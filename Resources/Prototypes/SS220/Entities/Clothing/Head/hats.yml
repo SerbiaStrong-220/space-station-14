@@ -281,7 +281,7 @@
   # Повар
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatStorageBase
   id: ClothingHeadHatChefWhite
   name: white chef's hat
   description: A hat that chefs use to keep hair out of the food. Judging by the food, it's not working.
@@ -290,16 +290,6 @@
     sprite: SS220/Clothing/Head/Hats/chef_white.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/chef_white.rsi
-  - type: Storage
-    grid:
-    - 0,0,0,0
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
   - type: Tag
     tags:
     - ClothMade
@@ -307,7 +297,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatStorageBase
   id: ClothingHeadHatChefGreen
   name: green chef's hat
   description: A hat that chefs use to keep hair out of the food. Judging by the food, it's not working.
@@ -316,16 +306,6 @@
     sprite: SS220/Clothing/Head/Hats/chef_green.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/chef_green.rsi
-  - type: Storage
-    grid:
-    - 0,0,0,0
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
   - type: Tag
     tags:
     - ClothMade
@@ -333,7 +313,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatStorageBase
   id: ClothingHeadHatChefBlack
   name: black chef's hat
   description: A hat that chefs use to keep hair out of the food. Judging by the food, it's not working.
@@ -342,16 +322,6 @@
     sprite: SS220/Clothing/Head/Hats/chef_black.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/chef_black.rsi
-  - type: Storage
-    grid:
-    - 0,0,0,0
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
   - type: Tag
     tags:
     - ClothMade
@@ -359,7 +329,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatStorageBase
   id: ClothingHeadHatChefNanotrasen
   name: blue chef's hat
   description: The wearer of this hat definitely won't let their hair get into someone else's food. Judging by the food, that's true.
@@ -369,16 +339,6 @@
     sprite: SS220/Clothing/Head/Hats/chef_nt.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/chef_nt.rsi
-  - type: Storage
-    grid:
-    - 0,0,0,0
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
   - type: Tag
     tags:
     - ClothMade

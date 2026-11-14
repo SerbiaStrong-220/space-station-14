@@ -4,6 +4,7 @@
   parent: BaseStorageItem
   description: A bag for storing chemistry products, such as pills, pill canisters, bottles, and syringes.
   components:
+  - type: StorageMicroFiber # SS220 microfibers
   - type: Sprite
     sprite: Objects/Specific/Chemistry/chem_bag.rsi
     state: icon
