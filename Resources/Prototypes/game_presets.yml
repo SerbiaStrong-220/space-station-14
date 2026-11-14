@@ -7,6 +7,7 @@
   description: survival-description
   rules:
     - SurvivalRule #SS220 survival rule
+    - CultYoggRuleMidPop # SS220 Cult Yogg
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
