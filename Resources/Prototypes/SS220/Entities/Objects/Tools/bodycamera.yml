@@ -39,7 +39,7 @@
   - type: ActiveListener
     range: 5
   - type: StationAiVision
-    enabled: true
+    enabled: false
     needsPower: false
   - type: Battery
     maxCharge: 720

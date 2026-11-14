@@ -61,7 +61,7 @@ public sealed class StationAiVisionSystem : EntitySystem
         // SS220-taperecorder-bodycam begin
         _visionQuery = GetEntityQuery<StationAiVisionComponent>();
 
-        SubscribeLocalEvent<StationAiVisionComponent, ComponentStartup>(OnVisionStartup);
+        SubscribeLocalEvent<StationAiVisionComponent, ComponentInit>(OnVisionInit);
         SubscribeLocalEvent<StationAiVisionComponent, ComponentShutdown>(OnVisionShutdown);
         SubscribeLocalEvent<StationAiVisionComponent, EntGotInsertedIntoContainerMessage>(OnVisionInserted);
         SubscribeLocalEvent<StationAiVisionComponent, EntGotRemovedFromContainerMessage>(OnVisionRemoved);
@@ -82,7 +82,7 @@ public sealed class StationAiVisionSystem : EntitySystem
     }
 
     // SS220-taperecorder-bodycam begin
-    private void OnVisionStartup(Entity<StationAiVisionComponent> ent, ref ComponentStartup args)
+    private void OnVisionInit(Entity<StationAiVisionComponent> ent, ref ComponentInit args)
     {
         if (_container.IsEntityInContainer(ent))
             _containedSeeds.Add(ent);
