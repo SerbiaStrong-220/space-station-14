@@ -90,7 +90,10 @@ public sealed partial class CargoSystem
 
     private void OnToggleLimit(Entity<CargoOrderConsoleComponent> ent, ref CargoConsoleToggleLimitMessage args)
     {
-        if (!_accessReaderSystem.FindAccessTags(args.Actor).Intersect(ent.Comp.RemoveLimitAccess).Any())
+        //SS220-request-console-emagging begin
+        if (!_emag.CheckFlag(ent, EmagType.Interaction)
+            && !_accessReaderSystem.FindAccessTags(args.Actor).Intersect(ent.Comp.RemoveLimitAccess).Any())
+        //SS220-request-console-emagging end
         {
             ConsolePopup(args.Actor, Loc.GetString("cargo-console-order-not-allowed"));
             PlayDenySound(ent, ent.Comp);
