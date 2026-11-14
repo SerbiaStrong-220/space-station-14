@@ -830,6 +830,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         {
             DebugTools.Assert(!Resolve(performer, ref performer.Comp, false)
                               || performer.Comp.LifeStage >= ComponentLifeStage.Stopping
+                              || TerminatingOrDeleted(performer) //SS220 Recycler expansion
                               || !performer.Comp.Actions.Contains(ent.Owner));
 
             if (!GameTiming.ApplyingState)
