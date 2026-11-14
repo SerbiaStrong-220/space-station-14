@@ -1,17 +1,17 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: EMP fruit
+  name: fulgora aetheris
   description: Crackles with accumulated static charge. Do not drop.
   parent: [BaseItem, BaseRestrictedLivingItem]
   suffix: CultYogg
-  id: ProductEmpFruit
+  id: ProductFulgoraAetheris
   components:
   - type: Sprite
-    sprite: SS220/Objects/CultYogg/Botany/emp_shroom.rsi
+    sprite: SS220/Objects/CultYogg/Botany/fulgora_aetheris.rsi
     state: fruit
   - type: Produce
-    seedId: EmpFruit
+    seedId: FulgoraAetheris
   - type: Tag
     tags:
     - YoggEquipment
@@ -30,24 +30,24 @@
 - type: entity
   parent: SeedBase
   suffix: CultYogg
-  name: packet of EMP fruit spores
-  description: Holding the spores in hands, you can feel a tingling sensation.
-  id: CultEmpFruitSeed
+  name: packet of fulgora aetheris seeds
+  description: Holding the seeds in hands, you can feel a tingling sensation.
+  id: CultFulgoraAetherisSeed
   components:
     - type: Seed
-      seedId: EmpFruit
+      seedId: FulgoraAetheris
     - type: Sprite
-      sprite: SS220/Objects/CultYogg/Botany/emp_shroom.rsi
+      sprite: SS220/Objects/CultYogg/Botany/fulgora_aetheris.rsi
 
 - type: seed
-  id: EmpFruit
-  name: seeds-emp-fruit-name
+  id: FulgoraAetheris
+  name: seeds-fulgora-aetheris-name
   noun: seeds-noun-seeds
-  displayName: seeds-emp-fruit-display-name
-  plantRsi: SS220/Objects/CultYogg/Botany/emp_shroom.rsi
-  packetPrototype: CultEmpFruitSeed
+  displayName: seeds-fulgora-aetheris-display-name
+  plantRsi: SS220/Objects/CultYogg/Botany/fulgora_aetheris.rsi
+  packetPrototype: CultFulgoraAetherisSeed
   productPrototypes:
-    - ProductEmpFruit
+    - ProductFulgoraAetheris
   harvestRepeat: Repeat
   lifespan: 25
   maturation: 12
