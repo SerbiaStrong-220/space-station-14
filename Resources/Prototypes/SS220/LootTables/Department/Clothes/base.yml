@@ -1,0 +1,50 @@
+- type: entityTable
+  id: ScienceCabinetDrawerClothes
+  table: !type:AllSelector
+    children:
+    - id: ClothingUniformJumpsuitScientist
+    - id: ClothingShoesColorWhite
+    - id: ClothingUniformJumpskirtScientist
+    - id: ClothingOuterCoatRnd
+      prob: 0.6
+    - id: ClothingOuterWinterSci
+      prob: 0.3
+    - id: ClothingEyesGlasses
+      prob: 0.5
+    - id: CrowbarRed #The jojoke - hit video game Half-Life # imagine, dev have to make that comment...
+      prob: 0.1
+
+- type: entityTable
+  id: EngineerCabinetDrawerClothes
+  table: !type:AllSelector
+    children:
+    - id: ClothingHeadHatHardhatYellow
+    - id: ClothingUniformJumpsuitEngineering
+    - id: ClothingShoesBootsWork
+    - id: ClothingUniformJumpskirtEngineering
+    - id: ClothingOuterVestHazard
+      prob: 0.6
+    - id: ClothingOuterWinterEngi
+      prob: 0.3
+
+- type: entityTable
+  id: MedicalCabinetDrawerClothes
+  table: !type:AllSelector
+    children:
+    - id: ClothingUniformJumpsuitMedicalDoctor
+    - id: ClothingShoesColorWhite
+    - id: ClothingOuterCoatLab
+      prob: 0.6
+    - id: ClothingOuterWinterMed
+      prob: 0.3
+    - id: ClothingUniformJumpskirtMedicalDoctor
+    - id: ClothingEyesGlasses
+      prob: 0.3
+    - id: HandheldHealthAnalyzer
+      prob: 0.6
+    - id: ClothingHandsGlovesLatex
+    - id: ClothingHeadsetMedical
+    - id: ClothingEyesHudMedical
+    - id: ClothingHeadHatSurgcapGreen
+    - id: ClothingMaskSterile
+      prob: 0.1
