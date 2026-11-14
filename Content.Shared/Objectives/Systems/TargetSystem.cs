@@ -45,8 +45,10 @@ public sealed class TargetSystem : EntitySystem
             if (!_mind.TryGetMind(uid, out var mind, out var mindComp) || mind == exclude || !_mobState.IsAlive(uid, mobState))
                 continue;
 
-            if (HasComp<ArenaParticipantComponent>(uid)) // SS220-arena-antag-fix
+            // SS220-arena-antag-fix begin
+            if (HasComp<ArenaParticipantComponent>(uid))
                 continue;
+            // SS220-arena-antag-fix end
 
             allHumans.Add((mind, mindComp));
         }
