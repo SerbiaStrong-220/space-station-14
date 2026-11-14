@@ -7,6 +7,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.SS220.TapeRecorder;
 using Content.Shared.TapeRecorder.Components;
 using Content.Shared.TapeRecorder.Events;
 using Content.Shared.Toggleable;
@@ -108,17 +109,32 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
         if (!TryGetTapeCassette(ent, out var tape))
             return false;
 
+        // SS220-taperecorder-bodycam begin
+        if (!ent.Comp.InternalStorage && tape.Comp.CurrentPosition >= tape.Comp.MaxCapacity.TotalSeconds)
+            return false;
+        // SS220-taperecorder-bodycam end
+
         var currentTime = tape.Comp.CurrentPosition + frameTime;
 
         //'Flushed' in this context is a mark indicating the message was not added between the last update and this update
         //Remove any flushed messages in the segment we just recorded over (ie old messages)
-        tape.Comp.RecordedData.RemoveAll(x => x.Timestamp > tape.Comp.CurrentPosition && x.Timestamp <= currentTime);
+        // SS220-taperecorder-bodycam begin
+        if (!ent.Comp.InternalStorage)
+            tape.Comp.RecordedData.RemoveAll(x => x.Timestamp > tape.Comp.CurrentPosition && x.Timestamp <= currentTime);
+        // SS220-taperecorder-bodycam end
 
         tape.Comp.RecordedData.AddRange(tape.Comp.Buffer);
 
         tape.Comp.Buffer.Clear();
 
         //Update the tape's current time
+        // SS220-taperecorder-bodycam begin
+        if (ent.Comp.InternalStorage)
+        {
+            tape.Comp.CurrentPosition = currentTime;
+            return true;
+        }
+        // SS220-taperecorder-bodycam end
         tape.Comp.CurrentPosition = (float) Math.Min(currentTime, tape.Comp.MaxCapacity.TotalSeconds);
 
         //If we have reached the end of the tape - stop
@@ -182,6 +198,9 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     /// </summary>
     protected void OnInteractingWithCassette(Entity<TapeCassetteComponent> ent, ref InteractUsingEvent args)
     {
+        if (HasComp<TapeRecorderComponent>(ent)) // SS220-taperecorder-bodycam
+            return;
+
         //Is the tape damaged?
         if (HasComp<FitsInTapeRecorderComponent>(ent))
             return;
@@ -202,6 +221,9 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     /// </summary>
     protected void OnTapeCassetteRepair(Entity<TapeCassetteComponent> ent, ref TapeCassetteRepairDoAfterEvent args)
     {
+        if (HasComp<TapeRecorderComponent>(ent)) // SS220-taperecorder-bodycam
+            return;
+
         if (args.Handled || args.Cancelled || args.Args.Target == null)
             return;
 
@@ -219,6 +241,9 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     /// </summary>
     protected void OnDamagedChanged(Entity<TapeCassetteComponent> ent, ref DamageChangedEvent args)
     {
+        if (HasComp<TapeRecorderComponent>(ent)) // SS220-taperecorder-bodycam
+            return;
+
         if (args.DamageDelta == null || args.DamageDelta.GetTotal() < 5)
             return;
 
@@ -230,6 +255,9 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
 
     protected void OnTapeExamined(Entity<TapeCassetteComponent> ent, ref ExaminedEvent args)
     {
+        if (HasComp<TapeRecorderComponent>(ent)) // SS220-taperecorder-bodycam
+            return;
+
         if (!args.IsInDetailsRange)
             return;
 
@@ -273,6 +301,11 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     /// </summary>
     protected void OnCassetteRemoveAttempt(Entity<TapeRecorderComponent> ent, ref ItemSlotEjectAttemptEvent args)
     {
+        // SS220-taperecorder-bodycam begin
+        if (args.Slot.ContainerSlot?.ID != SlotName)
+            return;
+        // SS220-taperecorder-bodycam end
+
         if (!HasComp<ActiveTapeRecorderComponent>(ent))
             return;
 
@@ -281,6 +314,11 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
 
     protected void OnCassetteRemoved(Entity<TapeRecorderComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        // SS220-taperecorder-bodycam begin
+        if (args.Container.ID != SlotName)
+            return;
+        // SS220-taperecorder-bodycam end
+
         SetMode(ent, TapeRecorderMode.Stopped);
         UpdateAppearance(ent);
         UpdateUI(ent);
@@ -334,8 +372,13 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
     /// </summary>
     /// <param name="ent">The tape recorder to update</param>
     /// <param name="mode">The new mode</param>
-    private void SetMode(Entity<TapeRecorderComponent> ent, TapeRecorderMode mode)
+    public void SetMode(Entity<TapeRecorderComponent> ent, TapeRecorderMode mode) // SS220-taperecorder-bodycam
     {
+        // SS220-taperecorder-bodycam begin
+        if ((ent.Comp.RecordingOnly || ent.Comp.InternalStorage) && mode is TapeRecorderMode.Playing or TapeRecorderMode.Rewinding)
+            return;
+        // SS220-taperecorder-bodycam end
+
         if (mode == ent.Comp.Mode)
             return;
 
@@ -345,6 +388,13 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
         }
         else
         {
+            // SS220-taperecorder-bodycam begin
+            var attempt = new TapeRecorderModeChangeAttemptEvent(mode);
+            RaiseLocalEvent(ent.Owner, ref attempt);
+            if (attempt.Cancelled)
+                return;
+            // SS220-taperecorder-bodycam end
+
             // can't play without a tape in it...
             if (!TryGetTapeCassette(ent, out _))
                 return;
@@ -363,11 +413,38 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
         ent.Comp.Mode = mode;
         Dirty(ent);
 
+        // SS220-taperecorder-bodycam begin
+        if (TryGetTapeCassette(ent, out var cassette))
+        {
+            if (ent.Comp.InternalStorage && mode == TapeRecorderMode.Stopped)
+            {
+                cassette.Comp.RecordedData.AddRange(cassette.Comp.Buffer);
+                cassette.Comp.Buffer.Clear();
+            }
+
+            Dirty(cassette);
+        }
+        // SS220-taperecorder-bodycam end
+
+        // SS220-taperecorder-bodycam begin
+        var changed = new TapeRecorderModeChangedEvent(mode);
+        RaiseLocalEvent(ent.Owner, ref changed);
+        UpdateAppearance(ent);
+        // SS220-taperecorder-bodycam end
+
         UpdateUI(ent);
     }
 
     protected bool TryGetTapeCassette(EntityUid ent, [NotNullWhen(true)] out Entity<TapeCassetteComponent> tape)
     {
+        // SS220-taperecorder-bodycam begin
+        if (TryComp<TapeRecorderComponent>(ent, out var recorder) && recorder.InternalStorage &&
+            TryComp<TapeCassetteComponent>(ent, out var storage))
+        {
+            tape = (ent, storage);
+            return true;
+        }
+        // SS220-taperecorder-bodycam end
         if (_slots.GetItemOrNull(ent, SlotName) is not {} cassette)
         {
             tape = default!;
@@ -417,7 +494,8 @@ public abstract class SharedTapeRecorderSystem : EntitySystem
             currentTime,
             maxTime,
             cassetteName,
-            cooldown);
+            cooldown,
+            hasCassette && (comp.InternalStorage || currentTime < tape.Comp.MaxCapacity.TotalSeconds)); // SS220-taperecorder-bodycam
 
         _ui.SetUiState(uid, TapeRecorderUIKey.Key, state);
     }

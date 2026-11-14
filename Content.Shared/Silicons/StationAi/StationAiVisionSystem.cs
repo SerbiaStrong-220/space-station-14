@@ -1,6 +1,8 @@
+using System.Numerics;
 using Content.Shared.Emp; // SS220 MalfAI
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.StationAi;
+using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Threading;
@@ -21,15 +23,21 @@ public sealed class StationAiVisionSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!; // SS220-taperecorder-bodycam
     [Dependency] private IGameTiming _timing = default!;
 
     [Dependency] private readonly EntityQuery<OccluderComponent> _occluderQuery = default!;
 
     private SeedJob _seedJob;
     private ViewJob _job;
+    private EntityQuery<StationAiVisionComponent> _visionQuery; // SS220-taperecorder-bodycam
 
     private readonly HashSet<Entity<OccluderComponent>> _occluders = new();
     private readonly HashSet<Entity<StationAiVisionComponent>> _seeds = new();
+    // SS220-taperecorder-bodycam begin
+    // Lookup by component skips seeds inside containers (worn body cameras), so they are tracked separately.
+    private readonly HashSet<EntityUid> _containedSeeds = new();
+    // SS220-taperecorder-bodycam end
     private readonly HashSet<Vector2i> _viewportTiles = new();
 
     // Dummy set
@@ -50,6 +58,15 @@ public sealed class StationAiVisionSystem : EntitySystem
     {
         base.Initialize();
 
+        // SS220-taperecorder-bodycam begin
+        _visionQuery = GetEntityQuery<StationAiVisionComponent>();
+
+        SubscribeLocalEvent<StationAiVisionComponent, ComponentInit>(OnVisionInit);
+        SubscribeLocalEvent<StationAiVisionComponent, ComponentShutdown>(OnVisionShutdown);
+        SubscribeLocalEvent<StationAiVisionComponent, EntGotInsertedIntoContainerMessage>(OnVisionInserted);
+        SubscribeLocalEvent<StationAiVisionComponent, EntGotRemovedFromContainerMessage>(OnVisionRemoved);
+        // SS220-taperecorder-bodycam end
+
         _seedJob = new()
         {
             System = this,
@@ -63,6 +80,29 @@ public sealed class StationAiVisionSystem : EntitySystem
             VisibleTiles = _singleTiles,
         };
     }
+
+    // SS220-taperecorder-bodycam begin
+    private void OnVisionInit(Entity<StationAiVisionComponent> ent, ref ComponentInit args)
+    {
+        if (_container.IsEntityInContainer(ent))
+            _containedSeeds.Add(ent);
+    }
+
+    private void OnVisionShutdown(Entity<StationAiVisionComponent> ent, ref ComponentShutdown args)
+    {
+        _containedSeeds.Remove(ent);
+    }
+
+    private void OnVisionInserted(Entity<StationAiVisionComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        _containedSeeds.Add(ent);
+    }
+
+    private void OnVisionRemoved(Entity<StationAiVisionComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    {
+        _containedSeeds.Remove(ent);
+    }
+    // SS220-taperecorder-bodycam end
 
     /// <summary>
     /// Returns the search margin needed to include active vision sources on this grid.
@@ -342,6 +382,23 @@ public sealed class StationAiVisionSystem : EntitySystem
         public void Execute()
         {
             System._lookup.GetLocalEntitiesIntersecting(Grid.Owner, ExpandedBounds, System._seeds, flags: LookupFlags.All | LookupFlags.Approximate);
+
+            // SS220-taperecorder-bodycam begin
+            if (System._containedSeeds.Count == 0)
+                return;
+
+            var invMatrix = System._xforms.GetInvWorldMatrix(Grid);
+            foreach (var uid in System._containedSeeds)
+            {
+                var xform = System.Transform(uid);
+                if (xform.GridUid != Grid.Owner || !System._visionQuery.TryComp(uid, out var vision))
+                    continue;
+
+                var localPos = Vector2.Transform(System._xforms.GetWorldPosition(xform), invMatrix);
+                if (ExpandedBounds.Contains(localPos))
+                    System._seeds.Add((uid, vision));
+            }
+            // SS220-taperecorder-bodycam end
         }
     }
 
