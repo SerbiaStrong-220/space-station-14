@@ -3,6 +3,7 @@
 - type: entity
   id: BaseMessengerServer
   parent: BaseMachinePowered
+  abstract: true
   name: messenger server
   description: Receives and store messages.
   components:
