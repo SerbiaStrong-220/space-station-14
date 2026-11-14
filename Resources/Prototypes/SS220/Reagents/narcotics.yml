@@ -42,6 +42,12 @@
               Cerebral: 0.25
       - !type:SatiateHunger
         factor: -0.2
+      # SS220-surgery-update begin
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
+      # SS220-surgery-update end
 
 - type: reagent
   id: Aglomorphine
@@ -158,6 +164,12 @@
         dependsOnAdaptation: true
         duration: 5
         refresh: false
+      # SS220-surgery-update begin
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
+      # SS220-surgery-update end
       - !type:Hallucination
         setting:
           randomEntities: HallucinationReagentFrontier

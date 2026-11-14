@@ -13,4 +13,7 @@
     state: operating_table
   # SS220 Surgery begin
   - type: OperatingTable
+  - type: DeviceLinkSink
+    ports:
+    - OperatingTableReceiver
   # SS220 Surgery end

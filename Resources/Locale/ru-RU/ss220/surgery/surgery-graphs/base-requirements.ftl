@@ -20,8 +20,8 @@ surgery-requirement-tool-required-surgical-tape = [color=lightblue]Хирург�
 surgery-requirement-tool-required-shears = Инструмент для [color=lightblue]ампутации[/color] ({ ent-AmputationShears })
 surgery-requirement-tool-required-specific = [color=gold]Особый[/color] инструмент
 
-surgery-requirement-operating-computer-description = Наличие рядом [color=lightblue]операционного компьютера[/color] с загруженным протоколом операции
-surgery-requirement-operating-computer-failure = Рядом нет операционного компьютера с загруженным протоколом этой операции!
+surgery-requirement-operating-computer-description = Наличие привязанного к столу [color=lightblue]операционного компьютера[/color] с загруженным протоколом операции
+surgery-requirement-operating-computer-failure = К операционному столу не привязан операционный компьютер с загруженным протоколом этой операции!
 
 surgery-requirement-has-organ-description = Наличие органа категории [color=lightblue]{ $organ }[/color]
 surgery-requirement-has-organ-failure = Требуемый орган ({ $organ }) отсутствует!

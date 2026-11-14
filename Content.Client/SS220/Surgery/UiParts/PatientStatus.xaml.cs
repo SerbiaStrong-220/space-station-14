@@ -52,6 +52,9 @@ public sealed partial class PatientStatus : Control
 
     public void ShowUnknownStatus()
     {
+        DecayDegree.Visible = true;
+        OverallDamage.Visible = true;
+
         OverallDamage.SetMarkup(Loc.GetString("patient-status-overall-damage", ("damage", "-")));
         MobStatus.SetMarkup(Loc.GetString("patient-status-mob-state-invalid"));
         DecayDegree.SetMarkup(Loc.GetString("patient-status-decay-degree--1"));

@@ -7,3 +7,12 @@
   id: DoorClosed
   name: signal-port-name-doorstatus-closed
   description: signal-port-description-doorstatus-closed
+
+# SS220-surgery-update begin
+- type: sourcePort
+  id: OperatingTableSender
+  name: signal-port-name-operating-table-sender
+  description: signal-port-description-operating-table-sender
+  defaultLinks:
+  - OperatingTableReceiver
+# SS220-surgery-update end

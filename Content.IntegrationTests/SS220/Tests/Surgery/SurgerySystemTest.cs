@@ -1,7 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Bed.Sleep;
+using Content.Shared.Body.Systems;
 using Content.Shared.Buckle;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.DeviceLinking;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Systems;
 using Content.Shared.SS220.Surgery.Graph;
@@ -261,6 +265,115 @@ public sealed class SurgerySystemTest
 
             var failAnesthetizedOnTable = surgerySystem.GetStepFailureChance(patient, surgeon, scalpel, edge);
             Assert.That(failAnesthetizedOnTable, Is.LessThan(failOnTable));
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task OperatingComputerDeviceLinkTest()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false
+        });
+
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var deviceLink = entMng.System<SharedDeviceLinkSystem>();
+        var powerReceiver = entMng.System<SharedPowerReceiverSystem>();
+        var transformSystem = entMng.System<SharedTransformSystem>();
+
+        EntityUid computer = default!;
+        EntityUid table1 = default!;
+        EntityUid table2 = default!;
+
+        await server.WaitAssertion(() =>
+        {
+            computer = entMng.SpawnEntity("computerBodyScanner", mapData.MapCoords);
+            table1 = entMng.SpawnEntity("OperatingTable", mapData.MapCoords);
+            table2 = entMng.SpawnEntity("OperatingTable", mapData.MapCoords);
+
+            Assert.That(surgerySystem.HasLinkedOperatingComputer(table1), Is.False);
+
+            deviceLink.LinkDefaults(null, computer, table1);
+
+            var computerComp = entMng.GetComponent<OperatingComputerComponent>(computer);
+            var table1Comp = entMng.GetComponent<OperatingTableComponent>(table1);
+            Assert.Multiple(() =>
+            {
+                Assert.That(computerComp.LinkedTable, Is.EqualTo(table1));
+                Assert.That(table1Comp.LinkedComputer, Is.EqualTo(computer));
+                Assert.That(surgerySystem.HasLinkedOperatingComputer(table1), Is.False);
+            });
+
+            powerReceiver.SetNeedsPower(computer, false);
+        });
+
+        await pair.RunTicksSync(5);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(surgerySystem.HasLinkedOperatingComputer(table1), Is.True);
+
+            transformSystem.SetMapCoordinates(table1, new MapCoordinates(20f, 0f, mapData.MapId));
+            Assert.That(surgerySystem.HasLinkedOperatingComputer(table1), Is.False);
+
+            transformSystem.SetMapCoordinates(table1, mapData.MapCoords);
+            Assert.That(surgerySystem.HasLinkedOperatingComputer(table1), Is.True);
+
+            deviceLink.LinkDefaults(null, computer, table2);
+
+            var computerComp = entMng.GetComponent<OperatingComputerComponent>(computer);
+            var table1Comp = entMng.GetComponent<OperatingTableComponent>(table1);
+            var table2Comp = entMng.GetComponent<OperatingTableComponent>(table2);
+            Assert.Multiple(() =>
+            {
+                Assert.That(table1Comp.LinkedComputer, Is.Null);
+                Assert.That(surgerySystem.HasLinkedOperatingComputer(table1), Is.False);
+                Assert.That(computerComp.LinkedTable, Is.EqualTo(table2));
+                Assert.That(table2Comp.LinkedComputer, Is.EqualTo(computer));
+                Assert.That(surgerySystem.HasLinkedOperatingComputer(table2), Is.True);
+            });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [TestCase("Aglomorphine")]
+    [TestCase("Frontier")]
+    [TestCase("Opium")]
+    public async Task NarcoticsPainNumbnessAnesthesiaTest(string reagentId)
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false
+        });
+
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var bloodstream = entMng.System<SharedBloodstreamSystem>();
+
+        EntityUid patient = default!;
+
+        await server.WaitAssertion(() =>
+        {
+            patient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            Assert.That(surgerySystem.IsPatientAnesthetized(patient), Is.False);
+            Assert.That(bloodstream.TryAddToBloodstream(patient, new Solution(reagentId, 5f)), Is.True);
+        });
+
+        await pair.RunSeconds(2.5f);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(surgerySystem.IsPatientAnesthetized(patient), Is.True);
         });
 
         await pair.CleanReturnAsync();

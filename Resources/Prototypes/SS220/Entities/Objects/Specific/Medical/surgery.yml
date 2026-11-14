@@ -14,6 +14,7 @@
   - type: Tag
     tags:
     - SurgeryTool
+    - SurgeryDrapes # SS220-surgery-update
   - type: SurgeryStarter
   - type: ActivatableUI
     key: enum.SurgeryDrapeUiKey.Key
@@ -42,6 +43,7 @@
   - type: Tag
     tags:
     - SurgeryTool
+    - SurgeryBoneGel # SS220-surgery-update
 
 - type: entity
   parent: BaseToolSurgery
@@ -168,10 +170,14 @@
   description: Adhesive medical tape used to mend fractures and secure surgical incisions.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Medical/medicart.rsi
-    state: tape
+    sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+    state: surgical_tape
   - type: Item
     size: Small
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryTape
   - type: SurgeryTool
     toolType: SurgicalTape
     additionalToolTypes:
@@ -195,6 +201,10 @@
     state: adv_retractor
   - type: Item
     storedRotation: 90
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryRetractorAdvanced
   - type: SurgeryTool
     toolType: Retractor
     additionalToolTypes:
@@ -221,6 +231,10 @@
     state: e_cautery
   - type: Item
     storedRotation: 90
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryCauteryAdvanced
   - type: SurgeryTool
     toolType: Cautery
     additionalToolTypes:
@@ -271,6 +285,10 @@
     state: bloodfilter
   - type: Item
     size: Small
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryBloodFilter
   - type: SurgeryTool
     toolType: BloodFilter
     failureDamage:
@@ -320,6 +338,66 @@
       - BodyAnalyzer
       - Injector
       - Healing
+  - type: ItemMapper
+    sprite: SS220/Objects/Specific/Medical/medicart.rsi
+    mapLayers:
+      drapes:
+        whitelist:
+          tags:
+          - SurgeryDrapes
+      scalpel_normal:
+        whitelist:
+          tags:
+          - SurgeryScalpelNormal
+      scalpel_advanced:
+        whitelist:
+          tags:
+          - SurgeryScalpelAdvanced
+      retractor_normal:
+        whitelist:
+          tags:
+          - SurgeryRetractor
+      retractor_advanced:
+        whitelist:
+          tags:
+          - SurgeryRetractorAdvanced
+      hemostat_normal:
+        whitelist:
+          tags:
+          - SurgeryHemostat
+      cautery_normal:
+        whitelist:
+          tags:
+          - SurgeryCautery
+      cautery_advanced:
+        whitelist:
+          tags:
+          - SurgeryCauteryAdvanced
+      saw_normal:
+        whitelist:
+          tags:
+          - SurgerySaw
+      drill_normal:
+        whitelist:
+          tags:
+          - SurgeryDrill
+      bonesetter:
+        whitelist:
+          tags:
+          - SurgeryBoneSetter
+      gel:
+        whitelist:
+          tags:
+          - SurgeryBoneGel
+      tape:
+        whitelist:
+          tags:
+          - SurgeryTape
+      filter:
+        whitelist:
+          tags:
+          - SurgeryBloodFilter
+  - type: Appearance
   - type: GuideHelp
     guides:
     - Surgery

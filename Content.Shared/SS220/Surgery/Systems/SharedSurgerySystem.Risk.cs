@@ -2,8 +2,11 @@
 
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
+using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.NightVision;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
@@ -18,10 +21,13 @@ namespace Content.Shared.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem
 {
+    [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
+    [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private const float UnanesthetizedFailurePenalty = 0.25f;
     private const float NoOperatingTableFailurePenalty = 0.20f;
@@ -29,15 +35,19 @@ public abstract partial class SharedSurgerySystem
     private const float PoorLightingFailurePenalty = 0.15f;
     private const float LightCheckRange = 3.5f;
 
-    private readonly HashSet<Entity<OperatingComputerComponent>> _computerBuffer = new();
     private readonly HashSet<EntityUid> _lightEntityBuffer = new();
 
     private void InitializeRisk()
     {
         SubscribeLocalEvent<SurgeryToolComponent, GetSurgeryDelayModifiersEvent>(OnToolGetDelayModifiers);
         SubscribeLocalEvent<SurgeryToolComponent, GetSurgeryFailureChanceEvent>(OnToolGetFailureChance);
+        SubscribeLocalEvent<OperatingTableComponent, ComponentInit>(OnOperatingTableInit);
+        SubscribeLocalEvent<OperatingTableComponent, PortDisconnectedEvent>(OnOperatingTablePortDisconnected);
         SubscribeLocalEvent<OperatingTableComponent, GetSurgeryDelayModifiersEvent>(OnTableGetDelayModifiers);
         SubscribeLocalEvent<OperatingTableComponent, GetSurgeryFailureChanceEvent>(OnTableGetFailureChance);
+        SubscribeLocalEvent<OperatingComputerComponent, ComponentInit>(OnOperatingComputerInit);
+        SubscribeLocalEvent<OperatingComputerComponent, NewLinkEvent>(OnOperatingComputerNewLink);
+        SubscribeLocalEvent<OperatingComputerComponent, PortDisconnectedEvent>(OnOperatingComputerPortDisconnected);
         SubscribeLocalEvent<OperatingComputerComponent, EntInsertedIntoContainerMessage>(OnComputerSlotInserted);
         SubscribeLocalEvent<OperatingComputerComponent, EntRemovedFromContainerMessage>(OnComputerSlotRemoved);
     }
@@ -133,24 +143,111 @@ public abstract partial class SharedSurgerySystem
         return true;
     }
 
+    private void OnOperatingTableInit(Entity<OperatingTableComponent> ent, ref ComponentInit args)
+    {
+        _deviceLink.EnsureSinkPorts(ent.Owner, ent.Comp.ComputerPort);
+    }
+
+    private void OnOperatingComputerInit(Entity<OperatingComputerComponent> ent, ref ComponentInit args)
+    {
+        _deviceLink.EnsureSourcePorts(ent.Owner, ent.Comp.TablePort);
+    }
+
+    private void OnOperatingComputerNewLink(Entity<OperatingComputerComponent> ent, ref NewLinkEvent args)
+    {
+        if (args.Source != ent.Owner ||
+            args.SourcePort != ent.Comp.TablePort ||
+            !TryComp<OperatingTableComponent>(args.Sink, out var table) ||
+            args.SinkPort != table.ComputerPort)
+        {
+            return;
+        }
+
+        if (ent.Comp.LinkedTable is { } prevTable && prevTable != args.Sink)
+            _deviceLink.RemoveSinkFromSource(ent.Owner, prevTable);
+
+        if (table.LinkedComputer is { } prevComputer && prevComputer != ent.Owner)
+            _deviceLink.RemoveSinkFromSource(prevComputer, args.Sink);
+
+        ent.Comp.LinkedTable = args.Sink;
+        table.LinkedComputer = ent.Owner;
+        Dirty(ent);
+        Dirty(args.Sink, table);
+    }
+
+    private void OnOperatingComputerPortDisconnected(Entity<OperatingComputerComponent> ent, ref PortDisconnectedEvent args)
+    {
+        if (args.Port != ent.Comp.TablePort)
+            return;
+
+        if (ent.Comp.LinkedTable is { } tableUid &&
+            TryComp<OperatingTableComponent>(tableUid, out var table) &&
+            table.LinkedComputer == ent.Owner)
+        {
+            table.LinkedComputer = null;
+            Dirty(tableUid, table);
+        }
+
+        ent.Comp.LinkedTable = null;
+        Dirty(ent);
+    }
+
+    private void OnOperatingTablePortDisconnected(Entity<OperatingTableComponent> ent, ref PortDisconnectedEvent args)
+    {
+        if (args.Port != ent.Comp.ComputerPort)
+            return;
+
+        if (ent.Comp.LinkedComputer is { } computerUid &&
+            TryComp<OperatingComputerComponent>(computerUid, out var computer) &&
+            computer.LinkedTable == ent.Owner)
+        {
+            computer.LinkedTable = null;
+            Dirty(computerUid, computer);
+        }
+
+        ent.Comp.LinkedComputer = null;
+        Dirty(ent);
+    }
+
     /// <summary>
-    /// Checks whether an operating table has an active <see cref="OperatingComputerComponent"/> in range.
+    /// Checks whether the device link between <paramref name="computer"/> and <paramref name="table"/>
+    /// is mutual, powered, and within <see cref="OperatingComputerComponent.MaxLinkDistance"/>.
+    /// </summary>
+    public bool IsOperatingLinkActive(Entity<OperatingComputerComponent> computer, Entity<OperatingTableComponent> table)
+    {
+        if (Deleted(computer.Owner) || Deleted(table.Owner))
+            return false;
+
+        if (computer.Comp.LinkedTable != table.Owner || table.Comp.LinkedComputer != computer.Owner)
+            return false;
+
+        if (!_powerReceiver.IsPowered(computer.Owner))
+            return false;
+
+        return _transform.InRange(
+            Transform(computer.Owner).Coordinates,
+            Transform(table.Owner).Coordinates,
+            computer.Comp.MaxLinkDistance);
+    }
+
+    /// <summary>
+    /// Checks whether an operating table has a linked, powered <see cref="OperatingComputerComponent"/> within range.
     /// </summary>
     public bool HasLinkedOperatingComputer(Entity<OperatingTableComponent> table, ProtoId<SurgeryGraphPrototype>? requiredSurgery = null)
     {
-        _computerBuffer.Clear();
-        _lookup.GetEntitiesInRange(Transform(table).Coordinates, table.Comp.LinkedComputerRange, _computerBuffer);
-
-        if (requiredSurgery is null)
-            return _computerBuffer.Count > 0;
-
-        foreach (var computer in _computerBuffer)
+        if (table.Comp.LinkedComputer is not { } computerUid ||
+            !TryComp<OperatingComputerComponent>(computerUid, out var computerComp))
         {
-            if (computer.Comp.UnlockedSurgeries.Contains(requiredSurgery.Value))
-                return true;
+            return false;
         }
 
-        return false;
+        if (!IsOperatingLinkActive((computerUid, computerComp), table))
+            return false;
+
+        if (requiredSurgery is null)
+            return true;
+
+        return computerComp.UnlockedSurgeries.Contains(requiredSurgery.Value);
     }
 
     /// <summary>

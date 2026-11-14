@@ -10,12 +10,10 @@ namespace Content.Shared.SS220.Surgery.Systems;
 
 public sealed partial class BodyAnalyzerSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedSurgerySystem _surgery = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
-
-    private readonly HashSet<Entity<OperatingTableComponent>> _tableBuffer = new();
 
     public override void Initialize()
     {
@@ -48,7 +46,7 @@ public sealed partial class BodyAnalyzerSystem : EntitySystem
                 if (!_userInterface.IsUiOpen(uid, BodyAnalyzerUiKey.Key))
                     continue;
 
-                var tablePatient = FindBuckledPatientOnLinkedTable((uid, computerComp), transform);
+                var tablePatient = FindBuckledPatientOnLinkedTable((uid, computerComp));
                 UpdateAnalyzerTarget((uid, component), tablePatient);
                 continue;
             }
@@ -78,25 +76,24 @@ public sealed partial class BodyAnalyzerSystem : EntitySystem
         if (!TryComp<BodyAnalyzerComponent>(entity, out var analyzer))
             return;
 
-        var patient = FindBuckledPatientOnLinkedTable(entity, Transform(entity));
+        var patient = FindBuckledPatientOnLinkedTable(entity);
         UpdateAnalyzerTarget((entity.Owner, analyzer), patient);
     }
 
-    private EntityUid? FindBuckledPatientOnLinkedTable(Entity<OperatingComputerComponent> computer, TransformComponent xform)
+    private EntityUid? FindBuckledPatientOnLinkedTable(Entity<OperatingComputerComponent> computer)
     {
-        _tableBuffer.Clear();
-        _lookup.GetEntitiesInRange(xform.Coordinates, computer.Comp.TableSearchRange, _tableBuffer);
-
-        foreach (var table in _tableBuffer)
+        if (computer.Comp.LinkedTable is not { } tableUid ||
+            !TryComp<OperatingTableComponent>(tableUid, out var tableComp) ||
+            !_surgery.IsOperatingLinkActive(computer, (tableUid, tableComp)) ||
+            !TryComp<StrapComponent>(tableUid, out var strap))
         {
-            if (!TryComp<StrapComponent>(table, out var strap))
-                continue;
+            return null;
+        }
 
-            foreach (var buckled in strap.BuckledEntities)
-            {
-                if (!Deleted(buckled))
-                    return buckled;
-            }
+        foreach (var buckled in strap.BuckledEntities)
+        {
+            if (!Deleted(buckled))
+                return buckled;
         }
 
         return null;

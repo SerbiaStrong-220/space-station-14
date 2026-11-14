@@ -1,6 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.DeviceLinking;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Surgery.Components;
 
@@ -21,6 +23,9 @@ public sealed partial class OperatingTableComponent : Component
     public float LinkedComputerFailureBonus = -0.05f;
 
     [DataField]
+    public ProtoId<SinkPortPrototype> ComputerPort = "OperatingTableReceiver";
+
+    [ViewVariables]
     [AutoNetworkedField]
-    public float LinkedComputerRange = 2.5f;
+    public EntityUid? LinkedComputer;
 }

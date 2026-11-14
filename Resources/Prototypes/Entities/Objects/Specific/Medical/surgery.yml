@@ -33,6 +33,10 @@
     soundHit:
       path: /Audio/Effects/lightburn.ogg
   # SS220 Surgery begin
+  - type: Tag # SS220-surgery-update
+    tags:
+    - SurgeryTool
+    - SurgeryCautery
   - type: SurgeryTool
     toolType: Cautery
     sound:
@@ -66,6 +70,10 @@
   - type: StaticPrice
     price: 40
   # SS220 Surgery begin
+  - type: Tag # SS220-surgery-update
+    tags:
+    - SurgeryTool
+    - SurgeryDrill
   - type: SurgeryTool
     toolType: Drill
     sound:
@@ -110,7 +118,9 @@
   # SS220 Edit biomass craft begin
   - type: Tag
     tags:
+    - SurgeryTool # SS220-surgery-update
     - Scalpel
+    - SurgeryScalpelNormal # SS220-surgery-update
   # SS220 Edit biomass craft end
   # SS220 Surgery begin
   - type: SurgeryTool
@@ -194,6 +204,11 @@
         Slash: 8
 # SS220 Throwable Changes end
   # SS220 Surgery begin
+  - type: Tag # SS220-surgery-update
+    tags:
+    - SurgeryTool
+    - Scalpel
+    - SurgeryScalpelAdvanced
   - type: SurgeryTool
     toolType: Scalpel
     speedModifier: 0.8
@@ -232,6 +247,11 @@
         Heat: 6
 # SS220 Throwable Changes end
   # SS220 Surgery begin
+  - type: Tag # SS220-surgery-update
+    tags:
+    - SurgeryTool
+    - Scalpel
+    - SurgeryScalpelAdvanced
   - type: SurgeryTool
     toolType: Scalpel
     additionalToolTypes:
@@ -259,6 +279,10 @@
     sprite: Objects/Specific/Medical/Surgery/scissors.rsi
     storedRotation: 90
   # SS220 Surgery begin
+  - type: Tag # SS220-surgery-update
+    tags:
+    - SurgeryTool
+    - SurgeryRetractor
   - type: SurgeryTool
     failureDamage:
       types:
@@ -282,6 +306,10 @@
     heldPrefix: hemostat
     storedRotation: 90
   # SS220 Surgery begin
+  - type: Tag # SS220-surgery-update
+    tags:
+    - SurgeryTool
+    - SurgeryHemostat
   - type: SurgeryTool
     failureDamage:
       types:
@@ -306,6 +334,10 @@
   - type: Item
     heldPrefix: setter
     storedRotation: 90
+  - type: Tag # SS220-surgery-update
+    tags:
+    - SurgeryTool
+    - SurgeryBoneSetter
   - type: SurgeryTool
     failureDamage:
       types:
@@ -339,6 +371,10 @@
     qualities:
       - Sawing
   # SS220 Surgery begin
+  - type: Tag # SS220-surgery-update
+    tags:
+    - SurgeryTool
+    - SurgerySaw
   - type: SurgeryTool
     failureDamage:
       types:

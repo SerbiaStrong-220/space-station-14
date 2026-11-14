@@ -693,6 +693,10 @@
   # SS220 Surgery begin
   - type: OperatingComputer
   - type: BodyAnalyzer
+  - type: DeviceLinkSource
+    range: 5
+    ports:
+    - OperatingTableSender
   - type: ActivatableUI
     key: enum.BodyAnalyzerUiKey.Key
   - type: UserInterface
