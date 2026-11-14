@@ -1,2 +1,2 @@
 ent-ComputerCrewRecordsManagement = crew records management console
-    .desc = Console for managing station crew records, lobby job limits and priority jobs.
+    .desc = A Head of Personnel workstation for maintaining the station crew registry and staffing roster. Used to register crew members, open vacancies and set recruitment priorities.

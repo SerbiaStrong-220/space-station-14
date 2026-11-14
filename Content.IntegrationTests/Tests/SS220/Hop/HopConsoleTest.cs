@@ -43,19 +43,34 @@ public sealed class HopConsoleTest : GameTest
           HeadOfPersonnel: [1, 1]
           StationEngineer: [4, 4]
           Passenger: [-1, -1]
-          CBURN: [-1, -1]
-          CentComNanoTrasenAdmiral: [-1, -1]
 """;
+
+    private EntityUid CreateStation()
+    {
+        var proto = Server.ResolveDependency<IPrototypeManager>().Index(_testMapId);
+        var station = Server.System<StationSystem>().InitializeNewStation(proto.Stations["Station"], null, "HoP test");
+
+        // TestPrototypes are loaded for the entire suite. Keep the map valid for
+        // InvalidRoundstartJobsTest and inject special jobs only into this test's live station.
+        var jobs = Server.System<StationJobsSystem>();
+        jobs.MakeJobUnlimited(station, "CBURN");
+        jobs.MakeJobUnlimited(station, "CentComNanoTrasenAdmiral");
+        return station;
+    }
 
     [Test]
     public async Task RealStationLimitsAndSpecialRoles()
     {
         await Server.WaitAssertion(() =>
         {
-            var proto = Server.ResolveDependency<IPrototypeManager>().Index(_testMapId);
-            var station = Server.System<StationSystem>().InitializeNewStation(proto.Stations["Station"], null, "HoP test");
+            var station = CreateStation();
             var system = Server.System<HopConsoleSystem>();
             var state = system.BuildState(station);
+            var jobs = Server.System<StationJobsSystem>();
+            Assert.That(jobs.GetJobs(station).Keys.Select(id => id.ToString()),
+                Does.Contain("CBURN").And.Contain("CentComNanoTrasenAdmiral"));
+            Assert.That(jobs.GetRoundStartJobs(station).Keys.Select(id => id.ToString()),
+                Does.Not.Contain("CBURN").And.Not.Contain("CentComNanoTrasenAdmiral"));
             Assert.That(state.Available, Is.True);
             Assert.That(state.Jobs.Select(j => j.Id), Is.EquivalentTo(new[] { "Captain", "HeadOfPersonnel", "Passenger", "StationEngineer" }));
             foreach (var id in new[] { "Captain", "HeadOfPersonnel" })
@@ -80,9 +95,8 @@ public sealed class HopConsoleTest : GameTest
         var map = await Pair.CreateTestMap();
         await Server.WaitAssertion(() =>
         {
-            var proto = Server.ResolveDependency<IPrototypeManager>().Index(_testMapId);
             var stations = Server.System<StationSystem>();
-            var station = stations.InitializeNewStation(proto.Stations["Station"], null, "HoP test");
+            var station = CreateStation();
             stations.AddGridToStation(station, map.GridCoords.EntityId);
             var console = SEntMan.SpawnEntity("ComputerCrewRecordsManagement", map.GridCoords);
             var hop = SEntMan.SpawnEntity("HoPIDCard", map.GridCoords);
