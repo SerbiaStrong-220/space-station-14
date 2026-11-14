@@ -153,6 +153,7 @@ public sealed partial class ZombieSystem
         RemComp<ComplexInteractionComponent>(target);
         RemComp<LanguageComponent>(target); // SS220-Add-Languages
         EnsureComp<StaminaResistanceComponent>(target).DamageCoefficient = 0.5f; // SS220 Zombie stamina resistance
+        AddZombieTelepathy(target, canSend: false); // SS220-november-event-balance
         RemComp<SentienceTargetComponent>(target);
 
         //funny voice

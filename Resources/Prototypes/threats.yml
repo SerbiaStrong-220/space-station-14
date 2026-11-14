@@ -3,7 +3,7 @@
   id: NinjaThreats
   weights:
     Dragon: 1
-    Revenant: 1
+    # Revenant: 1 #SS220-november-event-balance
     SpiderQueen: 1 #SS220 spider queen antag
 
 - type: ninjaHackingThreat
