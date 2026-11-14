@@ -53,7 +53,6 @@
     back:
     - BoxSurvivalBrigmedic
     - MedkitCombatFilled
-    - PinpointerUplink
 
 - type: startingGear
   id: RedWingsMedicGear
@@ -88,10 +87,10 @@
     back:
     - BoxSurvivalBrigmedic
     - MedkitCombatFilled
-    - PinpointerUplink
     - LaserSMGPowerCell
     - LaserSMGPowerCell
     - EmergencyRollerBedSpawnFolded
+    - DefibrillatorSyndicate
 
 - type: startingGear
   id: RedWingsPilotGear
@@ -125,4 +124,3 @@
     - BoxSurvivalBrigmedic
     - MedkitCombatFilled
     - HandHeldMassScanner
-    - PinpointerUplink
