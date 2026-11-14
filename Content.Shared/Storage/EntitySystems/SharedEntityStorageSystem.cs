@@ -15,12 +15,15 @@ using Content.Shared.Verbs;
 using Content.Shared.Wall;
 using Content.Shared.Whitelist;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
+using Content.Shared.SS220.DarkReaper;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -63,6 +66,8 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         SubscribeLocalEvent<EntityStorageComponent, BeforeExplodeEvent>(OnExploded);
 
         SubscribeLocalEvent<InsideEntityStorageComponent, EntGotRemovedFromContainerMessage>(OnRemoved);
+        SubscribeLocalEvent<DarkReaperComponent, InsertIntoEntityStorageAttemptEvent>(OnDarkReaperInsertAttempt); // SS220 Fix #4554
+        SubscribeLocalEvent<SpectralComponent, InsertIntoEntityStorageAttemptEvent>(OnSpectralInsertAttempt); // SS220 Fix #4554 
     }
 
     protected virtual void OnComponentInit(EntityUid uid, EntityStorageComponent component, ComponentInit args)
@@ -386,6 +391,22 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         return _whitelistSystem.CheckBoth(toInsert, component.Blacklist, component.Whitelist);
     }
 
+// SS220 Fix #4554 begin
+    private void OnDarkReaperInsertAttempt(Entity<DarkReaperComponent> ent,
+        ref InsertIntoEntityStorageAttemptEvent args)
+    {
+        if (!ent.Comp.PhysicalForm)
+            args.Cancelled = true;
+    }
+
+    private void OnSpectralInsertAttempt(Entity<SpectralComponent> ent,
+        ref InsertIntoEntityStorageAttemptEvent args)
+    {
+        if (!TryComp<PhysicsComponent>(ent, out var physics) ||
+            (physics.CollisionMask & (int)Physics.CollisionGroup.MobMask) == 0)
+            args.Cancelled = true;
+    }
+// SS220 Fix #4554 end
     public bool TryOpenStorage(EntityUid user, EntityUid target, bool silent = false)
     {
         if (!CanOpen(user, target, silent))
