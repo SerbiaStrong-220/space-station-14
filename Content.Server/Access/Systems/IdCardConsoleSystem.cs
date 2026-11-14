@@ -145,6 +145,15 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         if (component.TargetIdSlot.Item is not { Valid: true } targetId || !PrivilegedIdIsAuthorized(uid, component, out var privilegedId))
             return;
 
+        // SS220 Hop improve begin: keep the previous profession so ID-console job changes are auditable.
+        var previousJobPrototype = Comp<IdCardComponent>(targetId).JobPrototype;
+        if (TryComp<StationRecordKeyStorageComponent>(targetId, out var previousKeyStorage)
+            && previousKeyStorage.Key is { } previousKey
+            && _record.TryGetRecord<GeneralStationRecord>(previousKey, out var previousRecord))
+        {
+            previousJobPrototype = previousRecord.JobPrototype;
+        }
+        // SS220 Hop improve end
         // Limit name and job title lengths
         var maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
         var maxIdJobLength = _cfgManager.GetCVar(CCVars.MaxIdJobLength);
@@ -180,6 +189,13 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             Comp<IdCardComponent>(targetId).JobPrototype = newJobProto;
         }
 
+        // SS220 Hop improve begin: log profession changes separately from access changes.
+        if (newJobProto is { } changedJob && previousJobPrototype != changedJob)
+        {
+            _adminLogger.Add(LogType.Action,
+                $"{player} has changed the profession on {targetId} from {previousJobPrototype} to {changedJob}.");
+        }
+        // SS220 Hop improve end
         if (!newAccessList.TrueForAll(x => component.AccessLevels.Contains(x)))
         {
             _sawmill.Warning($"User {ToPrettyString(uid)} tried to write unknown access tag.");

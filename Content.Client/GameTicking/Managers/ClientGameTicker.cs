@@ -25,6 +25,7 @@ namespace Content.Client.GameTicking.Managers
 
         private Dictionary<NetEntity, Dictionary<ProtoId<JobPrototype>, int?>>  _jobsAvailable = new();
         private Dictionary<NetEntity, string> _stationNames = new();
+        private Dictionary<NetEntity, HashSet<ProtoId<JobPrototype>>> _priorityJobs = new(); // SS220 Hop improve: lobby-visible priority job markers.
 
         [ViewVariables] public bool AreWeReady { get; private set; }
         [ViewVariables] public bool IsGameStarted { get; private set; }
@@ -39,6 +40,7 @@ namespace Content.Client.GameTicking.Managers
 
         [ViewVariables] public IReadOnlyDictionary<NetEntity, Dictionary<ProtoId<JobPrototype>, int?>> JobsAvailable => _jobsAvailable;
         [ViewVariables] public IReadOnlyDictionary<NetEntity, string> StationNames => _stationNames;
+        [ViewVariables] public IReadOnlyDictionary<NetEntity, HashSet<ProtoId<JobPrototype>>> PriorityJobs => _priorityJobs; // SS220 Hop improve
 
         public event Action? InfoBlobUpdated;
         public event Action? LobbyStatusUpdated;
@@ -94,6 +96,7 @@ namespace Content.Client.GameTicking.Managers
         private void UpdateJobsAvailable(TickerJobsAvailableEvent message)
         {
             _jobsAvailable.Clear();
+            _priorityJobs.Clear(); // SS220 Hop improve
 
             foreach (var (job, data) in message.JobsAvailableByStation)
             {
@@ -106,6 +109,12 @@ namespace Content.Client.GameTicking.Managers
                 _stationNames[weh.Key] = weh.Value;
             }
 
+            // SS220 Hop improve begin
+            foreach (var (station, jobs) in message.PriorityJobsByStation)
+            {
+                _priorityJobs[station] = jobs;
+            }
+            // SS220 Hop improve end
             LobbyJobsAvailableUpdated?.Invoke(JobsAvailable);
         }
 

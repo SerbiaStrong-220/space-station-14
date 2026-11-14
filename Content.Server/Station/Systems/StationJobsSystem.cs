@@ -503,6 +503,7 @@ public sealed partial class StationJobsSystem : EntitySystem
 
         var jobs = new Dictionary<NetEntity, Dictionary<ProtoId<JobPrototype>, int?>>();
         var stationNames = new Dictionary<NetEntity, string>();
+        var priorities = new Dictionary<NetEntity, HashSet<ProtoId<JobPrototype>>>(); // SS220 Hop improve
 
         var query = EntityQueryEnumerator<StationJobsComponent>();
 
@@ -512,8 +513,9 @@ public sealed partial class StationJobsSystem : EntitySystem
             var list = comp.JobList.ToDictionary(x => x.Key, x => x.Value);
             jobs.Add(netStation, list);
             stationNames.Add(netStation, Name(station));
+            priorities.Add(netStation, comp.PriorityJobs.ToHashSet()); // SS220 Hop improve
         }
-        return new TickerJobsAvailableEvent(stationNames, jobs);
+        return new TickerJobsAvailableEvent(stationNames, jobs, priorities); // SS220 Hop improve
     }
 
     /// <summary>
@@ -524,6 +526,12 @@ public sealed partial class StationJobsSystem : EntitySystem
         _availableJobsDirty = true;
     }
 
+    // SS220 Hop improve begin: expose a refresh hook for consoles changing lobby job metadata.
+    public void RefreshJobsAvailable()
+    {
+        UpdateJobsAvailable();
+    }
+    // SS220 Hop improve end
     private void OnPlayerJoinedLobby(PlayerJoinedLobbyEvent ev)
     {
         RaiseNetworkEvent(_cachedAvailableJobs, ev.PlayerSession.Channel);
