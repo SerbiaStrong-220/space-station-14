@@ -45,7 +45,7 @@ public partial class TtsSystem
         }
         catch (Exception e)
         {
-            Log.Error(e.Message);
+            Log.Error($"Caught exception while converting text to speech for provider {provider} with kind {kind}. Exception:\n{e}");
             return null;
         }
     }

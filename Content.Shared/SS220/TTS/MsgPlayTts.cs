@@ -56,9 +56,8 @@ public sealed class MsgPlayTts : NetMessage
 
                 case SoundSpecifierType:
                     var streamLength = buffer.ReadVariableInt32();
-                    using (var stream = new MemoryStream(streamLength))
+                    using (var stream = new MemoryStream(buffer.ReadBytes(streamLength)))
                     {
-                        buffer.ReadAlignedMemory(stream, streamLength);
                         data = new TtsSoundSpecifierData(serializer.Deserialize<SoundSpecifier>(stream));
                     }
                     break;

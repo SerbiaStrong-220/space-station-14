@@ -100,19 +100,30 @@ public sealed partial class TtsSystem : SharedTtsSystem
             if (!queue.TryDequeue(out var request))
                 return null;
 
+            var playEntity = request.Meta.PlayEntity ?? request.Meta.Source;
+
             Entity<AudioComponent>? stream;
             switch (request)
             {
                 case PlayRequestByAudioStream byAudio:
-                    if (request.Meta.Source != null)
-                        stream = _audio.PlayEntity(byAudio.AudioStream, GetEntity(request.Meta.Source.Value), null, request.Params);
+                    if (playEntity is { } audioNetEntity)
+                    {
+                        // the entity may be unknown for the client, so there is nowhere to play
+                        stream = TryGetEntity(audioNetEntity, out var audioEntity)
+                            ? _audio.PlayEntity(byAudio.AudioStream, audioEntity.Value, null, request.Params)
+                            : null;
+                    }
                     else
                         stream = _audio.PlayGlobal(byAudio.AudioStream, null, request.Params);
                     break;
 
                 case PlayRequestBySoundSpecifier bySoundSpecifier:
-                    if (request.Meta.Source != null)
-                        stream = _audio.PlayEntity(bySoundSpecifier.Sound, Filter.Local(), GetEntity(request.Meta.Source.Value), false);
+                    if (playEntity is { } soundNetEntity)
+                    {
+                        stream = TryGetEntity(soundNetEntity, out var soundEntity)
+                            ? _audio.PlayEntity(bySoundSpecifier.Sound, Filter.Local(), soundEntity.Value, false)
+                            : null;
+                    }
                     else
                         stream = _audio.PlayGlobal(bySoundSpecifier.Sound, Filter.Local(), false);
                     break;

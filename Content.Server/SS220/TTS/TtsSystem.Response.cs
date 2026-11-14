@@ -1,5 +1,6 @@
 using Content.Shared.SS220.TTS;
 using System.Buffers;
+using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
 namespace Content.Server.SS220.TTS;
@@ -8,7 +9,7 @@ public partial class TtsSystem
 {
     private static class TtsResponseManager
     {
-        private static readonly Stack<TtsResponse> ResponsePool = new();
+        private static readonly ConcurrentStack<TtsResponse> ResponsePool = new();
         private static readonly ArrayPool<byte> ArrayPool = ArrayPool<byte>.Shared;
 
         public static TtsResponse Rent()
@@ -44,11 +45,10 @@ public partial class TtsSystem
     {
         public Task<bool>? Task;
 
-        protected override void OnReferenceDisposed()
+        protected override void OnAllReferencesDisposed()
         {
-            base.OnReferenceDisposed();
-            if (ReferenceCount == 0)
-                TtsResponseManager.Return(this);
+            base.OnAllReferencesDisposed();
+            TtsResponseManager.Return(this);
         }
 
         public void Dereference()

@@ -33,6 +33,9 @@ public partial class TtsSystem
 
     private void OnEntitySpoke(EntityUid uid, TtsComponent component, EntitySpokeEvent args)
     {
+        if (args.IsRadio)
+            return;
+
         HashSet<EntityUid> receivers = [];
         foreach (var receiver in Filter.Pvs(uid).Recipients)
         {

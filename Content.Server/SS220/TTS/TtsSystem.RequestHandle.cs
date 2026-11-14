@@ -257,20 +257,23 @@ public partial class TtsSystem
         if (!responce.TryGetValue(out var audioData))
             return;
 
-        var msg = new MsgPlayTts(new PlayTtsMessageData
-        {
-            TtsData = audioData,
-            TtsMetadata = new TtsMetadata()
-            {
-                Kind = TtsKind.Telepathy,
-                Provider = request.SpeakerData.Voice.Provider,
-                Source = request.SpeakerData.NetSpeaker,
-                ChannelPrototype = request.ChannelPrototype,
-            }
-        });
-
         foreach (var receiver in validReceivers)
+        {
+            var msg = new MsgPlayTts(new PlayTtsMessageData
+            {
+                TtsData = audioData,
+                TtsMetadata = new TtsMetadata()
+                {
+                    Kind = TtsKind.Telepathy,
+                    Provider = request.SpeakerData.Voice.Provider,
+                    Source = request.SpeakerData.NetSpeaker,
+                    PlayEntity = GetNetEntity(receiver.AttachedEntity),
+                    ChannelPrototype = request.ChannelPrototype,
+                }
+            });
+
             SendTtsMessage(msg, receiver);
+        }
     }
 
     private async Task HandleVoiceTestRequest(TtsVoiceTestRequest request)

@@ -20,7 +20,8 @@ public partial class TtsSystem
 
     private TtsCacheKey GenerateCacheKey(TtsMetadata meta)
     {
-        var key = new TtsCacheKey();
+        // Different kinds (e.g. whisper and radio of the same speaker) must be played independently
+        var key = new TtsCacheKey().With(meta.Kind.ToString());
 
         switch (meta.Kind)
         {

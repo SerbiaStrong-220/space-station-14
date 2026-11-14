@@ -17,6 +17,7 @@ using System.Collections.Concurrent;
 using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -326,18 +327,24 @@ public sealed partial class TtsSystem : SharedTtsSystem
 public class ReferenceCounter<T>(T value)
 {
     public T Value = value;
-    public int ReferenceCount { get; private set; } = 0;
+
+    private int _referenceCount;
+
+    public int ReferenceCount => Volatile.Read(ref _referenceCount);
 
     public Reference GetReference()
     {
-        ReferenceCount++;
+        Interlocked.Increment(ref _referenceCount);
         return new(this);
     }
 
     protected virtual void OnReferenceDisposed()
     {
-        ReferenceCount--;
+        if (Interlocked.Decrement(ref _referenceCount) == 0)
+            OnAllReferencesDisposed();
     }
+
+    protected virtual void OnAllReferencesDisposed() { }
 
     public struct Reference(ReferenceCounter<T> counter) : IDisposable
     {
