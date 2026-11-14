@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Content.Server.Corvax.Sponsors;
 using Content.Server.Database;
 using Content.Server.SS220.Signature;
+using Content.Server.SS220.Traits;
 using Content.Shared.Body;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
@@ -176,6 +177,7 @@ namespace Content.Server.Preferences.Managers
             }
 
             var signatureData = SignatureSerializer.Deserialize(profile.SignatureData); // ss220 add signature
+            var traitOptions = TraitOptionsSerializer.Deserialize(profile.TraitOptions); // ss220 trait options
 
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
@@ -198,7 +200,8 @@ namespace Content.Server.Preferences.Managers
                 traits.ToHashSet(),
                 loadouts,
                 signatureData,
-                profile.TeleportAfkToCryoStorage
+                profile.TeleportAfkToCryoStorage,
+                traitOptions: traitOptions // ss220 trait options
             );
         }
 

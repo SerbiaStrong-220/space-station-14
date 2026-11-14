@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.SS220.Signature;
+using Content.Server.SS220.Traits;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
@@ -251,6 +252,8 @@ namespace Content.Server.Database
                 profile.SignatureData = SignatureSerializer.Serialize(humanoid.SignatureData);
             }
             // ss220 add signature end
+
+            profile.TraitOptions = TraitOptionsSerializer.Serialize(humanoid.TraitOptions); // ss220 trait options
 
             profile.Jobs.Clear();
             profile.Jobs.AddRange(
