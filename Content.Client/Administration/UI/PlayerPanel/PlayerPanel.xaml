@@ -34,5 +34,7 @@
             <Button Name="CameraButton" Text="{Loc player-panel-camera}" Disabled="True"/>
            </GridContainer>
        </BoxContainer>
+       <!-- # SS220 connections by ckeys -->
+       <Button Name="ConnectionLogsButton" Text="{Loc connection-logs-title}" Disabled="True"/>
     </BoxContainer>
 </ui:FancyWindow>

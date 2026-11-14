@@ -2,6 +2,7 @@ using Content.Client.Administration.Managers;
 using Content.Client.Eui;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
+using Content.Shared.SS220.Administration.Connections; // # SS220 connections by ckeys
 using JetBrains.Annotations;
 using Robust.Client.Console;
 using Robust.Client.UserInterface;
@@ -37,6 +38,8 @@ public sealed class PlayerPanelEui : BaseEui
         PlayerPanel.OnFreezeAndMuteToggle += () => SendMessage(new PlayerPanelFreezeMessage(true));
         PlayerPanel.OnFreeze += () => SendMessage(new PlayerPanelFreezeMessage());
         PlayerPanel.OnLogs += () => SendMessage(new PlayerPanelLogsMessage());
+        // # SS220 connections by ckeys
+        PlayerPanel.OnConnectionLogs += () => SendMessage(new PlayerPanelConnectionLogsMessage());
         PlayerPanel.OnRejuvenate += () => SendMessage(new PlayerPanelRejuvenationMessage());
         PlayerPanel.OnDelete += () => SendMessage(new PlayerPanelDeleteMessage());
         PlayerPanel.OnFollow += () => SendMessage(new PlayerPanelFollowMessage());
