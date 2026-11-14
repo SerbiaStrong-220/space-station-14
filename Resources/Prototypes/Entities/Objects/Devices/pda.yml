@@ -1677,7 +1677,6 @@
       - NewsReaderCartridge
       - LogProbeCartridge
       - WantedListCartridge
-      - MessengerCartridgeClient # SS220 Messenger
       - MedTekCartridge
       - AstroNavCartridge
   - type: Tag #  Ignore Chameleon tags
