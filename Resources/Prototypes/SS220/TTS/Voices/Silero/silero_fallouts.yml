@@ -1,0 +1,350 @@
+- type: ttsVoice
+  id: Aradesh
+  name: Арадеш
+  speaker: aradesh
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Dornan
+  name: Дорнан
+  speaker: dornan
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Elder
+  name: Старейшина
+  speaker: elder
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Harris
+  name: Харрис
+  speaker: harris
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Cabbot
+  name: Каббот
+  speaker: cabbot
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Decker
+  name: Декер
+  speaker: decker
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Dick
+  name: Дик
+  speaker: dick
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Officer
+  name: Офицер
+  speaker: officer
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Frank
+  name: Фрэнк
+  speaker: frank
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Gizmo
+  name: Гизмо
+  speaker: gizmo
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Hakunin
+  name: Хакунин
+  speaker: hakunin
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Harold
+  name: Гарольд
+  speaker: harold
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Harry
+  name: Гарри
+  speaker: harry
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Jain
+  name: Джейн
+  speaker: jain
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Maxson
+  name: Максон
+  speaker: maxson
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Killian
+  name: Киллиан
+  speaker: killian
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Laura
+  name: Лора
+  speaker: laura
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Lieutenant
+  name: Лейтенант
+  speaker: lieutenant
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Loxley
+  name: Локсли
+  speaker: loxley
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Lynette
+  name: Линетт
+  speaker: lynette
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Marcus
+  name: Маркус
+  speaker: marcus
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Master
+  name: Мастер
+  speaker: master
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Morpheus
+  name: Морфей
+  speaker: morpheus
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Myron
+  name: Майрон
+  speaker: myron
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nicole
+  name: Николь
+  speaker: nicole
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Overseer
+  name: Смотритель
+  speaker: overseer
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Rhombus
+  name: Ромбус
+  speaker: rhombus
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Set
+  name: Сет
+  speaker: set
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Sulik
+  name: Сулик
+  speaker: sulik
+  provider: Silero
+  categories: [ Fallout2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Tandi
+  name: Танди
+  speaker: tandi
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Vree
+  name: Ври
+  speaker: vree
+  provider: Silero
+  categories: [ Fallout ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]

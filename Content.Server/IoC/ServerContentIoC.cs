@@ -8,7 +8,6 @@ using Content.Server.Connection;
 using Content.Server.Corvax.DiscordAuth;
 using Content.Server.Corvax.JoinQueue;
 using Content.Server.Corvax.Sponsors;
-using Content.Server.SS220.TTS;
 using Content.Server.Database;
 using Content.Server.Discord;
 using Content.Server.Discord.DiscordLink;
@@ -27,6 +26,7 @@ using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.SS220.BackEndApi;
+using Content.Server.SS220.TTS;
 using Content.Server.SS220.Discord;
 using Content.Server.Voting.Managers;
 using Content.Shared.Administration.Logs;
@@ -89,8 +89,8 @@ internal static class ServerContentIoC
         deps.Register<ServerFeedbackManager>();
         deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
         deps.Register<SponsorsManager>(); // Corvax-Sponsors
+        deps.Register<TtsNetManager>(); // SS220 TTS
         deps.Register<JoinQueueManager>(); // Corvax-Queue
-        deps.Register<TTSManager>(); // Corvax-TTS
         deps.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
         deps.Register<DiscordPlayerManager>(); // SiS220 discord player manager
         deps.Register<DiscordBanPostManager>();  // SS220 dscord ban post manager

@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Administration;
 
@@ -41,42 +41,32 @@ public sealed class QuickDialogDescOpenEvent : EntityEventArgs
 }
 
 [Serializable, NetSerializable]
-public sealed class QuickDialogTTSProtoIdOpenEvent : EntityEventArgs
+public sealed class QuickDialogTtsVoicePreferencesOpenEvent(string title, string description, NetEntity target, List<QuickDialogEntry> prompts, int dialogId, QuickDialogButtonFlag buttons) : EntityEventArgs
 {
     /// <summary>
     /// The title of the dialog.
     /// </summary>
-    public string Title;
+    public string Title = title;
 
     /// <summary>
     /// The title of the dialog.
     /// </summary>
-    public string Description;
+    public string Description = description;
 
     /// <summary>
     /// The internal dialog ID.
     /// </summary>
-    public int DialogId;
+    public int DialogId = dialogId;
 
-    public NetEntity Target { init; get; }
+    public NetEntity Target { init; get; } = target;
 
     /// <summary>
     /// The prompts to show the user.
     /// </summary>
-    public List<QuickDialogEntry> Prompts;
+    public List<QuickDialogEntry> Prompts = prompts;
 
     /// <summary>
     /// The buttons presented for the user.
     /// </summary>
-    public QuickDialogButtonFlag Buttons = QuickDialogButtonFlag.OkButton | QuickDialogButtonFlag.CancelButton;
-
-    public QuickDialogTTSProtoIdOpenEvent(string title, string description, NetEntity target, List<QuickDialogEntry> prompts, int dialogId, QuickDialogButtonFlag buttons)
-    {
-        Title = title;
-        Description = description;
-        Prompts = prompts;
-        Buttons = buttons;
-        DialogId = dialogId;
-        Target = target;
-    }
+    public QuickDialogButtonFlag Buttons = buttons;
 }

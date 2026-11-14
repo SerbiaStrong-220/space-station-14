@@ -3,4 +3,5 @@ torchaudio
 torchvision
 soundfile
 pydub
+audioop-lts
 flask

@@ -1,0 +1,115 @@
+- type: ttsVoice
+  id: SiriusBlack
+  name: Сириус Блэк
+  speaker: Harry_Potter_Sirius_Black
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Dobby
+  name: Добби
+  speaker: Harry_Potter_Dobby
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: SeverusSnapeFilm
+  name: Северус Снегг (фильм)
+  speaker: Harry_Potter_Severus_Snape_film
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: HarryPotter
+  name: Гарри Поттер
+  speaker: Harry_Potter_Harry_Potter
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: AlbusDumbledore
+  name: Альбус Дамблдор
+  speaker: Harry_Potter_Albus_Dumbledore
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Voldemort
+  name: Лорд Волдеморт
+  speaker: Harry_Potter_Lord_Voldemort
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: SeverusSnape
+  name: Северус Снегг
+  speaker: Harry_Potter_Severus_Snape
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: FiliusFlitwick
+  name: Филиус Флитвик
+  speaker: Harry_Potter_Filius_Flitwick
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: MinervaMcGonagall
+  name: Минерва Макгонагалл
+  speaker: Harry_Potter_Minerva_McGonagall
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: HoraceSlughorn
+  name: Гораций Слизнорт
+  speaker: Harry_Potter_Horace_Slughorn
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Cedric
+  name: Седрик Диггори
+  speaker: Harry_Potter_Cedric
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Alastor
+  name: Аластор Грозный Глаз Грюм
+  speaker: Harry_Potter_Alastor_Mad-Eye_Moody
+  provider: Silero
+  categories: [ HARRY_POTTER ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
