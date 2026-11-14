@@ -16,8 +16,7 @@
     tags:
     - YoggEquipment
     - CultYoggStealthProvidable
-  - type: TriggerOnLand
-  - type: LandAtCursor
+  - type: TriggerOnThrowDoHit
   - type: EmpOnTrigger
     keysIn:
     - trigger
