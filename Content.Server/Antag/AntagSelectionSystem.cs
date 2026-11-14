@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
@@ -14,6 +13,7 @@ using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Server.Shuttles.Systems;
+using Content.Server.SS220.MindSlave;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Antag;
 using Content.Shared.Clothing;
@@ -23,8 +23,11 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Players;
 using Content.Shared.Roles;
+using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.Experience;
 using Content.Shared.Whitelist;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -35,8 +38,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using Content.Server.SS220.MindSlave;
-using Content.Shared.SS220.Experience;
+using System.Linq;
 
 namespace Content.Server.Antag;
 
@@ -405,7 +407,19 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
             // we shouldn't be blocking the entity if they're just a ghost or smth.
             if (!HasComp<GhostComponent>(session.AttachedEntity))
-                antagEnt = session.AttachedEntity;
+            //SS220 mind visit extension begin
+            {
+                if (TryComp<VisitingMindComponent>(session.AttachedEntity, out var visitingComp))
+                {
+                    if (visitingComp.MindId is { Valid: true } mindUidValidated &&
+                        TryComp<MindComponent>(mindUidValidated, out var ownedMindComp))
+                        if (ownedMindComp.OwnedEntity is { Valid: true } ownedVerified)
+                            antagEnt = ownedVerified;
+                }
+                else
+                    antagEnt = session.AttachedEntity;
+            }
+            //SS220 mind visit extension end
         }
         else if (!ignoreSpawner && def.SpawnerPrototype != null) // don't add spawners if we have a player, dummy.
         {
@@ -434,18 +448,30 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             return;
         }
 
+        //SS220 mind visit extension begin
+        EntityUid entityVisited = player;
+
+        bool visited = false;
+
+        if (TryComp<AntagGearRelayComponent>(player, out var relayComp) && relayComp.User is { Valid: true } relayValidated)
+        {
+            entityVisited = relayValidated;
+            visited = true;
+        }
+        //SS220 mind visit extension end
+
         // TODO: This is really messy because this part runs twice for midround events.
         // Once when the ghostrole spawner is created and once when a player takes it.
         // Therefore any component subscribing to this has to make sure both subscriptions return the same value
         // or the ghost role raffle location preview will be wrong.
 
-        var getPosEv = new AntagSelectLocationEvent(session, ent, player);
+        var getPosEv = new AntagSelectLocationEvent(session, ent, entityVisited);//SS220 mind visit extension
         RaiseLocalEvent(ent, ref getPosEv, true);
         if (getPosEv.Handled)
         {
-            var playerXform = Transform(player);
+            var playerXform = Transform(entityVisited);//SS220 mind visit extension
             var pos = RobustRandom.Pick(getPosEv.Coordinates);
-            _transform.SetMapCoordinates((player, playerXform), pos);
+            _transform.SetMapCoordinates((entityVisited, playerXform), pos);//SS220 mind visit extension
         }
 
         // If we want to just do a ghost role spawner, set up data here and then return early.
@@ -489,7 +515,10 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         }
         // SS220-experience-update-end
 
-        _loadout.Equip(player, gear, def.RoleLoadout);
+        //SS220 mind visit extension begin
+        if (visited)
+            _loadout.Equip(entityVisited, gear, def.RoleLoadout);
+        //SS220 mind visit extension end
 
         if (session != null)
         {
@@ -512,8 +541,10 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             _adminLogger.Add(LogType.AntagSelection, $"Assigned {ToPrettyString(curMind)} as antagonist: {ToPrettyString(ent)}");
         }
 
-        var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
+        //SS220 mind visit extension begin
+        var afterEv = new AfterAntagEntitySelectedEvent(session, entityVisited, ent, def);
         RaiseLocalEvent(ent, ref afterEv, true);
+        //SS220 mind visit extension end
     }
 
     /// <summary>

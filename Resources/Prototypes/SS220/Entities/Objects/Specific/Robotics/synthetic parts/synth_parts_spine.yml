@@ -1,0 +1,72 @@
+- type: entity
+  id: SynthSpineSteel
+  parent: SynthSpineBase
+  name: steel synth frame
+  components:
+  - type: MovementSpeedModifyingPart
+    requiresActive: False
+    speedMod:
+      walkSpeedModifier: 0.8
+      sprintSpeedModifier: 0.8
+  - type: DamabeableSiliconPart
+    minDamageToMalfunction: 40
+    maxDamageToRemainFunctional: 60
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: frame_steel
+
+- type: entity
+  id: SynthSpineCarbon
+  parent: SynthSpineBase
+  name: carbon synth frame
+  components:
+  - type: MovementSpeedModifyingPart
+    requiresActive: False
+    speedMod:
+      walkSpeedModifier: 0.9
+      sprintSpeedModifier: 0.9
+  - type: DamabeableSiliconPart
+    minDamageToMalfunction: 30
+    maxDamageToRemainFunctional: 45
+  - type: Damageable
+    damageContainer: Synthetic
+    damageModifierSet: Synthetic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 65
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: frame_carbon
+
+- type: entity
+  id: SynthSpinePlasteel
+  parent: SynthSpineBase
+  name: plasteel synth frame
+  components:
+  - type: MovementSpeedModifyingPart
+    requiresActive: False
+    speedMod:
+      walkSpeedModifier: 0.75
+      sprintSpeedModifier: 0.75
+  - type: DamabeableSiliconPart
+    minDamageToMalfunction: 50
+    maxDamageToRemainFunctional: 80
+  - type: Damageable
+    damageContainer: Synthetic
+    damageModifierSet: Synthetic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+    state: frame_plasteel

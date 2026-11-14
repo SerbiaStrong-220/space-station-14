@@ -76,12 +76,12 @@ public sealed class LockSystem : EntitySystem
             return;
 
         // Only attempt an unlock by default on Activate
-        if (lockComp.Locked && lockComp.UnlockOnClick)
+        if (lockComp.Locked && lockComp.UnlockOnClick && (!lockComp.OnlyOwnerCanUnlock || args.Target == args.User)) //SS220 only owner can unlock
         {
             args.Handled = true;
             TryUnlock(uid, args.User, lockComp);
         }
-        else if (!lockComp.Locked && lockComp.LockOnClick)
+        else if (!lockComp.Locked && lockComp.LockOnClick && (!lockComp.OnlyOwnerCanUnlock || args.Target == args.User)) //SS220 only owner can unlock
         {
             args.Handled = true;
             TryLock(uid, args.User, lockComp);
@@ -362,7 +362,7 @@ public sealed class LockSystem : EntitySystem
 
     private void AddToggleLockVerb(EntityUid uid, LockComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || !component.ShowLockVerbs)
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || !component.ShowLockVerbs || (component.OnlyOwnerCanUnlock && args.Target != args.User)) //SS220 only owner can unlock
             return;
 
         AlternativeVerb verb = new()

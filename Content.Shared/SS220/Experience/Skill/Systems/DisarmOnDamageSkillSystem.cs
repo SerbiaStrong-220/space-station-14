@@ -51,6 +51,9 @@ public sealed partial class DisarmOnDamageSkillSystem : SkillEntitySystem
 
         TryChangeStudyingProgress(entity, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
 
+        if (HasComp<IgnoreDisarmOnDamageSkillComponent>(experienceEntity.Value.Owner))
+            return;
+
         // And after that we check if we lost our precious items
         if (!GetPredictedRandomOnCurTick(GetNetEntity(entity), GetNetEntity(args.Origin)).Prob(entity.Comp.DisarmChance))
             return;

@@ -5,6 +5,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.SS220.Mind;
 using Content.Shared.SS220.MindExtension;
 using Content.Shared.SS220.MindExtension.Events;
 using Robust.Shared.Network;
@@ -91,6 +92,9 @@ public partial class MindExtensionSystem //MindTrailSystem
     private void ChangeOrAddTrailPoint(MindExtensionData data, EntityUid entity, bool isAbandoned)
     {
         if (HasComp<GhostComponent>(entity))
+            return;
+
+        if (HasComp<MindTrailIgnoreComponent>(entity))
             return;
 
         if (TryComp<BorgChassisComponent>(entity, out var chassisComp) && chassisComp.BrainContainer.ContainedEntity != null)
