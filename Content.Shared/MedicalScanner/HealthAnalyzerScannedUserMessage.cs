@@ -34,7 +34,7 @@ public struct HealthAnalyzerUiState
 
     public HealthAnalyzerUiState() {}
 
-    public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, int? counterDeath, bool canPrint, string? dna)
+    public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, int? counterDeath /* SS220 LimitationRevive */, bool canPrint /* SS220 LimitationRevive */, string? dna /* SS220 RedWingsDnaScan */)
     {
         TargetEntity = targetEntity;
         Temperature = temperature;
