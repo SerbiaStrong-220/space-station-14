@@ -1,4 +1,7 @@
-cmd-removeextracomponents-desc = Удаляет все компоненты со всех сущностей с указанным id, если этот компонент отсутствует в их прототипе.\nЕсли id не указан, применяется ко всем сущностям.
+# SS220-localization-fix begin
+cmd-removeextracomponents-desc = Удаляет все компоненты со всех сущностей с указанным id, если этот компонент отсутствует в их прототипе.
+    Если id не указан, применяется ко всем сущностям.
+# SS220-localization-fix end
 
 cmd-removeextracomponents-help = removeextracomponents / removeextracomponents <entityId>
 

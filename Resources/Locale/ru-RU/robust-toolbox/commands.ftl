@@ -352,7 +352,10 @@ cmd-fuck-help = Вызывает исключение
 cmd-showpos-desc = Включает отрисовку для всех позиций сущностей в игре.
 cmd-showpos-help = Использование: showpos
 cmd-sggcell-desc = Перечисляет сущности в ячейке сетки привязки.
-cmd-sggcell-help = Использование: sggcell <gridID> <vector2i>\nЭтот vector2i параметр в форме x<int>,y<int>.
+# SS220-localization-fix begin
+cmd-sggcell-help = Использование: sggcell <gridID> <vector2i>
+    Этот vector2i параметр в форме x<int>,y<int>.
+# SS220-localization-fix end
 cmd-overrideplayername-desc = Изменяет имя, используемое при попытке подключения к серверу.
 cmd-overrideplayername-help = Использование: overrideplayername <name>
 cmd-showanchored-desc = Показывает закреплённые объекты на определённой плитке.

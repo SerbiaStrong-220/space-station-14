@@ -1,5 +1,5 @@
 cmd-chat-ban-desc = Запрещает пользователю писать в выбранном чате
-cmd-chat-ban-help = Использование: chat <имя или ID пользователя> <id чата> <причина> [продолжительность в минутах (необязательно, 0 для навсегда)] [тяжесть (необязательно)] [discord уведомление (необязательно)]
+cmd-chat-ban-help = Использование: chatban <имя или ID пользователя> <id чата> <причина> [продолжительность в минутах (необязательно, 0 для навсегда)] [тяжесть (необязательно)] [discord уведомление (необязательно)]
 
 ## Completion result hints
 
@@ -15,8 +15,10 @@ cmd-chat-ban-hint-duration-4 = 1 неделя
 cmd-chat-ban-hint-duration-5 = 2 недели
 cmd-chat-ban-hint-duration-6 = 1 месяц
 
-cmd-chat-ban-minutes-parse = { $time } - недопустимое количество минут.\n{ $help }
-cmd-chat-ban-severity-parse = ${ severity } не является валидной тяжестью\n{ $help }.
+cmd-chat-ban-minutes-parse = { $time } - недопустимое количество минут.
+    { $help }
+cmd-chat-ban-severity-parse = { $severity } не является валидной тяжестью.
+    { $help }
 cmd-chat-ban-arg-count = Недопустимое количество аргументов.
 cmd-chat-ban-parse = Чат { $chat } не существует.
 cmd-chat-ban-name-parse = Невозможно найти игрока с таким именем.

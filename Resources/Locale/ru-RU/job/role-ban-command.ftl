@@ -38,8 +38,12 @@ cmd-rolebanlist-help = Использование: <name or user ID> [include un
 
 cmd-rolebanlist-hint-1 = <name or user ID>
 cmd-rolebanlist-hint-2 = [include unbanned]
-cmd-roleban-minutes-parse = { $time } — недопустимое количество минут.\n{ $help }
-cmd-roleban-severity-parse = ${ severity } не является валидной тяжестью\n{ $help }.
+# SS220-localization-fix begin
+cmd-roleban-minutes-parse = { $time } — недопустимое количество минут.
+    { $help }
+cmd-roleban-severity-parse = { $severity } не является валидной тяжестью.
+    { $help }
+# SS220-localization-fix end
 cmd-roleban-arg-count = Недопустимое количество аргументов.
 cmd-roleban-job-parse = Работа { $job } не существует.
 cmd-roleban-name-parse = Невозможно найти игрока с таким именем.
