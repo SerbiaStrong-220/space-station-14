@@ -1,0 +1,58 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: EMP fruit
+  description: Crackles with accumulated static charge. Do not drop.
+  parent: [BaseItem, BaseRestrictedLivingItem]
+  suffix: CultYogg
+  id: ProductEmpFruit
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/Botany/emp_shroom.rsi
+    state: fruit
+  - type: Produce
+    seedId: EmpFruit
+  - type: Tag
+    tags:
+    - YoggEquipment
+    - CultYoggStealthProvidable
+  - type: TriggerOnLand
+  - type: LandAtCursor
+  - type: EmpOnTrigger
+    keysIn:
+    - trigger
+    range: 3.5
+    energyConsumption: 50000
+  - type: DeleteOnTrigger
+    keysIn:
+    - trigger
+
+- type: entity
+  parent: SeedBase
+  suffix: CultYogg
+  name: packet of EMP fruit spores
+  description: Holding the spores in hands, you can feel a tingling sensation.
+  id: CultEmpFruitSeed
+  components:
+    - type: Seed
+      seedId: EmpFruit
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/Botany/emp_shroom.rsi
+
+- type: seed
+  id: EmpFruit
+  name: seeds-emp-fruit-name
+  noun: seeds-noun-seeds
+  displayName: seeds-emp-fruit-display-name
+  plantRsi: SS220/Objects/CultYogg/Botany/emp_shroom.rsi
+  packetPrototype: CultEmpFruitSeed
+  productPrototypes:
+    - ProductEmpFruit
+  harvestRepeat: Repeat
+  lifespan: 25
+  maturation: 12
+  production: 10
+  yield: 3
+  potency: 10
+  growthStages: 7
+
