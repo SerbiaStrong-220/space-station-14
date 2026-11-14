@@ -6,7 +6,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 
 namespace Content.Shared.SS220.Surgery.Graph.Requirements;
 
