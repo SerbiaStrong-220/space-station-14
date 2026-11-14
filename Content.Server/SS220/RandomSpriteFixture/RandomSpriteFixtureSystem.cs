@@ -21,14 +21,15 @@ public sealed partial class RandomSpriteFixtureSystem : EntitySystem
 
     private void OnMapInit(Entity<RandomSpriteFixtureComponent> ent, ref MapInitEvent args)
     {
+        Box2? bounds = null;
         foreach (var (state, _) in Comp<RandomSpriteComponent>(ent).Selected.Values)
         {
-            if (!ent.Comp.Bounds.TryGetValue(state, out var bounds))
-                continue;
-
-            SetBounds(ent, bounds);
-            return;
+            if (ent.Comp.Bounds.TryGetValue(state, out var stateBounds))
+                bounds = bounds?.Union(stateBounds) ?? stateBounds;
         }
+
+        if (bounds != null)
+            SetBounds(ent, bounds.Value);
     }
 
     private void SetBounds(Entity<RandomSpriteFixtureComponent> ent, Box2 bounds)

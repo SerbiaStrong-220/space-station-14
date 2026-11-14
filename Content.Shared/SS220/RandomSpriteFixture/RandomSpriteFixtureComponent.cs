@@ -3,7 +3,7 @@
 namespace Content.Shared.SS220.RandomSpriteFixture;
 
 /// <summary>
-/// Resizes a fixture to match the state picked by RandomSpriteComponent.
+/// Resizes a fixture to cover all states picked by RandomSpriteComponent.
 /// </summary>
 [RegisterComponent]
 public sealed partial class RandomSpriteFixtureComponent : Component
