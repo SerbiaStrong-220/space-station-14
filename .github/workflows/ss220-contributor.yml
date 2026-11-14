@@ -1,0 +1,79 @@
+name: Add new SS220 contributor
+
+on:
+  pull_request_target:
+    branches: [master]
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ss220-contributor-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  add-contributor:
+    # GITHUB_TOKEN cannot push to a PR branch hosted in a fork.
+    if: >-
+      github.repository == 'SerbiaStrong-220/space-station-14' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref != 'master' &&
+      github.event.pull_request.user.type == 'User' &&
+      github.event.pull_request.user.login != 'IanComradeBot'
+    runs-on: ubuntu-latest
+    steps:
+      # Never execute scripts from the untrusted PR in pull_request_target.
+      - name: Checkout PR branch
+        uses: actions/checkout@v4.2.2
+        with:
+          path: pr
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 1
+
+      - name: Checkout trusted automation scripts
+        uses: actions/checkout@v4.2.2
+        with:
+          path: automation
+          ref: master
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            Resources/Credits/SS220GitHub.txt
+            Tools/add_ss220_contributor.ps1
+          fetch-depth: 1
+
+      - name: Add contributor when missing
+        shell: pwsh
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          $masterCredits = Join-Path $env:RUNNER_TEMP "SS220GitHub.master.txt"
+          Copy-Item automation/Resources/Credits/SS220GitHub.txt $masterCredits
+
+          if (-not (Test-Path pr/Resources/Credits/SS220GitHub.txt))
+          {
+            New-Item -ItemType Directory -Path pr/Resources/Credits -Force | Out-Null
+            Copy-Item $masterCredits pr/Resources/Credits/SS220GitHub.txt
+          }
+
+          automation/Tools/add_ss220_contributor.ps1 `
+            -Login $env:PR_AUTHOR `
+            -Path pr/Resources/Credits/SS220GitHub.txt `
+            -KnownContributors $masterCredits
+
+      - name: Commit contributor
+        shell: bash
+        env:
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          cd pr
+          git add -- Resources/Credits/SS220GitHub.txt
+          if git diff --cached --quiet -- Resources/Credits/SS220GitHub.txt; then
+            exit 0
+          fi
+
+          git config user.name "SS220 Credits Bot"
+          git config user.email "ss220-credits-bot@users.noreply.github.com"
+          git commit -m "Add PR contributor to SS220 credits"
+          git push origin "HEAD:refs/heads/$PR_BRANCH"
