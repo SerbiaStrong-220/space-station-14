@@ -58,7 +58,6 @@
     team: a
     icon: ArenaTeamAIcon
   - type: AntagImmune
-  - type: ParadoxCloneBlacklist
 
 - type: randomHumanoidSettings
   id: ArenaFighterPlayerTwo
@@ -72,7 +71,6 @@
     team: b
     icon: ArenaTeamBIcon
   - type: AntagImmune
-  - type: ParadoxCloneBlacklist
 
 - type: entity
   id: ArenaGhostSpawnerPlayerOne
