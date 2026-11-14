@@ -4,9 +4,9 @@ using Content.Shared.SS220.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
 
-namespace Content.Shared.SS220.EyeOffsetInCombatMode;
+namespace Content.Shared.SS220.ToggleableEyeOffset;
 
-public sealed partial class EyeOffsetInCombatModeSystem : EntitySystem
+public sealed partial class ToggleableEyeOffsetSystem : EntitySystem
 {
     public override void Initialize()
     {
@@ -14,7 +14,7 @@ public sealed partial class EyeOffsetInCombatModeSystem : EntitySystem
 
         CommandBinds.Builder
             .Bind(KeyFunctions220.ToggleOffset, InputCmdHandler.FromDelegate(OnOffsetToggle, handle: false, outsidePrediction: false))
-            .Register<EyeOffsetInCombatModeSystem>();
+            .Register<ToggleableEyeOffsetSystem>();
     }
 
     private void OnOffsetToggle(ICommonSession? session)
@@ -25,12 +25,12 @@ public sealed partial class EyeOffsetInCombatModeSystem : EntitySystem
         if (playerSession.AttachedEntity is not { Valid: true } user)
             return;
 
-        if (!TryComp<EyeOffsetInCombatModeComponent>(user, out var offsetComp))
+        if (!TryComp<ToggleableEyeOffsetComponent>(user, out var offsetComp))
             return;
 
         offsetComp.Online = !offsetComp.Online;
 
-        Dirty<EyeOffsetInCombatModeComponent>((user, offsetComp));
+        Dirty<ToggleableEyeOffsetComponent>((user, offsetComp));
     }
 
 }

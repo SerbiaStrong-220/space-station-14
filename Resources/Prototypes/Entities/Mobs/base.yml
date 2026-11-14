@@ -33,6 +33,13 @@
   - type: DoAfter
   - type: Examiner
   - type: Eye
+  #SS220 eye offset begin
+  - type: EyeCursorOffset
+    maxOffset: 6
+    pvsIncrease: 0.6
+  - type: ToggleableEyeOffset
+    online: false
+  #SS220 eye offset end
   - type: ContentEye
   - type: CameraRecoil
   - type: MindContainer

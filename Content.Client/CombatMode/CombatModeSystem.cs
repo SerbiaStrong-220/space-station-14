@@ -81,7 +81,8 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
                 EntityManager,
                 _eye,
                 this,
-                EntityManager.System<HandsSystem>()));
+                EntityManager.System<HandsSystem>(),//SS220 weapon overhaul
+                cfg: _cfg));//SS220 weapon overhaul
         }
         else
         {
