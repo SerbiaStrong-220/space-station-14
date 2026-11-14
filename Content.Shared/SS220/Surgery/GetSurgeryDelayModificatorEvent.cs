@@ -4,3 +4,6 @@ namespace Content.Shared.SS220.Surgery;
 
 [ByRefEvent]
 public record struct GetSurgeryDelayModifiersEvent(float FlatModifier, float Multiplier);
+
+[ByRefEvent]
+public record struct GetSurgeryFailureChanceEvent(float FlatModifier, float Multiplier);

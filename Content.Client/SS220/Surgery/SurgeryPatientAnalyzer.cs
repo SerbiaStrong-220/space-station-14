@@ -18,6 +18,7 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private RottingSystem _rotting = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private readonly SurgerySystem _surgery = default!;
 
     private const int MaxBrainRotPercentage = 100;
 
@@ -39,6 +40,9 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
         if (TryComp<LimitationReviveComponent>(target, out var limitationReviveComponent)
                 && mobStateComponent?.CurrentState == MobState.Dead) // kinda bad fix
             patientStatus.BrainRotDegree = GetBrainRotDegree(limitationReviveComponent, mobStateComponent);
+
+        patientStatus.IsAnesthetized = _surgery.IsPatientAnesthetized(target);
+        patientStatus.IsOnOperatingTable = _surgery.IsOnOperatingTable(target, out _);
 
         CollectPathologyDescriptions(target, ref patientStatus);
 
@@ -98,6 +102,16 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
         foreach (var descLocId in status.PathologiesDescription)
         {
             recommendation.Problems.Add(Loc.GetString(descLocId));
+        }
+
+        if (!status.IsAnesthetized && status.PatientState == MobState.Alive)
+        {
+            recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-need-anesthesia"));
+        }
+
+        if (!status.IsOnOperatingTable)
+        {
+            recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-need-operating-table"));
         }
 
         return recommendation;

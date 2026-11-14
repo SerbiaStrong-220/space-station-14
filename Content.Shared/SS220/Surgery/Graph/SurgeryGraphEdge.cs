@@ -53,6 +53,10 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     [DataField]
     public bool DeceaseSkillBonus { get; private set; } = false;
 
+    [DataField]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public float? FailureChance { get; private set; }
+
     /// <summary>
     /// This sound will be played when graph gets to target node
     /// </summary>

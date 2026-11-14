@@ -690,6 +690,29 @@
     radius: 1.5
     energy: 4.0
     color: "#1f8c28"
+  # SS220 Surgery begin
+  - type: OperatingComputer
+  - type: BodyAnalyzer
+  - type: ActivatableUI
+    key: enum.BodyAnalyzerUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.BodyAnalyzerUiKey.Key:
+        type: BodyAnalyzerBUI
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: ItemSlots
+    slots:
+      surgery_disk_slot:
+        name: operating-computer-slot-component-slot-name-disk
+        whitelist:
+          tags:
+          - SurgeryDisk
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+      surgery_disk_slot: !type:ContainerSlot
+  # SS220 Surgery end
 
 - type: entity
   parent: BaseComputerAiAccess

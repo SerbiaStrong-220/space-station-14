@@ -27,6 +27,8 @@
         - id: Scalpel
         - id: ClothingHandsGlovesNitrile
         - id: SurgeryDrapes
+        - id: BoneSetter
+        - id: BoneGel
         - id: MindslaveFixerCerebralImplant
         - id: BodyAnalyzer
 
@@ -48,7 +50,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,3,3
+    - 0,0,5,3
     whitelist:
       tags:
       - SurgeryTool
@@ -73,5 +75,8 @@
         - id: Retractor
         - id: Hemostat
         - id: Cautery
+        - id: BoneSetter
+        - id: SurgicalTape
         - id: BodyAnalyzer
+        - id: ChemistryBottleMorphine
         - id: ChemistryBottleTricordrazine

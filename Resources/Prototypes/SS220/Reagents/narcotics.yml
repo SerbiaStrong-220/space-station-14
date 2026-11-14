@@ -88,6 +88,10 @@
         statusEffectId: MobThresholdsModifierAglomorphine
         duration: 5
         refresh: false
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
       - !type:HealthChange
           damage:
             types:

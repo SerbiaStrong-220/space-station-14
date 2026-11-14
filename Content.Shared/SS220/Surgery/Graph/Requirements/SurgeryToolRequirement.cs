@@ -15,6 +15,6 @@ public sealed partial class SurgeryToolRequirement : SurgeryGraphRequirement
         if (!entityManager.TryGetComponent<SurgeryToolComponent>(uid, out var surgeryTool))
             return false;
 
-        return surgeryTool.ToolType == SurgeryTool;
+        return surgeryTool.ToolType == SurgeryTool || surgeryTool.AdditionalToolTypes.Contains(SurgeryTool);
     }
 }
