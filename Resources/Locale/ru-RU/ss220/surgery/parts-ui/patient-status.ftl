@@ -17,7 +17,7 @@ patient-status-brain-rot-none = Мозговая активность в нор�
 patient-status-brain-rot-invalid = Мозговая активность: -
 
 patient-status-anesthesia-active = Анестезия: [color=green]активна (наркоз / анальгетик)[/color]
-patient-status-anesthesia-none = Анестезия: [color=red]отсутствует (риск болевого срыва!)[/color]
+patient-status-anesthesia-none = Анестезия: [color=red]отсутствует[/color]
 patient-status-anesthesia-invalid = Анестезия: -
 
 patient-status-operating-table-yes = Положение: [color=green]на операционном столе[/color]

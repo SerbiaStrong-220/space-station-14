@@ -325,6 +325,7 @@
   - type: Sprite
     sprite: SS220/Objects/Specific/Medical/medicart.rsi
     state: tray
+    scale: 0.8, 0.8
   - type: Item
     size: Large
   - type: Storage

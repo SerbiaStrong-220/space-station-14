@@ -34,11 +34,15 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
         };
     }
 
-    public void ChangeTarget(EntityUid? target)
+    public void ChangeTarget(EntityUid? target, bool tableNotLinked = false)
     {
         if (target is not { } patient)
         {
-            TreatmentSuggestion.ShowTargetlessSuggestion();
+            if (tableNotLinked)
+                TreatmentSuggestion.ShowTableNotLinked();
+            else
+                TreatmentSuggestion.ShowTargetlessSuggestion();
+
             PatientStatus.ShowUnknownStatus();
             return;
         }
@@ -50,10 +54,15 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
         TreatmentSuggestion.ShowSuggestion(_surgeryPatientAnalyzer.GetTreatmentRecommendation(status));
     }
 
-    public void UpdatePerformer()
+    public void UpdatePerformer(bool tableNotLinked = false)
     {
         OperationList.MakeList(false);
-        TreatmentSuggestion.ShowTargetlessSuggestion();
+
+        if (tableNotLinked)
+            TreatmentSuggestion.ShowTableNotLinked();
+        else
+            TreatmentSuggestion.ShowTargetlessSuggestion();
+
         PatientStatus.ShowUnknownStatus();
     }
 }

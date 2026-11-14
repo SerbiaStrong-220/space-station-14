@@ -125,8 +125,10 @@ public sealed partial class BodyAnalyzerSystem : EntitySystem
     {
         analyzer.Comp.ScannedEntity = target;
         var netTarget = GetNetEntity(target);
+        var tableNotLinked = TryComp<OperatingComputerComponent>(analyzer, out var computer) &&
+                             computer.LinkedTable == null;
 
-        var state = new BodyAnalyzerTargetUpdate(netTarget);
+        var state = new BodyAnalyzerTargetUpdate(netTarget, tableNotLinked);
         _userInterface.SetUiState(analyzer.Owner, BodyAnalyzerUiKey.Key, state);
     }
 }
