@@ -617,8 +617,10 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (_arrivals.IsOnArrivals((entity.Value, null)))
             return false;
 
-        if (HasComp<ArenaParticipantComponent>(entity)) // SS220-arena-antag-fix
+        // SS220-arena-antag-fix begin
+        if (HasComp<ArenaParticipantComponent>(entity))
             return false;
+        // SS220-arena-antag-fix end
 
         if (!def.AllowNonHumans && !HasComp<HumanoidProfileComponent>(entity))
             return false;
