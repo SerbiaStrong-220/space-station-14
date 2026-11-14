@@ -1,0 +1,13 @@
+pending-ban-enable = Отложить выдачу блокировки
+pending-ban-delay = Через указанное время
+pending-ban-round-end = При завершении раунда
+pending-ban-round-start = При начале раунда
+pending-ban-lobby = При переходе в лобби
+pending-ban-minutes = минут до выдачи
+pending-ban-delay-help = Целое число минут от 1 до 525600.
+pending-ban-duration-hint = Срок бана — с момента выдачи
+pending-ban-shutdown-hint = При остановке сервера бан будет выдан досрочно. После аварийного завершения — при следующем запуске. Статус раунда срабатывает при следующем переходе в выбранный статус.
+pending-ban-invalid = Некорректные параметры отложенной блокировки.
+pending-ban-failed = Не удалось сохранить блокировку. Проверьте журнал сервера и повторите попытку.
+pending-ban-scheduled = Отложенная блокировка сохранена.
+pending-ban-activated = Выдана отложенная блокировка №{ $id }.

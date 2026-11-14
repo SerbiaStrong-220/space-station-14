@@ -8,6 +8,8 @@ using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Eui;
 using Robust.Shared.Network;
+using Content.Server.SS220.PendingBans;
+using Content.Shared.Database.SS220.PendingBans;
 
 namespace Content.Server.Administration;
 
@@ -21,6 +23,7 @@ public sealed class BanPanelEui : BaseEui
     [Dependency] private readonly IAdminManager _admins = default!;
 
     private readonly ISawmill _sawmill;
+    private bool _submitting; // SS220 pending bans
 
     private NetUserId? PlayerId { get; set; }
     private string PlayerName { get; set; } = string.Empty;
@@ -57,7 +60,31 @@ public sealed class BanPanelEui : BaseEui
         }
     }
 
+    // SS220 pending bans begin
+    // reject duplicate submits while resolving/saving the request.
     private async void BanPlayer(Ban ban)
+    {
+        if (_submitting)
+            return;
+
+        _submitting = true;
+        try
+        {
+            await BanPlayerAsync(ban);
+        }
+        catch (Exception e)
+        {
+            _sawmill.Error($"Failed to submit ban: {e}");
+            _chat.DispatchServerMessage(Player, Loc.GetString("pending-ban-failed"));
+        }
+        finally
+        {
+            _submitting = false;
+        }
+    }
+
+    private async System.Threading.Tasks.Task BanPlayerAsync(Ban ban)
+    // SS220 pending bans end
     {
         if (!_admins.HasAdminFlag(Player, AdminFlags.Ban))
         {
@@ -73,8 +100,16 @@ public sealed class BanPanelEui : BaseEui
             return;
         }
 
-        var isRoleBan = ban.BannedJobs?.Length > 0 || ban.BannedAntags?.Length > 0;
-
+        // SS220 pending bans begin
+        // validate network input before doing any work.
+        if (!Enum.IsDefined(ban.PendingTrigger) ||
+            ban.PendingTrigger == PendingBanTrigger.Delay && (ban.DelayMinutes == 0 || ban.DelayMinutes > 525600) ||
+            !Enum.IsDefined(ban.BanType) || string.IsNullOrWhiteSpace(ban.Reason))
+        {
+            _chat.DispatchServerMessage(Player, Loc.GetString("pending-ban-invalid"));
+            return;
+        }
+        // SS220 pending bans end
         // SS220-more-reasonable-ban-type-begin
         // CreateBanInfo banInfo = isRoleBan ? new CreateRoleBanInfo(ban.Reason) : new CreateServerBanInfo(ban.Reason); [wizden]
         CreateBanInfo banInfo = ban.BanType switch
@@ -151,7 +186,10 @@ public sealed class BanPanelEui : BaseEui
                 {
                     chatBanInfo.AddChat(chat);
                 }
-                _banManager.CreateChatsBan(chatBanInfo);
+                // SS220 pending bans begin
+                if (ban.PendingTrigger == PendingBanTrigger.Immediate)
+                    _banManager.CreateChatsBan(chatBanInfo);
+                // SS220 pending bans end
                 break;
 
             case BanType.Species:
@@ -160,7 +198,10 @@ public sealed class BanPanelEui : BaseEui
                 {
                     speciesBanInfo.AddSpecie(specie);
                 }
-                _banManager.CreateSpeciesBan(speciesBanInfo);
+                // SS220 pending bans begin
+                if (ban.PendingTrigger == PendingBanTrigger.Immediate)
+                    _banManager.CreateSpeciesBan(speciesBanInfo);
+                // SS220 pending bans end
                 break;
 
             case BanType.Role:
@@ -174,12 +215,14 @@ public sealed class BanPanelEui : BaseEui
                 {
                     roleBanInfo.AddAntag(row);
                 }
-
-                _banManager.CreateRoleBan(roleBanInfo);
+                // SS220 pending bans begin
+                if (ban.PendingTrigger == PendingBanTrigger.Immediate)
+                    _banManager.CreateRoleBan(roleBanInfo);
+                // SS220 pending bans end
                 break;
 
             case BanType.Server:
-                if (ban.Erase && targetUid is not null)
+                if (ban.PendingTrigger == PendingBanTrigger.Immediate && ban.Erase && targetUid is not null) // SS220 pending bans
                 {
                     try
                     {
@@ -192,12 +235,27 @@ public sealed class BanPanelEui : BaseEui
                     }
                 }
 
-                _banManager.CreateServerBan((CreateServerBanInfo)banInfo);
+                if (ban.PendingTrigger == PendingBanTrigger.Immediate) // SS220 pending bans
+                    _banManager.CreateServerBan((CreateServerBanInfo)banInfo);
                 break;
 
             default:
                 throw new NotImplementedException($"Ban type {ban.BanType} has no implementations!");
         }
+
+        // SS220 pending bans begin
+        // only acknowledge after the schedule is durably committed.
+        if (ban.PendingTrigger != PendingBanTrigger.Immediate)
+        {
+            // Permissions can change while the target is being looked up.
+            if (!_admins.HasAdminFlag(Player, AdminFlags.Ban))
+                return;
+
+            await _entities.System<PendingBanSystem>().ScheduleAsync(
+                banInfo, ban.PendingTrigger, ban.DelayMinutes, ban.Erase, ban.PostBanInfo);
+            _chat.DispatchServerMessage(Player, Loc.GetString("pending-ban-scheduled"));
+        }
+        // SS220 pending bans end
 
         Close();
     }
