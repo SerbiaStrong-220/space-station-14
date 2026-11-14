@@ -1,8 +1,10 @@
+using Content.Shared.Body;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Preferences;
 using Content.Shared.SS220.TTS;
+using Robust.Shared.Enums;
 using Robust.Shared.GameObjects.Components.Localization;
 using Robust.Shared.Prototypes;
 
@@ -12,6 +14,7 @@ public sealed class HumanoidProfileSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly GrammarSystem _grammar = default!;
+    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
 
     public override void Initialize()
     {
@@ -89,4 +92,27 @@ public sealed class HumanoidProfileSystem : EntitySystem
 
         return Loc.GetString("identity-age-old");
     }
+
+    // SS220 - father from the past - start
+    public void SetSex(Entity<HumanoidProfileComponent?> ent, Sex sex, Gender? gender = null)
+    {
+        if (!Resolve(ent, ref ent.Comp) || ent.Comp.Sex == sex) return;
+
+        var oldSex = ent.Comp.Sex;
+        ent.Comp.Sex = sex;
+
+        if (gender is { } g)
+        {
+            ent.Comp.Gender = g;
+            if (TryComp<GrammarComponent>(ent, out var grammar))
+                _grammar.SetGender((ent, grammar), g);
+        }
+
+        Dirty(ent);
+
+        var sexChanged = new SexChangedEvent(oldSex, sex);
+        RaiseLocalEvent(ent, ref sexChanged);
+        _visualBody.SetVisualSex(ent.Owner, sex);
+    }
+    // SS220 - father from the past - end
 }
