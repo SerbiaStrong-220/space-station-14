@@ -7,7 +7,6 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
 using Content.Server.EUI;
-using Content.Server.SS220.Database;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Eui;
@@ -19,6 +18,10 @@ namespace Content.Server.SS220.Administration.Connections;
 public sealed class ConnectionLogsEui : BaseEui
 {
     private const int PageSize = 50;
+    // A regex input/complexity bound, not the maximum length of an account name.
+    private const int MaxSearchPatternLength = 128;
+    private const int RegexTimeoutMilliseconds = 250;
+    private const string SawmillName = "admin.connections";
 
     [Dependency] private readonly IAdminManager _admins = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
@@ -27,12 +30,16 @@ public sealed class ConnectionLogsEui : BaseEui
 
     private readonly CancellationTokenSource _cancel = new();
     private string _ckey;
-    private List<ConnectionLogInfo> _logs = [];
+    private List<ConnectionLogInfo> _connectionLogs = [];
     private bool _isLoading;
     private bool _hasNext;
     private string? _error;
 
-    public ConnectionLogsEui(string ckey = "")
+    public ConnectionLogsEui() : this(string.Empty)
+    {
+    }
+
+    public ConnectionLogsEui(string ckey)
     {
         IoCManager.InjectDependencies(this);
         _ckey = ckey;
@@ -56,7 +63,7 @@ public sealed class ConnectionLogsEui : BaseEui
 
     public override EuiStateBase GetNewState()
     {
-        return new ConnectionLogsEuiState(_ckey, _logs, _isLoading, _hasNext, _error);
+        return new ConnectionLogsEuiState(_ckey, _connectionLogs, _isLoading, _hasNext, _error);
     }
 
     public override void HandleMessage(EuiMessageBase msg)
@@ -70,9 +77,9 @@ public sealed class ConnectionLogsEui : BaseEui
         {
             case Search search:
                 _ckey = search.Ckey.Trim();
-                _logs = [];
+                _connectionLogs = [];
                 _hasNext = false;
-                if (_ckey.Length is 0 or > 128)
+                if (_ckey.Length is 0 or > MaxSearchPatternLength)
                 {
                     _error = "connection-logs-invalid-ckey";
                     StateDirty();
@@ -113,7 +120,7 @@ public sealed class ConnectionLogsEui : BaseEui
         try
         {
             _ = new Regex(_ckey, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
-                TimeSpan.FromMilliseconds(250));
+                TimeSpan.FromMilliseconds(RegexTimeoutMilliseconds));
         }
         catch (ArgumentException)
         {
@@ -129,7 +136,7 @@ public sealed class ConnectionLogsEui : BaseEui
 
         try
         {
-            var last = _logs.LastOrDefault();
+            var last = _connectionLogs.LastOrDefault();
             var page = await _db.GetConnectionLogsAsync(_ckey, last?.Time, last?.Id, PageSize + 1, cancel);
             // Permissions may have changed while the database/auth request was in flight.
             if (!CanView())
@@ -139,7 +146,7 @@ public sealed class ConnectionLogsEui : BaseEui
                 _adminLog.Add(LogType.Action, $"{Player:actor} searched connection logs with regex {_ckey}");
 
             _hasNext = page.Count > PageSize;
-            _logs.AddRange(page.Take(PageSize).Select(log => new ConnectionLogInfo(
+            _connectionLogs.AddRange(page.Take(PageSize).Select(log => new ConnectionLogInfo(
                 log.Id,
                 log.UserName,
                 log.Time,
@@ -153,7 +160,7 @@ public sealed class ConnectionLogsEui : BaseEui
         }
         catch (Exception exception)
         {
-            _log.GetSawmill("admin.connections").Error($"Failed to load connection logs: {exception}");
+            _log.GetSawmill(SawmillName).Error($"Failed to load connection logs: {exception}");
             _error = "connection-logs-error";
         }
         finally
