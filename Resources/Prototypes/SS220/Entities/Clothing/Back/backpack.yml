@@ -26,6 +26,9 @@
   name: blueshield backpack
   description: A backpack specially designed for the Blue Shield, with a unique pocket hardsuit technology.
   components:
+  - type: DnaLockable
+    job: BlueShield
+    blockedActions: ToggleableClothing
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/blueshield.rsi
   - type: Storage
@@ -47,6 +50,8 @@
   name: blueshield backpack
   description: A backpack specially designed for the Blue Shield, with a unique pocket hardsuit technology.
   components:
+  - type: DnaLockable
+    job: null
   - type: ToggleableClothing
     clothingPrototype: ClothingOuterHardsuitHightBlueshield
 
