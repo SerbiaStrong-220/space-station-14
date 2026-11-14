@@ -21,7 +21,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.LateJoin
 {
-    public sealed class LateJoinGui : DefaultWindow
+    public sealed partial class LateJoinGui : DefaultWindow // SS220 Hop improve
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
@@ -83,6 +83,7 @@ namespace Content.Client.LateJoin
             _jobLists.Clear();
             _jobButtons.Clear();
             _jobCategories.Clear();
+            _prioritySections.Clear(); // SS220 Hop improve
 
             if (!_gameTicker.DisallowedLateJoin && _gameTicker.StationNames.Count == 0)
                 _sawmill.Warning("No stations exist, nothing to display in late-join GUI");
@@ -170,6 +171,7 @@ namespace Content.Client.LateJoin
                 Array.Sort(departments, DepartmentUIComparer.Instance);
 
                 _jobButtons[id] = new Dictionary<string, List<JobButton>>();
+                AddPrioritySection(id, jobList); // SS220 Hop improve
 
                 foreach (var department in departments)
                 {
@@ -231,68 +233,8 @@ namespace Content.Client.LateJoin
                     {
                         var value = stationAvailable[prototype.ID];
 
-                        var priority = _gameTicker.PriorityJobs.TryGetValue(id, out var priorityJobs)
-                            && priorityJobs.Contains(prototype.ID); // SS220 Hop improve
-                        var jobLabel = new Label
-                        {
-                            Margin = new Thickness(5f, 0, 0, 0)
-                        };
-
-                        var jobButton = new JobButton(jobLabel, prototype.ID, prototype.LocalizedName, value, priority); // SS220 Hop improve
-
-                        var jobSelector = new BoxContainer
-                        {
-                            Orientation = LayoutOrientation.Horizontal,
-                            HorizontalExpand = true
-                        };
-
-                        var icon = new TextureRect
-                        {
-                            TextureScale = new Vector2(2, 2),
-                            VerticalAlignment = VAlignment.Center
-                        };
-
-                        var jobIcon = _prototypeManager.Index(prototype.Icon);
-                        icon.Texture = _sprites.Frame0(jobIcon.Icon);
-                        jobSelector.AddChild(icon);
-
-                        jobSelector.AddChild(jobLabel);
-                        jobButton.AddChild(jobSelector);
-                        category.AddChild(jobButton);
-
-                        jobButton.OnPressed += _ => SelectedId.Invoke((id, jobButton.JobId));
-
-                        if (!_jobRequirements.IsAllowed(prototype, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
-                        {
-                            jobButton.Disabled = true;
-
-                            if (!reason.IsEmpty)
-                            {
-                                var tooltip = new Tooltip();
-                                tooltip.SetMessage(reason);
-                                jobButton.TooltipSupplier = _ => tooltip;
-                            }
-
-                            jobSelector.AddChild(new TextureRect
-                            {
-                                TextureScale = new Vector2(0.4f, 0.4f),
-                                Stretch = TextureRect.StretchMode.KeepCentered,
-                                Texture = _sprites.Frame0(new SpriteSpecifier.Texture(new ("/Textures/Interface/Nano/lock.svg.192dpi.png"))),
-                                HorizontalExpand = true,
-                                HorizontalAlignment = HAlignment.Right,
-                            });
-                        }
-                        else if (value == 0)
-                        {
-                            jobButton.Disabled = true;
-                        }
-
-                        if (!_jobButtons[id].ContainsKey(prototype.ID))
-                        {
-                            _jobButtons[id][prototype.ID] = new List<JobButton>();
-                        }
-
-                        _jobButtons[id][prototype.ID].Add(jobButton);
+                        // SS220 Hop improve: use the same selection and requirements for both listings.
+                        category.AddChild(CreateJobButton(id, prototype, value));
                     }
                 }
             }
@@ -331,6 +273,7 @@ namespace Content.Client.LateJoin
                     }
                 }
             }
+            RefreshPrioritySections(); // SS220 Hop improve
         }
 
         protected override void Dispose(bool disposing)
@@ -343,6 +286,7 @@ namespace Content.Client.LateJoin
                 _gameTicker.LobbyJobsAvailableUpdated -= JobsAvailableUpdated;
                 _jobButtons.Clear();
                 _jobCategories.Clear();
+                _prioritySections.Clear(); // SS220 Hop improve
             }
         }
     }

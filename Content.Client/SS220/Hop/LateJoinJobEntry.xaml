@@ -1,0 +1,8 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<BoxContainer xmlns="https://spacestation14.io" HorizontalExpand="True">
+    <TextureRect Name="JobIcon" Access="Public" TextureScale="2 2" VerticalAlignment="Center"/>
+    <Label Name="JobLabel" Access="Public" Margin="5 0 0 0"/>
+    <TextureRect Name="LockIcon" Access="Public" TextureScale="0.4 0.4" Stretch="KeepCentered"
+                 Visible="False"
+                 HorizontalExpand="True" HorizontalAlignment="Right"/>
+</BoxContainer>
