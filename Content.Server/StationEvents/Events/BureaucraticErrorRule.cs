@@ -15,13 +15,25 @@ namespace Content.Server.StationEvents.Events;
 public sealed class BureaucraticErrorRule : StationEventSystem<BureaucraticErrorRuleComponent>
 {
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
+    [Dependency] private readonly HopConsoleSystem _hopConsole = default!; // SS220 Hop improve
 
     protected override void Started(EntityUid uid, BureaucraticErrorRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
 
+        // SS220 Hop improve: prototype overrides must not make the effect last longer than ten minutes.
+        if (TryComp<StationEventComponent>(uid, out var stationEvent))
+        {
+            var deadline = Timing.CurTime + HopConsoleSystem.MaximumBureaucraticDuration;
+            if (stationEvent.EndTime == null || stationEvent.EndTime > deadline)
+                stationEvent.EndTime = deadline;
+        }
+
         if (!TryGetRandomStation(out var chosenStation, HasComp<StationJobsComponent>))
             return;
+
+        // SS220 Hop improve: expire an older override before taking the new baseline.
+        _hopConsole.RestoreExpiredRestrictions(chosenStation.Value);
 
         var jobList = _stationJobs.GetJobs(chosenStation.Value).Keys.ToList();
 
@@ -73,7 +85,14 @@ public sealed class BureaucraticErrorRule : StationEventSystem<BureaucraticError
         if (preferredJob is { } preferred)
             changed.Add(preferred);
         if (changed.Count > 0)
-            RaiseLocalEvent(new BureaucraticJobsChangedEvent(chosenStation.Value, changed, preferredJob));
+            RaiseLocalEvent(new BureaucraticJobsChangedEvent(chosenStation.Value, changed, preferredJob, before, uid));
         // SS220 Hop improve end
+    }
+
+    // SS220 Hop improve: explicit/normal event completion restores the saved staffing settings as well.
+    protected override void Ended(EntityUid uid, BureaucraticErrorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    {
+        base.Ended(uid, component, gameRule, args);
+        _hopConsole.EndBureaucraticError(uid);
     }
 }

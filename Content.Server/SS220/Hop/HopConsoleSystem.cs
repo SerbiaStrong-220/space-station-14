@@ -14,6 +14,7 @@ using Content.Shared.StationRecords;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Hop;
 
@@ -27,6 +28,8 @@ public sealed class HopConsoleSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly ISharedAdminLogManager _logs = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    public static readonly TimeSpan MaximumBureaucraticDuration = TimeSpan.FromMinutes(10);
     private float _refreshElapsed;
 
     public override void Initialize()
@@ -47,6 +50,19 @@ public sealed class HopConsoleSystem : EntitySystem
         if (!TryComp<StationJobsComponent>(args.Station, out var jobs))
             return;
         var restrictions = EnsureComp<HopStationRestrictionsComponent>(args.Station);
+        if (restrictions.RestoreAt == null)
+        {
+            restrictions.RestoreAt = _timing.CurTime + MaximumBureaucraticDuration;
+            restrictions.SavedPriorities.UnionWith(jobs.PriorityJobs);
+        }
+        // Overlapping events cannot overwrite the first baseline or extend the ten-minute deadline.
+        foreach (var id in args.ChangedJobs)
+        {
+            if (restrictions.LockedJobs.Contains(id) || !args.PreviousSlots.TryGetValue(id, out var previous))
+                continue;
+            restrictions.SavedTotals[id] = previous is { } slots ? slots + OccupiedSlots(jobs, id) : null;
+        }
+        restrictions.Rules.Add(args.Rule);
         restrictions.LockedJobs.UnionWith(args.ChangedJobs);
         var candidates = restrictions.LockedJobs
             .Where(id => CrewJob(jobs, id) && jobs.JobList.ContainsKey(id))
@@ -63,11 +79,57 @@ public sealed class HopConsoleSystem : EntitySystem
         _jobs.RefreshJobsAvailable();
     }
 
+    public void RestoreExpiredRestrictions(EntityUid station)
+    {
+        if (TryComp<HopStationRestrictionsComponent>(station, out var restrictions) &&
+            restrictions.RestoreAt is { } expires && expires <= _timing.CurTime && !IsPaused(station))
+            RestoreRestrictions(station, restrictions);
+    }
+
+    public void EndBureaucraticError(EntityUid rule)
+    {
+        var query = EntityQueryEnumerator<HopStationRestrictionsComponent>();
+        while (query.MoveNext(out var station, out var restrictions))
+        {
+            if (restrictions.Rules.Remove(rule) && restrictions.Rules.Count == 0)
+                RestoreRestrictions(station, restrictions);
+        }
+    }
+
+    private void RestoreRestrictions(EntityUid station, HopStationRestrictionsComponent restrictions)
+    {
+        if (!TryComp<StationJobsComponent>(station, out var jobs))
+            return;
+        foreach (var (id, total) in restrictions.SavedTotals)
+        {
+            if (total is { } finite)
+                _jobs.TrySetJobSlot(station, id, Math.Max(0, finite - OccupiedSlots(jobs, id)), createSlot: true);
+            else
+                _jobs.MakeJobUnlimited(station, id);
+        }
+        jobs.PriorityJobs.Clear();
+        jobs.PriorityJobs.UnionWith(restrictions.SavedPriorities);
+        restrictions.LockedJobs.Clear();
+        restrictions.SavedTotals.Clear();
+        restrictions.SavedPriorities.Clear();
+        restrictions.Rules.Clear();
+        restrictions.ForcedPriority = null;
+        restrictions.RestoreAt = null;
+        _jobs.RefreshJobsAvailable();
+    }
+
     private int OccupiedSlots(StationJobsComponent jobs, string jobId) =>
         jobs.PlayerJobs.Values.Sum(roles => roles.Count(role => role == jobId));
 
     public override void Update(float frameTime)
     {
+        // Restore even if nobody has a console open. Check every tick, not just at the UI refresh interval.
+        var restrictionsQuery = EntityQueryEnumerator<HopStationRestrictionsComponent>();
+        while (restrictionsQuery.MoveNext(out var station, out var restrictions))
+        {
+            if (restrictions.RestoreAt is { } expires && expires <= _timing.CurTime && !IsPaused(station))
+                RestoreRestrictions(station, restrictions);
+        }
         _refreshElapsed += frameTime;
         if (_refreshElapsed < 2f)
             return;
@@ -128,6 +190,7 @@ public sealed class HopConsoleSystem : EntitySystem
         if (!TryStation(console, out var station))
             return new HopConsoleState(string.Empty, new(), new(), available: false);
 
+        RestoreExpiredRestrictions(station);
         var jobs = Comp<StationJobsComponent>(station);
         TryComp<HopStationRestrictionsComponent>(station, out var restrictions);
         var entries = new List<HopJobEntry>();
@@ -180,6 +243,7 @@ public sealed class HopConsoleSystem : EntitySystem
         const HopConsoleOperation op = HopConsoleOperation.SaveJob;
         if (!Validate(console, args.Actor, op, out var station))
             return;
+        RestoreExpiredRestrictions(station);
         var jobs = Comp<StationJobsComponent>(station);
         if (!CrewJob(jobs, args.JobId) || !HopJobPolicy.ValidSlots(args.Slots))
         {
@@ -223,6 +287,11 @@ public sealed class HopConsoleSystem : EntitySystem
         }
         else
             jobs.PriorityJobs.Remove(args.JobId);
+        if (restrictions?.RestoreAt != null && restrictions.ForcedPriority == null)
+        {
+            restrictions.SavedPriorities.Clear();
+            restrictions.SavedPriorities.UnionWith(jobs.PriorityJobs);
+        }
         _jobs.RefreshJobsAvailable();
         _logs.Add(LogType.Action,
             $"{ToPrettyString(args.Actor)} changed {args.JobId} on {ToPrettyString(station)}: available slots {oldSlots?.ToString() ?? "unlimited"} -> {args.Slots?.ToString() ?? "unlimited"}, priority {oldPriority} -> {args.Priority}.");

@@ -14,7 +14,7 @@ public static class HopJobPolicy
     /// </summary>
     public static int MaximumAvailable(int? baseline, int occupied)
     {
-        var total = baseline is { } value ? (long) value / 2 : MaxSlots;
+        var total = baseline is { } value ? (long) value + value / 2 : MaxSlots;
         return (int)Math.Clamp(total - Math.Max(occupied, 0), 0, MaxSlots);
     }
 

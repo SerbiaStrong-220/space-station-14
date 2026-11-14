@@ -15,11 +15,16 @@ using Content.Shared.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using Content.Server.Station.Components;
+using Content.Server.StationEvents.Components;
 
 namespace Content.IntegrationTests.Tests.SS220.Hop;
 
 public sealed class HopConsoleTest : GameTest
 {
+    private readonly ProtoId<GameMapPrototype> _testMapId = "HopConsoleTestMap";
+
     [TestPrototypes]
     private const string Prototypes = """
 - type: gameMap
@@ -47,7 +52,7 @@ public sealed class HopConsoleTest : GameTest
     {
         await Server.WaitAssertion(() =>
         {
-            var proto = Server.ResolveDependency<IPrototypeManager>().Index<GameMapPrototype>("HopConsoleTestMap");
+            var proto = Server.ResolveDependency<IPrototypeManager>().Index(_testMapId);
             var station = Server.System<StationSystem>().InitializeNewStation(proto.Stations["Station"], null, "HoP test");
             var system = Server.System<HopConsoleSystem>();
             var state = system.BuildState(station);
@@ -75,7 +80,7 @@ public sealed class HopConsoleTest : GameTest
         var map = await Pair.CreateTestMap();
         await Server.WaitAssertion(() =>
         {
-            var proto = Server.ResolveDependency<IPrototypeManager>().Index<GameMapPrototype>("HopConsoleTestMap");
+            var proto = Server.ResolveDependency<IPrototypeManager>().Index(_testMapId);
             var stations = Server.System<StationSystem>();
             var station = stations.InitializeNewStation(proto.Stations["Station"], null, "HoP test");
             stations.AddGridToStation(station, map.GridCoords.EntityId);
@@ -145,6 +150,41 @@ public sealed class HopConsoleTest : GameTest
             Send(new HopConsoleRemoveRecordMessage(record.Key), hop);
             Assert.That(system.BuildState(console).Records, Is.Empty);
 
+            // Restore the last HoP staffing/priority settings after expiry, not the temporary unlimited slots.
+            var normal = system.BuildState(console);
+            var beforeEvent = jobs.GetJobs(station).ToDictionary(x => x.Key, x => x.Value);
+            jobs.MakeJobUnlimited(station, "StationEngineer");
+            SEntMan.EventBus.RaiseEvent(EventSource.Local, new BureaucraticJobsChangedEvent(station,
+                ["StationEngineer"], "StationEngineer", beforeEvent, console));
+            var timed = SEntMan.GetComponent<HopStationRestrictionsComponent>(station);
+            var deadline = timed.RestoreAt;
+            Assert.That(deadline, Is.EqualTo(Server.ResolveDependency<IGameTiming>().CurTime + TimeSpan.FromMinutes(10)));
+            // A second event must not extend the deadline or replace the original baseline.
+            var overlap = jobs.GetJobs(station).ToDictionary(x => x.Key, x => x.Value);
+            SEntMan.EventBus.RaiseEvent(EventSource.Local, new BureaucraticJobsChangedEvent(station,
+                ["StationEngineer"], "StationEngineer", overlap, hop));
+            Assert.That(timed.RestoreAt, Is.EqualTo(deadline));
+            Assert.That(jobs.TryAssignJob(station, "StationEngineer", new NetUserId(Guid.NewGuid())), Is.True);
+            timed.RestoreAt = Server.ResolveDependency<IGameTiming>().CurTime;
+            system.Update(0);
+            var restored = system.BuildState(console);
+            Assert.That(restored.Jobs.Single(j => j.Id == "StationEngineer").AvailableSlots,
+                Is.EqualTo(normal.Jobs.Single(j => j.Id == "StationEngineer").AvailableSlots - 1));
+            Assert.That(restored.Jobs.Any(j => j.SlotsLocked || j.PriorityLocked), Is.False);
+            Assert.That(restored.Jobs.Where(j => j.Priority).Select(j => j.Id),
+                Is.EquivalentTo(normal.Jobs.Where(j => j.Priority).Select(j => j.Id)));
+
+            // Jobs without HoP edits restore their defaults as well, including unlimited passengers.
+            var defaults = jobs.GetJobs(station).ToDictionary(x => x.Key, x => x.Value);
+            jobs.TrySetJobSlot(station, "Captain", 0);
+            jobs.TrySetJobSlot(station, "Passenger", 0);
+            SEntMan.EventBus.RaiseEvent(EventSource.Local, new BureaucraticJobsChangedEvent(station,
+                ["Captain", "Passenger"], "Captain", defaults, console));
+            system.EndBureaucraticError(console);
+            Assert.That(jobs.GetJobs(station)["Captain"], Is.EqualTo(defaults["Captain"]));
+            Assert.That(jobs.GetJobs(station)["Passenger"], Is.Null);
+            Assert.That(system.BuildState(console).Jobs.Any(j => j.SlotsLocked || j.PriorityLocked), Is.False);
+
             // The real event runs both its randomized branches through the restriction hook.
             var ticker = Server.System<GameTicker>();
             for (var i = 0; i < 40; i++)
@@ -178,9 +218,10 @@ public sealed class HopConsoleTest : GameTest
             Assert.That(system.BuildState(console).Jobs.Single(j => j.Priority).Id, Is.EqualTo(forcedPriority.Id));
 
             // Explicitly cover a second event affecting several roles while a forced priority already exists.
+            var previousSlots = jobs.GetJobs(station).ToDictionary(x => x.Key, x => x.Value);
             jobs.MakeJobUnlimited(station, "StationEngineer");
             SEntMan.EventBus.RaiseEvent(EventSource.Local, new BureaucraticJobsChangedEvent(station,
-                ["StationEngineer", "Captain"], "StationEngineer"));
+                ["StationEngineer", "Captain"], "StationEngineer", previousSlots, console));
             var eventState = system.BuildState(console);
             Assert.That(eventState.Jobs.Where(j => j.Priority).Select(j => j.Id), Is.EquivalentTo(new[] { "StationEngineer" }));
             Assert.That(eventState.Jobs.Single(j => j.Id == "StationEngineer").SlotsLocked, Is.True);
@@ -189,6 +230,24 @@ public sealed class HopConsoleTest : GameTest
             var other = system.BuildState(console).Jobs.First(j => !j.Priority);
             Send(new HopConsoleSaveJobMessage(other.Id, other.AvailableSlots, true, other.AvailableSlots, false), hop);
             Assert.That(system.BuildState(console).Jobs.Single(j => j.Priority).Id, Is.EqualTo("StationEngineer"));
+
+            timed.RestoreAt = Server.ResolveDependency<IGameTiming>().CurTime;
+            system.Update(0);
+            Assert.That(system.BuildState(console).Jobs.Any(j => j.SlotsLocked || j.PriorityLocked), Is.False);
+            var restoredBeforeEarlyEnd = jobs.GetJobs(station).ToDictionary(x => x.Key, x => x.Value);
+            var priorityBeforeEarlyEnd = system.BuildState(console).Jobs.Where(j => j.Priority).Select(j => j.Id).ToArray();
+            var longRule = ticker.AddGameRule("BureaucraticError");
+            SEntMan.GetComponent<StationEventComponent>(longRule).Duration = TimeSpan.FromMinutes(20);
+            ticker.StartGameRule(longRule);
+            ticker.StartGameRule(longRule);
+            Assert.That(SEntMan.GetComponent<StationEventComponent>(longRule).EndTime,
+                Is.LessThanOrEqualTo(Server.ResolveDependency<IGameTiming>().CurTime + TimeSpan.FromMinutes(10)));
+            ticker.EndGameRule(longRule);
+            Assert.That(jobs.GetJobs(station), Is.EquivalentTo(restoredBeforeEarlyEnd));
+            Assert.That(system.BuildState(console).Jobs.Where(j => j.Priority).Select(j => j.Id),
+                Is.EquivalentTo(priorityBeforeEarlyEnd));
+            Assert.That(system.BuildState(console).Jobs.Any(j => j.SlotsLocked || j.PriorityLocked), Is.False);
+            SEntMan.DeleteEntity(longRule);
 
             SEntMan.DeleteEntity(console);
             SEntMan.DeleteEntity(hop);
