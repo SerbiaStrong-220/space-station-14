@@ -144,7 +144,7 @@ public partial class TtsSystem
                 await httpResponse.Content.CopyToAsync(memoryStream, cts.Token);
 
                 memoryStream.Position = 0;
-                using var effectStream = await TtsSystem.AddFFMpegEffect(memoryStream, kind);
+                using var effectStream = await TtsSystem.AddFFMpegEffect(memoryStream, kind, Provider);
                 var streamToRead = effectStream ?? memoryStream;
 
                 streamToRead.Position = 0;

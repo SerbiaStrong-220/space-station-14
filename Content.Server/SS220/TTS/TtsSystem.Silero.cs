@@ -166,7 +166,7 @@ public partial class TtsSystem
                 await audioStream.WriteAsync(soundData, cts.Token);
                 audioStream.Position = 0;
 
-                using var effectStream = await TtsSystem.AddFFMpegEffect(audioStream, kind);
+                using var effectStream = await TtsSystem.AddFFMpegEffect(audioStream, kind, Provider);
                 var streamToRead = effectStream ?? audioStream;
 
                 streamToRead.Position = 0;

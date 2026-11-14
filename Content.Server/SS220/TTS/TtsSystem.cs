@@ -279,20 +279,21 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
         public void Cache(TtsCacheKey key, TtsResponse value)
         {
-            var currentCount = _lookup.Count;
-            while (currentCount > 0 && currentCount + 1 > Limit)
-            {
-                if (_keysQueue.TryDequeue(out var firstKey) && _lookup.TryRemove(firstKey, out var responce))
-                    responce.Dispose();
+            if (Limit == 0)
+                return;
 
-                currentCount = _lookup.Count;
-            }
+            // The same response may be cached by every request that waited for it.
+            // Overwriting would lose the reference without disposing it.
+            if (_lookup.ContainsKey(key))
+                return;
 
-            if (Limit != 0)
-            {
-                _lookup[key] = value.GetReference();
+            Trim(Limit - 1);
+
+            var reference = value.GetReference();
+            if (_lookup.TryAdd(key, reference))
                 _keysQueue.Enqueue(key);
-            }
+            else
+                reference.Dispose();
         }
 
         public bool TryGet(TtsCacheKey key, [NotNullWhen(true)] out TtsResponse.Reference? responce)
@@ -307,18 +308,33 @@ public sealed partial class TtsSystem : SharedTtsSystem
 
         public void Clear()
         {
-            _lookup.Clear();
+            foreach (var key in _lookup.Keys)
+            {
+                if (_lookup.TryRemove(key, out var reference))
+                    reference.Dispose();
+            }
+
             _keysQueue.Clear();
         }
 
         public void Trim()
         {
-            while (_lookup.Count > Limit)
-            {
-                if (_keysQueue.TryDequeue(out var firstKey) && _lookup.TryRemove(firstKey, out var reuseBuffer))
-                    reuseBuffer.GetReference().Dispose();
-            }
+            Trim(Limit);
+        }
 
+        /// <summary>
+        /// Removes the oldest responses until there are no more than <paramref name="maxCount"/> of them.
+        /// </summary>
+        private void Trim(int maxCount)
+        {
+            while (_lookup.Count > maxCount)
+            {
+                if (!_keysQueue.TryDequeue(out var firstKey))
+                    break;
+
+                if (_lookup.TryRemove(firstKey, out var reference))
+                    reference.Dispose();
+            }
         }
     }
 }
