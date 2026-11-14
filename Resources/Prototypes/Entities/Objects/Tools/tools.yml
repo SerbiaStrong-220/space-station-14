@@ -410,6 +410,7 @@
     - Airlock
     - AirlockGlass
     - Firelock
+    - FirelockGlass # SS220-rcd-firelock-stacking
     - TubeLight
     - BulbLight
     - LVCable

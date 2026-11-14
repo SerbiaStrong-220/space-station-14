@@ -1,0 +1,61 @@
+- type: reagent
+  id: Anaphyl
+  name: reagent-name-anaphyl
+  group: Toxins
+  desc: reagent-desc-anaphyl
+  color: "#640540"
+  physicalDesc: reagent-physical-desc-bubbling
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.5
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Asphyxiation: 5
+            Poison: 5
+            Cerebral: 3
+      - !type:Jitter
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        time: 1
+      - !type:StaminaChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Anaphyl
+          min: 5
+        value: 50
+      - !type:MovementSpeedModifier
+        conditions:
+        - !type:ReagentCondition
+          reagent: Anaphyl
+          min: 3.5
+        walkSpeedModifier: 1.5
+        sprintSpeedModifier: 1.5
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentCondition
+          reagent: Anaphyl
+          min: 5
+        type: Local
+        probability: 0.5
+        visualType: LargeCaution
+        messages: [ "anaphyl-effect-asphyxiation" ]
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+        type: add
+        time: 3
+      - !type:Jitter
+        time: 8
+      - !type:AdjustReagent
+        reagent: Epinephrine
+        amount: -2
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Epinephrine
+          min: 1
+        reagent: Anaphyl
+        amount: -0.5

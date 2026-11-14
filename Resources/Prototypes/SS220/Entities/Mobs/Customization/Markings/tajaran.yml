@@ -247,7 +247,7 @@
   id: TajaranSnout
   bodyPart: Snout
   forcedColoring: true
-  groupWhitelist: []
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Species/Tajaran/parts.rsi
     state: nose

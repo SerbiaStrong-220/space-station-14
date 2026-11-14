@@ -651,7 +651,8 @@
         type: StrippableBoundUserInterface
   - type: InventorySlots
   - type: Inventory
-    speciesId: hamster
+    #speciesId: hamster #SS220 mothroach displacement
+    speciesId: mothroach
     templateId: hamster
     displacements:
       head:
@@ -893,7 +894,7 @@
 
 - type: entity
   name: cow
-  parent: [ SimpleMobBase, BaseMobRuminant ]
+  parent: [ BaseMobRuminant, SimpleMobBase ] #SS220-fauna-diet-fix
   id: MobCow
   description: Moo.
   components:
@@ -976,7 +977,7 @@
 
 - type: entity
   name: crab
-  parent: [ SimpleMobBase, BaseMobHemocyanin ]
+  parent: [ BaseMobHemocyanin, SimpleMobBase ] #SS220-fauna-diet-fix
   id: MobCrab
   description: A folk legend goes around that his claw snaps spacemen out of existence over distasteful remarks. Be polite and tolerant for your own safety.
   components:
@@ -1044,7 +1045,7 @@
 
 - type: entity
   name: goat
-  parent: [ SimpleMobBase, BaseMobRuminant ]
+  parent: [ BaseMobRuminant, SimpleMobBase ] #SS220-fauna-diet-fix
   id: MobGoat
   description: Her spine consists of long sharp segments, no wonder she is so grumpy.
   components:
@@ -2666,7 +2667,7 @@
 # Code unique spider prototypes or combine them all into one spider and get a
 # random sprite state when you spawn it.
 - type: entity
-  parent: [ SimpleMobBase, BaseMobHemocyanin, MobCombat ]
+  parent: [ BaseMobHemocyanin, SimpleMobBase, MobCombat ] #SS220-fauna-diet-fix
   id: MobSpiderBase
   abstract: true
   components:
@@ -3316,7 +3317,7 @@
 
 - type: entity
   name: cat
-  parent: [SimpleMobBase, StripableInventoryBase, BaseMobCatBody] # SS220 cat organ
+  parent: [BaseMobCatBody, SimpleMobBase, StripableInventoryBase] # SS220 cat organ #SS220-fauna-diet-fix
   id: MobCat
   description: Feline pet, very funny.
   components:
@@ -4079,8 +4080,10 @@
   - type: IgnoreKudzu #ss220 kudzu nymph fix
   #SS220-NymphLanguageFix begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
+    - id: Rootspeak
   #SS220-NymphLanguageFix end
 
 - type: entity
