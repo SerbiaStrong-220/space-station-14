@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingNeckOtherShoulderBase
+  parent: [ClothingNeckOtherShoulderBase, BaseClothingCloak]
   id: ClothingNeckCloakCapeWhite
   name: white cloak-cape
   description: A comfortable cape, draped down your back and held around your neck with a brooch.

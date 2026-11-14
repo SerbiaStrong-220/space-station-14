@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingNeckCloakFieldOfficerCentComm
   name: CentComm field officer cloak
   description: This cloak reeks of authority and your termination.
@@ -10,7 +10,7 @@
     sprite: SS220/Clothing/Neck/Cloaks/centcomm_fo.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingNeckCloakWhiteCapFormal
   name: white formal captain's cloak
   description: A luxurious cloak for an honored veteran of long service.
@@ -22,7 +22,7 @@
     stealGroup: HeadCloak
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingNeckCloakNanotrasenAdmiral
   name: admiral's cape
   description: A cape with gold stitching, worn by Nanotrasen Navy Admirals.
@@ -31,7 +31,7 @@
       sprite: SS220/Clothing/Neck/Cloaks/nanotrasen_admiral.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingCloak1984
   name: 1984 cloak
   description: Literally 1984.
@@ -51,7 +51,7 @@
       - ClothMade
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingNeckCloakAlisa
   name: heart of Alisa
   description: A huge, kind heart sealed in a piece of cloth.
@@ -68,7 +68,7 @@
       toggleable-clothing: !type:ContainerSlot {}
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingNeckCloakOwl
   name: the owl hero's cloak
   description:  Be prepared for night patrols and strange questions about mice.
@@ -85,7 +85,7 @@
       toggleable-clothing: !type:ContainerSlot {}
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingNeckCMOParadeCloak
   name: chief medical officer's parade cloak
   description: The owner has seen everything and more. From the dwarf under the bahus to the smoking chemist in the lab.
@@ -106,7 +106,7 @@
     stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingNeckCloakCEDark
   name: chief engineer's dark cloak
   description: The dark cloak of the chief engineer for years of service as the head of the engineering department.
