@@ -15,3 +15,11 @@ patient-status-decay-degree--1 = #err
 patient-status-brain-rot-degree = Мозг пациента повреждён на [color=orange]{ $degree }%[/color]
 patient-status-brain-rot-none = Мозговая активность в норме
 patient-status-brain-rot-invalid = Мозг не найден!
+
+patient-status-anesthesia-active = Анестезия: [color=green]активна (наркоз / анальгетик)[/color]
+patient-status-anesthesia-none = Анестезия: [color=red]отсутствует (риск болевого срыва!)[/color]
+patient-status-anesthesia-invalid = Анестезия: #err
+
+patient-status-operating-table-yes = Положение: [color=green]на операционном столе[/color]
+patient-status-operating-table-no = Положение: [color=orange]вне операционного стола[/color]
+patient-status-operating-table-invalid = Положение: #err

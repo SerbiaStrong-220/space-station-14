@@ -30,6 +30,7 @@ public sealed partial class EdgeDescription : BoxContainer
 
     private static readonly LocId OperationDescriptionConditionSection = "operation-description-condition-section-name";
     private static readonly LocId OperationDescriptionActionDescriptions = "operation-description-action-description-section-name";
+    private static readonly LocId OperationDescriptionEdgeDelay = "operation-description-edge-delay";
 
     public EdgeDescription()
     {
@@ -65,15 +66,26 @@ public sealed partial class EdgeDescription : BoxContainer
     private void AddConditionInfo(SurgeryGraphEdge edge)
     {
         var surgeryRequirements = _surgeryGraph.GetRequirements(edge);
-        if (surgeryRequirements.Count == 0)
+        var delay = _surgeryGraph.Delay(edge);
+        if (surgeryRequirements.Count == 0 && delay == null)
             return;
 
         var builder = new StringBuilder();
-        builder.Append(Loc.GetString(OperationDescriptionConditionSection));
-        foreach (var requirement in surgeryRequirements)
+        if (delay is { } delayVal)
         {
-            builder.AppendLine();
-            builder.Append(requirement.RequirementDescription(_prototypeManager, _entityManager));
+            builder.Append(Loc.GetString(OperationDescriptionEdgeDelay, ("delay", $"{delayVal:0.#}")));
+            if (surgeryRequirements.Count > 0)
+                builder.AppendLine();
+        }
+
+        if (surgeryRequirements.Count > 0)
+        {
+            builder.Append(Loc.GetString(OperationDescriptionConditionSection));
+            foreach (var requirement in surgeryRequirements)
+            {
+                builder.AppendLine();
+                builder.Append(requirement.RequirementDescription(_prototypeManager, _entityManager));
+            }
         }
 
         this.TooltipSupplier = CreateRichTooltip;

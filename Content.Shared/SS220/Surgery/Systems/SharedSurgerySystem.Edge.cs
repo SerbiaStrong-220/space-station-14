@@ -123,13 +123,26 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         return true;
     }
 
+    public bool CanMeetRequirements(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
+    {
+        return CheckRequirements(entity, edge, used, user, applyEffects: false);
+    }
+
     public bool TryMeetRequirement(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
+    {
+        return CheckRequirements(entity, edge, used, user, applyEffects: true);
+    }
+
+    private bool CheckRequirements(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user, bool applyEffects)
     {
         foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+            var satisfied = applyEffects
+                ? requirement.MeetRequirement(requirementTarget, user, EntityManager)
+                : requirement.SatisfiesRequirements(requirementTarget, user, EntityManager);
 
-            if (requirement.MeetRequirement(requirementTarget, user, EntityManager))
+            if (satisfied)
                 continue;
 
             return false;
@@ -138,8 +151,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         foreach (var requirement in SurgeryGraph.GetRequirements(edge))
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+            var satisfied = applyEffects
+                ? requirement.MeetRequirement(requirementTarget, user, EntityManager)
+                : requirement.SatisfiesRequirements(requirementTarget, user, EntityManager);
 
-            if (requirement.MeetRequirement(requirementTarget, user, EntityManager))
+            if (satisfied)
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);

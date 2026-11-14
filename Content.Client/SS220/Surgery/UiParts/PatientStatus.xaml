@@ -20,6 +20,8 @@
                 <RichTextLabel Name="OverallDamage" Text="overall-damage" HorizontalExpand="True"/>
                 <RichTextLabel Name="DecayDegree" Text="decay-degree" HorizontalExpand="True"/>
                 <RichTextLabel Name="BrainRotStatus" Text="brain-rot-status" HorizontalExpand="True"/>
+                <RichTextLabel Name="AnesthesiaStatus" Text="anesthesia-status" HorizontalExpand="True"/>
+                <RichTextLabel Name="OperatingTableStatus" Text="operating-table-status" HorizontalExpand="True"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

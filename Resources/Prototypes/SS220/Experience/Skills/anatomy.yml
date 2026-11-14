@@ -10,7 +10,7 @@
   components:
   - type: SurgeryDoAfterSkill
     durationScale: 1.5
-    failureChance: 0
+    failureChance: 0.15
   - type: PathologyHealerRemoveDamageSkill
     removeDamageModifier:
       TorsoProjectileFragment: 1.2
@@ -33,7 +33,7 @@
   components:
   - type: SurgeryDoAfterSkill
     durationScale: 1
-    failureChance: 0
+    failureChance: 0.05
   - type: PathologyHealerRemoveDamageSkill
     removeDamageModifier:
       TorsoProjectileFragment: 1
@@ -80,7 +80,7 @@
   components:
   - type: SurgeryDoAfterSkill
     durationScale: 0.7
-    failureChance: 0
+    failureChance: -0.05
   - type: PathologyHealerRemoveDamageSkill
     removeDamageModifier:
       TorsoProjectileFragment: 0.8

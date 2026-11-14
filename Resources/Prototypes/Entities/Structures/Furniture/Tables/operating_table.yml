@@ -11,3 +11,6 @@
   - type: Icon
     sprite: Structures/Furniture/Tables/optable.rsi
     state: operating_table
+  # SS220 Surgery begin
+  - type: OperatingTable
+  # SS220 Surgery end

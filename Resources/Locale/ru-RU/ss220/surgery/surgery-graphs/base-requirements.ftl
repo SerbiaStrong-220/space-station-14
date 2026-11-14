@@ -12,7 +12,19 @@ surgery-requirement-tool-required-hemostat = Инструмент для [color=
 surgery-requirement-tool-required-saw = Инструмент для [color=lightblue]распиливания[/color] костей ({ ent-SawElectric })
 surgery-requirement-tool-required-bone-gel = гель для [color=lightblue]восстановления[/color] костей ({ ent-BoneGel })
 surgery-requirement-tool-required-cautery = Инструмент способного точечно [color=lightblue]прижечь[/color] рану ({ ent-Cautery })
+surgery-requirement-tool-required-bonesetter = Инструмент для [color=lightblue]вправления[/color] костей ({ ent-BoneSetter })
+surgery-requirement-tool-required-drill = Инструмент для [color=lightblue]сверления[/color] костной ткани ({ ent-Drill })
+surgery-requirement-tool-required-blood-filter = Инструмент для [color=lightblue]фильтрации[/color] крови ({ ent-BloodFilter })
+surgery-requirement-tool-required-autopsy-scanner = Инструмент для [color=lightblue]аутопсии[/color] тканей ({ ent-AutopsyScanner })
+surgery-requirement-tool-required-surgical-tape = [color=lightblue]Хирургическая лента[/color] ({ ent-SurgicalTape })
+surgery-requirement-tool-required-shears = Инструмент для [color=lightblue]ампутации[/color] ({ ent-AmputationShears })
 surgery-requirement-tool-required-specific = [color=gold]Особый[/color] инструмент
+
+surgery-requirement-operating-computer-description = Наличие рядом [color=lightblue]операционного компьютера[/color] с загруженным протоколом операции
+surgery-requirement-operating-computer-failure = Рядом нет операционного компьютера с загруженным протоколом этой операции!
+
+surgery-requirement-has-organ-description = Наличие органа категории [color=lightblue]{ $organ }[/color]
+surgery-requirement-has-organ-failure = Требуемый орган ({ $organ }) отсутствует!
 
 surgery-requirement-reagent-in-hand-description = Держать в руке ёмкость с [color=lightblue]реагентом[/color] { $reagent } в количестве как минимум { $amount }
 surgery-requirement-reagent-in-hand-failure-message = Для этого действия нужно держать в руке ёмкость с [color=lightblue]реагентом[/color] { $reagent } в количестве как минимум { $amount }

@@ -154,14 +154,14 @@
     edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/organ.ogg
     edgeIcon:
-      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
-      state: retractor
+      sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+      state: bonesetter
     requirements:
     - !type:SurgeryToolRequirement
       subject: used
-      surgeryTool: retractor
+      surgeryTool: Bonesetter
       requirementPriority: -1
-      description: surgery-requirement-tool-required-retractor
+      description: surgery-requirement-tool-required-bonesetter
       failureMessage: surgery-requirement-tool-miss
 
 - type: abstractSurgeryEdge

@@ -91,3 +91,15 @@
   effects:
   - !type:SpawnEntity
     entity: MaterialBiomass10
+
+- type: reaction
+  id: Morphine
+  reactants:
+    Inaprovaline:
+      amount: 1
+    Ethanol:
+      amount: 1
+    Carbon:
+      amount: 1
+  products:
+    Morphine: 3

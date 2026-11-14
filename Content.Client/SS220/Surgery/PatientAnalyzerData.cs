@@ -23,6 +23,8 @@ public struct PatientStatusData()
     /// From 0 to 2 according to <see cref="RottingSystem"/>
     /// </summary>
     public int BodyDecayDegree = -1;
+    public bool IsAnesthetized;
+    public bool IsOnOperatingTable;
 }
 
 public struct TreatmentRecommendation

@@ -1,6 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Body.Systems;
+using Content.Server.Chat.Systems;
+using Content.Shared.Chat;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Systems;
@@ -11,8 +14,11 @@ namespace Content.Server.SS220.Surgery.Systems;
 
 public sealed partial class SurgerySystem : SharedSurgerySystem
 {
-    [Dependency] private BloodstreamSystem _bloodstream = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+
+    private static readonly ProtoId<EmotePrototype> ScreamEmote = "Scream";
 
     public override void Initialize()
     {
@@ -61,5 +67,10 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         base.ProceedToNextStep(entity, user, used, surgeryGraph, chosenEdge);
 
         Dirty(entity);
+    }
+
+    protected override void OnPatientPain(EntityUid patient)
+    {
+        _chat.TryEmoteWithChat(patient, ScreamEmote, ChatTransmitRange.Normal, ignoreActionBlocker: true);
     }
 }

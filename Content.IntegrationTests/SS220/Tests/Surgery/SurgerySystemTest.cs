@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Bed.Sleep;
+using Content.Shared.Buckle;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Systems;
 using Content.Shared.SS220.Surgery.Graph;
@@ -200,6 +202,65 @@ public sealed class SurgerySystemTest
                 Assert.That(patientComp.OngoingSurgeries.ContainsKey(surgeryGraphId), Is.True);
                 Assert.That(patientComp.OngoingSurgeries[surgeryGraphId], Is.EqualTo("head-skin-incision"));
             });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task SurgeryRiskAndAnesthesiaTest()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false
+        });
+
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var buckleSystem = entMng.System<SharedBuckleSystem>();
+
+        EntityUid patient = default!;
+        EntityUid surgeon = default!;
+        EntityUid table = default!;
+        EntityUid scalpel = default!;
+        SurgeryGraphEdge edge = default!;
+        const string surgeryGraphId = "TestSurgeryGraph";
+
+        await server.WaitAssertion(() =>
+        {
+            patient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            surgeon = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            table = entMng.SpawnEntity("OperatingTable", mapData.MapCoords);
+            scalpel = entMng.SpawnEntity("Scalpel", mapData.MapCoords);
+
+            Assert.That(protoManager.TryIndex<SurgeryGraphPrototype>(surgeryGraphId, out var graphProto), Is.True);
+            Assert.That(graphProto!.TryGetNode("surgery-head-start", out var startNode), Is.True);
+            edge = startNode.Edges.First(e => e.Id == "head-skin-incision");
+
+            Assert.That(surgerySystem.IsPatientAnesthetized(patient), Is.False);
+            Assert.That(surgerySystem.IsOnOperatingTable(patient, out _), Is.False);
+
+            var delayOffTable = surgerySystem.GetStepDelay(patient, surgeon, scalpel, edge);
+            var failUnanesthetizedOffTable = surgerySystem.GetStepFailureChance(patient, surgeon, scalpel, edge);
+
+            Assert.That(buckleSystem.TryBuckle(patient, surgeon, table, popup: false), Is.True);
+            Assert.That(surgerySystem.IsOnOperatingTable(patient, out _), Is.True);
+
+            var delayOnTable = surgerySystem.GetStepDelay(patient, surgeon, scalpel, edge);
+            var failOnTable = surgerySystem.GetStepFailureChance(patient, surgeon, scalpel, edge);
+
+            Assert.That(delayOnTable, Is.LessThan(delayOffTable));
+            Assert.That(failOnTable, Is.LessThan(failUnanesthetizedOffTable));
+
+            entMng.EnsureComponent<SleepingComponent>(patient);
+            Assert.That(surgerySystem.IsPatientAnesthetized(patient), Is.True);
+
+            var failAnesthetizedOnTable = surgerySystem.GetStepFailureChance(patient, surgeon, scalpel, edge);
+            Assert.That(failAnesthetizedOnTable, Is.LessThan(failOnTable));
         });
 
         await pair.CleanReturnAsync();

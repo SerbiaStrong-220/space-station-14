@@ -7,12 +7,24 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Surgery.Components;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class SurgeryToolComponent : Component
 {
-    [DataField(required: true), ViewVariables(VVAccess.ReadWrite)]
+    [DataField(required: true)]
     [AutoNetworkedField]
     public SurgeryToolType ToolType = SurgeryToolType.Invalid;
+
+    [DataField]
+    [AutoNetworkedField]
+    public HashSet<SurgeryToolType> AdditionalToolTypes = new();
+
+    [DataField]
+    [AutoNetworkedField]
+    public float SpeedModifier = 1f;
+
+    [DataField]
+    [AutoNetworkedField]
+    public float FailureModifier = 0f;
 
     [DataField]
     public DamageSpecifier? FailureDamage;
@@ -22,14 +34,13 @@ public sealed partial class SurgeryToolComponent : Component
     public TimeSpan FailureDamageDelay = TimeSpan.FromSeconds(1f);
 
     [ViewVariables(VVAccess.ReadOnly)]
-    [AutoNetworkedField]
+    [AutoNetworkedField, AutoPausedField]
     public TimeSpan NextFailureDamageTime;
 
     [DataField("sound")]
-    public SoundSpecifier? UsingSound = null;
+    public SoundSpecifier? UsingSound;
 }
 
-// for now I need only this ones
 public enum SurgeryToolType
 {
     Invalid = -1,
@@ -39,5 +50,11 @@ public enum SurgeryToolType
     Hemostat,
     Saw,
     BoneGel,
-    Cautery
+    Cautery,
+    Bonesetter,
+    Drill,
+    BloodFilter,
+    AutopsyScanner,
+    SurgicalTape,
+    Shears
 }

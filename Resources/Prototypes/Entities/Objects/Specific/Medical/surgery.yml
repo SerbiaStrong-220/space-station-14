@@ -65,6 +65,14 @@
       path: /Audio/Items/drill_hit.ogg
   - type: StaticPrice
     price: 40
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Drill
+    sound:
+      path: /Audio/Items/drill_use.ogg
+      params:
+        variation: 0.125
+  # SS220 Surgery end
 
 # Scalpel
 # SS220 BaseScalpel added to separately define the scalpel and the laser scalpel
@@ -153,6 +161,16 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Scalpel
+    speedModifier: 1.25
+    failureModifier: 0.10
+    sound:
+      path: /Audio/SS220/Surgery/scalpel.ogg
+      params:
+        variation: 0.125
+  # SS220 Surgery end
 
 
 - type: entity
@@ -175,6 +193,16 @@
       types:
         Slash: 8
 # SS220 Throwable Changes end
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Scalpel
+    speedModifier: 0.8
+    failureModifier: -0.05
+    sound:
+      path: /Audio/SS220/Surgery/scalpel.ogg
+      params:
+        variation: 0.125
+  # SS220 Surgery end
 
 - type: entity
   name: laser scalpel
@@ -203,6 +231,18 @@
         Slash: 2
         Heat: 6
 # SS220 Throwable Changes end
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Scalpel
+    additionalToolTypes:
+    - Cautery
+    speedModifier: 0.7
+    failureModifier: -0.05
+    sound:
+      path: /Audio/SS220/Surgery/cautery.ogg
+      params:
+        variation: 0.125
+  # SS220 Surgery end
 
 # Scissors
 
@@ -253,12 +293,29 @@
         variation: 0.125
   # SS220 Surgery end
 
-  # - type: entity
-  #   name: bone setter
-  #   id: BoneSetter
-  #   parent: Retractor
-  #   description: A surgical tool used for setting bones.
-  #   components:
+# SS220 Surgery begin
+- type: entity
+  name: bone setter
+  id: BoneSetter
+  parent: Retractor
+  description: A surgical tool used for setting bones.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+    state: bonesetter
+  - type: Item
+    heldPrefix: setter
+    storedRotation: 90
+  - type: SurgeryTool
+    failureDamage:
+      types:
+        Blunt: 8
+    toolType: Bonesetter
+    sound:
+      path: /Audio/SS220/Surgery/retractor.ogg
+      params:
+        variation: 0.125
+# SS220 Surgery end
 # Saws
 
 - type: entity
@@ -281,6 +338,19 @@
   - type: Tool
     qualities:
       - Sawing
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    failureDamage:
+      types:
+        Slash: 12
+    toolType: Saw
+    speedModifier: 1.2
+    failureModifier: 0.10
+    sound:
+      path: /Audio/SS220/Surgery/saw.ogg
+      params:
+        variation: 0.125
+  # SS220 Surgery end
 # No melee for regular saw because have you ever seen someone use a band saw as a weapon? It's dumb.
 
 - type: entity
@@ -302,6 +372,16 @@
       path: /Audio/Weapons/bladeslice.ogg
   - type: Tool
     speedModifier: 0.5
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Saw
+    speedModifier: 1.35
+    failureModifier: 0.15
+    sound:
+      path: /Audio/SS220/Surgery/saw.ogg
+      params:
+        variation: 0.125
+  # SS220 Surgery end
 
 - type: entity
   name: circular saw
@@ -344,3 +424,13 @@
     attackRate: 1.5
   - type: Tool
     speedModifier: 2.0
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Saw
+    speedModifier: 0.7
+    failureModifier: -0.05
+    sound:
+      path: /Audio/SS220/Surgery/saw.ogg
+      params:
+        variation: 0.125
+  # SS220 Surgery end

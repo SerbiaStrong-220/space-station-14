@@ -29,3 +29,6 @@ treatment-recommendation-near-brain-rot-help = Чтобы замедлить г�
 treatment-recommendation-brain-rot = Мозг пациента повреждён!
 treatment-recommendation-brain-rot-help = Лечение с помощью { reagent-name-cerebrin }
     в { ent-CryoPod } восстановит мозговые повреждения.
+
+treatment-recommendation-need-anesthesia = Введите пациенту { reagent-name-morphine } или подайте веселящий газ ({ reagent-name-nitrous-oxide }) перед операцией, чтобы избежать болевого шока и врачебных ошибок.
+treatment-recommendation-need-operating-table = Уложите пациента на { ent-OperatingTable } для ускорения операции и снижения риска ошибок.

@@ -40,6 +40,14 @@ public sealed partial class PatientStatus : Control
             BrainRotStatus.SetMarkup(Loc.GetString($"patient-status-brain-rot-degree", ("degree", data.BrainRotDegree)));
         else
             BrainRotStatus.SetMarkup(Loc.GetString($"patient-status-brain-rot-none"));
+
+        AnesthesiaStatus.SetMarkup(Loc.GetString(data.IsAnesthetized
+            ? "patient-status-anesthesia-active"
+            : "patient-status-anesthesia-none"));
+
+        OperatingTableStatus.SetMarkup(Loc.GetString(data.IsOnOperatingTable
+            ? "patient-status-operating-table-yes"
+            : "patient-status-operating-table-no"));
     }
 
     public void ShowUnknownStatus()
@@ -48,5 +56,7 @@ public sealed partial class PatientStatus : Control
         MobStatus.SetMarkup(Loc.GetString("patient-status-mob-state-invalid"));
         DecayDegree.SetMarkup(Loc.GetString("patient-status-decay-degree--1"));
         BrainRotStatus.SetMarkup(Loc.GetString($"patient-status-brain-rot-invalid"));
+        AnesthesiaStatus.SetMarkup(Loc.GetString("patient-status-anesthesia-invalid"));
+        OperatingTableStatus.SetMarkup(Loc.GetString("patient-status-operating-table-invalid"));
     }
 }

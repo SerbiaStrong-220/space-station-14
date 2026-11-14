@@ -49,6 +49,11 @@ public sealed partial class SurgeryGraphSystem : EntitySystem
         return Get(edge, (x) => x.Delay);
     }
 
+    public float? FailureChance(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.FailureChance);
+    }
+
     public SpriteSpecifier? EdgeIcon(SurgeryGraphEdge edge)
     {
         return Get(edge, (x) => x.EdgeIcon);

@@ -5,8 +5,10 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Ui;
@@ -43,10 +45,13 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     private static readonly LocId SurgeryCantCancelOnStart = "surgery-cant-be-cancelled-on-start";
     private static readonly LocId SurgeryToolFailureDamage = "surgery-tool-damage-on-failure";
     private static readonly LocId SurgeryNeedToBeStarted = "surgery-need-to-be-started-before-operating";
+    private static readonly LocId SurgeryPatientFeelsPain = "surgery-patient-feels-pain";
 
     public override void Initialize()
     {
         base.Initialize();
+
+        InitializeRisk();
 
         SubscribeLocalEvent<SurgeryPatientComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<SurgeryPatientComponent, InteractUsingEvent>(OnSurgeryPatientInteractUsing);
@@ -204,6 +209,20 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (GetEdgeTargeting(entity, surgeryPrototype, args.EdgeId) is not { } chosenEdge)
             return;
 
+        if (!CanMeetRequirements(entity, chosenEdge, args.Used, args.User))
+            return;
+
+        var failChance = GetStepFailureChance(entity.Owner, args.User, args.Used, chosenEdge);
+        if (failChance > 0f)
+        {
+            var rand = SharedRandomExtensions.PredictedRandom(_gameTiming, GetNetEntity(entity.Owner), GetNetEntity(args.User));
+            if (rand.NextSingle() < failChance)
+            {
+                OnSurgeryFailure(args, isStepRollFailure: true);
+                return;
+            }
+        }
+
         if (!TryMeetRequirement(entity, chosenEdge, args.Used, args.User))
             return;
 
@@ -329,25 +348,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return false;
         }
 
-        if (SurgeryGraph.Delay(chosenEdge) is not { } secondsDelay)
-        {
+        if (SurgeryGraph.Delay(chosenEdge) is null)
             Log.Fatal($"Found edge {chosenEdge.Id} with zero delay, graph id {surgeryGraph}");
-            secondsDelay = ErrorGettingDelayDelay;
-        }
 
-        var ev = new GetSurgeryDelayModifiersEvent(0f, 1f);
-        RaiseLocalEvent(entity, ref ev);
-        RaiseLocalEvent(user, ref ev);
-
-        if (used is not null)
-            RaiseLocalEvent(used.Value, ref ev);
-
-        if (chosenEdge.DeceaseSkillBonus && ev.Multiplier > 1f)
-            secondsDelay *= (ev.Multiplier - 1f) / 2 + 1f;
-        else
-            secondsDelay *= ev.Multiplier;
-
-        secondsDelay += ev.FlatModifier;
+        var secondsDelay = GetStepDelay(entity.Owner, user, used, chosenEdge);
 
         var performerDoAfterEventArgs =
             new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(secondsDelay),
@@ -365,31 +369,53 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (TryComp<SurgeryToolComponent>(used, out var surgeryTool))
             _audio.PlayPredicted(surgeryTool.UsingSound, entity.Owner, user);
 
+        if (!IsPatientAnesthetized(entity.Owner))
+        {
+            _popup.PopupPredicted(
+                Loc.GetString(SurgeryPatientFeelsPain, ("target", Identity.Entity(entity.Owner, EntityManager))),
+                entity.Owner,
+                user,
+                PopupType.MediumCaution);
+            OnPatientPain(entity.Owner);
+        }
+
         return true;
     }
 
-    private void OnSurgeryFailure(SurgeryDoAfterEvent args)
+    private void OnSurgeryFailure(SurgeryDoAfterEvent args, bool isStepRollFailure = false)
     {
         if (args.Target is not { Valid: true } target)
             return;
 
-        if (TryComp<MeleeWeaponComponent>(args.Used, out var meleeWeapon))
-        {
-            if (!_meleeWeapon.AttemptLightAttack(args.User, args.Used.Value, meleeWeapon, target, checkCombatMode: false))
-                return;
-        }
-        else if (TryComp<SurgeryToolComponent>(args.Used, out var surgeryTool) && surgeryTool.FailureDamage is not null)
-        {
-            if (_gameTiming.CurTime < surgeryTool.NextFailureDamageTime)
-                return;
+        var damaged = false;
 
-            surgeryTool.NextFailureDamageTime = _gameTiming.CurTime + surgeryTool.FailureDamageDelay;
-            _damageable.TryChangeDamage(target, surgeryTool.FailureDamage, origin: args.User);
+        if (args.Used is { } usedToolUid && TryComp<SurgeryToolComponent>(usedToolUid, out var surgeryTool) && surgeryTool.FailureDamage is not null)
+        {
+            if (isStepRollFailure || _gameTiming.CurTime >= surgeryTool.NextFailureDamageTime)
+            {
+                surgeryTool.NextFailureDamageTime = _gameTiming.CurTime + surgeryTool.FailureDamageDelay;
+                Dirty(usedToolUid, surgeryTool);
+                _damageable.TryChangeDamage(target, surgeryTool.FailureDamage, origin: args.User);
+                damaged = true;
+            }
         }
-        else
+        else if (args.Used is { } usedUid && TryComp<MeleeWeaponComponent>(usedUid, out var meleeWeapon))
+        {
+            damaged = _meleeWeapon.AttemptLightAttack(args.User, usedUid, meleeWeapon, target, checkCombatMode: false);
+        }
+
+        if (!damaged && !isStepRollFailure)
             return;
 
-        _popup.PopupPredicted(Loc.GetString(SurgeryToolFailureDamage, ("used", args.Used), ("target", args.Target)), args.Target.Value, args.User, PopupType.SmallCaution);
-        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(args.User):user} failed performing edge of surgery and damaged {ToPrettyString(args.Target):target}!");
+        if (args.Used is { } usedTool)
+        {
+            _popup.PopupPredicted(
+                Loc.GetString(SurgeryToolFailureDamage, ("used", usedTool), ("target", Identity.Entity(target, EntityManager))),
+                target,
+                args.User,
+                PopupType.SmallCaution);
+        }
+
+        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(args.User):user} failed performing edge of surgery and damaged {ToPrettyString(target):target}!");
     }
 }
