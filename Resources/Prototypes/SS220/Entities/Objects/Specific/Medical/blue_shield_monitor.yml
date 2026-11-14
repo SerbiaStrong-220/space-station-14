@@ -1,0 +1,30 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: HandheldBlueShieldMonitor
+  parent: HandheldCrewMonitor
+  name: handheld blue shield monitor
+  description: A handheld crew monitor, hardware-configured to track the vital signs of the station's command staff and individuals with an implanted tracker who lack an ID card.
+  components:
+  - type: BlueShieldMonitor
+  - type: Sprite
+    sprite: SS220/Objects/Devices/blue_shield_monitor.rsi
+    layers:
+    - state: scanner
+    - state: scanner_glow
+      shader: unshaded
+  - type: ActivatableUI
+    key: enum.CrewMonitoringUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.CrewMonitoringUIKey.Key:
+        type: CrewMonitoringBoundUserInterface
+  - type: Item
+    heldPrefix: scanner
+    storedRotation: 270
+  - type: PowerCellDraw
+    drawRate: 1
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
