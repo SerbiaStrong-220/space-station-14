@@ -12,64 +12,78 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Clothing;
 
-public sealed class HideEquipmentLayersClothingSystem : EntitySystem
+public sealed partial class HideEquipmentLayersClothingSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     private const string NeckSlot = "neck";
-    private static readonly string[] HiddenSlots = ["back", "suitstorage"];
+    private static readonly string[] CoveredSlots = ["back", "suitstorage"];
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InventoryComponent, BeforeRenderEquipmentEvent>(OnBeforeRender);
-        SubscribeLocalEvent<InventoryComponent, ClothingDidUnequippedEvent>(OnUnequipped);
-        SubscribeLocalEvent<EquipmentVisualsUpdatedEvent>(OnVisualsUpdated);
+        SubscribeLocalEvent<InventoryComponent, BeforeRenderEquipmentEvent>(OnBeforeRenderEquipment);
+        SubscribeLocalEvent<InventoryComponent, ClothingDidUnequippedEvent>(OnClothingUnequipped);
+        SubscribeLocalEvent<EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
     }
 
-    private void OnBeforeRender(Entity<InventoryComponent> ent, ref BeforeRenderEquipmentEvent args)
+    private void OnBeforeRenderEquipment(Entity<InventoryComponent> wearer, ref BeforeRenderEquipmentEvent args) // чем гуще лес, тем if else if else
     {
-        if (HiddenSlots.Contains(args.Slot)
-            && _inventory.TryGetSlotEntity(ent, NeckSlot, out var worn, ent)
-            && TryGetHide(worn.Value, out var hide)
-            && _whitelist.CheckBoth(args.Equipment, hide.Blacklist, hide.Whitelist))
-            args.Cancel();
+        if (!CoveredSlots.Contains(args.Slot))
+            return;
+
+        if (!_inventory.TryGetSlotEntity(wearer, NeckSlot, out var neckItem, wearer))
+            return;
+
+        if (!TryGetHidingRules(neckItem.Value, out var hidingRules))
+            return;
+
+        if (!_whitelist.CheckBoth(
+                args.Equipment,
+                blacklist: hidingRules.Blacklist,
+                whitelist: hidingRules.Whitelist))
+            return;
+
+        args.Cancel();
     }
 
-    private void OnUnequipped(Entity<InventoryComponent> ent, ref ClothingDidUnequippedEvent args)
+    private void OnClothingUnequipped(Entity<InventoryComponent> wearer, ref ClothingDidUnequippedEvent args)
     {
         if (args.Clothing.Comp.InSlot == NeckSlot)
-            Rerender(ent);
+            RefreshCoveredEquipmentVisuals(wearer);
     }
 
-    // The neck item was redrawn: it was equipped, or a chameleon changed its disguise.
-    private void OnVisualsUpdated(EquipmentVisualsUpdatedEvent args)
+
+    private void OnEquipmentVisualsUpdated(EquipmentVisualsUpdatedEvent args)
     {
         if (args.Slot == NeckSlot)
-            Rerender(args.Equipee);
+            RefreshCoveredEquipmentVisuals(args.Equipee);
     }
 
-    private void Rerender(EntityUid wearer)
+    private void RefreshCoveredEquipmentVisuals(EntityUid wearer)
     {
-        foreach (var slot in HiddenSlots)
+        foreach (var slot in CoveredSlots)
         {
             if (_inventory.TryGetSlotEntity(wearer, slot, out var item))
                 _item.VisualsChanged(item.Value);
         }
     }
 
-    // A chameleon item hides whatever its disguise would.
-    private bool TryGetHide(EntityUid uid, [NotNullWhen(true)] out HideEquipmentLayersClothingComponent? hide)
+    private bool TryGetHidingRules(EntityUid neckItem, [NotNullWhen(true)] out HideEquipmentLayersClothingComponent? hidingRules)
     {
-        if (TryComp(uid, out hide))
+        if (TryComp(neckItem, out hidingRules))
             return true;
 
-        return TryComp<ChameleonClothingComponent>(uid, out var chameleon)
-               && _prototype.TryIndex(chameleon.Default, out var proto)
-               && proto.TryGetComponent(out hide, Factory);
+        if (!TryComp<ChameleonClothingComponent>(neckItem, out var chameleon))
+            return false;
+
+        if (!_prototype.TryIndex(chameleon.Default, out var disguisePrototype))
+            return false;
+
+        return disguisePrototype.TryGetComponent(out hidingRules, Factory);
     }
 }
