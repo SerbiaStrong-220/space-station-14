@@ -4,28 +4,22 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Cloning.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
-using Content.Shared.SS220.Experience.SkillChecks;
+using Content.Shared.SS220.Experience.Components;
+using Content.Shared.SS220.Experience.Skill;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
-namespace Content.Shared.SS220.Experience.Systems;
+namespace Content.Shared.SS220.Experience.Systems.Experience;
 
 public sealed partial class ExperienceSystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private ISharedAdminLogManager _adminLogManager = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private IGameTiming _gameTiming = default!;
 
     public const int StartSkillLevel = 1;
     public const int StartSublevel = 0;
     public static readonly FixedPoint4 StartLearningProgress = 0f;
     public static readonly FixedPoint4 EndLearningProgress = FixedPoint4.New(1f);
-
-    private static readonly HashSet<string> ContainerIds = [
-        ExperienceComponent.ContainerId,
-        ExperienceComponent.OverrideContainerId
-    ];
 
     public override void Initialize()
     {
