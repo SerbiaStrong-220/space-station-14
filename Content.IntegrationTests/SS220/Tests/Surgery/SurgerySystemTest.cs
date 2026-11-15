@@ -1,14 +1,26 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Atmos.EntitySystems;
+using Content.Shared.Atmos;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body.Systems;
 using Content.Shared.Buckle;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DeviceLinking;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Power.EntitySystems;
+using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Pathology;
+using Content.Shared.SS220.Surgery;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Systems;
 using Content.Shared.SS220.Surgery.Graph;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -19,6 +31,14 @@ namespace Content.IntegrationTests.SS220.Tests.Surgery;
 [TestFixture]
 public sealed class SurgerySystemTest
 {
+    private static readonly ProtoId<PathologyPrototype> LeftArmDislocationProto = "LeftArmDislocation";
+    private static readonly ProtoId<PathologyPrototype> HeadCranialFissureProto = "HeadCranialFissure";
+    private static readonly ProtoId<PathologyPrototype> EyeCornealTraumaProto = "EyeCornealTrauma";
+    private static readonly ProtoId<PathologyPrototype> MouthJawDislocationProto = "MouthJawDislocation";
+    private static readonly ProtoId<SurgeryGraphPrototype> LeftArmGraphId = "LeftArmSurgery";
+    private static readonly ProtoId<SkillTreePrototype> AnatomySkillTree = "Anatomy";
+    private static readonly EntProtoId PainNumbnessEffectProto = "StatusEffectPainNumbness";
+
     [TestPrototypes]
     private const string SurgeryDummyPrototypes = @"
 - type: entity
@@ -374,6 +394,222 @@ public sealed class SurgerySystemTest
         await server.WaitAssertion(() =>
         {
             Assert.That(surgerySystem.IsPatientAnesthetized(patient), Is.True);
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task Phase2TraumaAndLimbSurgeryTest()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false
+        });
+
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var pathologySystem = entMng.System<SharedPathologySystem>();
+        var buckleSystem = entMng.System<SharedBuckleSystem>();
+        var deviceLink = entMng.System<SharedDeviceLinkSystem>();
+        var powerReceiver = entMng.System<SharedPowerReceiverSystem>();
+        var pointLight = entMng.System<SharedPointLightSystem>();
+        var handsSystem = entMng.System<SharedHandsSystem>();
+        var damageableSystem = entMng.System<DamageableSystem>();
+        var experienceSystem = entMng.System<ExperienceSystem>();
+        var statusEffects = entMng.System<StatusEffectsSystem>();
+        var atmosSystem = entMng.System<AtmosphereSystem>();
+        var mobStateSystem = entMng.System<MobStateSystem>();
+
+        EntityUid patient = default!;
+        EntityUid surgeon = default!;
+        EntityUid table = default!;
+        EntityUid computer = default!;
+        EntityUid drapes = default!;
+        EntityUid scalpel = default!;
+        EntityUid hemostat = default!;
+        EntityUid retractor = default!;
+        EntityUid bonesetter = default!;
+        EntityUid boneGel = default!;
+        EntityUid surgicalTape = default!;
+        SurgeryPatientComponent patientComp = default!;
+
+        await server.WaitPost(() =>
+        {
+            var moles = new float[Atmospherics.AdjustedNumberOfGases];
+            moles[(int)Gas.Oxygen] = 21.824779f;
+            moles[(int)Gas.Nitrogen] = 82.10312f;
+            atmosSystem.SetMapAtmosphere(mapData.MapUid, false, new GasMixture(moles, Atmospherics.T20C));
+        });
+
+        async Task PerformStep(string nodeId, string edgeId, EntityUid tool, float waitSeconds = 6f)
+        {
+            await server.WaitAssertion(() =>
+            {
+                if (handsSystem.GetActiveItem(surgeon) != tool)
+                {
+                    handsSystem.TryDrop(surgeon, checkActionBlocker: false);
+                    Assert.That(handsSystem.TryPickup(surgeon, tool, checkActionBlocker: false, animate: false), Is.True);
+                }
+                Assert.That(protoManager.TryIndex<SurgeryGraphPrototype>(LeftArmGraphId, out var graphProto), Is.True);
+                Assert.That(graphProto!.TryGetNode(nodeId, out var node), Is.True);
+                var edge = node.Edges.FirstOrDefault(e => e.Id == edgeId);
+                Assert.That(edge, Is.Not.Null, $"Missing edge {edgeId} on node {nodeId}");
+
+                var failChance = surgerySystem.GetStepFailureChance(patient, surgeon, tool, edge!);
+                Assert.That(failChance, Is.EqualTo(0f), $"Expected 0 fail chance on linked table under anesthesia, got {failChance} for {edgeId}");
+
+                var started = surgerySystem.TryPerformOperationStep(
+                    new Entity<SurgeryPatientComponent>(patient, patientComp),
+                    LeftArmGraphId,
+                    edge!,
+                    tool,
+                    surgeon);
+                Assert.That(started, Is.True, $"Failed to start surgery step {edgeId}");
+            });
+
+            await pair.RunSeconds(waitSeconds);
+        }
+
+        await server.WaitAssertion(() =>
+        {
+            patient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            surgeon = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            table = entMng.SpawnEntity("OperatingTable", mapData.MapCoords);
+            computer = entMng.SpawnEntity("computerBodyScanner", new MapCoordinates(1f, 0f, mapData.MapId));
+            drapes = entMng.SpawnEntity("SurgeryDrapes", mapData.MapCoords);
+            scalpel = entMng.SpawnEntity("Scalpel", mapData.MapCoords);
+            hemostat = entMng.SpawnEntity("Hemostat", mapData.MapCoords);
+            retractor = entMng.SpawnEntity("Retractor", mapData.MapCoords);
+            bonesetter = entMng.SpawnEntity("BoneSetter", mapData.MapCoords);
+            boneGel = entMng.SpawnEntity("BoneGel", mapData.MapCoords);
+            surgicalTape = entMng.SpawnEntity("SurgicalTape", mapData.MapCoords);
+            patientComp = entMng.GetComponent<SurgeryPatientComponent>(patient);
+
+            experienceSystem.TrySetOverrideSkill(surgeon, AnatomySkillTree, new SkillTreeInfo { Level = 4, Sublevel = 0 });
+            pointLight.EnsureLight(table);
+            pointLight.SetEnabled(table, true);
+            deviceLink.LinkDefaults(null, computer, table);
+            powerReceiver.SetNeedsPower(computer, false);
+        });
+
+        await pair.RunTicksSync(5);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(surgerySystem.HasLinkedOperatingComputer(table), Is.True);
+            Assert.That(buckleSystem.TryBuckle(patient, surgeon, table, popup: false), Is.True);
+
+            // Validate zone metadata on Phase 2 pathology prototypes
+            Assert.That(protoManager.Index(LeftArmDislocationProto).TargetZone, Is.EqualTo(SurgeryPuppetPart.LeftArm));
+            Assert.That(protoManager.Index(HeadCranialFissureProto).TargetZone, Is.EqualTo(SurgeryPuppetPart.Head));
+            Assert.That(protoManager.Index(EyeCornealTraumaProto).TargetZone, Is.EqualTo(SurgeryPuppetPart.Eyes));
+            Assert.That(protoManager.Index(MouthJawDislocationProto).TargetZone, Is.EqualTo(SurgeryPuppetPart.Mouth));
+
+            // SurgicalTape is painless even while the patient is awake
+            var graph = protoManager.Index(LeftArmGraphId);
+            Assert.That(graph.TryGetNode("leftarm-compound-reset", out var resetNode), Is.True);
+            var tapeEdge = resetNode!.Edges.First(e => e.Id == "leftarm-compound-repair");
+            Assert.Multiple(() =>
+            {
+                Assert.That(surgerySystem.IsPainlessTool(surgicalTape), Is.True);
+                Assert.That(surgerySystem.IsPainlessTool(boneGel), Is.False);
+                Assert.That(
+                    surgerySystem.GetStepFailureChance(patient, surgeon, surgicalTape, tapeEdge),
+                    Is.LessThan(surgerySystem.GetStepFailureChance(patient, surgeon, boneGel, tapeEdge)));
+            });
+
+            Assert.That(statusEffects.TryAddStatusEffectDuration(patient, PainNumbnessEffectProto, TimeSpan.FromSeconds(120)), Is.True);
+
+            // Start with dislocation and repair directly without incision
+            Assert.That(pathologySystem.TryAddPathology(patient, "LeftArmDislocation"), Is.True);
+            Assert.That(
+                surgerySystem.TryStartSurgery(new Entity<SurgeryPatientComponent>(patient, patientComp), LeftArmGraphId, surgeon, drapes),
+                Is.True);
+        });
+
+        await pair.RunTicksSync(2);
+        await PerformStep("start-leftarm-surgery", "start-leftarm-dislocation", bonesetter, 4.5f);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(pathologySystem.HavePathology(patient, "LeftArmDislocation"), Is.False);
+                Assert.That(patientComp.OngoingSurgeries.ContainsKey(LeftArmGraphId), Is.False);
+            });
+
+            // Now test full compound fracture surgery using SurgicalTape
+            Assert.That(pathologySystem.TryAddPathology(patient, "LeftArmCompoundFracture"), Is.True);
+            Assert.That(
+                surgerySystem.TryStartSurgery(new Entity<SurgeryPatientComponent>(patient, patientComp), LeftArmGraphId, surgeon, drapes),
+                Is.True);
+        });
+
+        await pair.RunTicksSync(2);
+        await PerformStep("start-leftarm-surgery", "leftarm-skin-incision", scalpel, 4.5f);
+        await PerformStep("leftarm-skin-incision", "leftarm-skin-clamp-bleeders", hemostat, 4.5f);
+        await PerformStep("leftarm-skin-clamp-bleeders", "retract-leftarm-skin", retractor, 4.5f);
+        await PerformStep("retract-leftarm-skin", "leftarm-compound-reset", bonesetter, 6f);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(patientComp.OngoingSurgeries[LeftArmGraphId], Is.EqualTo("leftarm-compound-reset"));
+                Assert.That(pathologySystem.HavePathology(patient, "LeftArmCompoundFracture"), Is.True);
+            });
+        });
+
+        await PerformStep("leftarm-compound-reset", "leftarm-compound-repair", surgicalTape, 4.5f);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(patientComp.OngoingSurgeries[LeftArmGraphId], Is.EqualTo("retract-leftarm-skin"));
+                Assert.That(pathologySystem.HavePathology(patient, "LeftArmCompoundFracture"), Is.False);
+            });
+        });
+
+        await PerformStep("retract-leftarm-skin", "seal-wound", surgicalTape, 4.5f);
+
+        await server.WaitAssertion(() =>
+        {
+            patientComp.OngoingSurgeries.TryGetValue(LeftArmGraphId, out var remainingNode);
+            float? sealDelay = null;
+            if (protoManager.TryIndex<SurgeryGraphPrototype>(LeftArmGraphId, out var graphProto)
+                && graphProto.TryGetNode("retract-leftarm-skin", out var retractNode))
+            {
+                var sealEdge = retractNode.Edges.FirstOrDefault(e => e.Id == "seal-wound");
+                if (sealEdge != null)
+                    sealDelay = surgerySystem.GetStepDelay(patient, surgeon, surgicalTape, sealEdge);
+            }
+
+            Assert.That(
+                patientComp.OngoingSurgeries.ContainsKey(LeftArmGraphId),
+                Is.False,
+                $"Surgery did not finish after seal-wound. remainingNode={remainingNode}, sealDelay={sealDelay}, " +
+                $"surgeonAlive={mobStateSystem.IsAlive(surgeon)}, patientAlive={mobStateSystem.IsAlive(patient)}, " +
+                $"activeItem={handsSystem.GetActiveItem(surgeon)}, tool={surgicalTape}, " +
+                $"patientDamage={damageableSystem.GetTotalDamage(patient)}, surgeonDamage={damageableSystem.GetTotalDamage(surgeon)}");
+
+            // Verify heavy blunt damage triggers trauma pathologies via PathologyProviderSystem
+            var holder = entMng.GetComponent<PathologyHolderComponent>(patient);
+            for (var i = 0; i < 8; i++)
+            {
+                damageableSystem.ClearAllDamage(patient);
+                damageableSystem.TryChangeDamage(
+                    patient,
+                    new DamageSpecifier { DamageDict = { ["Blunt"] = 45 } },
+                    ignoreResistances: true);
+            }
+
+            Assert.That(holder.ActivePathologies.Count, Is.GreaterThan(0));
         });
 
         await pair.CleanReturnAsync();

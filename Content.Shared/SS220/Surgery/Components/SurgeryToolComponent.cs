@@ -39,6 +39,10 @@ public sealed partial class SurgeryToolComponent : Component
 
     [DataField("sound")]
     public SoundSpecifier? UsingSound;
+
+    [DataField]
+    [AutoNetworkedField]
+    public bool IsPainless;
 }
 
 public enum SurgeryToolType

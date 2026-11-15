@@ -5,3 +5,30 @@
   components:
   - type: InternalBloodLossStatusEffect
   - type: PathologyStatusEffectStackable
+
+- type: entity
+  parent: StatusEffectInternalBloodLoss
+  id: StatusEffectArterialBleeding
+  name: arterial bleeding
+  components:
+  - type: InternalBloodLossStatusEffect
+    bloodLossRatePerStack: 0.9
+  - type: PathologyStatusEffectStackable
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: StatusEffectLegTraumaSlowdown
+  name: leg trauma slowdown
+  components:
+  - type: MovementModStatusEffect
+    walkSpeedModifier: 0.78
+    sprintSpeedModifier: 0.75
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: StatusEffectCompoundLegSlowdown
+  name: compound fracture slowdown
+  components:
+  - type: MovementModStatusEffect
+    walkSpeedModifier: 0.6
+    sprintSpeedModifier: 0.55

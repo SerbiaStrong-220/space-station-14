@@ -5,6 +5,7 @@ using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Traits;
+using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -36,13 +37,16 @@ public abstract partial class SharedPathologySystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (_gameTiming.Paused)
+        if (_net.IsClient || _gameTiming.Paused)
             return;
+
+        if (_lastUpdate == TimeSpan.Zero)
+            _lastUpdate = _gameTiming.CurTime;
 
         if (_gameTiming.CurTime < _lastUpdate)
             return;
 
-        _lastUpdate = _gameTiming.CurTime + UpdateInterval;
+        _lastUpdate += UpdateInterval;
 
         var query = EntityQueryEnumerator<PathologyHolderComponent>();
         while (query.MoveNext(out var uid, out var holder))
@@ -67,7 +71,13 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
     private void OnRejuvenate(Entity<PathologyHolderComponent> entity, ref RejuvenateEvent args)
     {
-        foreach (var (pathologyId, _) in entity.Comp.ActivePathologies)
+        var pathologies = new ValueList<ProtoId<PathologyPrototype>>();
+        foreach (var pathologyId in entity.Comp.ActivePathologies.Keys)
+        {
+            pathologies.Add(pathologyId);
+        }
+
+        foreach (var pathologyId in pathologies)
         {
             TryRemovePathology(entity!, pathologyId, checkStacks: false);
         }
@@ -140,8 +150,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
     {
         var data = entity.Comp.ActivePathologies[pathologyPrototype.ID];
 
-        for (var _ = 0; _ < data.PathologyContexts.Count; _++)
-            ApplyPathologyContext(entity, data.PathologyContexts.Pop());
+        entity.Comp.ActivePathologies.Remove(pathologyPrototype.ID);
 
         for (var i = 0; i <= data.Level; i++)
         {
@@ -153,10 +162,12 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
             foreach (var effect in pathologyPrototype.Definition[i].StatusEffects)
             {
-                _statusEffects.TryRemoveStatusEffect(entity, effect);
+                if (!IsStatusEffectInUse(entity.Comp, effect))
+                    _statusEffects.TryRemoveStatusEffect(entity, effect);
             }
 
-            RemoveTrait(entity, pathologyPrototype.Definition[i].Trait);
+            if (pathologyPrototype.Definition[i].Trait is { } traitId && !IsTraitInUse(entity.Comp, traitId))
+                RemoveTrait(entity, traitId);
         }
 
         foreach (var context in data.PathologyContexts)
@@ -164,9 +175,45 @@ public abstract partial class SharedPathologySystem : EntitySystem
             ApplyPathologyContext(entity, context);
         }
 
-        entity.Comp.ActivePathologies.Remove(pathologyPrototype.ID);
+        data.PathologyContexts.Clear();
 
         Dirty(entity);
+    }
+
+    private bool IsStatusEffectInUse(PathologyHolderComponent holder, EntProtoId effect)
+    {
+        foreach (var (otherId, otherData) in holder.ActivePathologies)
+        {
+            if (!_prototype.Resolve(otherId, out var otherProto))
+                continue;
+
+            var maxLevel = Math.Min(otherData.Level, otherProto.Definition.Length - 1);
+            for (var i = 0; i <= maxLevel; i++)
+            {
+                if (otherProto.Definition[i].StatusEffects.Contains(effect))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsTraitInUse(PathologyHolderComponent holder, ProtoId<TraitPrototype> traitId)
+    {
+        foreach (var (otherId, otherData) in holder.ActivePathologies)
+        {
+            if (!_prototype.Resolve(otherId, out var otherProto))
+                continue;
+
+            var maxLevel = Math.Min(otherData.Level, otherProto.Definition.Length - 1);
+            for (var i = 0; i <= maxLevel; i++)
+            {
+                if (otherProto.Definition[i].Trait == traitId)
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     protected virtual void ApplyPathologyContext(Entity<PathologyHolderComponent> entity, IPathologyContext? context) { }

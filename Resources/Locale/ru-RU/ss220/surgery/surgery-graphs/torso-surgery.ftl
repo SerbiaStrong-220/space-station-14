@@ -44,3 +44,27 @@ surgery-requirement-direct-compact-defib-failure = Вы не знаете что
 remove-torso-bullet-fragments = Убрать инородные тела в торсе пациента
 surgery-pathology-requirement-description-torso-fragments = Инородные тела в торсе пациента
 surgery-pathology-requirement-failure-torso-fragments = Для этого действия требуется наличие инородных тел в теле пациента, но Вы их не находите.
+
+surgery-lowertorso-complex-name = Хирургия паховой области и таза
+surgery-lowertorso-complex-description = Комплексная операция в нижней части торса.
+    Позволяет лечить переломы таза, разрыв бедренной артерии и извлекать осколки.
+surgery-lowertorso-examine-start = Пациент готов к операции в области паха.
+to-lowertorso-skin-incision = Сделать надрез в области паха
+to-lowertorso-skin-clamp-bleeders = Зажать сосуды в разрезе
+to-retract-lowertorso-skin = Расширить разрез
+to-seal-lowertorso-incision = Зашить разрез в области паха
+remove-lowertorso-bullet-fragments = Извлечь инородное тело из таза
+surgery-pathology-requirement-description-lowertorso-fragments = Инородное тело в области паха
+surgery-pathology-requirement-failure-lowertorso-fragments = Инородных тел в области паха не обнаружено!
+
+torso-compound-reset = Вправление отломков рёбер
+torso-arterial-clamped = Пережатие артерии торса
+torso-necrosis-excised = Иссечение некроза на торсе
+
+start-lowertorso-surgery = Подготовка операции в области паха
+lowertorso-skin-incision = Надрез в области паха
+lowertorso-skin-clamp-bleeders = Остановка кровотечения
+retract-lowertorso-skin = Расширение разреза
+lowertorso-compound-reset = Вправление отломков таза
+lowertorso-arterial-clamped = Пережатие бедренной артерии
+lowertorso-necrosis-excised = Иссечение некроза в области паха

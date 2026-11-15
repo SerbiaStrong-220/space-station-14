@@ -47,6 +47,9 @@ public sealed partial class SurgeryPuppetBox : Control
     private const string TexturePath = "/Textures/SS220/Interface/Surgery/puppet";
     private Vector2 _baseTextureSize = new(42f, 42f);
 
+    private static readonly Color OngoingSurgeryTint = Color.FromHex("#FFA500");
+    private static readonly Color TraumaZoneTint = Color.FromHex("#FF5555");
+
     public SurgeryPuppetBox()
     {
         RobustXamlLoader.Load(this);
@@ -204,6 +207,33 @@ public sealed partial class SurgeryPuppetBox : Control
             oldTextureControl.Visible = true;
     }
 
+    public void UpdateZoneStates(IReadOnlySet<SurgeryPuppetPart> traumaZones, IReadOnlySet<SurgeryPuppetPart> ongoingSurgeryZones)
+    {
+        foreach (var (part, texture) in _parts)
+        {
+            texture.ModulateSelfOverride = ResolveZoneTint(part, traumaZones, ongoingSurgeryZones);
+        }
+    }
+
+    private static Color? ResolveZoneTint(
+        SurgeryPuppetPart part,
+        IReadOnlySet<SurgeryPuppetPart> traumaZones,
+        IReadOnlySet<SurgeryPuppetPart> ongoingSurgeryZones)
+    {
+        var hasHeadSubZoneOngoing = part == SurgeryPuppetPart.Head &&
+                                    (ongoingSurgeryZones.Contains(SurgeryPuppetPart.Eyes) ||
+                                     ongoingSurgeryZones.Contains(SurgeryPuppetPart.Mouth));
+        if (ongoingSurgeryZones.Contains(part) || hasHeadSubZoneOngoing)
+            return OngoingSurgeryTint;
+
+        var hasHeadSubZoneTrauma = part == SurgeryPuppetPart.Head &&
+                                   (traumaZones.Contains(SurgeryPuppetPart.Eyes) ||
+                                    traumaZones.Contains(SurgeryPuppetPart.Mouth));
+        if (traumaZones.Contains(part) || hasHeadSubZoneTrauma)
+            return TraumaZoneTint;
+
+        return null;
+    }
 
     /// <summary> If you still think why we need new med to make surgery just look into this method. </summary>
     private string? GetPuppetPartTexturePath(SurgeryPuppetPart puppetPart)
@@ -299,15 +329,9 @@ public sealed partial class SurgeryPuppetBox : Control
         Vector2 otherMargin = trueTextureSize - (offset + size) * scale;
         return new Thickness(offset.X * scale.X, offset.Y * scale.Y, otherMargin.X, otherMargin.Y);
     }
-    private Thickness GetPartThickness(Vector2 offset, Vector2 size)
-    {
-        return GetPartThickness(offset, size, Scale);
-    }
 }
 
 public sealed class PuppetButton : BaseButton
 {
     public SurgeryPuppetPart Part;
 }
-
-

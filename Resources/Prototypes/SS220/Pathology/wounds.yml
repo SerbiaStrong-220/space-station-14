@@ -1,23 +1,744 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Projectile Fragments
+
 - type: pathology
   id: TorsoProjectileFragment
   name: pathology-torso-projectile-name
   armorSlotFlags: TORSO
+  targetZone: Torso
+  operationRecommendation: pathology-torso-projectile-operation
   definition:
   - description: pathology-torso-projectile-description
     maxStackCount: 20
     statusEffects:
     - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: HeadProjectileFragment
   name: pathology-head-projectile-name
   armorSlotFlags: FULLHEAD
+  targetZone: Head
+  operationRecommendation: pathology-head-projectile-operation
   definition:
   - description: pathology-head-projectile-description
     maxStackCount: 20
     statusEffects:
     - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
     addStackEffects:
     - !type:RandomPathologyAddEffect
       weightedId: BrainTraumaPathology
       chance: 0.8
+
+- type: pathology
+  id: LowerTorsoProjectileFragment
+  name: pathology-lowertorso-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  operationRecommendation: pathology-lowertorso-projectile-operation
+  definition:
+  - description: pathology-lowertorso-projectile-description
+    maxStackCount: 20
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LeftArmProjectileFragment
+  name: pathology-leftarm-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  operationRecommendation: pathology-leftarm-projectile-operation
+  definition:
+  - description: pathology-leftarm-projectile-description
+    maxStackCount: 10
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: RightArmProjectileFragment
+  name: pathology-rightarm-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  operationRecommendation: pathology-rightarm-projectile-operation
+  definition:
+  - description: pathology-rightarm-projectile-description
+    maxStackCount: 10
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LeftLegProjectileFragment
+  name: pathology-leftleg-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  operationRecommendation: pathology-leftleg-projectile-operation
+  definition:
+  - description: pathology-leftleg-projectile-description
+    maxStackCount: 10
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: RightLegProjectileFragment
+  name: pathology-rightleg-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  operationRecommendation: pathology-rightleg-projectile-operation
+  definition:
+  - description: pathology-rightleg-projectile-description
+    maxStackCount: 10
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+# Dislocations
+
+- type: pathology
+  id: LeftArmDislocation
+  name: pathology-leftarm-dislocation-name
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  operationRecommendation: pathology-arm-dislocation-operation
+  definition:
+  - description: pathology-leftarm-dislocation-description
+    trait: Slowness
+
+- type: pathology
+  id: RightArmDislocation
+  name: pathology-rightarm-dislocation-name
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  operationRecommendation: pathology-arm-dislocation-operation
+  definition:
+  - description: pathology-rightarm-dislocation-description
+    trait: Slowness
+
+- type: pathology
+  id: LeftHandDislocation
+  name: pathology-lefthand-dislocation-name
+  armorSlotFlags: GLOVES
+  targetZone: LeftHand
+  operationRecommendation: pathology-hand-dislocation-operation
+  definition:
+  - description: pathology-lefthand-dislocation-description
+    trait: Slowness
+
+- type: pathology
+  id: RightHandDislocation
+  name: pathology-righthand-dislocation-name
+  armorSlotFlags: GLOVES
+  targetZone: RightHand
+  operationRecommendation: pathology-hand-dislocation-operation
+  definition:
+  - description: pathology-righthand-dislocation-description
+    trait: Slowness
+
+- type: pathology
+  id: LeftLegDislocation
+  name: pathology-leftleg-dislocation-name
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  operationRecommendation: pathology-leg-dislocation-operation
+  definition:
+  - description: pathology-leftleg-dislocation-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectLegTraumaSlowdown
+      walkSpeedModifier: 0.78
+      sprintSpeedModifier: 0.75
+
+- type: pathology
+  id: RightLegDislocation
+  name: pathology-rightleg-dislocation-name
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  operationRecommendation: pathology-leg-dislocation-operation
+  definition:
+  - description: pathology-rightleg-dislocation-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectLegTraumaSlowdown
+      walkSpeedModifier: 0.78
+      sprintSpeedModifier: 0.75
+
+- type: pathology
+  id: LeftFootDislocation
+  name: pathology-leftfoot-dislocation-name
+  armorSlotFlags: FEET
+  targetZone: LeftFoot
+  operationRecommendation: pathology-foot-dislocation-operation
+  definition:
+  - description: pathology-leftfoot-dislocation-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectLegTraumaSlowdown
+      walkSpeedModifier: 0.78
+      sprintSpeedModifier: 0.75
+
+- type: pathology
+  id: RightFootDislocation
+  name: pathology-rightfoot-dislocation-name
+  armorSlotFlags: FEET
+  targetZone: RightFoot
+  operationRecommendation: pathology-foot-dislocation-operation
+  definition:
+  - description: pathology-rightfoot-dislocation-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectLegTraumaSlowdown
+      walkSpeedModifier: 0.78
+      sprintSpeedModifier: 0.75
+
+# Hairline Fractures
+
+- type: pathology
+  id: TorsoHairlineFracture
+  name: pathology-torso-hairline-name
+  armorSlotFlags: TORSO
+  targetZone: Torso
+  operationRecommendation: pathology-torso-fracture-operation
+  definition:
+  - description: pathology-torso-hairline-description
+    trait: ChronicCough
+
+- type: pathology
+  id: LowerTorsoHairlineFracture
+  name: pathology-lowertorso-hairline-name
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  operationRecommendation: pathology-lowertorso-fracture-operation
+  definition:
+  - description: pathology-lowertorso-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectLegTraumaSlowdown
+      walkSpeedModifier: 0.78
+      sprintSpeedModifier: 0.75
+
+- type: pathology
+  id: LeftArmHairlineFracture
+  name: pathology-leftarm-hairline-name
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  operationRecommendation: pathology-arm-fracture-operation
+  definition:
+  - description: pathology-leftarm-hairline-description
+    trait: Slowness
+
+- type: pathology
+  id: RightArmHairlineFracture
+  name: pathology-rightarm-hairline-name
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  operationRecommendation: pathology-arm-fracture-operation
+  definition:
+  - description: pathology-rightarm-hairline-description
+    trait: Slowness
+
+- type: pathology
+  id: LeftHandHairlineFracture
+  name: pathology-lefthand-hairline-name
+  armorSlotFlags: GLOVES
+  targetZone: LeftHand
+  operationRecommendation: pathology-hand-fracture-operation
+  definition:
+  - description: pathology-lefthand-hairline-description
+    trait: Slowness
+
+- type: pathology
+  id: RightHandHairlineFracture
+  name: pathology-righthand-hairline-name
+  armorSlotFlags: GLOVES
+  targetZone: RightHand
+  operationRecommendation: pathology-hand-fracture-operation
+  definition:
+  - description: pathology-righthand-hairline-description
+    trait: Slowness
+
+- type: pathology
+  id: LeftLegHairlineFracture
+  name: pathology-leftleg-hairline-name
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  operationRecommendation: pathology-leg-fracture-operation
+  definition:
+  - description: pathology-leftleg-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectLegTraumaSlowdown
+      walkSpeedModifier: 0.78
+      sprintSpeedModifier: 0.75
+
+- type: pathology
+  id: RightLegHairlineFracture
+  name: pathology-rightleg-hairline-name
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  operationRecommendation: pathology-leg-fracture-operation
+  definition:
+  - description: pathology-rightleg-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectLegTraumaSlowdown
+      walkSpeedModifier: 0.78
+      sprintSpeedModifier: 0.75
+
+- type: pathology
+  id: LeftFootHairlineFracture
+  name: pathology-leftfoot-hairline-name
+  armorSlotFlags: FEET
+  targetZone: LeftFoot
+  operationRecommendation: pathology-foot-fracture-operation
+  definition:
+  - description: pathology-leftfoot-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectLegTraumaSlowdown
+      walkSpeedModifier: 0.78
+      sprintSpeedModifier: 0.75
+
+- type: pathology
+  id: RightFootHairlineFracture
+  name: pathology-rightfoot-hairline-name
+  armorSlotFlags: FEET
+  targetZone: RightFoot
+  operationRecommendation: pathology-foot-fracture-operation
+  definition:
+  - description: pathology-rightfoot-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectLegTraumaSlowdown
+      walkSpeedModifier: 0.78
+      sprintSpeedModifier: 0.75
+
+# Compound Fractures & Cranial Fissure
+
+- type: pathology
+  id: HeadCranialFissure
+  name: pathology-head-cranial-fissure-name
+  armorSlotFlags: HEAD
+  targetZone: Head
+  operationRecommendation: pathology-head-cranial-fissure-operation
+  definition:
+  - description: pathology-head-cranial-fissure-description
+    trait: PoorVision
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: TorsoCompoundFracture
+  name: pathology-torso-compound-name
+  armorSlotFlags: TORSO
+  targetZone: Torso
+  operationRecommendation: pathology-torso-fracture-operation
+  definition:
+  - description: pathology-torso-compound-description
+    trait: ChronicCough
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LowerTorsoCompoundFracture
+  name: pathology-lowertorso-compound-name
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  operationRecommendation: pathology-lowertorso-fracture-operation
+  definition:
+  - description: pathology-lowertorso-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectCompoundLegSlowdown
+      walkSpeedModifier: 0.6
+      sprintSpeedModifier: 0.55
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LeftArmCompoundFracture
+  name: pathology-leftarm-compound-name
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  operationRecommendation: pathology-arm-fracture-operation
+  definition:
+  - description: pathology-leftarm-compound-description
+    trait: Slowness
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: RightArmCompoundFracture
+  name: pathology-rightarm-compound-name
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  operationRecommendation: pathology-arm-fracture-operation
+  definition:
+  - description: pathology-rightarm-compound-description
+    trait: Slowness
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LeftHandCompoundFracture
+  name: pathology-lefthand-compound-name
+  armorSlotFlags: GLOVES
+  targetZone: LeftHand
+  operationRecommendation: pathology-hand-fracture-operation
+  definition:
+  - description: pathology-lefthand-compound-description
+    trait: Slowness
+
+- type: pathology
+  id: RightHandCompoundFracture
+  name: pathology-righthand-compound-name
+  armorSlotFlags: GLOVES
+  targetZone: RightHand
+  operationRecommendation: pathology-hand-fracture-operation
+  definition:
+  - description: pathology-righthand-compound-description
+    trait: Slowness
+
+- type: pathology
+  id: LeftLegCompoundFracture
+  name: pathology-leftleg-compound-name
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  operationRecommendation: pathology-leg-fracture-operation
+  definition:
+  - description: pathology-leftleg-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectCompoundLegSlowdown
+      walkSpeedModifier: 0.6
+      sprintSpeedModifier: 0.55
+
+- type: pathology
+  id: RightLegCompoundFracture
+  name: pathology-rightleg-compound-name
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  operationRecommendation: pathology-leg-fracture-operation
+  definition:
+  - description: pathology-rightleg-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectCompoundLegSlowdown
+      walkSpeedModifier: 0.6
+      sprintSpeedModifier: 0.55
+
+- type: pathology
+  id: LeftFootCompoundFracture
+  name: pathology-leftfoot-compound-name
+  armorSlotFlags: FEET
+  targetZone: LeftFoot
+  operationRecommendation: pathology-foot-fracture-operation
+  definition:
+  - description: pathology-leftfoot-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectCompoundLegSlowdown
+      walkSpeedModifier: 0.6
+      sprintSpeedModifier: 0.55
+
+- type: pathology
+  id: RightFootCompoundFracture
+  name: pathology-rightfoot-compound-name
+  armorSlotFlags: FEET
+  targetZone: RightFoot
+  operationRecommendation: pathology-foot-fracture-operation
+  definition:
+  - description: pathology-rightfoot-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+    effects:
+    - !type:PathologyMovementSpeedEffect
+      statusEffect: StatusEffectCompoundLegSlowdown
+      walkSpeedModifier: 0.6
+      sprintSpeedModifier: 0.55
+
+# Arterial Punctures
+
+- type: pathology
+  id: HeadArterialPuncture
+  name: pathology-head-arterial-name
+  armorSlotFlags: HEAD
+  targetZone: Head
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-head-arterial-description
+    maxStackCount: 2
+    statusEffects:
+    - StatusEffectArterialBleeding
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectArterialBleeding
+
+- type: pathology
+  id: TorsoArterialPuncture
+  name: pathology-torso-arterial-name
+  armorSlotFlags: TORSO
+  targetZone: Torso
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-torso-arterial-description
+    maxStackCount: 2
+    statusEffects:
+    - StatusEffectArterialBleeding
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectArterialBleeding
+
+- type: pathology
+  id: LowerTorsoArterialPuncture
+  name: pathology-lowertorso-arterial-name
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-lowertorso-arterial-description
+    maxStackCount: 2
+    statusEffects:
+    - StatusEffectArterialBleeding
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectArterialBleeding
+
+- type: pathology
+  id: LeftArmArterialPuncture
+  name: pathology-leftarm-arterial-name
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-leftarm-arterial-description
+    maxStackCount: 2
+    statusEffects:
+    - StatusEffectArterialBleeding
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectArterialBleeding
+
+- type: pathology
+  id: RightArmArterialPuncture
+  name: pathology-rightarm-arterial-name
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-rightarm-arterial-description
+    maxStackCount: 2
+    statusEffects:
+    - StatusEffectArterialBleeding
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectArterialBleeding
+
+- type: pathology
+  id: LeftLegArterialPuncture
+  name: pathology-leftleg-arterial-name
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-leftleg-arterial-description
+    maxStackCount: 2
+    statusEffects:
+    - StatusEffectArterialBleeding
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectArterialBleeding
+
+- type: pathology
+  id: RightLegArterialPuncture
+  name: pathology-rightleg-arterial-name
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-rightleg-arterial-description
+    maxStackCount: 2
+    statusEffects:
+    - StatusEffectArterialBleeding
+    effects:
+    - !type:PathologyAddStatusEffect
+      statusEffect: StatusEffectArterialBleeding
+
+# Burn Necrosis
+
+- type: pathology
+  id: HeadBurnNecrosis
+  name: pathology-head-necrosis-name
+  armorSlotFlags: FULLHEAD
+  targetZone: Head
+  operationRecommendation: pathology-necrosis-operation
+  definition:
+  - description: pathology-head-necrosis-description
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.15
+
+- type: pathology
+  id: TorsoBurnNecrosis
+  name: pathology-torso-necrosis-name
+  armorSlotFlags: TORSO
+  targetZone: Torso
+  operationRecommendation: pathology-necrosis-operation
+  definition:
+  - description: pathology-torso-necrosis-description
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.15
+
+- type: pathology
+  id: LowerTorsoBurnNecrosis
+  name: pathology-lowertorso-necrosis-name
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  operationRecommendation: pathology-necrosis-operation
+  definition:
+  - description: pathology-lowertorso-necrosis-description
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.15
+
+- type: pathology
+  id: LeftArmBurnNecrosis
+  name: pathology-leftarm-necrosis-name
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  operationRecommendation: pathology-necrosis-operation
+  definition:
+  - description: pathology-leftarm-necrosis-description
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.15
+
+- type: pathology
+  id: RightArmBurnNecrosis
+  name: pathology-rightarm-necrosis-name
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  operationRecommendation: pathology-necrosis-operation
+  definition:
+  - description: pathology-rightarm-necrosis-description
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.15
+
+- type: pathology
+  id: LeftLegBurnNecrosis
+  name: pathology-leftleg-necrosis-name
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  operationRecommendation: pathology-necrosis-operation
+  definition:
+  - description: pathology-leftleg-necrosis-description
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.15
+
+- type: pathology
+  id: RightLegBurnNecrosis
+  name: pathology-rightleg-necrosis-name
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  operationRecommendation: pathology-necrosis-operation
+  definition:
+  - description: pathology-rightleg-necrosis-description
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.15
+
+# Eyes & Mouth Traumas
+
+- type: pathology
+  id: EyeCornealTrauma
+  name: pathology-eye-corneal-name
+  armorSlotFlags: EYES
+  targetZone: Eyes
+  operationRecommendation: pathology-eye-corneal-operation
+  definition:
+  - description: pathology-eye-corneal-description
+    trait: PoorVision
+
+- type: pathology
+  id: MouthJawDislocation
+  name: pathology-mouth-jaw-dislocation-name
+  armorSlotFlags: MASK
+  targetZone: Mouth
+  operationRecommendation: pathology-mouth-jaw-dislocation-operation
+  definition:
+  - description: pathology-mouth-jaw-dislocation-description
+    trait: FrontalLisp

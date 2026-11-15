@@ -182,6 +182,8 @@
     toolType: SurgicalTape
     additionalToolTypes:
     - BoneGel
+    - Cautery
+    isPainless: true
     failureDamage:
       types:
         Blunt: 3
@@ -313,6 +315,7 @@
   - type: SurgeryTool
     toolType: AutopsyScanner
     failureModifier: 0
+    isPainless: true
     sound:
       path: /Audio/Items/hypospray.ogg
 

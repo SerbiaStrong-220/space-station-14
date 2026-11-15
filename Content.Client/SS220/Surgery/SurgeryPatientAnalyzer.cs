@@ -9,7 +9,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.SS220.Pathology;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Surgery;
 
@@ -104,6 +103,11 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
             recommendation.Problems.Add(Loc.GetString(descLocId));
         }
 
+        foreach (var opLocId in status.PathologiesOperations)
+        {
+            recommendation.Operations.Add(Loc.GetString(opLocId));
+        }
+
         if (!status.IsAnesthetized && status.PatientState == MobState.Alive)
         {
             recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-need-anesthesia"));
@@ -145,7 +149,13 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
             if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
                 continue;
 
+            if (instanceData.Level < 0 || instanceData.Level >= pathologyPrototype.Definition.Length)
+                continue;
+
             statusData.PathologiesDescription.Add(pathologyPrototype.Definition[instanceData.Level].Description);
+
+            if (pathologyPrototype.OperationRecommendation is { } operationLocId)
+                statusData.PathologiesOperations.Add(operationLocId);
         }
     }
 }

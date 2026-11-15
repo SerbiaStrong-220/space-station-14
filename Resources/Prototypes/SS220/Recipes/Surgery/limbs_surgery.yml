@@ -1,0 +1,1685 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: surgeryGraph
+  id: LeftArmSurgery
+  name: surgery-leftarm-complex-name
+  description: surgery-limb-complex-description
+  targetPart: LeftArm
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-torso-complex-inventory-requirement-description
+    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    slotNames:
+    - jumpsuit
+    - outerClothing
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-leftarm-surgery
+  end: seal-wound
+  graph:
+  - node: start-leftarm-surgery
+    nodeText:
+      examineDescription: surgery-limb-examine-start
+    edges:
+    - to: start-leftarm-surgery
+      id: start-leftarm-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - LeftArmDislocation
+    - to: leftarm-skin-incision
+      id: leftarm-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-limb-skin-incision
+
+  - node: leftarm-skin-incision
+    baseNode: incision
+    edges:
+    - to: leftarm-skin-clamp-bleeders
+      id: leftarm-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-limb-skin-clamp-bleeders
+
+  - node: leftarm-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-leftarm-skin
+      id: retract-leftarm-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-limb-skin
+
+  - node: retract-leftarm-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-leftarm-skin
+      id: retract-leftarm-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - LeftArmDislocation
+    - to: retract-leftarm-skin
+      id: retract-leftarm-fragments
+      delay: 4
+      edgeTooltip: remove-limb-bullet-fragments
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-limb-fragments
+        failureMessage: surgery-pathology-requirement-failure-limb-fragments
+        curePathologies:
+        - LeftArmProjectileFragment
+    - to: retract-leftarm-skin
+      id: retract-leftarm-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - LeftArmHairlineFracture
+    - to: leftarm-compound-reset
+      id: leftarm-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LeftArmCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: leftarm-arterial-clamped
+      id: leftarm-arterial-clamp
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-clamp-arterial-puncture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LeftArmArterialPuncture
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+    - to: leftarm-necrosis-excised
+      id: leftarm-necrosis-excise
+      baseEdge: to-excise-burn-necrosis
+      edgeTooltip: to-excise-burn-necrosis
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LeftArmBurnNecrosis
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: retract-leftarm-skin
+      id: retract-leftarm-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-leftarm-skin
+      id: retract-leftarm-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: leftarm-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-leftarm-skin
+      id: leftarm-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - LeftArmCompoundFracture
+
+  - node: leftarm-arterial-clamped
+    baseNode: arterial-puncture-clamped
+    edges:
+    - to: retract-leftarm-skin
+      id: leftarm-arterial-seal
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-seal-arterial-puncture
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+        curePathologies:
+        - LeftArmArterialPuncture
+
+  - node: leftarm-necrosis-excised
+    baseNode: burn-necrosis-excised
+    edges:
+    - to: retract-leftarm-skin
+      id: leftarm-necrosis-remove
+      baseEdge: to-remove-burn-necrosis
+      edgeTooltip: to-remove-burn-necrosis
+      actions:
+      - !type:ApplyDamageAction
+        damageGrouped:
+          Burn: -20
+          Toxin: -15
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+        curePathologies:
+        - LeftArmBurnNecrosis
+
+  - node: seal-wound
+    baseNode: seal-wound
+
+- type: surgeryGraph
+  id: RightArmSurgery
+  name: surgery-rightarm-complex-name
+  description: surgery-limb-complex-description
+  targetPart: RightArm
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-torso-complex-inventory-requirement-description
+    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    slotNames:
+    - jumpsuit
+    - outerClothing
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-rightarm-surgery
+  end: seal-wound
+  graph:
+  - node: start-rightarm-surgery
+    nodeText:
+      examineDescription: surgery-limb-examine-start
+    edges:
+    - to: start-rightarm-surgery
+      id: start-rightarm-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - RightArmDislocation
+    - to: rightarm-skin-incision
+      id: rightarm-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-limb-skin-incision
+
+  - node: rightarm-skin-incision
+    baseNode: incision
+    edges:
+    - to: rightarm-skin-clamp-bleeders
+      id: rightarm-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-limb-skin-clamp-bleeders
+
+  - node: rightarm-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-rightarm-skin
+      id: retract-rightarm-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-limb-skin
+
+  - node: retract-rightarm-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-rightarm-skin
+      id: retract-rightarm-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - RightArmDislocation
+    - to: retract-rightarm-skin
+      id: retract-rightarm-fragments
+      delay: 4
+      edgeTooltip: remove-limb-bullet-fragments
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-limb-fragments
+        failureMessage: surgery-pathology-requirement-failure-limb-fragments
+        curePathologies:
+        - RightArmProjectileFragment
+    - to: retract-rightarm-skin
+      id: retract-rightarm-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - RightArmHairlineFracture
+    - to: rightarm-compound-reset
+      id: rightarm-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: RightArmCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: rightarm-arterial-clamped
+      id: rightarm-arterial-clamp
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-clamp-arterial-puncture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: RightArmArterialPuncture
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+    - to: rightarm-necrosis-excised
+      id: rightarm-necrosis-excise
+      baseEdge: to-excise-burn-necrosis
+      edgeTooltip: to-excise-burn-necrosis
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: RightArmBurnNecrosis
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: retract-rightarm-skin
+      id: retract-rightarm-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-rightarm-skin
+      id: retract-rightarm-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: rightarm-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-rightarm-skin
+      id: rightarm-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - RightArmCompoundFracture
+
+  - node: rightarm-arterial-clamped
+    baseNode: arterial-puncture-clamped
+    edges:
+    - to: retract-rightarm-skin
+      id: rightarm-arterial-seal
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-seal-arterial-puncture
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+        curePathologies:
+        - RightArmArterialPuncture
+
+  - node: rightarm-necrosis-excised
+    baseNode: burn-necrosis-excised
+    edges:
+    - to: retract-rightarm-skin
+      id: rightarm-necrosis-remove
+      baseEdge: to-remove-burn-necrosis
+      edgeTooltip: to-remove-burn-necrosis
+      actions:
+      - !type:ApplyDamageAction
+        damageGrouped:
+          Burn: -20
+          Toxin: -15
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+        curePathologies:
+        - RightArmBurnNecrosis
+
+  - node: seal-wound
+    baseNode: seal-wound
+
+- type: surgeryGraph
+  id: LeftHandSurgery
+  name: surgery-lefthand-complex-name
+  description: surgery-hand-complex-description
+  targetPart: LeftHand
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-hand-complex-inventory-requirement-description
+    failureMessage: surgery-hand-complex-inventory-requirement-failure
+    slotNames:
+    - gloves
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-lefthand-surgery
+  end: seal-wound
+  graph:
+  - node: start-lefthand-surgery
+    nodeText:
+      examineDescription: surgery-limb-examine-start
+    edges:
+    - to: start-lefthand-surgery
+      id: start-lefthand-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - LeftHandDislocation
+    - to: lefthand-skin-incision
+      id: lefthand-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-limb-skin-incision
+
+  - node: lefthand-skin-incision
+    baseNode: incision
+    edges:
+    - to: lefthand-skin-clamp-bleeders
+      id: lefthand-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-limb-skin-clamp-bleeders
+
+  - node: lefthand-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-lefthand-skin
+      id: retract-lefthand-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-limb-skin
+
+  - node: retract-lefthand-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-lefthand-skin
+      id: retract-lefthand-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - LeftHandDislocation
+    - to: retract-lefthand-skin
+      id: retract-lefthand-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - LeftHandHairlineFracture
+    - to: lefthand-compound-reset
+      id: lefthand-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LeftHandCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: retract-lefthand-skin
+      id: retract-lefthand-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-lefthand-skin
+      id: retract-lefthand-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: lefthand-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-lefthand-skin
+      id: lefthand-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - LeftHandCompoundFracture
+
+  - node: seal-wound
+    baseNode: seal-wound
+
+- type: surgeryGraph
+  id: RightHandSurgery
+  name: surgery-righthand-complex-name
+  description: surgery-hand-complex-description
+  targetPart: RightHand
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-hand-complex-inventory-requirement-description
+    failureMessage: surgery-hand-complex-inventory-requirement-failure
+    slotNames:
+    - gloves
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-righthand-surgery
+  end: seal-wound
+  graph:
+  - node: start-righthand-surgery
+    nodeText:
+      examineDescription: surgery-limb-examine-start
+    edges:
+    - to: start-righthand-surgery
+      id: start-righthand-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - RightHandDislocation
+    - to: righthand-skin-incision
+      id: righthand-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-limb-skin-incision
+
+  - node: righthand-skin-incision
+    baseNode: incision
+    edges:
+    - to: righthand-skin-clamp-bleeders
+      id: righthand-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-limb-skin-clamp-bleeders
+
+  - node: righthand-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-righthand-skin
+      id: retract-righthand-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-limb-skin
+
+  - node: retract-righthand-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-righthand-skin
+      id: retract-righthand-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - RightHandDislocation
+    - to: retract-righthand-skin
+      id: retract-righthand-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - RightHandHairlineFracture
+    - to: righthand-compound-reset
+      id: righthand-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: RightHandCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: retract-righthand-skin
+      id: retract-righthand-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-righthand-skin
+      id: retract-righthand-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: righthand-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-righthand-skin
+      id: righthand-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - RightHandCompoundFracture
+
+  - node: seal-wound
+    baseNode: seal-wound
+
+- type: surgeryGraph
+  id: LeftLegSurgery
+  name: surgery-leftleg-complex-name
+  description: surgery-limb-complex-description
+  targetPart: LeftLeg
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-torso-complex-inventory-requirement-description
+    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    slotNames:
+    - jumpsuit
+    - outerClothing
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-leftleg-surgery
+  end: seal-wound
+  graph:
+  - node: start-leftleg-surgery
+    nodeText:
+      examineDescription: surgery-limb-examine-start
+    edges:
+    - to: start-leftleg-surgery
+      id: start-leftleg-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - LeftLegDislocation
+    - to: leftleg-skin-incision
+      id: leftleg-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-limb-skin-incision
+
+  - node: leftleg-skin-incision
+    baseNode: incision
+    edges:
+    - to: leftleg-skin-clamp-bleeders
+      id: leftleg-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-limb-skin-clamp-bleeders
+
+  - node: leftleg-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-leftleg-skin
+      id: retract-leftleg-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-limb-skin
+
+  - node: retract-leftleg-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-leftleg-skin
+      id: retract-leftleg-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - LeftLegDislocation
+    - to: retract-leftleg-skin
+      id: retract-leftleg-fragments
+      delay: 4
+      edgeTooltip: remove-limb-bullet-fragments
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-limb-fragments
+        failureMessage: surgery-pathology-requirement-failure-limb-fragments
+        curePathologies:
+        - LeftLegProjectileFragment
+    - to: retract-leftleg-skin
+      id: retract-leftleg-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - LeftLegHairlineFracture
+    - to: leftleg-compound-reset
+      id: leftleg-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LeftLegCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: leftleg-arterial-clamped
+      id: leftleg-arterial-clamp
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-clamp-arterial-puncture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LeftLegArterialPuncture
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+    - to: leftleg-necrosis-excised
+      id: leftleg-necrosis-excise
+      baseEdge: to-excise-burn-necrosis
+      edgeTooltip: to-excise-burn-necrosis
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LeftLegBurnNecrosis
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: retract-leftleg-skin
+      id: retract-leftleg-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-leftleg-skin
+      id: retract-leftleg-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: leftleg-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-leftleg-skin
+      id: leftleg-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - LeftLegCompoundFracture
+
+  - node: leftleg-arterial-clamped
+    baseNode: arterial-puncture-clamped
+    edges:
+    - to: retract-leftleg-skin
+      id: leftleg-arterial-seal
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-seal-arterial-puncture
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+        curePathologies:
+        - LeftLegArterialPuncture
+
+  - node: leftleg-necrosis-excised
+    baseNode: burn-necrosis-excised
+    edges:
+    - to: retract-leftleg-skin
+      id: leftleg-necrosis-remove
+      baseEdge: to-remove-burn-necrosis
+      edgeTooltip: to-remove-burn-necrosis
+      actions:
+      - !type:ApplyDamageAction
+        damageGrouped:
+          Burn: -20
+          Toxin: -15
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+        curePathologies:
+        - LeftLegBurnNecrosis
+
+  - node: seal-wound
+    baseNode: seal-wound
+
+- type: surgeryGraph
+  id: RightLegSurgery
+  name: surgery-rightleg-complex-name
+  description: surgery-limb-complex-description
+  targetPart: RightLeg
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-torso-complex-inventory-requirement-description
+    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    slotNames:
+    - jumpsuit
+    - outerClothing
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-rightleg-surgery
+  end: seal-wound
+  graph:
+  - node: start-rightleg-surgery
+    nodeText:
+      examineDescription: surgery-limb-examine-start
+    edges:
+    - to: start-rightleg-surgery
+      id: start-rightleg-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - RightLegDislocation
+    - to: rightleg-skin-incision
+      id: rightleg-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-limb-skin-incision
+
+  - node: rightleg-skin-incision
+    baseNode: incision
+    edges:
+    - to: rightleg-skin-clamp-bleeders
+      id: rightleg-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-limb-skin-clamp-bleeders
+
+  - node: rightleg-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-rightleg-skin
+      id: retract-rightleg-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-limb-skin
+
+  - node: retract-rightleg-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-rightleg-skin
+      id: retract-rightleg-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - RightLegDislocation
+    - to: retract-rightleg-skin
+      id: retract-rightleg-fragments
+      delay: 4
+      edgeTooltip: remove-limb-bullet-fragments
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-limb-fragments
+        failureMessage: surgery-pathology-requirement-failure-limb-fragments
+        curePathologies:
+        - RightLegProjectileFragment
+    - to: retract-rightleg-skin
+      id: retract-rightleg-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - RightLegHairlineFracture
+    - to: rightleg-compound-reset
+      id: rightleg-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: RightLegCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: rightleg-arterial-clamped
+      id: rightleg-arterial-clamp
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-clamp-arterial-puncture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: RightLegArterialPuncture
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+    - to: rightleg-necrosis-excised
+      id: rightleg-necrosis-excise
+      baseEdge: to-excise-burn-necrosis
+      edgeTooltip: to-excise-burn-necrosis
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: RightLegBurnNecrosis
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: retract-rightleg-skin
+      id: retract-rightleg-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-rightleg-skin
+      id: retract-rightleg-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: rightleg-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-rightleg-skin
+      id: rightleg-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - RightLegCompoundFracture
+
+  - node: rightleg-arterial-clamped
+    baseNode: arterial-puncture-clamped
+    edges:
+    - to: retract-rightleg-skin
+      id: rightleg-arterial-seal
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-seal-arterial-puncture
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+        curePathologies:
+        - RightLegArterialPuncture
+
+  - node: rightleg-necrosis-excised
+    baseNode: burn-necrosis-excised
+    edges:
+    - to: retract-rightleg-skin
+      id: rightleg-necrosis-remove
+      baseEdge: to-remove-burn-necrosis
+      edgeTooltip: to-remove-burn-necrosis
+      actions:
+      - !type:ApplyDamageAction
+        damageGrouped:
+          Burn: -20
+          Toxin: -15
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+        curePathologies:
+        - RightLegBurnNecrosis
+
+  - node: seal-wound
+    baseNode: seal-wound
+
+- type: surgeryGraph
+  id: LeftFootSurgery
+  name: surgery-leftfoot-complex-name
+  description: surgery-foot-complex-description
+  targetPart: LeftFoot
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-foot-complex-inventory-requirement-description
+    failureMessage: surgery-foot-complex-inventory-requirement-failure
+    slotNames:
+    - shoes
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-leftfoot-surgery
+  end: seal-wound
+  graph:
+  - node: start-leftfoot-surgery
+    nodeText:
+      examineDescription: surgery-limb-examine-start
+    edges:
+    - to: start-leftfoot-surgery
+      id: start-leftfoot-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - LeftFootDislocation
+    - to: leftfoot-skin-incision
+      id: leftfoot-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-limb-skin-incision
+
+  - node: leftfoot-skin-incision
+    baseNode: incision
+    edges:
+    - to: leftfoot-skin-clamp-bleeders
+      id: leftfoot-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-limb-skin-clamp-bleeders
+
+  - node: leftfoot-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-leftfoot-skin
+      id: retract-leftfoot-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-limb-skin
+
+  - node: retract-leftfoot-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-leftfoot-skin
+      id: retract-leftfoot-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - LeftFootDislocation
+    - to: retract-leftfoot-skin
+      id: retract-leftfoot-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - LeftFootHairlineFracture
+    - to: leftfoot-compound-reset
+      id: leftfoot-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LeftFootCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: retract-leftfoot-skin
+      id: retract-leftfoot-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-leftfoot-skin
+      id: retract-leftfoot-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: leftfoot-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-leftfoot-skin
+      id: leftfoot-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - LeftFootCompoundFracture
+
+  - node: seal-wound
+    baseNode: seal-wound
+
+- type: surgeryGraph
+  id: RightFootSurgery
+  name: surgery-rightfoot-complex-name
+  description: surgery-foot-complex-description
+  targetPart: RightFoot
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-foot-complex-inventory-requirement-description
+    failureMessage: surgery-foot-complex-inventory-requirement-failure
+    slotNames:
+    - shoes
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-rightfoot-surgery
+  end: seal-wound
+  graph:
+  - node: start-rightfoot-surgery
+    nodeText:
+      examineDescription: surgery-limb-examine-start
+    edges:
+    - to: start-rightfoot-surgery
+      id: start-rightfoot-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - RightFootDislocation
+    - to: rightfoot-skin-incision
+      id: rightfoot-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-limb-skin-incision
+
+  - node: rightfoot-skin-incision
+    baseNode: incision
+    edges:
+    - to: rightfoot-skin-clamp-bleeders
+      id: rightfoot-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-limb-skin-clamp-bleeders
+
+  - node: rightfoot-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-rightfoot-skin
+      id: retract-rightfoot-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-limb-skin
+
+  - node: retract-rightfoot-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-rightfoot-skin
+      id: retract-rightfoot-dislocation
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-dislocation
+        failureMessage: surgery-pathology-requirement-failure-dislocation
+        curePathologies:
+        - RightFootDislocation
+    - to: retract-rightfoot-skin
+      id: retract-rightfoot-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - RightFootHairlineFracture
+    - to: rightfoot-compound-reset
+      id: rightfoot-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: RightFootCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: retract-rightfoot-skin
+      id: retract-rightfoot-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-rightfoot-skin
+      id: retract-rightfoot-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: rightfoot-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-rightfoot-skin
+      id: rightfoot-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - RightFootCompoundFracture
+
+  - node: seal-wound
+    baseNode: seal-wound

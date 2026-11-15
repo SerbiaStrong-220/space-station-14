@@ -59,3 +59,46 @@ remove-brain-pathology = Иссечь поврежденные нервные т
 
 surgery-pathology-requirement-description-remove-brain-pathology = Присутствие неврологических отклонений
 surgery-pathology-requirement-failure-remove-brain-pathology = Для этого действия требуется наличие повреждённых участков в мозгу, но Вы их не находите.
+
+to-prep-cranial-fissure = Зачистить края трещины черепа
+to-repair-cranial-fissure = Заделать трещину черепа
+surgery-pathology-requirement-description-cranial-fissure = Наличие трещины черепа
+surgery-pathology-requirement-failure-cranial-fissure = Трещины черепа не обнаружено!
+
+surgery-eyes-complex-name = Операции на глазах
+surgery-eyes-complex-description = Операция для лечения повреждений роговицы и ран век.
+surgery-eyes-complex-inventory-requirement-description = Глаза пациента не должны быть закрыты очками
+surgery-eyes-complex-inventory-requirement-failure = Снимите защиту с глаз { THE($target) }!
+surgery-eyes-examine-start = Пациент готов к операции на глазах.
+to-retract-eyelids = Развести веки
+to-prep-eye-cornea = Подготовить повреждённую роговицу
+to-repair-eye-cornea = Зафиксировать роговицу
+to-seal-eyes-surgery = Завершить операцию на глазах
+surgery-pathology-requirement-description-eye-corneal = Повреждение роговицы глаза
+surgery-pathology-requirement-failure-eye-corneal = Повреждения роговицы не обнаружено!
+
+surgery-mouth-complex-name = Операции на челюсти и рте
+surgery-mouth-complex-description = Позволяет вправить вывих челюсти и обработать мягкие ткани.
+surgery-mouth-complex-inventory-requirement-description = Рот пациента не должен быть закрыт маской
+surgery-mouth-complex-inventory-requirement-failure = Снимите маску с { THE($target) }!
+surgery-mouth-examine-start = Пациент готов к операции на рте и челюсти.
+to-repair-jaw-dislocation = Вправить вывих челюсти
+to-mouth-skin-incision = Сделать надрез в области челюсти
+to-mouth-skin-clamp-bleeders = Зажать сосуды
+to-retract-mouth-skin = Расширить разрез
+to-seal-mouth-incision = Зашить разрез
+surgery-pathology-requirement-description-jaw-dislocation = Вывих нижней челюсти
+surgery-pathology-requirement-failure-jaw-dislocation = Вывиха челюсти не обнаружено!
+
+head-cranial-fissure-prepped = Обработка трещины черепа
+head-arterial-clamped = Пережатие артерии головы
+head-necrosis-excised = Иссечение некроза на голове
+
+start-eyes-surgery = Подготовка операции на глазах
+eyes-retract-lids = Фиксация век
+eyes-cornea-prepped = Подготовка роговицы
+
+start-mouth-surgery = Подготовка операции на челюсти и рте
+mouth-skin-incision = Надрез в области челюсти
+mouth-skin-clamp-bleeders = Остановка кровотечения
+retract-mouth-skin = Расширение разреза

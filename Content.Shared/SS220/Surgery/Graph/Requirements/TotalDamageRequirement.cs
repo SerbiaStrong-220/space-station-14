@@ -16,6 +16,9 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
     [DataField]
     public ProtoId<DamageTypePrototype>? DamageType;
 
+    [DataField]
+    public ProtoId<DamageGroupPrototype>? DamageGroup;
+
     [DataField(required: true)]
     public FixedPoint2 Damage;
 
@@ -28,7 +31,7 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
     protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         var damageSystem = entityManager.System<DamageableSystem>();
-        if (!entityManager.TryGetComponent<DamageableComponent>(uid, out var damageableComponent))
+        if (!entityManager.TryGetComponent<DamageableComponent>(uid, out _))
             return false;
 
         var modifier = 1f;
@@ -39,10 +42,19 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
                 && DamageMultipliers.TryGetValue(skillProto.Value, out modifier);
         }
 
+        if (DamageGroup is not null)
+        {
+            var perGroup = damageSystem.GetDamagePerGroup(uid.Value);
+            var groupDamage = perGroup.TryGetValue(DamageGroup.Value, out var value) ? value : FixedPoint2.Zero;
+            return groupDamage > Damage * modifier;
+        }
 
         if (DamageType is not null)
-            return damageSystem.GetAllDamage(uid.Value)[DamageType] > Damage * modifier;
-        else
-            return damageSystem.GetTotalDamage(uid.Value) > Damage * modifier;
+        {
+            var allDamage = damageSystem.GetAllDamage(uid.Value);
+            return allDamage.DamageDict.TryGetValue(DamageType.Value, out var typeDamage) && typeDamage > Damage * modifier;
+        }
+
+        return damageSystem.GetTotalDamage(uid.Value) > Damage * modifier;
     }
 }

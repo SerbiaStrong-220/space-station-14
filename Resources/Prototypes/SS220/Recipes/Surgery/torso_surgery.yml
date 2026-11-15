@@ -118,6 +118,84 @@
         failureMessage: surgery-pathology-requirement-failure-torso-fragments
         curePathologies:
         - TorsoProjectileFragment
+    # tend brute & burn wounds
+    - to: retract-torso-skin
+      id: retract-torso-skin-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-torso-skin
+      id: retract-torso-skin-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    # hairline fracture
+    - to: retract-torso-skin
+      id: retract-torso-skin-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - TorsoHairlineFracture
+    # compound fracture
+    - to: torso-compound-reset
+      id: torso-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: TorsoCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    # arterial puncture
+    - to: torso-arterial-clamped
+      id: torso-arterial-clamp
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-clamp-arterial-puncture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: TorsoArterialPuncture
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+    # burn necrosis
+    - to: torso-necrosis-excised
+      id: torso-necrosis-excise
+      baseEdge: to-excise-burn-necrosis
+      edgeTooltip: to-excise-burn-necrosis
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: TorsoBurnNecrosis
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
     # deeper
     - to: saw-rib-bone
       id: saw-rib-bone
@@ -128,6 +206,77 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-torso-incision
+
+  - node: torso-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-torso-skin
+      id: torso-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - TorsoCompoundFracture
+
+  - node: torso-arterial-clamped
+    baseNode: arterial-puncture-clamped
+    edges:
+    - to: retract-torso-skin
+      id: torso-arterial-seal
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-seal-arterial-puncture
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+        curePathologies:
+        - TorsoArterialPuncture
+
+  - node: torso-necrosis-excised
+    baseNode: burn-necrosis-excised
+    edges:
+    - to: retract-torso-skin
+      id: torso-necrosis-remove
+      baseEdge: to-remove-burn-necrosis
+      edgeTooltip: to-remove-burn-necrosis
+      actions:
+      - !type:ApplyDamageAction
+        damageGrouped:
+          Burn: -20
+          Toxin: -15
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+        curePathologies:
+        - TorsoBurnNecrosis
 
   - node: saw-rib-bone-gelled-fixed
     baseNode: saw-bone-gelled-fixed
@@ -187,5 +336,236 @@
       edgeTooltip: to-close-heart-incision
 
   # end
+  - node: seal-wound
+    baseNode: seal-wound
+
+# SS220-surgery-update LowerTorso surgery
+- type: surgeryGraph
+  id: LowerTorsoSurgery
+  name: surgery-lowertorso-complex-name
+  description: surgery-lowertorso-complex-description
+  targetPart: LowerTorso
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-torso-complex-inventory-requirement-description
+    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    slotNames:
+    - jumpsuit
+    - outerClothing
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-lowertorso-surgery
+  end: seal-wound
+  graph:
+  - node: start-lowertorso-surgery
+    nodeText:
+      examineDescription: surgery-lowertorso-examine-start
+    edges:
+    - to: lowertorso-skin-incision
+      id: lowertorso-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-lowertorso-skin-incision
+
+  - node: lowertorso-skin-incision
+    baseNode: incision
+    edges:
+    - to: lowertorso-skin-clamp-bleeders
+      id: lowertorso-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-lowertorso-skin-clamp-bleeders
+
+  - node: lowertorso-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-lowertorso-skin
+      id: retract-lowertorso-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-lowertorso-skin
+
+  - node: retract-lowertorso-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-lowertorso-skin
+      id: retract-lowertorso-remove-fragments
+      delay: 4
+      edgeTooltip: remove-lowertorso-bullet-fragments
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-lowertorso-fragments
+        failureMessage: surgery-pathology-requirement-failure-lowertorso-fragments
+        curePathologies:
+        - LowerTorsoProjectileFragment
+    - to: retract-lowertorso-skin
+      id: retract-lowertorso-tend-brute
+      baseEdge: to-tend-brute-wounds
+      edgeTooltip: to-tend-brute-wounds
+    - to: retract-lowertorso-skin
+      id: retract-lowertorso-tend-burn
+      baseEdge: to-tend-burn-wounds
+      edgeTooltip: to-tend-burn-wounds
+    - to: retract-lowertorso-skin
+      id: retract-lowertorso-repair-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - LowerTorsoHairlineFracture
+    - to: lowertorso-compound-reset
+      id: lowertorso-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LowerTorsoCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: lowertorso-arterial-clamped
+      id: lowertorso-arterial-clamp
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-clamp-arterial-puncture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LowerTorsoArterialPuncture
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+    - to: lowertorso-necrosis-excised
+      id: lowertorso-necrosis-excise
+      baseEdge: to-excise-burn-necrosis
+      edgeTooltip: to-excise-burn-necrosis
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LowerTorsoBurnNecrosis
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-lowertorso-incision
+
+  - node: lowertorso-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-lowertorso-skin
+      id: lowertorso-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - LowerTorsoCompoundFracture
+
+  - node: lowertorso-arterial-clamped
+    baseNode: arterial-puncture-clamped
+    edges:
+    - to: retract-lowertorso-skin
+      id: lowertorso-arterial-seal
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-seal-arterial-puncture
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+        curePathologies:
+        - LowerTorsoArterialPuncture
+
+  - node: lowertorso-necrosis-excised
+    baseNode: burn-necrosis-excised
+    edges:
+    - to: retract-lowertorso-skin
+      id: lowertorso-necrosis-remove
+      baseEdge: to-remove-burn-necrosis
+      edgeTooltip: to-remove-burn-necrosis
+      actions:
+      - !type:ApplyDamageAction
+        damageGrouped:
+          Burn: -20
+          Toxin: -15
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+        curePathologies:
+        - LowerTorsoBurnNecrosis
+
   - node: seal-wound
     baseNode: seal-wound

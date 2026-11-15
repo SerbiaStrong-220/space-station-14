@@ -339,7 +339,7 @@ public abstract partial class SharedSurgerySystem
         else if (HasComp<BuckleComponent>(patient))
             failEv.FlatModifier += NoOperatingTableFailurePenalty;
 
-        if (!IsPatientAnesthetized(patient))
+        if (!IsPatientAnesthetized(patient) && !IsPainlessTool(tool))
             failEv.FlatModifier += UnanesthetizedFailurePenalty;
 
         if (!HasSufficientLight(patient, surgeon))
@@ -347,6 +347,20 @@ public abstract partial class SharedSurgerySystem
 
         var total = failEv.FlatModifier * failEv.Multiplier;
         return Math.Clamp(total, 0f, 0.95f);
+    }
+
+    /// <summary>
+    /// Returns true when the tool being used does not cause patient pain or pain-related failure penalties.
+    /// </summary>
+    public bool IsPainlessTool(EntityUid? tool)
+    {
+        if (tool is not { } toolUid)
+            return false;
+
+        if (TryComp<SurgeryToolComponent>(toolUid, out var surgeryTool) && surgeryTool.IsPainless)
+            return true;
+
+        return HasComp<ImplantCheckInSurgeryComponent>(toolUid);
     }
 
     protected virtual void OnPatientPain(EntityUid patient)

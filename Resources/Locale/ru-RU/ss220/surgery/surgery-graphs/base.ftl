@@ -52,3 +52,43 @@ bone-gel-edge-name = Восстановить кости
 set-bones-edge-name = Выправить кости
 clamp-bleeders-edge-name = Зажать кровоточащие сосуды
 seal-wound-edge-name = Прижечь рану
+
+compound-fracture-reset-examine-description = В разрезе видна вправленная, но ещё не зафиксированная кость.
+compound-fracture-reset-popup = {THE($user)} вправляет смещённую кость {THE($target)}, используя {$used}
+
+arterial-puncture-clamped-examine-description = В разрезе видна пережатая гемостатом разорванная артерия.
+arterial-puncture-clamped-popup = {THE($user)} зажимает разорванную артерию {THE($target)}, используя {$used}
+
+burn-necrosis-excised-examine-description = Омертвевшие ткани иссечены и готовы к удалению.
+burn-necrosis-excised-popup = {THE($user)} иссекает некротизированные ткани {THE($target)}, используя {$used}
+
+cranial-fissure-prepped-examine-description = Края трещины черепа зачищены и готовы к фиксации.
+cranial-fissure-prepped-popup = {THE($user)} зачищает края трещины черепа {THE($target)}, используя {$used}
+
+to-tend-brute-wounds = Обработать механические раны
+to-tend-burn-wounds = Обработать ожоговые раны
+to-repair-dislocation = Вправить вывих
+to-repair-hairline-fracture = Восстановить трещину кости
+to-reset-compound-fracture = Вправить открытый перелом
+to-repair-compound-fracture = Зафиксировать кость
+to-clamp-arterial-puncture = Пережать разорванную артерию
+to-seal-arterial-puncture = Закрыть разрыв артерии
+to-excise-burn-necrosis = Иссечь некротические ткани
+to-remove-burn-necrosis = Удалить некротические ткани
+to-drill-cranial-fissure = Зачистить трещину черепа
+
+surgery-requirement-tend-brute-description = У пациента есть значительные механические повреждения
+surgery-requirement-tend-brute-failure = Механические раны слишком незначительны для хирургической обработки!
+surgery-requirement-tend-burn-description = У пациента есть значительные термические или химические ожоги
+surgery-requirement-tend-burn-failure = Ожоги слишком незначительны для хирургической обработки!
+
+surgery-pathology-requirement-description-dislocation = Наличие вывиха в этой зоне
+surgery-pathology-requirement-failure-dislocation = Вывиха в данной зоне не обнаружено!
+surgery-pathology-requirement-description-hairline = Наличие трещины кости в этой зоне
+surgery-pathology-requirement-failure-hairline = Трещин кости в данной зоне не обнаружено!
+surgery-pathology-requirement-description-compound = Наличие открытого перелома в этой зоне
+surgery-pathology-requirement-failure-compound = Открытого перелома в данной зоне не обнаружено!
+surgery-pathology-requirement-description-arterial = Наличие разрыва артерии в этой зоне
+surgery-pathology-requirement-failure-arterial = Разрыва артерии в данной зоне не обнаружено!
+surgery-pathology-requirement-description-necrosis = Наличие ожогового некроза в этой зоне
+surgery-pathology-requirement-failure-necrosis = Ожогового некроза в данной зоне не обнаружено!

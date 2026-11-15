@@ -369,7 +369,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (TryComp<SurgeryToolComponent>(used, out var surgeryTool))
             _audio.PlayPredicted(surgeryTool.UsingSound, entity.Owner, user);
 
-        if (!IsPatientAnesthetized(entity.Owner))
+        if (!IsPatientAnesthetized(entity.Owner) && !IsPainlessTool(used))
         {
             _popup.PopupPredicted(
                 Loc.GetString(SurgeryPatientFeelsPain, ("target", Identity.Entity(entity.Owner, EntityManager))),

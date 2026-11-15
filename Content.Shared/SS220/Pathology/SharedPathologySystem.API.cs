@@ -16,6 +16,8 @@ public abstract partial class SharedPathologySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private INetManager _net = default!;
 
+    internal bool IsClient => _net.IsClient;
+
     public Dictionary<ProtoId<PathologyPrototype>, PathologyDefinition> GetActivePathologies(Entity<PathologyHolderComponent?> entity)
     {
         if (!Resolve(entity.Owner, ref entity.Comp, false))
@@ -73,7 +75,7 @@ public abstract partial class SharedPathologySystem
 
         entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData);
 
-        if (instanceData is not null && instanceData.StackCount > pathologyPrototype.Definition[instanceData.Level].MaxStackCount)
+        if (instanceData is not null && instanceData.StackCount >= pathologyPrototype.Definition[instanceData.Level].MaxStackCount)
             return false;
 
         var attemptEv = new PathologyAddedAttempt(pathologyId);
@@ -106,6 +108,7 @@ public abstract partial class SharedPathologySystem
             return false;
 
         var ev = new PathologyRemoveAttempt(pathologyId, instanceData.Level);
+        RaiseLocalEvent(entity, ref ev);
         if (ev.Cancelled)
             return false;
 
@@ -115,7 +118,7 @@ public abstract partial class SharedPathologySystem
 
     public bool HavePathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp))
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
         return entity.Comp.ActivePathologies.ContainsKey(pathologyId);
@@ -126,7 +129,7 @@ public abstract partial class SharedPathologySystem
     /// </summary>
     public bool CanAddPathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp))
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
         if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
@@ -135,7 +138,7 @@ public abstract partial class SharedPathologySystem
         if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
             return true;
 
-        return pathologyPrototype.Definition[instanceData.Level].MaxStackCount > OneStack;
+        return instanceData.StackCount < pathologyPrototype.Definition[instanceData.Level].MaxStackCount;
     }
 
     public bool TryGetPathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, [NotNullWhen(true)] out int? stackCount)

@@ -58,6 +58,38 @@
       examineDescription: seal-wound-examine-description
       popup: seal-wound-popup
 
+- type: abstractSurgeryNode
+  id: compound-fracture-reset
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: compound-fracture-reset-examine-description
+      popup: compound-fracture-reset-popup
+
+- type: abstractSurgeryNode
+  id: arterial-puncture-clamped
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: arterial-puncture-clamped-examine-description
+      popup: arterial-puncture-clamped-popup
+
+- type: abstractSurgeryNode
+  id: burn-necrosis-excised
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: burn-necrosis-excised-examine-description
+      popup: burn-necrosis-excised-popup
+
+- type: abstractSurgeryNode
+  id: cranial-fissure-prepped
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: cranial-fissure-prepped-examine-description
+      popup: cranial-fissure-prepped-popup
+
 #Edges
 
 - type: abstractSurgeryEdge
@@ -207,3 +239,192 @@
     actions:
     - !type:ApplyBleedingAction
       bleedAmount: -2
+
+- type: abstractSurgeryEdge
+  id: to-tend-brute-wounds
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3
+    failureChance: 0.05
+    edgeTooltip: to-tend-brute-wounds
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: hemostat
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: hemostat
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-hemostat
+      failureMessage: surgery-requirement-tool-miss
+    - !type:TotalDamageRequirement
+      subject: target
+      damageGroup: Brute
+      damage: 5
+      description: surgery-requirement-tend-brute-description
+      failureMessage: surgery-requirement-tend-brute-failure
+    actions:
+    - !type:ApplyDamageAction
+      damageGrouped:
+        Brute: -15
+      skillTree: Anatomy
+      damageBonuses:
+        AnatomyInitial: 0.75
+        AnatomyBase: 1
+        AnatomyTrained: 1.25
+        AnatomyProfessional: 1.5
+
+- type: abstractSurgeryEdge
+  id: to-tend-burn-wounds
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3
+    failureChance: 0.05
+    edgeTooltip: to-tend-burn-wounds
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+      state: surgical_tape
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: cautery
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-cautery
+      failureMessage: surgery-requirement-tool-miss
+    - !type:TotalDamageRequirement
+      subject: target
+      damageGroup: Burn
+      damage: 5
+      description: surgery-requirement-tend-burn-description
+      failureMessage: surgery-requirement-tend-burn-failure
+    actions:
+    - !type:ApplyDamageAction
+      damageGrouped:
+        Burn: -15
+      skillTree: Anatomy
+      damageBonuses:
+        AnatomyInitial: 0.75
+        AnatomyBase: 1
+        AnatomyTrained: 1.25
+        AnatomyProfessional: 1.5
+
+- type: abstractSurgeryEdge
+  id: to-repair-dislocation
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.1
+    edgeTooltip: to-repair-dislocation
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+      state: bonesetter
+
+- type: abstractSurgeryEdge
+  id: to-repair-hairline-fracture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 4
+    failureChance: 0.08
+    edgeTooltip: to-repair-hairline-fracture
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: bone-gel
+
+- type: abstractSurgeryEdge
+  id: to-reset-compound-fracture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 5.5
+    failureChance: 0.12
+    edgeTooltip: to-reset-compound-fracture
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+      state: bonesetter
+
+- type: abstractSurgeryEdge
+  id: to-repair-compound-fracture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 4
+    failureChance: 0.08
+    edgeTooltip: to-repair-compound-fracture
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: bone-gel
+
+- type: abstractSurgeryEdge
+  id: to-clamp-arterial-puncture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.12
+    edgeTooltip: to-clamp-arterial-puncture
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: hemostat
+
+- type: abstractSurgeryEdge
+  id: to-seal-arterial-puncture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.1
+    edgeTooltip: to-seal-arterial-puncture
+    sound: /Audio/SS220/Surgery/seal_wound.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: cautery
+
+- type: abstractSurgeryEdge
+  id: to-excise-burn-necrosis
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.1
+    edgeTooltip: to-excise-burn-necrosis
+    sound: /Audio/SS220/Surgery/incision.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+      state: scalpel
+
+- type: abstractSurgeryEdge
+  id: to-remove-burn-necrosis
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.08
+    edgeTooltip: to-remove-burn-necrosis
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: hemostat
+
+- type: abstractSurgeryEdge
+  id: to-drill-cranial-fissure
+  edge:
+    to: abstract
+    id: abstract
+    delay: 4
+    failureChance: 0.12
+    edgeTooltip: to-drill-cranial-fissure
+    sound: /Audio/Items/drill_use.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/drill.rsi
+      state: drill
