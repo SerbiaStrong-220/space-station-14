@@ -36,4 +36,10 @@ public sealed partial class StaminaConvertArmorComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public NetEntity? User;
+
+    /// <summary>
+    /// Whether item converts stamina damage into electrical damage.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Enabled = true;
 }
