@@ -1071,3 +1071,6 @@ FoodLubroShroomCultDead: FoodLubroShroomDead
 FoodMikoTrapShroomCult: FoodMikoTrapShroom
 ShellClaw: ShellPincer
 ShellBeach: ShellScourge
+
+# 2026-11-14 - SS220 messenger server
+BaseMessengerServer: PDANanotrasenMessengerServer
