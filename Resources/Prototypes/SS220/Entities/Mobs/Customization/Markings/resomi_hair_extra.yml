@@ -1,0 +1,129 @@
+# Ported from SerbiaStrong-220/Monolith (_Moffstation)
+
+- type: marking
+  id: ResomiHairColonel
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiColonel
+
+- type: marking
+  id: ResomiHairWedge
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiWedge
+
+- type: marking
+  id: ResomiHairSamurai
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiSamurai
+
+- type: marking
+  id: ResomiHairCube
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiCube
+
+- type: marking
+  id: ResomiHairAerodynamic
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiAerodynamic
+
+- type: marking
+  id: ResomiHairBun
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiBun
+
+- type: marking
+  id: ResomiHairCowlick
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiCowlick
+
+- type: marking
+  id: ResomiHairCrest
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiCrest
+
+- type: marking
+  id: ResomiHairCrowned
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiCrowned
+
+- type: marking
+  id: ResomiHairMohawkAlt
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiMohawk_Alt
+
+- type: marking
+  id: ResomiHairPeel
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiPeel
+
+- type: marking
+  id: ResomiHairPonytail
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiPonytail
+
+- type: marking
+  id: ResomiHairSleek
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiSleek
+
+- type: marking
+  id: ResomiHairSoap
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiSoap
+
+- type: marking
+  id: ResomiHairSpikyAlt
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiSpiky_Alt
+
+- type: marking
+  id: ResomiHairSweptup
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair_extra.rsi
+    state: ResomiSweptup

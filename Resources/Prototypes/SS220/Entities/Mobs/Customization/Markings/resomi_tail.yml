@@ -1,0 +1,246 @@
+# Ported from SerbiaStrong-220/Monolith (_Moffstation)
+
+- type: marking
+  id: ResomiTailFeathered
+  bodyPart: Tail
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers
+
+- type: marking
+  id: ResomiTailBird
+  bodyPart: Tail
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_bird
+
+- type: marking
+  id: ResomiTailComplex
+  bodyPart: Tail
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_top
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_middle
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_bottom
+
+- type: marking
+  id: ResomiTailDamaged
+  bodyPart: Tail
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_damaged
+
+- type: marking
+  id: ResomiTailDamagedFeathered
+  bodyPart: Tail
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_damaged
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_damaged
+
+- type: marking
+  id: ResomiTailStubby
+  bodyPart: Tail
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_stubby
+
+- type: marking
+  id: ResomiTailStubbyFeathered
+  bodyPart: Tail
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_stubby
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_stubby
+
+- type: marking
+  id: ResomiTailFeathers
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers
+
+- type: marking
+  id: ResomiTailFeathersComplex
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_right_upper
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_right_lower
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_left_upper
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_left_lower
+
+- type: marking
+  id: ResomiTailFeathersShort
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_short
+
+- type: marking
+  id: ResomiTailFeathersFledgling
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_fledgling
+
+- type: marking
+  id: ResomiTailFeathersLarge
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_large
+
+- type: marking
+  id: ResomiTailFeathersStubby
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_stubby
+
+- type: marking
+  id: ResomiTailFeathersDamaged
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_feathers_damaged
+
+- type: marking
+  id: ResomiTailStripes
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_stripes
+
+- type: marking
+  id: ResomiTailSpots
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_spots
+
+- type: marking
+  id: ResomiTailProstheticWood
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  coloring:
+    layers:
+      tail_prosthetic_wood:
+        type: !type:SimpleColoring
+          color: white
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_prosthetic_wood
+
+- type: marking
+  id: ResomiTailProstheticHighTech
+  bodyPart: TailOverlay
+  groupWhitelist: [Resomi]
+  coloring:
+    layers:
+      tail_prosthetic_hightech:
+        type: !type:SimpleColoring
+          color: white
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_prosthetic_hightech
+
+- type: marking
+  id: ResomiTailProstheticUnbranded
+  bodyPart: TailOverlay
+  coloring:
+    layers:
+      tail_prosthetic_unbranded:
+        type: !type:SimpleColoring
+          color: white
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_prosthetic_unbranded
+
+- type: marking
+  id: ResomiTailBand
+  bodyPart: TailOverlay
+  coloring:
+    layers:
+      tail_band:
+        type: !type:SimpleColoring
+          color: white
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_band
+
+- type: marking
+  id: ResomiTailBandMulticolored
+  bodyPart: TailOverlay
+  coloring:
+    layers:
+      tail_band_multicolored_1:
+        type: !type:SimpleColoring
+          color: white
+      tail_band_multicolored_2:
+        type: !type:SimpleColoring
+          color: white
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_band_multicolored_1
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_band_multicolored_2
+
+- type: marking
+  id: ResomiTailBandLarge
+  bodyPart: TailOverlay
+  coloring:
+    layers:
+      tail_band_large:
+        type: !type:SimpleColoring
+          color: white
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_band_large
+
+- type: marking
+  id: ResomiTailBandSplit
+  bodyPart: TailOverlay
+  coloring:
+    layers:
+      tail_band_split_1:
+        type: !type:SimpleColoring
+          color: white
+      tail_band_split_2:
+        type: !type:SimpleColoring
+          color: white
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_band_split_1
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail_markings.rsi
+    state: tail_band_split_2

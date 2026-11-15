@@ -1,0 +1,222 @@
+# Ported from SerbiaStrong-220/Monolith (_Moffstation)
+
+- type: marking
+  id: ResomiGauzeBlindfold
+  bodyPart: Eyes
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_blindfold_resomi
+
+- type: marking
+  id: ResomiGauzeHead
+  bodyPart: Head
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_head_resomi
+
+- type: marking
+  id: ResomiLeftEyePad
+  bodyPart: Eyes
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_lefteye_1_resomi
+
+- type: marking
+  id: ResomiLeftEyePatch
+  bodyPart: Eyes
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_lefteye_2_resomi
+
+- type: marking
+  id: ResomiRightEyePad
+  bodyPart: Eyes
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_righteye_1_resomi
+
+- type: marking
+  id: ResomiRightEyePatch
+  bodyPart: Eyes
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_righteye_2_resomi
+
+- type: marking
+  id: ResomiGauzeStomach
+  bodyPart: Chest
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_abdomen_resomi
+
+- type: marking
+  id: ResomiGauzeShoulderRight
+  bodyPart: Chest
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_shoulder_r_resomi
+
+- type: marking
+  id: ResomiGauzeShoulderLeft
+  bodyPart: Chest
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_shoulder_l_resomi
+
+- type: marking
+  id: ResomiGauzeLeftArm
+  bodyPart: LArm
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_leftarm_resomi
+
+- type: marking
+  id: ResomiGauzeRightArm
+  bodyPart: RArm
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_rightarm_resomi
+
+- type: marking
+  id: ResomiGauzeBoxerwrapRight
+  bodyPart: RHand
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_boxerwrap_r_resomi
+
+- type: marking
+  id: ResomiGauzeBoxerwrapLeft
+  bodyPart: LHand
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_boxerwrap_l_resomi
+
+- type: marking
+  id: ResomiGauzeLegRight
+  bodyPart: RLeg
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_upperleg_r_resomi
+
+- type: marking
+  id: ResomiGauzeLegLeft
+  bodyPart: LLeg
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_upperleg_l_resomi
+
+- type: marking
+  id: ResomiGauzeFootRight
+  bodyPart: RFoot
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_lowerleg_r_resomi
+
+- type: marking
+  id: ResomiGauzeFootLeft
+  bodyPart: LFoot
+  groupWhitelist: [Resomi]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_gauze.rsi
+    state: gauze_lowerleg_l_resomi
