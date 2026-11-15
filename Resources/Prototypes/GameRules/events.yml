@@ -180,7 +180,7 @@
     startAnnouncement: station-event-bureaucratic-error-announcement
     minimumPlayers: 25
     weight: 3
-    duration: 1
+    duration: 600 # SS220 Hop improve: revert staffing overrides after at most ten minutes.
   - type: BureaucraticErrorRule
     ignoredJobs:
     - StationAi

@@ -1,0 +1,13 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<PanelContainer xmlns="https://spacestation14.io"
+                xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                Name="PriorityRecruitment" Margin="0 0 0 12" Visible="False">
+    <PanelContainer.PanelOverride>
+        <graphics:StyleBoxFlat BackgroundColor="#302A1C" BorderColor="#E6B86A" BorderThickness="1"/>
+    </PanelContainer.PanelOverride>
+    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+        <Label Text="{Loc 'late-join-priority-title'}" StyleClasses="LabelBig" FontColorOverride="#E6B86A"/>
+        <RichTextLabel Text="{Loc 'late-join-priority-description'}"/>
+        <BoxContainer Name="Jobs" Access="Public" Orientation="Vertical" SeparationOverride="4"/>
+    </BoxContainer>
+</PanelContainer>

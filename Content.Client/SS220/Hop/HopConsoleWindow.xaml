@@ -1,0 +1,119 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      Title="{Loc 'hop-console-window-title'}" MinSize="800 560" SetSize="940 660">
+    <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="8">
+        <BoxContainer SeparationOverride="8">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <Label Name="StationName" StyleClasses="LabelBig" ClipText="True"/>
+                <Label Text="{Loc 'hop-console-subtitle'}" FontColorOverride="#9DAAB8"/>
+            </BoxContainer>
+            <Button Name="RefreshButton" Text="{Loc 'hop-console-refresh'}" VerticalAlignment="Center"/>
+        </BoxContainer>
+        <Label Name="DebugWarning" Text="{Loc 'hop-console-debug-warning'}" FontColorOverride="#E6B86A" Visible="False" ClipText="True"
+               ToolTip="{Loc 'hop-console-debug-warning'}"/>
+        <TabContainer Name="Tabs" VerticalExpand="True">
+            <BoxContainer Name="JobsPage" SeparationOverride="12" Margin="0 8">
+                <BoxContainer Orientation="Vertical" SetWidth="310" SeparationOverride="6">
+                    <LineEdit Name="JobSearch" PlaceHolder="{Loc 'hop-console-job-search'}"/>
+                    <Label Name="JobCount" FontColorOverride="#9DAAB8"/>
+                    <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                        <BoxContainer Name="JobList" Orientation="Vertical" SeparationOverride="3"/>
+                    </ScrollContainer>
+                </BoxContainer>
+                <PanelContainer HorizontalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#1C232C"/>
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="16" SeparationOverride="10">
+                        <Label Name="JobEmpty" Text="{Loc 'hop-console-select-job'}" FontColorOverride="#9DAAB8"/>
+                        <BoxContainer Name="JobDetails" Orientation="Vertical" SeparationOverride="10" Visible="False">
+                            <Label Name="JobName" StyleClasses="LabelBig" ClipText="True"/>
+                            <PanelContainer StyleClasses="LowDivider"/>
+                            <GridContainer Columns="2" HSeparationOverride="16" VSeparationOverride="8">
+                                <Label Text="{Loc 'hop-console-roundstart'}" FontColorOverride="#9DAAB8"/>
+                                <Label Name="RoundStart"/>
+                                <Label Text="{Loc 'hop-console-configured'}" FontColorOverride="#9DAAB8"/>
+                                <Label Name="Configured"/>
+                                <Label Text="{Loc 'hop-console-current'}" FontColorOverride="#9DAAB8"/>
+                                <Label Name="Current"/>
+                                <Label Text="{Loc 'hop-console-occupied'}" FontColorOverride="#9DAAB8"/>
+                                <Label Name="Occupied"/>
+                                <Label Text="{Loc 'hop-console-maximum'}" FontColorOverride="#9DAAB8"/>
+                                <Label Name="Maximum"/>
+                            </GridContainer>
+                            <RichTextLabel Name="EventLock" Text="{Loc 'hop-console-event-lock'}" ModulateSelfOverride="#E6B86A" Visible="False"/>
+                            <RichTextLabel Name="PriorityLock" Text="{Loc 'hop-console-priority-lock'}" ModulateSelfOverride="#E6B86A" Visible="False"/>
+                            <PanelContainer StyleClasses="LowDivider"/>
+                            <Label Text="{Loc 'hop-console-edit-slots'}"/>
+                            <BoxContainer SeparationOverride="6">
+                                <Button Name="DecreaseSlots" Text="−" SetWidth="36"/>
+                                <LineEdit Name="Slots" SetWidth="90" PlaceHolder="{Loc 'hop-console-unlimited-value'}"/>
+                                <Button Name="IncreaseSlots" Text="+" SetWidth="36"/>
+                            </BoxContainer>
+                            <CheckBox Name="Unlimited" Text="{Loc 'hop-console-unlimited'}"/>
+                            <RichTextLabel Text="{Loc 'hop-console-slots-help'}" ModulateSelfOverride="#9DAAB8"/>
+                            <CheckBox Name="Priority" Text="{Loc 'hop-console-priority'}"/>
+                            <RichTextLabel Text="{Loc 'hop-console-priority-help'}" ModulateSelfOverride="#9DAAB8"/>
+                            <BoxContainer SeparationOverride="6" Margin="0 8 0 0">
+                                <Button Name="SaveJob" Text="{Loc 'hop-console-save-button'}" HorizontalExpand="True" Disabled="True"/>
+                                <Button Name="ResetJob" Text="{Loc 'hop-console-reset'}"/>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+            <BoxContainer Name="RecordsPage" SeparationOverride="12" Margin="0 8">
+                <BoxContainer Orientation="Vertical" SetWidth="310" SeparationOverride="6">
+                    <LineEdit Name="RecordSearch" PlaceHolder="{Loc 'hop-console-record-search'}"/>
+                    <BoxContainer>
+                        <Label Name="RecordCount" HorizontalExpand="True" FontColorOverride="#9DAAB8"/>
+                        <Button Name="NewRecord" Text="{Loc 'hop-console-new-record'}"/>
+                    </BoxContainer>
+                    <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                        <BoxContainer Name="RecordList" Orientation="Vertical" SeparationOverride="3"/>
+                    </ScrollContainer>
+                </BoxContainer>
+                <PanelContainer HorizontalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#1C232C"/>
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="16" SeparationOverride="10">
+                        <Label Name="RecordEmpty" Text="{Loc 'hop-console-select-record'}" FontColorOverride="#9DAAB8"/>
+                        <BoxContainer Name="RecordDetails" Orientation="Vertical" SeparationOverride="10" Visible="False">
+                            <Label Name="RecordName" StyleClasses="LabelBig" ClipText="True"/>
+                            <Label Name="RecordJob" ClipText="True" FontColorOverride="#9DAAB8"/>
+                            <Label Name="RecordNumber" FontColorOverride="#9DAAB8"/>
+                            <PanelContainer StyleClasses="LowDivider"/>
+                            <RichTextLabel Text="{Loc 'hop-console-delete-help'}" ModulateSelfOverride="#E6B86A"/>
+                            <Button Name="DeleteRecord" Text="{Loc 'hop-console-remove-button'}"/>
+                            <BoxContainer Name="DeleteConfirmation" Orientation="Vertical" SeparationOverride="8" Visible="False">
+                                <RichTextLabel Text="{Loc 'hop-console-delete-confirm'}" ModulateSelfOverride="#E6B86A"/>
+                                <BoxContainer SeparationOverride="6">
+                                    <Button Name="ConfirmDelete" Text="{Loc 'hop-console-confirm-delete'}" HorizontalExpand="True"/>
+                                    <Button Name="CancelDelete" Text="{Loc 'hop-console-cancel'}"/>
+                                </BoxContainer>
+                            </BoxContainer>
+                        </BoxContainer>
+                        <BoxContainer Name="RecordForm" Orientation="Vertical" SeparationOverride="8" Visible="False">
+                            <Label Text="{Loc 'hop-console-add-record'}" StyleClasses="LabelBig"/>
+                            <Label Text="{Loc 'hop-console-record-name'}"/>
+                            <LineEdit Name="NewName" PlaceHolder="{Loc 'hop-console-name-placeholder'}"/>
+                            <Label Text="{Loc 'hop-console-record-job'}"/>
+                            <OptionButton Name="NewJob" HorizontalExpand="True"/>
+                            <Label Text="{Loc 'hop-console-record-title'}"/>
+                            <LineEdit Name="NewTitle" PlaceHolder="{Loc 'hop-console-title-placeholder'}"/>
+                            <RichTextLabel Text="{Loc 'hop-console-create-help'}" ModulateSelfOverride="#9DAAB8"/>
+                            <BoxContainer SeparationOverride="6" Margin="0 8 0 0">
+                                <Button Name="AddRecord" Text="{Loc 'hop-console-add-button'}" HorizontalExpand="True" Disabled="True"/>
+                                <Button Name="CancelNewRecord" Text="{Loc 'hop-console-cancel'}"/>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+        </TabContainer>
+        <PanelContainer StyleClasses="LowDivider"/>
+        <Label Name="Status" Text="{Loc 'hop-console-ready'}" ClipText="True" FontColorOverride="#9DAAB8"/>
+    </BoxContainer>
+</controls:FancyWindow>

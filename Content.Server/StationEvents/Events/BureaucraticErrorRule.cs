@@ -4,6 +4,8 @@ using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Components;
 ﻿using Content.Shared.GameTicking.Components;
 using Content.Shared.Roles;
+using Content.Server.SS220.Hop;
+using Robust.Shared.Prototypes;
 using JetBrains.Annotations;
 using Robust.Shared.Random;
 
@@ -13,13 +15,25 @@ namespace Content.Server.StationEvents.Events;
 public sealed class BureaucraticErrorRule : StationEventSystem<BureaucraticErrorRuleComponent>
 {
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
+    [Dependency] private readonly HopConsoleSystem _hopConsole = default!; // SS220 Hop improve
 
     protected override void Started(EntityUid uid, BureaucraticErrorRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
 
+        // SS220 Hop improve: prototype overrides must not make the effect last longer than ten minutes.
+        if (TryComp<StationEventComponent>(uid, out var stationEvent))
+        {
+            var deadline = Timing.CurTime + HopConsoleSystem.MaximumBureaucraticDuration;
+            if (stationEvent.EndTime == null || stationEvent.EndTime > deadline)
+                stationEvent.EndTime = deadline;
+        }
+
         if (!TryGetRandomStation(out var chosenStation, HasComp<StationJobsComponent>))
             return;
+
+        // SS220 Hop improve: expire an older override before taking the new baseline.
+        _hopConsole.RestoreExpiredRestrictions(chosenStation.Value);
 
         var jobList = _stationJobs.GetJobs(chosenStation.Value).Keys.ToList();
 
@@ -29,11 +43,16 @@ public sealed class BureaucraticErrorRule : StationEventSystem<BureaucraticError
         if (jobList.Count == 0)
             return;
 
+        // SS220 Hop improve begin: track actual changes, not merely randomly selected roles.
+        var before = _stationJobs.GetJobs(chosenStation.Value).ToDictionary(x => x.Key, x => x.Value);
+        ProtoId<JobPrototype>? preferredJob = null;
+        // SS220 Hop improve end
         // Low chance to completely change up the late-join landscape by closing all positions except infinite slots.
         // Lower chance than the /tg/ equivalent of this event.
         if (RobustRandom.Prob(0.25f))
         {
             var chosenJob = RobustRandom.PickAndTake(jobList);
+            preferredJob = chosenJob; // SS220 Hop improve
             _stationJobs.MakeJobUnlimited(chosenStation.Value, chosenJob); // INFINITE chaos.
             foreach (var job in jobList)
             {
@@ -57,5 +76,23 @@ public sealed class BureaucraticErrorRule : StationEventSystem<BureaucraticError
                 _stationJobs.TryAdjustJobSlot(chosenStation.Value, chosenJob, RobustRandom.Next(-3, 6), clamp: true);
             }
         }
+
+        // SS220 Hop improve begin: protect event-modified limits from the crew management console.
+        var changed = _stationJobs.GetJobs(chosenStation.Value)
+            .Where(x => !before.TryGetValue(x.Key, out var old) || old != x.Value)
+            .Select(x => x.Key).ToHashSet();
+        // The chosen unlimited role is affected even if it was unlimited before this event.
+        if (preferredJob is { } preferred)
+            changed.Add(preferred);
+        if (changed.Count > 0)
+            RaiseLocalEvent(new BureaucraticJobsChangedEvent(chosenStation.Value, changed, preferredJob, before, uid));
+        // SS220 Hop improve end
+    }
+
+    // SS220 Hop improve: explicit/normal event completion restores the saved staffing settings as well.
+    protected override void Ended(EntityUid uid, BureaucraticErrorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    {
+        base.Ended(uid, component, gameRule, args);
+        _hopConsole.EndBureaucraticError(uid);
     }
 }
