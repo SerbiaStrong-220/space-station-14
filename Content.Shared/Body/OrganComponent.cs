@@ -1,4 +1,4 @@
-using Content.Shared.Chemistry.Reagent; //SS220 Recycler expansion
+using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 

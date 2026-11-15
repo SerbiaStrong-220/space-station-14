@@ -108,6 +108,12 @@
         stabilizer: ""
   - type: StaticPrice
     price: 120
+  #SS220 Recycler expansion begin
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 500 # 5 sheets
+      Plastic: 100 # 1 sheet
+  #SS220 Recycler expansion end
 
 - type: entityTable
   id: TreasureCoinPile
