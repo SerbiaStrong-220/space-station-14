@@ -77,14 +77,14 @@ private string GetRandomInsuranceLevel()
 
         var allRecords = _stationRecords.GetRecordsOfType<GeneralStationRecord>(station).ToList();
 
-        var forbiddenJobIds = new HashSet<string>();
+        var forbiddenJobIds = new HashSet<ProtoId<JobPrototype>>();
         foreach (var deptId in forbiddenDepartment)
         {
             if (_prototypeManager.TryIndex<DepartmentPrototype>(deptId, out var dept))
             {
                 foreach (var jobId in dept.Roles)
                 {
-                    forbiddenJobIds.Add(jobId);
+                    forbiddenJobIds.Add(new ProtoId<JobPrototype>(jobId));
                 }
             }
         }
@@ -147,10 +147,12 @@ private string GetRandomInsuranceLevel()
         {
             var name = record.Item2.Name;
             var dna = record.Item2.DNA;
-            var insurance = GetRandomInsuranceLevel();
 
             clientMessage.PushNewline();
-            clientMessage.AddMarkupPermissive(Loc.GetString("book-text-redwings-client-middle", ("dna", dna ?? ""), ("name", name), ("insurance", insurance)));
+            clientMessage.AddMarkupPermissive(Loc.GetString("book-text-redwings-client-middle", 
+                ("dna", dna ?? ""), 
+                ("name", name),
+                ("insurance", GetRandomInsuranceLevel())));
             clientMessage.PushNewline();
         }
         clientMessage.PushNewline();

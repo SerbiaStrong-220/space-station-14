@@ -250,6 +250,7 @@ public sealed partial class PinpointerSystem : EntitySystem
 
         comp.DnaToTrack = args.Dna;
         comp.TrackedByDnaEntity = null;
+        _pinpointer.SetTarget(uid, null);
         _pinpointer.SetActive(uid, true);
         UpdateDnaUI(uid, comp);
     }
@@ -288,6 +289,7 @@ public sealed partial class PinpointerSystem : EntitySystem
         }
         comp.DnaToTrack = dna;
         comp.TrackedByDnaEntity = null;
+        _pinpointer.SetTarget(uid, null);
         _pinpointer.SetActive(uid, true);
     }
 

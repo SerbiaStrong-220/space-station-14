@@ -1,4 +1,6 @@
 using Robust.Shared.Prototypes;
+using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Roles;
 
 namespace Content.Server.SS220.RedWings;
 
@@ -6,15 +8,15 @@ namespace Content.Server.SS220.RedWings;
 public sealed partial class RedWingsClientPaperComponent : Component
 {
     private const int DefaultClientAmount = 4;
-    private static readonly string[] DefaultForbiddenDepartment = ["Command", "Security"];
-    private static readonly string[] DefaultForbiddenSpecies = ["Ipc"];
+    private static readonly ProtoId<DepartmentPrototype>[] DefaultForbiddenDepartment = ["Command", "Security"];
+    private static readonly ProtoId<SpeciesPrototype>[] DefaultForbiddenSpecies = ["Ipc"];
 
     [DataField]
     public int ClientAmount = DefaultClientAmount;
 
     [DataField]
-    public string[] ForbiddenDepartment = DefaultForbiddenDepartment;
+    public ProtoId<DepartmentPrototype>[] ForbiddenDepartment = DefaultForbiddenDepartment;
 
     [DataField]
-    public string[] ForbiddenSpecies = DefaultForbiddenSpecies;
+    public ProtoId<SpeciesPrototype>[] ForbiddenSpecies = DefaultForbiddenSpecies;
 }
