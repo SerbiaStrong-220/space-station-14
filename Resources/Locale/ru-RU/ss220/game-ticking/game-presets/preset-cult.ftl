@@ -30,6 +30,15 @@ cult-yogg-cultists-numb-info =
     Количество культистов: { $cultists } (живых: { $aliveCultists })
     Количество Ми-Го: { $MiGo } (живых: { $aliveMiGo })
 
+cult-yogg-stage-name =
+    { $stage ->
+        [initial] Зарождение
+        [reveal] Проявление
+        [alarm] Тревога
+        [god] Пришествие
+       *[other] Неизвестная стадия
+    }
+
 cult-yogg-stage-info =
     Текущая стадия культа: { cult-yogg-stage-name }
     Необходимое число членов культа для перехода к следующей стадии: { $count }

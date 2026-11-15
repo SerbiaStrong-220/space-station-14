@@ -3,6 +3,11 @@
   name: species-name-reptilian
   roundStart: true
   prototype: MobReptilian
+  # SS220 age-tweak bgn
+  youngAge: 21
+  oldAge: 51
+  maxAge: 90
+  # SS220 age-tweak end
   defaultSkinTone: "#34a223"
   dollPrototype: AppearanceReptilian
   skinColoration: Hues

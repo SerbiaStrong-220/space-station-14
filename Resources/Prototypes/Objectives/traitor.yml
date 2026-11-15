@@ -240,7 +240,7 @@
   components:
   #ss220 paramed crewmonitor begin
   - type: NotJobRequirement
-    jobs: [ Paramedic ]
+    jobs: [ ChiefMedicalOfficer, Paramedic ]
   #ss220 paramed crewmonitor end
   - type: StealCondition
     stealGroup: HandheldCrewMonitor
@@ -401,8 +401,8 @@
       state: anom1
   - type: SupercriticalAnomaliesCondition
   - type: NumberObjective
-    min: 3
-    max: 4
+    min: 1 #SS220 was 3; supercrit anomalies objective changes
+    max: 1 #SS220 was 4; supercrit anomalies objective changes
     title: objective-condition-supercrit-anomalies-title
   - type: ObjectiveLimit
     limit: 1

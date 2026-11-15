@@ -21,7 +21,6 @@
     shoes: ClothingShoesSpaceNinja
     id: NinjaPDA
     ears: ClothingHeadsetNinja
-    pocket1: DoubleEmergencyOxygenTankFilled # SS220 Ninja Resprite
     pocket2: PinpointerStation
     belt: EnergyKatana
   inhand:
@@ -34,7 +33,6 @@
     - Wirecutter
     - Welder
     - Multitool
-    - BoxSurvivalEngineering # SS220 Ninja Resprite
     - EmergencyMedipen
     - Flare
     - FoodSnackNutribrick

@@ -327,7 +327,8 @@
 
 # ss220 Cult_update2 start
 - type: Tag
-  id: CultYoggInnerHandToggleable
+  id: YoggInnerHandEquipment
+
 # ss220 Cult_update2 end
 
 # ss220 ChameleonStructure start
@@ -408,3 +409,7 @@
 
 - type: Tag
   id: WeaponShotgunDoubleBarreled
+
+#Cult equipment: items with this tag forcibly removed from cultist on deconversion
+- type: Tag
+  id: YoggEquipment

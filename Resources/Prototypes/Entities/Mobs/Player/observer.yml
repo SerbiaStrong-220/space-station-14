@@ -95,6 +95,7 @@
   - type: GhostHearing
   - type: HallucinationImmune # SS220 - hallucinationSystem
   - type: SuperMatterImmune # SS220 - SuperMatterCrystal
+  - type: BypassSkillCheck # SS220-ghost-skill-bypass
   # SS220 ghost-hud-settings begin
   - type: GhostHudSettings
     huds:
