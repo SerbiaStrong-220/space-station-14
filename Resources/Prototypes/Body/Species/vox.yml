@@ -213,8 +213,10 @@
   - type: Butcherable
     butcheringType: Spike
     spawned:
-    - id: FoodMeatChicken
+    #SS220-species-meat begin
+    - id: FoodMeatVox
       amount: 5
+    #SS220-species-meat end
   - type: Destructible
     thresholds:
     - trigger:
@@ -319,7 +321,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Vox/organs.rsi
+    sprite: SS220/Mobs/Species/Vox/organs.rsi #SS220-species-organs-resprite
 
 - type: entity
   id: OrganVoxVisual
@@ -396,7 +398,7 @@
   id: OrganVoxFootRight
 
 - type: entity
-  parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganVoxInternal ]
+  parent: [ OrganBaseBrain, OrganVoxInternal ] #SS220-species-organs-resprite
   id: OrganVoxBrain
 
 - type: entity
@@ -434,9 +436,9 @@
     isSpecialDigestibleExclusive: false
 
 - type: entity
-  parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganVoxInternal, OrganVoxMetabolizer ]
+  parent: [ OrganBaseLiver, OrganVoxInternal, OrganVoxMetabolizer ] #SS220-species-organs-resprite
   id: OrganVoxLiver
 
 - type: entity
-  parent: [ OrganBaseKidneys, OrganSpriteHumanInternal, OrganVoxInternal, OrganVoxMetabolizer ]
+  parent: [ OrganBaseKidneys, OrganVoxInternal, OrganVoxMetabolizer ] #SS220-species-organs-resprite
   id: OrganVoxKidneys

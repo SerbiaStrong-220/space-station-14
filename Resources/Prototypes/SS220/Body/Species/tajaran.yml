@@ -106,8 +106,8 @@
   - type: Butcherable
     butcheringType: Spike
     spawned:
-      - id: FoodMeat
-        amount: 5
+    - id: FoodMeatTajaran
+      amount: 5
   - type: Fixtures
     fixtures:
       fix1:
@@ -187,7 +187,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/organs.rsi
+    sprite: SS220/Mobs/Species/Tajaran/organs.rsi
 
 - type: entity
   parent: OrganTajaran
@@ -251,7 +251,7 @@
   id: OrganTajaranFootRight
 
 - type: entity
-  parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganTajaranInternal ]
+  parent: [ OrganBaseBrain, OrganTajaranInternal ]
   id: OrganTajaranBrain
 
 - type: entity
@@ -299,9 +299,9 @@
       - Omnivorous #SS220 CultYoggs
 
 - type: entity
-  parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganTajaranInternal, OrganTajaranMetabolizer ]
+  parent: [ OrganBaseLiver, OrganTajaranInternal, OrganTajaranMetabolizer ]
   id: OrganTajaranLiver
 
 - type: entity
-  parent: [ OrganBaseKidneys, OrganSpriteHumanInternal, OrganTajaranInternal, OrganTajaranMetabolizer ]
+  parent: [ OrganBaseKidneys, OrganTajaranInternal, OrganTajaranMetabolizer ]
   id: OrganTajaranKidneys

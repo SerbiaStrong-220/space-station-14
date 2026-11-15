@@ -99,3 +99,136 @@
   tags:
   - Cooked
   - Mushroom
+
+# species cutlets
+- type: foodSequenceElement
+  id: VulpkaninCutletBurger
+  name: food-sequence-burger-content-vulpkanin
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: vulp_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: VulpkaninCutlet
+  name: food-sequence-content-vulpkanin
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: vulp_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: ArachnidCutletBurger
+  name: food-sequence-burger-content-arachnid
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: arachnid_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: ArachnidCutlet
+  name: food-sequence-content-arachnid
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: arachnid_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: TajaranCutletBurger
+  name: food-sequence-burger-content-tajaran
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: tajaran_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: TajaranCutlet
+  name: food-sequence-content-tajaran
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: tajaran_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: VoxCutletBurger
+  name: food-sequence-burger-content-vox
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: vox_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: VoxCutlet
+  name: food-sequence-content-vox
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: vox_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: MothCutletBurger
+  name: food-sequence-burger-content-moth
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: moth_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: MothCutlet
+  name: food-sequence-content-moth
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: moth_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: ResomiCutletBurger
+  name: food-sequence-burger-content-resomi
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: resomi_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
+
+- type: foodSequenceElement
+  id: ResomiCutlet
+  name: food-sequence-content-resomi
+  sprites:
+  - sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+    state: resomi_cutlet-cooked
+  tags:
+  - Cooked
+  - Cutlet
+  - Meat
