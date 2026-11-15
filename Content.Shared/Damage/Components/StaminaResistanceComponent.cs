@@ -35,4 +35,9 @@ public sealed partial class StaminaResistanceComponent : Component
     /// </summary>
     [DataField]
     public LocId Examine = "stamina-resistance-coefficient-value";
+
+    //SS220-StaminaConvertToggle begin
+    [DataField, AutoNetworkedField]
+    public bool Enabled = true;
+    //SS220-StaminaConvertToggle end
 }
