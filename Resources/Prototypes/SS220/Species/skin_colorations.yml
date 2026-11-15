@@ -6,3 +6,10 @@
     hue: [0.0, 0.14]
     saturation: [0.0, 0.65]
     lightness: [0.1, 1.0]
+
+- type: skinColoration
+  id: ResomiFemaleFeathers
+  strategy: !type:ClampedHslColoration
+    hue: [0.0, 0.14]
+    saturation: [0.0, 0.5]
+    lightness: [0.1, 1.0]

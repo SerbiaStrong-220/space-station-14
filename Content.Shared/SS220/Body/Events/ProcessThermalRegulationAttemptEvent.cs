@@ -1,3 +1,4 @@
 namespace Content.Shared.SS220.Body.Events;
 
-public sealed class ProcessThermalRegulationAttemptEvent : CancellableEntityEventArgs { }
+[ByRefEvent]
+public record struct ProcessThermalRegulationAttemptEvent(bool Cancelled = false);

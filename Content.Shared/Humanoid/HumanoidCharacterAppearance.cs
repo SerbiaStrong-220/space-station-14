@@ -58,7 +58,7 @@ public sealed partial class HumanoidCharacterAppearance : IEquatable<HumanoidCha
     {
         var protoMan = IoCManager.Resolve<IPrototypeManager>();
         var speciesPrototype = protoMan.Index<SpeciesPrototype>(species);
-        var skinColoration = protoMan.Index(speciesPrototype.SkinColoration).Strategy;
+        var skinColoration = protoMan.Index(speciesPrototype.GetSkinColoration(sex)).Strategy; //SS220-sex-skin-coloration
         var skinColor = skinColoration.InputType switch
         {
             SkinColorationStrategyInput.Unary => skinColoration.FromUnary(speciesPrototype.DefaultHumanSkinTone),
@@ -93,7 +93,7 @@ public sealed partial class HumanoidCharacterAppearance : IEquatable<HumanoidCha
         var newEyeColor = random.Pick(_realisticEyeColors);
 
         var protoMan = IoCManager.Resolve<IPrototypeManager>();
-        var skinType = protoMan.Index<SpeciesPrototype>(species).SkinColoration;
+        var skinType = protoMan.Index<SpeciesPrototype>(species).GetSkinColoration(sex); //SS220-sex-skin-coloration
         var strategy = protoMan.Index(skinType).Strategy;
 
         var newSkinColor = strategy.InputType switch
@@ -123,7 +123,7 @@ public sealed partial class HumanoidCharacterAppearance : IEquatable<HumanoidCha
 
         if (proto.TryIndex(species, out var speciesProto))
         {
-            var strategy = proto.Index(speciesProto.SkinColoration).Strategy;
+            var strategy = proto.Index(speciesProto.GetSkinColoration(sex)).Strategy; //SS220-sex-skin-coloration
             var organs = markingManager.GetOrgans(species);
             skinColor = strategy.EnsureVerified(skinColor);
 

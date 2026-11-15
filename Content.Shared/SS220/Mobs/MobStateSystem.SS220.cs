@@ -8,6 +8,6 @@ public partial class MobStateSystem
     private void OnProcessThermalRegulationAttempt(Entity<MobStateComponent> ent, ref ProcessThermalRegulationAttemptEvent args)
     {
         if (IsDead(ent))
-            args.Cancel();
+            args.Cancelled = true;
     }
 }

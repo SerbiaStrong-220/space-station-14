@@ -8,9 +8,15 @@
   defaultSkinTone: "#ffffff"
   dollPrototype: AppearanceResomi
   skinColoration: Hues
+  sexSkinColorations:
+    Female: ResomiFemaleFeathers
   maleFirstNames: NamesResomi
   femaleFirstNames: NamesResomi
   naming: First
   sexes:
-  - Unsexed
+  - Male
+  - Female
   buttScanTexture: /Textures/SS220/Interface/Butts/vox.png
+  youngAge: 25
+  oldAge: 45
+  maxAge: 64

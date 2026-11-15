@@ -102,7 +102,7 @@ public sealed partial class HumanoidProfileEditor
         if (Profile == null)
             return;
 
-        var skin = _prototypeManager.Index<SpeciesPrototype>(Profile.Species).SkinColoration;
+        var skin = _prototypeManager.Index<SpeciesPrototype>(Profile.Species).GetSkinColoration(Profile.Sex); //SS220-sex-skin-coloration
         var strategy = _prototypeManager.Index(skin).Strategy;
 
         switch (strategy.InputType)
@@ -217,6 +217,7 @@ public sealed partial class HumanoidProfileEditor
 
         UpdateGenderControls();
         _markingsModel.SetOrganSexes(newSex);
+        OnSkinColorOnValueChanged(); //SS220-sex-skin-coloration
         ReloadPreview();
     }
 
@@ -257,7 +258,7 @@ public sealed partial class HumanoidProfileEditor
     {
         if (Profile is null) return;
 
-        var skin = _prototypeManager.Index<SpeciesPrototype>(Profile.Species).SkinColoration;
+        var skin = _prototypeManager.Index<SpeciesPrototype>(Profile.Species).GetSkinColoration(Profile.Sex); //SS220-sex-skin-coloration
         var strategy = _prototypeManager.Index(skin).Strategy;
 
         switch (strategy.InputType)

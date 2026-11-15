@@ -54,7 +54,7 @@ public sealed class ThermalRegulatorSystem : EntitySystem
 
         // SS220 fix thermal regulation on dead mob begin
         var attemptEv = new ProcessThermalRegulationAttemptEvent();
-        RaiseLocalEvent(ent, attemptEv);
+        RaiseLocalEvent(ent, ref attemptEv);
 
         if (attemptEv.Cancelled)
             return;
