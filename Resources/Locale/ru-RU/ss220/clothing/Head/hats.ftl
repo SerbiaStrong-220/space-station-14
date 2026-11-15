@@ -148,3 +148,9 @@ ent-ClothingHeadBigCapCommissar = фуражка комиссара
 ent-ClothingHeadHatFollower = шляпа последователя
     .desc = Настало время небес.
     .suffix = За время в игре
+
+ent-ClothingHeadHatCone2 = { ent-ClothingHeadHatCone }
+    .desc = { ent-ClothingHeadHatCone.desc }
+
+ent-ClothingHeadHatCone3 = { ent-ClothingHeadHatCone }
+    .desc = { ent-ClothingHeadHatCone.desc }

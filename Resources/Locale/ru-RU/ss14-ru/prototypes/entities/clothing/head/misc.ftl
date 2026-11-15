@@ -42,9 +42,4 @@ ent-ClothingHeadHatHairflower = цветок для волос
 ent-ClothingHeadPerformerWig = парик артиста
     .desc = При детальном рассмотрении оказывается, что он сделан из оптического волокна.
 
-ent-ClothingHeadHatCone2 = { ent-ClothingHeadHatCone }
-    .desc = { ent-ClothingHeadHatCone.desc }
-
-ent-ClothingHeadHatCone3 = { ent-ClothingHeadHatCone }
-    .desc = { ent-ClothingHeadHatCone.desc }
     

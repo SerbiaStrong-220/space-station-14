@@ -180,10 +180,12 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Misc/cone.rsi
+  # SS220 Stacking cones begin
     state: icon
     layers:
     - state: icon
       map: [ "icon" ]
+  # SS220 Stacking cones end
   - type: Clothing
     sprite: Clothing/Head/Misc/cone.rsi
   - type: Item
@@ -191,18 +193,21 @@
   - type: PhysicalComposition #you can't just pass up some free plastic!
     materialComposition:
       Plastic: 100
-  - type: StackPrice # Ss220 cone stack
+  - type: StackPrice # Ss220 Stacking cones
     price: 25
+  # SS220 Stacking cones begin
   - type: Appearance
-# SS220 Stacking cones begin
   - type: Stack
     stackType: Cone
     count: 1
     baseLayer: icon
+    layerFunction: Threshold
     layerStates:
     - icon
     - icon_2
     - icon_3
+  - type: StackLayerThreshold
+    thresholds: [2, 3]
 
 - type: entity
   parent: ClothingHeadHatCone
