@@ -4,7 +4,6 @@
   id: Tox
   mapName: 'NSS Tox'
   mapPath: /Maps/SS220/tox.yml
-  maxPlayers: 90
   minPlayers: 0
   stations:
     Tox:

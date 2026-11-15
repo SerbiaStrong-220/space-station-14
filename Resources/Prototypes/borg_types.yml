@@ -1,7 +1,7 @@
 # Generic borg
 - type: borgType
   id: generic
-  name: borg-type-prototype-generic # SS220 Borgs-Id-fix
+  name: borg-type-prototype-scientist # SS220 generic borg rework
 
   # Description
   dummyPrototype: BorgChassisGeneric

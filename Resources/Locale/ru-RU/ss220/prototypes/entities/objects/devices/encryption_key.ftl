@@ -1,2 +1,25 @@
 ent-EncryptionKeyInterdyne = ключ шифрования Интердайн
     .desc = Его запах напоминает вам аптеку.
+ent-DecryptionKeyTernary = ключ дешифровки Тернарный
+    .desc = Небольшой криптографический чип. Позволяет вам понимать другой язык.
+ent-DecryptionKeySintaunathi = ключ дешифровки Синта’Унати
+    .desc = { ent-DecryptionKeyTernary.desc }
+ent-DecryptionKeySiiktajr = ключ дешифровки Сик’таир
+    .desc = { ent-DecryptionKeyTernary.desc }
+ent-DecryptionKeyVoxPidgin = ключ дешифровки Вокс-пиджин
+    .desc = { ent-DecryptionKeyTernary.desc }
+ent-DecryptionKeyRootspeak = ключ дешифровки Песнь корней
+    .desc = { ent-DecryptionKeyTernary.desc }
+ent-DecryptionKeyBubblish = ключ дешифровки Пузырчатый
+    .desc = { ent-DecryptionKeyTernary.desc }
+ent-DecryptionKeyTkachi = ключ дешифровки Ткачий
+    .desc = { ent-DecryptionKeyTernary.desc }
+ent-DecryptionKeyArati = ключ дешифровки Арати
+    .desc = { ent-DecryptionKeyTernary.desc }
+ent-DecryptionKeySolCommon = ключ дешифровки Общесолнечный
+    .desc = { ent-DecryptionKeyTernary.desc }
+ent-DecryptionKeyCentCom = ключ дешифровки Центрального Командования
+    .desc = { ent-DecryptionKeyTernary.desc }
+ent-DecryptionKeyAdvanced = ключ дешифровки продвинутый
+    .desc = { ent-DecryptionKeyTernary.desc }
+examine-key-holder-language-keys = Позволяет понимать языки: [color=cyan]{ $languages }[/color]

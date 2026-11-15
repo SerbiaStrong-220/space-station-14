@@ -83,6 +83,9 @@
     stunTime: 5
   - type: SiliconLawProvider
     laws: Crewsimov
+    # SS220 random lawset begin
+    useRandomLawset: true
+    # SS220 random lawset end
   - type: Inventory
     templateId: borg
   - type: Hands
@@ -155,7 +158,7 @@
       Unsexed: UnisexSilicon
     wilhelmProbability: 0
   - type: DamagedSiliconAccent
-  - type: UnblockableSpeech
+  # - type: UnblockableSpeech #ss220 Borg update
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepBorg
@@ -237,7 +240,7 @@
     enabled: false
     mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
-    radius: 4
+    radius: 6 #ss220 Borg update
     netsync: false
   - type: Pullable
   - type: Puller
@@ -283,12 +286,22 @@
         Heat: 50
   #SS220 Cult hotfix 17 #3641 end
 
+  #ss220 Borg update bgn - needed for BorgChassisClownMime from ss220
+- type: entity
+  abstract: true
+  parent: BaseBorgChassisNotIonStormable
+  id: BaseBorgChassisSpeech
+  components:
+  - type: IonStormTarget
+  #ss220 Borg update end
+
 - type: entity
   abstract: true
   parent: BaseBorgChassisNotIonStormable
   id: BaseBorgChassis
   components:
   - type: IonStormTarget
+  - type: UnblockableSpeech #ss220 Borg update
 
 - type: entity
   abstract: true
@@ -386,6 +399,9 @@
   - type: AccessReader
     access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: SiliconLawProvider
+    # SS220 random lawset begin
+    useRandomLawset: false
+    # SS220 random lawset end
     laws: SyndicateStatic
     subverted: true
   - type: IntrinsicRadioTransmitter
@@ -475,6 +491,9 @@
   components:
   - type: SiliconLawProvider
     laws: SyndicateStatic #Non-subverted version so they can still be changed
+    # SS220 random lawset begin
+    useRandomLawset: false
+    # SS220 random lawset end
   - type: StartIonStormed
     ionStormAmount: 3
   - type: IonStormTarget
@@ -533,6 +552,9 @@
     stunTime: 5
   - type: SiliconLawProvider
     laws: XenoborgLawset # custom laws here
+    # SS220 random lawset begin
+    useRandomLawset: false
+    # SS220 random lawset end
   - type: IntrinsicRadioTransmitter # can only use binary and xenoborg channel
     channels:
     - Xenoborg

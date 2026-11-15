@@ -13,13 +13,13 @@
   - type: Speech
     speechVerb: Robotic
   - type: Sprite
-    sprite: Objects/Devices/communication.rsi
+    sprite: SS220/Objects/Devices/radio_handheld.rsi #SS220 radio resprite 
     layers:
     - state: walkietalkie
     - state: walkietalkie-on
     state: walkietalkie
   - type: Item
-    sprite: Objects/Devices/communication.rsi
+    sprite: SS220/Objects/Devices/radio_handheld.rsi #SS220 radio resprite 
     heldPrefix: walkietalkie
   - type: Tag
     tags:
@@ -38,7 +38,14 @@
     channels:
     - Security
   - type: Sprite
-    sprite: Objects/Devices/securityhandy.rsi
+#SS220 radio resprite START
+    sprite: SS220/Objects/Devices/radio_handheld.rsi
+    layers:
+    - state: walkietalkie-sec
+    - state: walkietalkie-on
+#SS220 radio resprite END
   - type: Item
-    sprite: Objects/Devices/securityhandy.rsi
-    heldPrefix: walkietalkie
+#SS220 radio resprite START
+    sprite: SS220/Objects/Devices/radio_handheld.rsi #SS220 radio resprite
+    heldPrefix: walkietalkie-sec
+#SS220 radio resprite END

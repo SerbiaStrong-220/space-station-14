@@ -232,7 +232,11 @@ namespace Content.Server.Kitchen.EntitySystems
                         totalReagentsToRemove[reagent] -= quant;
                     }
 
-                    _solutionContainer.RemoveReagent(solutionEntity.Value, reagent, quant);
+                    //SS220-microwave-reagent-data begin
+                    // Recipe check ignores reagent data (e.g. DNA in mob blood/slime), so removal must ignore it too
+                    if (solution.RemoveReagent(reagent, quant, ignoreReagentData: true) > FixedPoint2.Zero)
+                        _solutionContainer.UpdateChemicals(solutionEntity.Value);
+                    //SS220-microwave-reagent-data end
                 }
             }
 

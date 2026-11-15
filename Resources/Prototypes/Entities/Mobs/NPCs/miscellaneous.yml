@@ -135,7 +135,7 @@
   - type: MultiHandedItem
   - type: NpcFactionMember
     factions:
-      - SimpleHostile
+      - PlantsFract
     #ss220 fix start
     addFriendlyFactions:
       - PetsNT

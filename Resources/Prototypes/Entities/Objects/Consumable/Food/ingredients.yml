@@ -347,9 +347,11 @@
       - dough
   - type: Sprite
     state: dough
-  - type: SliceableFood
-    count: 3
-    slice: FoodDoughSlice
+  # SS220 kitchen-processor begin
+#  - type: SliceableFood
+#    count: 3
+#    slice: FoodDoughSlice
+  # SS220 kitchen-processor end
   - type: Construction
     graph: Pizza
     node: start
@@ -373,6 +375,10 @@
   - type: Construction
     graph: DoughRope
     node: start
+  # SS220-kitchen-processor begin
+  - type: FoodProcessorIngredient
+    result: FoodSpaghetti
+  # SS220-kitchen-processor end
   - type: SolutionContainerManager
     solutions:
       food:
@@ -638,7 +644,7 @@
     node: flat
   - type: SliceableFood
     count: 3
-    slice: FoodCroissantRaw
+    slice: FoodDoughSlice # SS220-kitchen-processor
 
 - type: entity
   parent: FoodBakingBase
@@ -657,7 +663,7 @@
     node: flat
   - type: SliceableFood
     count: 3
-    slice: FoodCroissantRawCotton
+    slice: FoodDoughCottonSlice # SS220-kitchen-processor
 
 - type: entity
   parent: FoodBakingBase
@@ -1001,6 +1007,11 @@
       - dough
   - type: Sprite
     state: croissant-raw
+  # SS220-kitchen-processor begin
+  - type: Construction
+    graph: DoughRope
+    node: croissant
+  # SS220-kitchen-processor end
   - type: SolutionContainerManager
     solutions:
       food:
@@ -1026,3 +1037,8 @@
     - cotton
   - type: Sprite
     state: croissant-raw-cotton
+  # SS220-kitchen-processor begin
+  - type: Construction
+    graph: DoughRopeCotton
+    node: croissant
+  # SS220-kitchen-processor end

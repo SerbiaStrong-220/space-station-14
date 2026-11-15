@@ -24,8 +24,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Overlays;
-using Content.Shared.SS220.Ghost;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
@@ -105,7 +103,6 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
             SubscribeLocalEvent<GhostComponent, RespawnActionEvent>(OnActionRespawn);
             SubscribeLocalEvent<GhostComponent, ToggleAGhostBodyVisualsActionEvent>(OnToggleBodyVisualsAction);
-            SubscribeLocalEvent<GhostComponent, ToggleHudOnOtherActionEvent>(OnToggleHudOnOther);
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
@@ -121,37 +118,6 @@ namespace Content.Server.Ghost
                 args.VisibilityMask |= (int)VisibilityFlags.Ghost;
             }
         }
-
-        // SS220 ADD GHOST HUD'S START
-        private void OnToggleHudOnOther(EntityUid uid, GhostComponent component, ToggleHudOnOtherActionEvent args)
-        {
-            args.Handled = true;
-
-            if (HasComp<GhostHudOnOtherComponent>(uid))
-            {
-                RemComp<GhostHudOnOtherComponent>(uid);
-                RemComp<ShowJobIconsComponent>(uid);
-                RemComp<ShowMindShieldIconsComponent>(uid);
-                RemComp<ShowCriminalRecordIconsComponent>(uid);
-
-                _actions.SetToggled(component.ToggleHudOnOtherActionEntity, true);
-            }
-            else
-            {
-                AddComp<GhostHudOnOtherComponent>(uid);
-                AddComp<ShowJobIconsComponent>(uid);
-                AddComp<ShowMindShieldIconsComponent>(uid);
-                AddComp<ShowCriminalRecordIconsComponent>(uid);
-
-                _actions.SetToggled(component.ToggleHudOnOtherActionEntity, false);
-            }
-            var str = HasComp<GhostHudOnOtherComponent>(uid)
-                ? Loc.GetString("ghost-gui-toggle-hud-on")
-                : Loc.GetString("ghost-gui-toggle-hud-off");
-
-            Popup.PopupEntity(str, uid, uid);
-        }
-        // SS220 ADD GHOST HUD'S END
 
         private void OnGhostHearingAction(EntityUid uid, GhostComponent component, ToggleGhostHearingActionEvent args)
         {
@@ -275,6 +241,21 @@ namespace Content.Server.Ghost
             var time = _gameTiming.RealTime;
             component.TimeOfDeath = time;
 
+            //SS220 colourful ghost begin
+            // Choose the color once on the server so every client sees the same tint.
+            // Keep colors explicitly configured in prototypes or saved entities.
+            if (component.Color == Color.White)
+            {
+                // Full value and limited saturation keep even blue/purple ghosts light.
+                // Every RGB channel stays at least 0.45; sprite transparency is applied separately.
+                component.Color = Color.FromHsv(new Vector4(
+                    _random.NextFloat(),
+                    _random.NextFloat(0.35f, 0.55f),
+                    1f,
+                    1f));
+            }
+            //SS220 colourful ghost end
+
             //ss220 add filter tts for ghost start
             EnsureComp<GhostHearingComponent>(uid);
             //ss220 add filter tts for ghost end
@@ -311,8 +292,6 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleLightingActionEntity, component.ToggleLightingAction);
             _actions.AddAction(uid, ref component.ToggleFoVActionEntity, component.ToggleFoVAction);
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
-            // SS220 ADD GHOST HUD'S
-            _actions.AddAction(uid, ref component.ToggleHudOnOtherActionEntity, component.ToggleHudOnOtherAction);
             //ss220 add filter tts for ghost
             _actions.AddAction(uid, ref component.ToggleRadioChannelsUIEntity, component.ToggleRadioChannelsUI);
         }

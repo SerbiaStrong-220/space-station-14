@@ -15,6 +15,34 @@
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
 
+- type: loadoutEffectGroup
+  id: ChaplainFollower
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChaplain
+      time: 20h
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: ChaplainSchema
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChaplain
+      time: 75h
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
 # Neck
 
 - type: loadout
@@ -34,4 +62,34 @@
   id: ChaplainNeckSilverCross
   equipment:
     neck: ClothingNeckSilverCross
+
+# outer clothing
+
+- type: loadout
+  id: ChaplainOuterHoodieFollower
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChaplainFollower
+  equipment:
+    outerClothing: ClothingOuterHoodieFollower
+
+# Head
+
+- type: loadout
+  id: ChaplainHatFollower
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChaplainFollower
+  equipment:
+    head: ClothingHeadHatFollower
+
+# Outer Clothing
+
+- type: loadout
+  id: ChaplainOuterSchema
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ChaplainSchema
+  equipment:
+    outerClothing: ClothingOuterSchema
 

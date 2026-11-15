@@ -1,7 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Ghost;
-using Content.Server.Mind;
 using Content.Server.Preferences.Managers;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration.Logs;
@@ -23,7 +21,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using System.Linq;
-using Content.Shared.Body;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.TeleportAFKtoCryoSystem;
@@ -32,13 +29,11 @@ public sealed partial class TeleportAFKtoCryoSystem : EntitySystem
 {
     [Dependency] private ContainerSystem _containerSystem = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
-    [Dependency] private GhostSystem _ghostSystem = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private IServerPreferencesManager _preferencesManager = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private MindSystem _mindSystem = default!;
     [Dependency] private SharedAudioSystem _audioSystem = default!;
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private StationSystem _station = default!;
@@ -123,7 +118,7 @@ public sealed partial class TeleportAFKtoCryoSystem : EntitySystem
             case SessionStatus.Disconnected:
                 if (e.Session.AttachedEntity is null
                     || !HasComp<MindContainerComponent>(e.Session.AttachedEntity)
-                    || !HasComp<BodyComponent>(e.Session.AttachedEntity))
+                    || !HasComp<CanEnterCryostorageComponent>(e.Session.AttachedEntity))
                 {
                     break;
                 }
@@ -155,6 +150,10 @@ public sealed partial class TeleportAFKtoCryoSystem : EntitySystem
     /// <returns> true if player successfully transferred to cryo storage, otherwise returns false</returns>
     public bool TeleportEntityToCryoStorage(EntityUid target)
     {
+        // Entities that cannot enter the cryostorage (e.g. borgs) are left as they are
+        if (!HasComp<CanEnterCryostorageComponent>(target))
+            return false;
+
         if (!TryComp(target, out TransformComponent? xform))
             return false;
 
@@ -190,16 +189,6 @@ public sealed partial class TeleportAFKtoCryoSystem : EntitySystem
     {
         if (station != _station.GetOwningStation(cryopodUid))
             return false;
-
-        // Kicks the mind out of the entity if it cannot enter the cryostorage
-        if (!HasComp<CanEnterCryostorageComponent>(target))
-        {
-            if (_mindSystem.GetMind(target) is { } mind)
-            {
-                _ghostSystem.OnGhostAttempt(mind, false);
-            }
-            return true;
-        }
 
         var portal = Spawn(teleportPortalId, Transform(target).Coordinates);
 

@@ -293,6 +293,7 @@
     whitelist:
       components:
       - BorgChassis
+      - Ipc
   - type: Construction
     containers:
     - machine_parts
@@ -336,6 +337,7 @@
     whitelist:
       components:
       - BorgChassis
+      - Ipc
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container

@@ -64,6 +64,7 @@
     enabled: false
     scaleProcessSpeed: false #instant!
     minimumProcessDuration: 0
+    emagDuration: 300 #SS220-ReclaimerEmaggedTime
     whitelist:
       components:
       - PhysicalComposition

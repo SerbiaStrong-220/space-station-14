@@ -23,7 +23,7 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: PointLight
     radius: 1.5
-    energy: 1.6
+    energy: 3.0
     color: "#48CF48"
   - type: AccessReader
     access: [["CentralCommand"]]

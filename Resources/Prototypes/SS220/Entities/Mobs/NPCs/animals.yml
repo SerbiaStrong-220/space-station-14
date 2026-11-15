@@ -458,9 +458,13 @@
 - type: entity
   name: Mousi
   id: MobMousi
-  parent: [ SimpleMobBase, BaseMobRuminant ]
+  parent: [ BaseMobRuminant, SimpleMobBase ]
   description: Peep?...
   components:
+  - type: NightVision
+    profile: NightVisionGray
+    enabled: false
+    action: ActionToggleNightVisionInnate
   - type: NameIdentifier
   - type: Stripping
   - type: Strippable

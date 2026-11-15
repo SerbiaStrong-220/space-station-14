@@ -20,7 +20,7 @@
   id: JanitorGear
   equipment:
 #    shoes: ClothingShoesGaloshes #SS220-OrangeJanitor
-    id: JanitorPDA
+#   id: JanitorPDA #SS220-JRNewThings
     ears: ClothingHeadsetService
 #    belt: ClothingBeltJanitorFilled #SS220-JRJanitor
   #storage:

@@ -1,12 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Chasm;
 using Content.Shared.SS220.TeleportationChasm;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
 
-namespace Content.Client.Chasm;
+namespace Content.Client.SS220.TeleportationChasm;
 
 /// <summary>
 ///     Handles the falling animation for entities that fall into a chasm.
@@ -15,8 +14,7 @@ public sealed partial class TeleportationChasmFallingVisualsSystem : EntitySyste
 {
     [Dependency] private AnimationPlayerSystem _anim = default!;
     [Dependency] private SpriteSystem _sprite = default!;
-
-    private readonly string _chasmFallAnimationKey = "chasm_fall";
+    private const string ChasmFallAnimationKey = "chasm_fall";
 
     public override void Initialize()
     {
@@ -39,10 +37,10 @@ public sealed partial class TeleportationChasmFallingVisualsSystem : EntitySyste
         if (!TryComp<AnimationPlayerComponent>(ent, out var player))
             return;
 
-        if (_anim.HasRunningAnimation(player, _chasmFallAnimationKey))
+        if (_anim.HasRunningAnimation(player, ChasmFallAnimationKey))
             return;
 
-        _anim.Play((ent, player), GetFallingAnimation(ent.Comp), _chasmFallAnimationKey);
+        _anim.Play((ent, player), GetFallingAnimation(ent.Comp), ChasmFallAnimationKey);
     }
 
     private void OnComponentRemove(Entity<TeleportationChasmFallingComponent> ent, ref ComponentRemove args)
@@ -53,13 +51,13 @@ public sealed partial class TeleportationChasmFallingVisualsSystem : EntitySyste
         if (!TryComp<AnimationPlayerComponent>(ent, out var player))
             return;
 
-        if (_anim.HasRunningAnimation(player, _chasmFallAnimationKey))
-            _anim.Stop((ent, player), _chasmFallAnimationKey);
+        if (_anim.HasRunningAnimation(player, ChasmFallAnimationKey))
+            _anim.Stop((ent, player), ChasmFallAnimationKey);
     }
 
     private Animation GetFallingAnimation(TeleportationChasmFallingComponent component)
     {
-        var length = component.AnimationTime;
+        var length = component.FallAnimationDuration;
 
         return new Animation()
         {
