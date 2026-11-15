@@ -15,9 +15,3 @@
   channelParameters:
     name: chat-telepathy-hive
     color: "#cc80ff"
-
-- type: telepathyChannel
-  id: TelepathyChannelZombie
-  channelParameters:
-    name: chat-telepathy-zombie
-    color: "#9ACD32"

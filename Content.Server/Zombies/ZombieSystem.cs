@@ -64,7 +64,6 @@ namespace Content.Server.Zombies
         public override void Initialize()
         {
             base.Initialize();
-            InitializeTelepathy(); // SS220-november-event-balance
 
             SubscribeLocalEvent<ZombieComponent, EmoteEvent>(OnEmote, before:
                 new[] { typeof(VocalSystem), typeof(BodyEmotesSystem) });
