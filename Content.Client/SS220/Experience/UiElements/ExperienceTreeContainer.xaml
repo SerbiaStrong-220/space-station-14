@@ -9,36 +9,22 @@
     xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements" VerticalExpand="False">
     <BoxContainer Name="ContentContainer" Orientation="Vertical" Margin="0 2" HorizontalExpand="True">
         <BoxContainer Orientation="Vertical">
-            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Stretch">
                 <BoxContainer Name ="InfoContainer" Orientation="Horizontal" HorizontalAlignment="Left" HorizontalExpand="True" MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5">
                     <TextureRect Name="TreeIconRect"/>
                     <RichTextLabel Name="TreeName" Text="place-holder"/>
                 </BoxContainer>
-                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Right" MaxHeight="16">
-                    <BoxContainer Name ="TreeLevelsContainer" Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Right" Margin="0 0 2 0">
+                <BoxContainer Orientation="Horizontal" VerticalAlignment="Stretch" VerticalExpand="True" HorizontalExpand="True" HorizontalAlignment="Right">
+                    <BoxContainer Name ="TreeLevelsContainer" Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 2 0" MaxHeight="16">
                         <!-- Added here by code -->
                     </BoxContainer>
-                    <ExperienceUiElements:FancyTextureButton Name="ShowSubLevelsButton" ToggleMode="True"
-                        BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTextureButtonBackgroundColor}"
-                        PathIconNormal="/Textures/SS220/Interface/ExperienceView/unroll-button-normal.png"
-                        PathIconPressed="/Textures/SS220/Interface/ExperienceView/unroll-button-pressed.png"
-                        PathIconHover="/Textures/SS220/Interface/ExperienceView/unroll-button-hover.png"
-                        PathIconDisabled="/Textures/SS220/Interface/ExperienceView/unroll-button-disabled.png"/>
+                    <BoxContainer Name="AddLevelBox" Orientation="Horizontal">
+                        <TextureButton Name="AddLevelButton" TexturePath="/Textures/SS220/Interface/ExperienceView/add-button.png"
+                        VerticalExpand="True" VerticalAlignment="Center" HorizontalAlignment="Left" MaxHeight="16"/>
+                        <Label Name="SpendPointsPerLevelShower" Text="123456" Margin="0 0 20 0"
+                            VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    </BoxContainer>
                 </BoxContainer>
-            </BoxContainer>
-            <BoxContainer Name="SubdataContainer" Access="Public" Orientation="Horizontal" Visible="False" HorizontalAlignment="Right"
-                HorizontalExpand="True" VerticalExpand="True" MaxHeight="32"  VerticalAlignment="Center">
-                <Label Name="SpendPointsShower" Text="123456" HorizontalExpand="True" VerticalAlignment="Center" Margin="0 0 5 3"/>
-                <BoxContainer Name="SublevelsContainer" HorizontalAlignment="Right" VerticalAlignment="Center" VerticalExpand="True" Margin="0 0 2 0">
-                    <!-- Sublevels visual added by code -->
-                </BoxContainer>
-                <PanelContainer MouseFilter="Pass" Margin="0 2 0 6">
-                    <PanelContainer.PanelOverride>
-                        <gfx:StyleBoxFlat BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTextureButtonBackgroundColor}"/>
-                    </PanelContainer.PanelOverride>
-                    <TextureButton Name="AddSublevelPoint" TexturePath="/Textures/SS220/Interface/ExperienceView/add-button.png"
-                        VerticalExpand="True" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                </PanelContainer>
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>

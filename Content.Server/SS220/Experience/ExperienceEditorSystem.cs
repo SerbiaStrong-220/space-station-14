@@ -3,23 +3,21 @@
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
-using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Components;
 using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Robust.Server.Console;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Server.SS220.Experience;
 
 public sealed partial class ExperienceEditorSystem : EntitySystem
 {
-    [Dependency] private ExperienceSystem _experience = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private IConGroupController _groupController = default!;
-
-    private static readonly ProtoId<KnowledgePrototype> CultYoggKnowledge = "CultYoggKnowledge";
+    [Dependency] private ExperienceAdditionSystem _experienceAddition = default!;
 
     private const string EditorCommand = "expeditor";
 
@@ -27,38 +25,13 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ExperienceComponent, GotCultifiedEvent>(OnCultified);
-        SubscribeLocalEvent<ExperienceComponent, LiberationFromCultEvent>(OnLiberationFromCult);
+        SubscribeNetworkEvent<ChangeEntityExperienceAdminRequestEvent>(OnChangeAdminRequest);
+        SubscribeNetworkEvent<ChangeEntityExperiencePlayerRequestEvent>(OnChangePlayerRequest);
 
-        SubscribeNetworkEvent<ChangeEntityExperienceAdminRequest>(OnChangeAdminRequest);
-        SubscribeNetworkEvent<ChangeEntityExperiencePlayerRequest>(OnChangePlayerRequest);
         SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
     }
 
-    // !! DO NOT DO THE SAME !!
-    // It requires own system with dict like <obj, int> to resolve different sources of points
-    // just don't have time to implement & test it =(
-    // so you can actually make `god-add-experience` comp with own system to kill 10+ components and also do somewhat with role add knowledges or points
-    // zero idea should it be added with mindrole feels kinda other thing for this system
-    private void OnCultified(Entity<ExperienceComponent> entity, ref GotCultifiedEvent args)
-    {
-        _experience.TryAddKnowledge(entity!, CultYoggKnowledge);
-        var addPointsComp = EnsureComp<AntagFreeSublevelPointsAddComponent>(entity);
-
-        if (addPointsComp.AddFreeSublevelPoints < 5)
-            addPointsComp.AddFreeSublevelPoints = 5;
-    }
-
-    private void OnLiberationFromCult(Entity<ExperienceComponent> entity, ref LiberationFromCultEvent args)
-    {
-        _experience.TryRemoveKnowledge(entity!, CultYoggKnowledge);
-        var addPointsComp = EnsureComp<AntagFreeSublevelPointsAddComponent>(entity);
-
-        if (addPointsComp.AddFreeSublevelPoints == 5)
-            RemComp<AntagFreeSublevelPointsAddComponent>(entity);
-    }
-
-    private void OnChangeAdminRequest(ChangeEntityExperienceAdminRequest ev, EntitySessionEventArgs args)
+    private void OnChangeAdminRequest(ChangeEntityExperienceAdminRequestEvent ev, EntitySessionEventArgs args)
     {
         if (!_groupController.CanCommand(args.SenderSession, EditorCommand))
             return;
@@ -70,18 +43,23 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
             return;
         }
 
-        var forceAddComponent = EnsureComp<AdminForcedExperienceAddComponent>(targetEntity);
+        EnsureComp<ExperienceAdditionComponent>(targetEntity);
 
-        forceAddComponent.Knowledges = ev.Data.Knowledges;
-        forceAddComponent.Skills = ev.Data.SkillDictionary.Values
+        if (ev.Data is not { } additionData)
+        {
+            _experienceAddition.RemoveAdminAdded(targetEntity);
+            return;
+        }
+
+        var correctSkillDict = additionData.SkillDictionary.Values
             .SelectMany(list => list)
             .ToDictionary(view => view.SkillTreeId, item => item.Info);
 
-        var afterGainedEv = new RecalculateEntityExperience();
-        RaiseLocalEvent(targetEntity, ref afterGainedEv);
+        // TODO: make forced definable by admin
+        _experienceAddition.UpsertAdminForcedSpecifier(targetEntity, ExperienceAddSource.Admin, new ExperienceAddSpecifier(0, additionData.Knowledges, correctSkillDict));
     }
 
-    private void OnChangePlayerRequest(ChangeEntityExperiencePlayerRequest ev, EntitySessionEventArgs args)
+    private void OnChangePlayerRequest(ChangeEntityExperiencePlayerRequestEvent ev, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } playerEntity)
             return;
@@ -94,7 +72,7 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
 
         if (experienceComponent.FreeSublevelPoints < totalPointsSpend)
         {
-            DirtyField(playerEntity, experienceComponent, nameof(ExperienceComponent.FreeSublevelPoints));
+            Dirty(playerEntity, experienceComponent);
             return;
         }
 
@@ -116,21 +94,18 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
         playerChangedComp.SpentSublevelPoints += totalPointsSpend;
         Dirty(playerEntity, playerChangedComp);
 
-        var afterInitEv = new RecalculateEntityExperience();
-        RaiseLocalEvent(playerEntity, ref afterInitEv);
-
-        DirtyField(playerEntity, experienceComponent, nameof(ExperienceComponent.FreeSublevelPoints));
+        _experienceAddition.EnqueueRecalculation(playerEntity);
     }
 
     private void OnRoundEnd(RoundEndedEvent _)
     {
-        var backgroundEntityQuery = EntityQueryEnumerator<JobBackgroundSublevelAddComponent, RoleExperienceAddComponent>();
+        var backgroundEntityQuery = EntityQueryEnumerator<JobBackgroundSublevelAddComponent, ExperienceAdditionComponent>();
 
-        while (backgroundEntityQuery.MoveNext(out var uid, out var sublevelAddComponent, out var roleExperience))
+        while (backgroundEntityQuery.MoveNext(out var uid, out var sublevelAddComponent, out var additionComponent))
         {
             var stringSublevelView = GetSublevelStringView(sublevelAddComponent.Skills);
 
-            _adminLog.Add(LogType.Experience, LogImpact.Low, $"At round end entity with experience definition {roleExperience.DefinitionId}, used {sublevelAddComponent.SpentSublevelPoints} point to their leveling. Used to skills {stringSublevelView}");
+            _adminLog.Add(LogType.Experience, LogImpact.Low, $"At round end entity with experience definition {additionComponent.DefinitionId}, used {sublevelAddComponent.SpentSublevelPoints} point to their leveling. Used to skills {stringSublevelView}");
         }
     }
 
