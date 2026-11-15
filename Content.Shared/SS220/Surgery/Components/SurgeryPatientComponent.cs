@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Surgery.Components;
 /// This component contains information about being a valid target for surgery and ongiong operations
 /// </summary>
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class SurgeryPatientComponent : Component
 {
     [AutoNetworkedField]

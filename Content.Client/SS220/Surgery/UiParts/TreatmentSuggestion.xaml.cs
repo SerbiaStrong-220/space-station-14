@@ -56,6 +56,9 @@ public sealed partial class TreatmentSuggestion : Control
         if (dataText.Count == 0)
             return;
 
+        if (builder.Length > 0)
+            builder.AppendLine();
+
         builder.AppendLine(sectionName);
 
         foreach (var text in dataText)

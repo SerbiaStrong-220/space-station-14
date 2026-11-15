@@ -161,3 +161,56 @@ pathology-eye-corneal-operation = Операция на глазах: разве
 pathology-mouth-jaw-dislocation-name = Вывих челюсти
 pathology-mouth-jaw-dislocation-description = Нижняя челюсть вывихнута, речь пациента искажена.
 pathology-mouth-jaw-dislocation-operation = Операция на рте: вправьте вывих челюсти костоправом.
+
+# Визуально заметные травмы при осмотре здоровья (HealthExaminable)
+
+pathology-leftarm-dislocation-examine = Левая рука { POSS-ADJ($target) } неестественно вывернута в суставе.
+pathology-rightarm-dislocation-examine = Правая рука { POSS-ADJ($target) } неестественно вывернута в суставе.
+pathology-lefthand-dislocation-examine = Левая кисть { POSS-ADJ($target) } смещена и выглядит вывихнутой.
+pathology-righthand-dislocation-examine = Правая кисть { POSS-ADJ($target) } смещена и выглядит вывихнутой.
+pathology-leftleg-dislocation-examine = Левая нога { POSS-ADJ($target) } неестественно вывернута в суставе.
+pathology-rightleg-dislocation-examine = Правая нога { POSS-ADJ($target) } неестественно вывернута в суставе.
+pathology-leftfoot-dislocation-examine = Левая стопа { POSS-ADJ($target) } подвёрнута и смещена.
+pathology-rightfoot-dislocation-examine = Правая стопа { POSS-ADJ($target) } подвёрнута и смещена.
+pathology-mouth-jaw-dislocation-examine = Нижняя челюсть { POSS-ADJ($target) } перекошена и не смыкается.
+
+pathology-torso-hairline-examine = Грудная клетка { POSS-ADJ($target) } деформирована, виден отёк в области рёбер.
+pathology-lowertorso-hairline-examine = В области таза { POSS-ADJ($target) } заметен сильный отёк и гематома.
+pathology-leftarm-hairline-examine = Левая рука { POSS-ADJ($target) } распухла и выглядит деформированной.
+pathology-rightarm-hairline-examine = Правая рука { POSS-ADJ($target) } распухла и выглядит деформированной.
+pathology-lefthand-hairline-examine = Левая кисть { POSS-ADJ($target) } сильно распухла и посинела.
+pathology-righthand-hairline-examine = Правая кисть { POSS-ADJ($target) } сильно распухла и посинела.
+pathology-leftleg-hairline-examine = Левая нога { POSS-ADJ($target) } распухла и слегка искривлена.
+pathology-rightleg-hairline-examine = Правая нога { POSS-ADJ($target) } распухла и слегка искривлена.
+pathology-leftfoot-hairline-examine = Левая стопа { POSS-ADJ($target) } сильно распухла и деформирована.
+pathology-rightfoot-hairline-examine = Правая стопа { POSS-ADJ($target) } сильно распухла и деформирована.
+
+pathology-head-cranial-fissure-examine = На голове { POSS-ADJ($target) } видна глубокая трещина свода черепа и кровоподтёки!
+pathology-torso-compound-examine = На грудной клетке { POSS-ADJ($target) } открытый перелом — видны осколки кости!
+pathology-lowertorso-compound-examine = В области таза { POSS-ADJ($target) } открытый перелом и рваная рана!
+pathology-leftarm-compound-examine = Левая рука { POSS-ADJ($target) } переломлена в нескольких местах, видны фрагменты кости!
+pathology-rightarm-compound-examine = Правая рука { POSS-ADJ($target) } переломлена в нескольких местах, видны фрагменты кости!
+pathology-lefthand-compound-examine = Кости левой кисти { POSS-ADJ($target) } раздроблены и выступают наружу!
+pathology-righthand-compound-examine = Кости правой кисти { POSS-ADJ($target) } раздроблены и выступают наружу!
+pathology-leftleg-compound-examine = На левой ноге { POSS-ADJ($target) } открытый перелом — кость выступает из раны!
+pathology-rightleg-compound-examine = На правой ноге { POSS-ADJ($target) } открытый перелом — кость выступает из раны!
+pathology-leftfoot-compound-examine = Кости левой стопы { POSS-ADJ($target) } раздроблены и деформированы!
+pathology-rightfoot-compound-examine = Кости правой стопы { POSS-ADJ($target) } раздроблены и деформированы!
+
+pathology-head-arterial-examine = Из раны на голове { POSS-ADJ($target) } пульсирующей струёй хлещет кровь!
+pathology-torso-arterial-examine = Из раны на груди { POSS-ADJ($target) } толчками бьёт алая артериальная кровь!
+pathology-lowertorso-arterial-examine = Из паховой области { POSS-ADJ($target) } обильно хлещет артериальная кровь!
+pathology-leftarm-arterial-examine = Из раны на левой руке { POSS-ADJ($target) } пульсирующей струёй бьёт кровь!
+pathology-rightarm-arterial-examine = Из раны на правой руке { POSS-ADJ($target) } пульсирующей струёй бьёт кровь!
+pathology-leftleg-arterial-examine = Из раны на левой ноге { POSS-ADJ($target) } пульсирующей струёй бьёт кровь!
+pathology-rightleg-arterial-examine = Из раны на правой ноге { POSS-ADJ($target) } пульсирующей струёй бьёт кровь!
+
+pathology-head-necrosis-examine = Кожа и ткани головы { POSS-ADJ($target) } обуглены и почернели от некроза!
+pathology-torso-necrosis-examine = На груди { POSS-ADJ($target) } видны обширные обугленные участки омертвевшей ткани!
+pathology-lowertorso-necrosis-examine = В области таза { POSS-ADJ($target) } видны почерневшие участки ожогового некроза!
+pathology-leftarm-necrosis-examine = Ткани левой руки { POSS-ADJ($target) } обуглены и покрыты некротической коркой!
+pathology-rightarm-necrosis-examine = Ткани правой руки { POSS-ADJ($target) } обуглены и покрыты некротической коркой!
+pathology-leftleg-necrosis-examine = Ткани левой ноги { POSS-ADJ($target) } обуглены и покрыты некротической коркой!
+pathology-rightleg-necrosis-examine = Ткани правой ноги { POSS-ADJ($target) } обуглены и покрыты некротической коркой!
+
+pathology-eye-corneal-examine = Глаза { POSS-ADJ($target) } мутные и покрасневшие из-за повреждения роговицы.

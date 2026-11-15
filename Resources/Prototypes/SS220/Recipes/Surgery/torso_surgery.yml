@@ -118,15 +118,15 @@
         failureMessage: surgery-pathology-requirement-failure-torso-fragments
         curePathologies:
         - TorsoProjectileFragment
-    # tend brute & burn wounds
-    - to: retract-torso-skin
-      id: retract-torso-skin-tend-brute
-      baseEdge: to-tend-brute-wounds
-      edgeTooltip: to-tend-brute-wounds
-    - to: retract-torso-skin
-      id: retract-torso-skin-tend-burn
-      baseEdge: to-tend-burn-wounds
-      edgeTooltip: to-tend-burn-wounds
+    # tend brute & burn wounds (SS220: temporarily disabled)
+    #- to: retract-torso-skin
+    #  id: retract-torso-skin-tend-brute
+    #  baseEdge: to-tend-brute-wounds
+    #  edgeTooltip: to-tend-brute-wounds
+    #- to: retract-torso-skin
+    #  id: retract-torso-skin-tend-burn
+    #  baseEdge: to-tend-burn-wounds
+    #  edgeTooltip: to-tend-burn-wounds
     # hairline fracture
     - to: retract-torso-skin
       id: retract-torso-skin-hairline
@@ -418,14 +418,15 @@
         failureMessage: surgery-pathology-requirement-failure-lowertorso-fragments
         curePathologies:
         - LowerTorsoProjectileFragment
-    - to: retract-lowertorso-skin
-      id: retract-lowertorso-tend-brute
-      baseEdge: to-tend-brute-wounds
-      edgeTooltip: to-tend-brute-wounds
-    - to: retract-lowertorso-skin
-      id: retract-lowertorso-tend-burn
-      baseEdge: to-tend-burn-wounds
-      edgeTooltip: to-tend-burn-wounds
+    # tend brute & burn wounds (SS220: temporarily disabled)
+    #- to: retract-lowertorso-skin
+    #  id: retract-lowertorso-tend-brute
+    #  baseEdge: to-tend-brute-wounds
+    #  edgeTooltip: to-tend-brute-wounds
+    #- to: retract-lowertorso-skin
+    #  id: retract-lowertorso-tend-burn
+    #  baseEdge: to-tend-burn-wounds
+    #  edgeTooltip: to-tend-burn-wounds
     - to: retract-lowertorso-skin
       id: retract-lowertorso-repair-hairline
       baseEdge: to-repair-hairline-fracture

@@ -36,6 +36,7 @@ public sealed partial class AlertsUI : UIWidget
         // also there may be some new alerts we need to show.
         // further, we need to ensure they are ordered w.r.t their configured order
         SyncUpdateControls(alertsSystem, alertOrderPrototype, alertStates);
+        UpdatePathologyPuppetPosition(); //SS220-pathology-indication
     }
 
     public void ClearAllControls()
@@ -113,8 +114,13 @@ public sealed partial class AlertsUI : UIWidget
                     var added = false;
                     foreach (var alertControl in AlertContainer.Children)
                     {
-                        if (alertOrderPrototype.Compare(newAlert, ((AlertControl) alertControl).Alert) >= 0)
+                        //SS220-pathology-indication begin
+                        if (alertControl is not AlertControl control)
                             continue;
+
+                        if (alertOrderPrototype.Compare(newAlert, control.Alert) >= 0)
+                            continue;
+                        //SS220-pathology-indication end
 
                         var idx = alertControl.GetPositionInParent();
                         AlertContainer.Children.Add(newAlertControl);

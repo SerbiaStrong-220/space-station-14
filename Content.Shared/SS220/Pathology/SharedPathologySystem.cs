@@ -31,6 +31,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
         SubscribeLocalEvent<PathologyHolderComponent, RejuvenateEvent>(OnRejuvenate);
 
         InitializeStatusEffectContainerEvents();
+        InitializeExamineEvents();
     }
 
     public override void Update(float frameTime)

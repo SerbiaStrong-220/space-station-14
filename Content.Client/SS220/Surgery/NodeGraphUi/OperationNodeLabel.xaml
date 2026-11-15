@@ -1,7 +1,6 @@
 <NodeGraphUi:OperationNodeLabel xmlns="https://spacestation14.io"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:NodeGraphUi="clr-namespace:Content.Client.SS220.Surgery.NodeGraphUi"
-    VerticalExpand="True"
     HorizontalExpand="True"
     Orientation="Vertical">
     <BoxContainer Name="NodeHeaderContainer" Orientation="Horizontal" MouseFilter="Stop">

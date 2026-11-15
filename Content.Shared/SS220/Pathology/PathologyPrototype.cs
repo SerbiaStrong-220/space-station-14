@@ -27,6 +27,12 @@ public sealed partial class PathologyPrototype : IPrototype
     public LocId? OperationRecommendation;
 
     [DataField]
+    public LocId? ExamineDescription;
+
+    [DataField]
+    public bool IsSevere;
+
+    [DataField]
     public PathologyDefinition[] Definition = Array.Empty<PathologyDefinition>();
 }
 

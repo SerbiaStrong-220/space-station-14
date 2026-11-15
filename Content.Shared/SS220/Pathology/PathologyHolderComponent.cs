@@ -7,7 +7,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.Pathology;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class PathologyHolderComponent : Component
 {
     [ViewVariables]

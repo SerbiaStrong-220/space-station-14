@@ -116,6 +116,7 @@
 - type: pathology
   id: LeftArmDislocation
   name: pathology-leftarm-dislocation-name
+  examineDescription: pathology-leftarm-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: LeftArm
   operationRecommendation: pathology-arm-dislocation-operation
@@ -126,6 +127,7 @@
 - type: pathology
   id: RightArmDislocation
   name: pathology-rightarm-dislocation-name
+  examineDescription: pathology-rightarm-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: RightArm
   operationRecommendation: pathology-arm-dislocation-operation
@@ -136,6 +138,7 @@
 - type: pathology
   id: LeftHandDislocation
   name: pathology-lefthand-dislocation-name
+  examineDescription: pathology-lefthand-dislocation-examine
   armorSlotFlags: GLOVES
   targetZone: LeftHand
   operationRecommendation: pathology-hand-dislocation-operation
@@ -146,6 +149,7 @@
 - type: pathology
   id: RightHandDislocation
   name: pathology-righthand-dislocation-name
+  examineDescription: pathology-righthand-dislocation-examine
   armorSlotFlags: GLOVES
   targetZone: RightHand
   operationRecommendation: pathology-hand-dislocation-operation
@@ -156,6 +160,7 @@
 - type: pathology
   id: LeftLegDislocation
   name: pathology-leftleg-dislocation-name
+  examineDescription: pathology-leftleg-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: LeftLeg
   operationRecommendation: pathology-leg-dislocation-operation
@@ -172,6 +177,7 @@
 - type: pathology
   id: RightLegDislocation
   name: pathology-rightleg-dislocation-name
+  examineDescription: pathology-rightleg-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: RightLeg
   operationRecommendation: pathology-leg-dislocation-operation
@@ -188,6 +194,7 @@
 - type: pathology
   id: LeftFootDislocation
   name: pathology-leftfoot-dislocation-name
+  examineDescription: pathology-leftfoot-dislocation-examine
   armorSlotFlags: FEET
   targetZone: LeftFoot
   operationRecommendation: pathology-foot-dislocation-operation
@@ -204,6 +211,7 @@
 - type: pathology
   id: RightFootDislocation
   name: pathology-rightfoot-dislocation-name
+  examineDescription: pathology-rightfoot-dislocation-examine
   armorSlotFlags: FEET
   targetZone: RightFoot
   operationRecommendation: pathology-foot-dislocation-operation
@@ -222,6 +230,7 @@
 - type: pathology
   id: TorsoHairlineFracture
   name: pathology-torso-hairline-name
+  examineDescription: pathology-torso-hairline-examine
   armorSlotFlags: TORSO
   targetZone: Torso
   operationRecommendation: pathology-torso-fracture-operation
@@ -232,6 +241,7 @@
 - type: pathology
   id: LowerTorsoHairlineFracture
   name: pathology-lowertorso-hairline-name
+  examineDescription: pathology-lowertorso-hairline-examine
   armorSlotFlags: TORSO
   targetZone: LowerTorso
   operationRecommendation: pathology-lowertorso-fracture-operation
@@ -248,6 +258,7 @@
 - type: pathology
   id: LeftArmHairlineFracture
   name: pathology-leftarm-hairline-name
+  examineDescription: pathology-leftarm-hairline-examine
   armorSlotFlags: TORSO
   targetZone: LeftArm
   operationRecommendation: pathology-arm-fracture-operation
@@ -258,6 +269,7 @@
 - type: pathology
   id: RightArmHairlineFracture
   name: pathology-rightarm-hairline-name
+  examineDescription: pathology-rightarm-hairline-examine
   armorSlotFlags: TORSO
   targetZone: RightArm
   operationRecommendation: pathology-arm-fracture-operation
@@ -268,6 +280,7 @@
 - type: pathology
   id: LeftHandHairlineFracture
   name: pathology-lefthand-hairline-name
+  examineDescription: pathology-lefthand-hairline-examine
   armorSlotFlags: GLOVES
   targetZone: LeftHand
   operationRecommendation: pathology-hand-fracture-operation
@@ -278,6 +291,7 @@
 - type: pathology
   id: RightHandHairlineFracture
   name: pathology-righthand-hairline-name
+  examineDescription: pathology-righthand-hairline-examine
   armorSlotFlags: GLOVES
   targetZone: RightHand
   operationRecommendation: pathology-hand-fracture-operation
@@ -288,6 +302,7 @@
 - type: pathology
   id: LeftLegHairlineFracture
   name: pathology-leftleg-hairline-name
+  examineDescription: pathology-leftleg-hairline-examine
   armorSlotFlags: TORSO
   targetZone: LeftLeg
   operationRecommendation: pathology-leg-fracture-operation
@@ -304,6 +319,7 @@
 - type: pathology
   id: RightLegHairlineFracture
   name: pathology-rightleg-hairline-name
+  examineDescription: pathology-rightleg-hairline-examine
   armorSlotFlags: TORSO
   targetZone: RightLeg
   operationRecommendation: pathology-leg-fracture-operation
@@ -320,6 +336,7 @@
 - type: pathology
   id: LeftFootHairlineFracture
   name: pathology-leftfoot-hairline-name
+  examineDescription: pathology-leftfoot-hairline-examine
   armorSlotFlags: FEET
   targetZone: LeftFoot
   operationRecommendation: pathology-foot-fracture-operation
@@ -336,6 +353,7 @@
 - type: pathology
   id: RightFootHairlineFracture
   name: pathology-rightfoot-hairline-name
+  examineDescription: pathology-rightfoot-hairline-examine
   armorSlotFlags: FEET
   targetZone: RightFoot
   operationRecommendation: pathology-foot-fracture-operation
@@ -354,6 +372,8 @@
 - type: pathology
   id: HeadCranialFissure
   name: pathology-head-cranial-fissure-name
+  examineDescription: pathology-head-cranial-fissure-examine
+  isSevere: true
   armorSlotFlags: HEAD
   targetZone: Head
   operationRecommendation: pathology-head-cranial-fissure-operation
@@ -369,6 +389,8 @@
 - type: pathology
   id: TorsoCompoundFracture
   name: pathology-torso-compound-name
+  examineDescription: pathology-torso-compound-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: Torso
   operationRecommendation: pathology-torso-fracture-operation
@@ -384,6 +406,8 @@
 - type: pathology
   id: LowerTorsoCompoundFracture
   name: pathology-lowertorso-compound-name
+  examineDescription: pathology-lowertorso-compound-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LowerTorso
   operationRecommendation: pathology-lowertorso-fracture-operation
@@ -403,6 +427,8 @@
 - type: pathology
   id: LeftArmCompoundFracture
   name: pathology-leftarm-compound-name
+  examineDescription: pathology-leftarm-compound-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftArm
   operationRecommendation: pathology-arm-fracture-operation
@@ -418,6 +444,8 @@
 - type: pathology
   id: RightArmCompoundFracture
   name: pathology-rightarm-compound-name
+  examineDescription: pathology-rightarm-compound-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightArm
   operationRecommendation: pathology-arm-fracture-operation
@@ -433,6 +461,8 @@
 - type: pathology
   id: LeftHandCompoundFracture
   name: pathology-lefthand-compound-name
+  examineDescription: pathology-lefthand-compound-examine
+  isSevere: true
   armorSlotFlags: GLOVES
   targetZone: LeftHand
   operationRecommendation: pathology-hand-fracture-operation
@@ -443,6 +473,8 @@
 - type: pathology
   id: RightHandCompoundFracture
   name: pathology-righthand-compound-name
+  examineDescription: pathology-righthand-compound-examine
+  isSevere: true
   armorSlotFlags: GLOVES
   targetZone: RightHand
   operationRecommendation: pathology-hand-fracture-operation
@@ -453,6 +485,8 @@
 - type: pathology
   id: LeftLegCompoundFracture
   name: pathology-leftleg-compound-name
+  examineDescription: pathology-leftleg-compound-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftLeg
   operationRecommendation: pathology-leg-fracture-operation
@@ -469,6 +503,8 @@
 - type: pathology
   id: RightLegCompoundFracture
   name: pathology-rightleg-compound-name
+  examineDescription: pathology-rightleg-compound-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightLeg
   operationRecommendation: pathology-leg-fracture-operation
@@ -485,6 +521,8 @@
 - type: pathology
   id: LeftFootCompoundFracture
   name: pathology-leftfoot-compound-name
+  examineDescription: pathology-leftfoot-compound-examine
+  isSevere: true
   armorSlotFlags: FEET
   targetZone: LeftFoot
   operationRecommendation: pathology-foot-fracture-operation
@@ -501,6 +539,8 @@
 - type: pathology
   id: RightFootCompoundFracture
   name: pathology-rightfoot-compound-name
+  examineDescription: pathology-rightfoot-compound-examine
+  isSevere: true
   armorSlotFlags: FEET
   targetZone: RightFoot
   operationRecommendation: pathology-foot-fracture-operation
@@ -519,6 +559,8 @@
 - type: pathology
   id: HeadArterialPuncture
   name: pathology-head-arterial-name
+  examineDescription: pathology-head-arterial-examine
+  isSevere: true
   armorSlotFlags: HEAD
   targetZone: Head
   operationRecommendation: pathology-arterial-operation
@@ -534,6 +576,8 @@
 - type: pathology
   id: TorsoArterialPuncture
   name: pathology-torso-arterial-name
+  examineDescription: pathology-torso-arterial-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: Torso
   operationRecommendation: pathology-arterial-operation
@@ -549,6 +593,8 @@
 - type: pathology
   id: LowerTorsoArterialPuncture
   name: pathology-lowertorso-arterial-name
+  examineDescription: pathology-lowertorso-arterial-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LowerTorso
   operationRecommendation: pathology-arterial-operation
@@ -564,6 +610,8 @@
 - type: pathology
   id: LeftArmArterialPuncture
   name: pathology-leftarm-arterial-name
+  examineDescription: pathology-leftarm-arterial-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftArm
   operationRecommendation: pathology-arterial-operation
@@ -579,6 +627,8 @@
 - type: pathology
   id: RightArmArterialPuncture
   name: pathology-rightarm-arterial-name
+  examineDescription: pathology-rightarm-arterial-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightArm
   operationRecommendation: pathology-arterial-operation
@@ -594,6 +644,8 @@
 - type: pathology
   id: LeftLegArterialPuncture
   name: pathology-leftleg-arterial-name
+  examineDescription: pathology-leftleg-arterial-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftLeg
   operationRecommendation: pathology-arterial-operation
@@ -609,6 +661,8 @@
 - type: pathology
   id: RightLegArterialPuncture
   name: pathology-rightleg-arterial-name
+  examineDescription: pathology-rightleg-arterial-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightLeg
   operationRecommendation: pathology-arterial-operation
@@ -626,6 +680,8 @@
 - type: pathology
   id: HeadBurnNecrosis
   name: pathology-head-necrosis-name
+  examineDescription: pathology-head-necrosis-examine
+  isSevere: true
   armorSlotFlags: FULLHEAD
   targetZone: Head
   operationRecommendation: pathology-necrosis-operation
@@ -640,6 +696,8 @@
 - type: pathology
   id: TorsoBurnNecrosis
   name: pathology-torso-necrosis-name
+  examineDescription: pathology-torso-necrosis-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: Torso
   operationRecommendation: pathology-necrosis-operation
@@ -654,6 +712,8 @@
 - type: pathology
   id: LowerTorsoBurnNecrosis
   name: pathology-lowertorso-necrosis-name
+  examineDescription: pathology-lowertorso-necrosis-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LowerTorso
   operationRecommendation: pathology-necrosis-operation
@@ -668,6 +728,8 @@
 - type: pathology
   id: LeftArmBurnNecrosis
   name: pathology-leftarm-necrosis-name
+  examineDescription: pathology-leftarm-necrosis-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftArm
   operationRecommendation: pathology-necrosis-operation
@@ -682,6 +744,8 @@
 - type: pathology
   id: RightArmBurnNecrosis
   name: pathology-rightarm-necrosis-name
+  examineDescription: pathology-rightarm-necrosis-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightArm
   operationRecommendation: pathology-necrosis-operation
@@ -696,6 +760,8 @@
 - type: pathology
   id: LeftLegBurnNecrosis
   name: pathology-leftleg-necrosis-name
+  examineDescription: pathology-leftleg-necrosis-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftLeg
   operationRecommendation: pathology-necrosis-operation
@@ -710,6 +776,8 @@
 - type: pathology
   id: RightLegBurnNecrosis
   name: pathology-rightleg-necrosis-name
+  examineDescription: pathology-rightleg-necrosis-examine
+  isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightLeg
   operationRecommendation: pathology-necrosis-operation
@@ -726,6 +794,7 @@
 - type: pathology
   id: EyeCornealTrauma
   name: pathology-eye-corneal-name
+  examineDescription: pathology-eye-corneal-examine
   armorSlotFlags: EYES
   targetZone: Eyes
   operationRecommendation: pathology-eye-corneal-operation
@@ -736,6 +805,7 @@
 - type: pathology
   id: MouthJawDislocation
   name: pathology-mouth-jaw-dislocation-name
+  examineDescription: pathology-mouth-jaw-dislocation-examine
   armorSlotFlags: MASK
   targetZone: Mouth
   operationRecommendation: pathology-mouth-jaw-dislocation-operation
