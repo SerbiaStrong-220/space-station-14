@@ -7,6 +7,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Lock;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Verbs;
 using Robust.Shared.Prototypes;
@@ -25,6 +26,7 @@ public sealed partial class StaminaConvertArmorSystem : EntitySystem
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private ItemToggleSystem _itemToggle = default!;
+    [Dependency] private LockSystem _lock = default!;
     [Dependency] private EntityQuery<StaminaResistanceComponent> _resistQuery = default!;
 
     /// <inheritdoc/>
@@ -127,7 +129,7 @@ public sealed partial class StaminaConvertArmorSystem : EntitySystem
     /// </summary>
     private void OnToggleVerb(Entity<StaminaConvertArmorComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || !TryComp<ItemToggleComponent>(ent, out var toggle))
+        if (!args.CanAccess || !args.CanInteract || _lock.IsLocked(ent.Owner) || !TryComp<ItemToggleComponent>(ent, out var toggle))
             return;
 
         var user = args.User;
@@ -138,7 +140,7 @@ public sealed partial class StaminaConvertArmorSystem : EntitySystem
         });
     }
 
-    /// </summary>
+    /// <summary>
     /// Enables or disables item effects: converting stamina damage into electrical damage.
     /// </summary>
     private void OnToggled(Entity<StaminaConvertArmorComponent> ent, ref ItemToggledEvent args)
