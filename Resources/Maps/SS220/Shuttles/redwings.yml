@@ -3123,10 +3123,6 @@ entities:
     - type: Transform
       pos: -10.312696,3.6244984
       parent: 1
-    - type: UserInterface
-      actors:
-        enum.PaperUiKey.Key:
-        - invalid
     - type: Flammable
       nextUpdate: -128.8971972
     - type: Paper
