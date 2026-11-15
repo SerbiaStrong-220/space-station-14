@@ -40,6 +40,8 @@
     noRot: true
     overrideContainerOcclusion: true
     drawdepth: Ghosts
+  - type: WarpPoint
+    follow: true
   - type: MiGoTeleport
   - type: UserInterface
     interfaces:

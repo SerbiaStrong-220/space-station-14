@@ -124,3 +124,6 @@ lobby-state-background-spacemudaki-artist = Ivan_Gochin
 
 lobby-state-background-traitor-title = Traitor
 lobby-state-background-traitor-artist = НезьныйКусь
+
+lobby-state-background-hogband-title = Hog Band
+lobby-state-background-hogband-artist = Ellichirr

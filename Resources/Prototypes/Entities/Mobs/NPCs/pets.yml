@@ -1261,6 +1261,10 @@
     - id: Piggish
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Smile puller start
+  - type: Puller
+    needsHands: false
+  #SS220 Smile puller end
   - type: Inventory
     speciesId: slime
     templateId: head

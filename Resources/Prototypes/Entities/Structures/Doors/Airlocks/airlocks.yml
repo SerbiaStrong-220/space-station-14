@@ -131,7 +131,7 @@
     sprite: Structures/Doors/Airlocks/Standard/syndicate.rsi
 
 - type: entity
-  parent: AirlockCargo
+  parent: [BaseAirlockUniqueStates, AirlockCargo] #SS220-airlock-common-states
   id: AirlockMining
   suffix: Mining(Salvage)
   components:
@@ -152,7 +152,7 @@
     sprite: Structures/Doors/Airlocks/Standard/centcomm.rsi
 
 - type: entity
-  parent: Airlock
+  parent: [BaseAirlockUniqueStates, Airlock] #SS220-airlock-common-states
   id: AirlockHatch
   name: airtight hatch
   components:
@@ -162,7 +162,7 @@
     group: null
 
 - type: entity
-  parent: Airlock
+  parent: [BaseAirlockUniqueStates, Airlock] #SS220-airlock-common-states
   id: AirlockXenoborg
   name: xenoborg airlock
   components:
@@ -172,7 +172,7 @@
     group: null
 
 - type: entity
-  parent: Airlock
+  parent: [BaseAirlockUniqueStates, Airlock] #SS220-airlock-common-states
   id: AirlockHatchMaintenance
   name: maintenance hatch
   components:
@@ -182,7 +182,7 @@
     group: null
 
 - type: entity
-  parent: Airlock
+  parent: [BaseAirlockUniqueStates, Airlock] #SS220-airlock-common-states
   id: AirlockHatchSyndicate
   name: airtight hatch
   suffix: Syndicate
@@ -314,7 +314,7 @@
     sprite: Structures/Doors/Airlocks/Glass/syndicate.rsi
 
 - type: entity
-  parent: AirlockCargoGlass
+  parent: [BaseAirlockUniqueStates, AirlockCargoGlass] #SS220-airlock-common-states
   id: AirlockMiningGlass
   suffix: Mining(Salvage)
   components:
@@ -344,7 +344,7 @@
     sprite: Structures/Doors/Airlocks/Glass/basic.rsi
 
 - type: entity
-  parent: Airlock
+  parent: [BaseAirlockUniqueStates, Airlock] #SS220-airlock-common-states
   id: AirlockXeno
   suffix: Xeno
   components:
@@ -354,7 +354,7 @@
     group: null
 
 - type: entity
-  parent: AirlockGlass
+  parent: [BaseAirlockUniqueStates, AirlockGlass] #SS220-airlock-common-states
   id: AirlockGlassXeno
   suffix: Xeno
   components:

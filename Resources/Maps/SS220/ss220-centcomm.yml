@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 267.4.0
+  engineVersion: 277.2.1
   forkId: ""
   forkVersion: ""
-  time: 02/14/2026 17:41:13
+  time: 10/14/2026 08:36:53
   entityCount: 15039
 maps: []
 grids:
@@ -13093,6 +13093,9 @@ entities:
     - type: BecomesStation
       id: centcomm
     - type: ImplicitRoof
+    - type: TileHistory
+      chunkHistory: {}
+    - type: ExplosionAirtightGrid
   - uid: 4
     components:
     - type: MetaData
@@ -15925,16 +15928,6 @@ entities:
       parent: 1
     - type: AccessReader
       accessListsOriginal: []
-- proto: AirlockCentcommLockedBSO
-  entities:
-  - uid: 309
-    components:
-    - type: MetaData
-      name: отсек оперативников "Синий Щит"
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 1.5,22.5
-      parent: 1
 - proto: AirlockCentcommLockedCBURN
   entities:
   - uid: 310
@@ -16223,6 +16216,16 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -64.5,-15.5
+      parent: 1
+- proto: AirlockCentcommLockedSRT
+  entities:
+  - uid: 309
+    components:
+    - type: MetaData
+      name: отсек оперативников "Синий Щит"
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,22.5
       parent: 1
 - proto: AirlockChemistryGlassLocked
   entities:
@@ -16966,61 +16969,6 @@ entities:
       parent: 1
     - type: AccessReader
       accessListsOriginal: []
-- proto: AirlockGlassCentcommLockedBlueShieldOperative
-  entities:
-  - uid: 428
-    components:
-    - type: MetaData
-      name: отсек оперативников "Синий Щит"
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -9.5,25.5
-      parent: 1
-  - uid: 429
-    components:
-    - type: MetaData
-      name: комната оперативника "Синий Щит"
-    - type: Transform
-      pos: 5.5,29.5
-      parent: 1
-  - uid: 430
-    components:
-    - type: MetaData
-      name: личные комнаты оперативников
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 3.5,27.5
-      parent: 1
-    - type: AccessReader
-      accessListsOriginal: []
-  - uid: 431
-    components:
-    - type: MetaData
-      name: личные комнаты оперативников
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,28.5
-      parent: 1
-    - type: AccessReader
-      accessListsOriginal: []
-  - uid: 432
-    components:
-    - type: MetaData
-      name: отсек оперативников "Синий Щит"
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -9.5,24.5
-      parent: 1
-  - uid: 433
-    components:
-    - type: MetaData
-      name: комната оперативника "Синий Щит"
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 5.5,26.5
-      parent: 1
-    - type: AccessReader
-      accessListsOriginal: []
 - proto: AirlockGlassCentcommLockedCBURN
   entities:
   - uid: 434
@@ -17168,6 +17116,61 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -49.5,-8.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal: []
+- proto: AirlockGlassCentcommLockedSRTOperative
+  entities:
+  - uid: 428
+    components:
+    - type: MetaData
+      name: отсек оперативников "Синий Щит"
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,25.5
+      parent: 1
+  - uid: 429
+    components:
+    - type: MetaData
+      name: комната оперативника "Синий Щит"
+    - type: Transform
+      pos: 5.5,29.5
+      parent: 1
+  - uid: 430
+    components:
+    - type: MetaData
+      name: личные комнаты оперативников
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.5,27.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal: []
+  - uid: 431
+    components:
+    - type: MetaData
+      name: личные комнаты оперативников
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,28.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal: []
+  - uid: 432
+    components:
+    - type: MetaData
+      name: отсек оперативников "Синий Щит"
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -9.5,24.5
+      parent: 1
+  - uid: 433
+    components:
+    - type: MetaData
+      name: комната оперативника "Синий Щит"
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,26.5
       parent: 1
     - type: AccessReader
       accessListsOriginal: []
@@ -17369,26 +17372,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 485
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: AirSensor
   entities:
   - uid: 506
@@ -18518,26 +18507,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 487
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: APCBasic
   entities:
   - uid: 641
@@ -20763,52 +20738,24 @@ entities:
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1015
     components:
     - type: Transform
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1016
     components:
     - type: Transform
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1017
     components:
     - type: Transform
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: Bed
   entities:
   - uid: 1035
@@ -21373,64 +21320,6 @@ entities:
     - type: Transform
       pos: -30.5,23.5
       parent: 1
-- proto: BlasterPowerCellPulse
-  entities:
-  - uid: 1133
-    components:
-    - type: Transform
-      parent: 1132
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1134
-    components:
-    - type: Transform
-      parent: 1132
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1135
-    components:
-    - type: Transform
-      parent: 1132
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1136
-    components:
-    - type: Transform
-      parent: 1132
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1137
-    components:
-    - type: Transform
-      parent: 1132
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1138
-    components:
-    - type: Transform
-      parent: 1132
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1139
-    components:
-    - type: Transform
-      parent: 1132
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1140
-    components:
-    - type: Transform
-      parent: 1132
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: BlindsLeft
   entities:
   - uid: 1145
@@ -21631,52 +21520,24 @@ entities:
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1170
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1171
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1172
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: BlueprintBeltChiefEngineer
   entities:
   - uid: 1189
@@ -21905,13 +21766,6 @@ entities:
           - 27
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
 - proto: BoxFolderBlue
   entities:
   - uid: 29
@@ -21952,13 +21806,6 @@ entities:
           - 40
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 1219
     components:
     - type: Transform
@@ -22002,13 +21849,6 @@ entities:
           - 63
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
 - proto: BoxFolderCargo
   entities:
   - uid: 1226
@@ -22191,13 +22031,6 @@ entities:
           - 20
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
 - proto: BoxFolderMedical
   entities:
   - uid: 1251
@@ -22244,13 +22077,6 @@ entities:
           - 13
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 1253
     components:
     - type: Transform
@@ -22298,13 +22124,6 @@ entities:
           - 66
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
 - proto: BoxFolderRed
   entities:
   - uid: 47
@@ -22341,13 +22160,6 @@ entities:
           - 54
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 1255
     components:
     - type: MetaData
@@ -22697,26 +22509,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 489
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1339
     components:
     - type: Transform
@@ -22747,104 +22545,48 @@ entities:
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1345
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1346
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1347
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1348
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1349
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1350
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1351
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: Brutepack
   entities:
   - uid: 1173
@@ -22853,78 +22595,36 @@ entities:
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1174
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1175
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1176
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1177
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1178
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: BurnAutoInjector
   entities:
   - uid: 490
@@ -22933,130 +22633,60 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 491
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1352
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1353
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1354
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1355
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1356
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1357
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1358
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1359
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1384
     components:
     - type: Transform
@@ -23194,260 +22824,120 @@ entities:
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1407
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1408
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1409
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1410
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1411
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1412
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1413
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1414
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1415
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1416
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1417
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1418
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1419
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1420
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1421
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1422
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1423
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1424
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1425
     components:
     - type: Transform
       parent: 1405
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: CableApcExtension
   entities:
   - uid: 1426
@@ -32190,26 +31680,12 @@ entities:
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 3173
     components:
     - type: Transform
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 3186
     components:
     - type: Transform
@@ -33844,13 +33320,6 @@ entities:
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 3509
     components:
     - type: Transform
@@ -40695,13 +40164,6 @@ entities:
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 4874
     components:
     - type: Transform
@@ -43636,26 +43098,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 493
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: ChemistryBottleCryoxadone
   entities:
   - uid: 5386
@@ -43676,26 +43124,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 495
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: ChemistryBottleDexalinPlus
   entities:
   - uid: 496
@@ -43704,26 +43138,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 497
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: ChemistryBottleDiphenhydramine
   entities:
   - uid: 5388
@@ -43742,52 +43162,24 @@ entities:
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5392
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5393
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5394
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: ChemistryBottleDylovene
   entities:
   - uid: 498
@@ -43796,26 +43188,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 499
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: ChemistryBottleHyronalin
   entities:
   - uid: 500
@@ -43824,26 +43202,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 501
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: ChemistryBottleLeporazine
   entities:
   - uid: 5413
@@ -43869,104 +43233,48 @@ entities:
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5396
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5397
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5398
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5399
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5400
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5401
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5402
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: ChemistryBottleOpporozidone
   entities:
   - uid: 5416
@@ -43987,52 +43295,24 @@ entities:
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5404
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5405
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5406
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5418
     components:
     - type: Transform
@@ -44051,26 +43331,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 503
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: ChemistryHotplate
   entities:
   - uid: 5420
@@ -47583,20 +46849,6 @@ entities:
     - type: Transform
       pos: -50.331326,4.5918007
       parent: 1
-- proto: ClothingNeckScarfBSO
-  entities:
-  - uid: 5752
-    components:
-    - type: Transform
-      parent: 5749
-    - type: Physics
-      canCollide: False
-  - uid: 5760
-    components:
-    - type: Transform
-      parent: 5757
-    - type: Physics
-      canCollide: False
 - proto: ClothingNeckScarfCentcomm
   entities:
   - uid: 5753
@@ -47627,6 +46879,20 @@ entities:
     components:
     - type: Transform
       parent: 5815
+    - type: Physics
+      canCollide: False
+- proto: ClothingNeckScarfSRT
+  entities:
+  - uid: 5752
+    components:
+    - type: Transform
+      parent: 5749
+    - type: Physics
+      canCollide: False
+  - uid: 5760
+    components:
+    - type: Transform
+      parent: 5757
     - type: Physics
       canCollide: False
 - proto: ClothingNeckScarfStripedBlack
@@ -48456,52 +47722,24 @@ entities:
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5665
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5666
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5667
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: ClusterGrenade
   entities:
   - uid: 5685
@@ -48510,52 +47748,24 @@ entities:
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5686
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5687
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5688
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: ComfyChair
   entities:
   - uid: 5905
@@ -49984,7 +49194,7 @@ entities:
     - type: Transform
       pos: -30.5,11.5
       parent: 1
-- proto: CurbDarckSteel
+- proto: CurbDarkSteel
   entities:
   - uid: 6143
     components:
@@ -50498,7 +49708,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -1.5,-32.5
       parent: 1
-- proto: CurbDarckSteelCorner
+- proto: CurbDarkSteelCorner
   entities:
   - uid: 6232
     components:
@@ -50610,7 +49820,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 34.5,-1.5
       parent: 1
-- proto: CurbDarckSteelCornerSmall
+- proto: CurbDarkSteelCornerSmall
   entities:
   - uid: 6251
     components:
@@ -50942,7 +50152,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -7.5,-31.5
       parent: 1
-- proto: CurbDarckSteelRound
+- proto: CurbDarkSteelRound
   entities:
   - uid: 6309
     components:
@@ -51629,52 +50839,24 @@ entities:
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5408
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5409
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5410
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: DeskBell
   entities:
   - uid: 6420
@@ -56580,208 +55762,96 @@ entities:
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1361
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1362
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1363
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1364
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1365
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1366
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1367
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5606
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5607
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5608
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5609
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5610
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5611
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5612
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5613
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: EmpGrenade
   entities:
   - uid: 5706
@@ -56790,52 +55860,24 @@ entities:
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5707
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5708
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5709
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: EncryptionKeysPersonalAI
   entities:
   - uid: 7191
@@ -56887,104 +55929,48 @@ entities:
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5690
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5691
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5692
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5693
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5694
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5695
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5696
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 7198
     components:
     - type: Transform
@@ -61165,31 +60151,43 @@ entities:
     - type: Transform
       pos: -51.648758,22.741703
       parent: 1
+    - type: CollisionWake
+      enabled: False
   - uid: 7694
     components:
     - type: Transform
       pos: -51.336258,22.689583
       parent: 1
+    - type: CollisionWake
+      enabled: False
   - uid: 7695
     components:
     - type: Transform
       pos: -40.63635,-7.2976623
       parent: 1
+    - type: CollisionWake
+      enabled: False
   - uid: 7696
     components:
     - type: Transform
       pos: -71.31279,3.6455503
       parent: 1
+    - type: CollisionWake
+      enabled: False
   - uid: 7697
     components:
     - type: Transform
       pos: -71.703415,3.6455503
       parent: 1
+    - type: CollisionWake
+      enabled: False
   - uid: 7698
     components:
     - type: Transform
       pos: -40.28218,-7.3289337
       parent: 1
+    - type: CollisionWake
+      enabled: False
 - proto: FoodSnackSyndi
   entities:
   - uid: 7699
@@ -79649,52 +78647,24 @@ entities:
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1180
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1181
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1182
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 10006
     components:
     - type: Transform
@@ -79856,104 +78826,48 @@ entities:
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5711
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5712
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5713
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5714
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5715
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5716
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5717
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 10029
     components:
     - type: Transform
@@ -79997,104 +78911,48 @@ entities:
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5698
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5699
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5700
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5701
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5702
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5703
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5704
     components:
     - type: Transform
       parent: 5684
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 10036
     components:
     - type: Transform
@@ -82791,18 +81649,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -54.5,18.5
       parent: 1
-- proto: HighSecCentcommLockedBSO
-  entities:
-  - uid: 10528
-    components:
-    - type: MetaData
-      name: оружейная оперативников "Синий Щит"
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -2.5,29.5
-      parent: 1
-    - type: AccessReader
-      accessListsOriginal: []
 - proto: HighSecCentcommLockedCBURN
   entities:
   - uid: 10529
@@ -82841,6 +81687,18 @@ entities:
       name: оружейная ОБР
     - type: Transform
       pos: -45.5,-15.5
+      parent: 1
+    - type: AccessReader
+      accessListsOriginal: []
+- proto: HighSecCentcommLockedSRT
+  entities:
+  - uid: 10528
+    components:
+    - type: MetaData
+      name: оружейная оперативников "Синий Щит"
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,29.5
       parent: 1
     - type: AccessReader
       accessListsOriginal: []
@@ -82974,26 +81832,12 @@ entities:
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5412
     components:
     - type: Transform
       parent: 5390
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 10552
     components:
     - type: Transform
@@ -83051,39 +81895,18 @@ entities:
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 3177
     components:
     - type: Transform
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 3178
     components:
     - type: Transform
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5585
     components:
     - type: Transform
@@ -83122,39 +81945,18 @@ entities:
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 3180
     components:
     - type: Transform
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 3181
     components:
     - type: Transform
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5587
     components:
     - type: Transform
@@ -83281,6 +82083,20 @@ entities:
       parent: 10592
     - type: Physics
       canCollide: False
+- proto: JugArcryox
+  entities:
+  - uid: 10590
+    components:
+    - type: Transform
+      parent: 10585
+    - type: Physics
+      canCollide: False
+  - uid: 10597
+    components:
+    - type: Transform
+      parent: 10592
+    - type: Physics
+      canCollide: False
 - proto: JugCerebrin
   entities:
   - uid: 10587
@@ -83318,20 +82134,6 @@ entities:
     - type: Physics
       canCollide: False
   - uid: 10596
-    components:
-    - type: Transform
-      parent: 10592
-    - type: Physics
-      canCollide: False
-- proto: JugNecrosol
-  entities:
-  - uid: 10590
-    components:
-    - type: Transform
-      parent: 10585
-    - type: Physics
-      canCollide: False
-  - uid: 10597
     components:
     - type: Transform
       parent: 10592
@@ -83400,16 +82202,28 @@ entities:
     - type: Transform
       pos: -40.5,-7.5
       parent: 1
+    - type: ItemPlacer
+      placedEntities:
+      - 7698
+      - 7695
   - uid: 10607
     components:
     - type: Transform
       pos: -71.5,3.5
       parent: 1
+    - type: ItemPlacer
+      placedEntities:
+      - 7697
+      - 7696
   - uid: 10608
     components:
     - type: Transform
       pos: -51.5,22.5
       parent: 1
+    - type: ItemPlacer
+      placedEntities:
+      - 7694
+      - 7693
 - proto: KitchenKnife
   entities:
   - uid: 10609
@@ -84107,28 +82921,6 @@ entities:
     - type: Transform
       pos: -25.5,-18.5
       parent: 1
-- proto: LockerBlueshieldOperativeFilled
-  entities:
-  - uid: 10668
-    components:
-    - type: Transform
-      pos: -5.5,28.5
-      parent: 1
-  - uid: 10669
-    components:
-    - type: Transform
-      pos: -5.5,29.5
-      parent: 1
-  - uid: 10670
-    components:
-    - type: Transform
-      pos: -8.5,29.5
-      parent: 1
-  - uid: 10671
-    components:
-    - type: Transform
-      pos: -8.5,28.5
-      parent: 1
 - proto: LockerBoozeFilled
   entities:
   - uid: 10672
@@ -84630,6 +83422,28 @@ entities:
     - type: Transform
       pos: -21.5,-3.5
       parent: 1
+- proto: LockerSRTOperativeFilled
+  entities:
+  - uid: 10668
+    components:
+    - type: Transform
+      pos: -5.5,28.5
+      parent: 1
+  - uid: 10669
+    components:
+    - type: Transform
+      pos: -5.5,29.5
+      parent: 1
+  - uid: 10670
+    components:
+    - type: Transform
+      pos: -8.5,29.5
+      parent: 1
+  - uid: 10671
+    components:
+    - type: Transform
+      pos: -8.5,28.5
+      parent: 1
 - proto: LockerWallMedical
   entities:
   - uid: 476
@@ -85037,6 +83851,16 @@ entities:
     - type: Transform
       pos: 29.335365,9.378397
       parent: 1
+  - uid: 10780
+    components:
+    - type: Transform
+      pos: 29.627031,9.545179
+      parent: 1
+  - uid: 10781
+    components:
+    - type: Transform
+      pos: 29.512447,9.409669
+      parent: 1
 - proto: MagazinePistolSubMachineGunAcp
   entities:
   - uid: 10424
@@ -85123,18 +83947,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: MagazinePistolSubMachineGunRubber
-  entities:
-  - uid: 10780
-    components:
-    - type: Transform
-      pos: 29.627031,9.545179
-      parent: 1
-  - uid: 10781
-    components:
-    - type: Transform
-      pos: 29.512447,9.409669
-      parent: 1
 - proto: MagazineRifle
   entities:
   - uid: 10783
@@ -85327,6 +84139,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: Actions
       actions:
       - 77
@@ -85414,6 +84230,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: Actions
       actions:
       - 85
@@ -85500,6 +84320,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: Actions
       actions:
       - 92
@@ -85586,6 +84410,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: Actions
       actions:
       - 99
@@ -85674,6 +84502,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: WearingHeadset
       headset: 114
     - type: ThermalVision
@@ -85767,6 +84599,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: Actions
       actions:
       - 120
@@ -85880,6 +84716,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: Actions
       actions:
       - 127
@@ -85993,6 +84833,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: WearingHeadset
       headset: 5239
   - uid: 5436
@@ -86078,6 +84922,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: WearingHeadset
       headset: 5441
   - uid: 5740
@@ -86164,6 +85012,10 @@ entities:
           showEnts: False
           occludes: True
           ent: 5748
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: WearingHeadset
       headset: 5744
   - uid: 5802
@@ -86250,6 +85102,10 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+        body_organs: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
     - type: WearingHeadset
       headset: 5806
 - proto: Matchbox
@@ -86460,104 +85316,48 @@ entities:
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5648
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5649
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5650
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5651
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5652
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5653
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5654
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 10820
     components:
     - type: Transform
@@ -86855,13 +85655,6 @@ entities:
       count: 10
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1019
     components:
     - type: Transform
@@ -86870,13 +85663,6 @@ entities:
       count: 10
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1020
     components:
     - type: Transform
@@ -86885,13 +85671,6 @@ entities:
       count: 10
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1021
     components:
     - type: Transform
@@ -86900,13 +85679,6 @@ entities:
       count: 10
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1022
     components:
     - type: Transform
@@ -86915,13 +85687,6 @@ entities:
       count: 10
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1023
     components:
     - type: Transform
@@ -86930,13 +85695,6 @@ entities:
       count: 10
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1024
     components:
     - type: Transform
@@ -86945,13 +85703,6 @@ entities:
       count: 10
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: MicStand
   entities:
   - uid: 10844
@@ -87305,78 +86056,36 @@ entities:
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1184
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1185
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1186
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1187
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1188
     components:
     - type: Transform
       parent: 1168
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 10889
     components:
     - type: Transform
@@ -87991,7 +86700,13 @@ entities:
 
         [bullet]Уборщик [bold]Эмиви Пушистые Вапки[/bold] что привнес свое немаловажное оценочное мнение в обустройство сервисного отдела и на которого удалось свалить косяки других перед инвесторами.
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -88060,7 +86775,13 @@ entities:
 
         [italic]Место для печати[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -88133,7 +86854,13 @@ entities:
 
         [italic]Место для печати[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -88207,7 +86934,13 @@ entities:
 
         [italic]Место для печати[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -88284,7 +87017,13 @@ entities:
 
         [italic]Место для печати[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -88381,7 +87120,13 @@ entities:
 
         █████████▓▒▓▓▓▓▓▓▓▓▓▒▒▓██▒▒▓█████
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -88454,7 +87199,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -88880,7 +87631,13 @@ entities:
 
         [italic]Место для печати[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89125,7 +87882,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89214,7 +87977,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89308,7 +88077,13 @@ entities:
 
         [italic]Место для печати[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89378,7 +88153,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89446,7 +88227,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89526,7 +88313,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89607,7 +88400,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89650,13 +88449,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 43
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 44
     components:
     - type: Transform
@@ -89670,7 +88462,13 @@ entities:
         stampedName: В Утиль
       content: 'Я капитан станции EV-893 Эльдар ⬛⬛⬛⬛  докладываю : мой факс украли из-за этого прошу все бумаги отправлять на факс мостика . С уважением капитан'
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89713,13 +88511,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 45
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 59
     components:
     - type: Transform
@@ -89803,7 +88594,13 @@ entities:
 
         [bold]ЗАВЕРЕНО: Капитан станции NT-SS220 Frankenstein LV-891, Иврейн [/bold]⬛⬛⬛⬛.
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -89883,7 +88680,13 @@ entities:
 
         [bold]ЗАВЕРЕНО: Капитан станции NT-SS220 Frankenstein LV-891, Иврейн [/bold]⬛⬛⬛⬛.
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -90020,7 +88823,13 @@ entities:
 
         [bold]ЗАВЕРЕНО: Капитан станции NT-SS220 Frankenstein LV-891, Иврейн[/bold] ⬛⬛⬛⬛.
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -90393,7 +89202,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -90483,7 +89298,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -90565,7 +89386,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -90645,7 +89472,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -90765,7 +89598,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -90843,7 +89682,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -90899,7 +89744,13 @@ entities:
         stampedName: stamp-component-stamped-name-iaa
       content: "[bold]Форма НТ-КОМ-ЦК-ОТЧ[/bold]\r\n[head=2]Отчёт Агента Внутренних Дел[/head]\r\n\r\n[italic]Дата: 07/01/2569[/italic]\r\n\r\nЯ, Дженни ⬛⬛⬛⬛, как Агент Внутренних Дел, сообщаю:\r\n\r\nПосле прибытия на станцию примерно на сороковой минуте смены, мною был замечен капитан Виолетта ⬛⬛⬛⬛, находящаяся в баре, за игрой в карты с членом экипажа. На тот момент на станции был синий код.\n \r\nВ дальнейшем я получила жалобу от ГСБ, о том что капитан не исполняет свои прямые обязанности, а именно СРП, то есть не координирует и не контролирует работу отделов на станции, не обеспечивает выполнение указаний ЦК.\r\n\nВ ходе расследования по полученной жалобе, мною было установлено, что капитан большую часть прошедшей смены, а так же всё время до часа двадцати от начала смены, провела в баре, даже в красный код. \r\n\nНа станции объявлялся синий код по работе СБ в связи с полученным факсом с ЦК, а так же красный код по причине агрессивной фауны, капитан в это время находилась в баре. \r\n\nВ ходе разговора с капитаном примерно в час двадцать от начала смены, мною было установлено, что капитан находится в состоянии, похожем на алкогольное опьянение, не может чётко сформулировать свои действия по обеспечению работы по факсу с ЦК, не владеет информацией о работе отделов и не контролирует их, не имеет представления о ходе выполнения цели, и угрозах, возникающих на станции. \r\n\nГП Уми ⬛⬛⬛ так же подтвердила некомпетенцию капитана, высказав, цитирую \"она не работает, а сидит в баре\".\r\n\nГСБ Энзеру ⬛⬛⬛⬛ так же выразил опасения, что капитан возможно неквалифицирована, так как не имеет знаний о снаряжении, находящемся в её распоряжении и работе с ним.\r\n\r\n[italic]Данный документ может содержать нарушения, неправильность выполнения работы, невыполнение правил/сводов/законов/СРП.[/italic]\r\n\r\n[italic]Место для печатей[/italic]"
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -90982,7 +89833,13 @@ entities:
 
         [italic]Место для печати[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -91057,7 +89914,13 @@ entities:
 
         Печать магистрата
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -91100,13 +89963,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 73
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые плазматиеские волокна
-      fibers: []
-      fingerprints: []
   - uid: 10989
     components:
     - type: Transform
@@ -91167,7 +90023,13 @@ entities:
 
         [italic]Место для печатей[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -91269,7 +90131,13 @@ entities:
 
         [italic]Место для печати[/italic]
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -91335,7 +90203,13 @@ entities:
 
         Детали сообщения: Дорогое центральное командование, вопрос таков, вы отправляли на наш обьект протокол о лице что совершило преступления в нашем секторе? Если да, то оповестите пожалуйста нас, возможно ваше сообщение было перехвачено или же не отправлено до конца!
     - type: SolutionContainerManager
-      solutions: null
+      solutions:
+        food:
+          temperature: 293.15
+          canReact: True
+          maxVol: 0
+          name: food
+          reagents: []
       containers:
       - food
     - type: Physics
@@ -92230,40 +91104,30 @@ entities:
       rot: 3.141592653589793 rad
       pos: -71.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11118
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -73.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11119
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -74.5,-5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11120
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -74.5,-6.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11121
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -77.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: PlasmaReinforcedWindowDirectionalAng
   entities:
   - uid: 11122
@@ -92272,8 +91136,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -74.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: PlasticFlapsAirtightClear
   entities:
   - uid: 11123
@@ -92354,6 +91216,13 @@ entities:
       desc: Мягкая игрушка, напоминающая ядерного оперативника Синдиката. На бирке указано, что оперативники — это полнейшая выдумка. На спине имеется позывной 'Nuke'
     - type: Transform
       pos: -22.526827,-8.47471
+      parent: 1
+- proto: PlushieSpawner50
+  entities:
+  - uid: 12843
+    components:
+    - type: Transform
+      pos: 35.5,10.5
       parent: 1
 - proto: PortableFlasher
   entities:
@@ -93468,6 +92337,64 @@ entities:
     - type: Transform
       pos: -42.5,-3.5
       parent: 1
+- proto: PowerCellBlasterHighCapacity
+  entities:
+  - uid: 1133
+    components:
+    - type: Transform
+      parent: 1132
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 1134
+    components:
+    - type: Transform
+      parent: 1132
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 1135
+    components:
+    - type: Transform
+      parent: 1132
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 1136
+    components:
+    - type: Transform
+      parent: 1132
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 1137
+    components:
+    - type: Transform
+      parent: 1132
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 1138
+    components:
+    - type: Transform
+      parent: 1132
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 1139
+    components:
+    - type: Transform
+      parent: 1132
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 1140
+    components:
+    - type: Transform
+      parent: 1132
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: PowerCellHigh
   entities:
   - uid: 11321
@@ -95830,104 +94757,48 @@ entities:
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1369
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1370
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1371
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1372
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1373
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1374
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1375
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: PyraAutoInjector
   entities:
   - uid: 481
@@ -95950,104 +94821,48 @@ entities:
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1377
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1378
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1379
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1380
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1381
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1382
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 1383
     components:
     - type: Transform
       parent: 1343
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: Rack
   entities:
   - uid: 11708
@@ -96481,26 +95296,12 @@ entities:
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 505
     components:
     - type: Transform
       parent: 483
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - оранжевые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: RadioHandheldCentcom
   entities:
   - uid: 11718
@@ -97479,104 +96280,48 @@ entities:
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5656
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5657
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5658
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5659
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5660
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5661
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5662
     components:
     - type: Transform
       parent: 5646
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 10826
     components:
     - type: Transform
@@ -97601,50 +96346,36 @@ entities:
     - type: Transform
       pos: -20.5,-13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11887
     components:
     - type: Transform
       pos: -26.5,-13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11888
     components:
     - type: Transform
       pos: -19.5,-13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11889
     components:
     - type: Transform
       pos: -27.5,-13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11890
     components:
     - type: Transform
       pos: -22.5,-13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11891
     components:
     - type: Transform
       pos: -25.5,-13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11892
     components:
     - type: Transform
       pos: -23.5,-13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: ReinforcedUraniumWindow
   entities:
   - uid: 11893
@@ -97653,211 +96384,155 @@ entities:
       rot: 3.141592653589793 rad
       pos: -27.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11894
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -29.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11895
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -30.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11896
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -28.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11897
     components:
     - type: Transform
       pos: -32.5,-7.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11898
     components:
     - type: Transform
       pos: -35.5,-7.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11899
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 1.5,33.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11900
     components:
     - type: Transform
       pos: -0.5,30.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11901
     components:
     - type: Transform
       pos: -0.5,31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11902
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 2.5,33.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11903
     components:
     - type: Transform
       pos: 2.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11904
     components:
     - type: Transform
       pos: 0.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11905
     components:
     - type: Transform
       pos: -0.5,32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11906
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 0.5,33.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11907
     components:
     - type: Transform
       pos: -32.5,-3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11908
     components:
     - type: Transform
       pos: -35.5,-3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11909
     components:
     - type: Transform
       pos: -46.5,10.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11910
     components:
     - type: Transform
       pos: -46.5,11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11911
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -79.5,5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11912
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -52.5,11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11913
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -56.5,11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11914
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -48.5,8.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11915
     components:
     - type: Transform
       pos: -83.5,5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11916
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -84.5,5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11917
     components:
     - type: Transform
       pos: -80.5,5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11918
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -49.5,8.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11919
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -26.5,15.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11920
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -26.5,17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: ReinforcedWindow
   entities:
   - uid: 11921
@@ -97866,1059 +96541,773 @@ entities:
       rot: 3.141592653589793 rad
       pos: 23.5,-36.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11922
     components:
     - type: Transform
       pos: 34.5,-46.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11923
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 24.5,-35.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11924
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 34.5,-34.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11925
     components:
     - type: Transform
       pos: 34.5,-45.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11926
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 24.5,-45.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11927
     components:
     - type: Transform
       pos: -22.5,-31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11928
     components:
     - type: Transform
       pos: -22.5,-32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11929
     components:
     - type: Transform
       pos: -21.5,-29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11930
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -9.5,-30.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11931
     components:
     - type: Transform
       pos: -22.5,-29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11932
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -1.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11933
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -55.5,-5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11934
     components:
     - type: Transform
       pos: -21.5,-31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11935
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -9.5,-28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11936
     components:
     - type: Transform
       pos: -22.5,-28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11937
     components:
     - type: Transform
       pos: -23.5,-31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11938
     components:
     - type: Transform
       pos: -23.5,-29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11939
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -13.5,35.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11940
     components:
     - type: Transform
       pos: 31.5,-31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11941
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -10.5,36.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11942
     components:
     - type: Transform
       pos: 31.5,-32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11943
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -10.5,35.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11944
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -5.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11945
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -16.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11946
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -6.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11947
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 27.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11948
     components:
     - type: Transform
       pos: 11.5,-10.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11949
     components:
     - type: Transform
       pos: 12.5,-10.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11950
     components:
     - type: Transform
       pos: 13.5,-10.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11951
     components:
     - type: Transform
       pos: 16.5,-9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11952
     components:
     - type: Transform
       pos: 16.5,-5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11953
     components:
     - type: Transform
       pos: 17.5,-2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11954
     components:
     - type: Transform
       pos: 17.5,-1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11955
     components:
     - type: Transform
       pos: 17.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11956
     components:
     - type: Transform
       pos: 17.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11957
     components:
     - type: Transform
       pos: 17.5,3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11958
     components:
     - type: Transform
       pos: 16.5,12.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11959
     components:
     - type: Transform
       pos: 38.5,-19.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11960
     components:
     - type: Transform
       pos: 18.5,12.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11961
     components:
     - type: Transform
       pos: 38.5,-18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11962
     components:
     - type: Transform
       pos: 20.5,12.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11963
     components:
     - type: Transform
       pos: 38.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11964
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -3.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11965
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -7.5,-10.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11966
     components:
     - type: Transform
       pos: -13.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11967
     components:
     - type: Transform
       pos: 29.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11968
     components:
     - type: Transform
       pos: 28.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11969
     components:
     - type: Transform
       pos: -13.5,-5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11970
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 33.5,21.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11971
     components:
     - type: Transform
       pos: -13.5,-7.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11972
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -16.5,0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11973
     components:
     - type: Transform
       pos: 1.5,-9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11974
     components:
     - type: Transform
       pos: -1.5,-9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11975
     components:
     - type: Transform
       pos: 7.5,15.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11976
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -2.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11977
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -1.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11978
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -4.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11979
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11980
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,16.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11981
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 33.5,19.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11982
     components:
     - type: Transform
       pos: 17.5,-0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11983
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 25.5,13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11984
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 25.5,10.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11985
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -16.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11986
     components:
     - type: Transform
       pos: -13.5,-8.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11987
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 27.5,26.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11988
     components:
     - type: Transform
       pos: 16.5,30.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11989
     components:
     - type: Transform
       pos: 16.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11990
     components:
     - type: Transform
       pos: 16.5,28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11991
     components:
     - type: Transform
       pos: 16.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11992
     components:
     - type: Transform
       pos: 16.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11993
     components:
     - type: Transform
       pos: 16.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11994
     components:
     - type: Transform
       pos: 16.5,21.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11995
     components:
     - type: Transform
       pos: 16.5,20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11996
     components:
     - type: Transform
       pos: 16.5,19.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11997
     components:
     - type: Transform
       pos: 16.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11998
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 25.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 11999
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 33.5,20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12000
     components:
     - type: Transform
       pos: 41.5,-0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12001
     components:
     - type: Transform
       pos: 41.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12002
     components:
     - type: Transform
       pos: 38.5,-3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12003
     components:
     - type: Transform
       pos: 41.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12004
     components:
     - type: Transform
       pos: 38.5,-10.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12005
     components:
     - type: Transform
       pos: 38.5,-9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12006
     components:
     - type: Transform
       pos: 38.5,-2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12007
     components:
     - type: Transform
       pos: 38.5,-11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12008
     components:
     - type: Transform
       pos: 41.5,0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12009
     components:
     - type: Transform
       pos: 27.5,-32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12010
     components:
     - type: Transform
       pos: 27.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12011
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 24.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12012
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 13.5,31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12013
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 14.5,31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12014
     components:
     - type: Transform
       pos: 31.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12015
     components:
     - type: Transform
       pos: 27.5,-31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12016
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -13.5,36.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12017
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -7.5,-38.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12018
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -13.5,-37.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12019
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -7.5,-36.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12020
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -12.5,-37.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12021
     components:
     - type: Transform
       pos: -49.5,-22.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12022
     components:
     - type: Transform
       pos: -52.5,-22.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12023
     components:
     - type: Transform
       pos: -52.5,-23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12024
     components:
     - type: Transform
       pos: -49.5,-23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12025
     components:
     - type: Transform
       pos: 7.5,-16.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12026
     components:
     - type: Transform
       pos: 22.5,-41.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12027
     components:
     - type: Transform
       pos: 22.5,-40.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12028
     components:
     - type: Transform
       pos: 22.5,-39.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12029
     components:
     - type: Transform
       pos: 36.5,-39.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12030
     components:
     - type: Transform
       pos: 36.5,-40.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12031
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 35.5,-44.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12032
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -2.5,-37.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12033
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 34.5,-35.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12034
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 25.5,-34.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12035
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 35.5,-35.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12036
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 33.5,-34.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12037
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 23.5,-44.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12038
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 25.5,-46.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12039
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -1.5,-37.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12040
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 35.5,-36.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12041
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 7.5,-26.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12042
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 7.5,-30.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12043
     components:
     - type: Transform
       pos: -6.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12044
     components:
     - type: Transform
       pos: -6.5,-26.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12045
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -11.5,-37.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12046
     components:
     - type: Transform
       pos: -6.5,-20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12047
     components:
     - type: Transform
       pos: -2.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12048
     components:
     - type: Transform
       pos: -57.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12049
     components:
     - type: Transform
       pos: -57.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12050
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -74.5,6.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12051
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 36.5,-41.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12052
     components:
     - type: Transform
       pos: -54.5,-11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12053
     components:
     - type: Transform
       pos: -53.5,-11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12054
     components:
     - type: Transform
       pos: -52.5,-11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12055
     components:
     - type: Transform
       pos: -51.5,-11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12056
     components:
     - type: Transform
       pos: -34.5,14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12057
     components:
     - type: Transform
       pos: -32.5,14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12058
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 23.5,-35.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12059
     components:
     - type: Transform
       pos: 33.5,-46.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12060
     components:
     - type: Transform
       pos: 35.5,-45.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12061
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 24.5,-34.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12062
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 24.5,-46.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12063
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 23.5,-45.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: ReinforcementRadioSyndicateFake
   entities:
   - uid: 12064
@@ -99214,26 +97603,12 @@ entities:
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1026
     components:
     - type: Transform
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5522
     components:
     - type: Transform
@@ -99445,26 +97820,12 @@ entities:
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 3183
     components:
     - type: Transform
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5593
     components:
     - type: Transform
@@ -99487,26 +97848,12 @@ entities:
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1028
     components:
     - type: Transform
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 6029
     components:
     - type: Transform
@@ -99816,13 +98163,6 @@ entities:
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 6046
     components:
     - type: Transform
@@ -99917,65 +98257,30 @@ entities:
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1031
     components:
     - type: Transform
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1032
     components:
     - type: Transform
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1033
     components:
     - type: Transform
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 1034
     components:
     - type: Transform
       parent: 1013
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5530
     components:
     - type: Transform
@@ -100251,26 +98556,12 @@ entities:
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 3185
     components:
     - type: Transform
       parent: 3171
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - черные укрепленные тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5603
     components:
     - type: Transform
@@ -101065,15 +99356,11 @@ entities:
     - type: Transform
       pos: -59.5,-15.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12107
     components:
     - type: Transform
       pos: -58.5,-15.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: ShuttersNormalOpen
   entities:
   - uid: 12108
@@ -101082,75 +99369,55 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 8.5,-9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12109
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 8.5,-8.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12110
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 8.5,-6.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12111
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 8.5,-7.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12112
     components:
     - type: Transform
       pos: 27.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12113
     components:
     - type: Transform
       pos: 28.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12114
     components:
     - type: Transform
       pos: 29.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12115
     components:
     - type: Transform
       pos: 30.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12116
     components:
     - type: Transform
       pos: 31.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12117
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 5.5,-20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: ShuttersWindowOpen
   entities:
   - uid: 12118
@@ -101158,46 +99425,34 @@ entities:
     - type: Transform
       pos: 9.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12119
     components:
     - type: Transform
       pos: 11.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12120
     components:
     - type: Transform
       pos: 10.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12121
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,-16.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12122
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12123
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,-18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: SignalButton
   entities:
   - uid: 12124
@@ -102174,52 +100429,24 @@ entities:
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5719
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5720
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5721
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: Sink
   entities:
   - uid: 12215
@@ -102367,104 +100594,48 @@ entities:
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5669
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5670
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5671
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5672
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5673
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5674
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5675
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: Soap
   entities:
   - uid: 5486
@@ -102892,208 +101063,96 @@ entities:
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5615
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5616
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5617
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5618
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5619
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5620
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5621
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5622
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5623
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5624
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5625
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5626
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5627
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5628
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5629
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: StimpackERT
   entities:
   - uid: 5630
@@ -103102,208 +101161,96 @@ entities:
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5631
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5632
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5633
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5634
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5635
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5636
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5637
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5638
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5639
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5640
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5641
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5642
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5643
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5644
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
   - uid: 5645
     components:
     - type: Transform
       parent: 5605
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - белые синтетические волокна
-      fibers: []
-      fingerprints: []
 - proto: StoolBar
   entities:
   - uid: 12292
@@ -106375,104 +104322,48 @@ entities:
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5677
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5678
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5679
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5680
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5681
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5682
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5683
     components:
     - type: Transform
       parent: 5663
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: TelecomServer
   entities:
   - uid: 12803
@@ -106781,13 +104672,6 @@ entities:
     - type: Transform
       pos: -60.433006,-3.7285128
       parent: 1
-- proto: ToySpawner
-  entities:
-  - uid: 12843
-    components:
-    - type: Transform
-      pos: 35.5,10.5
-      parent: 1
 - proto: TrashBin
   entities:
   - uid: 12844
@@ -107071,64 +104955,48 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -83.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12875
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -83.5,0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12876
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -63.5,11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12877
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -59.5,9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12878
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -59.5,11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12879
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -63.5,13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12880
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -63.5,9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 12881
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -59.5,13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: VariantCubeBox
   entities:
   - uid: 1312
@@ -117449,18 +115317,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -47.5,10.5
       parent: 1
-- proto: WarderobePrisonSecureFilled
-  entities:
-  - uid: 14774
-    components:
-    - type: Transform
-      pos: 24.5,10.5
-      parent: 1
-  - uid: 14775
-    components:
-    - type: Transform
-      pos: 24.5,13.5
-      parent: 1
 - proto: WardrobeCargoFilled
   entities:
   - uid: 14776
@@ -117484,6 +115340,18 @@ entities:
     components:
     - type: Transform
       pos: 3.5,-32.5
+      parent: 1
+- proto: WardrobePrisonSecureFilled
+  entities:
+  - uid: 14774
+    components:
+    - type: Transform
+      pos: 24.5,10.5
+      parent: 1
+  - uid: 14775
+    components:
+    - type: Transform
+      pos: 24.5,13.5
       parent: 1
 - proto: WarningN2
   entities:
@@ -117686,7 +115554,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: WeaponLaserCarabine
+- proto: WeaponLaserCarbineIK60
   entities:
   - uid: 10451
     components:
@@ -118216,52 +116084,24 @@ entities:
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5723
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5724
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
   - uid: 5725
     components:
     - type: Transform
       parent: 5705
     - type: Physics
       canCollide: False
-    - type: Forensics
-      residues: []
-      dnas: []
-      microFibers:
-      - серые тканевые волокна
-      fibers: []
-      fingerprints: []
 - proto: Windoor
   entities:
   - uid: 14827
@@ -118270,30 +116110,22 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 7.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14828
     components:
     - type: Transform
       pos: 30.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14829
     components:
     - type: Transform
       pos: 2.5,14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14830
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 7.5,-18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorBarLocked
   entities:
   - uid: 14831
@@ -118302,32 +116134,24 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,-8.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14832
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 8.5,-6.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14833
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 8.5,-9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14834
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 8.5,-7.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorKitchenHydroponicsLocked
   entities:
   - uid: 14835
@@ -118336,32 +116160,24 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14836
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 8.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14837
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 8.5,3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14838
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 8.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecure
   entities:
   - uid: 14839
@@ -118370,40 +116186,30 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,-16.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14840
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -4.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14841
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -11.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14842
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -10.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14843
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 21.5,22.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14844
     components:
     - type: MetaData
@@ -118412,72 +116218,54 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 16.5,24.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14845
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 21.5,26.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14846
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 30.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
     - type: Door
-      secondsUntilStateChange: -1087806.8
+      secondsUntilStateChange: -1087869.8
       state: Opening
   - uid: 14847
     components:
     - type: Transform
       pos: -33.5,14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14848
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -24.5,0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14849
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -23.5,0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14850
     components:
     - type: Transform
       pos: -24.5,5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14851
     components:
     - type: Transform
       pos: -23.5,5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14852
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -10.5,11.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecureArmoryLocked
   entities:
   - uid: 14853
@@ -118486,31 +116274,23 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 29.5,9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14854
     components:
     - type: Transform
       pos: 24.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14855
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 25.5,3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14856
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 29.5,8.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecureBrigLocked
   entities:
   - uid: 14857
@@ -118519,24 +116299,18 @@ entities:
       rot: 3.141592653589793 rad
       pos: 30.5,-4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14858
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 25.5,9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14859
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 25.5,12.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecureCargoLocked
   entities:
   - uid: 14860
@@ -118545,16 +116319,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.5,-16.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14861
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -4.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecureCentralCommandLocked
   entities:
   - uid: 14862
@@ -118563,118 +116333,88 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -36.5,20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14863
     components:
     - type: Transform
       pos: -8.5,32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14864
     components:
     - type: Transform
       pos: -5.5,32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14865
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -10.5,32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14866
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -10.5,31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14867
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -5.5,28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14868
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -5.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14869
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -8.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14870
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -8.5,28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14871
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -36.5,19.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14872
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -31.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14873
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -30.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14874
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -29.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14875
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -25.5,20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14876
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -25.5,20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecureChemistryLocked
   entities:
   - uid: 14877
@@ -118683,32 +116423,24 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 7.5,-18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14878
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14879
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -33.5,14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14880
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -53.5,-5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecureEngineeringLocked
   entities:
   - uid: 14881
@@ -118716,15 +116448,11 @@ entities:
     - type: Transform
       pos: -10.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14882
     components:
     - type: Transform
       pos: -11.5,-14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecureHeadOfPersonnelLocked
   entities:
   - uid: 14883
@@ -118733,8 +116461,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecureJanitorLocked
   entities:
   - uid: 14884
@@ -118742,16 +116468,12 @@ entities:
     - type: Transform
       pos: 25.5,-27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14885
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 24.5,-28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindoorSecureSecurityLocked
   entities:
   - uid: 14886
@@ -118760,8 +116482,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -24.5,5.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14887
     components:
     - type: Transform
@@ -118770,22 +116490,16 @@ entities:
       parent: 1
     - type: AccessReader
       accessListsOriginal: []
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14888
     components:
     - type: Transform
       pos: -24.5,0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14889
     components:
     - type: Transform
       pos: -23.5,0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: Window
   entities:
   - uid: 14890
@@ -118793,108 +116507,80 @@ entities:
     - type: Transform
       pos: 36.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14891
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 34.5,-3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14892
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 36.5,-3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14893
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 35.5,-3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14894
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,12.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14895
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 2.5,12.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14896
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 5.5,12.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14897
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 4.5,12.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14898
     components:
     - type: Transform
       pos: 12.5,21.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14899
     components:
     - type: Transform
       pos: 11.5,21.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14900
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 12.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14901
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 11.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14902
     components:
     - type: Transform
       pos: 34.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14903
     components:
     - type: Transform
       pos: 35.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindowClockworkDirectional
   entities:
   - uid: 14904
@@ -118903,93 +116589,69 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 26.5,24.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14905
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 26.5,24.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14906
     components:
     - type: Transform
       pos: 26.5,24.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14907
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 26.5,24.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14908
     components:
     - type: Transform
       pos: 16.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14909
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 16.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14910
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 16.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14911
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 16.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14912
     components:
     - type: Transform
       pos: 16.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14913
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 16.5,21.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14914
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 12.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14915
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 12.5,21.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindowDirectional
   entities:
   - uid: 14916
@@ -118998,40 +116660,30 @@ entities:
       rot: 3.141592653589793 rad
       pos: 9.5,-35.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14917
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 7.5,-35.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14918
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 24.5,-20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14919
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 25.5,-20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14920
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -23.5,13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindowFrostedDirectional
   entities:
   - uid: 14921
@@ -119040,32 +116692,24 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -40.5,-16.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14922
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -41.5,-16.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14923
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -42.5,-16.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14924
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -43.5,-16.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindowReinforcedDirectional
   entities:
   - uid: 14925
@@ -119074,683 +116718,505 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -10.5,12.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14926
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -49.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14927
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 2.5,-17.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14928
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,-19.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14929
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,-15.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14930
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14931
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -7.5,32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14932
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.5,28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14933
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -4.5,32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14934
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -6.5,32.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14935
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -10.5,13.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14936
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -10.5,10.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14937
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 0.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14938
     components:
     - type: Transform
       pos: -4.5,0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14939
     components:
     - type: Transform
       pos: -3.5,0.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14940
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 0.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14941
     components:
     - type: Transform
       pos: 29.5,8.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14942
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 25.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14943
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 15.5,3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14944
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 16.5,3.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14945
     components:
     - type: Transform
       pos: 16.5,-2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14946
     components:
     - type: Transform
       pos: 15.5,-2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14947
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,21.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14948
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,20.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14949
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14950
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14951
     components:
     - type: Transform
       pos: 22.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14952
     components:
     - type: Transform
       pos: 21.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14953
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 21.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14954
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 22.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14955
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 21.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14956
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 21.5,24.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14957
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 21.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14958
     components:
     - type: Transform
       pos: 21.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14959
     components:
     - type: Transform
       pos: 22.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14960
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 22.5,21.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14961
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 21.5,21.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14962
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 19.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14963
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 19.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14964
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 19.5,24.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14965
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 19.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14966
     components:
     - type: Transform
       pos: 19.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14967
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14968
     components:
     - type: Transform
       pos: 18.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14969
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 18.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14970
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 18.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14971
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 17.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14972
     components:
     - type: Transform
       pos: 17.5,23.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14973
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 28.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14974
     components:
     - type: Transform
       pos: 29.5,9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14975
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 29.5,18.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14976
     components:
     - type: Transform
       pos: 22.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14977
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 25.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14978
     components:
     - type: Transform
       pos: 23.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14979
     components:
     - type: Transform
       pos: 25.5,2.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14980
     components:
     - type: Transform
       pos: -10.5,31.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14981
     components:
     - type: Transform
       pos: 21.5,-27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14982
     components:
     - type: Transform
       pos: 22.5,-27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14983
     components:
     - type: Transform
       pos: 23.5,-27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14984
     components:
     - type: Transform
       pos: 24.5,-27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14985
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -5.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14986
     components:
     - type: Transform
       pos: -5.5,28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14987
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -8.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14988
     components:
     - type: Transform
       pos: -8.5,28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14989
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -48.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14990
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -39.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14991
     components:
     - type: Transform
       pos: -47.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14992
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -47.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14993
     components:
     - type: Transform
       pos: -48.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14994
     components:
     - type: Transform
       pos: -40.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14995
     components:
     - type: Transform
       pos: -39.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14996
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -40.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14997
     components:
     - type: Transform
       pos: -49.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14998
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -56.5,14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 14999
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -19.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15000
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -18.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15001
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -17.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15002
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -16.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15003
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -15.5,29.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15004
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -52.5,14.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15005
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -25.5,28.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15006
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -25.5,27.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15007
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -25.5,25.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15008
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -25.5,24.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15009
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -25.5,26.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15010
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -10.5,9.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15011
     components:
     - type: Transform
       pos: -45.5,22.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15012
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -30.5,26.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15013
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -30.5,26.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WindowReinforcedDirectionalAng
   entities:
   - uid: 15014
@@ -119759,62 +117225,46 @@ entities:
       rot: 3.141592653589793 rad
       pos: -41.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15015
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -38.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15016
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -50.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15017
     components:
     - type: Transform
       pos: -38.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15018
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -46.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15019
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -41.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15020
     components:
     - type: Transform
       pos: -46.5,4.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
   - uid: 15021
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -50.5,1.5
       parent: 1
-    - type: DeltaPressure
-      gridUid: 1
 - proto: WoodenBench
   entities:
   - uid: 15022

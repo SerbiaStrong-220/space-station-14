@@ -12,6 +12,7 @@ using Content.Shared.Objectives.Systems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Antag;
 using Robust.Shared.Random;
+using Content.Server.SS220.Messenger;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -23,6 +24,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SuitSensorSystem _sensor = default!;
     [Dependency] private readonly TargetSystem _target = default!;
+    [Dependency] private MessengerServerSystem _messengerServer = default!; //SS220-messenger-paradox-clone
 
     public override void Initialize()
     {
@@ -92,6 +94,8 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
             Log.Error($"Unable to make a paradox clone of entity {ToPrettyString(ent.Comp.OriginalBody)}");
             return;
         }
+
+        _messengerServer.TryLinkClone(ent.Comp.OriginalBody.Value, clone.Value); //SS220-messenger-paradox-clone
 
         var targetComp = EnsureComp<TargetOverrideComponent>(clone.Value);
         targetComp.Target = ent.Comp.OriginalMind; // set the kill target

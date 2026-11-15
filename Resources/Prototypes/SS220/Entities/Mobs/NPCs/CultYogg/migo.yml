@@ -75,6 +75,7 @@
     gridsBlacklist:
       tags:
       - AstralBlocker
+  - type: StatusIcon
   - type: ShowCultYoggIcons
   - type: NpcFactionMember
     factions:

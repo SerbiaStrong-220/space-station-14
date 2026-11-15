@@ -311,7 +311,7 @@
   name: SharkDragon
   id: MobSharkEldrichDragon
   suffix: Shitspawn, Lanc
-  parent: [ SimpleSpaceMobBase, BaseMobBloodsucker, FlyingMobBase, MobCombat, MobPassiveCollision ]
+  parent: [ BaseMobBloodsucker, SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ]
   components:
     - type: InputMover
     - type: MobMover

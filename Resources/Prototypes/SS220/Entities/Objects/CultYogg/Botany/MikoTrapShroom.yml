@@ -1,7 +1,7 @@
 - type: entity
   name: miko trap
-  parent: [BaseBearTrap, CultYoggRestrictedItem]
-  id: FoodMikoTrapShroomCult
+  parent: [BaseBearTrap, BaseRestrictedLivingItem]
+  id: FoodMikoTrapShroom
   description: a hidden mushroom trap for infidels.
   components:
     - type: Sprite
@@ -43,6 +43,7 @@
       seedId: MikoTrapShroomSpores
     - type: Tag
       tags:
+      - YoggEquipment
       - Omnivorous
       - Unstackable
 
@@ -65,7 +66,7 @@
   plantRsi: SS220/Objects/CultYogg/Botany/miko_trap_shroom.rsi
   packetPrototype: MikoTrapShroomSeeds
   productPrototypes:
-  - FoodMikoTrapShroomCult
+  - FoodMikoTrapShroom
   harvestRepeat: Repeat
   lifespan: 25
   maturation: 12
