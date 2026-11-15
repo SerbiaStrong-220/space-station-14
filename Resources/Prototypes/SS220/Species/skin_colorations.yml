@@ -1,0 +1,8 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: skinColoration
+  id: TajaranFur
+  strategy: !type:ClampedHslColoration
+    hue: [0.0, 0.14]
+    saturation: [0.0, 0.65]
+    lightness: [0.1, 1.0]

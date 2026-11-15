@@ -154,3 +154,7 @@ ent-ClothingHeadHatCone2 = { ent-ClothingHeadHatCone }
 
 ent-ClothingHeadHatCone3 = { ent-ClothingHeadHatCone }
     .desc = { ent-ClothingHeadHatCone.desc }
+
+ent-ClothingHeadHatMimeHarlequin = колпак готического арлекина
+    .desc = Высокий колпак как символ успеха и признания.
+    .suffix = За время в игре
