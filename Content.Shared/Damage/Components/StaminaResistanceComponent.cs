@@ -37,6 +37,10 @@ public sealed partial class StaminaResistanceComponent : Component
     public LocId Examine = "stamina-resistance-coefficient-value";
 
     //SS220-StaminaConvertToggle begin
+    /// <summary>
+    /// Whether stamina resistance is currently applied. Allows disabling the
+    /// effect runtime without removing component or reequipping the item.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool Enabled = true;
     //SS220-StaminaConvertToggle end
