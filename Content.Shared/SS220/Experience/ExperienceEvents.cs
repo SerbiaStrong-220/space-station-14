@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Experience;
@@ -46,11 +47,3 @@ public record struct KnowledgeGainedEvent(ProtoId<KnowledgePrototype> Knowledge)
 /// </summary>
 [ByRefEvent]
 public record struct KnowledgeLostEvent(ProtoId<KnowledgePrototype> Knowledge);
-
-/// <summary>
-/// Raised on override skill entity to check if it subscribed to event
-/// </summary>
-/// <typeparam name="T"> event type </typeparam>
-/// <param name="Subscribed"> flag that returned if entity subscribed </param>
-[ByRefEvent]
-public record struct SkillEntityOverrideCheckEvent<T>(bool Subscribed = false) where T : notnull;

@@ -16,6 +16,7 @@ public enum AirAlarmMode
     WideFiltering,
     Fill,
     Panic,
+    Flood, // SS220 MalfAI
 }
 
 [Serializable, NetSerializable]
@@ -37,7 +38,8 @@ public interface IAtmosDeviceData
 [Serializable, NetSerializable]
 public sealed class AirAlarmUIState : BoundUserInterfaceState
 {
-    public AirAlarmUIState(string address, int deviceCount, float pressureAverage, float temperatureAverage, List<(string, IAtmosDeviceData)> deviceData, AirAlarmMode mode, AtmosAlarmType alarmType, bool autoMode, bool panicWireCut)
+    // SS220 MalfAI: floodUnlocked exposes the station upgrade to the client.
+    public AirAlarmUIState(string address, int deviceCount, float pressureAverage, float temperatureAverage, List<(string, IAtmosDeviceData)> deviceData, AirAlarmMode mode, AtmosAlarmType alarmType, bool autoMode, bool panicWireCut, bool floodUnlocked = false)
     {
         Address = address;
         DeviceCount = deviceCount;
@@ -48,6 +50,7 @@ public sealed class AirAlarmUIState : BoundUserInterfaceState
         AlarmType = alarmType;
         AutoMode = autoMode;
         PanicWireCut = panicWireCut;
+        FloodUnlocked = floodUnlocked; // SS220 MalfAI
     }
 
     public string Address { get; }
@@ -66,6 +69,9 @@ public sealed class AirAlarmUIState : BoundUserInterfaceState
     public AtmosAlarmType AlarmType { get; }
     public bool AutoMode { get; }
     public bool PanicWireCut { get; }
+    // SS220 MalfAI begin
+    public bool FloodUnlocked { get; }
+    // SS220 MalfAI end
 }
 
 [Serializable, NetSerializable]
