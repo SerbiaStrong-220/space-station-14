@@ -25,18 +25,19 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 using Content.Shared.Gibbing;
+using Content.Shared.Humanoid;
+// SS220 Recycler expansion begin
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
-using Content.Shared.Humanoid;
 using Robust.Shared.Containers;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Body;
-// SS220 recycler expansion end
+using Robust.Shared.Map;
+// SS220 Recycler expansion end
 
 namespace Content.Server.Materials;
 
@@ -55,14 +56,14 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    // SS220 recycler expansion start
+    // SS220 Recycler expansion begin
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly SharedBatterySystem _batterySystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private static readonly ProtoId<ReagentPrototype> BloodId = "Blood";
     private static readonly FixedPoint2 OrganBloodVolume = 20;
-    // SS220 recycler expansion end
+    // SS220 Recycler expansion end
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -91,6 +92,14 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
         if (args.Handled)
             return;
 
+        // SS220 Recycler expansion begin
+        // if we're trying to get a solution out of the reclaimer, don't destroy it
+        if (ShouldSkipStartProcess(entity, args.Used))
+            return;
+        // SS220 Recycler expansion end
+
+        /*
+        // Original code replaced by SS220 expansion
         // if we're trying to get a solution out of the reclaimer, don't destroy it
         if (_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.SolutionContainerId, out _, out var outputSolution) && outputSolution.Contents.Any())
         {
@@ -105,9 +114,42 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
                     return;
             }
         }
+        */
 
         args.Handled = TryStartProcessItem(entity.Owner, args.Used, entity.Comp, args.User);
     }
+
+    // SS220 Recycler expansion begin
+    /// <summary>
+    /// Checks if we should skip the start process, for example if we're trying to get a solution out of the reclaimer.
+    /// </summary>
+    private bool ShouldSkipStartProcess(Entity<MaterialReclaimerComponent> entity, EntityUid used)
+    {
+        // if we're trying to get a solution out of the reclaimer, don't destroy it
+        if (!_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.SolutionContainerId, out _, out var outputSolution) ||
+            !outputSolution.Contents.Any())
+        {
+            return false;
+        }
+
+        if (!TryComp<SolutionContainerManagerComponent>(used, out var managerComponent))
+            return false;
+
+        var hasCapacity = _solutionContainer.EnumerateSolutions((used, managerComponent))
+            .Any(s => s.Solution.Comp.Solution.AvailableVolume > 0);
+
+        if (!hasCapacity)
+            return false;
+
+        if (_openable.IsClosed(used))
+            return false;
+
+        if (TryComp<SolutionTransferComponent>(used, out var transfer) && transfer.CanReceive)
+            return true;
+
+        return false;
+    }
+    // SS220 Recycler expansion end
 
     private void OnSuicideByEnvironment(Entity<MaterialReclaimerComponent> entity, ref SuicideByEnvironmentEvent args)
     {
@@ -203,77 +245,126 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 
         var xform = Transform(uid);
 
-        // SS220 recycler expansion start
+        // SS220 Recycler expansion begin
+        // Reclaim solutions from the item before it's destroyed.
         if (component.ReclaimSolutions)
             SpawnChemicalsFromComposition(uid, item, completion, !CanGib(uid, item, component), component, xform);
 
-        if (TryComp<ContainerManagerComponent>(item, out var containerManager))
-        {
-            foreach (var container in _container.GetAllContainers(item, containerManager))
-            {
-                var containerId = container.ToString();
-                if (containerId != null && containerId.StartsWith("solution@"))
-                    continue;
+        // Drop all items from containers inside the processed item.
+        EmptyItemContainers(item, xform.Coordinates);
 
-                _container.EmptyContainer(container, true, xform.Coordinates);
-            }
-        }
+        // Batteries can explode if they have charge.
+        HandleBatteryExplosion(uid, item);
 
-        if (TryComp<PowerCellComponent>(item, out var cell) && TryComp<BatteryComponent>(item, out var battery))
-        {
-            var charge = _batterySystem.GetCharge((item, battery));
-            if (charge > 0)
-            {
-                var intensity = Math.Min(charge / 1000f, 20f);
-                _explosion.QueueExplosion(uid, "Default", intensity, 1f, 2f, addLog: false);
-            }
-        }
-
+        // Reclaim materials based on physical composition.
         if (component.ReclaimMaterials)
             SpawnMaterialsFromComposition(uid, item, completion * component.Efficiency, xform: xform);
 
+        // Handle gibbing for humanoids and organic parts.
         if (CanGib(uid, item, component) || HasComp<OrganComponent>(item))
         {
-            var isOrgan = HasComp<OrganComponent>(item);
-            var logImpact = (HasComp<HumanoidProfileComponent>(item) || isOrgan) ? LogImpact.Extreme : LogImpact.Medium;
-            _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity} ");
-
-            if (isOrgan)
-            {
-                var bloodSolution = new Solution();
-
-                if (TryComp<OrganComponent>(item, out var organ))
-                {
-                    if (TryComp<BloodstreamComponent>(organ.Body, out var bloodstream))
-                    {
-                        bloodSolution.AddSolution(bloodstream.BloodReferenceSolution.Clone(), _prototype);
-                    }
-                    else if (organ.BloodReagent != null)
-                    {
-                        bloodSolution.AddReagent(organ.BloodReagent, OrganBloodVolume);
-                    }
-                    else
-                    {
-                        bloodSolution.AddReagent(BloodId, OrganBloodVolume);
-                    }
-
-                    if (bloodSolution.Volume > 0)
-                        bloodSolution.ScaleTo(OrganBloodVolume);
-                }
-
-                _puddle.TrySpillAt(uid, bloodSolution, out _, false, transformComponent: xform);
-                _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
-            }
-            else
-            {
-                _gibbing.Gib(item);
-                _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
-            }
-            //SS220 Recycler expansion end
+            HandleOrganReclaim(uid, item, component, xform);
         }
+
+        /*
+        // Original code replaced by SS220 expansion
+        if (CanGib(uid, item, component))
+        {
+            var logImpact = HasComp<HumanoidProfileComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
+            _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity} ");
+            if (component.ReclaimSolutions)
+                SpawnChemicalsFromComposition(uid, item, completion, false, component, xform);
+            _gibbing.Gib(item);
+            _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+        }
+        else
+        {
+            if (component.ReclaimSolutions)
+                SpawnChemicalsFromComposition(uid, item, completion, true, component, xform);
+        }
+        */
+        // SS220 Recycler expansion end
 
         QueueDel(item);
     }
+
+    // SS220 Recycler expansion begin
+    /// <summary>
+    /// Spills all items from containers inside the processed item.
+    /// </summary>
+    private void EmptyItemContainers(EntityUid item, EntityCoordinates coordinates)
+    {
+        if (!TryComp<ContainerManagerComponent>(item, out var containerManager))
+            return;
+
+        foreach (var container in _container.GetAllContainers(item, containerManager))
+        {
+            var containerId = container.ToString();
+            if (containerId != null && containerId.StartsWith("solution@"))
+                continue;
+
+            _container.EmptyContainer(container, true, coordinates);
+        }
+    }
+
+    /// <summary>
+    /// Handles explosion if the processed item is a powered battery.
+    /// </summary>
+    private void HandleBatteryExplosion(EntityUid uid, EntityUid item)
+    {
+        if (!TryComp<PowerCellComponent>(item, out var cell) || !TryComp<BatteryComponent>(item, out var battery))
+            return;
+
+        var charge = _batterySystem.GetCharge((item, battery));
+        if (charge > 0)
+        {
+            var intensity = Math.Min(charge / 1000f, 20f);
+            _explosion.QueueExplosion(uid, "Default", intensity, 1f, 2f, addLog: false);
+        }
+    }
+
+    /// <summary>
+    /// Handles reclaiming of organic parts and humanoids.
+    /// </summary>
+    private void HandleOrganReclaim(EntityUid uid, EntityUid item, MaterialReclaimerComponent component, TransformComponent xform)
+    {
+        var isOrgan = HasComp<OrganComponent>(item);
+        var logImpact = (HasComp<HumanoidProfileComponent>(item) || isOrgan) ? LogImpact.Extreme : LogImpact.Medium;
+        _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity} ");
+
+        if (isOrgan)
+        {
+            var bloodSolution = new Solution();
+
+            if (TryComp<OrganComponent>(item, out var organ))
+            {
+                if (TryComp<BloodstreamComponent>(organ.Body, out var bloodstream))
+                {
+                    bloodSolution.AddSolution(bloodstream.BloodReferenceSolution.Clone(), _prototype);
+                }
+                else if (organ.BloodReagent != null)
+                {
+                    bloodSolution.AddReagent(organ.BloodReagent, OrganBloodVolume);
+                }
+                else
+                {
+                    bloodSolution.AddReagent(BloodId, OrganBloodVolume);
+                }
+
+                if (bloodSolution.Volume > 0)
+                    bloodSolution.ScaleTo(OrganBloodVolume);
+            }
+
+            _puddle.TrySpillAt(uid, bloodSolution, out _, false, transformComponent: xform);
+            _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+        }
+        else
+        {
+            _gibbing.Gib(item);
+            _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+        }
+    }
+    // SS220 Recycler expansion end
 
     private void SpawnMaterialsFromComposition(EntityUid reclaimer,
         EntityUid item,
@@ -325,6 +416,12 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 
         efficiency *= reclaimerComponent.Efficiency;
 
+        // SS220 Recycler expansion begin
+        var totalChemicals = CollectItemChemicals(item, efficiency, reclaimerComponent, composition);
+        // SS220 Recycler expansion end
+
+        /*
+        // Original code replaced by SS220 expansion
         var totalChemicals = new Solution();
 
         if (Resolve(item, ref composition, false))
@@ -345,7 +442,53 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             {
                 totalChemicals.AddSolution(drainableSolution, _prototype);
             }
-            // SS220 recycler expansion start
+        }
+        else
+        {
+            // Are we an industrial reagent grinder? Use extractable solution.
+            if (_solutionContainer.TryGetExtractableSolution(item, out _, out var extractableSolution))
+            {
+                totalChemicals.AddSolution(extractableSolution, _prototype);
+            }
+        }
+        */
+
+        if (!_solutionContainer.TryGetSolution(reclaimer, reclaimerComponent.SolutionContainerId, out var outputSolution) ||
+            !_solutionContainer.TryTransferSolution(outputSolution.Value, totalChemicals, totalChemicals.Volume) ||
+            totalChemicals.Volume > 0)
+        {
+            _puddle.TrySpillAt(reclaimer, totalChemicals, out _, sound, transformComponent: xform);
+        }
+    }
+
+    // SS220 Recycler expansion begin
+    /// <summary>
+    /// Collects all chemicals from the item's composition and internal solutions.
+    /// </summary>
+    private Solution CollectItemChemicals(EntityUid item,
+        float efficiency,
+        MaterialReclaimerComponent reclaimerComponent,
+        PhysicalCompositionComponent? composition = null)
+    {
+        var totalChemicals = new Solution();
+
+        if (Resolve(item, ref composition, false))
+        {
+            foreach (var (key, value) in composition.ChemicalComposition)
+            {
+                // TODO use ReagentQuantity
+                totalChemicals.AddReagent(key, value * efficiency, false);
+            }
+        }
+
+        // if the item we inserted has reagents, add it in.
+        if (reclaimerComponent.OnlyReclaimDrainable)
+        {
+            // Are we a recycler? Only use drainable solution.
+            if (_solutionContainer.TryGetDrainableSolution(item, out _, out var drainableSolution))
+            {
+                totalChemicals.AddSolution(drainableSolution, _prototype);
+            }
             // Fallback for items that might not have DrainableSolution component but still have reagents.
             else
             {
@@ -354,7 +497,6 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
                     totalChemicals.AddSolution(solution.Solution.Comp.Solution, _prototype);
                 }
             }
-            // SS220 recycler expansion end
         }
         else
         {
@@ -365,11 +507,7 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             }
         }
 
-        if (!_solutionContainer.TryGetSolution(reclaimer, reclaimerComponent.SolutionContainerId, out var outputSolution) ||
-            !_solutionContainer.TryTransferSolution(outputSolution.Value, totalChemicals, totalChemicals.Volume) ||
-            totalChemicals.Volume > 0)
-        {
-            _puddle.TrySpillAt(reclaimer, totalChemicals, out _, sound, transformComponent: xform);
-        }
+        return totalChemicals;
     }
+    // SS220 Recycler expansion end
 }

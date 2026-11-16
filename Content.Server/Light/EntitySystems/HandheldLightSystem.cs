@@ -98,6 +98,8 @@ namespace Content.Server.Light.EntitySystems
         private void OnShutdown(EntityUid uid, HandheldLightComponent component, ComponentShutdown args)
         {
             //SS220 Recycler expansion start
+            //_actions.RemoveAction(uid, component.ToggleActionEntity);
+            //_actions.RemoveAction(uid, component.SelfToggleActionEntity);
             if (component.ToggleActionEntity is { } action && _actions.GetAction(action)?.Comp.AttachedEntity == uid)
                 _actions.RemoveAction(uid, action);
 
