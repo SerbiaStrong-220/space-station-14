@@ -66,7 +66,7 @@
   description: A somewhat battered combat rifle of a design originating from old Earth. Favored by criminals, militias, and terrorists due to its famed reliability and easy-to-manufacture design. Feeds from .30 rifle magazines.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Rifles/ak.rsi
+    sprite: SS220/Objects/Weapons/Guns/Rifles/ak.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
@@ -255,7 +255,7 @@
   description: "A designated marksman rifle firing in 3-round bursts. The Estoc was designed as the Lecter’s long-range counterpart, equipped with an extended 20-inch barrel and telescopic sight.\nFeeds from .20 rifle magazines."
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
+    sprite: SS220/Objects/Weapons/Guns/Rifles/estoc.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -265,7 +265,7 @@
     shape:
     - 0,0,4,2
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
+    sprite: SS220/Objects/Weapons/Guns/Rifles/estoc.rsi
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/estocshot.ogg
