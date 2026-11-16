@@ -12,7 +12,6 @@
   - type: Transform
     anchored: true
     noRot: true
-  - type: Anchorable
   - type: Fixtures # TODO find masks/layers together
     fixtures:
       fix1:
@@ -33,13 +32,16 @@
           - InteractImpassable
   - type: CollisionWake
     enabled: false
+  - type: AtmosDevice
+    joinSystem: true
   - type: SinguloFood
-    energy: 10000
+    energy: 5000
   - type: Explosive
     explosionType: Default
-    maxIntensity: 25000
-    intensitySlope: 5
-    totalIntensity: 25000
+    maxIntensity: 60
+    intensitySlope: 10
+    totalIntensity: 45000
+    maxTileBreak: 128
   - type: NameIdentifier
     group: GenericNumber
   - type: TTS
@@ -64,6 +66,8 @@
   - type: SuperMatter
     consumeSound:
       collection: SupermatterConsume
+      params:
+        volume: -5
   - type: RadiationSource
     enabled: true
     intensity: 2

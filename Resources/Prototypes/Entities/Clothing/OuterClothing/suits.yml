@@ -27,13 +27,16 @@
     - WhitelistChameleon
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
+  - type: HideLayerClothing
+    slots:
+      - Tail
 
 - type: entity
   parent: ClothingOuterSuitBomb
   id: ClothingOuterSuitJanitorBomb
   name: janitorial bomb suit
-  description: A heavy helmet designed to withstand explosions formed from reactions between chemicals.
-  suffix: DO NOT MAP
+  description: Heavy body armor designed to withstand explosions formed from reactions between chemicals.
+  categories: [ DoNotMap ]
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/janitor_bombsuit.rsi
@@ -64,12 +67,15 @@
         Heat: 0.8
         Cold: 0.8
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
+    walkModifier: 0.7
     sprintModifier: 0.7
   - type: HeldSpeedModifier
   - type: GroupExamine
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
@@ -78,9 +84,9 @@
   description: An expensive firesuit that protects against even the most deadly of station fires. Designed to protect even if the wearer is set aflame.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/atmos_firesuit.rsi #SS220 atmos firesuit resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/atmos_firesuit.rsi #SS220 atmos firesuit resprite
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -102,6 +108,13 @@
   - type: GroupExamine
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - PressureProtectionSuit # SS220-add-atmos-suit-weightless-protection
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: [ClothingOuterBaseLarge, GeigerCounterClothing, AllowSuitStorageClothing]
@@ -128,8 +141,21 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing]
@@ -138,9 +164,9 @@
   description: This black technologically advanced, cybernetically-enhanced suit provides many abilities like invisibility or teleportation.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/spaceninja.rsi # SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/spaceninja.rsi # SS220 Ninja Resprite
   # hardsuit stuff
   - type: PressureProtection
     highPressureMultiplier: 0.6
@@ -158,13 +184,20 @@
   # phase cloak
   - type: ToggleClothing
     action: ActionTogglePhaseCloak
+    disableOnUnequip: true
   - type: ComponentToggler
     parent: true
     components:
     - type: Stealth
-      minVisibility: -1 # SS220 Revert Ninja Stealth by #1075. Fix #1575 begin
-      maxVisibility: -1
-      lastVisibility: 0 # SS220 Revert Ninja Stealth by #1075. Fix #1575 end
+  # SS220 invis buff begin
+      minVisibility: 0.05
+      maxVisibility: 1
+      lastVisibility: 1
+      shimmerScale: 0.25
+    - type: StealthOnMove
+      passiveVisibilityRate: -0.475
+      movementVisibilityRate: 0
+  # SS220 invis buff end
   - type: PowerCellDraw
     drawRate: 1.8 # 200 seconds on the default cell
   - type: ToggleCellDraw
@@ -176,6 +209,13 @@
     noPowerPopup: ninja-no-power
   # core ninja suit stuff
   - type: NinjaSuit
+  - type: EmpResistance
+    strengthMultiplier: 0
+  # SS220-add-tag-for-proper-skill-check-begin
+  - type: Tag
+    tags:
+    - PressureProtectionSuit
+  # SS220-add-tag-for-proper-skill-check-end
   - type: UseDelay
     delay: 5 # disable time
   - type: PowerCellSlot
@@ -191,6 +231,12 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellSmall
         disableEject: true
+        whitelist:
+          tags:
+            - PowerCell
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: ClothingOuterBase
@@ -243,6 +289,16 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 
@@ -263,11 +319,26 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
   - type: Construction
     graph: ClothingOuterSuitIan
     node: suit
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: AddAccentClothing
+    accent: BarkAccent
 
 - type: entity
   parent: ClothingOuterBase
@@ -287,11 +358,25 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: ClothingOuterSuitCarp
   id: ClothingOuterHardsuitCarp
   suffix: Hardsuit, DO NOT MAP
+  categories: [ DoNotMap ]
   components:
   - type: PressureProtection
     highPressureMultiplier: 0.6
@@ -301,3 +386,6 @@
     coolingCoefficient: 0.01
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCarp
+  - type: StaticPrice
+    price: 1500
+

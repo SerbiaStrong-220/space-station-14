@@ -5,6 +5,7 @@
   components:
   - type: MobMover
   - type: Mech
+  - type: MechRobot #SS220-AddMechToClothing
   - type: MechAir
   - type: AirFilter
     # everything except oxygen and nitrogen
@@ -64,6 +65,7 @@
   - type: Pullable
   - type: Physics
     bodyType: KinematicController
+  - type: GravityAffected
   - type: Clickable
   - type: WiresPanel
   - type: Fixtures
@@ -129,7 +131,7 @@
     mechToPilotDamageMultiplier: 0.75
     pilotWhitelist:
       components:
-        - HumanoidAppearance
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -167,6 +169,8 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepClown
+      params:
+        variation: 0.17
   - type: Mech
     baseState: honker
     openState: honker-open
@@ -174,7 +178,7 @@
     mechToPilotDamageMultiplier: 0.5
     pilotWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
 
 - type: entity
   parent: MechHonker

@@ -9,8 +9,11 @@ namespace Content.Shared.Preferences.Loadouts.Effects;
 public sealed partial class LoadoutEffectGroupPrototype : IPrototype
 {
     [IdDataField]
-    public string ID { get; } = string.Empty;
+    public string ID { get; private set; } = string.Empty;
 
     [DataField(required: true)]
     public List<LoadoutEffect> Effects = new();
+
+    [DataField]
+    public List<LoadoutEffect>? SponsorTierLoadoutEffects;
 }

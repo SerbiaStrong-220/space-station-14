@@ -1,0 +1,232 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# WARNING: Put here music ONLY with mono channel!
+
+- type: jukebox
+  id: requiem
+  name: Quantum (Feat Z.W.E.I) - Requiem
+  path:
+    path: /Audio/SS220/Jukebox/Requiem.ogg
+
+- type: jukebox
+  id: life_at_station
+  name: Quantum (Feat Z.W.E.I) - Life at the station
+  path:
+    path: /Audio/SS220/Jukebox/Life_At_The_Station.ogg
+
+- type: jukebox
+  id: junk_recyclers
+  name: Quantum (Feat Z.W.E.I) - Junk recyclers
+  path:
+    path: /Audio/SS220/Jukebox/Junk_Recyclers.ogg
+
+- type: jukebox
+  id: your_green_eyes
+  name: Quantum (Feat Z.W.E.I) - Your green eyes
+  path:
+    path: /Audio/SS220/Jukebox/Your_Green_Eyes.ogg
+
+- type: jukebox
+  id: neon
+  name: Quantum (Feat Z.W.E.I) - Neon
+  path:
+    path: /Audio/SS220/Jukebox/neon.ogg
+
+- type: jukebox
+  id: doubleu
+  name: Quantum (Feat Z.W.E.I) - double u
+  path:
+    path: /Audio/SS220/Jukebox/double-u.ogg
+
+- type: jukebox
+  id: vincent_helman
+  name: Quantum (Feat Z.W.E.I) - Vincent Helman
+  path:
+    path: /Audio/SS220/Jukebox/Vincent_Helman.ogg
+
+- type: jukebox
+  id: the_bar_counter
+  name: Quantum (Feat Z.W.E.I) - The bar counter
+  path:
+    path: /Audio/SS220/Jukebox/The_Bar_Counter.ogg
+
+- type: jukebox
+  id: tchaikovsky_waltz_of_the_flowers
+  name: Pyotr Ilyich Tchaikovsky - Waltz of the Flowers
+  path:
+    path: /Audio/SS220/Jukebox/Pyotr Ilyich Tchaikovsky - Waltz of the Flowers.ogg
+
+- type: jukebox
+  id: chopin_nocturne_9_2
+  name: Frédéric Chopin - Nocturne in E flat major, Op. 9 no. 2
+  path:
+    path: /Audio/SS220/Jukebox/Frédéric Chopin - Nocturne in E flat major, Op. 9 no. 2.ogg
+
+- type: jukebox
+  id: beethoven_moonlight_sonata
+  name: Ludwig van Beethoven - Moonlight Sonata, Op. 27 No. 2
+  path:
+    path: /Audio/SS220/Jukebox/Ludwig van Beethoven - Moonlight Sonata, Op. 27 No. 2.ogg
+
+- type: jukebox
+  id: ebilla_big_hole
+  name: E6illa - Big hole
+  path:
+    path: /Audio/SS220/Lobby/big_hole.ogg
+
+- type: jukebox
+  id: ebilla_since_2569
+  name: E6illa - Since 2569
+  path:
+    path: /Audio/SS220/Jukebox/since_2569.ogg
+
+- type: jukebox
+  id: ebilla_nordic
+  name: E6illa - Nordic
+  path:
+    path: /Audio/SS220/Jukebox/nordic.ogg
+
+- type: jukebox
+  id: ebilla_blues
+  name: E6illa - Blues
+  path:
+    path: /Audio/SS220/Jukebox/blues.ogg
+
+- type: jukebox
+  id: ebilla_station_area
+  name: E6illa - Station area
+  path:
+    path: /Audio/SS220/Lobby/station_area.ogg
+
+- type: jukebox
+  id: ebilla_silence_and_you
+  name: E6illa - Silence and you
+  path:
+    path: /Audio/SS220/Lobby/silence_and_you.ogg
+
+- type: jukebox
+  id: ebilla_sky_rocket
+  name: E6illa - Sky rocket
+  path:
+    path: /Audio/SS220/Lobby/sky_rocket.ogg
+
+- type: jukebox
+  id: rivgane_crimsonstorm
+  name: Rivgane - Crimson Storm
+  path:
+    path: /Audio/SS220/Lobby/crimsonstorm.ogg
+
+- type: jukebox
+  id: rivgane_mechanismeight
+  name: Andrew Sega (remixed by Rivgane) - Mechanism 8
+  path:
+    path: /Audio/SS220/Jukebox/mechanismeight.ogg
+
+- type: jukebox
+  id: sakura
+  name: Q__ntum - Sakura
+  path:
+    path: /Audio/SS220/Lobby/sakura.ogg
+
+- type: jukebox
+  id: you_see_her
+  name: Q__ntum - You see her. She's coming.
+  path:
+    path: /Audio/SS220/Lobby/you_see_her.ogg
+
+- type: jukebox
+  id: vivaldi_Spring
+  name: Vivaldi - Spring
+  path:
+    path: /Audio/SS220/Jukebox/Vivaldi_Spring.ogg
+
+- type: jukebox
+  id: vivaldi_Autumn
+  name: Vivaldi - Autumn
+  path:
+    path: /Audio/SS220/Jukebox/Vivaldi_Autumn.ogg
+
+- type: jukebox
+  id: vivaldi_Summer
+  name: Vivaldi - Summer
+  path:
+    path: /Audio/SS220/Jukebox/Vivaldi_Summer.ogg
+
+- type: jukebox
+  id: vivaldi_Winter
+  name: Vivaldi - Winter
+  path:
+    path: /Audio/SS220/Jukebox/Vivaldi_Winter.ogg
+
+- type: jukebox
+  id: Wellerman
+  name: PGN - Wellerman
+  path:
+    path: /Audio/SS220/Jukebox/Wellerman.ogg
+
+- type: jukebox
+  id: Jhonny_i_knew_ya
+  name: PGN - Jhonny i knew ya
+  path:
+    path: /Audio/SS220/Jukebox/Jhonny_i_knew_ya.ogg
+
+- type: jukebox
+  id: The_Drunken_Sailor
+  name: The Drunken Sailor
+  path:
+    path: /Audio/SS220/Jukebox/The_Drunken_Sailor.ogg
+
+- type: jukebox
+  id: Rest_In_Peace
+  name: Quantum (Feat Z.W.E.I) - Rest In Peace
+  path:
+    path: /Audio/SS220/Jukebox/Rest_In_Peace.ogg
+
+- type: jukebox
+  id: the_rave
+  name: Quantum_ - The Rave
+  path:
+    path: /Audio/SS220/Lobby/the_rave.ogg
+
+- type: jukebox
+  id: the_settler
+  name: Chris Remo - The Settler
+  path:
+    path: /Audio/SS220/Lobby/the_settler.ogg
+
+- type: jukebox
+  id: our_classtrial
+  name: Danganronpa V3 - Our Classtrial
+  path:
+    path: /Audio/SS220/Jukebox/ourclasstrial.ogg
+
+- type: jukebox
+  id: broken
+  name: Wall GG - Broken
+  path:
+    path: /Audio/SS220/Jukebox/broken.ogg
+
+- type: jukebox
+  id: wycc_sixteen_tons
+  name: Wycc - Sixteen Tons
+  path:
+    path: /Audio/SS220/Jukebox/Wycc_SixteenTons.ogg
+
+- type: jukebox
+  id: space_asshole
+  name: Chris Remo - Space Asshole
+  path:
+    path: /Audio/Lobby/space_asshole.ogg
+
+- type: jukebox
+  id: the_wizard
+  name: Chris Remo - The Wizard
+  path:
+    path: /Audio/Lobby/the_wizard.ogg
+
+- type: jukebox
+  id: pwmur
+  name: Sunbeamstress - Phoron Will Make Us Rich
+  path:
+    path: /Audio/Lobby/pwmur.ogg
+

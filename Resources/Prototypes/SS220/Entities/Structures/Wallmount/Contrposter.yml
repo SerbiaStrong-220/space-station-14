@@ -1,0 +1,15 @@
+- type: entity
+  id: Contrposters
+  name: Roll of questionable posters
+  description: An unremarkable poster
+  parent: BaseItem
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Misc/Contrposter.rsi
+    layers:
+    - state: contrposter
+  - type: Tag
+    tags:
+    - Contrposter

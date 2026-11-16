@@ -19,7 +19,7 @@ public sealed partial class PaperComponent : Component, IPhotocopyableComponent
     public bool Writable { get; set; } = true;
 
     [DataField("contentSize")]
-    public int ContentSize { get; set; } = 6000;
+    public int ContentSize { get; set; } = 10000;
 
     [DataField("stampedBy"), AutoNetworkedField]
     public List<StampDisplayInfo> StampedBy { get; set; } = new();
@@ -38,11 +38,6 @@ public sealed partial class PaperComponent : Component, IPhotocopyableComponent
     /// </summary>
     [DataField("sound")]
     public SoundSpecifier? Sound { get; private set; } = new SoundCollectionSpecifier("PaperScribbles", AudioParams.Default.WithVariation(0.1f));
-
-    //SS220 Add auto form
-    [AutoNetworkedField]
-    public EntityUid? Writer;
-    //SS220 Add auto form
 
     public IPhotocopiedComponentData GetPhotocopiedData()
     {

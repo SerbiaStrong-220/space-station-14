@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage;
 using Content.Shared.Item;
@@ -10,34 +10,42 @@ namespace Content.Shared.SS220.SwitchableWeapon;
 [RegisterComponent]
 public sealed partial class SwitchableWeaponComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite)][DataField("damageFolded")]
-    public DamageSpecifier DamageFolded = new(){
+    [DataField]
+    public DamageSpecifier DamageFolded = new()
+    {
         DamageDict = new()
         {
             { "Blunt", 0.0f },
-        }
+        },
     };
 
-    [ViewVariables(VVAccess.ReadWrite)][DataField("damageOpen")]
-    public DamageSpecifier DamageOpen = new(){
+    [DataField]
+    public DamageSpecifier DamageOpen = new()
+    {
         DamageDict = new()
         {
             { "Blunt", 4.0f },
-        }
+        },
     };
 
-    [ViewVariables(VVAccess.ReadWrite)][DataField("isOpen")]
-    public bool IsOpen = false;
+    [DataField]
+    public float StaminaDamageFolded;
 
-    [ViewVariables(VVAccess.ReadWrite)][DataField("openSound")]
+    [DataField]
+    public float StaminaDamageOpen = 28;
+
+    [DataField]
+    public bool IsOpen;
+
+    [DataField]
     public SoundSpecifier? OpenSound;
 
-    [ViewVariables(VVAccess.ReadWrite)][DataField("closeSound")]
+    [DataField]
     public SoundSpecifier? CloseSound;
 
-    [ViewVariables(VVAccess.ReadWrite)][DataField("sizeOpened")]
+    [DataField]
     public ProtoId<ItemSizePrototype> SizeOpened = "Large";
 
-    [ViewVariables(VVAccess.ReadWrite)][DataField("sizeClosed")]
+    [DataField]
     public ProtoId<ItemSizePrototype> SizeClosed = "Small";
 }

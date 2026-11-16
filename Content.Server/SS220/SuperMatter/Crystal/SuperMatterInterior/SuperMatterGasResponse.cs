@@ -1,9 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Shared.Atmos;
-using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.SS220.SuperMatter.Functions;
 
-namespace Content.Server.SS220.SuperMatterCrystal;
+namespace Content.Server.SS220.SuperMatter.Crystal.SuperMatterInterior;
 
 public static class SuperMatterGasResponse
 {
@@ -23,19 +24,24 @@ public static class SuperMatterGasResponse
         }
         return resultRelativeInfluence;
     }
+
     public static float GetFlatGasesInfluenceToMatterDecay(SuperMatterComponent smComp, GasMixture gasMixture)
     {
         var resultFlatInfluence = 0f;
         var decayInfluenceGases = SuperMatterGasInteraction.DecayInfluenceGases;
+
         if (decayInfluenceGases == null)
             return resultFlatInfluence;
+
         foreach (var gasId in decayInfluenceGases.Keys)
         {
             var gasEfficiency = GetGasInfluenceEfficiency(gasId, gasMixture);
             resultFlatInfluence += decayInfluenceGases[gasId].flatInfluence * gasEfficiency;
         }
+
         return resultFlatInfluence;
     }
+
     /// <summary>
     /// Checks all entrees in <see cref="SuperMatterGasInteraction.EnergyEfficiencyChangerGases"/>
     /// looks if we have it Mixture and calculate their efficiency
@@ -45,8 +51,10 @@ public static class SuperMatterGasResponse
     {
         var resultEfficiency = 0f;
         var affectGases = SuperMatterGasInteraction.EnergyEfficiencyChangerGases;
+
         if (affectGases == null)
             return resultEfficiency;
+
         foreach (var gasId in affectGases.Keys)
         {
             resultEfficiency += affectGases[gasId].RelativeInfluence
@@ -61,12 +69,15 @@ public static class SuperMatterGasResponse
     {
         if (gasMixture.TotalMoles == 0)
             return 0;
+
         return gasMixture.GetMoles(gasId) / gasMixture.TotalMoles;
     }
+
     private static float GetNonLinierGasInfluenceEfficiencyFunction(Gas gasId, GasMixture gasMixture, float optimalRatio)
     {
         var maxValue = MathF.Pow(optimalRatio, 2) * MathF.Exp(-2);
         var optParam = 2 / optimalRatio;
+
         // same function soo its okay
         var normalizedMoles = GetGasInfluenceEfficiency(gasId, gasMixture);
 

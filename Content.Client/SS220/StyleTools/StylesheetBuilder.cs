@@ -6,6 +6,7 @@ namespace Content.Client.SS220.StyleTools
     public sealed class StylesheetBuilder
     {
         private readonly List<StyleRule> _rules;
+        private readonly List<StyleProperty> _props = new();
 
         private MutableSelectorElement? _currentMainSelector;
         private MutableSelectorElement? _currentChildSelector;
@@ -67,7 +68,7 @@ namespace Content.Client.SS220.StyleTools
 
         public StylesheetBuilder Prop(string key, object value)
         {
-            _currentSelector?.Prop(key, value);
+            _props.Add(new StyleProperty(key, value));
             return this;
         }
 
@@ -83,14 +84,26 @@ namespace Content.Client.SS220.StyleTools
                 return;
             if (_currentChildSelector is null)
             {
+                PushProps(_currentMainSelector);
                 _rules.Add(_currentMainSelector);
             }
             else
             {
-                _rules.Add(StylesheetHelpers.Child().Parent(_currentMainSelector).Child(_currentChildSelector));
+                var selector = StylesheetHelpers.Child().Parent(_currentMainSelector).Child(_currentChildSelector);
+                PushProps(selector);
+                _rules.Add(selector);
             }
             _currentMainSelector = null;
             _currentChildSelector = null;
+            _props.Clear();
+        }
+
+        private void PushProps(MutableSelector selector)
+        {
+            foreach (var prop in _props)
+            {
+                selector.Prop(prop.Name, prop.Value);
+            }
         }
     }
 }

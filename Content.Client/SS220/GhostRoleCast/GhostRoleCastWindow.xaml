@@ -3,16 +3,16 @@
             xmlns="https://spacestation14.io">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
-            <Label Name="RoleNameLabel" Text="Role Name" />
-            <LineEdit Name="RoleName" HorizontalExpand="True" />
+            <Label Name="RoleNameLabel" MinSize="150 0" Text="Role Name" />
+            <LineEdit Name="RoleName" MinSize="300 0" HorizontalExpand="True" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Label Name="RoleDescriptionLabel" Text="Role Description" />
-            <LineEdit Name="RoleDescription" HorizontalExpand="True" />
+            <Label Name="RoleDescriptionLabel" MinSize="150 0" Text="Role Description" />
+            <LineEdit Name="RoleDescription" MinSize="300 0" HorizontalExpand="True" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Label Name="RoleRulesLabel" Text="Role Rules" />
-            <LineEdit Name="RoleRules" HorizontalExpand="True"  Text="{Loc ghost-role-component-default-rules}" />
+            <Label Name="RoleRulesLabel" MinSize="150 0" Text="Role Rules" />
+            <LineEdit Name="RoleRules" MinSize="300 0" HorizontalExpand="True" Text="{Loc ghost-role-component-default-rules}" />
         </BoxContainer>
     </BoxContainer>
 </DefaultWindow>

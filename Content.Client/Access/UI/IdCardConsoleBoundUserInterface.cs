@@ -3,6 +3,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.CrewManifest;
+using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using static Content.Shared.Access.Components.IdCardConsoleComponent;
 
@@ -24,18 +25,21 @@ namespace Content.Client.Access.UI
         {
             base.Open();
             List<ProtoId<AccessLevelPrototype>> accessLevels;
+            List<ProtoId<AccessLevelPrototype>> extendedAccessLevels; // SS220-ID console extended access button
 
             if (EntMan.TryGetComponent<IdCardConsoleComponent>(Owner, out var idCard))
             {
                 accessLevels = idCard.AccessLevels;
+                extendedAccessLevels = idCard.ExtendedAccessLevels; // SS220-ID console extended access button
             }
             else
             {
                 accessLevels = new List<ProtoId<AccessLevelPrototype>>();
+                extendedAccessLevels = new List<ProtoId<AccessLevelPrototype>>(); // SS220-ID console extended access button
                 _idCardConsoleSystem.Log.Error($"No IdCardConsole component found for {EntMan.ToPrettyString(Owner)}!");
             }
 
-            _window = new IdCardConsoleWindow(this, _prototypeManager, accessLevels)
+            _window = new IdCardConsoleWindow(this, _prototypeManager, accessLevels, extendedAccessLevels) // SS220-ID console extended access button | add extendedAccessLevels argument
             {
                 Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName
             };
@@ -64,14 +68,8 @@ namespace Content.Client.Access.UI
             _window?.UpdateState(castState);
         }
 
-        public void SubmitData(string newFullName, string newJobTitle, List<ProtoId<AccessLevelPrototype>> newAccessList, string newJobPrototype)
+        public void SubmitData(string newFullName, string newJobTitle, List<ProtoId<AccessLevelPrototype>> newAccessList, ProtoId<JobPrototype>? newJobPrototype)
         {
-            if (newFullName.Length > MaxFullNameLength)
-                newFullName = newFullName[..MaxFullNameLength];
-
-            if (newJobTitle.Length > MaxJobTitleLength)
-                newJobTitle = newJobTitle[..MaxJobTitleLength];
-
             SendMessage(new WriteToTargetIdMessage(
                 newFullName,
                 newJobTitle,

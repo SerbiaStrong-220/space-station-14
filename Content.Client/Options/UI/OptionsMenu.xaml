@@ -9,5 +9,6 @@
         <tabs:AudioTab Name="AudioTab" />
         <tabs:NetworkTab Name="NetworkTab" /> <!-- 220 revert-network-tab -->
         <tabs:AccessibilityTab Name="AccessibilityTab" />
+        <tabs:AdminOptionsTab Name="AdminOptionsTab" />
     </TabContainer>
 </DefaultWindow>

@@ -8,46 +8,53 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingHeadHatChameleon
-    - id: ClothingUniformJumpsuitPyjamaSyndicateRed
-    - id: ClothingUniformJumpsuitPyjamaSyndicatePink
-    - id: ClothingUniformJumpskirtSyndieFormalDress
-    - id: ClothingUniformJumpsuitSyndieFormal
-    - id: ClothingOuterCoatSyndieCap
-    - id: ClothingHeadHatSyndie
-    - id: ClothingMaskNeckGaiter
-    - id: ClothingUniformJumpskirtOperative
-    - id: ClothingNeckSyndieMedal
-      amount: 4
-    - id: ClothingNeckHydraMedal
-      amount: 3
-    - id: JobIconChangerIOT
+    access: [ [ "SyndicateAgent" ], [ "NuclearOperative" ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingHeadHatChameleon
+        - id: ClothingUniformJumpsuitPyjamaSyndicateRed
+        - id: ClothingUniformJumpsuitPyjamaSyndicatePink
+        - id: ClothingUniformJumpskirtSyndieFormalDress
+        - id: ClothingUniformJumpsuitSyndieFormal
+        - id: ClothingOuterCoatSyndieCap
+        - id: ClothingHeadHatSyndie
+        - id: ClothingMaskNeckGaiter
+        - id: ClothingUniformJumpskirtOperative
+        - id: ClothingNeckSyndieMedal
+          amount: 4
+        - id: ClothingNeckHydraMedal
+          amount: 3
+        - id: JobIconChangerIOT
 
 - type: entity
   parent: ClothingBackpackNuclear
   id: ClothingBackpackNuclearLeader
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: StorageFill
-      contents:
-      - id: Crowbar
-      - id: RubberStampSyndicate
-      - id: CigPackSyndicate
-        amount: 2
-      - id: Lighter
-      - id: FlashlightSecliteSyndicate
-      - id: Stimpack
-      - id: PowerCellHyper
-      - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGun
-        amount: 2
-      - id: CombatMedipen
-      - id: EnergySwordDouble
-      - id: DnaScramblerImplanter
-      - id: ExGrenade
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Crowbar
+        - id: RubberStampSyndicate
+        - id: CigPackSyndicate
+          amount: 2
+        - id: Lighter
+        - id: FlashlightSecliteSyndicate
+        - id: Stimpack
+        - id: PowerCellHyper
+        - id: WeaponSubMachineGunC20r
+        - id: MagazinePistolSubMachineGun
+          amount: 2
+        - id: CombatMedipen
+        - id: EnergySwordDouble
+        - id: DnaScramblerImplanter
+        - id: ExGrenade
+        - id: GlowstickRed
+          amount: 2
+        - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadLeaderGear
@@ -63,43 +70,46 @@
     id: SyndiPDAAgentLeader
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltMilitaryWebbingEbent_IronSquad
-    pocket1: FreedomImplanter
-    pocket2: StorageImplanter
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadLeader
   name: 1Спавнер лидера Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentIronSquadLeader
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentIronSquadLeader
 
 - type: randomHumanoidSettings
   id: EbentIronSquadLeader
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentIronSquadLeaderGear ]
-    - type: EventRole
-      roleGroupKey: IronSquad
-      statusIcon: IOTCommand
-    - type: NpcFactionMember
-      factions:
-      - EbentIronSquad
+  - type: Loadout
+    prototypes: [ EbentIronSquadLeaderGear ]
+  - type: EventRole
+    roleGroupKey: IronSquad
+    statusIcon: IOTCommand
+  - type: NpcFactionMember
+    factions:
+    - EbentIronSquad
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: IronSquadLeader
   name: job-name-iron-squad-leader
   description: job-description-iron-squad-leader
   startingGear: EbentIronSquadLeaderGear
+  experienceDefinition: IronSquadLeaderRoleExperience
   playTimeTracker: IronSquadLeader
   setPreference: false
   canBeAntag: false
   access:
+  - SyndicateAgent
   - NuclearOperative
 
 - type: playTimeTracker
@@ -113,54 +123,48 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingHeadHatChameleon
-    - id: ClothingUniformJumpsuitPyjamaSyndicateRed
-    - id: ClothingUniformJumpsuitPyjamaSyndicatePink
-    - id: ClothingUniformJumpskirtSyndieFormalDress
-    - id: ClothingUniformJumpsuitSyndieFormal
-    - id: ClothingOuterCoatSyndieCap
-    - id: ClothingHeadHatSyndie
-    - id: ClothingMaskNeckGaiter
-    - id: ClothingUniformJumpskirtOperative
-    - id: ClothingUniformJumpsuitOperative
-    - id: SyndicateJawsOfLife
-    - id: ClothingHeadHatBeretMerc
-    - id: ClothingNeckSyndicakePin
-    - id: ClothingNeckCloakHerald
-    - id: ClothingNeckCloakGoliathCloak
-    - id: ClothingNeckScarfStripedSyndieRed
-    - id: ClothingBeltChiefEngineerFilled
-    - id: JetpackVoidFilled
-    - id: JobIconChangerIOT
+    access: [ [ "SyndicateAgent" ], [ "NuclearOperative" ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SyndicateJawsOfLife
+        - id: ClothingNeckSyndicakePin
+        - id: ClothingBeltChiefEngineerFilled
+        - id: JetpackVoidFilled
+        - id: JobIconChangerIOT
+        - id: ClothingBackpackChameleonFill
+        - id: RCD
+        - id: RCDAmmo
+          amount: 4
+        - id: ClothingEyesGlassesMeson
 
 - type: entity
   parent: ClothingBackpackNuclear
   id: ClothingBackpackNuclearEngineer
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: StorageFill
-      contents:
-      - id: Crowbar
-      - id: CigPackSyndicate
-        amount: 2
-      - id: Lighter
-      - id: FlashlightSecliteSyndicate
-      - id: Stimpack
-      - id: PowerCellHyper
-      - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGun
-        amount: 2
-      - id: CombatMedipen
-      - id: EnergySword
-      - id: RCD
-      - id: EnergyShield
-      - id: RCDAmmo
-        amount: 3
-      - id: DnaScramblerImplanter
-      - id: ExGrenade
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Crowbar
+        - id: CigPackSyndicate
+          amount: 2
+        - id: Lighter
+        - id: FlashlightSecliteSyndicate
+        - id: Stimpack
+        - id: PowerCellHyper
+        - id: WeaponSubMachineGunC20r
+        - id: MagazinePistolSubMachineGun
+          amount: 2
+        - id: CombatMedipen
+        - id: EnergySword
+        - id: DnaScramblerImplanter
+        - id: ExGrenade
+        - id: GlowstickRed
+          amount: 2
+        - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadEngineerGear
@@ -177,49 +181,47 @@
     id: SyndiPDAAgentEngineer
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltMilitaryWebbingEbent_IronSquad
-    pocket1: FreedomImplanter
-    pocket2: StorageImplanter
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadEngineer
   name: 2Спавнер инженера Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentIronSquadEngineer
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentIronSquadEngineer
 
 - type: randomHumanoidSettings
   id: EbentIronSquadEngineer
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentIronSquadEngineerGear ]
-    - type: EventRole
-      roleGroupKey: IronSquad
-      statusIcon: IOTEngineerOfficer
-    - type: NpcFactionMember
-      factions:
-      - EbentIronSquad
+  - type: Loadout
+    prototypes: [ EbentIronSquadEngineerGear ]
+  - type: EventRole
+    roleGroupKey: IronSquad
+    statusIcon: IOTEngineerOfficer
+  - type: NpcFactionMember
+    factions:
+    - EbentIronSquad
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: IronSquadEngineer
   name: job-name-iron-squad-engineer
   description: job-description-iron-squad-engineer
   startingGear: EbentIronSquadEngineerGear
+  experienceDefinition: IronSquadEngineerRoleExperience
   playTimeTracker: IronSquadEngineer
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadEngineer
@@ -232,41 +234,47 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingUniformJumpsuitPyjamaSyndicateRed
-    - id: ClothingUniformJumpsuitPyjamaSyndicatePink
-    - id: ClothingMaskNeckGaiter
-    - id: ClothingUniformJumpskirtOperative
-    - id: ClothingUniformJumpsuitOperative
-    - id: ClothingBackpackDuffelSyndicateMedicalBundleFilled
-    - id: BoxBeaker
-      amount: 2
-    - id: EmergencyRollerBedSpawnFolded
-      amount: 2
-    - id: ClothingEyesHudMedSec
+    access: [ [ "SyndicateAgent" ], [ "NuclearOperative" ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingUniformJumpsuitPyjamaSyndicateRed
+        - id: ClothingUniformJumpsuitPyjamaSyndicatePink
+        - id: ClothingMaskNeckGaiter
+        - id: ClothingUniformJumpskirtOperative
+        - id: ClothingUniformJumpsuitOperative
+        - id: BoxBeaker
+          amount: 2
+        - id: EmergencyRollerBedSpawnFolded
+          amount: 2
+        - id: ClothingEyesHudMedSec
+        - id: SyndiHypo
+        - id: DefibrillatorSyndicate
 
 - type: entity
   parent: ClothingBackpackNuclear
   id: ClothingBackpackNuclearCorpsman
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: StorageFill
-      contents:
-      - id: Crowbar
-      - id: CigPackSyndicate
-        amount: 2
-      - id: Lighter
-      - id: FlashlightSecliteSyndicate
-      - id: PowerCellHyper
-      - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGun
-        amount: 2
-      - id: EnergySword
-      - id: SyndiHypo
-      - id: DnaScramblerImplanter
-      - id: ExGrenade
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Crowbar
+        - id: CigPackSyndicate
+          amount: 2
+        - id: Lighter
+        - id: FlashlightSecliteSyndicate
+        - id: PowerCellHyper
+        - id: WeaponSubMachineGunC20r
+        - id: MagazinePistolSubMachineGun
+          amount: 2
+        - id: EnergySword
+        - id: DnaScramblerImplanter
+        - id: ExGrenade
+        - id: GlowstickRed
+          amount: 2
 
 - type: startingGear
   id: EbentIronSquadCorpsmanGear
@@ -275,7 +283,7 @@
     back: ClothingBackpackNuclearCorpsman
     shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
-    gloves: ClothingHandsGlovesNitrile
+    gloves: ClothingHandsGlovesCombat
     neck: ClothingCloakIronSquadMed
     outerClothing: ClothingOuterHardsuitIronMed
     suitstorage: OxygenTankFilled
@@ -290,45 +298,45 @@
   name: 5Спавнер полевого медика Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentIronSquadCorpsman
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentIronSquadCorpsman
 
 - type: randomHumanoidSettings
   id: EbentIronSquadCorpsman
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentIronSquadCorpsmanGear ]
-    - type: GhostRole
-      makeSentient: true
-      name: Полевой медик Железного Отряда
-    - type: GhostTakeoverAvailable
-    - type: EventRole
-      roleGroupKey: IronSquad
-      statusIcon: IOTMedic
-    - type: NpcFactionMember
-      factions:
-      - EbentIronSquad
+  - type: Loadout
+    prototypes: [ EbentIronSquadCorpsmanGear ]
+  - type: GhostRole
+    makeSentient: true
+    name: Полевой медик Железного Отряда
+  - type: GhostTakeoverAvailable
+  - type: EventRole
+    roleGroupKey: IronSquad
+    statusIcon: IOTMedic
+  - type: NpcFactionMember
+    factions:
+    - EbentIronSquad
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: IronSquadCorpsman
   name: job-name-iron-squad-corpsman
   description: job-description-iron-squad-corpsman
   startingGear: EbentIronSquadCorpsmanGear
+  experienceDefinition: IronSquadCorpsmanRoleExperience
   playTimeTracker: IronSquadCorpsman
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadCorpsman
@@ -341,50 +349,56 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingHeadHatChameleon
-    - id: ClothingUniformJumpsuitPyjamaSyndicateRed
-    - id: ClothingUniformJumpsuitPyjamaSyndicatePink
-    - id: ClothingUniformJumpskirtSyndieFormalDress
-    - id: ClothingUniformJumpsuitSyndieFormal
-    - id: ClothingOuterCoatSyndieCap
-    - id: ClothingHeadHatSyndie
-    - id: ClothingMaskNeckGaiter
-    - id: ClothingUniformJumpskirtOperative
-    - id: ClothingUniformJumpsuitOperative
-    - id: BoxBeaker
-      amount: 2
-    - id: EmergencyRollerBedSpawnFolded
-      amount: 2
-    - id: ClothingEyesHudMedSec
-    - id: JobIconChangerIOT
+    access: [ [ "SyndicateAgent" ], [ "NuclearOperative" ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingHeadHatChameleon
+        - id: ClothingUniformJumpsuitPyjamaSyndicateRed
+        - id: ClothingUniformJumpsuitPyjamaSyndicatePink
+        - id: ClothingUniformJumpskirtSyndieFormalDress
+        - id: ClothingUniformJumpsuitSyndieFormal
+        - id: ClothingOuterCoatSyndieCap
+        - id: ClothingHeadHatSyndie
+        - id: ClothingMaskNeckGaiter
+        - id: ClothingUniformJumpskirtOperative
+        - id: ClothingUniformJumpsuitOperative
+        - id: BoxBeaker
+          amount: 2
+        - id: EmergencyRollerBedSpawnFolded
+          amount: 2
+        - id: ClothingEyesHudMedSec
+        - id: JobIconChangerIOT
+        - id: SyndiHypo
+        - id: DefibrillatorSyndicate
 
 - type: entity
   parent: ClothingBackpackNuclear
   id: ClothingBackpackNuclearCMO
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: StorageFill
-      contents:
-      - id: Crowbar
-      - id: CigPackSyndicate
-        amount: 2
-      - id: Lighter
-      - id: FlashlightSecliteSyndicate
-      - id: Stimpack
-      - id: PowerCellHyper
-      - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGun
-        amount: 2
-      - id: CombatMedipen
-      - id: EnergySword
-      - id: BoxDeathRattleImplants
-      - id: SyndiHypo
-      - id: EnergyShield
-      - id: DnaScramblerImplanter
-      - id: ExGrenade
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Crowbar
+        - id: CigPackSyndicate
+          amount: 2
+        - id: Lighter
+        - id: FlashlightSecliteSyndicate
+        - id: Stimpack
+        - id: PowerCellHyper
+        - id: WeaponSubMachineGunC20r
+        - id: MagazinePistolSubMachineGun
+          amount: 2
+        - id: CombatMedipen
+        - id: EnergySword
+        - id: DnaScramblerImplanter
+        - id: ExGrenade
+        - id: GlowstickRed
+          amount: 2
+        - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadCMOGear
@@ -393,56 +407,55 @@
     back: ClothingBackpackNuclearCMO
     shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
-    gloves: ClothingHandsGlovesNitrile
+    eyes: ClothingEyesHudMedical
+    gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitIronCMO
     suitstorage: OxygenTankFilled
     neck: ClothingCloakIronSquadCMO
     id: SyndiPDAAgentCMO
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltMilitaryWebbingEbent_IronSquad
-    pocket1: FreedomImplanter
-    pocket2: StorageImplanter
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadCMO
   name: 3Спавнер главврача Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentIronSquadCMO
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentIronSquadCMO
 
 - type: randomHumanoidSettings
   id: EbentIronSquadCMO
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentIronSquadCMOGear ]
-    - type: EventRole
-      roleGroupKey: IronSquad
-      statusIcon: IOTMedicalOfficer
-    - type: NpcFactionMember
-      factions:
-      - EbentIronSquad
+  - type: Loadout
+    prototypes: [ EbentIronSquadCMOGear ]
+  - type: EventRole
+    roleGroupKey: IronSquad
+    statusIcon: IOTMedicalOfficer
+  - type: NpcFactionMember
+    factions:
+    - EbentIronSquad
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: IronSquadCMO
   name: job-name-iron-squad-cmo
   description: job-description-iron-squad-cmo
   startingGear: EbentIronSquadCMOGear
+  experienceDefinition: IronSquadCMORoleExperience
   playTimeTracker: IronSquadCMO
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadCMO
@@ -455,14 +468,16 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingHeadHatChameleon
-    - id: ClothingUniformJumpsuitPyjamaSyndicateRed
-    - id: ClothingUniformJumpsuitPyjamaSyndicatePink
-    - id: ClothingUniformJumpskirtOperative
-    - id: ClothingUniformJumpsuitOperative
+    access: [ [ "SyndicateAgent" ], [ "NuclearOperative" ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingHeadHatChameleon
+        - id: ClothingUniformJumpsuitPyjamaSyndicateRed
+        - id: ClothingUniformJumpsuitPyjamaSyndicatePink
+        - id: ClothingUniformJumpskirtOperative
+        - id: ClothingUniformJumpsuitOperative
 
 - type: entity
   name: "рюкзак синдиката"
@@ -471,20 +486,24 @@
   id: ClothingBackpackNuclearTrooper
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: StorageFill
-      contents:
-      - id: Crowbar
-      - id: CigPackSyndicate
-        amount: 2
-      - id: Lighter
-      - id: FlashlightSecliteSyndicate
-      - id: PowerCellHyper
-      - id: WeaponSubMachineGunC20r
-      - id: MagazinePistolSubMachineGun
-        amount: 2
-      - id: EnergySword
-      - id: DnaScramblerImplanter
-      - id: ExGrenade
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Crowbar
+        - id: CigPackSyndicate
+          amount: 2
+        - id: Lighter
+        - id: FlashlightSecliteSyndicate
+        - id: PowerCellHyper
+        - id: WeaponSubMachineGunC20r
+        - id: MagazinePistolSubMachineGun
+          amount: 2
+        - id: EnergySword
+        - id: DnaScramblerImplanter
+        - id: ExGrenade
+        - id: GlowstickRed
+          amount: 2
 
 - type: startingGear
   id: EbentIronSquadTrooperGear
@@ -507,45 +526,45 @@
   name: 4Спавнер бойца Железного Отряда
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentIronSquadTrooper
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentIronSquadTrooper
 
 - type: randomHumanoidSettings
   id: EbentIronSquadTrooper
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentIronSquadTrooperGear ]
-    - type: GhostRole
-      makeSentient: true
-      name: Боец Железного Отряда
-    - type: GhostTakeoverAvailable
-    - type: EventRole
-      roleGroupKey: IronSquad
-      statusIcon: IOTCombatant
-    - type: NpcFactionMember
-      factions:
-      - EbentIronSquad
+  - type: Loadout
+    prototypes: [ EbentIronSquadTrooperGear ]
+  - type: GhostRole
+    makeSentient: true
+    name: Боец Железного Отряда
+  - type: GhostTakeoverAvailable
+  - type: EventRole
+    roleGroupKey: IronSquad
+    statusIcon: IOTCombatant
+  - type: NpcFactionMember
+    factions:
+    - EbentIronSquad
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: IronSquadFighter
   name: job-name-iron-squad-fighter
   description: job-description-iron-squad-fighter
   startingGear: EbentIronSquadTrooperGear
+  experienceDefinition: IronSquadFighterRoleExperience
   playTimeTracker: IronSquadFighter
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadFighter

@@ -1,21 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction.Events;
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Popups;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Network;
-using Content.Shared.Communications;
 
 namespace Content.Shared.SS220.UseableBook;
 
-public sealed class UseableBookSystem : EntitySystem
+public sealed partial class UseableBookSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -24,47 +23,43 @@ public sealed class UseableBookSystem : EntitySystem
         SubscribeLocalEvent<UseableBookComponent, UseInHandEvent>(OnBookUse);
         SubscribeLocalEvent<UseableBookComponent, UseableBookReadDoAfterEvent>(OnDoAfter);
     }
+
     public bool CanUseBook(EntityUid entity, UseableBookComponent comp, EntityUid user, [NotNullWhen(false)] out string? reason)
     {
         reason = null;
-        bool bCan = false;
-
-        if (comp.CanUseOneTime && comp.Used)
+        if (comp is { CanUseOneTime: true, Used: true })
         {
             reason = Loc.GetString("useable-book-used-onetime"); // данную книгу можно было изучить только один раз
-            goto retn;
+            return false;
         }
+
         if (comp.CustomCanRead is not null)
         {
             var customCanRead = comp.CustomCanRead;
             customCanRead.Interactor = user;
             customCanRead.BookComp = comp;
-            RaiseLocalEvent(entity, (object)customCanRead, broadcast:true);
+            RaiseLocalEvent(entity, (object)customCanRead, broadcast: true);
 
             if (customCanRead.Handled)
             {
                 reason = customCanRead.Reason;
-                bCan = customCanRead.Can;
-
-                if (!customCanRead.Can)
-                    goto retn;
+                return customCanRead.Can;
             }
         }
-        if (comp.LeftUses > 0)
-            bCan = true;
-        else
-            reason = Loc.GetString("useable-book-used"); // потрачены все использования
 
-        retn:
-        return bCan;
+        if (comp.LeftUses > 0)
+            return true;
+
+        reason = Loc.GetString("useable-book-used");
+        return false;
     }
 
-    private void OnBookUse(EntityUid entity, UseableBookComponent comp, UseInHandEvent args)
+    private void OnBookUse(Entity<UseableBookComponent> ent, ref UseInHandEvent args)
     {
-        if (CanUseBook(entity, comp, args.User, out var reason))
+        if (CanUseBook(ent, ent.Comp, args.User, out var reason))
         {
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(comp.ReadTime), new UseableBookReadDoAfterEvent(),
-            entity, target: entity)
+            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(ent.Comp.ReadTime), new UseableBookReadDoAfterEvent(),
+            ent, target: ent)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
@@ -74,30 +69,34 @@ public sealed class UseableBookSystem : EntitySystem
             return;
         }
         if (_net.IsServer)
-            _popupSystem.PopupEntity(reason, entity, type: PopupType.Medium);
+            _popupSystem.PopupEntity(reason, ent, type: PopupType.Medium);
     }
 
-    private void OnDoAfter(EntityUid uid, UseableBookComponent comp, UseableBookReadDoAfterEvent args)
+    private void OnDoAfter(Entity<UseableBookComponent> ent, ref UseableBookReadDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
+
         if (args.Target is not { } target)
             return;
 
-        comp.Used = true;
-        comp.LeftUses -= 1;
+        ent.Comp.Used = true;
+        ent.Comp.LeftUses -= 1;
 
-        foreach (var kvp in comp.ComponentsOnRead)
+        foreach (var kvp in ent.Comp.ComponentsOnRead)
         {
             var copiedComp = (Component) _serialization.CreateCopy(kvp.Value.Component, notNullableOverride: true);
-            copiedComp.Owner = args.User;
-            _entManager.AddComponent(args.User, copiedComp, true);
+            AddComp(args.User, copiedComp, true);
         }
 
-        Dirty(uid, comp);
-        var useableArgs = new UseableBookOnReadEvent();
-        useableArgs.Interactor = args.User;
-        useableArgs.BookComp = comp;
+        Dirty(ent);
+
+        var useableArgs = new UseableBookOnReadEvent
+        {
+            Interactor = args.User,
+            BookComp = ent.Comp,
+        };
+
         RaiseLocalEvent(useableArgs);
     }
 }

@@ -1,0 +1,49 @@
+- files: ["migo_astral_in.ogg", "migo_astral_out.ogg", "migo_slave.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Original is created by MIXnikita for SS220"
+  source: "https://github.com/SerbiaStrong-22"
+
+- files: ["nyarlathotep_step1.ogg", "nyarlathotep_step2.ogg", "nyarlathotep_voice1.ogg", "nyarlathotep_voice2.ogg", "nyarlathotep_voice3.ogg", "nyarlathotep_start.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Original is created by MIXnikita for SS220"
+  source: "https://github.com/SerbiaStrong-22"
+
+- files: ["its_coming.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Original is created by Haziness Codex for SS220"
+  source: "https://github.com/SerbiaStrong-22"
+
+- files: ["inhale_scream_1.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/jorickhoofd/sounds/179333/"
+
+- files: ["inhale_scream_2.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/jorickhoofd/sounds/180300/"
+
+- files: ["inhale_scream_3.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/jorickhoofd/sounds/180301/"
+
+- files: ["lurbo_kill.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original is created by FairCashew, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/FairCashew/sounds/684867/"
+
+- files: ["lurbo_unequip.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by DrMinky, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/DrMinky/sounds/167074/"
+
+- files: ["lamp_on.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original is created by samararaine, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/samararaine/sounds/186374/"
+
+- files: ["lamp_off.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by 14GPanskaLetko_Dominik, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/14GPanskaLetko_Dominik/sounds/419290/"

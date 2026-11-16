@@ -1,8 +1,80 @@
-#Head
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Job Time
+- type: loadoutEffectGroup
+  id: MagistrateMonocle
+  effects:
+  - !type:AnyLoadoutEffect
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobNanoTrasenRepresentative
+        time: 18000 # 5 hrs
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobMagistrate
+        time: 18000 # 5 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: StreetJudge
+  effects:
+  - !type:AnyLoadoutEffect
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobNanoTrasenRepresentative
+        time: 72000 # 20 hrs
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobMagistrate
+        time: 72000 # 20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+# Head
 - type: loadout
   id: MagistratePwig
   equipment:
     head: ClothingHeadHatPwig
+
+- type: loadout
+  id: MagistrateStreetJudge
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StreetJudge
+  equipment:
+    head: ClothingHeadHatStreetJudge
+
+# Eyes
+- type: loadout
+  id: GlassesCommand
+  equipment:
+    eyes: ClothingEyesGlassesCommand
+
+- type: loadout
+  id: MagistrateMonocle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MagistrateMonocle
+  equipment:
+    eyes: ClothingEyesMonocle
+
+- type: loadout
+  id: EyesHudCommand
+  equipment:
+    eyes: ClothingEyesHudCommand
 
 # Outerclothing
 - type: loadout

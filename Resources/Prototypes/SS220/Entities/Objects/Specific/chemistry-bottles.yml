@@ -62,3 +62,34 @@
         reagents:
         - ReagentId: Dermaline
           Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: CerebrinChemistryBottle
+  suffix: cerebrin
+  components:
+  - type: Label
+    currentLabel: reagent-name-cerebrin
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Cerebrin
+          Quantity: 30
+
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: NicergolineChemistryBottle
+  suffix: nicergoline
+  components:
+  - type: Label
+    currentLabel: reagent-name-nicergoline
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nicergoline
+          Quantity: 30

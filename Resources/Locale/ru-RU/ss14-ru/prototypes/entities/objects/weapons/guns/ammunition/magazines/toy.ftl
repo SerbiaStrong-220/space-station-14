@@ -1,2 +1,2 @@
 ent-MagazineFoamBox = коробка боеприпасов (пенопласт)
-    .desc = { ent-MagazineLightRifleBox.desc }
+    .desc = Коробка с 100-зарядным ремнем, на котором закреплены... пенопластовые дротики?

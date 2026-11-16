@@ -1,0 +1,23 @@
+- type: entity
+  id: FragmentHeavyLarge
+  parent: BaseProjectileFragment
+  name: bullet (.30, deformed)
+  components:
+  - type: Sprite
+    state: slug
+
+- type: entity
+  id: FragmentHeavyMedium
+  parent: BaseProjectileFragment
+  name: large bullet fragment (.30)
+  components:
+  - type: Sprite
+    state: metal-1
+
+- type: entity
+  id: FragmentHeavySmall
+  parent: BaseProjectileFragment
+  name: bullet fragments (.30)
+  components:
+  - type: Sprite
+    state: metal-0

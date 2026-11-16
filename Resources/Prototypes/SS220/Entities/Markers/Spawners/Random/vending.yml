@@ -1,0 +1,16 @@
+#  © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: RrrantaVendingSpawner
+  name: rrranta vend spawner
+  suffix: Any
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Structures/Machines/VendingMachines/random.rsi
+      state: any
+  - type: RandomSpawner
+    prototypes:
+    - VendingMachineRrranta
+    chance: 0.25

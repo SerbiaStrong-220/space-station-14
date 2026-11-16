@@ -7,7 +7,9 @@ using Content.Client.Corvax.Sponsors;
 using Content.Client.Options;
 using Content.Client.DebugMon;
 using Content.Client.Eui;
+using Content.Client.FeedbackPopup;
 using Content.Client.Fullscreen;
+using Content.Client.GameTicking.Managers;
 using Content.Client.GhostKick;
 using Content.Client.Guidebook;
 using Content.Client.Input;
@@ -17,14 +19,18 @@ using Content.Client.Lobby;
 using Content.Client.MainMenu;
 using Content.Client.Parallax.Managers;
 using Content.Client.Players.PlayTimeTracking;
+using Content.Client.Playtime;
 using Content.Client.Radiation.Overlays;
 using Content.Client.Replay;
 using Content.Client.Screenshot;
 using Content.Client.Singularity;
+using Content.Client.SS220.ChatBans;
 using Content.Client.Stylesheets;
+using Content.Client.UserInterface;
 using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Shared.Ame.Components;
+using Content.Shared.FeedbackSystem;
 using Content.Shared.Gravity;
 using Content.Shared.Localizations;
 using Robust.Client;
@@ -40,6 +46,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Content.Client.SS220.Discord;
 using Robust.Shared.Timing;
+using Content.Client.SS220.TTS;
+using Content.Client.SS220.Species;
 
 namespace Content.Client.Entry
 {
@@ -79,26 +87,35 @@ namespace Content.Client.Entry
         [Dependency] private readonly ILogManager _logManager = default!;
         [Dependency] private readonly DiscordPlayerInfoManager _discordPlayerInfoManager = default!; // SS220 discord info manager
         [Dependency] private readonly DebugMonitorManager _debugMonitorManager = default!;
+        [Dependency] private readonly TitleWindowManager _titleWindowManager = default!;
+        [Dependency] private readonly TTSManager _ttsManager = default!; // SS220 TTS
+        [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+        [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
+        [Dependency] private readonly SpeciesRequirementsManager _speciesRequirements = default!; // SS220 Species bans
+        [Dependency] private readonly ChatRequirementsManager _chatRequirements = default!; // SS220 Chat bans
+        [Dependency] private readonly ClientFeedbackManager _feedbackManager = null!;
 
-        public override void Init()
+        public override void PreInit()
         {
-            ClientContentIoC.Register();
+            ClientContentIoC.Register(Dependencies);
 
             foreach (var callback in TestingCallbacks)
             {
                 var cast = (ClientModuleTestingCallbacks) callback;
                 cast.ClientBeforeIoC?.Invoke();
             }
+        }
 
-            IoCManager.BuildGraph();
-            IoCManager.InjectDependencies(this);
+        public override void Init()
+        {
+            Dependencies.BuildGraph();
+            Dependencies.InjectDependencies(this);
 
             _contentLoc.Initialize();
             _componentFactory.DoAutoRegistrations();
             _componentFactory.IgnoreMissingComponents();
 
             // Do not add to these, they are legacy.
-            _componentFactory.RegisterClass<SharedGravityGeneratorComponent>();
             _componentFactory.RegisterClass<SharedAmeControllerComponent>();
             // Do not add to the above, they are legacy
 
@@ -113,12 +130,10 @@ namespace Content.Client.Entry
             _prototypeManager.RegisterIgnore("htnPrimitive");
             _prototypeManager.RegisterIgnore("gameMap");
             _prototypeManager.RegisterIgnore("gameMapPool");
-            _prototypeManager.RegisterIgnore("lobbyBackground");
             _prototypeManager.RegisterIgnore("gamePreset");
             _prototypeManager.RegisterIgnore("noiseChannel");
             _prototypeManager.RegisterIgnore("playerConnectionWhitelist");
             _prototypeManager.RegisterIgnore("spaceBiome");
-            _prototypeManager.RegisterIgnore("worldgenConfig");
             _prototypeManager.RegisterIgnore("gameRule");
             _prototypeManager.RegisterIgnore("worldSpell");
             _prototypeManager.RegisterIgnore("entitySpell");
@@ -129,6 +144,8 @@ namespace Content.Client.Entry
             _prototypeManager.RegisterIgnore("nukeopsRole");
             _prototypeManager.RegisterIgnore("stationGoal"); // Corvax-StationGoal
             _prototypeManager.RegisterIgnore("ghostRoleRaffleDecider");
+            _prototypeManager.RegisterIgnore("codewordGenerator");
+            _prototypeManager.RegisterIgnore("codewordFaction");
 
             _componentFactory.GenerateNetIds();
             _adminManager.Initialize();
@@ -139,7 +156,10 @@ namespace Content.Client.Entry
             _ghostKick.Initialize();
             _extendedDisconnectInformation.Initialize();
             _jobRequirements.Initialize();
+            _speciesRequirements.Initialize(); // SS220 Species bans
+            _chatRequirements.Initialize(); // SS220 Chat bans
             _playbackMan.Initialize();
+            _clientsidePlaytimeManager.Initialize();
 
             //AUTOSCALING default Setup!
             _configManager.SetCVar("interface.resolutionAutoScaleUpperCutoffX", 1080);
@@ -172,7 +192,10 @@ namespace Content.Client.Entry
             _discordAuthManager.Initialize(); // Corvax-DiscordAuth
             _userInterfaceManager.SetActiveTheme(_configManager.GetCVar(CVars.InterfaceTheme));
             _documentParsingManager.Initialize();
-            _discordPlayerInfoManager.Initialize();
+            _discordPlayerInfoManager.Initialize(); // SS220 tier info
+            _titleWindowManager.Initialize();
+            _ttsManager.Initialize(); // SS220 TTS
+            _feedbackManager.Initialize();
 
             _baseClient.RunLevelChanged += (_, args) =>
             {
@@ -228,6 +251,15 @@ namespace Content.Client.Entry
             if (level == ModUpdateLevel.FramePreEngine)
             {
                 _debugMonitorManager.FrameUpdate();
+            }
+
+            if (level == ModUpdateLevel.PreEngine)
+            {
+                if (_baseClient.RunLevel is ClientRunLevel.InGame or ClientRunLevel.SinglePlayerGame)
+                {
+                    var updateSystem = _entitySystemManager.GetEntitySystem<BuiPreTickUpdateSystem>();
+                    updateSystem.RunUpdates();
+                }
             }
         }
     }

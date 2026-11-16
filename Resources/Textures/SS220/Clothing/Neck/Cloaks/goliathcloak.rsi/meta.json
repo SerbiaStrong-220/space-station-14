@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from TGstation https://github.com/tgstation/tgstation/blob/HEAD/icons/mob/clothing/suits/armor.dmi, original sprite by TechnoAlchemisto (https://github.com/TechnoAlchemisto) and modified sprite by FantasticFwoosh (https://github.com/FantasticFwoosh), sprites in hand by EstKemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+	{
+      "name": "equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

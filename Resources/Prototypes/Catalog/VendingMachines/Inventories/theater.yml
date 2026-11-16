@@ -19,6 +19,7 @@
     ClothingOuterPoncho: 2
     ClothingHeadHatSantahat: 2
     ClothingOuterSanta: 2
+    #ClothingHeadHatNewYearsCap: 2 #SS220 New years cap
     ClothingHeadHatSkub: 2
     ClothingOuterSkub: 2
     ClothingHeadHatBeretFrench: 2
@@ -45,6 +46,7 @@
     ClothingUniformJumpsuitDameDane: 2
     ClothingShoesDameDane: 2
     ClothingOuterDameDane: 2
+    ClothingHeadHatMitreClown: 1
     ClothingOuterClownPriest: 1
     ClothingMaskSadMime: 1
     ClothingMaskScaredMime: 1
@@ -60,10 +62,14 @@
     ClothingShoesBootsCowboyBrown: 1
     ClothingShoesBootsCowboyBlack: 1
     ClothingShoesBootsCowboyWhite: 1
-  emaggedInventory:
+  contrabandInventory:
+    ClothingHeadHatRichard: 1
+    ToyFigurineBoxer: 1
+    ToyFigurineMusician: 1
     ClothingShoesBling: 1
     ClothingShoesBootsCowboyFancy: 1
     ClothingOuterDogi: 1
-    ClothingMaskSexyClown: 1
-    ClothingMaskSexyMime: 1
+    ClothingOuterSuitCarp: 1
+    ClothingMaskBlushingClown: 1
+    ClothingMaskBlushingMime: 1
     ClothingHeadHatCowboyBountyHunter: 1

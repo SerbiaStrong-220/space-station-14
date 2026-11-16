@@ -1,5 +1,6 @@
 - type: gameMap
   id: SS220_CentComm
+  isGrid: true
   mapName: 'Центральное Командование'
   mapPath: /Maps/SS220/ss220-centcomm.yml
   minPlayers: 10

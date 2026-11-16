@@ -1,0 +1,18 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Client.Items;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.SS220.CultYogg.SedativeSting;
+
+namespace Content.Client.SS220.CultYogg.SedativeSting.Systems;
+
+public sealed partial class ClientSedativeStingSystem : EntitySystem
+{
+    [Dependency] private SharedSolutionContainerSystem _solutionContainers = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        Subs.ItemStatus<SedativeStingComponent>(ent => new SedativeStingStatusControl(ent, _solutionContainers));
+    }
+}

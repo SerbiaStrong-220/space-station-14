@@ -1,0 +1,443 @@
+## Death Squad
+
+- type: randomHumanoidSettings
+  id: DeathSquadLeaderRandom
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Dwarf, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Ipc]
+  parent: EventHumanoidMindShielded
+  randomizeName: false
+  components:
+    - type: GhostRole
+      allowMovement: true
+      allowSpeech: true
+      makeSentient: true
+      job: DeathSquadLeader
+      name: Командир Эскадрона Смерти
+      description: "Командир элитного отряда зачистки НаноТрейзен - Эскадрона Смерти. Приготовьтесь к массированному наступлению на станцию. Ваша задача, как тяжеловооружённого оперативника, - уничтожить всё живое на своём пути. И никаких свидетелей."
+    - type: GhostTakeoverAvailable
+    - type: ZombieImmune
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        170: Critical
+        220: Dead
+    - type: Stamina
+      baseCritThreshold: 200
+      decay: 6
+      cooldown: 1
+    - type: SlowOnDamage
+      speedModifierThresholds:
+        80: 0.9
+        140: 0.7
+        160: 0.5
+    - type: Loadout
+      prototypes: [ DeathSquadLeaderGear ]
+    - type: AutoImplant
+      implants:
+      - DeathAcidifierImplant
+      - FreedomImplant
+      - MindShieldImplant
+    - type: NpcFactionMember
+      factions:
+      - DeathSquad
+    - type: StatusEffects
+      allowed:
+      - Stun
+      - KnockedDown
+      - SlowedDown
+      - Stutter
+      - Electrocution
+      - SlurredSpeech
+      - RatvarianLanguage
+      - PressureImmunity
+      - StaminaModifier
+    - type: Thirst
+      startingThirst: 2500  # spawn with Okay thirst state
+      thresholds:
+        OverHydrated: 3500
+        Okay: 2500
+        Thirsty: 1500
+        Parched: 1000
+        Dead: 0
+      baseDecayRate: 0.0001
+    - type: Hunger
+      lastAuthoritativeHungerValue: 2500   # spawn with Okay hunger state
+      thresholds:
+        Overfed: 3500
+        Okay: 2500
+        Peckish: 1500
+        Starving: 1000
+        Dead: 0
+      baseDecayRate: 0.0001
+    - type: PassiveDamage
+      allowedStates:
+      - Alive
+      damage:
+        types:
+          Blunt: -0.33
+          Slash: -0.33
+          Piercing: -0.33
+          Heat: -0.25
+          Shock: -0.25
+          Cold: -0.25
+          Caustic: -0.25
+          Poison: -0.5
+          Radiation: -0.5
+          Asphyxiation: -0.25
+          Bloodloss: -0.25
+
+- type: randomHumanoidSettings
+  id: DeathSquadHealerRandom
+  parent: DeathSquadLeaderRandom
+  components:
+    - type: GhostRole
+      job: DeathSquadHealer
+      name: Специалист Эскадрона Смерти
+      description: "Специалист элитного отряда зачистки НаноТрейзен - Эскадрона Смерти. Приготовьтесь к массированному наступлению на станцию. Ваша задача, как тяжеловооружённого оперативника, - уничтожить всё живое на своём пути. И никаких свидетелей."
+    - type: Loadout
+      prototypes: [ DeathSquadHealerGear ]
+    - type: PassiveDamage
+      allowedStates:
+      - Alive
+      damage:
+        types:
+          Blunt: -0.27
+          Slash: -0.27
+          Piercing: -0.26
+          Heat: -0.2
+          Shock: -0.2
+          Cold: -0.2
+          Caustic: -0.2
+          Poison: -0.4
+          Radiation: -0.4
+          Asphyxiation: -0.2
+          Bloodloss: -0.2
+
+- type: randomHumanoidSettings
+  id: DeathSquadOperativeRandom
+  parent: DeathSquadLeaderRandom
+  components:
+    - type: GhostRole
+      job: DeathSquadOperative
+      name: Оперативник Эскадрона Смерти
+      description: "Оперативник элитного отряда зачистки НаноТрейзен - Эскадрона Смерти. Приготовьтесь к массированному наступлению на станцию. Ваша задача, как тяжеловооружённого оперативника, - уничтожить всё живое на своём пути. И никаких свидетелей."
+    - type: Loadout
+      prototypes: [ DeathSquadOperativeGear ]
+    - type: PassiveDamage
+      allowedStates:
+      - Alive
+      damage:
+        types:
+          Blunt: -0.2
+          Slash: -0.2
+          Piercing: -0.2
+          Heat: -0.15
+          Shock: -0.15
+          Cold: -0.15
+          Caustic: -0.15
+          Poison: -0.3
+          Radiation: -0.3
+          Asphyxiation: -0.15
+          Bloodloss: -0.15
+
+- type: entity
+  name: commander of the Death Squadron
+  parent: RandomHumanoidSpawnerERTLeader
+  id: MobHumanDeathSquadLeader
+  suffix: Death Squad
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/dq_hardsuit_commander.rsi
+    state: icon
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesMilitaryFirstLeader
+    - NamesMilitaryLast
+  - type: RandomHumanoidSpawner
+    settings: DeathSquadLeaderRandom
+
+- type: entity
+  name: specialist of the Death Squadron
+  parent: RandomHumanoidSpawnerERTLeader
+  id: MobHumanDeathSquadHealer
+  suffix: Death Squad
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/dq_alpha_hardsuit.rsi
+    state: icon
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesMilitaryFirstLeader
+    - NamesMilitaryLast
+  - type: RandomHumanoidSpawner
+    settings: DeathSquadHealerRandom
+
+- type: entity
+  parent: RandomHumanoidSpawnerERTLeader
+  id: MobHumanDeathSquadOperative
+  name: operative of the Death Squadron
+  suffix: Death Squad
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+    state: icon
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesMilitaryFirstLeader
+    - NamesMilitaryLast
+  - type: RandomHumanoidSpawner
+    settings: DeathSquadOperativeRandom
+
+- type: startingGear
+  id: DeathSquadLeaderGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDeathSquad
+    id: DeathsquadCommanderPDA
+    pocket1: EnergySword
+    pocket2: EnergyShieldAlt
+
+- type: startingGear
+  id: DeathSquadHealerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDeathSquad
+    id: DeathsquadHealerPDA
+    pocket1: EnergySword
+    pocket2: EnergyShieldAlt
+
+- type: startingGear
+  id: DeathSquadOperativeGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDeathSquad
+    id: DeathsquadPDA
+    pocket1: EnergySword
+    pocket2: EnergyShieldAlt
+
+##Ert Gamma
+
+#ERT Gamma Leader
+- type: randomHumanoidSettings
+  id: ERTLeaderGamma
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Ipc]
+  parent: EventHumanoidMindShielded
+  randomizeName: false
+  components:
+    - type: GhostRole
+      name: ghost-role-information-ert-leader-name
+      description: ghost-role-information-ert-leader-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTLeader
+    - type: AutoImplant
+      implants:
+      - AdrenalImplant
+      - ThermalVisionImplant
+      - DeathRattleImplantCentcomm
+      - MindShieldImplant
+    - type: Loadout
+      prototypes: [ ERTLeaderGammaGear ]
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirstLeader
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+
+- type: entity
+  id: RandomHumanoidSpawnerERTLeaderGamma
+  name: ERT leader Gamma
+  suffix: ERTRole, Gamma
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: ertleadereva
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirstLeader
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+    - type: RandomHumanoidSpawner
+      settings: ERTLeaderGamma
+
+- type: startingGear
+  id: ERTLeaderGammaGear
+  experienceDefinition: ERTLeaderRoleExperience
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTLeader
+    back: ClothingBackpackERTLeaderGammaFilled
+    shoes: ClothingShoesBootsMagAdv
+    eyes: ClothingEyesHudMedSec
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitERTLeaderGamma
+    neck: ClothingBeltHolster
+    suitstorage: WeaponLaserCarbineIK60
+    id: ERTLeaderPDA
+    ears: ClothingHeadsetAltCentComm
+    belt: ClothingBeltSecurity
+    pocket1: WeaponSubMachineGunSaber
+    pocket2: DoubleEmergencyOxygenTankFilled
+  storage:
+    belt:
+    - Stunbaton
+    - Flash
+    - GrenadeFlashBang
+    - TearGasGrenade
+    - Handcuffs
+    - Handcuffs
+
+#ERT Gamma Security
+
+- type: randomHumanoidSettings
+  id: ERTSecurityGamma
+  parent: ERTLeaderGamma
+  components:
+    - type: GhostRole
+      name: ghost-role-information-ert-security-name
+      description: ghost-role-information-ert-security-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTSecurity
+    - type: Loadout
+      prototypes: [ ERTSecurityGammaGear ]
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirst
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+
+- type: entity
+  id: RandomHumanoidSpawnerERTSecurityGamma
+  name: ERT security Gamma
+  suffix: ERTRole, Gamma
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: ertsecurityeva
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirst
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+    - type: RandomHumanoidSpawner
+      settings: ERTSecurityGamma
+
+- type: startingGear
+  id: ERTSecurityGammaGear
+  experienceDefinition: ERTSecurityRoleExperience
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTSecurity
+    back: ClothingBackpackERTSecurityGammaFilled
+    shoes: ClothingShoesBootsMagAdv
+    eyes: ClothingEyesHudMedSec
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitERTSecurityGamma
+    neck: ClothingBeltHolster
+    suitstorage: WeaponLaserCarbineIK60
+    id: ERTSecurityPDA
+    ears: ClothingHeadsetAltCentComm
+    belt: ClothingBeltSecurity
+    pocket1: WeaponSubMachineGunSaber
+    pocket2: DoubleEmergencyOxygenTankFilled
+  storage:
+    belt:
+    - Stunbaton
+    - Flash
+    - GrenadeFlashBang
+    - TearGasGrenade
+    - Handcuffs
+    - Handcuffs
+
+##ERT Gamma Medical
+
+- type: randomHumanoidSettings
+  id: ERTMedicalGamma
+  parent: ERTLeaderGamma
+  randomizeName: false
+  components:
+    - type: GhostRole
+      name: ghost-role-information-ert-medical-name
+      description: ghost-role-information-ert-medical-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: ERTMedical
+    - type: Loadout
+      prototypes: [ ERTMedicalGammaGear ]
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirst
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+
+- type: entity
+  id: RandomHumanoidSpawnerERTMedicalGamma
+  name: ERT Medical Gamma
+  suffix: ERTRole, Gamma
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: ertmedicaleva
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirst
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+    - type: RandomHumanoidSpawner
+      settings: ERTMedicalGamma
+
+- type: startingGear
+  id: ERTMedicalGammaGear
+  experienceDefinition: ERTMedicalRoleExperience
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTMedic
+    back: ClothingBackpackERTMedicalGammaFilled
+    shoes: ClothingShoesBootsMagAdv
+    eyes: ClothingEyesHudMedSec
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitERTMedicalGamma
+    neck: ClothingBeltHolster
+    suitstorage: WeaponLaserCarbineIK60
+    id: ERTMedicPDA
+    ears: ClothingHeadsetAltCentComm
+    belt: ClothingBeltERTGammaMedicalFilled
+    pocket1: WeaponSubMachineGunSaber
+    pocket2: DoubleEmergencyOxygenTankFilled
+
+# CBURN Leader
+- type: entity
+  id: RandomHumanoidSpawnerCBURNLeader
+  name: CBURN Leader
+  suffix: ERTRole
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: cburn
+    - type: RandomHumanoidSpawner
+      settings: CBURNLeader
+
+- type: randomHumanoidSettings
+  id: CBURNLeader
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
+  parent: EventHumanoidCentcomm
+  components:
+    - type: Loadout
+      prototypes: [CBURNLeaderGear]
+      roleLoadout: [ RoleSurvivalCentcom ]
+    - type: GhostRole
+      name: ghost-role-information-cburn-agent-name
+      description: ghost-role-information-cburn-agent-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+      job: CBURNLeader
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirst
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+    - type: ZombieImmune #SS220 ERTchangingthings

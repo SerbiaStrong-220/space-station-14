@@ -2,7 +2,7 @@
 - type: rcd
   id: Invalid   # Hidden prototype - do not add to RCDs
   mode: Invalid
-  
+
 - type: rcd
   id: Deconstruct
   name: rcd-component-deconstruct
@@ -13,14 +13,14 @@
   rotation: Camera
 
 - type: rcd
-  id: DeconstructLattice   # Hidden prototype - do not add to RCDs  
+  id: DeconstructLattice   # Hidden prototype - do not add to RCDs
   name: rcd-component-deconstruct
   mode: Deconstruct
   cost: 2
   delay: 0
   rotation: Camera
   fx: EffectRCDConstruct0
-    
+
 - type: rcd
   id: DeconstructTile      # Hidden prototype - do not add to RCDs
   name: rcd-component-deconstruct
@@ -30,21 +30,21 @@
   rotation: Camera
   fx: EffectRCDDeconstruct4
 
-# Flooring 
+# Flooring
 - type: rcd
   id: Plating
   name: rcd-component-plating
   category: WallsAndFlooring
   sprite: /Textures/Interface/Radial/RCD/plating.png
   mode: ConstructTile
-  prototype: Plating
+  prototype: PlatingRCD
   cost: 1
   delay: 1
   collisionMask: InteractImpassable
   rules:
     - CanBuildOnEmptyTile
   fx: EffectRCDConstruct1
-  
+
 - type: rcd
   id: FloorSteel
   name: rcd-component-floor-steel
@@ -62,7 +62,7 @@
 - type: rcd
   id: Catwalk
   category: WallsAndFlooring
-  sprite: /Textures/Interface/Radial/RCD/catwalk.png
+  sprite: /Textures/SS220/Interface/Radial/RCD/catwalk.png # ss220 rcd upd
   mode: ConstructObject
   prototype: Catwalk
   cost: 1
@@ -78,9 +78,9 @@
 - type: rcd
   id: WallSolid
   category: WallsAndFlooring
-  sprite: /Textures/Interface/Radial/RCD/solid_wall.png
+  sprite: /Textures/SS220/Interface/Radial/RCD/solid_wall.png # ss220 rcd upd
   mode: ConstructObject
-  prototype: WallSolid 
+  prototype: WallSolid
   cost: 4
   delay: 2
   collisionMask: FullTileMask
@@ -96,6 +96,8 @@
   cost: 4
   delay: 2
   collisionMask: Impassable
+  rules: #SS220-rcd-firelock-stacking
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: Fixed
   fx: EffectRCDConstruct2
 
@@ -103,7 +105,7 @@
 - type: rcd
   id: Window
   category: WindowsAndGrilles
-  sprite: /Textures/Interface/Radial/RCD/window.png
+  sprite: /Textures/SS220/Interface/Radial/RCD/window.png # ss220 rcd upd
   mode: ConstructObject
   prototype: Window
   cost: 3
@@ -111,13 +113,14 @@
   collisionMask: Impassable
   rules:
     - IsWindow
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: Fixed
   fx: EffectRCDConstruct2
-  
+
 - type: rcd
   id: WindowDirectional
   category: WindowsAndGrilles
-  sprite: /Textures/Interface/Radial/RCD/directional.png
+  sprite: /Textures/SS220/Interface/Radial/RCD/directional.png # ss220 rcd upd
   mode: ConstructObject
   prototype: WindowDirectional
   cost: 2
@@ -126,13 +129,15 @@
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
   rules:
     - IsWindow
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: User
   fx: EffectRCDConstruct1
-  
+  allowMultiDirection: true
+
 - type: rcd
   id: ReinforcedWindow
   category: WindowsAndGrilles
-  sprite: /Textures/Interface/Radial/RCD/window_reinforced.png
+  sprite: /Textures/SS220/Interface/Radial/RCD/window_reinforced.png # ss220 rcd upd
   mode: ConstructObject
   prototype: ReinforcedWindow
   cost: 4
@@ -140,13 +145,14 @@
   collisionMask: Impassable
   rules:
     - IsWindow
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: User
   fx: EffectRCDConstruct3
-    
+
 - type: rcd
   id: WindowReinforcedDirectional
   category: WindowsAndGrilles
-  sprite: /Textures/Interface/Radial/RCD/directional_reinforced.png
+  sprite: /Textures/SS220/Interface/Radial/RCD/directional_reinforced.png # ss220 rcd upd
   mode: ConstructObject
   prototype: WindowReinforcedDirectional
   cost: 3
@@ -155,44 +161,52 @@
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
   rules:
     - IsWindow
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
   rotation: User
   fx: EffectRCDConstruct2
+  allowMultiDirection: true
 
 # Airlocks
 - type: rcd
   id: Airlock
   category: Airlocks
-  sprite: /Textures/Interface/Radial/RCD/airlock.png
+  sprite: /Textures/SS220/Interface/Radial/RCD/airlock.png # ss220 rcd upd
   mode: ConstructObject
   prototype: Airlock
   cost: 4
   delay: 4
   collisionMask: FullTileMask
-  rotation: Camera
+  rules: #SS220-rcd-firelock-stacking
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
+  rotation: User # ss220 rcd upd (fix rot)
   fx: EffectRCDConstruct4
-  
+
 - type: rcd
   id: AirlockGlass
   category: Airlocks
-  sprite: /Textures/Interface/Radial/RCD/glass_airlock.png
+  sprite: /Textures/SS220/Interface/Radial/RCD/glass_airlock.png # ss220 rcd upd
   mode: ConstructObject
   prototype: AirlockGlass
   cost: 4
   delay: 4
   collisionMask: FullTileMask
-  rotation: Camera
+  rules: #SS220-rcd-firelock-stacking
+    - CanBuildOnFirelock #SS220-rcd-firelock-stacking
+  rotation: User # ss220 rcd upd (fix rot)
   fx: EffectRCDConstruct4
-  
+
 - type: rcd
   id: Firelock
   category: Airlocks
-  sprite: /Textures/Interface/Radial/RCD/firelock.png
+  sprite: /Textures/SS220/Interface/Radial/RCD/firelock.png # ss220 rcd upd
   mode: ConstructObject
   prototype: Firelock
   cost: 4
   delay: 3
   collisionMask: FullTileMask
-  rotation: Camera
+  rules: #SS220-rcd-firelock-stacking
+    - IsFirelock #SS220-rcd-firelock-stacking
+  rotation: User # ss220 rcd upd (fix rot)
   fx: EffectRCDConstruct3
 
 # Lighting
@@ -208,7 +222,8 @@
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
   rotation: User
   fx: EffectRCDConstruct1
-  
+  allowMultiDirection: true
+
 - type: rcd
   id: BulbLight
   category: Lighting
@@ -221,6 +236,7 @@
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
   rotation: User
   fx: EffectRCDConstruct1
+  allowMultiDirection: true
 
 # Electrical
 - type: rcd
@@ -235,7 +251,7 @@
   - MustBuildOnSubfloor
   rotation: Fixed
   fx: EffectRCDConstruct0
-    
+
 - type: rcd
   id: MVCable
   category: Electrical
@@ -248,7 +264,7 @@
   - MustBuildOnSubfloor
   rotation: Fixed
   fx: EffectRCDConstruct0
-    
+
 - type: rcd
   id: HVCable
   category: Electrical
@@ -261,7 +277,7 @@
   - MustBuildOnSubfloor
   rotation: Fixed
   fx: EffectRCDConstruct0
-    
+
 - type: rcd
   id: CableTerminal
   category: Electrical

@@ -8,7 +8,7 @@ namespace Content.Shared.Labels.Components;
 /// Makes entities have a label in their name. Labels are normally given by <see cref="HandLabelerComponent"/>
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class LabelComponent : Component, IPhotocopyableComponent
+public sealed partial class LabelComponent : Component, IPhotocopyableComponent /* SS220 Photocopy */
 {
     /// <summary>
     /// Current text on the label. If set before map init, during map init this string will be localized.
@@ -17,19 +17,39 @@ public sealed partial class LabelComponent : Component, IPhotocopyableComponent
     [DataField, AutoNetworkedField]
     public string? CurrentLabel { get; set; }
 
+    /// <summary>
+    /// Should the label show up in the examine menu?
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Examinable = true;
+
+    //SS220-LabelColors begin
+    [DataField, AutoNetworkedField]
+    public Color LabelColor = Color.White;
+    //SS220-LabelColors end
+
+    // SS220 Photocopy begin
     public IPhotocopiedComponentData GetPhotocopiedData()
     {
         return new LabelComponentPhotocopiedData()
-        {
-            CurrentLabel = CurrentLabel
+        {   //SS220-LabelColors begin
+            CurrentLabel = CurrentLabel,
+            LabelColor = LabelColor
+            //SS220-LabelColors end
         };
     }
+    // SS220 Photocopy end
 }
 
+// SS220 Photocopy begin
 [Serializable]
 public sealed class LabelComponentPhotocopiedData : IPhotocopiedComponentData
 {
     public string? CurrentLabel;
+    public Color LabelColor = Color.White; //SS220-LabelColors
+
+    public bool NeedToEnsure => true; //SS220-LabelColors
+
     public void RestoreFromData(EntityUid uid, Component someComponent)
     {
         if (someComponent is not LabelComponent labelComponent)
@@ -42,8 +62,9 @@ public sealed class LabelComponentPhotocopiedData : IPhotocopiedComponentData
                 return;
 
             var entSys = IoCManager.Resolve<IEntityManager>();
-            var labelSys = entSys.System<SharedLabelSystem>();
-            labelSys.Label(uid, CurrentLabel, label: labelComponent);
+            var labelSys = entSys.System<LabelSystem>();
+            labelSys.ApplyPreEscapedLabel(new Entity<LabelComponent>(uid, labelComponent), CurrentLabel, LabelColor); //SS220-LabelColors
         }
     }
 }
+// SS220 Photocopy end

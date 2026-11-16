@@ -1,20 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Actions;
 using Content.Shared.Mind;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.DarkReaper;
 
-public sealed class DarkReaperRuneSharedSystem : EntitySystem
+public sealed partial class DarkReaperRuneSharedSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("dark-reaper-spawn");
 
@@ -26,36 +26,36 @@ public sealed class DarkReaperRuneSharedSystem : EntitySystem
         SubscribeLocalEvent<DarkReaperRuneComponent, ComponentStartup>(OnInit);
     }
 
-    private void OnInit(EntityUid uid, DarkReaperRuneComponent component, ComponentStartup args)
+    private void OnInit(Entity<DarkReaperRuneComponent> ent, ref ComponentStartup args)
     {
         if (_net.IsServer)
-            _actions.AddAction(uid, ref component.SpawnActionEntity, component.SpawnAction);
+            _actions.AddAction(ent, ref ent.Comp.SpawnActionEntity, ent.Comp.SpawnAction);
     }
 
-    private void OnSpawnAction(EntityUid uid, DarkReaperRuneComponent component, ReaperSpawnEvent args)
+    private void OnSpawnAction(Entity<DarkReaperRuneComponent> ent, ref ReaperSpawnEvent args)
     {
         if (!_net.IsServer)
             return;
 
         args.Handled = true;
 
-        if (!_prototype.TryIndex<EntityPrototype>(component.DarkReaperPrototypeId, out var reaperProto))
+        if (!_prototype.TryIndex<EntityPrototype>(ent.Comp.DarkReaperPrototypeId, out _))
             return;
 
-        if (!_mindSystem.TryGetMind(uid, out var mindId, out var mind))
+        if (!_mindSystem.TryGetMind(ent, out var mindId, out var mind))
             return;
 
-        var coords = Transform(uid).Coordinates;
+        var coords = Transform(ent).Coordinates;
         if (!coords.IsValid(EntityManager))
         {
             _sawmill.Debug("Failed to spawn Dark Reaper: spawn coordinates are invalid!");
             return;
         }
 
-        var reaper = Spawn(component.DarkReaperPrototypeId, Transform(uid).Coordinates);
+        var reaper = Spawn(ent.Comp.DarkReaperPrototypeId, Transform(ent).Coordinates);
         _mindSystem.TransferTo(mindId, reaper, mind: mind);
-        _audio.PlayPvs(component.SpawnSound, reaper);
+        _audio.PlayPvs(ent.Comp.SpawnSound, reaper);
 
-        QueueDel(uid);
+        QueueDel(ent);
     }
 }

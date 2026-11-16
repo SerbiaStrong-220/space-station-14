@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: latheRecipe
   id: ClothingWristWatch
   result: ClothingWristWatch
@@ -13,3 +15,68 @@
   completetime: 1
   materials:
     Plastic: 100
+
+- type: latheRecipe
+  id: SuperSynthesizerInstrument
+  result: SuperSynthesizerInstrument
+  completetime: 1
+  materials:
+    Steel: 1500
+    Plastic: 500
+
+- type: latheRecipe
+  id: ClothingBeltMilitaryWebbing
+  result: ClothingBeltMilitaryWebbing
+  completetime: 1
+  materials:
+    Plastic: 200
+    Cloth: 1000
+
+- type: latheRecipe
+  id: WeaponCrusher
+  result: WeaponCrusher
+  completetime: 3
+  materials:
+    Steel: 2000
+    Gold: 500
+
+- type: latheRecipe
+  id: WeaponCrusherGlaive
+  result: WeaponCrusherGlaive
+  completetime: 3
+  materials:
+    Steel: 2500
+    Plasma: 1500
+    Gold: 1000
+
+- type: latheRecipe
+  id: ToySword
+  result: ToySword
+  completetime: 1
+  materials:
+    Plastic: 800
+
+- type: latheRecipe
+  id: DoubleToySword
+  result: DoubleToySword
+  completetime: 1
+  materials:
+    Plastic: 1600
+
+- type: latheRecipe
+  id: CassetteTape
+  result: CassetteTape
+  categories: [ Tools ]
+  completetime: 2
+  materials:
+    Steel: 50
+    Plastic: 150
+
+- type: latheRecipe
+  id: TapeRecorder
+  result: TapeRecorder
+  categories: [ Tools ]
+  completetime: 3
+  materials:
+    Steel: 250
+    Plastic: 250

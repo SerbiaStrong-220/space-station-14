@@ -1,6 +1,7 @@
 using Content.Server.Discord;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
+using Content.Shared.SS220.CCVars;
 
 namespace Content.Server.GameTicking
 {
@@ -50,7 +51,7 @@ namespace Content.Server.GameTicking
                         LobbyEnabled ? PlayerGameStatus.NotReadyToPlay : PlayerGameStatus.ReadyToPlay;
                 }
             }, true);
-            Subs.CVar(_cfg, CCVars.AutoMapVote, value => AutoMapVote = value, true); // SS220 Auto-Map-Vote
+            Subs.CVar(_cfg, CCVars220.AutoMapVote, value => AutoMapVote = value, true); // SS220 Auto-Map-Vote
             Subs.CVar(_cfg, CCVars.GameDummyTicker, value => DummyTicker = value, true);
             Subs.CVar(_cfg, CCVars.GameLobbyDuration, value => LobbyDuration = TimeSpan.FromSeconds(value), true);
             Subs.CVar(_cfg, CCVars.GameDisallowLateJoins,

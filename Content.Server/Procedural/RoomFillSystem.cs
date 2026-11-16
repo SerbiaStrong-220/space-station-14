@@ -1,4 +1,5 @@
 using Robust.Shared.Map.Components;
+using Robust.Shared.Random;
 
 namespace Content.Server.Procedural;
 
@@ -6,6 +7,7 @@ public sealed class RoomFillSystem : EntitySystem
 {
     [Dependency] private readonly DungeonSystem _dungeon = default!;
     [Dependency] private readonly SharedMapSystem _maps = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -15,16 +17,11 @@ public sealed class RoomFillSystem : EntitySystem
 
     private void OnRoomFillMapInit(EntityUid uid, RoomFillComponent component, MapInitEvent args)
     {
-        // Just test things.
-        if (component.Size == Vector2i.Zero)
-            return;
-
         var xform = Transform(uid);
 
         if (xform.GridUid != null)
         {
-            var random = new Random();
-            var room = _dungeon.GetRoomPrototype(component.Size, random, component.RoomWhitelist);
+            var room = _dungeon.GetRoomPrototype(_random, component.RoomWhitelist, component.MinSize, component.MaxSize);
 
             if (room != null)
             {
@@ -32,9 +29,9 @@ public sealed class RoomFillSystem : EntitySystem
                 _dungeon.SpawnRoom(
                     xform.GridUid.Value,
                     mapGrid,
-                    _maps.LocalToTile(xform.GridUid.Value, mapGrid, xform.Coordinates),
+                    _maps.LocalToTile(xform.GridUid.Value, mapGrid, xform.Coordinates) - new Vector2i(room.Size.X/2,room.Size.Y/2),
                     room,
-                    random,
+                    _random,
                     null,
                     clearExisting: component.ClearExisting,
                     rotation: component.Rotation);

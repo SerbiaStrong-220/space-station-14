@@ -3,3 +3,9 @@
   id: ServiceWorkerWaiter
   equipment:
     jumpsuit: ClothingUniformJumpsuitWaiter
+
+# Jumpskirt
+- type: loadout
+  id: ServiceWorkerWaitress
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtWaitress

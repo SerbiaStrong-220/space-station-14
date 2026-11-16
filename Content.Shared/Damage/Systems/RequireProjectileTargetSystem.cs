@@ -1,14 +1,21 @@
+using Content.Shared.Damage.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
-using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.Standing;
-using Robust.Shared.Physics.Events;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
+using Robust.Shared.Physics.Events;
 
-namespace Content.Shared.Damage.Components;
+namespace Content.Shared.Damage.Systems;
 
 public sealed class RequireProjectileTargetSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    //SS220 weapon overhaul begin
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private MobStateSystem _state = default!;
+    //SS220 weapon overhaul end
 
     public override void Initialize()
     {
@@ -26,17 +33,38 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
             return;
 
         var other = args.OtherEntity;
-        if (TryComp(other, out ProjectileComponent? projectile) &&
-            CompOrNull<TargetedProjectileComponent>(other)?.Target != ent)
+
+        //SS220 weapon overhaul begin
+        if (TryComp(other, out ProjectileComponent? projectile) && (projectile.Shooter is { Valid: true } shooterValidated))
         {
-            // Prevents shooting out of while inside of crates
-            var shooter = projectile.Shooter;
-            if (!shooter.HasValue)
+            bool isAimed = HasComp<AimedProjectileComponent>(other);
+
+            if (_standing.IsDown(shooterValidated) && //The shooter and the target are both down and the target is alive => we'll hit, otherwise we won't
+                _standing.IsDown(ent.Owner) &&
+                _state.IsAlive(ent.Owner))
                 return;
 
-            if (!_container.IsEntityOrParentInContainer(shooter.Value))
-               args.Cancelled = true;
+            if (isAimed &&
+                _state.IsAlive(ent.Owner))
+                return;
+
+            if (CompOrNull<TargetedProjectileComponent>(other)?.Target != ent)
+            {
+                // Prevents shooting out of while inside of crates
+                var shooter = projectile.Shooter;
+                if (!shooter.HasValue)
+                    return;
+
+                // ProjectileGrenades delete the entity that's shooting the projectile,
+                // so it's impossible to check if the entity is in a container
+                if (TerminatingOrDeleted(shooter.Value))
+                    return;
+
+                if (!_container.IsEntityOrParentInContainer(shooter.Value))
+                    args.Cancelled = true;
+            }
         }
+        //SS220 weapon overhaul end
     }
 
     private void SetActive(Entity<RequireProjectileTargetComponent> ent, bool value)

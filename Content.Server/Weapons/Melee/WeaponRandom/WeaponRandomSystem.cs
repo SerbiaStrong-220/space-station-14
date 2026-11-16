@@ -1,6 +1,7 @@
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Audio.Systems;
+using Content.Server.Damage.Systems;
 
 namespace Content.Server.Weapons.Melee.WeaponRandom;
 
@@ -11,6 +12,7 @@ public sealed class WeaponRandomSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly StaminaSystem _stamina = default!; // SS220 Add random stamina damage
 
     public override void Initialize()
     {
@@ -27,6 +29,16 @@ public sealed class WeaponRandomSystem : EntitySystem
         {
             _audio.PlayPvs(component.DamageSound, uid);
             args.BonusDamage = component.DamageBonus;
+
+            // SS220 Add random stamina damage begin
+            if (component.StaminaDamage is { } staminaDamage)
+            {
+                foreach (var ent in args.HitEntities)
+                {
+                    _stamina.TryTakeStamina(ent, staminaDamage);
+                }
+            }
+            // SS220 Add random stamina damage end
         }
     }
 }

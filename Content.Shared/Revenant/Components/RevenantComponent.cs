@@ -13,6 +13,13 @@ namespace Content.Shared.Revenant.Components;
 [AutoGenerateComponentState]
 public sealed partial class RevenantComponent : Component
 {
+    // SS220 revenant-stuns-damage-dealer-begin
+    /// <summary>
+    /// For how much time attacker will be stunned after damaging owner
+    /// </summary>
+    [DataField]
+    public TimeSpan? StunTime = null;
+    // SS220 revenant-stuns-damage-dealer-end
     /// <summary>
     /// The total amount of Essence the revenant has. Functions
     /// as health and is regenerated.
@@ -215,5 +222,16 @@ public sealed partial class RevenantComponent : Component
     public string HarvestingState = "harvesting";
     #endregion
 
-    [DataField] public EntityUid? Action;
+    /// <summary>
+    /// The scaling for passively chilling surroundings.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 ChillScaling = 7000;
+
+    /// <summary>
+    /// The upper limit for essence when passively chilling surroundings.
+    /// Beyond this point, more essence will not cause more chilling.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 ChillUpperBound = 500;
 }

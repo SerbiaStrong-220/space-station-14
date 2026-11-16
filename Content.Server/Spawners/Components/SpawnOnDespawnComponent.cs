@@ -15,4 +15,9 @@ public sealed partial class SpawnOnDespawnComponent : Component
     /// </summary>
     [DataField(required: true)]
     public EntProtoId Prototype = string.Empty;
+
+    // SS220 Add inherit rotation begin
+    [DataField]
+    public bool InheritRotation = false;
+    // SS220 Add inherit rotation end
 }

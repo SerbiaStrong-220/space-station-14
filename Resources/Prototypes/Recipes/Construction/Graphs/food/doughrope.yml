@@ -9,5 +9,59 @@
       steps:
       - tool: Rolling
         doAfter: 1
+    # SS220-kitchen-processor begin
+    - to: buttered
+      steps:
+      - prototype: FoodButterSlice
+        name: construction-graph-tag-butter-slice
+        icon:
+          sprite: Objects/Consumable/Food/ingredients.rsi
+          state: butter-slice
+        doAfter: 1
+  # This node deliberately has no entity: the dough slice keeps its prototype,
+  # while its Construction component remembers that butter was added.
+  - node: buttered
+    edges:
+    - to: croissant
+      steps:
+      - tool: Rolling
+        doAfter: 1
+  - node: croissant
+    entity: FoodCroissantRaw
+  # SS220-kitchen-processor end
   - node: rolled
     entity: FoodDoughRope
+
+- type: constructionGraph
+  id: DoughRopeCotton
+  start: start
+  graph:
+  - node: start
+    entity: FoodDoughCottonSlice
+    edges:
+    - to: rolled
+      steps:
+      - tool: Rolling
+        doAfter: 1
+    # SS220-kitchen-processor begin
+    - to: buttered
+      steps:
+      - prototype: FoodButterSlice
+        name: construction-graph-tag-butter-slice
+        icon:
+          sprite: Objects/Consumable/Food/ingredients.rsi
+          state: butter-slice
+        doAfter: 1
+  # This node deliberately has no entity: the dough slice keeps its prototype,
+  # while its Construction component remembers that butter was added.
+  - node: buttered
+    edges:
+    - to: croissant
+      steps:
+      - tool: Rolling
+        doAfter: 1
+  - node: croissant
+    entity: FoodCroissantRawCotton
+  # SS220-kitchen-processor end
+  - node: rolled
+    entity: FoodDoughCottonRope

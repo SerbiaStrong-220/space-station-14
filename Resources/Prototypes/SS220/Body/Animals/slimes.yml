@@ -1,0 +1,21 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Fauna slimes digest raw meat and blood like other animals, unlike slime people.
+- type: entity
+  parent: OrganSlimePersonCore
+  id: OrganSlimeAnimalCore
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [ Slime, Animal ]
+
+- type: entity
+  id: BaseMobSlimesAnimal
+  abstract: true
+  components:
+  - type: Body
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganSlimeAnimalCore
+        - id: OrganSlimePersonLungs

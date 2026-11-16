@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobQuartermaster
       time: 360000 # 100 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: Warehouseman
@@ -16,6 +21,25 @@
       !type:RoleTimeRequirement
       role: JobQuartermaster
       time: 468000 # 130 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: ExpensiveCoat
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobQuartermaster
+      time: 45h
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 - type: loadout
@@ -43,6 +67,14 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitWarehouseman
 
+- type: loadout
+  id: QuartermasterJumpskirtWarehouseman
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Warehouseman
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtWarehouseman
+
 # Outerclothing
 
 - type: loadout
@@ -52,3 +84,22 @@
     proto: Warehouseman
   equipment:
     outerClothing: ClothingOuterCoatQMWarehouseman
+
+- type: loadout
+  id: QuartermasterOuterCoatQMExpensive
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ExpensiveCoat
+  equipment:
+    outerClothing: ClothingOuterCoatQMExpensiveCoat
+
+# Headset
+- type: loadout
+  id: QuartermasterHeadset
+  equipment:
+    ears: ClothingHeadsetQM
+
+- type: loadout
+  id: QuartermasterHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltCargo

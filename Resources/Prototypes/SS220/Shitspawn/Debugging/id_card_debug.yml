@@ -1,0 +1,72 @@
+- type: entity
+  id: DebugIDCard
+  parent: IDCardStandard
+  name: ID карта дебага
+  description: Карта, предназначенная для работы с конфигуратором доступа. Имеет абсолютно все доступы. Не маппить.
+  suffix: Debug, Маппинг
+  components:
+  - type: Sprite
+    layers:
+    - state: admin
+  - type: Clothing
+    slots:
+    - idcard
+  - type: Access
+    tags:
+      - Armory
+      - Atmospherics
+      - Bar
+      - Brig
+      - Blueshield
+      - Captain
+      - Cargo
+      - Chapel
+      - Chemistry
+      - ChiefEngineer
+      - ChiefMedicalOfficer
+      - Command
+      - Clown #SS220 New_accesses_and_some_tweaks
+      - Detective
+      - Engineering
+      - EmergencyShuttleRepealAll
+      - External
+      - HeadOfPersonnel
+      - HeadOfSecurity
+      - Hydroponics
+      - Janitor
+      - Kitchen
+      - Lawyer
+      - Ipc #SS220-IPC
+      - Librarian #SS220 New_accesses_and_some_tweaks
+      - Maintenance
+      - Medical
+      - NanoTrasenRepresentative
+      - NuclearOperative
+      - Paramedic
+      - Psychologist #SS220 New_accesses_and_some_tweaks
+      - Quartermaster
+      - Research
+      - ResearchDirector
+      - Reporter #SS220 New_accesses_and_some_tweaks
+      - Salvage
+      - Security
+      - Service
+      - SyndicateAgent
+      - Theatre
+      - Mime #SS220 New_accesses_and_some_tweaks
+      - Musician #SS220 New_accesses_and_some_tweaks
+      - Wizard
+      - Xenoborg
+      #New centcomm accesses begin
+      - CentralCommand
+      - CentralCommandCBURN
+      - CentralCommandERT
+      - CentralCommandSRT
+      - CentralCommandDeathSquad
+      #New centcomm accesses end
+      #Ussp accesses begin
+      - Ussp
+      - UsspCommand
+      - UsspMedical
+      - UsspEngineering
+      #Ussp accesses end

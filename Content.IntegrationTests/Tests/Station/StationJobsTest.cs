@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Content.Server.Maps;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Maps;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.GameObjects;
@@ -15,10 +16,12 @@ namespace Content.IntegrationTests.Tests.Station;
 
 [TestFixture]
 [TestOf(typeof(StationJobsSystem))]
-public sealed class StationJobsTest
+public sealed class StationJobsTest : GameTest
 {
+    private const string StationMapId = "FooStation";
+
     [TestPrototypes]
-    private const string Prototypes = @"
+    private const string Prototypes = $@"
 - type: playTimeTracker
   id: PlayTimeDummyAssistant
 
@@ -35,13 +38,13 @@ public sealed class StationJobsTest
   id: PlayTimeDummyChaplain
 
 - type: gameMap
-  id: FooStation
+  id: {StationMapId}
   minPlayers: 0
-  mapName: FooStation
+  mapName: {StationMapId}
   mapPath: /Maps/Test/empty.yml
   stations:
     Station:
-      mapNameTemplate: FooStation
+      mapNameTemplate: {StationMapId}
       stationProto: StandardNanotrasenStation
       components:
         - type: StationJobs
@@ -54,25 +57,30 @@ public sealed class StationJobsTest
 - type: job
   id: TAssistant
   playTimeTracker: PlayTimeDummyAssistant
+  experienceDefinition: NoExperience # SS220-experience-update
 
 - type: job
   id: TMime
   weight: 20
   playTimeTracker: PlayTimeDummyMime
+  experienceDefinition: NoExperience # SS220-experience-update
 
 - type: job
   id: TClown
   weight: -10
   playTimeTracker: PlayTimeDummyClown
+  experienceDefinition: NoExperience # SS220-experience-update
 
 - type: job
   id: TCaptain
   weight: 10
   playTimeTracker: PlayTimeDummyCaptain
+  experienceDefinition: NoExperience # SS220-experience-update
 
 - type: job
   id: TChaplain
   playTimeTracker: PlayTimeDummyChaplain
+  experienceDefinition: NoExperience # SS220-experience-update
 ";
 
     private const int StationCount = 100;
@@ -83,11 +91,11 @@ public sealed class StationJobsTest
     [Test]
     public async Task AssignJobsTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
-        var fooStationProto = prototypeManager.Index<GameMapPrototype>("FooStation");
+        var fooStationProto = prototypeManager.Index<GameMapPrototype>(StationMapId);
         var entSysMan = server.ResolveDependency<IEntityManager>().EntitySysManager;
         var stationJobs = entSysMan.GetEntitySystem<StationJobsSystem>();
         var stationSystem = entSysMan.GetEntitySystem<StationSystem>();
@@ -151,17 +159,16 @@ public sealed class StationJobsTest
                 Assert.That(assigned.Values.Select(x => x.Item1).ToList(), Does.Contain("TCaptain"));
             });
         });
-        await pair.CleanReturnAsync();
     }
 
     [Test]
     public async Task AdjustJobsTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
-        var fooStationProto = prototypeManager.Index<GameMapPrototype>("FooStation");
+        var fooStationProto = prototypeManager.Index<GameMapPrototype>(StationMapId);
         var entSysMan = server.ResolveDependency<IEntityManager>().EntitySysManager;
         var stationJobs = entSysMan.GetEntitySystem<StationJobsSystem>();
         var stationSystem = entSysMan.GetEntitySystem<StationSystem>();
@@ -201,13 +208,12 @@ public sealed class StationJobsTest
                 Assert.That(stationJobs.IsJobUnlimited(station, "TChaplain"), "Could not make TChaplain unlimited.");
             });
         });
-        await pair.CleanReturnAsync();
     }
 
     [Test]
     public async Task InvalidRoundstartJobsTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
@@ -245,7 +251,6 @@ public sealed class StationJobsTest
                 }
             });
         });
-        await pair.CleanReturnAsync();
     }
 }
 

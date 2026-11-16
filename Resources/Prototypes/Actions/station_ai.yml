@@ -1,68 +1,37 @@
-﻿# Actions
+# Actions
 - type: entity
+  parent: BaseAction
   id: ActionJumpToCore
   name: Jump to core
   description: Sends your eye back to the core.
   components:
-  - type: InstantAction
-    priority: -10
+  - type: Action
+    priority: -9
     itemIconStyle: BigAction
     icon:
-      sprite: Interface/Actions/actions_ai.rsi
+      # SS220-resprite start
+      #sprite: Interface/Actions/actions_ai.rsi
+      sprite: SS220/Interface/Actions/actions_ai.rsi
       state: ai_core
+      # SS220-resprite end
+  - type: InstantAction
     event: !type:JumpToCoreEvent
 
 - type: entity
-  id: ActionShowJobIcons
-  name: Show job icons
-  description: Shows job icons for crew members.
-  components:
-  - type: InstantAction
-    priority: -5
-    itemIconStyle: BigAction
-    icon:
-      sprite: Interface/Actions/actions_ai.rsi
-      state: job_view
-    event: !type:ActionComponentChangeEvent
-      components:
-      - type: ShowJobIcons
-
-- type: entity
-  id: ActionSurvCameraLights
-  name: Toggle camera lights
-  description: Enable surveillance camera lights near wherever you're viewing.
-  components:
-  - type: InstantAction
-    priority: -6
-    itemIconStyle: BigAction
-    icon:
-      sprite: Interface/Actions/actions_ai.rsi
-      state: camera_light
-    event: !type:RelayedActionComponentChangeEvent
-      components:
-      - type: LightOnCollideCollider
-      - type: FixturesChange
-        fixtures:
-          lightTrigger:
-            shape:
-              !type:PhysShapeCircle
-              radius: 0.35
-            density: 80
-            hard: false
-            layer:
-            - GhostImpassable
-
-
-- type: entity
+  parent: BaseMentalAction
   id: ActionAIViewLaws
   name: View Laws
   description: View the laws that you must follow.
   components:
-  - type: InstantAction
+  - type: Action
     priority: -3
     itemIconStyle: NoItem
     icon:
-      sprite: Interface/Actions/actions_ai.rsi
+      # SS220-resprite start
+      #sprite: SS220/Interface/Actions/actions_ai.rsi
+      sprite: SS220/Interface/Actions/actions_ai.rsi
       state: state_laws
-    event: !type:ToggleLawsScreenEvent
+      # SS220-resprite end
     useDelay: 0.5
+  - type: InstantAction
+    event: !type:ToggleLawsScreenEvent

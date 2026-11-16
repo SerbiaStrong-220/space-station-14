@@ -55,11 +55,19 @@
             - material: Plasteel
               amount: 1
               doAfter: 1
+            - tool: Welding
+              doAfter: 3
 
         - to: TableGlass
           steps:
             - material: Glass
               amount: 1
+              doAfter: 1
+
+        - to: TableCard
+          steps:
+            - material: Cardboard
+              amount: 3
               doAfter: 1
 
         - to: TableReinforcedGlass
@@ -160,6 +168,8 @@
               prototype: SheetPlasteel1
               amount: 1
           steps:
+            - tool: Welding
+              doAfter: 3
             - tool: Anchoring
               doAfter: 1
 
@@ -174,6 +184,18 @@
           steps:
             - tool: Anchoring
               doAfter: 1
+
+    - node: TableCard
+      entity: TableCard
+      edges:
+        - to: TableFrame
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialCardboard1
+              amount: 3
+          steps:
+            - tool: Slicing
+              doAfter: 2
 
     - node: TableReinforcedGlass
       entity: TableReinforcedGlass
@@ -285,102 +307,53 @@
 
         - to: TableFancyBlack
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetBlack
               amount: 1
-              #name: black carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-black
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyBlue
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetBlue
               amount: 1
-              #name: blue carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-blue
-            #SS220 Curtains and fancy tables recepie fix end
+
+        - to: TableFancySkyBlue
+          steps:
+            - material: FloorCarpetSkyBlue
+              amount: 1
 
         - to: TableFancyCyan
           steps:
-           #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetCyan
               amount: 1
-              #name: cyan carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-cyan
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyGreen
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetGreen
               amount: 1
-              #name: green carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-green
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyOrange
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetOrange
               amount: 1
-              #name: orange carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-orange
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyPurple
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetPurple
               amount: 1
-              #name: purple carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-purple
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyPink
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetPink
               amount: 1
-              #name: pink carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-pink
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyRed
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetRed
               amount: 1
-              #name: red carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-red
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyWhite
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetWhite
               amount: 1
-              #name: white carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-white
-            #SS220 Curtains and fancy tables recepie fix end
 
     - node: TableCarpet
       entity: TableCarpet
@@ -417,6 +390,18 @@
           steps:
             - tool: Prying
               doAfter: 1
+
+    - node: TableFancySkyBlue
+      entity: TableFancySkyBlue
+      edges:
+        - to: TableWood
+          completed:
+          - !type:SpawnPrototype
+            prototype: FloorCarpetItemSkyBlue
+            amount: 1
+          steps:
+          - tool: Prying
+            doAfter: 1
 
     - node: TableFancyCyan
       entity: TableFancyCyan
@@ -525,3 +510,15 @@
           steps:
             - tool: Prying
               doAfter: 1
+
+    - node: TableXeno
+      entity: TableXeno
+      edges:
+      - to: TableFrame
+        completed:
+        - !type:SpawnPrototype
+          prototype: SheetSteel1
+          amount: 1
+        steps:
+        - tool: Anchoring
+          doAfter: 1

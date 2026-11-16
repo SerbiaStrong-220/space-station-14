@@ -2,18 +2,24 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SS220.IgnoreLightVision;
+namespace Content.Shared.SS220.IgnoreLightVision.Components;
 
 public abstract partial class AddIgnoreLightVisionOverlayComponent : Component
 {
     [DataField]
     public IgnoreLightVisionOverlayState State = IgnoreLightVisionOverlayState.Off;
+
     [DataField]
     public float VisionRadius = 8f;
+
     [DataField]
     public float HighSensitiveVisionRadius = 2f;
+
     [DataField]
     public bool AddAction = false;
+
+    [DataField]
+    public bool ChangeIconOverlaySpace;
 
     public AddIgnoreLightVisionOverlayComponent(float radius, float closeRadius)
     {
@@ -36,5 +42,5 @@ public enum IgnoreLightVisionOverlayState
     Error,
     Off,
     Half,
-    Full
+    Full,
 }

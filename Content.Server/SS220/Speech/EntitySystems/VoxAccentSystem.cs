@@ -3,13 +3,13 @@
 using System.Text.RegularExpressions;
 using Robust.Shared.Random;
 using Content.Server.SS220.Speech.Components;
-using Content.Server.Speech;
+using Content.Shared.Speech;
 
 namespace Content.Server.SS220.Speech.EntitySystems;
 
-public sealed class VoxAccentSystem : EntitySystem
+public sealed partial class VoxAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private static readonly Regex RegexLowerK = new("k+");
     private static readonly Regex RegexUpperK = new("K+");
@@ -19,7 +19,7 @@ public sealed class VoxAccentSystem : EntitySystem
     private static readonly Regex RegexUpperCH = new("CH+");
     private static readonly Regex RegexRuLowerCH = new("ч+");
     private static readonly Regex RegexRuUpperCH = new("Ч+");
-    
+
     public override void Initialize()
     {
         base.Initialize();

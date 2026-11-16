@@ -7,9 +7,9 @@
   description: Today im a aloe.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_aloe.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_aloe.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_aloe.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_aloe.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -18,9 +18,9 @@
   description: Today im a ambrosia deus.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_ambrosia_deus.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_ambrosia_deus.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_ambrosia_deus.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_ambrosia_deus.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -29,9 +29,9 @@
   description: Today im a ambrosia vulgaris.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_ambrosia_vulgaris.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_ambrosia_vulgaris.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_ambrosia_vulgaris.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_ambrosia_vulgaris.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -40,9 +40,9 @@
   description: Today im a apple.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_apple.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_apple.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_apple.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_apple.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -51,9 +51,9 @@
   description: Today im a banana.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_banana.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_banana.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_banana.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_banana.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -62,9 +62,9 @@
   description: Today im a berries.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_berries.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_berries.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_berries.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_berries.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -73,9 +73,9 @@
   description: Today im a blood tomato.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_bloodtomato.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_bloodtomato.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_bloodtomato.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_bloodtomato.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -84,9 +84,9 @@
   description: Today im a blue tomato.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_bluetomato.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_bluetomato.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_bluetomato.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_bluetomato.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -95,9 +95,9 @@
   description: Today im a bungo.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_bungo.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_bungo.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_bungo.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_bungo.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -106,9 +106,9 @@
   description: Today im a cabbage.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_cabbage.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_cabbage.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_cabbage.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_cabbage.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -117,9 +117,9 @@
   description: Today im a cannabis.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_cannabis.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_cannabis.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_cannabis.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_cannabis.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -128,9 +128,9 @@
   description: Today im a carrot.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_carrot.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_carrot.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_carrot.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_carrot.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -139,9 +139,9 @@
   description: Today im a chanterella.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_chanterella.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_chanterella.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_chanterella.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_chanterella.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -150,9 +150,9 @@
   description: Today im a chili.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_chili.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_chili.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_chili.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_chili.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -161,9 +161,9 @@
   description: Today im a chilly.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_chilly.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_chilly.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_chilly.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_chilly.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -172,9 +172,9 @@
   description: Today im a cocoa.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_cocoa.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_cocoa.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_cocoa.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_cocoa.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -183,9 +183,9 @@
   description: Today im a corn.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_corn.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_corn.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_corn.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_corn.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -194,9 +194,9 @@
   description: Today im a cotton.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_cotton.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_cotton.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_cotton.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_cotton.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -205,9 +205,9 @@
   description: Today im a death nettle.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_deathnettle.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_deathnettle.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_deathnettle.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_deathnettle.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -216,9 +216,9 @@
   description: Today im a eggplant.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_eggplant.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_eggplant.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_eggplant.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_eggplant.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -227,9 +227,9 @@
   description: Today im a eggy.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_eggy.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_eggy.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_eggy.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_eggy.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -238,9 +238,9 @@
   description: Today im a flyamanita.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_flyamanita.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_flyamanita.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_flyamanita.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_flyamanita.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -249,9 +249,9 @@
   description: Today im a galaxy thistle.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_galaxythistle.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_galaxythistle.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_galaxythistle.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_galaxythistle.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -260,9 +260,9 @@
   description: Today im a garlic.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_garlic.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_garlic.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_garlic.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_garlic.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -271,9 +271,9 @@
   description: Today im a gatfruit.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_gatfruit.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_gatfruit.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_gatfruit.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_gatfruit.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -282,9 +282,9 @@
   description: Today im a grape.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_grape.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_grape.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_grape.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_grape.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -293,9 +293,9 @@
   description: Today im a koibean.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_koibean.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_koibean.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_koibean.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_koibean.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -304,9 +304,9 @@
   description: Today im a lemon.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_lemon.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_lemon.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_lemon.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_lemon.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -315,9 +315,9 @@
   description: Today im a lemoon.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_lemoon.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_lemoon.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_lemoon.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_lemoon.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -326,9 +326,9 @@
   description: Today im a lime.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_lime.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_lime.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_lime.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_lime.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -337,9 +337,9 @@
   description: Today im a lingzhi.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_lingzhi.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_lingzhi.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_lingzhi.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_lingzhi.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -348,9 +348,9 @@
   description: Today im a mimana.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_mimana.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_mimana.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_mimana.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_mimana.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -359,9 +359,9 @@
   description: Today im a nettle.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_nettle.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_nettle.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_nettle.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_nettle.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -370,9 +370,9 @@
   description: Today im a oat.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_oat.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_oat.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_oat.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_oat.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -381,9 +381,9 @@
   description: Today im a onion.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_onion.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_onion.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_onion.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_onion.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -392,9 +392,9 @@
   description: Today im a onion red.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_onionred.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_onionred.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_onionred.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_onionred.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -403,9 +403,9 @@
   description: Today im a orange.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_orange.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_orange.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_orange.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_orange.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -414,9 +414,9 @@
   description: Today im a pea.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_pea.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_pea.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_pea.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_pea.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -425,9 +425,9 @@
   description: Today im a pineapple.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_pineapple.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_pineapple.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_pineapple.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_pineapple.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -436,9 +436,9 @@
   description: Today im a poppy.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_poppy.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_poppy.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_poppy.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_poppy.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -447,9 +447,9 @@
   description: Today im a potato.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_potato.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_potato.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_potato.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_potato.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -458,9 +458,9 @@
   description: Today im a pumpkin.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_pumpkin.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_pumpkin.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_pumpkin.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_pumpkin.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -469,9 +469,9 @@
   description: Today im a rice.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_rice.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_rice.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_rice.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_rice.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -480,9 +480,9 @@
   description: Today im a soybeans.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_soybeans.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_soybeans.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_soybeans.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_soybeans.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -491,9 +491,9 @@
   description: Today im a steelcap.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_steelcap.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_steelcap.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_steelcap.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_steelcap.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -502,9 +502,9 @@
   description: Today im a stobacco.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_stobacco.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_stobacco.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_stobacco.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_stobacco.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -513,9 +513,9 @@
   description: Today im a sugarcane.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_sugarcane.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_sugarcane.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_sugarcane.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_sugarcane.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -524,9 +524,9 @@
   description: Today im a tobacco.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_tobacco.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_tobacco.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_tobacco.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_tobacco.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -535,9 +535,9 @@
   description: Today im a tomato.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_tomato.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_tomato.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_tomato.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_tomato.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -546,9 +546,9 @@
   description: Today im a towercap.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_towercap.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_towercap.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_towercap.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_towercap.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -557,9 +557,9 @@
   description: Today im a watermelon.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_watermelon.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_watermelon.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_watermelon.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_watermelon.rsi
 
 - type: entity
   parent: ClothingUniformBase
@@ -568,6 +568,6 @@
   description: Today im a wheat.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_wheat.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_wheat.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Harvest/harvest_wheat.rsi
+    sprite: SS220/Clothing/Uniforms/Other/Harvest/harvest_wheat.rsi

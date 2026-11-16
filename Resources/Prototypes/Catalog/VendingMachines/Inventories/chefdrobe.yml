@@ -27,3 +27,5 @@
     ClothingOuterJacketChefWhite: 1
     ClothingOuterJacketChefGreen: 1
     ClothingOuterJacketChefBlack: 1 #SS220 Chef Resprite end
+  contrabandInventory:
+    ToyFigurineChef: 1

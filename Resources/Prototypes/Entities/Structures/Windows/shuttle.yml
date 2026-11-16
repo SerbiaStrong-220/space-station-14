@@ -1,7 +1,7 @@
 - type: entity
   id: ShuttleWindow
   name: shuttle window
-  parent: WindowRCDResistant
+  parent: [BaseDeltaPressureReinforcedGlass, WindowRCDResistant]
   components:
   - type: Sprite
     drawdepth: WallTops
@@ -67,6 +67,10 @@
     drawdepth: WallTops
     sprite: SS220/Structures/Windows/shuttle_window_diagonal.rsi #ss220-walls-update
     state: state0
+  - type: Tag
+    tags:
+    - Diagonal
+    - Window
   - type: IconSmooth
     mode: Diagonal
     key: walls  # Corvax-Resprite

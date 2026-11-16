@@ -1,0 +1,13 @@
+- type: weightedRandom
+  id: PathologyAfterDeathList
+  weights:
+    LightweightDrunk: 0.5
+    FrontalLisp: 0.4
+    # PoorVision: 0.4
+    Paracusia: 0.4
+    PainNumbness: 0.4
+    # Blindness: 0.15
+    Muted: 0.15
+    Narcolepsy: 0.3
+    Slowness: 0.45
+    Nervousness: 0.45

@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Client.Paper;
 using Content.Client.Paper.UI;
 using Content.Shared.Paper;
 using Content.Shared.SS220.ButtScan;
@@ -16,7 +15,7 @@ namespace Content.Client.SS220.ButtScan.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ButtScanWindow : PaperWindow
 {
-    [Dependency] private readonly IResourceCache _resCache = default!;
+    [Dependency] private IResourceCache _resCache = default!;
 
     private readonly Vector2 _buttRectSize = new Vector2(300, 300);
     private readonly Thickness _buttRectMargin = new(25, 25);

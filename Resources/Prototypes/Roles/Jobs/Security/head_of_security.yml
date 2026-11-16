@@ -4,22 +4,34 @@
   description: job-description-hos
   playTimeTracker: JobHeadOfSecurity
   requirements:
+    # SS220-RoleTime begin
+    # - !type:RoleTimeRequirement
+    #   role: JobWarden
+    #   time: 3h
+    # - !type:RoleTimeRequirement
+    #   role: JobDetective
+    #   time: 1h # knowing how to use the tools is important
+    # - !type:RoleTimeRequirement
+    #   role: JobSecurityOfficer
+    #   time: 5h
+    # SS220-RoleTime end
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 180000 # SS220-RoleTime
+      time: 50h # SS220-RoleTime
     - !type:RoleTimeRequirement
       role: JobWarden
-      time: 43200 # SS220-RoleTime 2
+      time: 12h # SS220-RoleTime 2
     - !type:AgeRequirement
       requiredAge: 20
+      ignoreSpecies: [ Ipc ] #SS220-JobsAgeIPC
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:
       - Felinid #SS220-jobbans end
   weight: 10
   startingGear: HoSGear
+  experienceDefinition: HeadOfSecurityRoleExperience # SS220-experience
   icon: "JobIconHeadOfSecurity"
-  requireAdminNotify: true
   supervisors: job-supervisors-captain
   canBeAntag: false
   radioBold: true
@@ -30,10 +42,11 @@
   - Security
   - Armory
   - Maintenance
-  - Service
   - External
   - Detective
   - Cryogenics
+  - GenpopEnter
+  - GenpopLeave
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -49,12 +62,20 @@
     gloves: ClothingHandsGlovesCombat
     ears: ClothingHeadsetAltSecurity
 #    belt: ClothingBeltSecurityFilled #SS220-FreedomHoSCap
-    pocket1: WeaponPistolMk58Nonlethal #SS220-DeleteSecurityLetal-Begin
+    pocket1: WeaponPistolMk58
 #    pocket2: MagazinePistol #SS220-DeleteSecurityLetal-End
   storage:
     back:
     - Flash
-    - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
-    - MagazinePistolRubber
+    - MagazinePistol
+    - MagazinePistol
     - FlashlightSeclite
     - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End
+
+- type: chameleonOutfit
+  id: HeadOfSecurityChameleonOutfit
+  job: HeadOfSecurity
+  hasMindShield: true
+  equipment:
+    mask: ClothingMaskGasSecurity
+    neck: ClothingNeckCloakHos

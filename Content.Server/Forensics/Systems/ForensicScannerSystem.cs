@@ -16,6 +16,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Content.Server.Chemistry.Containers.EntitySystems;
+using Robust.Shared.Prototypes;
 // todo: remove this stinky LINQy
 
 namespace Content.Server.Forensics
@@ -32,6 +33,8 @@ namespace Content.Server.Forensics
         [Dependency] private readonly MetaDataSystem _metaData = default!;
         [Dependency] private readonly ForensicsSystem _forensicsSystem = default!;
         [Dependency] private readonly TagSystem _tag = default!;
+
+        private static readonly ProtoId<TagPrototype> DNASolutionScannableTag = "DNASolutionScannable";
 
         public override void Initialize()
         {
@@ -51,6 +54,7 @@ namespace Content.Server.Forensics
             var state = new ForensicScannerBoundUserInterfaceState(
                 component.Fingerprints,
                 component.Fibers,
+                component.MicroFibers,//SS220 Micro_fibers
                 component.TouchDNAs,
                 component.SolutionDNAs,
                 component.Residues,
@@ -66,7 +70,7 @@ namespace Content.Server.Forensics
             if (args.Handled || args.Cancelled)
                 return;
 
-            if (!EntityManager.TryGetComponent(uid, out ForensicScannerComponent? scanner))
+            if (!TryComp(uid, out ForensicScannerComponent? scanner))
                 return;
 
             if (args.Args.Target != null)
@@ -75,6 +79,7 @@ namespace Content.Server.Forensics
                 {
                     scanner.Fingerprints = new();
                     scanner.Fibers = new();
+                    scanner.MicroFibers = new();//SS220 Micro_fibers
                     scanner.TouchDNAs = new();
                     scanner.Residues = new();
                 }
@@ -82,11 +87,12 @@ namespace Content.Server.Forensics
                 {
                     scanner.Fingerprints = forensics.Fingerprints.ToList();
                     scanner.Fibers = forensics.Fibers.ToList();
+                    scanner.MicroFibers = forensics.MicroFibers.ToList();//SS220 Micro_fibers
                     scanner.TouchDNAs = forensics.DNAs.ToList();
                     scanner.Residues = forensics.Residues.ToList();
                 }
 
-                if (_tag.HasTag(args.Args.Target.Value, "DNASolutionScannable"))
+                if (_tag.HasTag(args.Args.Target.Value, DNASolutionScannableTag))
                 {
                     scanner.SolutionDNAs = _forensicsSystem.GetSolutionsDNA(args.Args.Target.Value);
                 } else
@@ -122,7 +128,9 @@ namespace Content.Server.Forensics
                 Act = () => StartScan(uid, component, args.User, args.Target),
                 IconEntity = GetNetEntity(uid),
                 Text = Loc.GetString("forensic-scanner-verb-text"),
-                Message = Loc.GetString("forensic-scanner-verb-message")
+                Message = Loc.GetString("forensic-scanner-verb-message"),
+                // This is important because if its true using the scanner will count as touching the object.
+                DoContactInteraction = false
             };
 
             args.Verbs.Add(verb);
@@ -153,7 +161,17 @@ namespace Content.Server.Forensics
                     return;
                 }
             }
-
+			//SS220 Micro_fibers start
+            foreach (var microFiber in component.MicroFibers)
+            {
+                if (microFiber == pad.Sample)
+                {
+                    _audioSystem.PlayPvs(component.SoundMatch, uid);
+                    _popupSystem.PopupEntity(Loc.GetString("forensic-scanner-match-micro-fiber"), uid, args.User);
+                    return;
+                }
+            }
+			//SS220 Micro_fibers end
             foreach (var fingerprint in component.Fingerprints)
             {
                 if (fingerprint == pad.Sample)
@@ -193,7 +211,7 @@ namespace Content.Server.Forensics
             }
 
             // Spawn a piece of paper.
-            var printed = EntityManager.SpawnEntity(component.MachineOutput, Transform(uid).Coordinates);
+            var printed = Spawn(component.MachineOutput, Transform(uid).Coordinates);
             _handsSystem.PickupOrDrop(args.Actor, printed, checkActionBlocker: false);
 
             if (!TryComp<PaperComponent>(printed, out var paperComp))
@@ -218,6 +236,14 @@ namespace Content.Server.Forensics
                 text.AppendLine(fiber);
             }
             text.AppendLine();
+            //SS220 Micro_fibers start
+            text.AppendLine(Loc.GetString("forensic-scanner-interface-micro-fibers"));
+            foreach (var microFiber in component.MicroFibers)
+            {
+                text.AppendLine(microFiber);
+            }
+            text.AppendLine();
+            //SS220 Micro_fibers end
             text.AppendLine(Loc.GetString("forensic-scanner-interface-dnas"));
             foreach (var dna in component.TouchDNAs)
             {
@@ -252,6 +278,7 @@ namespace Content.Server.Forensics
         {
             component.Fingerprints = new();
             component.Fibers = new();
+            component.MicroFibers = new();//SS220 Micro_fibers
             component.TouchDNAs = new();
             component.SolutionDNAs = new();
             component.LastScannedName = string.Empty;

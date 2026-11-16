@@ -1,5 +1,5 @@
 - type: entity
-  parent: Airlock
+  parent: [BaseAirlockUniqueStates, Airlock] #SS220-airlock-common-states
   id: PinionAirlock
   suffix: Pinion, Clockwork
   components:
@@ -10,9 +10,11 @@
     node: airlock
     containers:
     - board
+  - type: Paintable
+    group: null
 
 - type: entity
-  parent: AirlockGlass
+  parent: [BaseAirlockUniqueStates, AirlockGlass] #SS220-airlock-common-states
   id: PinionAirlockGlass
   suffix: Pinion, Clockwork
   components:
@@ -25,3 +27,5 @@
     - board
   - type: StaticPrice
     price: 165
+  - type: Paintable
+    group: null

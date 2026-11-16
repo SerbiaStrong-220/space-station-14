@@ -9,6 +9,18 @@
   - type: Sprite
     state: icon
   - type: AllowSuitStorage #220 OuterClothing fix
+  #ss220 handheld radio on outer clothing start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+            - Radio
+  #ss220 handheld radio on outer clothing end
 
 - type: entity
   abstract: true
@@ -30,13 +42,28 @@
   parent: ClothingOuterBase
   id: ClothingOuterStorageBase
   components:
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,2
   - type: Storage
     grid:
     - 0,0,2,1
+    maxItemSize: Small
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
         ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -99,6 +126,16 @@
       toggleable-clothing: !type:ContainerSlot {}
       storagebase: !type:Container
         ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
 
 - type: entity
   abstract: true
@@ -106,6 +143,9 @@
   id: ClothingOuterHardsuitBase
   name: base hardsuit
   components:
+# SlotBlocker blocked until UI change
+#  - type: SlotBlock
+#    slots: [innerclothing, feet]
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -113,8 +153,9 @@
     heatingCoefficient: 0.01
     coolingCoefficient: 0.01
   - type: ClothingSpeedModifier
-    walkModifier: 0.4
+    walkModifier: 0.6
     sprintModifier: 0.6
+    requireActivated: false #ss220 shield fix
   - type: HeldSpeedModifier
   - type: Item
     size: Ginormous
@@ -131,6 +172,16 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
   - type: GroupExamine
   - type: Tag
     tags:
@@ -143,6 +194,9 @@
       flatReductions:
         Heat: 10 # the average lightbulb only does around four damage!
     slots: OUTERCLOTHING
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   abstract: true
@@ -150,6 +204,9 @@
   id: ClothingOuterEVASuitBase
   name: base EVA Suit
   components:
+# SlotBlocker blocked until UI change
+#  - type: SlotBlock
+#    slots: [innerclothing, feet]
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
@@ -169,6 +226,9 @@
       flatReductions:
         Heat: 10 # the average lightbulb only does around four damage!
     slots: OUTERCLOTHING
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: ClothingOuterBase
@@ -184,6 +244,16 @@
       toggleable-clothing: !type:ContainerSlot {}
       storagebase: !type:Container
         ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+      #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
 
 - type: entity
   abstract: true
@@ -191,4 +261,6 @@
   id: ClothingOuterBaseMedium
   components:
   - type: Item
-    size: Huge
+    size: Large
+    shape:
+    - 0,0,2,3

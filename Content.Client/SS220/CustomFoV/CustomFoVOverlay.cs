@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
 using Content.Shared.SS220.CustomFoV;
 using Robust.Client.GameObjects;
@@ -16,11 +17,15 @@ public sealed class CustomFoVOverlay : Overlay
     private readonly IPrototypeManager _prototype;
     private readonly SpriteSystem _sprite;
     private readonly SharedTransformSystem _transform;
+    private readonly MapSystem _map;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
 
     private readonly SpriteSpecifier _fovCorner;
     private readonly ShaderInstance _shader;
+    private readonly Dictionary<EntityUid, Dictionary<Vector2i, Entity<TransformComponent>>> _entMapDict = new();
+
+    private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "unshaded";
 
     internal CustomFoVOverlay(EntityManager entMan, IPrototypeManager prototype)
     {
@@ -28,23 +33,23 @@ public sealed class CustomFoVOverlay : Overlay
         _prototype = prototype;
 
         _fovCorner = new SpriteSpecifier.Texture(new("SS220/Misc/fov_corner.png"));
-        _sprite = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
-        _transform = _entMan.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
-        _shader = _prototype.Index<ShaderPrototype>("unshaded").InstanceUnique();
+
+        _map = entMan.System<MapSystem>();
+        _sprite = _entMan.System<SpriteSystem>();
+        _transform = _entMan.System<SharedTransformSystem>();
+
+        _shader = _prototype.Index(ShaderProtoId).InstanceUnique();
 
         ZIndex = (int) Shared.DrawDepth.DrawDepth.WallFovOverlay;
     }
-
-    private Dictionary<EntityUid, Dictionary<Vector2i, Entity<TransformComponent>>> _entMapDict = new();
 
     protected override void Draw(in OverlayDrawArgs args)
     {
         _entMapDict.Clear();
 
-        if (args.Viewport.Eye is not { } eye || !eye.DrawFov)
+        if (args.Viewport.Eye is not { DrawFov: true } eye)
             return;
 
-        var eyeAngle = eye.Rotation;
         var texture = _sprite.Frame0(_fovCorner);
         var handle = args.WorldHandle;
 
@@ -57,11 +62,11 @@ public sealed class CustomFoVOverlay : Overlay
             if (!occluderQuery.TryGetComponent(entity, out var occluder) || !occluder.Enabled)
                 continue;
 
-            if (!xformQuery.TryGetComponent(entity, out var xform) || xform.MapID != args.MapId || !xform.Anchored || !xform.GridUid.HasValue)
+            if (!xformQuery.TryGetComponent(entity, out var xform) || !xform.Anchored || xform.GridUid is not { Valid: true } gridUid)
                 continue;
 
-            var gridComp = _entMan.GetComponent<MapGridComponent>(xform.GridUid.Value);
-            var tile = gridComp.CoordinatesToTile(xform.Coordinates);
+            var gridComp = _entMan.GetComponent<MapGridComponent>(gridUid);
+            var tile = _map.CoordinatesToTile(gridUid, gridComp, xform.Coordinates);
 
             // Create lookup maps for grids so neighbors can be found quickly
             if (!_entMapDict.TryGetValue(xform.GridUid.Value, out var gridDict))
@@ -81,9 +86,6 @@ public sealed class CustomFoVOverlay : Overlay
 
         void DrawFoVCorner(Vector2 worldPosition, Angle worldRot)
         {
-            if (handle is null || texture is null)
-                return;
-
             var rotatedMatrix = Matrix3Helpers.CreateTransform(worldPosition, worldRot);
             handle.SetTransform(rotatedMatrix);
             handle.DrawTexture(texture, new Vector2(-0.5f, -0.5f));

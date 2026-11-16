@@ -8,11 +8,13 @@
       department: Medical
       time: 18000 # SS220-RoleTime
   startingGear: PsychologistGear
+  experienceDefinition: PsychologistRoleExperience # SS220-experience
   icon: "JobIconPsychologist"
   supervisors: job-supervisors-cmo
   access:
   - Medical
   - Maintenance
+  - Psychologist #SS220 New_accesses_and_some_tweaks
   extendedAccess:
   - Chemistry
 
@@ -27,3 +29,15 @@
 #    - BoxSurvivalMedical #SS220-delete-dupe-box
     - PillCanisterPsycho #SS220-Pills-Psychologist
     - RubberStampPsychologist
+
+- type: chameleonOutfit
+  id: PsychologistChameleonOutfit
+  job: Psychologist
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    outerClothing: ClothingOuterCoatLab
+    neck: ClothingNeckStethoscope
+    belt: ClothingBeltMedical
+    gloves: ClothingHandsGlovesLatex

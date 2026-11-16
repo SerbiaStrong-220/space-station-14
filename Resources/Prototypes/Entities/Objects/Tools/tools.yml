@@ -43,6 +43,14 @@
       Steel: 100
   - type: StaticPrice
     price: 30
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/wirecutter_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/wirecutter_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: screwdriver
@@ -71,6 +79,7 @@
     damage:
       types:
         Piercing: 6
+    angle: 0 #SS220-piercing screwdriver
     soundHit:
       path: "/Audio/Weapons/bladeslice.ogg"
   - type: Tool
@@ -87,6 +96,26 @@
       Steel: 100
   - type: StaticPrice
     price: 30
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 270
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 5
+# SS220 Throwable Changes end
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/screwdriver_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/screwdriver_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: wrench
@@ -127,6 +156,17 @@
       Steel: 100
   - type: StaticPrice
     price: 22
+  - type: GuideHelp
+    guides:
+    - Construction
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/wrench_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/wrench_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: multitool
@@ -175,6 +215,20 @@
       Plastic: 100
   - type: StaticPrice
     price: 56
+  - type: GuideHelp
+    guides:
+    - Networking
+    - WirePanels
+    - Airlocks
+    - InspectingPower
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/multitool_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/multitool_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: network configurator
@@ -225,7 +279,15 @@
       price: 56
     - type: GuideHelp
       guides:
-      - NetworkConfigurator
+      - Networking
+    # SS220-place-and-pickup-sounds begin
+    - type: EmitSoundOnPickup
+      sound:
+        path: /Audio/SS220/Items/Tools/multitool_pickup.ogg
+    - type: EmitSoundOnDrop
+      sound:
+        path: /Audio/SS220/Items/Tools/multitool_drop.ogg
+    # SS220-place-and-pickup-sounds end
 
 #Power tools
 #Later on these should switch probably switch damage when changing the tool behavior.
@@ -282,6 +344,14 @@
         Piercing: 10
     soundHit:
       path: "/Audio/Items/drill_hit.ogg"
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/rpd_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/rpd_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   id: RCD
@@ -292,6 +362,7 @@
   - type: RCD
     availablePrototypes:
     - WallSolid
+    - WallReinforced # ss220 rcd upd
     - FloorSteel
     - Plating
     - Catwalk
@@ -303,6 +374,7 @@
     - Airlock
     - AirlockGlass
     - Firelock
+    - FirelockGlass # SS220-rcd-firelock-stacking
     - TubeLight
     - BulbLight
     - LVCable
@@ -310,10 +382,23 @@
     - HVCable
     - CableTerminal
     - Deconstruct
+  # ss220 rcd upd bgn
+    - StraightPipe
+    - PipeFourway
+    - PipeTjunction
+    - PipeBend
+    - PassiveVent
+    - AirVent
+    - Scrubber
+    - DisposalPipe
+    - DisposalTrunk
+    - DisposalJunction
+    - DisposalJunctionFlipped
+    - DisposalYJunction
+    - DisposalBend
+  # ss220 rcd upd end
   - type: LimitedCharges
     maxCharges: 30
-    charges: 30
-  - type: UseDelay
   - type: Sprite
     sprite: Objects/Tools/rcd.rsi
     state: icon
@@ -337,6 +422,14 @@
   - type: ActivatableUI
     inHandsOnly: true
     key: enum.RcdUiKey.Key
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/rcd_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/rcd_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   id: RCDEmpty
@@ -344,20 +437,19 @@
   suffix: Empty
   components:
   - type: LimitedCharges
-    charges: 0
+    lastCharges: -1
 
 - type: entity
   id: RCDRecharging
   parent: RCD
   name: experimental RCD
-  description: A bluespace-enhanced rapid construction device that passively generates its own compressed matter.
+  description: Cyborg-mounted Rapid Construction Device which creates compressed matter on the fly using an internal fabricator.
   suffix: AutoRecharge
   components:
   - type: LimitedCharges
-    maxCharges: 20
-    charges: 20
+    maxCharges: 30 # rcd upd
   - type: AutoRecharge
-    rechargeDuration: 10
+    rechargeDuration: 5 # rcd upd
 
 - type: entity
   id: RCDExperimental
@@ -481,6 +573,12 @@
   - type: StaticPrice
     price: 25
   - type: Shovel
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 10
+# SS220 Throwable Changes end
 
 - type: entity
   parent: BaseItem
@@ -494,11 +592,16 @@
   - type: Item
     sprite: Objects/Tools/rolling_pin.rsi
     size: Small
+    storedRotation: -45
   - type: Clothing
     sprite: Objects/Tools/rolling_pin.rsi
     quickEquip: false
     slots:
     - Belt
+  # SS220 rolling pin damage and sound tweaks begin
+  - type: StaminaDamageOnHit
+    damage: 16
+  # SS220 rolling pin damage and sound tweaks end
   - type: MeleeWeapon
     soundHit: !type:SoundCollectionSpecifier # SS220 Sounds
       collection: BatonHit
@@ -506,7 +609,6 @@
     damage:
       types:
         Blunt: 7
-        Stamina: 16
   - type: Tool
     qualities:
     - Rolling
@@ -519,3 +621,11 @@
   - type: Construction
     graph: WoodenRollingPin
     node: rollingpin
+# SS220 Throwable Changes begin
+  - type: StaminaDamageOnCollide
+    damage: 13.5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5.5
+# SS220 Throwable Changes end

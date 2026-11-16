@@ -42,3 +42,64 @@
   id: french75
   flavorType: Complex
   description: терпко-сладко
+
+- type: flavor
+  id: HolyMoly
+  flavorType: Base
+  description: божественно
+
+- type: flavor
+  id: Bacchus
+  flavorType: Complex
+  description: flavor-complex-bacchus
+
+- type: flavor
+  id: Xlebnuldiesel
+  flavorType: Complex
+  description: flavor-complex-xlebnuldiesel
+
+- type: flavor
+  id: rrranta
+  flavorType: Complex
+  description: flavor-complex-rrranta
+
+- type: flavor
+  id: Skooma
+  flavorType: Complex
+  description: flavor-complex-skooma
+
+- type: flavor
+  id: olivier
+  flavorType: Complex
+  description: flavor-complex-olivier
+
+- type: flavor
+  id: bnuuynyatina
+  flavorType: Base
+  description: flavor-base-bnuuynyatina
+
+- type: flavor
+  id: driedbnuuynyatina
+  flavorType: Base
+  description: flavor-base-driedbnuuynyatina
+
+- type: flavor
+  id: OrionNebula
+  flavorType: Complex
+  description: flavor-complex-Orion-Nebula
+  
+- type: flavor
+  id: sawdustporridge
+  flavorType: Complex
+  description: flavor-complex-sawdustporridge
+
+- type: flavor
+  id: sawdustsoup
+  flavorType: Complex
+  description: flavor-complex-sawdustsoup
+
+- type: flavor
+  id: chocolatewhite
+  flavorType: Complex
+  description: flavor-complex-chocolatewhite
+

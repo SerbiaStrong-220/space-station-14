@@ -1,6 +1,7 @@
 - type: job
   id: IAA
   name: job-name-iaa
+  setPreference: false # SS220 ntr - add
   playTimeTracker: JobIAA
   requirements:
   - !type:DepartmentTimeRequirement
@@ -14,6 +15,7 @@
       species:
       - Felinid #SS220-jobbans end
   startingGear: IAAGear
+  experienceDefinition: IAARoleExperience # SS220-experience
   icon: "JobIconIAA"
   supervisors: job-supervisors-magistrate #SS220-Law Department
   canBeAntag: false
@@ -46,3 +48,14 @@
     - Flash
     - ExpensiveLighterNanotrasen
 #SS220-IAA-Loadout-End
+
+- type: chameleonOutfit
+  id: IAAChameleonOutfit
+  job: IAA
+  equipment:
+    head: ClothingHeadHatBowlerHat
+    eyes: ClothingEyesGlassesSunglasses
+    mask: ClothingMaskBreath
+    neck: ClothingNeckLawyerbadge
+    outerClothing: ClothingOuterWinterColorBlack
+    gloves: ClothingHandsGlovesColorBlack

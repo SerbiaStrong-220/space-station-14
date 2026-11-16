@@ -4,19 +4,33 @@
   description: job-description-ce
   playTimeTracker: JobChiefEngineer
   requirements:
+    # SS220 Role requirements begin
+    # off
+    # - !type:RoleTimeRequirement
+    #   role: JobAtmosphericTechnician
+    #   time: 9000 #2.5 hrs
+    # - !type:RoleTimeRequirement
+    #   role: JobStationEngineer
+    #   time: 18000 #5 hrs
+    # - !type:DepartmentTimeRequirement
+    #   department: Engineering
+    #   time: 36000 #10 hrs
+    # off
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 180000 # SS220-RoleTime
     - !type:AgeRequirement
       requiredAge: 20
+      ignoreSpecies: [ Ipc ] #SS220-JobsAgeIPC
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:
       - Felinid #SS220-jobbans end
+    # SS220 Role requirements end
   weight: 10
   startingGear: ChiefEngineerGear
+  experienceDefinition: ChiefEngineerRoleExperience # SS220-experience
   icon: "JobIconChiefEngineer"
-  requireAdminNotify: true
   supervisors: job-supervisors-captain
   access:
   - Maintenance
@@ -37,7 +51,7 @@
   equipment:
 #    id: CEPDA SS220-dark-chief-engineer-pda
 #    eyes: ClothingEyesGlassesMeson #SS220-TwoOne-Floppa-Iteration
-    ears: ClothingHeadsetCE
+#    ears: ClothingHeadsetCE #ss220 HeadsetLoadout
     belt: ClothingBeltUtilityEngineering
   storage:
     back:

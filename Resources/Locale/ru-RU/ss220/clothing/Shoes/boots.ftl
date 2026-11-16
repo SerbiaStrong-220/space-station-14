@@ -1,0 +1,20 @@
+ent-ClothingShoesBootsMagDQ = магнитные ботинки Эскадрона Смерти
+    .suffix = Эскадрон Смерти, dq
+    .desc = Самые современные магнитные ботинки в незабываемых цветах.
+ent-ClothingShoesCMOCorporate = корпоративные туфли главного врача
+    .desc = Прошли кровь и пот, буквально. Тем не менее выглядят как новые.
+    .suffix = За время в игре
+ent-ClothingShoesColorDarkBrown = тёмно-коричневые туфли
+    .desc = Стильные тёмно-коричневые туфли.
+
+ent-ClothingShoesWandererBoots = сапоги странника
+    .desc = Если, обернувшись назад, ты видишь свое будущее, значит ты все сделал правильно...
+    .suffix = За емаг одеждомата
+ent-ClothingShoesBootsLaceupSeniorService = зелёные шнурованные туфли
+    .desc = Для тех, кто действительно готов ко всему и сразу.
+    .suffix = За время в игре
+ent-ClothingShoesBootsWinterSecMed = зимние ботинки бригмедика
+    .desc = Прочные утеплённые ботинки, созданные для медика, работающего в холодных коридорах бригa.
+ent-ClothingShoesBootsJRSalvage = рабочие ботинки утилизатора JR
+    .desc = Пожалуй, единственная обувь, в которой удобно перемещаться по космическому грунту.
+    .suffix = { ent-ClothingShoesBootsLaceupSeniorService.suffix }

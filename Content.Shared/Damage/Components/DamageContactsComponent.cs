@@ -33,4 +33,17 @@ public sealed partial class DamageContactsComponent : Component
     [DataField]
     public TimeSpan StandStillTime = TimeSpan.Zero;
     //SS220 Add stand still time end
+
+    //SS220 Add IgnoreResistances datafield begin
+    /// <summary>
+    /// Should this damage ignore resists
+    /// </summary>
+    [DataField]
+    public bool IgnoreResistances = false;
+    //SS220 Add IgnoreResistances datafield end
+
+    //SS220 Add BloodlossModifier datafield start
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public float? BloodlossModifier;
+    //SS220 Add BloodlossModifier datafield end
 }

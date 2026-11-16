@@ -1,11 +1,12 @@
 using System.Linq;
-using Content.Server.Administration.Commands;
+using Content.Server.Clothing.Systems;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.KillTracking;
 using Content.Server.Mind;
 using Content.Server.Points;
 using Content.Server.RoundEnd;
 using Content.Server.Station.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Points;
 using Content.Shared.Storage;
@@ -26,9 +27,9 @@ namespace Content.Server.GameTicking.Rules;
 /// </summary>
 public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponent>
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly OutfitSystem _outfitSystem = default!;
     [Dependency] private readonly PointSystem _point = default!;
     [Dependency] private readonly RespawnRuleSystem _respawn = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
@@ -37,7 +38,6 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
     [Dependency] private readonly UplinkSystem _uplink = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
-    private ISawmill _sawmill = default!;
     int _deathMatchStartingBalance;
 
     public override void Initialize()
@@ -72,12 +72,12 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
             var newMind = _mind.CreateMind(ev.Player.UserId, ev.Profile.Name);
             _mind.SetUserId(newMind, ev.Player.UserId);
 
-            var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(ev.Station, null, ev.Profile);
+            var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(ev.Station, null, ev.Profile, false);
             DebugTools.AssertNotNull(mobMaybe);
             var mob = mobMaybe!.Value;
 
             _mind.TransferTo(newMind, mob);
-            SetOutfitCommand.SetOutfit(mob, dm.Gear, EntityManager);
+            _outfitSystem.SetOutfit(mob, dm.Gear);
             EnsureComp<KillTrackerComponent>(mob);
             _respawn.AddToTracker(ev.Player.UserId, (uid, tracker));
 
@@ -165,6 +165,7 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
         }
         args.AddLine(Loc.GetString("point-scoreboard-header"));
         args.AddLine(new FormattedMessage(point.Scoreboard).ToMarkup());
+        args.AddLine("");
     }
 
     private void OnPlayersSpawned(RulePlayerJobsAssignedEvent ev)
@@ -179,9 +180,11 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
         }
     }
 
+    // SS220-add-uplink-begin
     public void AddUplink(ICommonSession session)
     {
         if (session?.AttachedEntity is not { } user) { return; }
-        if (!_uplink.AddUplink(user, _deathMatchStartingBalance)) { }
+        _uplink.AddUplink(user, _deathMatchStartingBalance, out _);
     }
+    // SS220-add-uplink-end
 }

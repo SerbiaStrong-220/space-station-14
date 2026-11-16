@@ -22,7 +22,7 @@
         layer:
         - MachineLayer
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/Portable/portable_scrubber.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/Portable/portable_scrubber.rsi # SS220 atmospherics-sprite-update
     noRot: true
     layers:
     - state: icon
@@ -30,6 +30,7 @@
     - state: unlit
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
     - state: draining
       shader: unshaded
       visible: false
@@ -94,6 +95,9 @@
                 max: 2
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
+  - type: GuideHelp
+    guides:
+    - PortableScrubber
 
 - type: entity
   id: SpaceHeater
@@ -123,7 +127,7 @@
   - type: ApcPowerReceiver
     powerDisabled: true #starts off
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/Portable/portable_sheater.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/Portable/portable_sheater.rsi # SS220 atmospherics-sprite-update
     noRot: true
     layers:
     - state: sheaterOff
@@ -179,6 +183,9 @@
                 max: 3
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
+  - type: GuideHelp
+    guides:
+    - Thermomachines
 
 - type: entity
   parent: SpaceHeater

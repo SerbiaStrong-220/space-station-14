@@ -44,8 +44,11 @@ public sealed class WarDeclaratorSystem : EntitySystem
     {
         if (!_accessReaderSystem.IsAllowed(args.User, ent))
         {
-            var msg = Loc.GetString("war-declarator-not-working");
-            _popupSystem.PopupEntity(msg, ent);
+            if (!args.Silent)
+            {
+                var msg = Loc.GetString("war-declarator-not-working");
+                _popupSystem.PopupEntity(msg, ent);
+            }
             args.Cancel();
             return;
         }
@@ -71,7 +74,7 @@ public sealed class WarDeclaratorSystem : EntitySystem
         if (ev.Status == WarConditionStatus.WarReady)
         {
             var title = Loc.GetString(ent.Comp.SenderTitle);
-            _chat.DispatchGlobalAnnouncement(ent.Comp.Message, title, true, ent.Comp.Color);
+            _chat.DispatchGlobalAnnouncement(ent.Comp.Message, title, true, ent.Comp.Sound, ent.Comp.Color);
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has declared war with this text: {ent.Comp.Message}");
         }
 

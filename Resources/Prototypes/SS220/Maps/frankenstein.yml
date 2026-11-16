@@ -3,8 +3,9 @@
 - type: gameMap
   id: Frankenstein
   mapName: 'NSS Frankenstein'
-  mapPath: /Maps/SS220/ss220-box.yml
+  mapPath: /Maps/SS220/frankenstein.yml
   minPlayers: 0
+  maxPlayers: 65
   stations:
     Boxstation:
       stationProto: FrankensteinStation
@@ -38,7 +39,7 @@
             #medical
             ChiefMedicalOfficer: [ 1, 1 ]
             SeniorPhysician: [ 1, 1]
-            Chemist: [ 3, 3 ]
+            Chemist: [ 2, 2 ]
             MedicalDoctor: [ 4, 4 ]
             Paramedic: [ 1, 1 ]
             MedicalIntern: [ 8, 8 ]
@@ -48,17 +49,19 @@
             SeniorResearcher: [ 1, 1]
             Scientist: [ 5, 5 ]
             ResearchAssistant: [ 8, 8 ]
+            StationAi: [ 1, 1 ]
             Borg: [ 3, 3 ]
             #security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
             SeniorOfficer: [ 1, 1]
-            SecurityOfficer: [ 6, 6 ]
+            SecurityOfficer: [ 4, 5 ]
             Detective: [ 1, 1 ]
-            SecurityPilot: [ 2, 2 ]
-            SecurityCadet: [ 4, 4 ]
-            Magistrate: [ 1, 1 ]
-            IAA: [ 2, 2 ] # Corvax-IAA
+            SecurityPilot: [ 1, 2 ]
+            SecurityCadet: [ 1, 2 ]
+            #Magistrate: [ 1, 1 ] #SS220 Replaced NTR
+            #IAA: [ 2, 2 ] # Corvax-IAA #SS220 Replaced NTR
+            NanoTrasenRepresentative: [ 1, 1 ] #SS220-Map-Jobs NanoTrasen Representative
             Lawyer: [ 3, 3 ]
             BlueShield: [ 1, 1 ]
             Brigmedic: [ 1, 1 ]
@@ -81,7 +84,6 @@
           - Artifacts
           - Bank
           - Zoo
-          - MiningOutpost
           - Tesla
           #SS220
           - Saveplanet
@@ -91,6 +93,7 @@
           - Robotisation
           - Homekeepers
           - ComplexPVO
+          - SportComplex
 
 - type: entity
   id: FrankensteinStation
@@ -100,5 +103,5 @@
     - type: StationMinimap
       minimapData: !type:StationMinimapData
         mapTexture: SS220/ViewableMaps/Frankenstein.png
-        originOffset: 110, 192
+        originOffset: 110, 181
         mapScale: 6.4

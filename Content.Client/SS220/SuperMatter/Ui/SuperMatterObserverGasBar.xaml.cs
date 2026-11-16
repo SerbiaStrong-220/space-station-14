@@ -15,11 +15,11 @@ namespace Content.Client.SS220.SuperMatter.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class SuperMatterObserverGasBar : Control
 {
-    [Dependency] private readonly ILocalizationManager _localization = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ILocalizationManager _localization = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public Gas GasId = Gas.Oxygen;
-    public Color GasColor = default;
+    public Color GasColor;
     public string LocalizedGasName = string.Empty;
 
     public SuperMatterObserverGasBar()
@@ -31,12 +31,13 @@ public sealed partial class SuperMatterObserverGasBar : Control
     public void Initialize(Gas gas)
     {
         GasId = gas;
-        _prototypeManager.TryIndex<GasPrototype>(((int)GasId).ToString(), out var gasProto);
+        _prototypeManager.Resolve<GasPrototype>(GasId.ToString(), out var gasProto);
         LocalizedGasName = _localization.GetString(gasProto == null ? GasId.ToString() : gasProto.Name);
-        GasColor = gasProto == null ? Color.ForestGreen : Color.FromHex("#" + gasProto.Color);
+        GasColor = gasProto == null ? Color.ForestGreen : gasProto.Color;
         ApplyForeground();
         FillingBar.ToolTip = GetTooltip();
     }
+
     /// <summary>
     /// This method produce foreground and overrides existed foreground
     /// </summary>
@@ -46,13 +47,11 @@ public sealed partial class SuperMatterObserverGasBar : Control
         foreground.BorderThickness = new Thickness(2, 2, 0, 4);
         FillingBar.ForegroundStyleBoxOverride = foreground;
     }
+
     public void UpdateBar(float ratio)
     {
         FillingBar.SetAsRatio(ratio);
-
-        var builder = new StringBuilder();
-        builder.AppendJoin(" ", [LocalizedGasName, (ratio * 100f).ToString("N2"), "%"]);
-        BarLabel.Text = builder.ToString();
+        BarLabel.Text = $"{LocalizedGasName} {ratio * 100:N2} %";
     }
 
     private string GetTooltip()

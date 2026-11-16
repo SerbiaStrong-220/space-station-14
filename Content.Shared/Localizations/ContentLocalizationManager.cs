@@ -12,6 +12,7 @@ namespace Content.Shared.Localizations
         // If you want to change your codebase's language, do it here.
         private const string Culture = "ru-RU"; // Corvax-Localization
         private const string FallbackCulture = "en-US"; // Corvax-Localization
+        private const string ForkCulture = "ru-RU-220"; // SS220-loc
 
         /// <summary>
         /// Custom format strings used for parsing and displaying minutes:seconds timespans.
@@ -27,20 +28,33 @@ namespace Content.Shared.Localizations
         public void Initialize()
         {
             var culture = new CultureInfo(Culture);
+            var cultureFork = new CultureInfo(ForkCulture); // SS220
             var fallbackCulture = new CultureInfo(FallbackCulture); // Corvax-Localization
 
             _loc.LoadCulture(culture);
+            _loc.LoadCulture(cultureFork); // SS220
             _loc.LoadCulture(fallbackCulture); // Corvax-Localization
-            _loc.SetFallbackCluture(fallbackCulture); // Corvax-Localization
-            _loc.AddFunction(culture, "PRESSURE", FormatPressure);
-            _loc.AddFunction(culture, "POWERWATTS", FormatPowerWatts);
-            _loc.AddFunction(culture, "POWERJOULES", FormatPowerJoules);
-            _loc.AddFunction(culture, "UNITS", FormatUnits);
-            _loc.AddFunction(culture, "TOSTRING", args => FormatToString(culture, args));
-            _loc.AddFunction(culture, "LOC", FormatLoc);
-            _loc.AddFunction(culture, "NATURALFIXED", FormatNaturalFixed);
-            _loc.AddFunction(culture, "NATURALPERCENT", FormatNaturalPercent);
 
+            _loc.SetFallbackCluture(culture, fallbackCulture); // SS220-loc-edit
+            _loc.SetCulture(cultureFork); // SS220-loc
+
+            // SS220-fix-loc-funcs-begin
+            var cultures = new List<CultureInfo>([culture, fallbackCulture, cultureFork]);
+            foreach (var tempCulture in cultures)
+            {
+                _loc.AddFunction(tempCulture, "PRESSURE", FormatPressure);
+                _loc.AddFunction(tempCulture, "POWERWATTS", FormatPowerWatts);
+                _loc.AddFunction(tempCulture, "POWERJOULES", FormatPowerJoules);
+                // NOTE: ENERGYWATTHOURS() still takes a value in joules, but formats as watt-hours.
+                _loc.AddFunction(tempCulture, "ENERGYWATTHOURS", FormatEnergyWattHours);
+                _loc.AddFunction(tempCulture, "UNITS", FormatUnits);
+                _loc.AddFunction(tempCulture, "TOSTRING", args => FormatToString(tempCulture, args));
+                _loc.AddFunction(tempCulture, "LOC", FormatLoc);
+                _loc.AddFunction(tempCulture, "NATURALFIXED", FormatNaturalFixed);
+                _loc.AddFunction(tempCulture, "NATURALPERCENT", FormatNaturalPercent);
+                _loc.AddFunction(tempCulture, "PLAYTIME", FormatPlaytime);
+            }
+            // SS220-fix-loc-funcs-end
 
             /*
              * The following language functions are specific to the english localization. When working on your own
@@ -52,12 +66,13 @@ namespace Content.Shared.Localizations
             _loc.AddFunction(cultureEn, "MAKEPLURAL", FormatMakePlural);
             _loc.AddFunction(cultureEn, "MANY", FormatMany);
 
+            // SS220-loc-begin
+            _loc.AddFunction(culture, "MAKEPLURAL", FormatMakePluralRu);
+            _loc.AddFunction(culture, "MANY", FormatManyRu);
 
-            // TODO canvas123: Fix this, made only to make it work and not fail tests.
-            var cultureRu = new CultureInfo("ru-RU");
-
-            _loc.AddFunction(cultureRu, "MAKEPLURAL", FormatMakePluralRu);
-            _loc.AddFunction(cultureRu, "MANY", FormatManyRu);
+            _loc.AddFunction(cultureFork, "MAKEPLURAL", FormatMakePluralRu);
+            _loc.AddFunction(cultureFork, "MANY", FormatManyRu);
+            // SS220-loc-end
         }
 
         private ILocValue FormatMany(LocArgs args)
@@ -178,8 +193,8 @@ namespace Content.Shared.Localizations
             {
                 <= 0 => string.Empty,
                 1 => list[0],
-                2 => $"{list[0]} or {list[1]}",
-                _ => $"{string.Join(" or ", list)}"
+                2 => $"{list[0]} или {list[1]}", //SS220 Localize
+                _ => $"{string.Join(", ", list.GetRange(0, list.Count - 1))} или {list[^1]}" //SS220 Localize
             };
         }
 
@@ -189,6 +204,17 @@ namespace Content.Shared.Localizations
         public static string FormatDirection(Direction dir)
         {
             return Loc.GetString($"zzzz-fmt-direction-{dir.ToString()}");
+        }
+
+        /// <summary>
+        /// Formats playtime as hours and minutes.
+        /// </summary>
+        public static string FormatPlaytime(TimeSpan time)
+        {
+            time = TimeSpan.FromMinutes(Math.Ceiling(time.TotalMinutes));
+            var hours = (int)time.TotalHours;
+            var minutes = time.Minutes;
+            return Loc.GetString($"zzzz-fmt-playtime", ("hours", hours), ("minutes", minutes));
         }
 
         private static ILocValue FormatLoc(LocArgs args)
@@ -210,10 +236,16 @@ namespace Content.Shared.Localizations
             return new LocValueString(obj?.ToString() ?? "");
         }
 
-        private static ILocValue FormatUnitsGeneric(LocArgs args, string mode)
+        private static ILocValue FormatUnitsGeneric(
+            LocArgs args,
+            string mode,
+            Func<double, double>? transformValue = null)
         {
             const int maxPlaces = 5; // Matches amount in _lib.ftl
             var pressure = ((LocValueNumber) args.Args[0]).Value;
+
+            if (transformValue != null)
+                pressure = transformValue(pressure);
 
             var places = 0;
             while (pressure > 1000 && places < maxPlaces)
@@ -238,6 +270,13 @@ namespace Content.Shared.Localizations
         private static ILocValue FormatPowerJoules(LocArgs args)
         {
             return FormatUnitsGeneric(args, "zzzz-fmt-power-joules");
+        }
+
+        private static ILocValue FormatEnergyWattHours(LocArgs args)
+        {
+            const double joulesToWattHours = 1.0 / 3600;
+
+            return FormatUnitsGeneric(args, "zzzz-fmt-energy-watt-hours", joules => joules * joulesToWattHours);
         }
 
         private static ILocValue FormatUnits(LocArgs args)
@@ -278,6 +317,16 @@ namespace Content.Shared.Localizations
             );
 
             return new LocValueString(res);
+        }
+
+        private static ILocValue FormatPlaytime(LocArgs args)
+        {
+            var time = TimeSpan.Zero;
+            if (args.Args is { Count: > 0 } && args.Args[0].Value is TimeSpan timeArg)
+            {
+                time = timeArg;
+            }
+            return new LocValueString(FormatPlaytime(time));
         }
     }
 }

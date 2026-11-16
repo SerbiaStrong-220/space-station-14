@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -8,7 +10,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.DarkReaper;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedDarkReaperSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
 public sealed partial class DarkReaperComponent : Component
 {
@@ -27,15 +29,15 @@ public sealed partial class DarkReaperComponent : Component
     /// Max progression stage
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly), DataField, AutoNetworkedField]
-    public int MaxStage = 3;
+    public int MaxStage = 3; // if you change max stage, you MUST change damage for every stage below
 
     /// <summary>
     /// Stage at which station receives alert
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField(serverOnly: true)]
+    [DataField(serverOnly: true)]
     public int AlertStage = 3;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField(serverOnly: true)]
+    [DataField(serverOnly: true)]
     public string AlertLevelOnAlertStage = "delta";
 
     /// <summary>
@@ -67,27 +69,26 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField(serverOnly: true)]
     public HashSet<EntProtoId> SpawnOnDeathPool = new()
     {
-        "LeftLegHuman",
-        "RightLegHuman",
-        "LeftFootHuman",
-        "RightFootHuman",
-        "LeftArmHuman",
-        "RightArmHuman",
-        "LeftHandHuman",
-        "RightHandHuman",
-        "TorsoSkeleton",
-        "NormalHeadSkeleton"
+        "OrganHumanLegLeft",
+        "OrganHumanLegRight",
+        "OrganHumanFootLeft",
+        "OrganHumanFootRight",
+        "OrganHumanArmLeft",
+        "OrganHumanArmRight",
+        "OrganHumanHandLeft",
+        "OrganHumanHandRight",
+        "OrganSkeletonPersonTorso",
+        "NormalHeadSkeleton",
     };
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public int SpawnOnDeathAmount = 8;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public int SpawnOnDeathAdditionalPerStage = 4;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public float SpawnOnDeathImpulseStrength = 30;
-
 
     /// ABILITY STATS ///
 
@@ -110,6 +111,22 @@ public sealed partial class DarkReaperComponent : Component
     /// </summary>
     [ViewVariables, DataField]
     public float StunAbilityLightBreakRadius = 4.5f;
+
+    /// <summary>
+    /// StunAbilityConfusion - radius in which entities are affected by confusion
+    /// </summary>
+    [DataField]
+    public float StunAbilityConfusion = 12f;
+    /// <summary>
+    /// ConfusionDuration - duration of the confusion effect
+    /// </summary>
+    [DataField]
+    public TimeSpan ConfusionDuration = TimeSpan.FromSeconds(7);
+    /// <summary>
+    /// ConfusionEffectName - name of effect that applied
+    /// </summary>
+    [DataField]
+    public EntProtoId ConfusionEffectName = "FlashSlowdownStatusEffect";
 
     /// <summary>
     /// Duration of the stun that is applied by the ability
@@ -164,7 +181,7 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier PortalOpenSound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_gate_open.ogg", new()
     {
-        MaxDistance = 8
+        MaxDistance = 8,
     });
 
     /// <summary>
@@ -173,7 +190,7 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier PortalCloseSound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_gate_close.ogg", new()
     {
-        MaxDistance = 7
+        MaxDistance = 7,
     });
 
     /// CONSOOM
@@ -181,7 +198,7 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier ConsumeAbilitySound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_eat.ogg", new()
     {
-        MaxDistance = 8
+        MaxDistance = 8,
     });
 
     [ViewVariables(VVAccess.ReadOnly), DataField]
@@ -191,14 +208,14 @@ public sealed partial class DarkReaperComponent : Component
     /// Entity that spawns when dark reaper consumes people.
     /// Intended to be a replacement for giblets, as dark reaper no longer gibs people.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public EntProtoId EntityToSpawnAfterConsuming = "SS220Gore";
 
     /// <summary>
     /// Probability than item in inventory slot gets dropped when target is consumed.
     /// Rolls for each inventory slot.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField(serverOnly: true)]
+    [DataField(serverOnly: true)]
     public float InventoryDropProbabilityOnConsumed = 0.5f;
 
     /// STAGE PROGRESSION
@@ -206,34 +223,37 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier LevelupSound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_levelup.ogg", new()
     {
-        MaxDistance = 8
+        MaxDistance = 8,
     });
 
     /// <summary>
     /// DamageSpecifier for melee damage that Dark Reaper does at every stage.
     /// </summary>
     [ViewVariables, DataField, AutoNetworkedField]
-    public List<Dictionary<string, FixedPoint2>> StageMeleeDamage = new()
+    public List<Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>> StageMeleeDamage = new()
     {
         // Stage 1
         new()
         {
             { "Slash", 12 },
-            { "Piercing", 4 }
+            { "Piercing", 4 },
+            { "Structural", 20 },
         },
 
         // Stage 2
         new()
         {
             { "Slash", 16 },
-            { "Piercing", 8 }
+            { "Piercing", 8 },
+            { "Structural", 40 },
         },
 
         // Stage 3
         new()
         {
             { "Slash", 20 },
-            { "Piercing", 16 }
+            { "Piercing", 16 },
+            { "Structural", 60 },
         }
     };
 
@@ -249,7 +269,8 @@ public sealed partial class DarkReaperComponent : Component
             Coefficients = new()
             {
                 {"Radiation", 0},
-                {"Piercing", 0.8f}
+                {"Piercing", 0.7f},
+                {"Heat", 0.7f},
             }
         },
 
@@ -259,7 +280,8 @@ public sealed partial class DarkReaperComponent : Component
             Coefficients = new()
             {
                 {"Radiation", 0},
-                {"Piercing", 0.6f}
+                {"Piercing", 0.6f},
+                {"Heat", 0.6f},
             }
         },
 
@@ -275,7 +297,7 @@ public sealed partial class DarkReaperComponent : Component
                 {"Cold", 0.25f},
                 {"Shock", 0.25f},
                 {"Cellular", 0},
-                {"Radiation", 0}
+                {"Radiation", 0},
             }
         }
     };
@@ -284,7 +306,7 @@ public sealed partial class DarkReaperComponent : Component
     {
         // stage 1 is free (initial)
         3,
-        8
+        8,
     };
 
     /// ABILITIES ///
@@ -296,6 +318,8 @@ public sealed partial class DarkReaperComponent : Component
     public EntProtoId ConsumeAction = "ActionDarkReaperConsume";
     [DataField]
     public EntProtoId MaterializeAction = "ActionDarkReaperMaterialize";
+    [DataField]
+    public EntProtoId BloodMistAction = "ActionDarkReaperBloodMist";
 
     [DataField, AutoNetworkedField]
     public EntityUid? RoflActionEntity;
@@ -305,6 +329,8 @@ public sealed partial class DarkReaperComponent : Component
     public EntityUid? ConsumeActionEntity;
     [DataField, AutoNetworkedField]
     public EntityUid? MaterializeActionEntity;
+    [DataField, AutoNetworkedField]
+    public EntityUid? BloodMistActionEntity;
 
     // ABILITY STATES ///
     [ViewVariables, AutoNetworkedField]
@@ -321,6 +347,44 @@ public sealed partial class DarkReaperComponent : Component
 
     [ViewVariables]
     public TimeSpan? MaterializedStart;
+
+    [ViewVariables, AutoNetworkedField]
+    public TimeSpan? BloodMistStart;
+
+    [DataField]
+    public TimeSpan? SpawnedTime;
+
+    // YOU ALWAYS MUST SYNC THIS WITH STAGES
+    [DataField]
+    public List<DamageSpecifier> NonActiveDamagePerInterval = new()
+    {
+        new DamageSpecifier
+        {
+            DamageDict = { ["Blunt"] = FixedPoint2.New(0.4f) },
+        },
+        new DamageSpecifier
+        {
+            DamageDict = { ["Blunt"] = FixedPoint2.New(0.5f) },
+        },
+        new DamageSpecifier
+        {
+            DamageDict = { ["Blunt"] = FixedPoint2.New(0.7f) },
+        },
+    };
+
+    [DataField, AutoPausedField]
+    public TimeSpan NextDamageTime;
+
+    [DataField]
+    public TimeSpan DamageInterval = TimeSpan.FromSeconds(1f);
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<int, float> LifestealPerStage = new()
+    {
+        { 1, 5f },
+        { 2, 10f },
+        { 3, 20f },
+    };
 }
 
 [Serializable, NetSerializable]

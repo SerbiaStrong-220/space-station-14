@@ -8,7 +8,7 @@
     sprite: SS220/Objects/Fun/figurines.rsi
     state: admiral
   # SS220 Speak for all toys
-  - type: SpeakOnUse
+  - type: SpeakOnTrigger
     pack: FigurinesAdmiral
 
 - type: entity
@@ -21,7 +21,7 @@
     sprite: SS220/Objects/Fun/figurines.rsi
     state: blueshield
   # SS220 Speak for all toys
-  - type: SpeakOnUse
+  - type: SpeakOnTrigger
     pack: FigurinesBlueshield
 
 - type: entity
@@ -34,7 +34,7 @@
     sprite: SS220/Objects/Fun/figurines.rsi
     state: diplomat
   # SS220 Speak for all toys
-  - type: SpeakOnUse
+  - type: SpeakOnTrigger
     pack: FigurinesDiplomat
 
 - type: entity
@@ -47,7 +47,7 @@
     sprite: SS220/Objects/Fun/figurines.rsi
     state: field_officer_centcom
   # SS220 Speak for all toys
-  - type: SpeakOnUse
+  - type: SpeakOnTrigger
     pack: FigurinesFieldOfficerCentcom
 
 - type: entity
@@ -60,7 +60,7 @@
     sprite: SS220/Objects/Fun/figurines.rsi
     state: officer_centcom
   # SS220 Speak for all toys
-  - type: SpeakOnUse
+  - type: SpeakOnTrigger
     pack: FigurinesOfficerCentcom
 
 - type: entity
@@ -73,7 +73,7 @@
     sprite: SS220/Objects/Fun/figurines.rsi
     state: senior_scientist
   # SS220 Speak for all toys
-  - type: SpeakOnUse
+  - type: SpeakOnTrigger
     pack: FigurinesSeniorScientist
 
 - type: entity
@@ -86,6 +86,6 @@
     sprite: SS220/Objects/Fun/figurines.rsi
     state: zombie
   # SS220 Speak for all toys
-  - type: SpeakOnUse
+  - type: SpeakOnTrigger
     pack: FigurinesZombie
 

@@ -3,7 +3,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Humanoid.Markings
 {
-    [Prototype("marking")]
+    [Prototype]
     public sealed partial class MarkingPrototype : IPrototype
     {
         [IdDataField]
@@ -14,11 +14,8 @@ namespace Content.Shared.Humanoid.Markings
         [DataField("bodyPart", required: true)]
         public HumanoidVisualLayers BodyPart { get; private set; } = default!;
 
-        [DataField("markingCategory", required: true)]
-        public MarkingCategories MarkingCategory { get; private set; } = default!;
-
-        [DataField("speciesRestriction")]
-        public List<string>? SpeciesRestrictions { get; private set; }
+        [DataField]
+        public List<ProtoId<MarkingsGroupPrototype>>? GroupWhitelist;
 
         // Corvax-Sponsors-Start
         [DataField("sponsorOnly")]
@@ -28,14 +25,26 @@ namespace Content.Shared.Humanoid.Markings
         [DataField("sexRestriction")]
         public Sex? SexRestriction { get; private set; }
 
-        [DataField("followSkinColor")]
-        public bool FollowSkinColor { get; private set; } = false;
-
         [DataField("forcedColoring")]
         public bool ForcedColoring { get; private set; } = false;
 
+        // SS220 cult markings fix begin
+        /// <summary>
+        /// Is the marking hidden from the marking picker
+        /// </summary>
+        [DataField]
+        public bool Hidden = false;
+        // SS220 cult markings fix end
+
         [DataField("coloring")]
         public MarkingColors Coloring { get; private set; } = new();
+
+        /// <summary>
+        /// Do we need to apply any displacement maps to this marking? Set to false if your marking is incompatible
+        /// with a standard human doll, and is used for some special races with unusual shapes
+        /// </summary>
+        [DataField]
+        public bool CanBeDisplaced { get; private set; } = true;
 
         [DataField("sprites", required: true)]
         public List<SpriteSpecifier> Sprites { get; private set; } = default!;

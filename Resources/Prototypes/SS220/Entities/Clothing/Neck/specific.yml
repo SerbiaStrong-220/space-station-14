@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckProtectBundle
-  name: защитный комплект СБ
-  description: Защитный комплект состоящий из пары наколенников и налокотников идеально впишутся в ваш рабочий процесс по устранению беспорядков!
+  name: security protection bundle
+  description: A protection bundle consisting of a pair of knee and elbow pads. Fits perfectly into your riot control workflow!
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Misc/tactical.rsi
@@ -17,23 +17,69 @@
           Slash: 0.90
 
 - type: entity
+  parent: ClothingNeckProtectBundle
+  id: ClothingNeckProtectBundleBlue
+  name: protection bundle
+  description: A protection bundle consisting of a pair of knee and elbow pads. Fits perfectly into your riot control workflow!
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Misc/tactical_blue.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Misc/tactical_blue.rsi
+
+- type: entity
   parent: ClothingNeckBase
   id: ClothingNeckAmuletDruid #SS220 druid loadout
   name: druid amulet
   description: A beautiful amulet that emphasizes harmony with nature and most likely endows its wearer with the power of the earth.
+  suffix: For playtime
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/druid_amulet.rsi
+      sprite: SS220/Clothing/Neck/Misc/hydro_druid_amulet.rsi
     - type: Clothing
-      sprite: SS220/Clothing/Neck/druid_amulet.rsi
+      sprite: SS220/Clothing/Neck/Misc/hydro_druid_amulet.rsi
 
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckRuffClownPennywise
   name: white ruff
   description: An item of clothing of the high society.
+  suffix: For playtime
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Ruffs/whiteruff.rsi
+      sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
     - type: Clothing
-      sprite: SS220/Clothing/Neck/Ruffs/whiteruff.rsi
+      sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckGoldenCross
+  name: golden cross
+  description: Beautiful golden cross.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckSilverCross
+  name: silver cross
+  description: Beautiful silver cross.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMimeHarlequin
+  name: gothic harlequin's collar
+  description: A serrated collar, a symbol of hope and stubbornness.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Misc/mime_harlequin.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Neck/Misc/mime_harlequin.rsi

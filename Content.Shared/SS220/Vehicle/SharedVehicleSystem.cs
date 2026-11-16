@@ -18,6 +18,8 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Serialization;
+using Content.Shared.Actions.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Vehicle;
 
@@ -28,23 +30,23 @@ namespace Content.Shared.SS220.Vehicle;
 /// </summary>
 public abstract partial class SharedVehicleSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] protected readonly IGameTiming GameTiming = default!;
-
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItemSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] protected IGameTiming GameTiming = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private MovementSpeedModifierSystem _modifier = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItemSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedJointSystem _joints = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedMoverController _mover = default!;
 
     private const string KeySlot = "key_slot";
+    private static readonly ProtoId<TagPrototype> DoorBumperOpenerTag = "DoorBumpOpener";
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -120,7 +122,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         // Entity is no longer riding
         RemComp<RiderComponent>(args.Buckle);
         RemComp<RelayInputMoverComponent>(args.Buckle);
-        _tagSystem.RemoveTag(uid, "DoorBumpOpener");
+        _tagSystem.RemoveTag(uid, DoorBumperOpenerTag);
 
         Appearance.SetData(uid, VehicleVisuals.HideRider, false);
         // Reset component
@@ -168,14 +170,16 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             _actionsSystem.AddAction(args.Buckle, ref flashlight.ToggleActionEntity, flashlight.ToggleAction, uid, actions);
         }
 
-        if (component.HornSound != null)
-        {
-            _actionsSystem.AddAction(args.Buckle, ref component.HornActionEntity, component.HornAction, uid, actions);
-        }
+        // remove vehicle begin
+        //if (component.HornSound != null)
+        //{
+        //    _actionsSystem.AddAction(args.Buckle, ref component.HornActionEntity, component.HornAction, uid, actions);
+        //}
+        // remove vehicle end
 
         _joints.ClearJoints(args.Buckle);
 
-        _tagSystem.AddTag(uid, "DoorBumpOpener");
+        _tagSystem.AddTag(uid, DoorBumperOpenerTag);
     }
 
     /// <summary>
@@ -198,9 +202,14 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     /// </summary>
     private void OnEntInserted(EntityUid uid, VehicleComponent component, EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != KeySlot ||
-            !_tagSystem.HasTag(args.Entity, "VehicleKey"))
+        // remove vehicle begin
+        //if (args.Container.ID != KeySlot ||
+        //    !_tagSystem.HasTag(args.Entity, "VehicleKey"))
+        //    return;
+
+        if (args.Container.ID != KeySlot)
             return;
+        // remove vehicle end
 
         // Enable vehicle
         var inVehicle = EnsureComp<InVehicleComponent>(args.Entity);

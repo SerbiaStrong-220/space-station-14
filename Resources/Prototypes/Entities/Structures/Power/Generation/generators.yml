@@ -2,6 +2,7 @@
 
 - type: entity
   abstract: true
+  parent: BaseMachine
   id: BaseGenerator
   description: A high efficiency thermoelectric generator.
   name: generator
@@ -12,10 +13,6 @@
     range: 5
     sound:
       path: /Audio/Ambience/Objects/engine_hum.ogg
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Physics
-    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
@@ -27,9 +24,6 @@
         - MachineMask
         layer:
         - MachineLayer
-  - type: Transform
-    anchored: true
-    noRot: true
   - type: Sprite
     sprite: Structures/Power/power.rsi
     state: generator
@@ -49,8 +43,7 @@
     supplyRate: 3000
     supplyRampRate: 500
     supplyRampTolerance: 500
-  - type: Anchorable
-  - type: Pullable
+  - type: Anchorable # Reduces anchor time to 1 second
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
@@ -87,18 +80,24 @@
     onBump: false
     requirePower: true
     highVoltageNode: output
+  - type: GuideHelp
+    guides:
+    - ShuttleCraft
 
 # Base Wallmount Generator
 
 - type: entity
   abstract: true
   id: BaseGeneratorWallmount
-  parent: BaseGenerator
+  parent: [ BaseGenerator, BaseWallmount ]
   name: wallmount generator
   description: A high efficiency thermoelectric generator stuffed in a wall cabinet.
-  placement:
-    mode: SnapgridCenter
   components:
+  # SS220-fix-wallmount-rot-begin
+  - type: Transform
+    anchored: true
+    noRot: false
+  # SS220-fix-wallmount-rot-end
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -15
@@ -107,17 +106,10 @@
       path: /Audio/Ambience/Objects/hdd_buzz.ogg
   - type: PointLight
     radius: 1.5
-    energy: 1.6
+    energy: 3.0
     color: "#3db83b"
     castShadows: false
     netsync: false
-  - type: Fixtures
-  - type: Transform
-    anchored: true
-    noRot: false
-  - type: Physics
-    bodyType: Static
-    canCollide: false
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: Structures/Power/Generation/wallmount_generator.rsi
@@ -141,25 +133,19 @@
     supplyRate: 3000
     supplyRampRate: 500
     supplyRampTolerance: 500
-  - type: WallMount
+  - type: GuideHelp
+    guides:
+    - ShuttleCraft
 
 # Construction Frames
 
 - type: entity
+  parent: BaseWallmountMetallic
   categories: [ HideSpawnMenu ]
   id: BaseGeneratorWallmountFrame
   name: wallmount generator frame
   description: A construction frame for a wallmount generator.
-  placement:
-    mode: SnapgridCenter
   components:
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Physics
-    canCollide: false
-  - type: Fixtures
-  - type: Transform
-    anchored: true
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: Structures/Power/Generation/wallmount_generator.rsi
@@ -168,7 +154,6 @@
   - type: Construction
     graph: WallmountGenerator
     node: frame
-  - type: WallMount
 
 # Generators in use
 
@@ -227,6 +212,27 @@
   - type: ContainerContainer
     containers:
       board: !type:Container
+  - type: GuideHelp
+    guides:
+    - ShuttleCraft
+
+- type: entity
+  parent: BaseGeneratorWallmount
+  id: GeneratorWallmountAPULV
+  name: shuttle LV APU
+  description: An advanced auxiliary power unit for a shuttle.
+  components:
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      output:
+        !type:CableDeviceNode
+        nodeGroupID: Apc
+  - type: PowerSupplier
+    voltage: Apc
+    supplyRate: 20000
+    supplyRampRate: 500
+    supplyRampTolerance: 500
 
 # RTG - no fuel requirement
 

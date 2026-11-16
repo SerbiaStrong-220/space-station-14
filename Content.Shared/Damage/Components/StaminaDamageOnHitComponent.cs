@@ -10,4 +10,9 @@ public sealed partial class StaminaDamageOnHitComponent : Component
 
     [DataField("sound")]
     public SoundSpecifier? Sound;
+
+    // SS220 Add ingnore resistance begin
+    [DataField]
+    public bool IgnoreResistance;
+    // SS220 Add ingnore resistance end
 }

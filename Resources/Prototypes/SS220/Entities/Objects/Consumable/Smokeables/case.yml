@@ -9,26 +9,32 @@
     layers:
     - state: closed
     - state: open
-      map: ["openLayer"]
+      map: [ "openLayer" ]
     - state: snuff1
-      map: ["snuff1"]
+      map: [ "snuff1" ]
       visible: false
     - state: snuff2
-      map: ["snuff2"]
+      map: [ "snuff2" ]
       visible: false
     - state: snuff3
-      map: ["snuff3"]
+      map: [ "snuff3" ]
       visible: false
     - state: snuff4
-      map: ["snuff4"]
+      map: [ "snuff4" ]
       visible: false
     - state: snuff5
-      map: ["snuff5"]
+      map: [ "snuff5" ]
       visible: false
     - state: snuff6
-      map: ["snuff6"]
+      map: [ "snuff6" ]
       visible: false
   - type: Storage
+    whitelist:
+      tags:
+      - Smokable
+      - Cigarette
+      - Cigar
+      - Lighter
     grid:
     - 0,0,2,1
   - type: Item
@@ -37,13 +43,15 @@
     shape:
     - 0,0,1,1
     storedRotation: 90
-  - type: StorageFill
-    contents:
-    - id: GroundTobacco
-      amount: 6
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: GroundTobacco
+          amount: 6
   - type: ItemCounter
     count:
-      tags: [Smokable]
+      tags: [ Smokable ]
     composite: true
     layerStates:
     - snuff1

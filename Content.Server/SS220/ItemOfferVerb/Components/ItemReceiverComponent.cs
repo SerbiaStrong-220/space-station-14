@@ -2,17 +2,18 @@
 
 using Content.Server.SS220.ItemOfferVerb.Systems;
 
-namespace Content.Server.SS220.ItemOfferVerb.Components
+namespace Content.Server.SS220.ItemOfferVerb.Components;
+
+[RegisterComponent]
+[Access(typeof(ItemOfferSystem))]
+public sealed partial class ItemReceiverComponent : Component
 {
-    [RegisterComponent]
-    [Access(typeof(ItemOfferSystem))]
-    public sealed partial class ItemReceiverComponent : Component
-    {
-        [ViewVariables(VVAccess.ReadOnly)]
-        public EntityUid Giver { get; set; }
-        [ViewVariables(VVAccess.ReadOnly)]
-        public EntityUid? Item { get; set; }
-        [ViewVariables(VVAccess.ReadOnly)]
-        public float ReceiveRange = 2f;
-    }
+    [ViewVariables(VVAccess.ReadOnly)]
+    public EntityUid Giver { get; set; }
+
+    [ViewVariables(VVAccess.ReadOnly)]
+    public EntityUid? Item { get; set; }
+
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float ReceiveRange = 2f;
 }

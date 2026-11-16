@@ -18,6 +18,7 @@
       species:
       - Felinid #SS220-jobbans end
   startingGear: SeniorOfficerGear
+  experienceDefinition: SecuritySeniorRoleExperience
   icon: "JobIconSeniorOfficer"
   supervisors: job-supervisors-hos
   canBeAntag: false
@@ -36,11 +37,21 @@
 #    eyes: ClothingEyesGlassesSecurity #SS220-TwoOne-Floppa-Iteration
     id: SeniorOfficerPDA
     ears: ClothingHeadsetSecurity
-    pocket1: WeaponPistolMk58Nonlethal
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Flash
-    - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
-    - MagazinePistolRubber
+    - MagazinePistol
+    - MagazinePistol
     - FlashlightSeclite
     - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End
+
+- type: chameleonOutfit
+  id: SeniorSecurityOfficerChameleonOutfit
+  job: SeniorOfficer
+# hasMindShield: true
+  equipment:
+    head: ClothingHeadHatBeretSecurity
+    mask: ClothingMaskGasSecurity
+    neck: Dinkystar
+    gloves: ClothingHandsGlovesColorBlack

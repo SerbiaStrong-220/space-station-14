@@ -1,0 +1,10 @@
+- type: guideEntry
+  id: Tajaran
+  name: species-name-tajaran
+  text: "/ServerInfo/SS220/Guidebook/Mobs/Tajaran.xml"
+
+- type: guideEntry
+  id: Ipc
+  name: species-name-ipc
+  text: /ServerInfo/SS220/Guidebook/Mobs/Ipc.xml
+

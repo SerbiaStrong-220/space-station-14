@@ -3,10 +3,11 @@
   startingInventory:
     FoodSnackRaisins: 3
     FoodSnackChocolate: 3
+    FoodSnackChocolateWhite: 2 #SS220-NewThings
     FoodSnackCnDs: 3
     FoodSnackPistachios: 3
     FoodSnackSus: 3
     FoodSnackSemki: 3
-  emaggedInventory:
+  contrabandInventory:
+    FoodSnackSwirlLollipop: 2
     FoodSnackSyndi: 3
-

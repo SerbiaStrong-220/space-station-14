@@ -5,7 +5,6 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -15,6 +14,8 @@ namespace Content.Client.DoAfter;
 
 public sealed class DoAfterOverlay : Overlay
 {
+    private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
+
     private readonly IEntityManager _entManager;
     private readonly IGameTiming _timing;
     private readonly IPlayerManager _player;
@@ -22,6 +23,7 @@ public sealed class DoAfterOverlay : Overlay
     private readonly MetaDataSystem _meta;
     private readonly ProgressColorSystem _progressColor;
     private readonly SharedContainerSystem _container;
+    private readonly SpriteSystem _sprite;
 
     private readonly Texture _barTexture;
     private readonly ShaderInstance _unshadedShader;
@@ -46,11 +48,12 @@ public sealed class DoAfterOverlay : Overlay
         _meta = _entManager.EntitySysManager.GetEntitySystem<MetaDataSystem>();
         _container = _entManager.EntitySysManager.GetEntitySystem<SharedContainerSystem>();
         _progressColor = _entManager.System<ProgressColorSystem>();
+        _sprite = _entManager.System<SpriteSystem>();
         var sprite = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/progress_bar.rsi"), "icon");
         _barTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
         _player = player; // SS220 Invisible-DoAfter
 
-        _unshadedShader = protoManager.Index<ShaderPrototype>("unshaded").Instance();
+        _unshadedShader = protoManager.Index(UnshadedShader).Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -122,7 +125,7 @@ public sealed class DoAfterOverlay : Overlay
 
                 // Use the sprite itself if we know its bounds. This means short or tall sprites don't get overlapped
                 // by the bar.
-                float yOffset = sprite.Bounds.Height / 2f + 0.05f;
+                var yOffset = _sprite.GetLocalBounds((uid, sprite)).Height / 2f + 0.05f;
 
                 // Position above the entity (we've already applied the matrix transform to the entity itself)
                 // Offset by the texture size for every do_after we have.
@@ -130,7 +133,7 @@ public sealed class DoAfterOverlay : Overlay
                     yOffset / scale + offset / EyeManager.PixelsPerMeter * scale);
 
                 // Draw the underlying bar texture
-                handle.DrawTexture(_barTexture, position);
+                handle.DrawTexture(_barTexture, position, doAfter.BarColorOverride); // SS220-changeable-doafter-bar-color
 
                 Color color;
                 float elapsedRatio;
@@ -139,7 +142,7 @@ public sealed class DoAfterOverlay : Overlay
                 if (doAfter.CancelledTime != null)
                 {
                     var elapsed = doAfter.CancelledTime.Value - doAfter.StartTime;
-                    elapsedRatio = (float) Math.Min(1, elapsed.TotalSeconds / doAfter.Args.Delay.TotalSeconds);
+                    elapsedRatio = (float)Math.Min(1, elapsed.TotalSeconds / doAfter.Args.Delay.TotalSeconds);
                     var cancelElapsed = (time - doAfter.CancelledTime.Value).TotalSeconds;
                     var flash = Math.Floor(cancelElapsed / FlashTime) % 2 == 0;
                     color = GetProgressColor(0, flash ? alpha : 0);
@@ -147,7 +150,7 @@ public sealed class DoAfterOverlay : Overlay
                 else
                 {
                     var elapsed = time - doAfter.StartTime;
-                    elapsedRatio = (float) Math.Min(1, elapsed.TotalSeconds / doAfter.Args.Delay.TotalSeconds);
+                    elapsedRatio = (float)Math.Min(1, elapsed.TotalSeconds / doAfter.Args.Delay.TotalSeconds);
                     color = GetProgressColor(elapsedRatio, alpha);
                 }
 

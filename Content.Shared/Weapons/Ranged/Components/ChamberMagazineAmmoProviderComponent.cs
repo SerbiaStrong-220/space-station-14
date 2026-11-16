@@ -13,21 +13,38 @@ public sealed partial class ChamberMagazineAmmoProviderComponent : MagazineAmmoP
     /// <summary>
     /// If the gun has a bolt and whether that bolt is closed. Firing is impossible
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField("boltClosed"), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool? BoltClosed = false;
 
     /// <summary>
     /// Does the gun automatically open and close the bolt upon shooting.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField("autoCycle"), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool AutoCycle = true;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("soundBoltClosed"), AutoNetworkedField]
+    //SS220 weapon overhaul begin
+    [DataField, AutoNetworkedField]
+    public bool CanBeLoadedManually = false;
+
+    [DataField, AutoNetworkedField]
+    public bool MustBeLoadedThroughChamber = false;
+
+    [DataField("soundInsert"), AutoNetworkedField]
+    public SoundSpecifier? InsertSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/bullet_insert.ogg");
+    //SS220 weapon overhaul end
+
+    /// <summary>
+    /// Can the gun be racked, which opens and then instantly closes the bolt to cycle a round.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool CanRack = true;
+
+    [DataField("soundBoltClosed"), AutoNetworkedField]
     public SoundSpecifier? BoltClosedSound = new SoundPathSpecifier("/Audio/Weapons/Guns/Bolt/rifle_bolt_closed.ogg");
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("soundBoltOpened"), AutoNetworkedField]
+    [DataField("soundBoltOpened"), AutoNetworkedField]
     public SoundSpecifier? BoltOpenedSound = new SoundPathSpecifier("/Audio/Weapons/Guns/Bolt/rifle_bolt_open.ogg");
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("soundRack"), AutoNetworkedField]
+    [DataField("soundRack"), AutoNetworkedField]
     public SoundSpecifier? RackSound = new SoundPathSpecifier("/Audio/Weapons/Guns/Cock/ltrifle_cock.ogg");
 }

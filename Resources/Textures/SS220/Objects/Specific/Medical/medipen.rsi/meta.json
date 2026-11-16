@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by kit0vras (Github/Discord) & EstKemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "medipen"
+    },
+    {
+      "name": "medipen_empty"
+    },
+    {
+      "name": "firstaid"
+    },
+    {
+      "name": "firstaid_empty"
+    },
+    {
+      "name": "holypen"
+    },
+    {
+      "name": "holypen_empty"
+    },
+    {
+      "name": "hypovolemic"
+    },
+    {
+      "name": "hypovolemic_empty"
+    },
+    {
+      "name": "stimpen"
+    },
+    {
+      "name": "stimpen_empty"
+    },
+    {
+      "name": "microstimpen"
+    },
+    {
+      "name": "microstimpen_empty"
+    },
+    {
+      "name": "morphen"
+    },
+    {
+      "name": "morphen_empty"
+    },
+    {
+      "name": "oxapen"
+    },
+    {
+      "name": "oxapen_empty"
+    },
+	{
+      "name": "ebentpen"
+    },
+    {
+      "name": "ebentpen_empty"
+    },
+    {
+      "name": "penacid"
+    },
+    {
+      "name": "penacid_empty"
+    },
+    {
+      "name": "salacid"
+    },
+    {
+      "name": "bicpen"
+    },
+    {
+      "name": "bicpen_empty"
+    },
+    {
+      "name": "dermpen"
+    },
+    {
+      "name": "dermpen_empty"
+    },
+    {
+      "name": "salacid_empty"
+    },
+    {
+      "name": "salpen"
+    },
+    {
+      "name": "salpen_empty"
+    },
+    {
+      "name": "atropen"
+    },
+    {
+      "name": "atropen_empty"
+    },
+    {
+      "name": "arithpen"
+    },
+    {
+      "name": "arithpen_empty"
+    },
+    {
+      "name": "punctpen"
+    },
+    {
+      "name": "punctpen_empty"
+    },
+    {
+      "name": "pyrapen"
+    },
+    {
+      "name": "pyrapen_empty"
+    },
+    {
+      "name": "dexpen"
+    },
+    {
+      "name": "dexpen_empty"
+    },
+    {
+      "name": "medipen-inhand-left",
+        "directions": 4
+    },
+    {
+      "name": "medipen-inhand-right",
+        "directions": 4
+    },
+    {
+      "name": "base-needle-inhand-left",
+        "directions": 4
+    },
+    {
+      "name": "base-needle-inhand-right",
+        "directions": 4
+    },
+    {
+      "name": "base-colorA-inhand-left",
+        "directions": 4
+    },
+    {
+      "name": "base-colorA-inhand-right",
+        "directions": 4
+    },
+    {
+      "name": "base-colorB-inhand-left",
+        "directions": 4
+    },
+    {
+      "name": "base-colorB-inhand-right",
+        "directions": 4
+    }
+  ]
+}

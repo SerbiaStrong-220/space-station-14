@@ -2,7 +2,24 @@
   id: Sneeze
   name: chat-emote-name-sneeze
   category: Vocal
+  icon: SS220/Interface/Emotes/sneeze.png #SS220 icons for emote
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-sneeze"]
+  chatTriggers:
+  - sneeze
+  - sneezes
+  - sneezed
+  - sneeze.
+  - sneezes.
+  - sneezed.
+  - sneeze!
+  - sneezes!
+  - sneezed!
 
 - type: emote
   id: Cough
@@ -16,6 +33,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-cough"]
   chatTriggers:
     - cough
@@ -68,6 +87,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-yawn"]
   chatTriggers:
     - yawn

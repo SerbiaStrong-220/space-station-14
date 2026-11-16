@@ -1,0 +1,7 @@
+﻿- type: latheRecipePack
+  id: MedServiceTech
+  recipes:
+  - PinpointerCrew
+  - DefibrillatorCompact
+  - ClothingEyesHudMediChem
+  - ClothingEyesNightVisionMedical

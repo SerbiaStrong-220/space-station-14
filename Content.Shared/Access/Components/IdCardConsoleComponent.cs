@@ -1,5 +1,6 @@
 using Content.Shared.Access.Systems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -10,9 +11,6 @@ namespace Content.Shared.Access.Components;
 [Access(typeof(SharedIdCardConsoleSystem))]
 public sealed partial class IdCardConsoleComponent : Component
 {
-    public const int MaxFullNameLength = 30;
-    public const int MaxJobTitleLength = 30;
-
     public static string PrivilegedIdCardSlotId = "IdCardConsole-privilegedId";
     public static string TargetIdCardSlotId = "IdCardConsole-targetId";
 
@@ -28,9 +26,9 @@ public sealed partial class IdCardConsoleComponent : Component
         public readonly string FullName;
         public readonly string JobTitle;
         public readonly List<ProtoId<AccessLevelPrototype>> AccessList;
-        public readonly ProtoId<AccessLevelPrototype> JobPrototype;
+        public readonly ProtoId<JobPrototype>? JobPrototype;
 
-        public WriteToTargetIdMessage(string fullName, string jobTitle, List<ProtoId<AccessLevelPrototype>> accessList, ProtoId<AccessLevelPrototype> jobPrototype)
+        public WriteToTargetIdMessage(string fullName, string jobTitle, List<ProtoId<AccessLevelPrototype>> accessList, ProtoId<JobPrototype>? jobPrototype)
         {
             FullName = fullName;
             JobTitle = jobTitle;
@@ -59,24 +57,68 @@ public sealed partial class IdCardConsoleComponent : Component
         "Paramedic",
         "Command",
         "Cryogenics",
+        "Clown", //SS220 New_accesses_and_some_tweaks
         "Engineering",
         "External",
+        "GenpopEnter",
+        "GenpopLeave",
         "HeadOfPersonnel",
         "HeadOfSecurity",
         "Hydroponics",
         "Janitor",
         "Kitchen",
         "Lawyer",
+        "Librarian", //SS220 New_accesses_and_some_tweaks
+        "NanoTrasenRepresentative", //SS220 ntr add
         "Maintenance",
         "Medical",
+        "Psychologist", //SS220 New_accesses_and_some_tweaks
         "Quartermaster",
         "Research",
         "ResearchDirector",
+        "Reporter", //SS220 New_accesses_and_some_tweaks
         "Salvage",
         "Security",
         "Service",
         "Theatre",
+        "Mime", //SS220 New_accesses_and_some_tweaks
+        "Musician", //SS220 New_accesses_and_some_tweaks
     };
+
+    // SS220-ID console extended access button-Begin
+    /// <summary>
+    /// All access levels which will be given to ID card when "Extended" button is pressed
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<AccessLevelPrototype>> ExtendedAccessLevels = new()
+    {
+        "Bar",
+        "Cargo",
+        "Chapel",
+        "Paramedic",
+        "Cryogenics",
+        "Engineering",
+        "External",
+        "Hydroponics",
+        "Janitor",
+        "Kitchen",
+        "Lawyer",
+        "Maintenance",
+        "Medical",
+        "Research",
+        "Salvage",
+        "Service",
+        "Theatre",
+        "Mime",
+        "Musician",
+        "Librarian",
+        "Psychologist",
+        "Clown",
+        "Reporter",
+        "GenpopEnter",
+        "GenpopLeave",
+    };
+    // SS220-ID console extended access button-End
 
     [Serializable, NetSerializable]
     public sealed class IdCardConsoleBoundUserInterfaceState : BoundUserInterfaceState
@@ -90,7 +132,7 @@ public sealed partial class IdCardConsoleComponent : Component
         public readonly string? TargetIdJobTitle;
         public readonly List<ProtoId<AccessLevelPrototype>>? TargetIdAccessList;
         public readonly List<ProtoId<AccessLevelPrototype>>? AllowedModifyAccessList;
-        public readonly ProtoId<AccessLevelPrototype> TargetIdJobPrototype;
+        public readonly ProtoId<JobPrototype> TargetIdJobPrototype;
 
         public IdCardConsoleBoundUserInterfaceState(bool isPrivilegedIdPresent,
             bool isPrivilegedIdAuthorized,
@@ -99,7 +141,7 @@ public sealed partial class IdCardConsoleComponent : Component
             string? targetIdJobTitle,
             List<ProtoId<AccessLevelPrototype>>? targetIdAccessList,
             List<ProtoId<AccessLevelPrototype>>? allowedModifyAccessList,
-            ProtoId<AccessLevelPrototype> targetIdJobPrototype,
+            ProtoId<JobPrototype> targetIdJobPrototype,
             string privilegedIdName,
             string targetIdName)
         {

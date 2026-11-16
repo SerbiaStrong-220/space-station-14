@@ -1,3 +1,4 @@
+﻿using Content.Client.FeedbackPopup;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Guidebook;
@@ -25,6 +26,7 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
     [Dependency] private readonly InfoUIController _info = default!;
     [Dependency] private readonly OptionsUIController _options = default!;
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
+    [Dependency] private readonly FeedbackPopupUIController _feedback = null!;
 
     private Options.UI.EscapeMenu? _escapeWindow;
 
@@ -62,6 +64,12 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
 
         _escapeWindow.OnClose += DeactivateButton;
         _escapeWindow.OnOpen += ActivateButton;
+
+        _escapeWindow.FeedbackButton.OnPressed += _ =>
+        {
+            CloseEscapeWindow();
+            _feedback.ToggleWindow();
+        };
 
         _escapeWindow.ChangelogButton.OnPressed += _ =>
         {
@@ -103,11 +111,13 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
             _guidebook.ToggleGuidebook();
         };
 
-        _escapeWindow.DiscordLinkButton.OnPressed += _ =>
+        // SS220 dlinkbutton-to-resetttscache bgn
+        _escapeWindow.TTSQueueResetButton.OnPressed += _ =>
         {
             CloseEscapeWindow();
-            _console.ExecuteCommand("discordlink");
+            _console.ExecuteCommand("ttsqueuereset");
         };
+        // SS220 dlinkbutton-to-resetttscache end
 
         // Hide wiki button if we don't have a link for it.
         _escapeWindow.WikiButton.Visible = _cfg.GetCVar(CCVars.InfoLinksWiki) != "";

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "by spo9k\u0026lina, modified by Estkemran (Github) for SS220, tajaran_tail Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/fc9b91e3cb51b20987aab9630e73ac587bc00f3f",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ears_nyshka_inner",
+      "directions": 4
+    },
+    {
+      "name": "ears_nyshka_outer",
+      "directions": 4
+    },
+    {
+      "name": "ears_piercing_inner",
+      "directions": 4
+    },
+    {
+      "name": "ears_piercing_outer",
+      "directions": 4
+    },
+    {
+      "name": "ears_vini_inner",
+      "directions": 4
+    },
+    {
+      "name": "ears_vini_outer",
+      "directions": 4
+    }
+  ]
+}

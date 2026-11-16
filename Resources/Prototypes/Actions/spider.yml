@@ -1,19 +1,23 @@
 - type: entity
+  parent: BaseAction
   id: ActionSpiderWeb
   name: Spider Web
   description: Spawns a web that slows your prey down.
   components:
-  - type: InstantAction
+  - type: Action
     icon: SS220/Interface/Actions/web.png #SS220 new web action sprite
-    event: !type:SpiderWebActionEvent
     useDelay: 25
+  - type: InstantAction
+    event: !type:SpiderWebActionEvent
 
 - type: entity
+  parent: BaseAction
   id: ActionSericulture
   name: Weave silk
   description: Weave a bit of silk for use in arts and crafts.
   components:
-  - type: InstantAction
+  - type: Action
     icon: SS220/Interface/Actions/web.png #SS220 new web action sprite
-    event: !type:SericultureActionEvent
     useDelay: 1
+  - type: InstantAction
+    event: !type:SericultureActionEvent

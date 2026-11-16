@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -15,7 +16,7 @@ public sealed partial class DarkReaperRuneComponent : Component
     [ViewVariables, DataField]
     public SoundSpecifier SpawnSound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_start.ogg", new()
     {
-        MaxDistance = 8
+        MaxDistance = 8,
     });
 
     [DataField]

@@ -6,17 +6,18 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 180000 # SS220-RoleTime
+      time: 50h # SS220-RoleTime
     - !type:AgeRequirement
       requiredAge: 20
+      ignoreSpecies: [ Ipc ] #SS220-JobsAgeIPC
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:
       - Felinid #SS220-jobbans end
   weight: 10
   startingGear: ResearchDirectorGear
+  experienceDefinition: ResearchDirectorRoleExperience # SS220-experience
   icon: "JobIconResearchDirector"
-  requireAdminNotify: true
   supervisors: job-supervisors-captain
   radioBold: true
   access:
@@ -33,9 +34,21 @@
 
 - type: startingGear
   id: ResearchDirectorGear
-  equipment:
+  #equipment: #SS220 HeadsetLoadout
     #id: RnDPDA #SS220-RD-New-Loadout
-    ears: ClothingHeadsetRD
+    #ears: ClothingHeadsetRD #SS220 HeadsetLoadout
   storage:
     back:
     - Flash
+
+- type: chameleonOutfit
+  id: ResearchDirectorChameleonOutfit
+  job: ResearchDirector
+# hasMindShield: false #ss220 ChameleonOutfit fix
+  equipment:
+    head: ClothingHeadHatBeretRND
+    eyes: ClothingEyesGlasses
+    mask: ClothingMaskGas
+    neck: ClothingNeckCloakRd
+    outerClothing: ClothingOuterCoatRD
+    gloves: ClothingHandsGlovesColorPurple

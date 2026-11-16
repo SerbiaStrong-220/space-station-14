@@ -14,23 +14,26 @@ public sealed partial class FaxMachineComponent : Component
     /// <summary>
     /// Name with which the fax will be visible to others on the network
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField("name")]
     public string FaxName { get; set; } = "Unknown";
 
     /// <summary>
     /// Sprite to use when inserting an object.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
     public string InsertingState = "inserting";
 
     /// <summary>
     /// Device address of fax in network to which data will be send
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField("destinationAddress")]
     public string? DestinationFaxAddress { get; set; }
+
+    /// <summary>
+    /// Name of fax in network to which data will be send
+    /// </summary>
+    [DataField("destinationName")]
+    public string? DestinationFaxName { get; set; }
 
     /// <summary>
     /// Contains the item to be sent, assumes it's paper...
@@ -42,21 +45,18 @@ public sealed partial class FaxMachineComponent : Component
     /// Is fax machine should respond to pings in network
     /// This will make it visible to others on the network
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField]
     public bool ResponsePings { get; set; } = true;
 
     /// <summary>
     /// Should admins be notified on message receive
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField]
     public bool NotifyAdmins { get; set; } = false;
 
     /// <summary>
     /// Should that fax receive nuke codes send by admins. Probably should be captain fax only
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField]
     public bool ReceiveNukeCodes { get; set; } = false;
 
@@ -64,16 +64,15 @@ public sealed partial class FaxMachineComponent : Component
     /// <summary>
     /// Should that fax receive station goal info
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("receiveStationGoal")]
-    public bool ReceiveStationGoal { get; set; } = false;
-    // Corvax-StationGoal-End
+    [DataField]
+    public bool ReceiveStationGoal { get; set; }
 
     /// <summary>
-    /// Sound to play when fax has been emagged
+    /// Should that fax receive station goals from other stations
     /// </summary>
     [DataField]
-    public SoundSpecifier EmagSound = new SoundCollectionSpecifier("sparks");
+    public bool ReceiveAllStationGoals { get; set; }
+    // Corvax-StationGoal-End
 
     /// <summary>
     /// Sound to play when fax printing new message
@@ -151,24 +150,76 @@ public sealed partial class FaxMachineComponent : Component
     /// </summary>
     [DataField]
     public EntProtoId PrintOfficePaperId = "PaperOffice";
+
+    /// <summary>
+    ///     If the fax machine should add a bit of text in the end of the fax that specifies from where and to where the fax is for
+    /// </summary>
+    [DataField]
+    public bool AddSenderInfo = true;
+
+    /// <summary>
+    ///     The text that is sent along with the paper's content if <see cref="AddSenderInfo"/> is true
+    /// </summary>
+    [DataField]
+    public LocId SenderInfo = "fax-machine-sender-info";
 }
 
-[DataDefinition]
-public sealed partial class FaxPrintout
+[DataDefinition, Virtual] // SS220 Make virtual
+public partial class FaxPrintout
 {
-    [DataField("dataToCopy")]
-    public Dictionary<Type, IPhotocopiedComponentData>? DataToCopy { get; private set; }
+    [DataField(required: true)]
+    public string Name { get; private set; } = default!;
 
-    [DataField("metaData")]
-    public PhotocopyableMetaData? MetaData { get; private set; }
+    [DataField]
+    public string? Label { get; private set; }
 
-    private FaxPrintout()
+    [DataField(required: true)]
+    public string Content { get; private set; } = default!;
+
+    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
+    public string PrototypeId { get; private set; } = default!;
+
+    [DataField("stampState")]
+    public string? StampState { get; private set; }
+
+    [DataField("stampedBy")]
+    public List<StampDisplayInfo> StampedBy { get; private set; } = new();
+
+    [DataField]
+    public bool Locked { get; private set; }
+
+    [DataField]
+    public string? SenderFaxName { get; private set; } = default!;
+
+    protected FaxPrintout() // SS220 Make protected
     {
     }
 
-    public FaxPrintout(Dictionary<Type, IPhotocopiedComponentData>? dataToCopy, PhotocopyableMetaData? metaData)
+    public FaxPrintout(string content, string name, string? label = null, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null, bool locked = false, string? senderFaxName = null)
     {
-        DataToCopy = dataToCopy;
-        MetaData = metaData;
+        Content = content;
+        Name = name;
+        Label = label;
+        PrototypeId = prototypeId ?? "";
+        StampState = stampState;
+        StampedBy = stampedBy ?? new List<StampDisplayInfo>();
+        Locked = locked;
+        SenderFaxName = senderFaxName;
     }
 }
+
+//ss220 autogamma update
+public sealed class FaxSendAttemptEvent : CancellableEntityEventArgs
+{
+    public EntityUid FaxEnt;
+    public string DestinationFaxAddress;
+    public string SenderFaxAddress;
+
+    public FaxSendAttemptEvent(EntityUid faxEnt, string destinationFaxAddress, string senderFaxAddress)
+    {
+        FaxEnt = faxEnt;
+        DestinationFaxAddress = destinationFaxAddress;
+        SenderFaxAddress = senderFaxAddress;
+    }
+}
+//ss220 autogamma update

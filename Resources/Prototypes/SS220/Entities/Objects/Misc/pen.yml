@@ -12,6 +12,7 @@
     - Write
     - WriteIgnoreStamps
     - Pickaxe
+    - Pen
   - type: Sprite
     sprite: SS220/Objects/Misc/pen.rsi
     state: pen_centcom
@@ -52,8 +53,27 @@
       deviceNetId: Wireless
       receiveFrequencyId: BasicDevice
     - type: WirelessNetworkConnection
-      range: 15
+      range: 60
     - type: Tag
       tags:
         - Write
         - Pen
+
+- type: entity
+  name: ручка
+  description: Ручка с чёрными чернилами.
+  parent: BaseItem
+  id: PenDnaScrambler
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/pens.rsi
+    state: pen
+  - type: Item
+    sprite: Objects/Misc/pens.rsi
+    heldPrefix: pen
+    size: Tiny
+  - type: PenScrambler
+  - type: Tag
+    tags:
+    - Write
+    - Pen

@@ -1,7 +1,7 @@
 - type: entity
   name: space carp
   id: BaseMobCarp
-  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   description: It's a space carp.
   abstract: true
   components:
@@ -39,12 +39,12 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        40: Dead
+        60: Dead #SS220 Carp HP buff
     - type: MovementSpeedModifier
       baseWalkSpeed: 2.5
       baseSprintSpeed: 3.5
     - type: Stamina
-      critThreshold: 100
+      baseCritThreshold: 100
     - type: DamageStateVisuals
       states:
         Alive:
@@ -68,16 +68,21 @@
         path: /Audio/Effects/bite.ogg
       damage:
         types:
-          Blunt: 5
-          Slash: 7
+          Blunt: 6 #SS220 tweak-carp-damage BEGIN
+          Slash: 9
+          Bloodloss: 2 #SS220 tweak-carp-damage END
     - type: TypingIndicator
       proto: alien
     - type: Tag
       tags:
         - Carp
         - DoorBumpOpener
-    - type: ReplacementAccent
-      accent: genericAggressive
+        - CannotSuicide
+  # - type: ReplacementAccent #SS220 Dragon & Carp Language Begin
+  #   accent: genericAggressive
+    - type: Language
+      availableLanguages:
+      - id: Carpish #SS220 Dragon & Carp Language End
     - type: Speech
       speechVerb: LargeMob
     - type: InteractionPopup
@@ -114,6 +119,11 @@
       sprite: Mobs/Aliens/Carps/magic.rsi
     - type: TypingIndicator
       proto: guardian
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   name: holocarp
@@ -137,6 +147,11 @@
             - Opaque
     - type: TypingIndicator
       proto: robot
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   parent: MobCarp
@@ -146,7 +161,7 @@
   components:
   - type: PointLight
     radius: 1.5
-    energy: 0.5
+    energy: 2
   - type: RgbLightController
     layers: [ 0 ]
 
@@ -156,6 +171,10 @@
   suffix: "Salvage Ruleset"
   components:
     - type: SalvageMobRestrictions
+    # - type: MobThresholds  # SS220 Revert Wizden balance #38131 BEGIN
+    #   thresholds:
+    #     0: Alive
+    #     30: Dead  # SS220 Revert Wizden balance #38131 END
 
 - type: entity
   name: space carp
@@ -170,14 +189,24 @@
       name: ghost-role-information-sentient-carp-name
       description: ghost-role-information-sentient-carp-description
       rules: ghost-role-information-space-dragon-summoned-carp-rules
-# SS220-partial-revert-raffle-Begin
-#      raffle:
-#        settings: short
-# SS220-partial-revert-reffle-End
+      mindRoles:
+      - MindRoleGhostRoleTeamAntagonistFlock
     - type: GhostTakeoverAvailable
     - type: HTN
       rootTask:
         task: DragonCarpCompound
+    - type: Flammable
+      damage:
+       types: {}
+    - type: Temperature
+    - type: TemperatureDamage
+      heatDamageThreshold: 1200
+    # SS220 Telepathy begin
+    - type: Telepathy
+      canSend: true
+      telepathyChannelPrototype: TelepathyChannelSpaceDragon
+    # SS220 Telepathy end
+    - type: Insulated # SS220 Insulated Dragon and Carp
 
 - type: entity
   id: MobCarpDungeon
@@ -187,7 +216,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      50: Dead
+      60: Dead #SS220 Carp HP buff
   - type: SlowOnDamage
     speedModifierThresholds:
       25: 0.7
@@ -198,10 +227,16 @@
 
 - type: entity
   name: sharkminnow
-  parent: BaseMobCarp
+  parent: [ BaseMobBloodsucker, BaseMobCarp ]
   id: MobShark
   description: A dangerous shark from the blackness of endless space, who loves to drink blood.
   components:
+    # SS220 ADD NIGHT VISION START
+    - type: NightVision
+      profile: NightVisionLightGray
+      enabled: false
+      action: ActionToggleNightVisionInnate
+    # SS220 ADD NIGHT VISION END
     - type: Sprite
       sprite: Mobs/Aliens/Carps/sharkminnow.rsi
       layers:
@@ -224,9 +259,9 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        150: Dead
+        150: Dead # SS220 Revert Wizden balance #38131
     - type: Stamina
-      critThreshold: 150
+      baseCritThreshold: 150
     - type: DamageStateVisuals
       states:
         Alive:
@@ -235,16 +270,12 @@
         Dead:
           Base: dead
           BaseUnshaded: dead_mouth
-    - type: Body
-      prototype: Bloodsucker
-      requiredLegs: 1
     - type: Butcherable
       spawned:
         - id: FoodMeatFish
           amount: 4
         - id: MaterialToothSharkminnow1
-          amount: 1
-          maxAmount: 3
+          amount: 3
     - type: MeleeWeapon
       damage:
         types:

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/4f6190e2895e09116663ef282d3ce1d8b35c032e modified by MrALPAKA,  Surani, off-equipped-HELMET-vox and on-equipped-HELMET-vox sprited by Estkemran (Github) for SS220",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by Kit0vras (Github/Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -22,27 +22,11 @@
       "directions": 4
     },
     {
-      "name": "off-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "off-inhand-right",
-      "directions": 4
-    },
-    {
       "name": "on-equipped-HELMET",
       "directions": 4
     },
     {
       "name": "on-equipped-HELMET-vox",
-      "directions": 4
-    },
-    {
-      "name": "on-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "on-inhand-right",
       "directions": 4
     }
   ]

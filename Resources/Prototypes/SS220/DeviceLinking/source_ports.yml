@@ -1,0 +1,9 @@
+- type: sourcePort
+  id: DoorOpened
+  name: signal-port-name-doorstatus-opened
+  description: signal-port-description-doorstatus-opened
+
+- type: sourcePort
+  id: DoorClosed
+  name: signal-port-name-doorstatus-closed
+  description: signal-port-description-doorstatus-closed

@@ -1,0 +1,25 @@
+- type: entity
+  parent: FoodMealBase
+  id: FoodCataria
+  name: mint
+  description: Meaowee
+  components:
+  - type: Item
+    storedOffset: 0,-1
+  - type: FlavorProfile
+    flavors:
+    - minty
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/cataria.rsi
+    state: cataria
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: CatariaJuice
+          Quantity: 15
+  - type: Extractable
+    grindableSolutionName: food

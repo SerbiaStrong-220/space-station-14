@@ -1,7 +1,6 @@
-﻿using Content.Shared.FixedPoint;
+using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Shared.Silicons.Laws;
 
@@ -61,18 +60,35 @@ public sealed partial class SiliconLawset
 /// This is a prototype for a <see cref="SiliconLawPrototype"/> list.
 /// Cannot be used directly since it is a list of prototype ids rather than List<Siliconlaw>.
 /// </summary>
-[Prototype("siliconLawset"), Serializable, NetSerializable]
+[Prototype]
 public sealed partial class SiliconLawsetPrototype : IPrototype
 {
     /// <inheritdoc/>
     [IdDataField]
     public string ID { get; private set; } = default!;
 
+    // SS220 random lawset begin
+    /// <summary>
+    /// Relative selection weight. Null excludes this lawset from station randomization.
+    /// </summary>
+    [DataField]
+    public float? Weight { get; private set; }
+
+    [MemberNotNullWhen(true, nameof(Weight))]
+    public bool Randomizable => Weight is not null;
+    // SS220 random lawset end
+
+    /// <summary>
+    /// The locstring of the lawset for the guidebook entry, if no name is provided, defaults to the ID
+    /// </summary>    
+    [DataField]
+    public LocId? Name = null;
+
     /// <summary>
     /// List of law prototype ids in this lawset.
     /// </summary>
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdListSerializer<SiliconLawPrototype>))]
-    public List<string> Laws = new();
+    [DataField(required: true)]
+    public List<ProtoId<SiliconLawPrototype>> Laws = new();
 
     /// <summary>
     /// What entity the lawset considers as a figure of authority.

@@ -11,4 +11,21 @@ public sealed partial class IFFConsoleComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("allowedFlags")]
     public IFFFlags AllowedFlags = IFFFlags.HideLabel;
+    // ss220 spacewar begin
+    [DataField]
+    public TimeSpan StealthTime = TimeSpan.Zero;
+
+    [DataField]
+    public TimeSpan StealthCooldown = TimeSpan.Zero;
+
+    public TimeSpan CooldownUntil = TimeSpan.Zero;
+
+    public TimeSpan StealthUntil = TimeSpan.Zero;
+    // ss220 spacewar end
+
+    /// <summary>
+    /// If true, automatically applies all supported IFF flags to the console's grid on MapInitEvent.
+    /// </summary>
+    [DataField]
+    public bool HideOnInit = false;
 }

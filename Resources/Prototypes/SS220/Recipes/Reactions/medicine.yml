@@ -54,3 +54,40 @@
       amount: 1
   products:
     Harai: 5
+
+- type: reaction
+  id: Cerebrin
+  reactants:
+    Phalanximine:
+      amount: 1
+    Sugar:
+      amount: 1
+  products:
+    Cerebrin: 2
+
+- type: reaction
+  id: Nicergoline
+  reactants:
+    Desoxyephedrine:
+      amount: 1
+    Cerebrin:
+      amount: 1
+    Oxygen:
+      amount: 1
+  products:
+    Nicergoline: 3
+
+- type: reaction
+  id: Biomass
+  impact: Low
+  quantized: true
+  reactants:
+    Protein:
+      amount: 10
+    Cryoxadone:
+      amount: 10
+    Blood:
+      amount: 10
+  effects:
+  - !type:SpawnEntity
+    entity: MaterialBiomass10

@@ -6,8 +6,9 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 18000 # SS220-RoleTime
+      time: 5h # SS220-RoleTime
   startingGear: DoctorGear
+  experienceDefinition: MedicalDoctorRoleExperience # SS220-experience
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo
   access:
@@ -15,12 +16,28 @@
   - Maintenance
   extendedAccess:
   - Chemistry
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: DoctorDay
+    prototype: WehMedipen
 
 - type: startingGear
   id: DoctorGear
   equipment:
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalFilled
-  #storage:
-    #back:
-    #- Stuff
+  # ss220-surgery-update-begin
+  storage:
+    back:
+    - FilledSurgeryMedkit
+  # ss220-surgery-update-end
+
+- type: chameleonOutfit
+  id: MedicalDoctorChameleonOutfit
+  job: MedicalDoctor
+  equipment:
+    head: ClothingHeadNurseHat
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatLab
+    gloves: ClothingHandsGlovesLatex

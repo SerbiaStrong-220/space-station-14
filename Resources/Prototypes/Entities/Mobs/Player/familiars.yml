@@ -11,6 +11,8 @@
     name: ghost-role-information-remilia-name
     description: ghost-role-information-remilia-description
     rules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
   - type: GhostTakeoverAvailable
   - type: Grammar
     attributes:
@@ -24,12 +26,18 @@
     tags:
     - Chapel
   - type: MindContainer
-    showExamineInfo: true
+  - type: MindExaminable
   - type: NpcFactionMember
     factions:
     - PetsNT
   - type: Alerts
   - type: Familiar
+  #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+  #SS220 Languages tweaks end
 
 - type: entity
   name: Cerberus
@@ -44,6 +52,9 @@
     name: ghost-role-information-cerberus-name
     description: ghost-role-information-cerberus-description
     rules: ghost-role-information-familiar-rules
+    job: PeacefulPet # SS220-add-time-requirements
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -83,10 +94,16 @@
     tags:
     - Chapel
   - type: MindContainer
-    showExamineInfo: true
+  - type: MindExaminable
   - type: Familiar
   - type: Vocal
     sounds:
       Male: Cerberus
       Female: Cerberus
       Unsexed: Cerberus
+  #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+  #SS220 Languages tweaks end

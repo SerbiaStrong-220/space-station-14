@@ -1,12 +1,11 @@
-using System.Linq;
+using Content.Shared.Access.Systems;
 using Content.Shared.Database;
 using Content.Shared.Examine;
-using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -14,41 +13,35 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public sealed class BatteryWeaponFireModesSystem : EntitySystem
 {
+    [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!; //SS220 Add Multifaze gun
-    [Dependency] private readonly SharedGunSystem _gunSystem = default!; //SS220 Add Multifaze gun
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BatteryWeaponFireModesComponent, ActivateInWorldEvent>(OnInteractHandEvent);
+        SubscribeLocalEvent<BatteryWeaponFireModesComponent, UseInHandEvent>(OnUseInHandEvent);
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, GetVerbsEvent<Verb>>(OnGetVerb);
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, ComponentInit>(OnInit); //SS220 Add Multifaze gun
         SubscribeLocalEvent<BatteryWeaponFireModesComponent, GunRefreshModifiersEvent>(OnRefreshModifiers); //SS220 Add Multifaze gun
     }
 
-    private void OnExamined(EntityUid uid, BatteryWeaponFireModesComponent component, ExaminedEvent args)
+    private void OnExamined(Entity<BatteryWeaponFireModesComponent> ent, ref ExaminedEvent args)
     {
-        if (component.FireModes.Count < 2)
+        if (ent.Comp.FireModes.Count < 2)
             return;
 
-        var fireMode = GetMode(component);
-        var name = string.Empty; //SS220 Add Multifaze gun
+        var fireMode = GetMode(ent.Comp);
 
         //SS220 Add Multifaze gun begin
-        //if (!_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var proto))
-        //    return;
+        if (!_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var proto))
+            return;
 
-        if (fireMode.FireModeName != null)
-            name = fireMode.FireModeName;
-        else if (_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var entProto))
-            name = entProto.Name;
-        //SS220 Add Multifaze gun end
-
-        args.PushMarkup(Loc.GetString("gun-set-fire-mode", ("mode", Loc.GetString(name)))); //SS220 Add Multifaze gun
+        args.PushMarkup(Loc.GetString("gun-set-fire-mode-examine", ("mode", proto.Name)));
     }
 
     private BatteryWeaponFireMode GetMode(BatteryWeaponFireModesComponent component)
@@ -58,10 +51,13 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
 
     private void OnGetVerb(EntityUid uid, BatteryWeaponFireModesComponent component, GetVerbsEvent<Verb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || args.Hands == null)
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract)
             return;
 
         if (component.FireModes.Count < 2)
+            return;
+
+        if (!_accessReaderSystem.IsAllowed(args.User, uid))
             return;
 
         for (var i = 0; i < component.FireModes.Count; i++)
@@ -75,14 +71,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
 
             if (_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var entProto))
             {
-                if (fireMode.FireModeName is not null)
-                    text = fireMode.FireModeName;
-                else
-                    text = entProto.Name;
-            }
-            else if (_prototypeManager.TryIndex<HitscanPrototype>(fireMode.Prototype, out _))
-            {
-                text += fireMode.FireModeName;
+                text = fireMode.FireModeName ?? entProto.Name;
             }
             //SS220 Add Multifaze gun end
 
@@ -92,11 +81,11 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
                 Category = VerbCategory.SelectType,
                 Text = Loc.GetString(text), //SS220 Add Multifaze gun
                 Disabled = i == component.CurrentFireMode,
-                Impact = LogImpact.Low,
+                Impact = LogImpact.Medium,
                 DoContactInteraction = true,
                 Act = () =>
                 {
-                    SetFireMode(uid, component, index, args.User);
+                    TrySetFireMode((uid, component), index, args.User);
                 }
             };
 
@@ -104,102 +93,66 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         }
     }
 
-    private void OnInteractHandEvent(EntityUid uid, BatteryWeaponFireModesComponent component, ActivateInWorldEvent args)
+    private void OnUseInHandEvent(Entity<BatteryWeaponFireModesComponent> ent, ref UseInHandEvent args)
     {
-        if (!args.Complex)
+        if (args.Handled)
             return;
 
-        if (component.FireModes.Count < 2)
-            return;
-
-        CycleFireMode(uid, component, args.User);
+        args.Handled = true;
+        TryCycleFireMode(ent, args.User);
     }
 
-    private void CycleFireMode(EntityUid uid, BatteryWeaponFireModesComponent component, EntityUid user)
+    public void TryCycleFireMode(Entity<BatteryWeaponFireModesComponent> ent, EntityUid? user = null)
     {
-        if (component.FireModes.Count < 2)
+        if (ent.Comp.FireModes.Count < 2)
             return;
 
-        var index = (component.CurrentFireMode + 1) % component.FireModes.Count;
-        SetFireMode(uid, component, index, user);
+        var index = (ent.Comp.CurrentFireMode + 1) % ent.Comp.FireModes.Count;
+        TrySetFireMode(ent, index, user);
     }
 
-    private void SetFireMode(EntityUid uid, BatteryWeaponFireModesComponent component, int index, EntityUid? user = null)
+    public bool TrySetFireMode(Entity<BatteryWeaponFireModesComponent> ent, int index, EntityUid? user = null)
     {
-        var fireMode = component.FireModes[index];
-        component.CurrentFireMode = index;
-        Dirty(uid, component);
+        if (index < 0 || index >= ent.Comp.FireModes.Count)
+            return false;
 
-        //SS220 Add Multifaze gun begin
-        var name = string.Empty;
+        if (user != null && !_accessReaderSystem.IsAllowed(user.Value, ent))
+            return false;
 
-        //if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProvider))
-        //{
-        //    if (!_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var prototype))
-        //        return;
+        SetFireMode(ent, index, user);
 
-        //    projectileBatteryAmmoProvider.Prototype = fireMode.Prototype;
-        //    projectileBatteryAmmoProvider.FireCost = fireMode.FireCost;
-        //}
+        return true;
+    }
 
-        if (_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var entProto))
+    private void SetFireMode(Entity<BatteryWeaponFireModesComponent> ent, int index, EntityUid? user = null)
+    {
+        var fireMode = ent.Comp.FireModes[index];
+        ent.Comp.CurrentFireMode = index;
+        Dirty(ent);
+
+        if (_prototypeManager.TryIndex(fireMode.Prototype, out var entProto))
         {
-            if (HasComp<HitscanBatteryAmmoProviderComponent>(uid))
-                RemComp<HitscanBatteryAmmoProviderComponent>(uid);
+            if (TryComp<AppearanceComponent>(ent, out var appearance))
+                _appearanceSystem.SetData(ent, BatteryWeaponFireModeVisuals.State, entProto.ID, appearance);
 
-            if (!_gameTiming.ApplyingState)
-                EnsureComp<ProjectileBatteryAmmoProviderComponent>(uid);
-
-            if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProvider))
-            {
-
-                if (fireMode.FireModeName is not null)
-                    name = fireMode.FireModeName;
-                else
-                    name = entProto.Name;
-
-                projectileBatteryAmmoProvider.Prototype = fireMode.Prototype;
-                projectileBatteryAmmoProvider.FireCost = fireMode.FireCost;
-
-                Dirty(uid, projectileBatteryAmmoProvider);
-            }
-        }
-        else if (_prototypeManager.TryIndex<HitscanPrototype>(fireMode.Prototype, out _))
-        {
-            if (HasComp<ProjectileBatteryAmmoProviderComponent>(uid))
-                RemComp<ProjectileBatteryAmmoProviderComponent>(uid);
-
-            if (!_gameTiming.ApplyingState)
-                EnsureComp<HitscanBatteryAmmoProviderComponent>(uid);
-
-            if (TryComp(uid, out HitscanBatteryAmmoProviderComponent? hitscanBatteryAmmoProvider))
-            {
-                name += fireMode.FireModeName;
-
-                hitscanBatteryAmmoProvider.Prototype = fireMode.Prototype;
-                hitscanBatteryAmmoProvider.FireCost = fireMode.FireCost;
-
-                Dirty(uid, hitscanBatteryAmmoProvider);
-            }
-        }
-        else
-        {
-            Log.Error($"{fireMode.Prototype} is not Entity or Hitscan prototype");
-            return;
+            if (user != null && fireMode.FireModeName != null)
+                _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode-popup", ("mode", Loc.GetString(fireMode.FireModeName))), ent, user.Value);
         }
 
-        _gunSystem.RefreshModifiers(uid);
-        //SS220 Add Multifaze gun end
-
-        if (user != null)
+        if (TryComp(ent, out BatteryAmmoProviderComponent? batteryAmmoProviderComponent))
         {
-            _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode", ("mode", Loc.GetString(name))), uid, user.Value); //SS220 Add Multifaze gun
+            batteryAmmoProviderComponent.Prototype = fireMode.Prototype;
+            batteryAmmoProviderComponent.FireCost = fireMode.FireCost;
+
+            Dirty(ent, batteryAmmoProviderComponent);
+
+            _gun.UpdateShots((ent, batteryAmmoProviderComponent));
         }
 
-        //SS220 Add Multifaze gun begin
+        // SS220 Add Multifaze gun begin
         var ev = new ChangeFireModeEvent(index);
-        RaiseLocalEvent(uid, ref ev);
-        //SS220 Add Multifaze gun end
+        RaiseLocalEvent(ent, ref ev);
+        // SS220 Add Multifaze gun end
     }
 
     //SS220 Add Multifaze gun begin
@@ -209,15 +162,25 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
             return;
 
         var index = ent.Comp.CurrentFireMode % ent.Comp.FireModes.Count;
-        SetFireMode(ent, ent.Comp, index);
+        SetFireMode(ent, index);
     }
 
     private void OnRefreshModifiers(Entity<BatteryWeaponFireModesComponent> ent, ref GunRefreshModifiersEvent args)
     {
         var firemode = GetMode(ent.Comp);
 
-        if (firemode.SoundGunshot is not null)
-            args.SoundGunshot = new SoundPathSpecifier(firemode.SoundGunshot);
+        if (firemode.GunModifiers is not { } modifiers ||
+            !TryComp<GunComponent>(ent.Owner, out var gunComponent))
+            return;
+
+        args.SoundGunshot = modifiers.SoundGunshot ?? gunComponent.SoundGunshot;
+        args.AngleIncrease = modifiers.AngleIncrease ?? gunComponent.AngleIncrease;
+        args.AngleDecay = modifiers.AngleDecay ?? gunComponent.AngleDecay;
+        args.MaxAngle = modifiers.MaxAngle ?? gunComponent.MaxAngle;
+        args.MinAngle = modifiers.MinAngle ?? gunComponent.MinAngle;
+        args.ShotsPerBurst = modifiers.ShotsPerBurst ?? gunComponent.ShotsPerBurst;
+        args.FireRate = modifiers.FireRate ?? gunComponent.FireRate;
+        args.ProjectileSpeed = modifiers.ProjectileSpeed ?? gunComponent.ProjectileSpeed;
     }
     //SS220 Add Multifaze gun end
 }

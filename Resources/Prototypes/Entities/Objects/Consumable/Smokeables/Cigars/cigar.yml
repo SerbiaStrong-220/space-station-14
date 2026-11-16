@@ -1,6 +1,3 @@
-- type: Tag
-  id: Cigar
-
 - type: entity
   id: Cigar
   parent: BaseCigar # SS220 Cigarettes questions
@@ -36,6 +33,15 @@
     solutions:
       smokable:
         maxVol: 20
+      food: #SS220-Eat-Cigarettes-begin
+        maxVol: 20
+        reagents:
+        - ReagentId: GastroToxin
+          Quantity: 1
+  - type: Edible # ss220 edible cigars
+  - type: FlavorProfile
+    flavors:
+      - punishment #SS220-Eat-Cigarettes-end
   - type: Tag
     tags:
       - Cigar
@@ -47,6 +53,7 @@
   parent: Cigar
   name: premium Havanian cigar
   description: A cigar fit for only the best of the best.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigars/cigar-gold.rsi
@@ -71,3 +78,12 @@
     solutions:
       smokable:
         maxVol: 20
+      food: #SS220-Eat-Cigarettes-begin
+        maxVol: 20
+        reagents:
+        - ReagentId: GastroToxin
+          Quantity: 1
+  - type: Edible # ss220 edible cigars
+  - type: FlavorProfile
+    flavors:
+      - punishment #SS220-Eat-Cigarettes-end

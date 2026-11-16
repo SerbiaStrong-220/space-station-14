@@ -6,9 +6,9 @@
   name: CentCom winter coat
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/WinterCoats/coatcentcom.rsi
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/centcom.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/WinterCoats/coatcentcom.rsi
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/centcom.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWinterCentcomm
 
@@ -18,6 +18,29 @@
   name: captain's white winter coat
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/WinterCoats/whitecapcoat.rsi
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/captain_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/WinterCoats/whitecapcoat.rsi
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/captain_white.rsi
+
+- type: entity
+  parent: ClothingOuterWinterCoatToggleable
+  id: ClothingOuterWinterJanitorJR
+  name: janitor JR winter coat
+  description: JR provides cleaning services even in extremely cold conditions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/janitor_JR.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/janitor_JR.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWinterJanitorJR
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-synthetic-fur
+    microFiberColor: micro-fibers-green
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.95
+        Heat: 0.9
+        Caustic: 0.9
+    priceMultiplier: 0.15

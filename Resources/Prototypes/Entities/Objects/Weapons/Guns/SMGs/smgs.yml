@@ -13,6 +13,8 @@
   - type: Sprite
   - type: Item
     size: Large
+    shape:
+    - 0,0,2,1
   - type: Clothing
     sprite: Objects/Weapons/Guns/SMGs/atreides.rsi
     quickEquip: false
@@ -21,9 +23,12 @@
     - suitStorage
   - type: AmmoCounter
   - type: Gun
-    minAngle: 2
-    maxAngle: 16
-    fireRate: 8
+    #220 SG Angle Updates begin
+    minAngle: 11
+    maxAngle: 20
+    fireRate: 7.5
+    #220 SG Angle Updates end
+    burstFireRate: 8
     angleIncrease: 3
     angleDecay: 16
     selectedMode: FullAuto
@@ -33,6 +38,7 @@
     - Burst #ss220 gunmodes
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/smg.ogg
+    defaultDirection: 1, 0
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/smg_cock.ogg
@@ -50,7 +56,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
         priority: 1
         whitelist:
           tags:
@@ -61,12 +66,20 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/smg_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/smg_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: Atreides
   parent: [BaseWeaponSubMachineGun]
   id: WeaponSubMachineGunAtreides
-  description: Pla-ket-ket-ket-ket! Uses .35 auto ammo.
+  description: A rare machine pistol hailing from the Corporate Wars. Its extremely high fire rate and compact profile make it useful in close quarters combat. Despite its age, it is in remarkably good condition. Feeds from .35 SMG magazines.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/atreides.rsi
@@ -76,7 +89,7 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Gun
-    fireRate: 10
+    fireRate: 8 #220 SG Angle Updates
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
   - type: MagazineVisuals
@@ -86,10 +99,10 @@
   - type: Appearance
 
 - type: entity
-  name: C-20r sub machine gun
+  name: C-20r submachine gun
   parent: [BaseWeaponSubMachineGun]
   id: WeaponSubMachineGunC20r
-  description: A firearm that is often used by the infamous nuclear operatives. Uses .35 auto ammo.
+  description: A classic and widespread submachine gun, infamous for its use by the Gorlex Marauders. One of the first homegrown Waffle Corp. designs, it remains in service today. Feeds from .35 SMG magazines.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
@@ -103,16 +116,20 @@
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -16
+    #220 SG Angle Updates begin
+    minAngle: -2
+    maxAngle: -13
+    #220 SG Angle Updates end
   - type: Gun
-    minAngle: 21
-    maxAngle: 32
-    shotsPerBurst: 5
+    #220 SG Angle Updates begin
+    minAngle: 17
+    maxAngle: 29
+    shotsPerBurst: 6
+    #220 SG Angle Updates end
     availableModes:
-    - SemiAuto
     - Burst
     - FullAuto
+    - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/c-20r.ogg
   - type: ChamberMagazineAmmoProvider
@@ -122,43 +139,96 @@
     steps: 6
     zeroVisible: true
   - type: Appearance
+  - type: StaticPrice
+    price: 5000
+
+- type: entity
+  name: C-20r ROW #I think ROW stands for Recharging Onboard Weapon so i'm following the L6C's example
+  id: WeaponSubMachineGunC20rROW
+  parent: BaseItem
+  description: A burst-fire C-20r submachine gun for use by cyborgs. Creates .35 caliber ammo on the fly from an internal ammo fabricator, which slowly self-charges.
+  components:
+  - type: Gun
+    minAngle: 2
+    maxAngle: 16
+    angleIncrease: 4
+    angleDecay: 16
+    fireRate: 8
+    burstFireRate: 8
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/c-20r.ogg
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-5
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Huge
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgePistol
+    capacity: 30
+    proto: CartridgePistol
+    cycleable: false # No synthesizing ammo for your syndicate masters.
+  - type: BallisticAmmoSelfRefiller
+    autoRefillRate: 4s
+    affectedByEmp: true
+  - type: AmmoCounter
 
 - type: entity
   name: Drozd
-  parent: [BaseWeaponSubMachineGun]
+  parent: [BaseWeaponSubMachineGun, BaseSecurityContraband]
   id: WeaponSubMachineGunDrozd
-  description: An excellent fully automatic Heavy SMG.
+  description: A modern SMG manufactured by Nanotrasen’s Small Arms Division. It features an exceptional rate of fire in burst mode, useful for holding defensive angles or engaging hostiles at longer ranges. Feeds from .35 SMG magazines.
   components:
     - type: Sprite
-      sprite: Objects/Weapons/Guns/SMGs/drozd.rsi
+      sprite: SS220/Objects/Weapons/Guns/SMGs/drozd.rsi #SS220 drozd resprite
       layers:
         - state: base
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-0
           map: ["enum.GunVisualLayers.Mag"]
     - type: Clothing
-      sprite: Objects/Weapons/Guns/SMGs/drozd.rsi
+      sprite: SS220/Objects/Weapons/Guns/SMGs/drozd.rsi #SS220 drozd resprite
     - type: Wieldable
       unwieldOnUse: false
     - type: GunWieldBonus
-      minAngle: -19
-      maxAngle: -16
+      #220 SG Angle Updates begin
+      minAngle: -2
+      maxAngle: -13
+      #220 SG Angle Updates end
     - type: Gun
-      minAngle: 21
-      maxAngle: 32
-      fireRate: 6
-      selectedMode: FullAuto
+      #220 SG Angle Updates begin
+      minAngle: 17
+      maxAngle: 29
+      fireRate: 6.5
+      #220 SG Angle Updates end
+      burstFireRate: 18
       soundGunshot:
-        path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-#     availableModes: #ss220 gunmodes
-#        - FullAuto   #ss220 gunmodes
+        path: /Audio/SS220/Weapons/Guns/Gunshots/drozd_shot.ogg #SS220 drozd update
+      selectedMode: Burst
+      availableModes:
+      - Burst
+      - FullAuto
+      - SemiAuto
+      shotsPerBurst: 3
+      burstCooldown: 0.375
     - type: ItemSlots
       slots:
         gun_magazine:
           name: Magazine
           startingItem: MagazinePistolSubMachineGun
-          insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-          ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+          insertSound: /Audio/SS220/Weapons/Guns/MagIn/drozd_magIn.ogg #SS220 drozd update
+          ejectSound: /Audio/SS220/Weapons/Guns/MagOut/drozd_magOut.ogg #SS220 drozd update
           priority: 2
           whitelist:
             tags:
@@ -166,70 +236,27 @@
           whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
-          startingItem: CartridgePistol
           priority: 1
           whitelist:
             tags:
               - CartridgePistol
     - type: MagazineVisuals
       magState: mag
-      steps: 1
+      steps: 1 # SS220-fix-for-our-sprites
       zeroVisible: true
     - type: Appearance
-
-- type: entity
-  name: Vector
-  parent: BaseWeaponSubMachineGun
-  id: WeaponSubMachineGunVector
-  suffix: Deprecated use Drozd
-  description: An excellent fully automatic Heavy SMG. Uses .45 magnum ammo.
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/SMGs/vector.rsi
-    layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
-      - state: mag-0
-        map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/SMGs/vector.rsi
-  - type: Gun
-    fireRate: 6
-    selectedMode: FullAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-#    availableModes: #ss220 gunmodes
-#    - FullAuto      #ss220 gunmodes
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineMagnumSubMachineGun
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineMagnumSubMachineGun
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeMagnum
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeMagnum
-        whitelistFailPopup: gun-magazine-whitelist-fail
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
+# SS220-sec-gear-size-fix-start
+    - type: Item
+      size: Large
+      shape:
+      - 0,0,3,1
+# SS220-sec-gear-size-fix-end
 
 - type: entity
   name: WT550
-  parent: [ BaseWeaponSubMachineGun]
+  parent: [BaseWeaponSubMachineGun, BaseSecurityContraband]
   id: WeaponSubMachineGunWt550
-  description: An excellent SMG, produced by NanoTrasen's Small Arms Division. Uses .35 auto ammo.
+  description: A truly unique firearm, the WT550 was designed by Nanotrasen's Small Arms Division as a compact submachine gun fully controllable with one hand. It contains an exotic internal recoil buffer and feeds from special top-mounted .35 magazines.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
@@ -249,17 +276,21 @@
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
   - type: Gun
-    fireRate: 5.5
-    minAngle: 1
-    maxAngle: 6
+    #220 SG Angle Updates begin
+    fireRate: 6.5
+    minAngle: 17
+    maxAngle: 27
+    #220 SG Angle Updates end
     angleIncrease: 1.5
     angleDecay: 6
     selectedMode: FullAuto
     shotsPerBurst: 5
+    burstCooldown: 0.2
+    burstFireRate: 7
     availableModes:
-    - SemiAuto
     - Burst
     - FullAuto
+    - SemiAuto
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -274,7 +305,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
         priority: 1
         whitelist:
           tags:
@@ -284,3 +314,55 @@
     steps: 6
     zeroVisible: true
   - type: Appearance
+# SS220-sec-gear-size-fix-start
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,2,1
+  - type: Tag
+    tags:
+    - SecBeltEquip
+# SS220-sec-gear-size-fix-end
+
+- type: entity
+  name: brown briefcase
+  parent: [BaseWeaponSubMachineGun]
+  id: WeaponSubMachineGunBriefcase
+  description: Useful for carrying items in your hands.
+  suffix: Gun
+  components:
+  - type: Item
+    size: Ginormous
+    inhandVisuals:
+      left:
+        - sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
+          state: inhand-left
+        # - state: inhand-left-muzzle # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
+      right:
+        - sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
+          state: inhand-right
+        # - state: inhand-right-muzzle # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
+  - type: Sprite
+    sprite: Objects/Storage/Briefcases/briefcase_brown.rsi # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
+    layers:
+    - sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
+      state: icon
+    # - state: icon-muzzle # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
+    #   map: ["enum.GunVisualLayers.Base"] # ss220 - post upstream - WeaponSubMachineGunBriefcase sprite fix
+  - type: Gun
+    fireRate: 9
+    minAngle: 25
+    maxAngle: 32
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
+  - type: ChamberMagazineAmmoProvider
+    autoEject: false
+  - type: Appearance
+  - type: StaticPrice
+    price: 5000
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8

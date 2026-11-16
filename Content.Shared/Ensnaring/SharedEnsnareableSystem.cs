@@ -1,7 +1,4 @@
-using System.Linq;
 using Content.Shared.Alert;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -32,12 +29,11 @@ public abstract class SharedEnsnareableSystem : EntitySystem
     [Dependency] private   readonly MovementSpeedModifierSystem _speedModifier = default!;
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     [Dependency] private   readonly SharedAudioSystem _audio = default!;
-    [Dependency] private   readonly SharedBodySystem _body = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
     [Dependency] private   readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private   readonly SharedHandsSystem _hands = default!;
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
-    [Dependency] private   readonly StaminaSystem _stamina = default!;
+    [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
 
     public override void Initialize()
     {
@@ -57,7 +53,7 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         SubscribeLocalEvent<EnsnaringComponent, StepTriggerAttemptEvent>(AttemptStepTrigger);
         SubscribeLocalEvent<EnsnaringComponent, StepTriggeredOffEvent>(OnStepTrigger);
         SubscribeLocalEvent<EnsnaringComponent, ThrowDoHitEvent>(OnThrowHit);
-        SubscribeLocalEvent<EnsnaringComponent, AttemptPacifiedThrowEvent>(OnAttemptPacifiedThrow);
+
         SubscribeLocalEvent<EnsnareableComponent, GetVerbsEvent<Verb>>(GetVerb); //ss220 Ensnareable
     }
 
@@ -223,11 +219,6 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         }
     }
 
-    private void OnAttemptPacifiedThrow(Entity<EnsnaringComponent> ent, ref AttemptPacifiedThrowEvent args)
-    {
-        args.Cancel("pacified-cannot-throw-snare");
-    }
-
     private void OnRemoveEnsnareAlert(Entity<EnsnareableComponent> ent, ref RemoveEnsnareAlertEvent args)
     {
         if (args.Handled)
@@ -288,23 +279,18 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         if (!TryComp<EnsnareableComponent>(target, out var ensnareable))
             return false;
 
-        // Need to insert before free legs check.
-        Container.Insert(ensnare, ensnareable.Container);
+        var numEnsnares = ensnareable.Container.ContainedEntities.Count;
 
-        var legs = _body.GetBodyChildrenOfType(target, BodyPartType.Leg).Count();
-        var ensnaredLegs = (2 * ensnareable.Container.ContainedEntities.Count);
-        var freeLegs = legs - ensnaredLegs;
-
-        if (freeLegs > 0)
+        //Don't do anything if the maximum number of ensnares is applied.
+        if (numEnsnares >= component.MaxEnsnares)
             return false;
 
-        // Apply stamina damage to target if they weren't ensnared before.
-        if (ensnareable.IsEnsnared != true)
+        Container.Insert(ensnare, ensnareable.Container);
+
+        // Apply stamina damage to target
+        if (TryComp<StaminaComponent>(target, out var stamina))
         {
-            if (TryComp<StaminaComponent>(target, out var stamina))
-            {
-                _stamina.TakeStaminaDamage(target, component.StaminaDamage, with: ensnare, component: stamina);
-            }
+            _stamina.TakeStaminaDamage(target, component.StaminaDamage, with: ensnare, component: stamina);
         }
 
         component.Ensnared = target;
@@ -333,11 +319,16 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         Container.Remove(ensnare, ensnareable.Container, force: true);
         ensnareable.IsEnsnared = ensnareable.Container.ContainedEntities.Count > 0;
         Dirty(component.Ensnared.Value, ensnareable);
-        component.Ensnared = null;
+        //component.Ensnared = null; //ss220 add freedom from bola
 
         UpdateAlert(target, ensnareable);
         var ev = new EnsnareRemoveEvent(component.WalkSpeed, component.SprintSpeed);
-        RaiseLocalEvent(ensnare, ev);
+        //ss220 add freedom from bola start
+        //RaiseLocalEvent(ensnare, ev); //ss220 why raise event on bola???
+        RaiseLocalEvent(component.Ensnared.Value, ev);
+
+        component.Ensnared = null;
+        //ss220 add freedom from bola end
     }
 
     /// <summary>

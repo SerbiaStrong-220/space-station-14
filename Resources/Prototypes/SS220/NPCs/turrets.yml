@@ -5,7 +5,7 @@
         - !type:HTNPrimitiveTask
           operator: !type:UtilityOperator
             proto: NearbyGunTargets
-        
+
         - !type:HTNPrimitiveTask
           preconditions:
             - !type:KeyExistsPrecondition
@@ -20,6 +20,7 @@
           operator: !type:GunOperator
             targetKey: Target
             requireLOS: true
+            opaqueKey: true
           services:
             - !type:UtilityService
               id: RangedService

@@ -1,18 +1,16 @@
 using Content.Server.Atmos.Monitor.Components;
-using Content.Server.Atmos.Piping.Components;
 using Content.Server.DeviceLinking.Systems;
-using Content.Server.DeviceNetwork;
-using Content.Server.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Popups;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Monitor;
 using Content.Shared.Atmos.Monitor.Components;
 using Content.Shared.Atmos.Piping.Unary.Components;
+using Content.Shared.Database;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Systems;
@@ -20,8 +18,12 @@ using Content.Shared.Interaction;
 using Content.Shared.Power;
 using Content.Shared.Wires;
 using Robust.Server.GameObjects;
-using Robust.Shared.Player;
 using System.Linq;
+using Content.Shared.Atmos.Components;
+using Content.Shared.DeviceNetwork.Events;
+using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.SS220.MalfAI; // SS220 MalfAI
+using Content.Shared.Station;
 
 namespace Content.Server.Atmos.Monitor.Systems;
 
@@ -37,6 +39,7 @@ namespace Content.Server.Atmos.Monitor.Systems;
 public sealed class AirAlarmSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _access = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly AtmosAlarmableSystem _atmosAlarmable = default!;
     [Dependency] private readonly AtmosDeviceNetworkSystem _atmosDevNet = default!;
     [Dependency] private readonly DeviceNetworkSystem _deviceNet = default!;
@@ -44,6 +47,7 @@ public sealed class AirAlarmSystem : EntitySystem
     [Dependency] private readonly DeviceListSystem _deviceList = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedStationSystem _station = default!; // SS220 MalfAI
 
     #region Device Network API
 
@@ -125,6 +129,19 @@ public sealed class AirAlarmSystem : EntitySystem
         {
             payload.Add(AtmosMonitorSystem.AtmosMonitorThresholdGasType, gas);
         }
+
+        _deviceNet.QueuePacket(uid, address, payload);
+
+        SyncDevice(uid, address);
+    }
+
+    private void SetAllThresholds(EntityUid uid, string address, AtmosSensorData data)
+    {
+        var payload = new NetworkPayload
+        {
+            [DeviceNetworkConstants.Command] = AtmosMonitorSystem.AtmosMonitorSetAllThresholdsCmd,
+            [AtmosMonitorSystem.AtmosMonitorAllThresholdData] = data
+        };
 
         _deviceNet.QueuePacket(uid, address, payload);
 
@@ -275,6 +292,14 @@ public sealed class AirAlarmSystem : EntitySystem
 
     private void OnUpdateAlarmMode(EntityUid uid, AirAlarmComponent component, AirAlarmUpdateAlarmModeMessage args)
     {
+        // SS220 MalfAI begin
+        if (args.Mode == AirAlarmMode.Flood && !IsFloodUnlocked(uid))
+        {
+            UpdateUI(uid, component);
+            return;
+        }
+        // SS220 MalfAI end
+
         if (AccessCheck(uid, args.Actor, component))
         {
             var addr = string.Empty;
@@ -283,6 +308,7 @@ public sealed class AirAlarmSystem : EntitySystem
                 addr = netConn.Address;
             }
 
+            _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(args.Actor)} changed {ToPrettyString(uid)} mode to {args.Mode}");
             SetMode(uid, addr, args.Mode, false);
         }
         else
@@ -294,15 +320,26 @@ public sealed class AirAlarmSystem : EntitySystem
     private void OnUpdateAutoMode(EntityUid uid, AirAlarmComponent component, AirAlarmUpdateAutoModeMessage args)
     {
         component.AutoMode = args.Enabled;
+
+        _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(args.Actor)} changed {ToPrettyString(uid)} auto mode to {args.Enabled}");
         UpdateUI(uid, component);
     }
 
     private void OnUpdateThreshold(EntityUid uid, AirAlarmComponent component, AirAlarmUpdateAlarmThresholdMessage args)
     {
         if (AccessCheck(uid, args.Actor, component))
+        {
+            if (args.Gas != null)
+                _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(args.Actor)} changed {args.Address} {args.Gas} {args.Type} threshold using {ToPrettyString(uid)}");
+            else
+                _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(args.Actor)} changed {args.Address} {args.Type} threshold using {ToPrettyString(uid)}");
+
             SetThreshold(uid, args.Address, args.Type, args.Threshold, args.Gas);
+        }
         else
+        {
             UpdateUI(uid, component);
+        }
     }
 
     private void OnUpdateDeviceData(EntityUid uid, AirAlarmComponent component, AirAlarmUpdateDeviceDataMessage args)
@@ -310,6 +347,8 @@ public sealed class AirAlarmSystem : EntitySystem
         if (AccessCheck(uid, args.Actor, component)
             && _deviceList.ExistsInDeviceList(uid, args.Address))
         {
+            _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(args.Actor)} changed {args.Address} settings using {ToPrettyString(uid)}");
+
             SetDeviceData(uid, args.Address, args.Data);
         }
         else
@@ -331,6 +370,7 @@ public sealed class AirAlarmSystem : EntitySystem
             case GasVentPumpData ventData:
                 foreach (string addr in component.VentData.Keys)
                 {
+                    _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(args.Actor)} copied settings to vent {addr}");
                     SetData(uid, addr, args.Data);
                 }
                 break;
@@ -338,7 +378,15 @@ public sealed class AirAlarmSystem : EntitySystem
             case GasVentScrubberData scrubberData:
                 foreach (string addr in component.ScrubberData.Keys)
                 {
+                    _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(args.Actor)} copied settings to scrubber {addr}");
                     SetData(uid, addr, args.Data);
+                }
+                break;
+
+            case AtmosSensorData sensorData:
+                foreach (string addr in component.SensorData.Keys)
+                {
+                    SetAllThresholds(uid, addr, sensorData);
                 }
                 break;
         }
@@ -359,6 +407,7 @@ public sealed class AirAlarmSystem : EntitySystem
         if (!_access.IsAllowed(user.Value, uid, reader))
         {
             _popup.PopupEntity(Loc.GetString("air-alarm-ui-access-denied"), user.Value, user.Value);
+            _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Low, $"{ToPrettyString(user)} attempted to access {ToPrettyString(uid)} without access");
             return false;
         }
 
@@ -378,7 +427,8 @@ public sealed class AirAlarmSystem : EntitySystem
             addr = netConn.Address;
         }
 
-        if (component.AutoMode)
+        // SS220 MalfAI: automatic mode changes must not cancel Flood.
+        if (component.AutoMode && component.CurrentMode != AirAlarmMode.Flood)
         {
             if (args.AlarmType == AtmosAlarmType.Danger)
             {
@@ -428,10 +478,24 @@ public sealed class AirAlarmSystem : EntitySystem
     /// <param name="uiOnly">Whether this change is for the UI only, or if it changes the air alarm's operating mode. Defaults to true.</param>
     public void SetMode(EntityUid uid, string origin, AirAlarmMode mode, bool uiOnly = true, AirAlarmComponent? controller = null)
     {
-        if (!Resolve(uid, ref controller) || controller.CurrentMode == mode)
+        if (!Resolve(uid, ref controller))
         {
             return;
         }
+
+        if (controller.PanicWireCut)
+        {
+            mode = AirAlarmMode.Panic;
+        }
+
+        // SS220 MalfAI begin
+        if (mode == AirAlarmMode.Flood && !IsFloodUnlocked(uid))
+        {
+            UpdateUI(uid, controller);
+            return;
+        }
+        // SS220 MalfAI end
+
 
         controller.CurrentMode = mode;
 
@@ -471,6 +535,17 @@ public sealed class AirAlarmSystem : EntitySystem
         // as other alarms
         SyncMode(uid, mode);
     }
+
+    // SS220 MalfAI begin
+    public bool IsFloodUnlocked(EntityUid uid)
+    {
+        if (Count<MalfAiAirFloodComponent>() == 0)
+            return false;
+
+        return _station.GetOwningStation(uid) is { } station
+            && HasComp<MalfAiAirFloodComponent>(station);
+    }
+    // SS220 MalfAI end
 
     /// <summary>
     ///     Sets device data. Practically a wrapper around the packet sending function, SetData.
@@ -614,6 +689,7 @@ public sealed class AirAlarmSystem : EntitySystem
         }
         foreach (var (addr, data) in alarm.ScrubberData)
         {
+            data.AirAlarmPanicWireCut = alarm.PanicWireCut;
             dataToSend.Add((addr, data));
         }
         foreach (var (addr, data) in alarm.SensorData)
@@ -631,7 +707,7 @@ public sealed class AirAlarmSystem : EntitySystem
         _ui.SetUiState(
             uid,
             SharedAirAlarmInterfaceKey.Key,
-            new AirAlarmUIState(devNet.Address, deviceCount, pressure, temperature, dataToSend, alarm.CurrentMode, highestAlarm.Value, alarm.AutoMode));
+            new AirAlarmUIState(devNet.Address, deviceCount, pressure, temperature, dataToSend, alarm.CurrentMode, highestAlarm.Value, alarm.AutoMode, alarm.PanicWireCut, IsFloodUnlocked(uid))); // SS220 MalfAI
     }
 
     private const float Delay = 8f;

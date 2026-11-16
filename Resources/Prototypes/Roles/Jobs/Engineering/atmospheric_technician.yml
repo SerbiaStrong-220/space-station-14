@@ -6,8 +6,9 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 36000 # SS220-RoleTime 2
+      time: 10h # SS220-RoleTime 2
   startingGear: AtmosphericTechnicianGear
+  experienceDefinition: AtmosphericTechnicianRoleExperience #SS220-experience
   icon: "JobIconAtmosphericTechnician"
   supervisors: job-supervisors-ce
   access:
@@ -15,6 +16,10 @@
   - Engineering
   - External
   - Atmospherics
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FirefighterDay
+    prototype: FireAxe
 
 - type: startingGear
   id: AtmosphericTechnicianGear
@@ -26,3 +31,13 @@
   #storage:
     #back:
     #- Stuff
+
+- type: chameleonOutfit
+  id: AtmosphericTechnicianChameleonOutfit
+  job: AtmosphericTechnician
+  equipment:
+    head: ClothingHeadHelmetAtmosFire
+    mask: ClothingMaskGasAtmos
+    neck: ClothingNeckScarfStripedLightBlue
+    outerClothing: ClothingOuterSuitAtmosFire
+    gloves: ClothingHandsGlovesColorYellow

@@ -1,0 +1,78 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Mind;
+using Content.Shared.SS220.CultYogg.Corruption;
+using Robust.Shared.Prototypes;
+using Content.Shared.SS220.Language.Components;
+using Content.Server.SS220.Language;
+
+namespace Content.Server.SS220.CultYogg.AnimalCorruption;
+public sealed partial class CultYoggAnimalCorruptionSystem : EntitySystem
+{
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private LanguageSystem _language = default!;
+
+    public void AnimalCorruption(EntityUid uid)
+    {
+        if (TerminatingOrDeleted(uid))
+            return;
+
+        if (!CheckForCorruption(uid, out var corruptionProto))
+            return;
+
+        // Get original body position and spawn MiGo here
+        var corruptedAnimal = _entityManager.SpawnAtPosition(corruptionProto.Result, Transform(uid).Coordinates);
+
+        // Inherit the original entity languages
+        if (TryComp<LanguageComponent>(uid, out var originalLangComp))
+        {
+            _language.AddLanguagesFromSource((uid, originalLangComp), corruptedAnimal);
+        }
+
+        // Move the mind if there is one and it's supposed to be transferred
+        if (_mind.TryGetMind(uid, out var mindId, out var mind))
+            _mind.TransferTo(mindId, corruptedAnimal, mind: mind);
+
+        //Delete previous entity
+        _entityManager.DeleteEntity(uid);
+    }
+
+    private bool CheckForCorruption(EntityUid uid, [NotNullWhen(true)] out CultYoggCorruptedAnimalsPrototype? corruption)//if enity_id in list of corruptable
+    {
+        var idOfEntity = MetaData(uid).EntityPrototype!.ID;
+
+        foreach (var entProto in _prototypeManager.EnumeratePrototypes<CultYoggCorruptedAnimalsPrototype>())//idk if it isn't shitcode
+        {
+            if (idOfEntity == entProto.ID)
+            {
+                corruption = entProto;
+                return true;
+            }
+        }
+
+        var parents = MetaData(uid).EntityPrototype?.Parents;//idk if it isn't shitcode
+        if (parents == null)
+        {
+            corruption = null;
+            return false;
+        }
+
+        foreach (var parentId in parents)
+        {
+            foreach (var entProto in _prototypeManager.EnumeratePrototypes<CultYoggCorruptedAnimalsPrototype>())
+            {
+                if (parentId != entProto.ID)
+                    continue;
+
+                corruption = entProto;
+                return true;
+            }
+        }
+
+        corruption = null;
+        return false;
+    }
+}

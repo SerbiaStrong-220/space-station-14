@@ -32,3 +32,8 @@
         Base: blue_adult_slime
       Dead:
         Base: blue_adult_slime_dead
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+    - id: Bubblish

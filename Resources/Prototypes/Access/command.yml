@@ -21,15 +21,24 @@
 - type: accessGroup
   id: Command
   tags:
-  - Command
   - Captain
-  - HeadOfPersonnel
-  - Blueshield
+  - Command
+  - ChiefEngineer
+  - ChiefMedicalOfficer
   - Cryogenics
-  - Magistrate #SS220 Law Department
+  - HeadOfPersonnel
+  - HeadOfSecurity
+  - Quartermaster
+  - ResearchDirector
+  - Blueshield #SS220 Blueshield
+  - NanoTrasenRepresentative #SS220 ntr-add
 
 - type: accessLevel
   id: EmergencyShuttleRepealAll
+  name: id-card-access-level-emergency-shuttle-repeal
+  canAddToIdCard: false
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
+  showInPda: false # ss220 add additional info for pda
 
 - type: accessLevel
   id: Cryogenics

@@ -1,0 +1,26 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: construction
+  id: WeaponMakeshiftLaser
+  graph: WeaponMakeshiftLaserGraph
+  startNode: start
+  targetNode: pistol
+  category: construction-category-weapons
+  objectType: Item
+
+- type: construction
+  id: WeaponShotgunHandmade
+  graph: WeaponShotgunHandmadeGraph
+  startNode: start
+  targetNode: HDpistol
+  category: construction-category-weapons
+  objectType: Item
+
+- type: construction
+  id: BeerCap
+  graph: BeerCapGraph
+  startNode: start
+  targetNode: beer_cap
+  category: construction-category-misc
+  objectType: Item
+

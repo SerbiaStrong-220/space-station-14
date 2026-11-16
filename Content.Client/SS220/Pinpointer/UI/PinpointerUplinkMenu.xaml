@@ -1,0 +1,29 @@
+﻿<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Title="{Loc 'pinpointer-ui-title'}"
+    MinSize="350 300"
+    Resizable="True">
+
+    <BoxContainer Orientation="Vertical" VerticalExpand="True">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'pinpointer-ui-item-to-track'}"
+                   Name="LabelTrack"
+                   HorizontalExpand="True"
+                   Access="Public"
+                   Margin="5 0 0 0"/>
+            <Button Name="DNASearch"
+                    StyleClasses="OpenBoth"
+                    SetWidth="130"
+                    Text="{Loc 'pinpointer-ui-uplink-search-by-dna'}"
+                    Margin="0 0 5 0"/>
+        </BoxContainer>
+        <PanelContainer StyleClasses="HighDivider"/>
+
+        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+            <BoxContainer Name="ItemList" Orientation="Vertical"/>
+        </ScrollContainer>
+        <LineEdit Name="SearchBar" PlaceHolder="{Loc 'object-tab-object-search'}" HorizontalExpand="true"/>
+    </BoxContainer>
+
+</controls:FancyWindow>

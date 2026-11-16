@@ -1,6 +1,7 @@
 using Content.Server.Objectives.Components;
-using Content.Server.Objectives.Components.Targets;
+using Content.Shared.Administration.Logs;
 using Content.Shared.CartridgeLoader;
+using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
@@ -13,6 +14,8 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Stacks;
+using JetBrains.Annotations;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Objectives.Systems;
 
@@ -26,9 +29,14 @@ public sealed class StealConditionSystem : EntitySystem
     [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
+    // ss220 add custom antag goals start
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    // ss220 add custom antag goals end
+
     private EntityQuery<ContainerManagerComponent> _containerQuery;
 
     private HashSet<Entity<TransformComponent>> _nearestEnts = new();
+    private HashSet<EntityUid> _countedItems = new();
 
     public override void Initialize()
     {
@@ -77,9 +85,20 @@ public sealed class StealConditionSystem : EntitySystem
     private void OnAfterAssign(Entity<StealConditionComponent> condition, ref ObjectiveAfterAssignEvent args)
     {
         var group = _proto.Index(condition.Comp.StealGroup);
-        string localizedName = Loc.GetString(group.Name);
+        // ss220 add custom antag goals start
+        var localizedName = string.Empty;
 
-        var title =condition.Comp.OwnerText == null
+        if (group != null)
+        {
+            localizedName = Loc.GetString(group.Name);
+        }
+        else if (condition.Comp.StealTarget != null)
+        {
+            localizedName = Name(condition.Comp.StealTarget.Value);
+        }
+        // ss220 add custom antag goals end
+
+        var title = condition.Comp.OwnerText == null
             ? Loc.GetString(condition.Comp.ObjectiveNoOwnerText, ("itemName", localizedName))
             : Loc.GetString(condition.Comp.ObjectiveText, ("owner", Loc.GetString(condition.Comp.OwnerText)), ("itemName", localizedName));
 
@@ -87,22 +106,28 @@ public sealed class StealConditionSystem : EntitySystem
             ? Loc.GetString(condition.Comp.DescriptionMultiplyText, ("itemName", localizedName), ("count", condition.Comp.CollectionSize))
             : Loc.GetString(condition.Comp.DescriptionText, ("itemName", localizedName));
 
+        // ss220 add custom antag goals start
+        if (group != null)
+            _objectives.SetIcon(condition.Owner, group.Sprite, args.Objective);
+        // ss220 add custom antag goals end
+
         _metaData.SetEntityName(condition.Owner, title, args.Meta);
         _metaData.SetEntityDescription(condition.Owner, description, args.Meta);
-        _objectives.SetIcon(condition.Owner, group.Sprite, args.Objective);
     }
     private void OnGetProgress(Entity<StealConditionComponent> condition, ref ObjectiveGetProgressEvent args)
     {
-        args.Progress = GetProgress(args.Mind, condition);
+        args.Progress = GetProgress((args.MindId, args.Mind), condition);
     }
 
-    private float GetProgress(MindComponent mind, StealConditionComponent condition)
+    private float GetProgress(Entity<MindComponent> mind, StealConditionComponent condition)
     {
-        if (!_containerQuery.TryGetComponent(mind.OwnedEntity, out var currentManager))
+        if (!_containerQuery.TryGetComponent(mind.Comp.OwnedEntity, out var currentManager))
             return 0;
 
         var containerStack = new Stack<ContainerManagerComponent>();
         var count = 0;
+
+        _countedItems.Clear();
 
         //check stealAreas
         if (condition.CheckStealAreas)
@@ -126,7 +151,7 @@ public sealed class StealConditionSystem : EntitySystem
         }
 
         //check pulling object
-        if (TryComp<PullerComponent>(mind.OwnedEntity, out var pull)) //TO DO: to make the code prettier? don't like the repetition
+        if (TryComp<PullerComponent>(mind.Comp.OwnedEntity, out var pull)) //TO DO: to make the code prettier? don't like the repetition
         {
             var pulledEntity = pull.Pulling;
             if (pulledEntity != null)
@@ -153,7 +178,7 @@ public sealed class StealConditionSystem : EntitySystem
             }
         } while (containerStack.TryPop(out currentManager));
 
-        var result = count / (float) condition.CollectionSize;
+        var result = count / (float)condition.CollectionSize;
         result = Math.Clamp(result, 0, 1);
         return result;
     }
@@ -174,6 +199,18 @@ public sealed class StealConditionSystem : EntitySystem
 
     private int CheckStealTarget(EntityUid entity, StealConditionComponent condition)
     {
+        if (_countedItems.Contains(entity))
+            return 0;
+
+        // ss220 add custom antag goals start
+        if (entity == condition.StealTarget)
+            return 1;
+
+        var proto = Prototype(entity);
+        if (proto != null && proto == condition.StealTargetProto)
+            return 1;
+        // ss220 add custom antag goals end
+
         // check if this is the target
         if (!TryComp<StealTargetComponent>(entity, out var target))
             return 0;
@@ -196,6 +233,40 @@ public sealed class StealConditionSystem : EntitySystem
             }
         }
 
+        _countedItems.Add(entity);
+
         return TryComp<StackComponent>(entity, out var stack) ? stack.Count : 1;
     }
+
+    // ss220 add custom antag goals start
+    [PublicAPI]
+    public void SetStealTarget(EntityUid entity, Entity<StealConditionComponent> condition)
+    {
+        var proto = Prototype(entity);
+        if (proto == null)
+            return;
+
+        condition.Comp.StealTarget = entity;
+        SetDataToCondition(Name(entity), proto, condition);
+    }
+
+    [PublicAPI]
+    public void SetStealTarget(EntityPrototype proto, Entity<StealConditionComponent> condition)
+    {
+        condition.Comp.StealTargetProto = proto;
+        SetDataToCondition(proto.Name, proto, condition);
+    }
+
+    private void SetDataToCondition(string localizedName, EntityPrototype proto, Entity<StealConditionComponent> condition)
+    {
+        var title = Loc.GetString(condition.Comp.ObjectiveNoOwnerText, ("itemName", localizedName));
+        var description = Loc.GetString(condition.Comp.DescriptionText, ("itemName", localizedName));
+
+        _metaData.SetEntityName(condition.Owner, title, MetaData(condition.Owner));
+        _metaData.SetEntityDescription(condition.Owner, description, MetaData(condition.Owner));
+        _objectives.SetIcon(condition.Owner, new SpriteSpecifier.EntityPrototype(proto.ID));
+
+        _adminLog.Add(LogType.Mind, LogImpact.Low, $"Changed objective {ToPrettyString(condition):objective}");
+    }
+    // ss220 add custom antag goals end
 }

@@ -57,6 +57,7 @@
     allowedStates:
     - Alive
     - Dead
+  - type: DefibReviveAlive #SS220-xeno-defib
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -65,10 +66,12 @@
     speedModifierThresholds:
       25: 0.5
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: Bloodstream
-    bloodReagent: FluorosulfuricAcid
-    bloodMaxVolume: 650
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 650
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
@@ -76,10 +79,9 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 6
+      types:
+        Piercing: 6
   - type: DamageStateVisuals
-    rotate: true
     states:
       Alive:
         Base: running
@@ -99,16 +101,17 @@
     makeSentient: true
     name: ghost-role-information-xeno-name
     description: ghost-role-information-xeno-description
-    rules: ghost-role-information-rules-default-team-antagonist
+    rules: ghost-role-information-xeno-rules
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
   - type: TypingIndicator
     proto: alien
   - type: Temperature
+    currentTemperature: 310.15
+  - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
-    currentTemperature: 310.15
   - type: Tag
     tags:
       - CannotSuicide
@@ -137,7 +140,7 @@
       0: Alive
       100: Dead
   - type: Stamina
-    critThreshold: 300
+    baseCritThreshold: 300
   - type: SlowOnDamage
     speedModifierThresholds:
       50: 0.7
@@ -174,8 +177,8 @@
       40: 0.7
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 6
+      types:
+        Slash: 6
   - type: MovementSpeedModifier
     baseSprintSpeed: 4
   - type: Fixtures
@@ -212,8 +215,8 @@
   - type: MovementSpeedModifier
   - type: MeleeWeapon
     damage:
-     groups:
-       Brute: 12
+      types:
+        Slash: 12
   - type: Fixtures
     fixtures:
       fix1:
@@ -249,8 +252,8 @@
     baseSprintSpeed: 4
   - type: MeleeWeapon
     damage:
-     groups:
-       Brute: 10
+      types:
+        Slash: 10
   - type: SlowOnDamage
     speedModifierThresholds:
       50: 0.7
@@ -282,8 +285,8 @@
     baseSprintSpeed: 6.0
   - type: MeleeWeapon
     damage:
-     groups:
-       Brute: 5
+      types:
+        Slash: 5
   - type: Fixtures
     fixtures:
       fix1:
@@ -364,8 +367,14 @@
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightBlue
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
   - type: Sprite
-    drawdepth: Mobs
+    drawdepth: SmallMobs #SS220-fauna-update
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -378,6 +387,13 @@
         Base: dead_purple_snake
       Dead:
         Base: dead_purple_snake
+    #SS220-fauna-damagesets-begin
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: MobBasicSnake
+  - type: StaminaResistance
+    damageCoefficient: 0.2
+    #SS220-fauna-damagesets-ended
   - type: Butcherable
     spawned:
     - id: FoodMeatSnake
@@ -394,6 +410,7 @@
   - type: NpcFactionMember
     factions:
     - Xeno
+    - SimpleHostile
   - type: MeleeWeapon
     angle: 0
     animation: WeaponArcBite
@@ -416,15 +433,21 @@
           radius: 0.35
         density: 25
         mask:
-        - MobMask
+        - SmallMobMask #SS220-fauna-update
         layer:
-        - MobLayer
+        - SmallMobLayer #SS220-fauna-update
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepSnake
+      #SS220-fauna-update-begin
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
+  - type: NoSlip
+      #SS220-fauna-update-ended
   - type: Tag
     tags:
-    - DoorBumpOpener
+    #- DoorBumpOpener #SS220-fauna-update (muted tag due to changes)
     - FootstepSound
 
 - type: entity
@@ -454,3 +477,124 @@
       amount: 2
   - type: SolutionTransfer
     maxTransferAmount: 1
+
+# Mob mapped to Xeno Station that can not be ghostrole / pry
+
+- type: entity
+  name: '"Dale"'
+  description: A praetorian left over from the station's initial security sweep. Has a pair of bloodied dog tags engraved with the name "Pvt. Dale" stuck in its maw.
+  parent: SimpleSpaceMobBase
+  id: MobXenoLonePraetorianNoGhost
+  components:
+  - type: Insulated
+  - type: CombatMode
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: XenoCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: Hands
+  - type: ComplexInteraction
+  - type: MobState
+  - type: DefibReviveAlive #SS220-xeno-defib
+  - type: Stamina
+    baseCritThreshold: 200
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 300
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    soundHit:
+     collection: AlienClaw
+    animation: WeaponArcBite
+    damage:
+      types:
+        Slash: 5
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: running
+      Critical:
+        Base: crit
+      Dead:
+        Base: dead
+  - type: Puller
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatXeno
+      amount: 5
+  - type: TypingIndicator
+    proto: alien
+  - type: Temperature
+    currentTemperature: 310.15
+  - type: TemperatureDamage
+    heatDamageThreshold: 360
+    coldDamageThreshold: -150
+  - type: NoSlip
+  - type: Perishable #Ummmm the acid kills a lot of the bacteria or something
+    molsPerSecondPerUnitMass: 0.0005
+  - type: Speech
+    speechVerb: LargeMob
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Xenos/praetorian.rsi
+    offset: 0,0.4
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: running
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      -1: Critical
+      250: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      120: 0.7
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3.7
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 15500
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Tag
+    tags:
+    - CannotSuicide
+  - type: SolutionContainerManager # Being hit speeds you up so you can escape
+    solutions:
+      bite:
+        reagents:
+        - ReagentId: Stimulants
+          Quantity: 50
+        - ReagentId: TranexamicAcid
+          Quantity: 50
+  - type: MeleeChemicalInjector
+    transferAmount: 1
+    solution: bite
+    pierceArmor: true

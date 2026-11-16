@@ -30,6 +30,8 @@ marking-GauzeUpperLegRight-gauze_upperleg_r = Бинт, Перевязь бед�
 marking-GauzeUpperLegRight = Бинт, Перевязь бедра (Правый)
 marking-GauzeBlindfold-gauze_blindfold = Бинт, Повязка на оба глаза
 marking-GauzeBlindfold = Бинт, Повязка на глаза
+marking-GauzeHead-gauze_head = Бинт, Повязка на голову
+marking-GauzeHead = Бинт, Повязка на голову
 marking-GauzeLizardBlindfold-gauze_lizard_blindfold = Бинт, Повязка на глаза
 marking-GauzeLizardBlindfold = Бинт, Повязка на глаза
 marking-GauzeLizardFootRight-gauze_lizard_foot_r = Бинт, Перевязь стопы (Правый)
@@ -66,3 +68,63 @@ marking-GauzeMothLowerLegRight-gauze_moth_lowerleg_r = Инсектоид, Би�
 marking-GauzeMothLowerLegRight = Инсектоид, Бинт, Перевязь голени (Правый)
 marking-GauzeMothLowerLegLeft-gauze_moth_lowerleg_l = Инсектоид, Бинт, Перевязь голени (Левый)
 marking-GauzeMothLowerLegLeft = Инсектоид, Бинт, Перевязь голени (Левый)
+
+marking-GauzeVulpStomach-gauze_vulp_abdomen = Вульпканинская Марлевая Повязка на Живот
+
+marking-GauzeVulpStomach = Вульпканинская Марлевая Повязка на Живот
+
+marking-GauzeVulpBlindfold-gauze_vulp_blindfold = Вульпканинская Повязка на Глаза
+
+marking-GauzeVulpBlindfold = Вульпканинская Повязка на Глаза
+
+marking-GauzeVulpBoxerwrapLeft-gauze_vulp_boxerwrap_l = Вульпканинская Боксерская Обмотка (Левая)
+
+marking-GauzeVulpBoxerwrapLeft = Вульпканинская Боксерская Обмотка (Левая)
+
+marking-GauzeVulpBoxerwrapRight-gauze_vulp_boxerwrap_r = Вульпканинская Боксерская Обмотка (Правая)
+
+marking-GauzeVulpBoxerwrapRight = Вульпканинская Боксерская Обмотка (Правая)
+
+marking-GauzeVulpHead-gauze_vulp_head = Вульпканинская Марлевая Повязка на Голову
+
+marking-GauzeVulpHead = Вульпканинская Марлевая Повязка на Голову
+
+marking-GauzeVulpLeftArm-gauze_vulp_leftarm = Вульпканинская Марлевая Повязка на Руку (Левая)
+
+marking-GauzeVulpLeftArm = Вульпканинская Марлевая Повязка на Руку (Левая)
+
+marking-GauzeVulpLefteyePatch-gauze_vulp_lefteye_2 = Вульпканинская Марлевая Глазная Повязка (Левая)
+
+marking-GauzeVulpLefteyePatch = Вульпканинская Марлевая Глазная Повязка (Левая)
+
+marking-GauzeVulpLowerArmRight-gauze_vulp_lowerarm_r = Вульпканинская Марлевая Повязка на Запястье (Правая)
+
+marking-GauzeVulpLowerArmRight = Вульпканинская Марлевая Повязка на Запястье (Правая)
+
+marking-GauzeVulpLowerLegLeft-gauze_vulp_lowerleg_l = Вульпканинская Марлевая Повязка на Лодыжку (Левая)
+
+marking-GauzeVulpLowerLegLeft = Вульпканинская Марлевая Повязка на Лодыжку (Левая)
+
+marking-GauzeVulpLowerLegRight-gauze_vulp_lowerleg_r = Вульпканинская Марлевая Повязка на Лодыжку (Правая)
+
+marking-GauzeVulpLowerLegRight = Вульпканинская Марлевая Повязка на Лодыжку (Правая)
+
+marking-GauzeVulpRighteyePatch-gauze_vulp_righteye_2 = Вульпканинская Марлевая Глазная Повязка (Правая)
+
+marking-GauzeVulpRighteyePatch = Вульпканинская Марлевая Глазная Повязка (Правая)
+
+marking-GauzeVulpShoulder-gauze_vulp_shoulder = Вульпканинский Марлевый Слинг на Плечо
+
+marking-GauzeVulpShoulder = Вульпканинский Марлевый Слинг на Плечо
+
+marking-GauzeVulpUpperArmRight-gauze_vulp_upperarm_r = Вульпканинская Марлевая Повязка на Предплечье (Правая)
+
+marking-GauzeVulpUpperArmRight = Вульпканинская Марлевая Повязка на Предплечье (Правая)
+
+marking-GauzeVulpUpperLegLeft-gauze_vulp_upperleg_l = Вульпканинская Марлевая Повязка на Бедро (Левая)
+
+marking-GauzeVulpUpperLegLeft = Вульпканинская Марлевая Повязка на Бедро (Левая)
+
+marking-GauzeVulpUpperLegRight-gauze_vulp_upperleg_r = Вульпканинская Марлевая Повязка на Бедро (Правая)
+
+marking-GauzeVulpUpperLegRight = Вульпканинская Марлевая Повязка на Бедро (Правая)

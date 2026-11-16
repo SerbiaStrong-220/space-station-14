@@ -1,4 +1,7 @@
+using System.Linq; //ss220 fix medibot
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage; //ss220 fix medibot
+using Content.Shared.EntityEffects.Effects.Damage; //ss220 fix medibot
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Robust.Shared.Audio;
@@ -45,26 +48,33 @@ public sealed partial class MedibotTreatment
     [DataField(required: true)]
     public FixedPoint2 Quantity;
 
-    /// <summary>
-    /// Do nothing when the patient is at or below this total damage.
-    /// When null this will inject meds into completely healthy patients.
-    /// </summary>
-    [DataField]
-    public FixedPoint2? MinDamage;
-
-    /// <summary>
-    /// Do nothing when the patient is at or above this total damage.
-    /// Useful for tricordrazine which does nothing above 50 damage.
-    /// </summary>
-    [DataField]
-    public FixedPoint2? MaxDamage;
-
+    //ss220 fix medibot start
     /// <summary>
     /// Returns whether the treatment will probably work for an amount of damage.
     /// Doesn't account for specific damage types only total amount.
     /// </summary>
-    public bool IsValid(FixedPoint2 damage)
+    public bool IsValid(DamageSpecifier damage, bool isEmagged, IPrototypeManager proto)
     {
-        return (MaxDamage == null || damage < MaxDamage) && (MinDamage == null || damage > MinDamage);
+        if (isEmagged)
+            return true;
+
+        if (!proto.TryIndex(Reagent, out var reagentProto))
+            return false;
+
+        var metabolisms = reagentProto.Metabolisms?.Metabolisms;
+        if (metabolisms == null)
+            return false;
+
+        return metabolisms.Values
+            .SelectMany(m => m.Effects)
+            .SelectMany(effect => effect switch
+            {
+                HealthChange health => health.Damage.DamageDict.Keys,
+                EvenHealthChange even => even.Damage.Keys
+                    .SelectMany(group => proto.Index(group).DamageTypes),
+                _ => [],
+            })
+            .Any(type => damage.DamageDict.GetValueOrDefault(type) > 0);
     }
+    //ss220 fix medibot end
 }

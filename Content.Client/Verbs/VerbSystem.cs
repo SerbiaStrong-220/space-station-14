@@ -16,6 +16,7 @@ using Robust.Client.State;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Client.Verbs
@@ -33,8 +34,11 @@ namespace Content.Client.Verbs
         [Dependency] private readonly SharedContainerSystem _containers = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly EntityLookupSystem _lookup = default!;
+        [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
 
         private float _lookupSize;
+
+        private static readonly ProtoId<TagPrototype> HideContextMenuTag = "HideContextMenu";
 
         /// <summary>
         ///     These flags determine what entities the user can see on the context menu.
@@ -147,7 +151,7 @@ namespace Content.Client.Verbs
 
             for (var i = entities.Count - 1; i >= 0; i--)
             {
-                if (_tagSystem.HasTag(entities[i], "HideContextMenu"))
+                if (_tagSystem.HasTag(entities[i], HideContextMenuTag))
                     entities.RemoveSwap(i);
             }
 
@@ -156,10 +160,9 @@ namespace Content.Client.Verbs
             if (container == null && (visibility & MenuVisibility.InContainer) == 0)
                 return entities.Count != 0;
 
-            var spriteQuery = GetEntityQuery<SpriteComponent>();
             for (var i = entities.Count - 1; i >= 0; i--)
             {
-                if (!spriteQuery.TryGetComponent(entities[i], out var spriteComponent) || !spriteComponent.Visible)
+                if (!_spriteQuery.TryGetComponent(entities[i], out var spriteComponent) || !spriteComponent.Visible)
                     entities.RemoveSwap(i);
             }
 
@@ -213,7 +216,7 @@ namespace Content.Client.Verbs
             {
                 // maybe send an informative pop-up message.
                 if (!string.IsNullOrWhiteSpace(verb.Message))
-                    _popupSystem.PopupEntity(verb.Message, user);
+                    _popupSystem.PopupEntity(FormattedMessage.RemoveMarkupOrThrow(verb.Message), user);
 
                 return;
             }
@@ -222,7 +225,7 @@ namespace Content.Client.Verbs
                 // is this a client exclusive (gui) verb?
                 ExecuteVerb(verb, user, GetEntity(target));
             else
-                EntityManager.RaisePredictiveEvent(new ExecuteVerbEvent(target, verb));
+                RaisePredictiveEvent(new ExecuteVerbEvent(target, verb));
         }
 
         private void HandleVerbResponse(VerbsResponseEvent msg)

@@ -15,6 +15,7 @@
     tags:
     - Sheet
     - Metal
+    - ConstructionMaterial
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -30,6 +31,9 @@
     solutions:
       steel:
         canReact: false
+  - type: GuideHelp
+    guides:
+    - ExpandingRepairingStation
 
 - type: entity
   parent: SheetMetalBase
@@ -56,9 +60,11 @@
   - type: Item
     heldPrefix: steel
   - type: Appearance
+  # SS220-steel plating start
   - type: FloorTile
     outputs:
     - Plating
+  # SS220-steel plating ended
   - type: Extractable
     grindableSolutionName: steel
   - type: SolutionContainerManager
@@ -73,6 +79,14 @@
         - ReagentId: Lead
           Quantity: 0.2
         #SS220 tweak produce lead end
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Materials/metal_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Materials/metal_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: SheetSteel
@@ -97,15 +111,6 @@
   - type: Stack
     stackType: Steel
     count: 1
-
-- type: entity
-  parent: SheetSteel
-  id: SheetSteelLingering0
-  suffix: Lingering, 0
-  components:
-  - type: Stack
-    lingering: true
-    count: 0
 
 - type: entity
   parent: SheetMetalBase
@@ -213,7 +218,7 @@
           Quantity: 0.2
         #SS220 tweak produce lead end
         canReact: false
-      
+
 
 - type: entity
   parent: SheetPlasteel

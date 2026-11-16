@@ -1,0 +1,71 @@
+- type: entity
+  parent: AccessConfigurator
+  id: AccessConfiguratorDebug
+  name: конфигуратор доступа
+  description: Используется в маппинге для изменения требований уровня доступа к шлюзам и другим запираемым объектам. Не маппить.
+  suffix: Debug, Маппинг
+  components:
+    - type: Sprite
+      sprite: SS220/Debugging/debug_access_configurator.rsi
+      state: icon
+    - type: Item
+      size: Small
+    - type: Clothing
+      sprite: SS220/Debugging/debug_access_configurator.rsi
+    - type: AccessOverrider
+      accessLevels:
+      - Armory
+      - Atmospherics
+      - Bar
+      - Brig
+      - Blueshield
+      - Captain
+      - Cargo
+      - Chapel
+      - Chemistry
+      - ChiefEngineer
+      - ChiefMedicalOfficer
+      - Command
+      - Clown #SS220 New_accesses_and_some_tweaks
+      - Detective
+      - Engineering
+      - EmergencyShuttleRepealAll
+      - External
+      - HeadOfPersonnel
+      - HeadOfSecurity
+      - Hydroponics
+      - Janitor
+      - Kitchen
+      - Lawyer
+      - Librarian #SS220 New_accesses_and_some_tweaks
+      - Maintenance
+      - Medical
+      - NanoTrasenRepresentative
+      - NuclearOperative
+      - Paramedic
+      - Psychologist #SS220 New_accesses_and_some_tweaks
+      - Quartermaster
+      - Research
+      - ResearchDirector
+      - Reporter #SS220 New_accesses_and_some_tweaks
+      - Salvage
+      - Security
+      - Service
+      - SyndicateAgent
+      - Theatre
+      - Mime #SS220 New_accesses_and_some_tweaks
+      - Musician #SS220 New_accesses_and_some_tweaks
+      #New centcomm accesses begin
+      - CentralCommand
+      - CentralCommandCBURN
+      - CentralCommandERT
+      - CentralCommandSRT
+      - CentralCommandDeathSquad
+      #New centcomm accesses end
+      #Ussp accesses begin
+      - Ussp
+      - UsspCommand
+      - UsspMedical
+      - UsspEngineering
+      #Ussp accesses end
+      - Interdyne

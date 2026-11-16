@@ -12,6 +12,7 @@
   - type: Tag
     tags:
     - Sheet
+    - ConstructionMaterial
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -107,9 +108,6 @@
         - ReagentId: Plasma
           Quantity: 10
         canReact: false
-  - type: Tag
-    tags:
-    - Sheet
 
 - type: entity
   parent: SheetPlasma
@@ -142,6 +140,7 @@
     tags:
     - Plastic
     - Sheet
+    - ConstructionMaterial
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -172,6 +171,14 @@
         - ReagentId: Phosphorus
           Quantity: 5
         canReact: false
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Materials/plastic_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Materials/plastic_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: SheetPlastic
@@ -196,13 +203,13 @@
     count: 1
 
 - type: entity
-  parent: [SheetOtherBase, FoodBase]
+  parent: [SheetOtherBase, EdibleBase]
   id: SheetUranium
   name: uranium
   suffix: Full
   components:
   - type: Material
-  - type: Food
+  - type: Edible
     transferAmount: 10
   - type: BadFood
   - type: PhysicalComposition

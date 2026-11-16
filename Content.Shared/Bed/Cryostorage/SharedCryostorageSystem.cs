@@ -7,7 +7,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Content.Shared.Actions;
 
@@ -18,14 +18,16 @@ namespace Content.Shared.Bed.Cryostorage;
 /// </summary>
 public abstract class SharedCryostorageSystem : EntitySystem
 {
-    [Dependency] protected readonly ISharedAdminLogManager AdminLog = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private   readonly IConfigurationManager _configuration = default!;
+    [Dependency] private   readonly ISharedPlayerManager _player = default!;
+    [Dependency] private   readonly SharedMapSystem _map = default!;
+    [Dependency] private   readonly MobStateSystem _mobState = default!;
+    [Dependency] private   readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] protected readonly ISharedAdminLogManager AdminLog = default!;
     [Dependency] protected readonly SharedMindSystem Mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!; // 220 cryo action
+    [Dependency] private readonly MetaDataSystem _meta = default!;
 
     protected EntityUid? PausedMap { get; private set; }
 
@@ -64,7 +66,7 @@ public abstract class SharedCryostorageSystem : EntitySystem
             return;
 
         var containedComp = EnsureComp<CryostorageContainedComponent>(args.Entity);
-        _actionsSystem.AddAction(args.Entity, ref comp.LeaveActionUid, comp.LeaveActionID, uid); // 220 cryo action
+        _actionsSystem.AddAction(args.Entity, ref comp.LeaveActionUid, comp.LeaveActionId, uid); // 220 cryo action
         var delay = Mind.TryGetMind(args.Entity, out _, out _) ? comp.GracePeriod : comp.NoMindGracePeriod;
         containedComp.GracePeriodEndTime = Timing.CurTime + delay;
         containedComp.Cryostorage = ent;
@@ -129,7 +131,8 @@ public abstract class SharedCryostorageSystem : EntitySystem
         if (args.Dragged == args.User)
             return;
 
-        if (!Mind.TryGetMind(args.Dragged, out _, out var mindComp) || mindComp.Session?.AttachedEntity != args.Dragged)
+        if (!_player.TryGetSessionByEntity(args.Dragged, out var session) ||
+            session.AttachedEntity != args.Dragged)
             return;
 
         args.CanDrop = false;
@@ -162,7 +165,7 @@ public abstract class SharedCryostorageSystem : EntitySystem
         if (PausedMap == null || !Exists(PausedMap))
             return;
 
-        EntityManager.DeleteEntity(PausedMap.Value);
+        Del(PausedMap.Value);
         PausedMap = null;
     }
 
@@ -171,9 +174,10 @@ public abstract class SharedCryostorageSystem : EntitySystem
         if (PausedMap != null && Exists(PausedMap))
             return;
 
-        var map = _mapManager.CreateMap();
-        _mapManager.SetMapPaused(map, true);
-        PausedMap = _mapManager.GetMapEntityId(map);
+        var mapUid = _map.CreateMap();
+        _meta.SetEntityName(mapUid, Loc.GetString("cryostorage-paused-map-name"));
+        _map.SetPaused(mapUid, true);
+        PausedMap = mapUid;
     }
 
     public bool IsInPausedMap(Entity<TransformComponent?> entity)

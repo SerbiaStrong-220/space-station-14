@@ -1,0 +1,19 @@
+- type: entity
+  parent: [DrinkBottleGlassBaseFull, DrinkVisualsAllFilled]
+  id: HolyWaterJug
+  name: water jug
+  description: Stay hydrated.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Holywater
+          Quantity: 30
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/holy_water_jug.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: fill-
+    inHandsMaxFillLevels: 0

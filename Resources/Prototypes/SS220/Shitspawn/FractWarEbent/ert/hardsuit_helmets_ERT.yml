@@ -8,9 +8,9 @@
   description: Защищает самую ценную голову в этом секторе. Выглядит дорого.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_admiral.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_admiral.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_admiral.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_admiral.rsi
 
 # CE
 - type: entity
@@ -21,9 +21,9 @@
   description: Шлем с поверхностью, устойчивой к радиации, коррозии и агрессивным веществам.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_ce.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_ce.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_ce.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_ce.rsi
 
 # CMO
 - type: entity
@@ -34,9 +34,9 @@
   description: Царапины и капли крови явно указывают на то, что клятва Гиппократа не является такой уж обязательной в исполнении.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_cmo.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_cmo.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_cmo.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_cmo.rsi
 
 # Soldier
 - type: entity
@@ -47,9 +47,9 @@
   description: Тонкий металла с мягкой обшивкой из шерсти неизвестного происхождения.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_soldier.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_soldier.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_soldier.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_soldier.rsi
 
 # Med
 - type: entity
@@ -60,32 +60,32 @@
   description: Серебро известно своими антибактериальными свойствами, это точно не коррупционная схема.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_med.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_med.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_med.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_med.rsi
 
 # Heavy
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseERT
-  id: ClothingHeadHelmetHardsuitERTHeavy
+  id: ClothingHeadHelmetHardsuitERTLight
   categories: [ HideSpawnMenu ]
   name: шлем скафандра NT-3000
   description: Толстый слой металла обеспечивает пассивную защиту от пуль и лазеров.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_heavy.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_heavy.rsi
 
 # Heavy2
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseERT
-  id: ClothingHeadHelmetHardsuitERTHeavy2
+  id: ClothingHeadHelmetHardsuitERTHeavy
   categories: [ HideSpawnMenu ]
   name: шлем скафандра Gladiator
   description: Настощий мир в розовых очках.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy_2.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_heavy_2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ert_heavy_2.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ert_heavy_2.rsi

@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingOuterStorageToggleableBase
   id: ClothingOuterExosuitSalvage
-  name: экзокостюм утилизатора
-  description: Специальный костюм с капюшоном, почти не стесняющий движений и предоставляющий защиту.
+  name: salvage exosuit
+  description: A specialized hooded suit that barely restricts movement while providing decent protection.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Misc/salvage_exosuit.rsi
@@ -22,7 +22,8 @@
         Heat: 0.85
         Caustic: 0.85
         Radiation: 0.85
-        Stamina: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 0.90

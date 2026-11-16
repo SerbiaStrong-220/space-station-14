@@ -7,8 +7,23 @@
       !type:RoleTimeRequirement
       role: JobMedicalIntern
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
+- type: loadout
+  id: InternJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitIntern
+
+- type: loadout
+  id: InternJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtIntern
+
 - type: loadout
   id: MedicalInternJumpsuitTurtleneck
   effects:

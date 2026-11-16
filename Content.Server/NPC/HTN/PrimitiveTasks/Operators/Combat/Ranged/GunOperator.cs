@@ -5,14 +5,18 @@ using Content.Shared.CombatMode;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
+using Content.Shared.Prototypes;
+using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Combat.Ranged;
 
 public sealed partial class GunOperator : HTNOperator, IHtnConditionalShutdown
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!; //SS220 Change laser turrets AI
 
     [DataField("shutdownState")]
     public HTNPlanState ShutdownState { get; private set; } = HTNPlanState.TaskFinished;
@@ -34,6 +38,12 @@ public sealed partial class GunOperator : HTNOperator, IHtnConditionalShutdown
     /// </summary>
     [DataField("requireLOS")]
     public bool RequireLOS = false;
+
+    /// <summary>
+    /// If true, only opaque objects will block line of sight.
+    /// </summary>
+    [DataField("opaqueKey")]
+    public bool UseOpaqueForLOSChecks = false;
 
     // Like movement we add a component and pass it off to the dedicated system.
 
@@ -58,8 +68,10 @@ public sealed partial class GunOperator : HTNOperator, IHtnConditionalShutdown
     public override void Startup(NPCBlackboard blackboard)
     {
         base.Startup(blackboard);
+
         var ranged = _entManager.EnsureComponent<NPCRangedCombatComponent>(blackboard.GetValue<EntityUid>(NPCBlackboard.Owner));
         ranged.Target = blackboard.GetValue<EntityUid>(TargetKey);
+        ranged.UseOpaqueForLOSChecks = UseOpaqueForLOSChecks;
 
         if (blackboard.TryGetValue<float>(NPCBlackboard.RotateSpeed, out var rotSpeed, _entManager))
         {
@@ -73,7 +85,8 @@ public sealed partial class GunOperator : HTNOperator, IHtnConditionalShutdown
 
         //SS220 Change laser turrets AI begin
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
-        if (_entManager.HasComponent<HitscanBatteryAmmoProviderComponent>(owner))
+        if (_entManager.TryGetComponent<BatteryAmmoProviderComponent>(owner, out var batteryAmmoProvider) &&
+            _proto.Index(batteryAmmoProvider.Prototype).HasComponent<HitscanBasicDamageComponent>())
         {
             ranged.CollisionGroup = CollisionGroup.Opaque;
         }

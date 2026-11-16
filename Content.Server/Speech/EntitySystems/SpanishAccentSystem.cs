@@ -1,19 +1,27 @@
 using System.Text;
 using Content.Server.Speech.Components;
+using Content.Shared.Speech;
 
 namespace Content.Server.Speech.EntitySystems
 {
     public sealed class SpanishAccentSystem : EntitySystem
     {
-        public override void Initialize()
-        {
-            SubscribeLocalEvent<SpanishAccentComponent, AccentGetEvent>(OnAccent);
-        }
+    [Dependency] private readonly ReplacementAccentSystem _replacement = default!; // SS220 fix spanish accent
 
-        public string Accentuate(string message)
+    public const string SpanishAccentId = "spanish"; // SS220 fix spanish accent
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<SpanishAccentComponent, AccentGetEvent>(OnAccent);
+    }
+
+    public string Accentuate(string message)
         {
             // Insert E before every S
             message = InsertS(message);
+
+            message = _replacement.ApplyReplacements(message, SpanishAccentId); // SS220 fix spanish accent
+       
             // If a sentence ends with ?, insert a reverse ? at the beginning of the sentence
             message = ReplacePunctuation(message);
             return message;

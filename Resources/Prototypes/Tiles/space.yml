@@ -1,6 +1,7 @@
 - type: tile
   id: Space
   name: tiles-space
+  tags: [ tile-tag-musthave ]  # SS220 Tiles Resprite
   friction: 0
   isSubfloor: true
   isSpace: true

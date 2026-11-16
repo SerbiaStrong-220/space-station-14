@@ -18,6 +18,7 @@ public enum SponsorTier
     Moderator,
     Administrator,
     Mentor,
+    SeniorDevTeam,
     HeadDeveloper,
 
     // Тиры подписок должны идти в конце, для упрощения вычисления лучшего уровня поддержки.

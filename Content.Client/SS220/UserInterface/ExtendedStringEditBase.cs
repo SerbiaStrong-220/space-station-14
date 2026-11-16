@@ -31,7 +31,6 @@ public abstract class ExtendedStringEditBase : Control
             VAlign = Label.VAlignMode.Bottom,
             VerticalAlignment = VAlignment.Stretch,
             HorizontalAlignment = HAlignment.Stretch,
-            FontColorOverride = new Color(1f, 1f, 1f, 0.4f), // This should come from stylesheet, but i dont care for now
         };
         LimitLabel.AddStyleClass("WindowFooterText");
     }

@@ -150,3 +150,28 @@ liar-word-30 = хочу есть # SS220 fix
 liar-word-replacement-30 = не хочу есть
 liar-word-31 = еды
 liar-word-replacement-31 = не хочу есть
+
+liar-word-32 = плохой
+liar-word-replacement-32 = хороший
+
+liar-word-33 = не
+liar-word-replacement-33 = эээ
+
+liar-word-34 = истина
+liar-word-replacement-34 = ложь
+
+liar-word-35 = ложь
+liar-word-replacement-35 = истина
+
+liar-word-36 = есть
+liar-word-replacement-36 = нету
+
+liar-word-37 = нету
+liar-word-37-2 = отсутствует
+liar-word-replacement-37 = есть
+
+liar-word-38 = виновен
+liar-word-replacement-38 = невиновен
+
+liar-word-39 = невиновен
+liar-word-replacement-39 = виновен

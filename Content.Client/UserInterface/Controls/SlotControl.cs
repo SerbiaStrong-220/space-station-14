@@ -1,13 +1,14 @@
 using System.Numerics;
 using Content.Client.Cooldown;
 using Content.Client.UserInterface.Systems.Inventory.Controls;
+using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Controls
 {
-    [Virtual]
     public abstract class SlotControl : Control, IEntityControl
     {
         public static int DefaultButtonSize = 64;
@@ -15,11 +16,13 @@ namespace Content.Client.UserInterface.Controls
         public TextureRect ButtonRect { get; }
         public TextureRect BlockedRect { get; }
         public TextureRect HighlightRect { get; }
+        public TextureRect StuckOnEquipRect { get; } //ss220 StuckOnEquip
         public SpriteView HoverSpriteView { get; }
         public TextureButton StorageButton { get; }
         public CooldownGraphic CooldownDisplay { get; }
 
         private SpriteView SpriteView { get; }
+        private EntityPrototypeView ProtoView { get; }
 
         public EntityUid? Entity => SpriteView.Entity;
 
@@ -51,6 +54,8 @@ namespace Content.Client.UserInterface.Controls
 
         public bool Blocked { get => BlockedRect.Visible; set => BlockedRect.Visible = value;}
 
+        public bool StuckOnEquip { get => StuckOnEquipRect.Visible; set => StuckOnEquipRect.Visible = value;} //ss220 StuckOnEquip
+
         private string? _blockedTexturePath;
         public string? BlockedTexturePath
         {
@@ -61,6 +66,19 @@ namespace Content.Client.UserInterface.Controls
                 BlockedRect.Texture = Theme.ResolveTextureOrNull(_blockedTexturePath)?.Texture;
             }
         }
+
+        //ss220 StuckOnEquip begin
+        private string? _stuckOnEquipTexturePath;
+        public string? StuckOnEquipTexturePath
+        {
+            get => _stuckOnEquipTexturePath;
+            set
+            {
+                _stuckOnEquipTexturePath = value;
+                StuckOnEquipRect.Texture = Theme.ResolveTextureOrNull(_stuckOnEquipTexturePath)?.Texture;
+            }
+        }
+        //ss220 StuckOnEquip end
 
         private string? _buttonTexturePath;
         public string? ButtonTexturePath
@@ -141,6 +159,13 @@ namespace Content.Client.UserInterface.Controls
                 SetSize = new Vector2(DefaultButtonSize, DefaultButtonSize),
                 OverrideDirection = Direction.South
             });
+            AddChild(ProtoView = new EntityPrototypeView
+            {
+                Visible = false,
+                Scale = new Vector2(2, 2),
+                SetSize = new Vector2(DefaultButtonSize, DefaultButtonSize),
+                OverrideDirection = Direction.South
+            });
 
             AddChild(HoverSpriteView = new SpriteView
             {
@@ -191,6 +216,15 @@ namespace Content.Client.UserInterface.Controls
                 Visible = false
             });
 
+            //ss220 StuckOnEquip begin
+            AddChild(StuckOnEquipRect = new TextureRect
+            {
+                TextureScale = new Vector2(2, 2),
+                Visible = false
+            });
+            StuckOnEquipTexturePath = "stuckonequip";
+            //ss220 StuckOnEquip end
+
             HighlightTexturePath = "slot_highlight";
             BlockedTexturePath = "blocked";
         }
@@ -209,10 +243,33 @@ namespace Content.Client.UserInterface.Controls
             HoverSpriteView.SetEntity(null);
         }
 
+        /// <summary>
+        /// Causes the control to display a placeholder prototype, optionally faded
+        /// </summary>
         public void SetEntity(EntityUid? ent)
         {
             SpriteView.SetEntity(ent);
+            SpriteView.Visible = true;
+            ProtoView.Visible = false;
             UpdateButtonTexture();
+        }
+
+        /// <summary>
+        /// Causes the control to display a placeholder prototype, optionally faded
+        /// </summary>
+        public void SetPrototype(EntProtoId? proto, bool fade)
+        {
+            ProtoView.SetPrototype(proto);
+            SpriteView.Visible = false;
+            ProtoView.Visible = true;
+
+            UpdateButtonTexture();
+
+            if (ProtoView.Entity is not { } ent || !fade)
+                return;
+
+            var sprites = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
+            sprites.SetColor((ent.Owner, ent.Comp1), Color.DarkGray.WithAlpha(0.65f));
         }
 
         private void UpdateButtonTexture()

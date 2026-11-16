@@ -21,17 +21,23 @@
     - Trash
   - type: SpaceGarbage
   - type: Sprite
-    sprite: Objects/Tools/matches.rsi
+    sprite: SS220/Objects/Tools/Matches/matches.rsi #SS220 zippo resprie
     layers:
       - state: match_unlit
   - type: Item
-    sprite: Objects/Tools/matches.rsi
+    sprite: SS220/Objects/Tools/Matches/matches.rsi #SS220 zippo resprie
     heldPrefix: unlit
     size: Tiny
   - type: Matchstick
     duration: 10
     igniteSound:
       path: /Audio/Items/match_strike.ogg
+      params:
+        volume: -0.125
+        variation: 0.125
+  - type: IgnitionSource
+    ignited: false
+    temperature: 400.0
   - type: PointLight
     enabled: false
     radius: 1.1
@@ -64,11 +70,16 @@
       path: /Audio/Items/matchbox_drop.ogg
   - type: Matchbox
   - type: Sprite
-    sprite: Objects/Tools/matches.rsi
+    sprite: SS220/Objects/Tools/Matches/matches.rsi #SS220 zippo resprie
     layers:
     - state: matchbox
     - state: matchbox-open
       map: ["openLayer"]
+      #SS220 zippo resprie start
+    - state: matchbox0
+      map: ["matchbox0"]
+      visible: false
+      #SS220 zippo resprie end
     - state: matchbox1
       map: ["matchbox1"]
       visible: false
@@ -79,26 +90,76 @@
       map: ["matchbox3"]
       visible: false
   - type: Item
-    sprite: Objects/Tools/matches.rsi
+    sprite: SS220/Objects/Tools/Matches/matches.rsi #SS220 zippo resprie
     heldPrefix: matchbox
     size: Small
   - type: Storage
     grid:
     - 0,0,2,1
-  - type: StorageFill
-    contents:
-      - id: Matchstick
+    #SS220-FixMatchBox-begin
+    whitelist:
+      tags:
+        - Matchstick
+    #SS220-FixMatchBox-end
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: Matchstick
         amount: 6
   - type: ItemCounter
     count:
       tags: [Matchstick]
     composite: true
     layerStates:
-    - matchbox1
-    - matchbox2
+    #SS220 zippo resprie start
     - matchbox3
+    - matchbox2
+    - matchbox1
+    - matchbox0
+    #SS220 zippo resprie end
   - type: Appearance
   - type: Tag
     tags:
     - Trash
   - type: SpaceGarbage
+
+- type: entity
+  parent: [Matchbox, BaseSyndicateContraband]
+  id: GorlexMatchbox
+  name: Gorlex match box
+  description: "A pneumatic match box styled after the Gorlex Marauders' equipment. Contains 24 matches."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Matches/gorlex.rsi #SS220 zippo resprie
+  - type: Item
+    sprite: SS220/Objects/Tools/Matches/gorlex.rsi #SS220 zippo resprie
+  - type: Storage
+    grid:
+    - 0,0,11,1
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: GorlexMatchstick
+        amount: 24
+  - type: Matchbox
+
+- type: entity
+  name: match stick
+  parent: [Matchstick, BaseSyndicateContraband]
+  id: GorlexMatchstick
+  description: A military grade match stick, used for lighting fine smokables and noncombatants alike.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Matches/gorlex.rsi  #SS220 zippo resprie
+    layers:
+      - state: match_unlit
+  - type: Item
+    sprite: SS220/Objects/Tools/Matches/gorlex.rsi  #SS220 zippo resprie
+    heldPrefix: unlit
+    size: Tiny
+  - type: PointLight
+    enabled: false
+    radius: 3
+    color: green
+  - type: Matchstick
+    duration: 30

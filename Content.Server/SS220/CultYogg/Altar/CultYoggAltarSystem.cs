@@ -1,0 +1,120 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Server.Administration.Logs;
+using Content.Server.Body.Systems;
+using Content.Server.Chat.Systems;
+using Content.Server.Destructible;
+using Content.Server.Pinpointer;
+using Content.Server.SS220.GameTicking.Rules.Components;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
+using Content.Shared.Buckle.Components;
+using Content.Shared.Database;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.Gibbing;
+using Content.Shared.SS220.CultYogg.Altar;
+using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Shared.SS220.CultYogg.MiGo;
+using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+
+namespace Content.Server.SS220.CultYogg.Altar;
+
+public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
+{
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<CultYoggAltarComponent, MiGoSacrificeDoAfterEvent>(OnDoAfter);
+    }
+
+    private void OnDoAfter(Entity<CultYoggAltarComponent> ent, ref MiGoSacrificeDoAfterEvent args)
+    {
+        if (args.Cancelled)
+        {
+            ent.Comp.AnnounceTime = null;
+            return;
+        }
+
+        if (!TryComp<StrapComponent>(ent, out var strapComp))
+            return;
+
+        var sacrificial = strapComp.BuckledEntities.FirstOrNull();
+
+        if (sacrificial == null)
+            return;
+
+        if (!TryComp<AppearanceComponent>(ent, out var appearanceComp))
+            return;
+
+        _adminLog.Add(LogType.RoundFlow, LogImpact.Medium, $"Cult Yogg sacrificed {ToPrettyString(sacrificial.Value):target}");
+        _gibbing.Gib(sacrificial.Value);
+        ent.Comp.Used = true;
+
+        RemComp<StrapComponent>(ent);
+        RemComp<DestructibleComponent>(ent);
+
+        var query = EntityQueryEnumerator<GameRuleComponent, CultYoggRuleComponent>();
+        while (query.MoveNext(out var uid, out _, out _))
+        {
+            var ev = new CultYoggSacrificedTargetEvent(ent);
+            RaiseLocalEvent(uid, ref ev, true);
+        }
+
+        //send cooldown to a MiGo sacrifice action
+        var queryMiGo = EntityQueryEnumerator<MiGoComponent>();
+        while (queryMiGo.MoveNext(out _, out var comp))
+        {
+            if (comp.MiGoErectActionEntity == null)
+                continue;
+
+            var sacrAction = comp.MiGoSacrificeActionEntity;
+
+            if (!TryComp<ActionComponent>(sacrAction, out var actionComponent))
+                continue;
+
+            if (actionComponent.UseDelay == null)
+                continue;
+
+            _actionsSystem.SetCooldown(sacrAction, actionComponent.UseDelay.Value);
+        }
+
+        UpdateAppearance(ent, ent.Comp, appearanceComp);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<CultYoggAltarComponent, TransformComponent>();
+        while (query.MoveNext(out var ent, out var altarComp, out var xform))
+        {
+            if (altarComp.AnnounceTime == null)
+                continue;
+
+            if (_time.CurTime <= altarComp.AnnounceTime)
+                continue;
+
+            var msg = Loc.GetString("cult-yogg-sacrifice-warning",
+    ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((ent, xform)))),
+    ("coords", GetCoords(ent)));
+            _chat.DispatchGlobalAnnouncement(msg, announcementSound: altarComp.Sound, colorOverride: Color.Red);
+
+            altarComp.AnnounceTime = null;
+        }
+    }
+
+    private string GetCoords(EntityUid ent)
+    {
+        var coordinates = _transform.GetWorldPosition(ent);
+        return $"({Math.Round(coordinates.X)}, {Math.Round(coordinates.Y)})";
+    }
+}

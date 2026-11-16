@@ -14,6 +14,14 @@
       - material: Steel
         amount: 2
         doAfter: 1
+    - to: signaller
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - material: Cable
+        amount: 1
+        doAfter: 1
     - to: trunk
       steps:
       - material: Steel
@@ -30,6 +38,41 @@
       - material: Steel
         amount: 2
         doAfter: 1
+    # DisposalFilter ss220 start
+    - to: filter
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - material: Plastic
+        amount: 2
+        doAfter: 1
+      - material: Glass
+        amount: 1
+        doAfter: 1
+    - to: filterflipped
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - material: Plastic
+        amount: 2
+        doAfter: 1
+      - material: Glass
+        amount: 1
+        doAfter: 1
+    - to: xfilter
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - material: Plastic
+        amount: 2
+        doAfter: 1
+      - material: Glass
+        amount: 1
+        doAfter: 1
+    # DisposalFilter ss220 end
     # DisposalJunction
     - to: junction
       steps:
@@ -42,6 +85,11 @@
         amount: 2
         doAfter: 1
     - to: yJunction
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+    - to: xJunction
       steps:
       - material: Steel
         amount: 2
@@ -75,7 +123,7 @@
       completed:
       - !type:SpawnPrototype
         prototype: SheetSteel1
-      - !type:DeleteEntity
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -87,7 +135,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DeleteEntity
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -99,7 +147,21 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DeleteEntity
+      - !type:DestroyEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+  - node: signaller
+    entity: DisposalSignaller
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: CableApcStack1 # I have no idea why this does not work
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -111,7 +173,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DeleteEntity
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -124,7 +186,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DeleteEntity
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -136,7 +198,62 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DeleteEntity
+      - !type:DestroyEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+  # Disposal Filter
+  - node: filter
+    entity: DisposalFilterPipeY
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetPlastic1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetGlass1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Welding
+        doAfter: 1
+  - node: filterflipped
+    entity: DisposalFilterPipeYFlipped
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetPlastic1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetGlass1
+        amount: 1
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Welding
+        doAfter: 1
+  - node: xfilter
+    entity: DisposalFilterPipeX
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetPlastic1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetGlass1
+        amount: 1
+      - !type:DeleteEntity {}
       steps:
       - tool: Welding
         doAfter: 1
@@ -149,23 +266,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DeleteEntity
-      steps:
-      - tool: Welding
-        doAfter: 1
-    - to: yJunction
-      steps:
-      - tool: Screwing
-        doAfter: 1
-  - node: junctionflipped
-    entity: DisposalJunctionFlipped
-    edges:
-    - to: start
-      completed:
-      - !type:SpawnPrototype
-        prototype: SheetSteel1
-        amount: 2
-      - !type:DeleteEntity
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -181,7 +282,39 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DeleteEntity
+      - !type:DestroyEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+    - to: junctionflipped
+      steps:
+      - tool: Screwing
+        doAfter: 1
+  - node: junctionflipped
+    entity: DisposalJunctionFlipped
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:DestroyEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+    - to: xJunction
+      steps:
+      - tool: Screwing
+        doAfter: 1
+  - node: xJunction
+    entity: DisposalXJunction
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -189,10 +322,7 @@
       steps:
       - tool: Screwing
         doAfter: 1
-    - to: junctionflipped
-      steps:
-      - tool: Screwing
-        doAfter: 1
+  # DisposalBend
   - node: bend
     entity: DisposalBend
     edges:
@@ -201,7 +331,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DeleteEntity
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -216,7 +346,7 @@
         amount: 2
       - !type:SpawnPrototype
         prototype: CableApcStack1
-      - !type:DeleteEntity
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -230,7 +360,7 @@
         amount: 2
       - !type:SpawnPrototype
         prototype: CableApcStack1
-      - !type:DeleteEntity
+      - !type:DestroyEntity
       steps:
       - tool: Welding
         doAfter: 1

@@ -6,7 +6,7 @@ namespace Content.Server.AlertLevel;
 [Prototype("alertLevels")]
 public sealed partial class AlertLevelPrototype : IPrototype
 {
-    [IdDataField] public string ID { get; } = default!;
+    [IdDataField] public string ID { get; private set; } = default!;
 
     /// <summary>
     /// Dictionary of alert levels. Keyed by string - the string key is the most important
@@ -29,6 +29,10 @@ public sealed partial class AlertLevelPrototype : IPrototype
 [DataDefinition]
 public sealed partial class AlertLevelDetail
 {
+    // SS220-add-announce-over-tts-begin
+    [DataField]
+    public bool PlayTTS = false;
+    // SS220-add-announce-over-tts-end
     /// <summary>
     /// What is announced upon this alert level change. Can be a localized string.
     /// </summary>

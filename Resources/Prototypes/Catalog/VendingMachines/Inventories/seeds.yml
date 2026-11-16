@@ -2,7 +2,7 @@
   id: MegaSeedServitorInventory
   startingInventory:
     AloeSeeds: 3
-    AmbrosiaVulgarisSeeds: 3
+    #AmbrosiaVulgarisSeeds: 3 #ss220 remove ambrosia from vend
     AppleSeeds: 5
     BananaSeeds: 5
     BerrySeeds: 5
@@ -15,7 +15,6 @@
     CornSeeds: 5
     CottonSeeds: 5
     EggplantSeeds: 5
-    EggySeeds: 5
     GalaxythistleSeeds: 3
     GarlicSeeds: 3
     GrapeSeeds: 5
@@ -53,5 +52,7 @@
     RroseSeeds: 1
     WroseSeeds: 1
     #ss220 seeds end
-  emaggedInventory:
+  contrabandInventory:
+    TobaccoSeeds: 2
+    FoodSnackSemki: 2
     FlyAmanitaSeeds: 1

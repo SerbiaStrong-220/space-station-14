@@ -51,7 +51,7 @@ public sealed class SpriteFont : Font
         return GetHeight(scale) + (int)(LineInterval * scale * Scale);
     }
 
-    public override float DrawChar(DrawingHandleScreen handle, Rune rune, Vector2 baseline, float scale, Color color, bool fallback = true)
+    public override float DrawChar(DrawingHandleBase handle, Rune rune, Vector2 baseline, float scale, Color color, bool fallback = true)
     {
         var totalScale = scale * Scale;
         if (Rune.IsWhiteSpace(rune))
@@ -69,7 +69,10 @@ public sealed class SpriteFont : Font
         baseline.X += metrics.BearingX;
         baseline.Y -= metrics.BearingY;
         var rect = new UIBox2(baseline, baseline + glyph.Texture.Size * totalScale);
-        handle.DrawTextureRect(glyph.Texture, rect, color);
+        if (handle is DrawingHandleScreen screenHandle)
+            screenHandle.DrawTextureRect(glyph.Texture, rect, color);
+        else if (handle is DrawingHandleWorld worldHandle)
+            worldHandle.DrawTextureRect(glyph.Texture, Box2.FromTwoPoints(baseline, baseline + glyph.Texture.Size * totalScale));
         return metrics.Width;
     }
 

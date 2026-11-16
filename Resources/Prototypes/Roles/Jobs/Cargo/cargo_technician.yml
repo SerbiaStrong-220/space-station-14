@@ -4,9 +4,10 @@
   description: job-description-cargotech
   playTimeTracker: JobCargoTechnician
   requirements:
-    - !type:OverallPlaytimeRequirement 
+    - !type:OverallPlaytimeRequirement
       time: 3600 # SS220-RoleTime 2
   startingGear: CargoTechGear
+  experienceDefinition: CargoTechnicianRoleExperience # SS220-experience
   icon: "JobIconCargoTechnician"
   supervisors: job-supervisors-qm
   access:
@@ -14,13 +15,27 @@
   - Maintenance
   extendedAccess:
   - Salvage
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: BoxingDay
+    prototype: BoxCardboard
 
 - type: startingGear
   id: CargoTechGear
   equipment:
-    id: CargoPDA
     ears: ClothingHeadsetCargo
     pocket1: AppraisalTool
   #storage:
     #back:
     #- Stuff
+
+- type: chameleonOutfit
+  id: CargoTechnicianChameleonOutfit
+  job: CargoTechnician
+  equipment:
+    head: ClothingHeadHatCargosoft
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskBreath
+    outerClothing: ClothingOuterWinterCargo
+    neck: ClothingNeckScarfStripedBrown
+    gloves: ClothingHandsGlovesFingerless

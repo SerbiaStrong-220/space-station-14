@@ -1,11 +1,12 @@
 - type: entity
-  parent: BaseStructureDynamic
+  parent: [ BaseStructureDynamic, BasePaperLabelableVisualized ]
   id: CrateGeneric
   categories: [ HideSpawnMenu ]
   name: crate
   description: A large container for items.
   components:
   - type: Cart #SS220-Cart-system-fix
+  - type: Animateable
   - type: Transform
     noRot: true
   - type: Icon
@@ -58,37 +59,13 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-  - type: Appearance
   - type: EntityStorageVisuals
     stateDoorOpen: open
     stateDoorClosed: closed
-  - type: GenericVisualizer
-    visuals:
-      enum.PaperLabelVisuals.HasLabel:
-        enum.PaperLabelVisuals.Layer:
-          True: { visible: true }
-          False: { visible: false }
-      enum.PaperLabelVisuals.LabelType:
-        enum.PaperLabelVisuals.Layer:
-          Paper: { state: paper }
-          Bounty: { state: bounty }
-          CaptainsPaper: { state: captains_paper }
-          Invoice: { state: invoice }
-  - type: PaperLabel
-    labelSlot:
-      insertVerbText: Attach Label
-      ejectVerbText: Remove Label
-      whitelist:
-        components:
-        - Paper
-      blacklist:
-        tags:
-        - Book
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
       paper_label: !type:ContainerSlot
-  - type: ItemSlots
   - type: StaticPrice
     price: 75
   - type: Construction
@@ -160,3 +137,5 @@
     - Energy
     reflectProb: 0.2
     spread: 90
+  - type: Paintable
+    group: CrateSecure

@@ -17,10 +17,14 @@
     ClothingOuterFlannelBlue: 2
     ClothingOuterFlannelGreen: 2
     ClothingOuterCoatBomber: 3
+    ClothingHeadHatCanadaBeanie: 4
     ClothingHeadHatSantahat: 2
     ClothingHeadHatXmasCrown: 2
-
+    ClothingHeadHatUshanka: 5 #SS220-winterdrobe inventory change
   emaggedInventory:
     ClothingNeckScarfStripedSyndieGreen: 3
     ClothingNeckScarfStripedSyndieRed: 3
-    ClothingNeckScarfStripedCentcom: 3
+    #SS220-winterdrobe inventory change start
+    ClothingOuterWinterSyndie: 1
+    ClothingShoesBootsWinterSyndicate: 1
+    #SS220-winterdrobe inventory change ended

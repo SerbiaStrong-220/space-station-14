@@ -8,15 +8,15 @@ namespace Content.Server.SS220.Detective.Camera;
 [Access(typeof(DetectiveCameraSystem))]
 public sealed partial class DetectiveCameraComponent : Component
 {
-    [DataField("enabled"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public bool Enabled;
 
-    [DataField("activateCameraOnEnable"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public bool ActivateCameraOnEnable;
 
-    [DataField("powerOnSound"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public SoundSpecifier PowerOnSound = new SoundPathSpecifier("/Audio/Items/Defib/defib_success.ogg");
 
-    [DataField("powerOffSound"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public SoundSpecifier PowerOffSound = new SoundPathSpecifier("/Audio/Items/Defib/defib_failed.ogg");
 }

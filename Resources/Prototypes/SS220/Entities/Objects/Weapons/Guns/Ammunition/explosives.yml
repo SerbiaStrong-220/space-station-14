@@ -1,51 +1,120 @@
+#Svarshik's toy guns!
+#BASE
 - type: entity
-  id: BaseGrenadeArta
-  name: base grenade
-  parent: BaseItem
+  id: BaseGrenadeToy
+  suffix: Toy
   abstract: true
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
-    sound:
-      path: /Audio/SS220/Effects/Drop/arta_shell.ogg
-      params:
-        volume: 2
   - type: Tag
     tags:
-    - GrenadeDusterArta
-  - type: Item
-    size: Small
+    - ToyGrenade
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-explosive-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-explosive-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
+
+#funny kaboom. Totally harmless!
+- type: entity
+  id: GrenadeBlastToy
+  name: blast grenade
+  parent: [ BaseGrenadeToy, BaseGrenade ]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeBlastToy
   - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    layers:
+    - state: blast
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: blast
+    suffix: false
 
 - type: entity
-  id: GrenadeSuperArta
-  name: снаряд артиллерии
-  parent: BaseGrenadeArta
+  id: GrenadeFragToy
+  name: frag grenade
+  parent: [ BaseGrenadeToy, BaseGrenade ]
   components:
   - type: CartridgeAmmo
-    proto: BulletGrenadeSuperArta
+    proto: BulletGrenadeFragToy
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/nar.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
-    - state: pent
+    - state: frag
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
     state: frag
     suffix: false
-    
+
+#doesn't really flash anybody
 - type: entity
-  id: GrenadeEMPArta
-  name: ЭМИ снаряд артиллерии
-  parent: BaseGrenadeArta
+  id: GrenadeFlashToy
+  name: flash grenade
+  parent: [ BaseGrenadeToy, BaseGrenade ]
   components:
   - type: CartridgeAmmo
-    proto: BulletGrenadeEMPArta
+    proto: BulletGrenadeFlashToy
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Explosives/nar.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
-    - state: emp
+    - state: flash
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: flash
+    suffix: false
+
+#admeme
+- type: entity
+  id: GrenadeKaboomToy
+  name: kaboom grenade
+  description: RP nuke #it really is. Kabooms though all hallways! Zero harm!
+  parent: [ BaseGrenadeToy, BaseGrenade ]
+  suffix: Admeme
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeKaboomToy
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    layers:
+    - state: frag
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
     state: frag
     suffix: false
+
+- type: entity
+  id: GrenadeLubeToy
+  name: lube grenade
+  parent: BaseGrenade
+  suffix: Lube
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeLubeToy
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    layers:
+    - state: baton
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: baton
+    suffix: false
+  - type: Tag
+    tags:
+    - ToyGrenade
+    - Grenade #will fit into normal China Lake.
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-lubebomb-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-lubebomb-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
+    hiddenName: ent-GrenadeLubeToy

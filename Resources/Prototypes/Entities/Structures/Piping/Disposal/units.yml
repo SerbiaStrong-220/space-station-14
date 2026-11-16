@@ -8,6 +8,8 @@
     snap:
     - Disposal
   components:
+  - type: Climbable
+    vaultable: false
   - type: Sprite
     sprite: Structures/Piping/disposal.rsi
     layers:
@@ -29,6 +31,17 @@
       map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
   - type: Physics
     bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 55
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -77,14 +90,23 @@
     graph: DisposalMachine
     node: disposal_unit
   - type: DisposalUnit
+    # ss220 fix ai inside disposal unit start
+    blacklist:
+      components:
+      - StationAiHeld
+    # ss220 fix ai inside disposal unit end
   - type: ThrowInsertContainer
     containerId: disposals
+    probability: 0.67
   - type: UserInterface
     interfaces:
       enum.DisposalUnitUiKey.Key:
         type: DisposalUnitBoundUserInterface
-  - type: RatKingRummageable
+  - type: Rummageable
+    table: !type:NestedSelector
+      tableId: RatKingLoot
   - type: RequireProjectileTarget
+  - type: StationAiWhitelist #SS220 Disposal Unit AI interaction fix
 
 # SS220 rnd-transport
 - type: entity
@@ -111,6 +133,11 @@
     - state: dispover-handle
       map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
   - type: DisposalUnit
+    # ss220 fix ai inside disposal unit start
+    blacklist:
+      components:
+      - StationAiHeld
+    # ss220 fix ai inside disposal unit end
   - type: UserInterface
     interfaces:
       enum.DisposalUnitUiKey.Key:
@@ -146,10 +173,12 @@
     graph: DisposalMachine
     node: mailing_unit
   - type: DisposalUnit
-    autoEngageEnabled: false
     whitelist:
       components:
       - Item
+    blacklist:
+      components:
+      - EntityStorage
   - type: MailingUnit
   - type: DeviceNetwork
     deviceNetId: Wired
@@ -163,6 +192,6 @@
   - type: UserInterface
     interfaces:
       enum.MailingUnitUiKey.Key:
-        type: DisposalUnitBoundUserInterface
+        type: MailingUnitBoundUserInterface
       enum.ConfigurationUiKey.Key:
         type: ConfigurationBoundUserInterface

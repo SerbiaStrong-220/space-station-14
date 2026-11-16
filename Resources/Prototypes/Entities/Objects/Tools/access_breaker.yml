@@ -1,0 +1,37 @@
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: AccessBreakerUnlimited
+  suffix: Unlimited
+  name: authentication disruptor
+  description: A hacked access configurator, specialized to unlock and erase access from digital locks.
+  components:
+  - type: Emag
+    emagImmuneTag: AccessBreakerImmune
+    emagType: Access
+  - type: Sprite
+    sprite: Objects/Tools/access_breaker.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Tools/access_breaker.rsi
+# SS220-hidden-desc-begin
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-access-breaker-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-access-breaker-research ]
+      EngineerKnowledge: [ corvax-hidden-desc-access-breaker-engineering ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    - [EngineerKnowledge, null]
+    hiddenName: ent-AccessBreakerUnlimited
+# SS220-hidden-desc-end
+
+- type: entity
+  parent: AccessBreakerUnlimited
+  id: AccessBreaker
+  suffix: Limited
+  components:
+  - type: LimitedCharges
+  - type: AutoRecharge
+  - type: StaticPrice
+    price: 2000

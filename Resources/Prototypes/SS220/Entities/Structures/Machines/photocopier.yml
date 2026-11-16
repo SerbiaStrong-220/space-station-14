@@ -26,6 +26,18 @@
     - state: "printing_paper"
       map: ["enum.PhotocopierVisualLayers.PrintAnim"]
   - type: Appearance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3, -0.3, 0.3, 0.3"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
   - type: Climbable
   - type: ApcPowerReceiver
     powerLoad: 200
@@ -34,6 +46,7 @@
     shape:
       !type:PhysShapeCircle
       radius: 0.2
+  - type: StationAiWhitelist
   - type: Photocopier
     formCollections: [ "nanotrasen_station" ]
     contrabandFormCollections: [ "syndicate" ]
@@ -48,7 +61,7 @@
           - Paper
           - ButtScan
           - Photo
-        tags: 
+        tags:
           - Folder
     tonerSlot:
       insertSound: /Audio/Machines/screwdriveropen.ogg
@@ -85,6 +98,7 @@
   parent: PhotocopierBase
   name: central command photocopier
   components:
+  - type: StationAiWhitelist
   - type: Photocopier
     formCollections: [ "nanotrasen_station", "nanotrasen_central_command" ]
     tonerSlot:

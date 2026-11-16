@@ -3,7 +3,6 @@ using Content.Server.GameTicking.Events;
 using Content.Shared.UserInterface;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Players;
-using Content.Shared.SS220.Discord;
 using Content.Shared.SS220.Shlepovend;
 using Robust.Server.Audio;
 using Robust.Server.Player;
@@ -12,12 +11,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Shlepovend;
 
-public sealed class ShlepovendSystem : SharedShlepovendSystem
+public sealed partial class ShlepovendSystem : SharedShlepovendSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private AudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -77,7 +76,7 @@ public sealed class ShlepovendSystem : SharedShlepovendSystem
 
     public void OnToggleInterface(Entity<ShlepovendComponent> entity, ref AfterActivatableUIOpenEvent args)
     {
-        if (TryComp<ActorComponent>(args.Actor, out var actor) && actor.PlayerSession is { } session)
+        if (TryComp<ActorComponent>(args.User, out var actor) && actor.PlayerSession is { } session)
             SendTokenCount(session);
     }
 

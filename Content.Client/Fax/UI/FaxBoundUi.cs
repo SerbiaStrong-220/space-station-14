@@ -26,17 +26,60 @@ public sealed class FaxBoundUi : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<FaxWindow>();
-        // SS220 Printer (And fax overhaul)
-        // _window.FileButtonPressed += OnFileButtonPressed;
-        // _window.CopyButtonPressed += OnCopyButtonPressed;
+        _window.FileButtonPressed += OnFileButtonPressed;
+        _window.CopyButtonPressed += OnCopyButtonPressed;
         _window.SendButtonPressed += OnSendButtonPressed;
         _window.RefreshButtonPressed += OnRefreshButtonPressed;
         _window.PeerSelected += OnPeerSelected;
     }
 
+    private async void OnFileButtonPressed()
+    {
+        if (_dialogIsOpen)
+            return;
+
+        _dialogIsOpen = true;
+        var filters = new FileDialogFilters(new FileDialogFilters.Group("txt"));
+        await using var file = await _fileDialogManager.OpenFile(filters, FileAccess.Read);
+        _dialogIsOpen = false;
+
+        if (_window == null || _window.Disposed || file == null)
+        {
+            return;
+        }
+
+        using var reader = new StreamReader(file);
+
+        var firstLine = await reader.ReadLineAsync();
+        string? label = null;
+        var content = await reader.ReadToEndAsync();
+
+        if (firstLine is { })
+        {
+            if (firstLine.StartsWith('#'))
+            {
+                label = firstLine[1..].Trim();
+            }
+            else
+            {
+                content = firstLine + "\n" + content;
+            }
+        }
+
+        SendMessage(new FaxFileMessage(
+            label?[..Math.Min(label.Length, FaxFileMessageValidation.MaxLabelSize)],
+            content[..Math.Min(content.Length, FaxFileMessageValidation.MaxContentSize)],
+            _window.OfficePaper));
+    }
+
     private void OnSendButtonPressed()
     {
         SendMessage(new FaxSendMessage());
+    }
+
+    private void OnCopyButtonPressed()
+    {
+        SendMessage(new FaxCopyMessage());
     }
 
     private void OnRefreshButtonPressed()

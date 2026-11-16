@@ -2,7 +2,7 @@
   name: arm blade
   parent: BaseItem
   id: ArmBlade
-  description: A grotesque blade made out of bone and flesh that cleaves through people as a hot knife through butter.
+  description: A grotesque blade made out of bone and flesh that can pry open doors and cleaves through people as a hot knife through butter.
   components:
   - type: Sharp
   - type: Execution
@@ -11,13 +11,41 @@
     sprite: Objects/Weapons/Melee/armblade.rsi
     state: icon
   - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
     wideAnimationRotation: 90
-    attackRate: 0.75
+    attackRate: 1
     damage:
-      types:
-        Slash: 25
+      types: # Same as energy sword, but slash/pierce instead of slash/heat
+        Slash: 15
         Piercing: 15
+        Structural: 20
   - type: Item
     size: Normal
     sprite: Objects/Weapons/Melee/armblade.rsi
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.35
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 melee weapon block added end
   - type: Prying
+    speedModifier: 1.5 # Jaws of life speed
+    pryPowered: true

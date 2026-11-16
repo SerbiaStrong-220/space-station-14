@@ -27,8 +27,7 @@ public sealed partial class CartComponent : Component
     /// <summary>
     /// Time required for attaching/deattaching
     /// </summary>
-    [DataField("attachToggleTime")]
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     [AutoNetworkedField]
     public float AttachToggleTime = .3f;
 

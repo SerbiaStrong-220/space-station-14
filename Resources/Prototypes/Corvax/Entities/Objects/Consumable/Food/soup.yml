@@ -7,7 +7,7 @@
     - type: FlavorProfile
       flavors:
         - meaty
-    - type: Food
+    - type: Edible
       trash: [ FoodBowlBig ]
       utensil:
         - Spoon
@@ -20,7 +20,7 @@
     - type: SolutionContainerManager
       solutions:
         food:
-          maxVol: 30
+          maxVol: 35 #SS220-SoupFix
           reagents:
             - ReagentId: Nutriment
               Quantity: 10

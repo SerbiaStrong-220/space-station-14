@@ -13,21 +13,22 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.SpiderQueen.Systems;
 
-public abstract class SharedSpiderQueenSystem : EntitySystem
+public abstract partial class SharedSpiderQueenSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!; 
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<SpiderQueenComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<SpiderQueenComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
     }
@@ -35,6 +36,15 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     private void OnStartup(Entity<SpiderQueenComponent> entity, ref ComponentStartup args)
     {
         UpdateAlert(entity);
+    }
+
+    private void OnShutdown(Entity<SpiderQueenComponent> entity, ref ComponentShutdown args)
+    {
+        foreach (var cocoon in entity.Comp.CocoonsList)
+        {
+            if (TryComp<SpiderCocoonComponent>(cocoon, out var cocoonComp))
+                cocoonComp.CocoonOwner = null;
+        }
     }
 
     private void OnExamine(Entity<SpiderQueenComponent> entity, ref ExaminedEvent args)
@@ -69,7 +79,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
             return;
         }
 
-        if (!HasComp<HumanoidAppearanceComponent>(target))
+        if (!HasComp<HumanoidProfileComponent>(target))
         {
             _popup.PopupEntity(Loc.GetString("cocooning-target-not-humanoid"), performer, performer);
             return;
@@ -112,6 +122,9 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     /// </summary>
     public bool CheckEnoughBloodPoints(EntityUid uid, FixedPoint2 cost, SpiderQueenComponent? component = null)
     {
+        if (cost <= 0)
+            return true;
+
         if (!Resolve(uid, ref component))
         {
             if (_net.IsServer)
@@ -127,6 +140,17 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         }
         else
             return true;
+    }
+
+    public void ChangeBloodPointsAmount(EntityUid uid, SpiderQueenComponent component, FixedPoint2 amount)
+    {
+        var newValue = component.CurrentBloodPoints + amount;
+        component.CurrentBloodPoints = newValue > 0
+            ? MathF.Min((float)newValue, (float)component.MaxBloodPoints)
+            : 0;
+
+        Dirty(uid, component);
+        UpdateAlert((uid, component));
     }
 
     /// <summary>

@@ -1,16 +1,134 @@
-# VladIsLove for SS220
 - type: entity
   id: BorgModuleProtoKineticAccelerator
   parent: [ BaseBorgModuleCargo, BaseProviderBorgModule ]
-  name: протокинетический модуль киборга
-  description: Техническая деталь, дающая киборгам новые способности.
+  name: protokinetic cyborg module
   components:
   - type: Sprite
     layers:
     - state: cargo
     - state: icon-ProtoKinetic-gun
   - type: ItemBorgModule
-    items:
-    - WeaponProtoKineticAccelerator
-    - JetpackBorgModule
-    - HandheldGPSBasic
+    hands:
+    - item: WeaponProtoKineticAccelerator
+    - item: JetpackBorgModule
+    - item: HandHeldMassScannerBorg
+    - item: HandheldGPSBasic
+
+- type: entity
+  id: BorgModuleFireAxe
+  parent: [ BaseBorgModuleEngineering, BaseProviderBorgModule ]
+  name: fire axe cyborg module
+  description: A piece of tech that gives cyborgs a fire axe!
+  components:
+    - type: Sprite
+      layers:
+        - state: engineering
+        - state: icon-fireaxe
+          sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+    - type: ItemBorgModule
+      hands:
+      - item: BorgFireAxe
+    - type: BorgModuleIcon
+      icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: fireaxe-module }
+
+- type: entity
+  id: BorgModuleFlamingAxe
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: fire axe cyborg module
+  description: A piece of tech that gives cyborgs a fire axe!
+  components:
+    - type: Sprite
+      layers:
+      - state: syndicate
+      - state: icon-fireaxe-flaming
+        sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+    - type: ItemBorgModule
+      hands:
+      - item: BorgFireAxeFlaming
+    - type: BorgModuleIcon
+      icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: syndicate-fireaxe-module }
+    - type: HiddenDescription
+      entries:
+        SyndicateAgentKnowledge: [ hidden-desc-flaming-axe-module-syndicate ]
+        ScienceKnowledge: [ hidden-desc-flaming-axe-module-research ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: ent-BaseBorgModule
+
+- type: entity
+  id: BorgModuleMime
+  parent: [ BaseBorgModuleService, BaseProviderBorgModule ]
+  name: mime cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: ClownMime
+    - state: icon-ClownMime
+    sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+  - type: Tag
+    tags:
+    - BorgModuleClown
+  - type: ItemBorgModule
+    hands:
+    - item: BluespaceCrayon
+    - item: Pen
+    - item: CrowbarBaguetteCyborg
+    - item: ToyFigurineMime
+  - type: BorgModuleIcon
+    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: ClownMime-module }
+
+- type: entity
+  id: BorgModuleClown
+  parent: [ BaseBorgModuleService, BaseProviderBorgModule ]
+  name: clowning cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: ClownMime
+    - state: icon-ClownMime
+    sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+  - type: Tag
+    tags:
+    - BorgModuleClown
+  - type: ItemBorgModule
+    hands:
+    - item: BananiumHorn
+    - item: ClownRecorder
+    - item: RubberChicken
+    - item: LauncherCreamPieCyborg
+    - item: ToyFigurineClown
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: clowning-module }
+
+- type: entity
+  id: BorgModuleTanksPlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: SS220/Placeholders/tanks.rsi
+    state: tanks
+
+- type: entity
+  id: BorgModuleSeedsPlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: SS220/Placeholders/seeds.rsi
+    state: seed
+
+- type: entity
+  id: BorgModuleArtifactsPlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: SS220/Placeholders/artifacts.rsi
+    state: artifacts
+
+- type: entity
+  id: BorgModuleMusiqueInstrumentsPlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: SS220/Placeholders/instruments.rsi
+    state: instruments

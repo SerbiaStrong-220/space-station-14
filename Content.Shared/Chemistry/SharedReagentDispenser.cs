@@ -1,5 +1,6 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
+using Content.Shared.Storage;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Chemistry
@@ -54,6 +55,11 @@ namespace Content.Shared.Chemistry
                 case "50":
                     ReagentDispenserDispenseAmount = ReagentDispenserDispenseAmount.U50;
                     break;
+                //ss220 add 75u for chem master start
+                case "75":
+                    ReagentDispenserDispenseAmount = ReagentDispenserDispenseAmount.U75;
+                    break;
+                //ss220 add 75u for chem master end
                 case "100":
                     ReagentDispenserDispenseAmount = ReagentDispenserDispenseAmount.U100;
                     break;
@@ -66,11 +72,25 @@ namespace Content.Shared.Chemistry
     [Serializable, NetSerializable]
     public sealed class ReagentDispenserDispenseReagentMessage : BoundUserInterfaceMessage
     {
-        public readonly string SlotId;
+        public readonly ItemStorageLocation StorageLocation;
 
-        public ReagentDispenserDispenseReagentMessage(string slotId)
+        public ReagentDispenserDispenseReagentMessage(ItemStorageLocation storageLocation)
         {
-            SlotId = slotId;
+            StorageLocation = storageLocation;
+        }
+    }
+
+    /// <summary>
+    ///     Message sent by the user interface to ask the reagent dispenser to eject a container
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class ReagentDispenserEjectContainerMessage : BoundUserInterfaceMessage
+    {
+        public readonly ItemStorageLocation StorageLocation;
+
+        public ReagentDispenserEjectContainerMessage(ItemStorageLocation storageLocation)
+        {
+            StorageLocation = storageLocation;
         }
     }
 
@@ -90,13 +110,16 @@ namespace Content.Shared.Chemistry
         U25 = 25,
         U30 = 30,
         U50 = 50,
+        //ss220 add 75u for chem master start
+        U75 = 75,
+        //ss220 add 75u for chem master start
         U100 = 100,
     }
 
     [Serializable, NetSerializable]
-    public sealed class ReagentInventoryItem(string storageSlotId, string reagentLabel, FixedPoint2 quantity, Color reagentColor)
+    public sealed class ReagentInventoryItem(ItemStorageLocation storageLocation, string reagentLabel, FixedPoint2 quantity, Color reagentColor)
     {
-        public string StorageSlotId = storageSlotId;
+        public ItemStorageLocation StorageLocation = storageLocation;
         public string ReagentLabel = reagentLabel;
         public FixedPoint2 Quantity = quantity;
         public Color ReagentColor = reagentColor;

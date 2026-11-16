@@ -2,7 +2,7 @@ store-category-chemical-implants = Химические импланты
 
 uplink-chemical-implanter-desc = Многоразовое средство имплантирования особых имплантов с препаратами внутрь тела
 
-uplink-empty-chemical-implant-desc = Пустая капсула объёмом 30u для внедрения собственных смесей
+uplink-empty-chemical-implant-desc = Пустая капсула объёмом 80u для внедрения собственных смесей
 
 uplink-combat-chemical-implant-desc = Содержит в себе препараты из боевого медипена
 

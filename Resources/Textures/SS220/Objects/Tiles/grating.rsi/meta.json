@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by @Kit0vras (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+      {
+        "name":"grating-maint-drain-middle"
+      },
+      {
+        "name":"grating-maint-drain-horizontal"
+      },
+      {
+        "name":"grating-maint-drain-vertical"
+      },
+      {
+        "name":"grating-maint-horizontal"
+      },
+      {
+        "name":"grating-maint-mini"
+      },
+      {
+        "name":"grating-maint-mono"
+      },
+      {
+        "name":"grating-maint-vertical"
+      },
+      {
+        "name":"grating-maint"
+      }
+   ]
+}

@@ -1,10 +1,17 @@
 using Content.Server.Administration.Logs;
+using Content.Server.Destructible;
 using Content.Server.Effects;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
+using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.Projectiles.Components;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 
@@ -15,6 +22,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ColorFlashEffectSystem _color = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly DestructibleSystem _destructibleSystem = default!;
     [Dependency] private readonly GunSystem _guns = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
 
@@ -28,7 +36,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     {
         // This is so entities that shouldn't get a collision are ignored.
         if (args.OurFixtureId != ProjectileFixture || !args.OtherFixture.Hard
-            || component.DamagedEntity || component is { Weapon: null, OnlyCollideWhenShot: true })
+            || component.ProjectileSpent || component is { Weapon: null, OnlyCollideWhenShot: true })
             return;
 
         var target = args.OtherEntity;
@@ -41,40 +49,109 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             return;
         }
 
-        var ev = new ProjectileHitEvent(component.Damage, target, component.Shooter);
+        //SS220 shield rework begin
+        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component.Damage);
+        RaiseLocalEvent(target, ref blockattemptEv);
+        if (blockattemptEv.Cancelled)
+        {
+            if (TryGetNetEntity(target, out var netTarget))
+            {
+                var blockedComp = EnsureComp<BlockedProjectileComponent>(uid);
+                blockedComp.BlockerEntity = netTarget;
+                Dirty(uid, blockedComp);
+            }
+
+            SetShooter(uid, component, target);
+            QueueDel(uid);
+
+            if (blockattemptEv.hitMarkColor != null)
+                _color.RaiseEffect((Color)blockattemptEv.hitMarkColor, new List<EntityUid>() { target }, Filter.Pvs(target, entityManager: EntityManager));
+
+            return;
+        }
+        //SS220 shield rework end
+
+        var ev = new ProjectileHitEvent(component.Damage * _damageableSystem.UniversalProjectileDamageModifier, target, component.Shooter);
         RaiseLocalEvent(uid, ref ev);
 
         var otherName = ToPrettyString(target);
-        var direction = args.OurBody.LinearVelocity.Normalized();
-        var modifiedDamage = _damageableSystem.TryChangeDamage(target, ev.Damage, component.IgnoreResistances, origin: component.Shooter);
+        var damageRequired = _destructibleSystem.DestroyedAt(target);
+        if (TryComp<DamageableComponent>(target, out var damageableComponent))
+        {
+            damageRequired -= _damageableSystem.GetTotalDamage((target, damageableComponent));
+            damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
+        }
         var deleted = Deleted(target);
 
-        if (modifiedDamage is not null && EntityManager.EntityExists(component.Shooter))
+        if (_damageableSystem.TryChangeDamage((target, damageableComponent), ev.Damage, out var damage, component.IgnoreResistances, origin: component.Shooter) && Exists(component.Shooter))
         {
-            if (modifiedDamage.AnyPositive() && !deleted)
+            if (!deleted)
             {
                 _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target, entityManager: EntityManager));
             }
 
             _adminLogger.Add(LogType.BulletHit,
-                HasComp<ActorComponent>(target) ? LogImpact.Extreme : LogImpact.High,
-                $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(component.Shooter!.Value):user} hit {otherName:target} and dealt {modifiedDamage.GetTotal():damage} damage");
+                LogImpact.Medium,
+                $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(component.Shooter!.Value):user} hit {otherName:target} and dealt {damage:damage} damage");
+
+            component.ProjectileSpent = !TryPenetrate((uid, component), damage, damageRequired);
+        }
+        else
+        {
+            component.ProjectileSpent = true;
         }
 
         if (!deleted)
         {
-            _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound);
-            _sharedCameraRecoil.KickCamera(target, direction);
+            _guns.PlayImpactSound(target, damage, component.SoundHit, component.ForceSound);
+
+            if (!args.OurBody.LinearVelocity.IsLengthZero())
+                _sharedCameraRecoil.KickCamera(target, args.OurBody.LinearVelocity.Normalized());
         }
 
-        component.DamagedEntity = true;
-
-        if (component.DeleteOnCollide)
+        if (component.DeleteOnCollide && component.ProjectileSpent)
             QueueDel(uid);
 
         if (component.ImpactEffect != null && TryComp(uid, out TransformComponent? xform))
         {
             RaiseNetworkEvent(new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(xform.Coordinates)), Filter.Pvs(xform.Coordinates, entityMan: EntityManager));
         }
+    }
+
+    private bool TryPenetrate(Entity<ProjectileComponent> projectile, DamageSpecifier damage, FixedPoint2 damageRequired)
+    {
+        // If penetration is to be considered, we need to do some checks to see if the projectile should stop.
+        if (projectile.Comp.PenetrationThreshold == 0)
+            return false;
+
+        // If a damage type is required, stop the bullet if the hit entity doesn't have that type.
+        if (projectile.Comp.PenetrationDamageTypeRequirement != null)
+        {
+            foreach (var requiredDamageType in projectile.Comp.PenetrationDamageTypeRequirement)
+            {
+                if (damage.DamageDict.Keys.Contains(requiredDamageType))
+                    continue;
+
+                return false;
+            }
+        }
+
+        // If the object won't be destroyed, it "tanks" the penetration hit.
+        if (damage.GetTotal() < damageRequired)
+        {
+            return false;
+        }
+
+        if (!projectile.Comp.ProjectileSpent)
+        {
+            projectile.Comp.PenetrationAmount += damageRequired;
+            // The projectile has dealt enough damage to be spent.
+            if (projectile.Comp.PenetrationAmount >= projectile.Comp.PenetrationThreshold)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

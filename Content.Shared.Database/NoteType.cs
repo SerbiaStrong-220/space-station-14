@@ -35,4 +35,13 @@ public enum NoteType
     ///     A role ban, converted to a shared note
     /// </summary>
     RoleBan = 4,
+
+    // SS220 Species bans begin
+    /// <summary>
+    ///     A species ban, converted to a shared note
+    /// </summary>
+    SpeciesBan = 5,
+
+    ChatBan = 6,
+    // SS220 Species bans end
 }

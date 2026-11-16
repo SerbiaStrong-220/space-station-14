@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by .kreks. (Discord) and Estkemran (Github)",
+  "size":
+  {
+    "x": 32,
+    "y": 32
+  },
+  "states":
+  [
+    {
+      "name": "ninjaAdrenal"
+    },
+    {
+      "name": "ninjadash"
+    },
+    {
+      "name": "ninjaEMP"
+    },
+    {
+        "name": "ninjaGlovesOff"
+    },
+    {
+        "name": "ninjaGlovesOn"
+    },
+    {
+        "name": "ninjaInvisible"
+    },
+    {
+        "name": "ninjaTeleport"
+    },
+    {
+        "name": "ninjaThrowingStar"
+    }
+  ]
+}

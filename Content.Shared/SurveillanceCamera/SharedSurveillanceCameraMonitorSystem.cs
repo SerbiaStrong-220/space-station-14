@@ -1,4 +1,5 @@
-using System.Numerics;
+using Content.Shared.DeviceNetwork;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SurveillanceCamera;
@@ -18,14 +19,18 @@ public sealed class SurveillanceCameraMonitorUiState : BoundUserInterfaceState
 
     public string ActiveAddress;
 
-    // Known cameras, by address and name.
-    public Dictionary<string, Dictionary<string, (string, Vector2)>> Cameras { get; } // SS220 Camera-Map
+    // Currently active subnet.
+    public string ActiveSubnet { get; }
 
-    public SurveillanceCameraMonitorUiState(NetEntity? activeCamera, HashSet<string> subnets, string activeAddress, Dictionary<string, Dictionary<string, (string, Vector2)>> cameras)
+    // Known cameras, by address and name.
+    public Dictionary<string, string> Cameras { get; }
+
+    public SurveillanceCameraMonitorUiState(NetEntity? activeCamera, HashSet<string> subnets, string activeAddress, string activeSubnet, Dictionary<string, string> cameras)
     {
         ActiveCamera = activeCamera;
         Subnets = subnets;
         ActiveAddress = activeAddress;
+        ActiveSubnet = activeSubnet;
         Cameras = cameras;
     }
 }
@@ -34,10 +39,12 @@ public sealed class SurveillanceCameraMonitorUiState : BoundUserInterfaceState
 public sealed class SurveillanceCameraMonitorSwitchMessage : BoundUserInterfaceMessage
 {
     public string Address { get; }
+    public string? CameraSubnet { get; }
 
-    public SurveillanceCameraMonitorSwitchMessage(string address)
+    public SurveillanceCameraMonitorSwitchMessage(string address, string? cameraSubnet = null)
     {
         Address = address;
+        CameraSubnet = cameraSubnet;
     }
 }
 
@@ -80,11 +87,11 @@ public sealed class SurveillanceCameraSetupBoundUiState : BoundUserInterfaceStat
 {
     public string Name { get; }
     public uint Network { get; }
-    public List<string> Networks { get; }
+    public List<ProtoId<DeviceFrequencyPrototype>> Networks { get; }
     public bool NameDisabled { get; }
     public bool NetworkDisabled { get; }
 
-    public SurveillanceCameraSetupBoundUiState(string name, uint network, List<string> networks, bool nameDisabled, bool networkDisabled)
+    public SurveillanceCameraSetupBoundUiState(string name, uint network, List<ProtoId<DeviceFrequencyPrototype>> networks, bool nameDisabled, bool networkDisabled)
     {
         Name = name;
         Network = network;

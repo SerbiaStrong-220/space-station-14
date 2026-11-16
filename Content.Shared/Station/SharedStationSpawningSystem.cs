@@ -2,11 +2,15 @@ using System.Linq;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
+using Content.Shared.Item;
 using Content.Shared.Preferences.Loadouts;
+using Content.Shared.Radio.Components; // SS220-ipc-builtin-radio
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience.Systems;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Collections;
+using Robust.Shared.Containers; // SS220-ipc-builtin-radio
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -21,21 +25,13 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private SharedContainerSystem _container = default!; // SS220-ipc-builtin-radio
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
 
-    private EntityQuery<HandsComponent> _handsQuery;
-    private EntityQuery<InventoryComponent> _inventoryQuery;
-    private EntityQuery<StorageComponent> _storageQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        _handsQuery = GetEntityQuery<HandsComponent>();
-        _inventoryQuery = GetEntityQuery<InventoryComponent>();
-        _storageQuery = GetEntityQuery<StorageComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
-    }
+    [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
+    [Dependency] private readonly EntityQuery<InventoryComponent> _inventoryQuery = default!;
+    [Dependency] private readonly EntityQuery<StorageComponent> _storageQuery = default!;
+    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
 
     /// <summary>
     ///     Equips the data from a `RoleLoadout` onto an entity.
@@ -67,9 +63,14 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     {
         string? name = null;
 
-        if (string.IsNullOrEmpty(name) && PrototypeManager.TryIndex(roleProto.NameDataset, out var nameData))
+        if (roleProto.CanCustomizeName)
         {
-            name = _random.Pick(nameData.Values);
+            name = loadout.EntityName;
+        }
+
+        if (string.IsNullOrEmpty(name) && PrototypeManager.Resolve(roleProto.NameDataset, out var nameData))
+        {
+            name = Loc.GetString(_random.Pick(nameData.Values));
         }
 
         if (!string.IsNullOrEmpty(name))
@@ -89,7 +90,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     /// </summary>
     public void EquipStartingGear(EntityUid entity, ProtoId<StartingGearPrototype>? startingGear, bool raiseEvent = true)
     {
-        PrototypeManager.TryIndex(startingGear, out var gearProto);
+        PrototypeManager.Resolve(startingGear, out var gearProto);
         EquipStartingGear(entity, gearProto, raiseEvent);
     }
 
@@ -112,6 +113,14 @@ public abstract class SharedStationSpawningSystem : EntitySystem
         if (startingGear == null)
             return;
 
+        // SS220-experience-update-begin
+        if (startingGear is StartingGearPrototype startingGearProto)
+        {
+            var changeDefEv = new TryChangeExperienceDefinitionEvent(startingGearProto.ExperienceDefinition, false);
+            RaiseLocalEvent(entity, ref changeDefEv);
+        }
+        // SS220-experience-update-end
+
         var xform = _xformQuery.GetComponent(entity);
 
         if (InventorySystem.TryGetSlots(entity, out var slotDefinitions))
@@ -121,7 +130,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
                 var equipmentStr = startingGear.GetGear(slot.Name);
                 if (!string.IsNullOrEmpty(equipmentStr))
                 {
-                    var equipmentEntity = EntityManager.SpawnEntity(equipmentStr, xform.Coordinates);
+                    var equipmentEntity = Spawn(equipmentStr, xform.Coordinates);
                     InventorySystem.TryEquip(entity, equipmentEntity, slot.Name, silent: true, force: true);
                 }
             }
@@ -133,9 +142,9 @@ public abstract class SharedStationSpawningSystem : EntitySystem
             var coords = xform.Coordinates;
             foreach (var prototype in inhand)
             {
-                var inhandEntity = EntityManager.SpawnEntity(prototype, coords);
+                var inhandEntity = Spawn(prototype, coords);
 
-                if (_handsSystem.TryGetEmptyHand(entity, out var emptyHand, handsComponent))
+                if (_handsSystem.TryGetEmptyHand((entity, handsComponent), out var emptyHand))
                 {
                     _handsSystem.TryPickup(entity, inhandEntity, emptyHand, checkActionBlocker: false, handsComp: handsComponent);
                 }
@@ -145,29 +154,41 @@ public abstract class SharedStationSpawningSystem : EntitySystem
         if (startingGear.Storage.Count > 0)
         {
             var coords = _xformSystem.GetMapCoordinates(entity);
-            var ents = new ValueList<EntityUid>();
             _inventoryQuery.TryComp(entity, out var inventoryComp);
 
-            foreach (var (slot, entProtos) in startingGear.Storage)
+            foreach (var (slotName, entProtos) in startingGear.Storage)
             {
-                if (entProtos.Count == 0)
+                if (entProtos == null || entProtos.Count == 0)
                     continue;
 
                 if (inventoryComp != null &&
-                    InventorySystem.TryGetSlotEntity(entity, slot, out var slotEnt, inventoryComponent: inventoryComp) &&
+                    InventorySystem.TryGetSlotEntity(entity, slotName, out var slotEnt, inventoryComponent: inventoryComp) &&
                     _storageQuery.TryComp(slotEnt, out var storage))
                 {
-                    foreach (var ent in entProtos)
-                    {
-                        ents.Add(Spawn(ent, coords));
-                    }
 
-                    foreach (var ent in ents)
+                    foreach (var entProto in entProtos)
                     {
-                        _storage.Insert(slotEnt.Value, ent, out _, storageComp: storage, playSound: false);
+                        var spawnedEntity = Spawn(entProto, coords);
+
+                        _storage.Insert(slotEnt.Value, spawnedEntity, out _, storageComp: storage, playSound: false);
                     }
                 }
             }
+
+            // SS220-ipc-builtin-radio begin
+            // Pre-install encryption keys into the built-in radio's key_slots container.
+            // Bypasses EncryptionKeySystem.TryInsertKey's lock check (same as ContainerFill).
+            if (startingGear.Storage.TryGetValue(EncryptionKeyHolderComponent.KeyContainerName, out var keyProtos) &&
+                keyProtos is { Count: > 0 } &&
+                TryComp<EncryptionKeyHolderComponent>(entity, out var keyHolder))
+            {
+                foreach (var keyProto in keyProtos)
+                {
+                    var keyEntity = Spawn(keyProto, coords);
+                    _container.Insert(keyEntity, keyHolder.KeyContainer);
+                }
+            }
+            // SS220-ipc-builtin-radio end
         }
 
         if (raiseEvent)
@@ -175,5 +196,35 @@ public abstract class SharedStationSpawningSystem : EntitySystem
             var ev = new StartingGearEquippedEvent(entity);
             RaiseLocalEvent(entity, ref ev);
         }
+    }
+
+    /// <summary>
+    ///     Gets all the gear for a given slot when passed a loadout.
+    /// </summary>
+    /// <param name="loadout">The loadout to look through.</param>
+    /// <param name="slot">The slot that you want the clothing for.</param>
+    /// <returns>
+    ///     If there is a value for the given slot, it will return the proto id for that slot.
+    ///     If nothing was found, will return null
+    /// </returns>
+    public string? GetGearForSlot(RoleLoadout? loadout, string slot)
+    {
+        if (loadout == null)
+            return null;
+
+        foreach (var group in loadout.SelectedLoadouts)
+        {
+            foreach (var items in group.Value)
+            {
+                if (!PrototypeManager.Resolve(items.Prototype, out var loadoutPrototype))
+                    return null;
+
+                var gear = ((IEquipmentLoadout) loadoutPrototype).GetGear(slot);
+                if (gear != string.Empty)
+                    return gear;
+            }
+        }
+
+        return null;
     }
 }

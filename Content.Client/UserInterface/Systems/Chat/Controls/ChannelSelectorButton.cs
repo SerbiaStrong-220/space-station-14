@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared.Chat;
+using Content.Shared.FixedPoint;
 
 namespace Content.Client.UserInterface.Systems.Chat.Controls;
 
@@ -69,9 +70,24 @@ public sealed class ChannelSelectorButton : ChatPopupButton<ChannelSelectorPopup
         };
     }
 
-    public void UpdateChannelSelectButton(ChatSelectChannel channel, Shared.Radio.RadioChannelPrototype? radio)
+    public void UpdateChannelSelectButton(ChatSelectChannel channel, Shared.Radio.RadioChannelPrototype? radio, FixedPoint2? frequency = null /*SS220-add-frequency-radio */)
     {
-        Text = radio != null ? Loc.GetString(radio.Name) : ChannelSelectorName(channel);
+        // SS220-add-frequency-radio-begin
+        string channelName;
+        if (radio is not null)
+        {
+            channelName = radio.FrequencyRadio && frequency is not null
+                ? Loc.GetString(radio.FrequencyChanelName, ("freq", frequency.Value.Float()))
+                : Loc.GetString(radio.Name);
+        }
+        else
+        {
+            channelName = ChannelSelectorName(channel);
+        }
+
+        Text = channelName;
+        // Text = radio != null ? Loc.GetString(radio.Name) : ChannelSelectorName(channel); // [wizden-code] SS220-add-frequency-radio
+        // SS220-add-frequency-radio-end
         Modulate = radio?.Color ?? ChannelSelectColor(channel);
     }
 }

@@ -1,0 +1,376 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: CultYoggBuildingFrame
+  suffix: CultYogg
+  parent: BaseStructure
+  name: cult building frame
+  description: A frame for the construction of cult structures.
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.35,0.25,0.35"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: InteractionOutline
+  - type: Rotatable
+    rotateWhileAnchored: true
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/building_frame.rsi
+    drawdepth: Objects
+    layers:
+    - state: frame
+      map: [ "enum.ConstructionVisuals.Layer" ]
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Electronic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: monitorBroken
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance
+  - type: CultYoggBuildingFrame
+    eraseTime: 5
+  - type: ContainerContainer
+    containers:
+      cult-yogg-building-frame-storage: !type:Container
+        showEnts: False
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
+
+- type: entity
+  parent: BaseWall
+  id: WallCultYogg
+  suffix: CultYogg
+  name: cursed wall
+  description: It is a wall and it is cursed.
+  components:
+  - type: Tag
+    tags:
+      - Wall
+      - WhitelistChameleonStructureWall
+  - type: Sprite
+    sprite: SS220/Structures/Walls/cult_yogg_walls.rsi
+  - type: Icon
+    sprite: SS220/Structures/Walls/cult_yogg_walls.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: cult
+  - type: CultYoggBuilding
+    eraseTime: 3
+  - type: ChameleonStructure
+    userWhitelist:
+      components:
+      - CultYogg
+      - MiGo
+    requireTag: WhitelistChameleonStructureWall
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonStructureUiKey.Key:
+        type: ChameleonStructureBoundUserInterface
+  - type: CultYoggChamelenBlocker
+  - type: HiddenDescription
+    entries:
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-BaseWall
+
+- type: entity
+  parent: BaseSecretDoor
+  id: CultYoggDoor
+  suffix: CultYogg, secret door
+  name: cursed secreddoor
+  description: Think twice before opening it.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/cult_yogg_doors.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    bumpOpen: false
+    clickOpen: true
+    closeTimeOne: 0.2
+    closeTimeTwo: 0.6
+    openTimeOne: 0.6
+    openTimeTwo: 0.2
+    openSound:
+      path: /Audio/Effects/door_open.ogg
+    closeSound:
+      path: /Audio/Effects/door_close.ogg
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: CultYoggBuilding
+    eraseTime: 3
+  - type: ChameleonStructure
+    userWhitelist:
+      components:
+      - CultYogg
+      - MiGo
+    requireTag: WhitelistChameleonStructureSecretDoor
+    protoList:
+     - SolidSecretDoor
+     - SolidSecretReinforcedDoor
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonStructureUiKey.Key:
+        type: ChameleonStructureBoundUserInterface
+  - type: HiddenDescription
+    entries:
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-CultYoggDoor
+  - type: Tag
+    tags:
+      - Structure
+      - Wall
+      - WhitelistChameleonStructureSecretDoor
+  - type: Weldable
+    fuel: 5
+    time: 3
+  - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
+
+- type: entity
+  parent: Bed
+  id: CultYoggBed
+  suffix: CultYogg
+  components:
+  - type: Strap
+    hasSeatbelt: true
+    uncuffTimeModifier: 2.0
+  - type: CultYoggBuilding
+    eraseTime: 3
+    spawnOnErase:
+      - id: CableApcStack1Live
+        stackAmount: 3
+      - id: SheetTokl1
+        stackAmount: 5
+
+- type: entity
+  parent: BaseStructure
+  id: CultYoggAirlock
+  suffix: CultYogg
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: SS220/Structures/CultYogg/airlock.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: welded
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: bolted_unlit
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: emergency_unlit
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+      shader: unshaded
+    - state: panel_open
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: electrified
+      sprite: Effects/electricity.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.Sparks"]
+  - type: AnimationPlayer
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - AirlockLayer
+  - type: LayerChangeOnWeld
+    unWeldedLayer: AirlockLayer
+    weldedLayer: WallLayer
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronics ]
+  - type: AccessWhitelist
+    whitelist:
+      components:
+      - CultYogg
+      - MiGo
+  - type: Door
+    crushDamage:
+      types:
+        Blunt: 15
+    openSound:
+      path: /Audio/Machines/airlock_open.ogg
+    closeSound:
+      path: /Audio/Machines/airlock_close.ogg
+    denySound:
+      path: /Audio/Machines/airlock_deny.ogg
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+  - type: Weldable
+    fuel: 5
+    time: 3
+  - type: Airlock
+    openUnlitVisible: true
+  - type: NavMapDoor
+  - type: DoorBolt
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ElectrifiedVisuals.ShowSparks:
+        enum.ElectrifiedLayers.Sparks:
+          True: { visible: True }
+          False: { visible: False }
+  - type: WiresVisuals
+  - type: ElectrocutionHUDVisuals
+  - type: ApcPowerReceiver
+    powerLoad: 20
+    needsPower: false
+  - type: ExtensionCableReceiver
+  - type: Electrified
+    enabled: false
+    usesApcPower: true
+  - type: WiresPanel
+  - type: WiresPanelSecurity
+  - type: Wires
+    boardName: wires-board-name-airlock
+    layoutId: Airlock
+  - type: SoundOnOverload
+  - type: SpawnOnOverload
+  - type: UserInterface
+    interfaces:
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+      enum.ChameleonStructureUiKey.Key:
+        type: ChameleonStructureBoundUserInterface
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+  - type: AirlockVisuals
+  - type: RadiationBlocker
+    resistance: 3
+  - type: Occluder
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StrongMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+  - type: PlacementReplacement
+    key: walls
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: LightningTarget
+    priority: 1
+  - type: Tag
+    tags:
+      - Airlock
+      - WhitelistChameleonStructureAirlock
+  - type: FoVOverlay
+  - type: BlockWeather
+  - type: ChameleonStructure
+    userWhitelist:
+      components:
+      - CultYogg
+      - MiGo
+    requireTag: WhitelistChameleonStructureAirlock
+    protoList:
+     - AirlockChemistry
+     - AirlockMaint
+     - Airlock
+     - AirlockSecurity
+     - AirlockCommand
+     - AirlockVirology
+     - AirlockHydroponics
+     - AirlockFreezer
+     - AirlockEngineering
+     - AirlockMedical
+     - AirlockScience
+     - AirlockCargo
+     - AirlockClown
+     - AirlockExternalGlass
+     - AirlockGlass
+     - AirlockSecurityGlass
+     - AirlockCommandGlass
+     - AirlockVirologyGlass
+     - AirlockHydroponicsGlass
+     - AirlockEngineeringGlass
+     - AirlockMedicalGlass
+     - AirlockScienceGlass
+     - AirlockCargoGlass
+  - type: CultYoggBuilding
+    eraseTime: 3
+  - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
+  - type: HiddenDescription
+    entries:
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-CultYoggAirlock

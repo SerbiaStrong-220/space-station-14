@@ -1,36 +1,97 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-
-  parent: ClothingBeltStorageBase
-  id: ClothingBeltWebbingSRT
-  name: пояс ГСН
-  description: Этот пояс позволяет хранить всё необходимое в удобном и быстродоступном месте, а материал из которого он выполнен, позволяет выглядеть ещё более стильно.
+  parent: ClothingBeltSecurity
+  id: ClothingBeltBlueShield
+  name: the Blue Shield belt
+  description: This belt allows you to store everything you need in a convenient and quickly accessible place, and the material from which it is made allows you to look even more stylish.
   components:
   - type: Sprite
-    sprite: Clothing/Belt/assault.rsi
+    sprite: SS220/Clothing/Belt/blueshield.rsi
   - type: Clothing
-    sprite: Clothing/Belt/assault.rsi
+    sprite: SS220/Clothing/Belt/blueshield.rsi
   - type: Storage
-    blacklist: # SS220 Fix #2009 begin
-      tags:
-        - HolofanProjector
-    # SS220 Fix #2009 end
+    maxItemSize: Normal
+    defaultStorageOrientation: Vertical
+    grid:
+    - 0,0,6,2
 
 - type: entity
-  parent: ClothingBeltWebbingSRT
-  id: ClothingBeltWebbingSRTFilled
-  suffix: Заполненный
+  parent: ClothingBeltBlueShield
+  id: ClothingBeltBlueShieldFilled
+  suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: FlashlightSeclite
-      - id: CombatKnife
-      - id: Handcuffs
-      - id: Handcuffs
-      - id: GrenadeFlashBang
-      - id: GrenadeFlashBang
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Handcuffs
+        - id: Handcuffs
+        - id: GrenadeFlashBang
+        - id: RadioHandheldSecurity
+        - id: FlashlightSeclite
 
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltWebbingBlueShield
+  name: the Blue Shield RPS
+  description: Universal unloading vest with straps and belt. It can accommodate anything... anything of a small size.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/blueshield_webbing.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/blueshield_webbing.rsi
+  - type: Storage
+    grid:
+    - 0,1,0,2
+    - 1,1,1,1
+    - 2,2,2,3
+    - 3,0,3,1
+    - 4,2,4,3
+    - 5,0,5,1
+    - 6,2,6,3
+    - 7,0,7,1
+    - 8,2,8,3
+    - 9,1,9,1
+    - 10,1,10,2
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-boots-sidearm
+        whitelist:
+          tags:
+          - Medkit
+          components:
+          - Stunbaton
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: False
+        occludes: True
+        ents: [ ]
+      item: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+
+- type: entity
+  parent: ClothingBeltWebbingBlueShield
+  id: ClothingBeltWebbingBlueShieldFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Handcuffs
+        - id: FlashlightSeclite
+        - id: Handcuffs
+        - id: GrenadeFlashBang
+        - id: GrenadeFlashBang
+        - id: RadioHandheldSecurity
+      item: !type:AllSelector
+        children:
+        - id: Stunbaton
 
 - type: entity
   parent: ClothingBeltSheath
@@ -129,6 +190,7 @@
   id: ClothingBeltCutlassSheath
   name: officer's cutlass sheath
   description: The sheath of an officer's cutlass. Protects the cutlass from you, and you from the sea.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/cutlass_sheath.rsi
@@ -162,30 +224,30 @@
   id: ClothingBeltPlantDruid #SS220 druid loadout
   name: druid belt
   description: A belt that helps researchers unlock the mysteries of alien flora.
-  suffix: DO NOT MAP, Filled
+  suffix: Filled, For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/druid_belt.rsi
+    sprite: SS220/Clothing/Belt/hydro_druid.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/druid_belt.rsi
+    sprite: SS220/Clothing/Belt/hydro_druid.rsi
   - type: Storage
     whitelist:
       tags:
-        # - PlantAnalyzer
-        - PlantSampleTaker
-        - BotanyShovel
-        - BotanyHoe
-        - BotanyHatchet
-        - PlantSampleTaker
-        - PlantBGone
-        - Bottle
-        - Syringe
-        - CigPack
-        - Dropper
+      # - PlantAnalyzer
+      - PlantSampleTaker
+      - BotanyShovel
+      - BotanyHoe
+      - BotanyHatchet
+      - PlantSampleTaker
+      - PlantBGone
+      - Bottle
+      - Syringe
+      - CigPack
+      - Dropper
       components:
-        - Seed
-        - Smokable
-        - HandLabeler
+      - Seed
+      - Smokable
+      - HandLabeler
   - type: ItemMapper
     mapLayers:
       hatchet:
@@ -214,160 +276,172 @@
           - Bottle
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
-  - type: StorageFill
-    contents:
-    - id: HydroponicsToolMiniHoe
-    - id: HydroponicsToolSpade
-    - id: HydroponicsToolClippers
-    - id: RobustHarvestChemistryBottle
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: HydroponicsToolMiniHoe
+        - id: HydroponicsToolSpade
+        - id: HydroponicsToolClippers
+        - id: ChemistryBottleRobustHarvest
 
 #chief 220
 
 - type: entity
   parent: ClothingBeltStorageBase
   id: ClothingBeltChefApronBase
-  name: фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   abstract: true
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
   - type: Storage
     whitelist:
       tags:
-        - KitchenKnife
-        - Cleaver
-        - RollingPin
-        - Coldsauce
-        - Enzyme
-        - Hotsauce
-        - Ketchup
-        - BBQsauce
-        - SaltShaker
-        - PepperShaker
-        - CigPack
-        - Packet
-        - Skewer
-        - MonkeyCube
-        #ss220 chiefs belt start
-        - WaterBottle
-        - Vinegar
-        - OilOlive
-        - GlassBeaker
-        #ss220 chiefs belt end
-        - Mayo
+      - KitchenKnife
+      - Cleaver
+      - RollingPin
+      - Coldsauce
+      - Enzyme
+      - Hotsauce
+      - Ketchup
+      - BBQsauce
+      - SaltShaker
+      - PepperShaker
+      - CigPack
+      - Packet
+      - Skewer
+      - MonkeyCube
+      #ss220 chiefs belt start
+      - WaterBottle
+      - Vinegar
+      - OilOlive
+      - GlassBeaker
+      #ss220 chiefs belt end
+      - Mayo
       components:
-        - Mousetrap
-        - Smokable
-        - Utensil
+      - Mousetrap
+      - Smokable
+      - Utensil
 
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronWhite
-  name: белый фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: white apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronGreen
-  name: зелёный фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: green apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_green.rsi
+    sprite: SS220/Clothing/Belt/chef_green.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_green.rsi
+    sprite: SS220/Clothing/Belt/chef_green.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronBlack
-  name: чёрный фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: black apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_black.rsi
+    sprite: SS220/Clothing/Belt/chef_black.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_black.rsi
+    sprite: SS220/Clothing/Belt/chef_black.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronRed
-  name: красный фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: red apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_red.rsi
+    sprite: SS220/Clothing/Belt/chef_red.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_red.rsi
+    sprite: SS220/Clothing/Belt/chef_red.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronNanotrasen
-  name: синий фартук
-  description: Фартук высокого качества с карманами, сделанный на заказ. Нужен для хранения кухонных ножей и быстрого доступа к приправам.
-  suffix: Не маппить, Сеньор
+  name: blue apron
+  description: A high-quality custom-made apron with pockets. Essential for storing kitchen knives and providing quick access to seasonings.
+  suffix: За время в игре, Сеньор
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/Belt/chef_nt.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/Belt/chef_nt.rsi
 
 - type: entity
   id: ClothingBeltChefApronWhiteFilled
   parent: ClothingBeltChefApronWhite
   suffix: Заполненный
   components:
-  - type: StorageFill
-    contents:
-    - id: FoodShakerSalt
-    - id: FoodShakerPepper
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FoodShakerSalt
+        - id: FoodShakerPepper
 
 - type: entity
   id: ClothingBeltChefApronGreenFilled
   parent: ClothingBeltChefApronGreen
   suffix: Заполненный
   components:
-  - type: StorageFill
-    contents:
-    - id: FoodShakerSalt
-    - id: FoodShakerPepper
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FoodShakerSalt
+        - id: FoodShakerPepper
 
 - type: entity
   id: ClothingBeltChefApronBlackFilled
   parent: ClothingBeltChefApronBlack
   suffix: Заполненный
   components:
-  - type: StorageFill
-    contents:
-    - id: FoodShakerSalt
-    - id: FoodShakerPepper
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FoodShakerSalt
+        - id: FoodShakerPepper
 
 - type: entity
   id: ClothingBeltChefApronRedFilled
   parent: ClothingBeltChefApronRed
   suffix: Заполненный
   components:
-  - type: StorageFill
-    contents:
-    - id: FoodShakerSalt
-    - id: FoodShakerPepper
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FoodShakerSalt
+        - id: FoodShakerPepper
 
 - type: entity
   id: ClothingBeltChefApronNanotrasenFilled
   parent: ClothingBeltChefApronNanotrasen
-  suffix: Заполненный, Не маппить, Сеньор
+  suffix: Заполненный, За время в игре, Сеньор
   components:
-  - type: StorageFill
-    contents:
-    - id: FoodShakerSalt
-    - id: FoodShakerPepper
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FoodShakerSalt
+        - id: FoodShakerPepper
 
 # Уборщик
 
@@ -385,34 +459,120 @@
   - type: Storage
     whitelist:
       tags:
-        - Wrench
-        - Bottle
-        - Spray
-        - Soap
-        - Flashlight
-        - CigPack
-        - TrashBag
-        - WetFloorSign
-        - HolosignProjector
-        - Plunger
-        - JanicartKeys # SS220 Readd-Vehicles
+      - Wrench
+      - Bottle
+      - Spray
+      - Soap
+      - Flashlight
+      - CigPack
+      - TrashBag
+      - WetFloorSign
+      - HolosignProjector
+      - Plunger
+      - GoldenPlunger
+      - WireBrush
       components:
-        - LightReplacer
-        - SmokeOnTrigger
+      - LightReplacer
+      - SmokeOnTrigger
     maxItemSize: Large
-  - type: ItemMapper
-    mapLayers:
-      bottle:
-        whitelist:
-          tags:
-          - Bottle
-      bottle_spray:
-        whitelist:
-          tags:
-          - Spray
-      wrench:
-        whitelist:
-          tags:
-          - Wrench
-    sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
+
+- type: entity
+  id: ClothingBeltJanitorJRFilled
+  parent: ClothingBeltJanitorJR
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SoapJR #Make a soap group and pick between when i'm not lazy
+        - id: SprayBottleSpaceCleaner
+        - id: CleanerGrenade
+          amount: 2
+        - id: FlashlightLantern
+        - id: LightReplacer
+        - id: WireBrush
+
+- type: entity
+  parent: ClothingBeltMedical
+  id: ClothingBeltMedicalInterdyne
+  name: the interdyne paramedic's RPS
+  description: A third-generation shoulder belt system designed for civilian paramedics. Unlike its military counterpart, issued to field orderlies, it is lighter to wear. In narrow circles, he has the slang nickname "Kangaroo" for two large pockets in the belly area.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/paramedic_interdyne.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/paramedic_interdyne.rsi
+
+- type: entity
+  id: ClothingBeltMedicalInterdyneFilled
+  parent: ClothingBeltMedicalInterdyne
+  suffix: Paramedic,Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Bloodpack
+          amount: 2
+        - id: Gauze
+        # Reagents focused on emergency response rather than outright healing
+        - id: ChemistryBottleInaprovaline
+          amount: 2
+        - id: ChemistryBottleHaloperidol
+        - id: ChemistryBottleEthylredoxrazine
+        - id: ChemistryBottleIpecac
+        - id: ChemistryBottleCharcoal
+
+#Утилизатор JR
+- type: entity
+  parent: OreBag
+  id: OreBagJRSalvage
+  name: salvager JR ore bag
+  description: A considerable portion of space debris consists of asteroid fragments, for the collection of which special bags have been developed. It attracts nearby ore if attached to the belt.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/jr_ore_bag.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Specific/jr_ore_bag.rsi
+
+- type: entity
+  parent: ClothingBeltSecurityMedical
+  id: ClothingBeltERTGammaMedicalFilled
+  description: Can hold various medical equipment.
+  suffix: ERT, Filled
+  name: ERT medical belt
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CombatMedipen
+          amount: 4
+        - id: PunctAutoInjector
+          amount: 4
+        - id: PyraAutoInjector
+          amount: 4
+        - id: AirlossAutoInjector
+          amount: 2
+        - id: SyringeSaline
+          amount: 2
+
+- type: entity
+  parent: ClothingBeltCorporateJudo
+  id: ClothingBeltCorporateJudoFilled
+  name: Corporate Judo Belt
+  description: Teaches the wearer NT Corporate Judo.
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Handcuffs
+          amount: 2
+        - id: HoloprojectorSecurity
+        - id: RadioHandheldSecurity

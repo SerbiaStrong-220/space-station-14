@@ -53,6 +53,13 @@
     - type: TileFrictionModifier
       modifier: 0.4 # makes it slide
     - type: Cart #SS220-Cart-system
+    #SS220-CartLock begin
+    - type: Lock
+      locked: true
+      lockOnClick: false
+    - type: AccessReader
+      access: [ [ "Command" ], [ "Kitchen" ] ]
+    #SS220-CartLock end
 
 # Add this if freezing/heating container/objects thermodynamics becomes a thing
 
@@ -74,7 +81,6 @@
   description: Get out there and slang some dogs.
   components:
     - type: Sprite
-      netSync: false
       noRot: true
       sprite: Objects/Specific/Kitchen/food_carts.rsi
       layers:
@@ -155,7 +161,6 @@
   description: It's the Ice Cream Man! It's the Ice Cream Man!
   components:
     - type: Sprite
-      netSync: false
       noRot: true
       sprite: Objects/Specific/Kitchen/food_carts.rsi
       layers:

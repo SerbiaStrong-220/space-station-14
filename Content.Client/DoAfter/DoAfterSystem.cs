@@ -30,7 +30,9 @@ public sealed class DoAfterSystem : SharedDoAfterSystem
         _overlay.RemoveOverlay<DoAfterOverlay>();
     }
 
+#pragma warning disable RA0028 // No base call in overriden function
     public override void Update(float frameTime)
+#pragma warning restore RA0028 // No base call in overriden function
     {
         // Currently this only predicts do afters initiated by the player.
 
@@ -48,9 +50,7 @@ public sealed class DoAfterSystem : SharedDoAfterSystem
 
         var time = GameTiming.CurTime;
         var comp = Comp<DoAfterComponent>(playerEntity.Value);
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var handsQuery = GetEntityQuery<HandsComponent>();
-        Update(playerEntity.Value, active, comp, time, xformQuery, handsQuery);
+        Update(playerEntity.Value, active, comp, time);
     }
 
     /// <summary>

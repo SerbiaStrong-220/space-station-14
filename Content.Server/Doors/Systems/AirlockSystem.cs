@@ -1,6 +1,6 @@
-using Content.Server.DeviceLinking.Events;
 using Content.Server.Power.Components;
 using Content.Server.Wires;
+using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Interaction;
@@ -12,26 +12,14 @@ namespace Content.Server.Doors.Systems;
 
 public sealed class AirlockSystem : SharedAirlockSystem
 {
-    [Dependency] private readonly WiresSystem _wiresSystem = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AirlockComponent, ComponentInit>(OnAirlockInit);
         SubscribeLocalEvent<AirlockComponent, SignalReceivedEvent>(OnSignalReceived);
 
         SubscribeLocalEvent<AirlockComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<AirlockComponent, ActivateInWorldEvent>(OnActivate, before: new[] { typeof(DoorSystem) });
-    }
-
-    private void OnAirlockInit(EntityUid uid, AirlockComponent component, ComponentInit args)
-    {
-        if (TryComp<ApcPowerReceiverComponent>(uid, out var receiverComponent))
-        {
-            Appearance.SetData(uid, DoorVisuals.Powered, receiverComponent.Powered);
-            Appearance.SetData(uid, DoorVisuals.ClosedLights, true); // Corvax-Resprite-Airlocks
-        }
     }
 
     private void OnSignalReceived(EntityUid uid, AirlockComponent component, ref SignalReceivedEvent args)
@@ -47,11 +35,6 @@ public sealed class AirlockSystem : SharedAirlockSystem
     {
         component.Powered = args.Powered;
         Dirty(uid, component);
-
-        if (TryComp<AppearanceComponent>(uid, out var appearanceComponent))
-        {
-            Appearance.SetData(uid, DoorVisuals.Powered, args.Powered, appearanceComponent);
-        }
 
         if (!TryComp(uid, out DoorComponent? door))
             return;
@@ -72,19 +55,6 @@ public sealed class AirlockSystem : SharedAirlockSystem
     {
         if (args.Handled || !args.Complex)
             return;
-
-        if (TryComp<WiresPanelComponent>(uid, out var panel) &&
-            panel.Open &&
-            TryComp<ActorComponent>(args.User, out var actor))
-        {
-            if (TryComp<WiresPanelSecurityComponent>(uid, out var wiresPanelSecurity) &&
-                !wiresPanelSecurity.WiresAccessible)
-                return;
-
-            _wiresSystem.OpenUserInterface(uid, actor.PlayerSession);
-            args.Handled = true;
-            return;
-        }
 
         if (component.KeepOpenIfClicked && component.AutoClose)
         {

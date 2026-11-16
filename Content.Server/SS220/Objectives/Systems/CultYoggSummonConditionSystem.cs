@@ -1,0 +1,107 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using System.Text;
+using Content.Shared.Mind;
+using Content.Shared.Roles.Jobs;
+using Content.Shared.Objectives.Components;
+using Content.Server.SS220.GameTicking.Rules;
+using Content.Shared.SS220.CultYogg.Sacrificials;
+using Content.Server.SS220.Objectives.Components;
+
+namespace Content.Server.SS220.Objectives.Systems;
+
+/// <summary>
+/// Handle amount of sacrifices
+/// </summary>
+public sealed partial class CultYoggSummonConditionSystem : EntitySystem
+{
+    [Dependency] private CultYoggRuleSystem _cultRule = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private SharedMindSystem _minds = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<CultYoggSummonConditionComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<CultYoggSummonConditionComponent, ObjectiveAfterAssignEvent>(OnAfterAssign);
+        SubscribeLocalEvent<CultYoggSummonConditionComponent, ObjectiveGetProgressEvent>(OnGetProgress);
+        SubscribeLocalEvent<CultYoggSummonConditionComponent, CultYoggUpdateSacrObjEvent>(OnSacrUpdate);
+    }
+
+    //check if gamerule was rewritten
+    private void OnInit(Entity<CultYoggSummonConditionComponent> ent, ref ComponentInit args)
+    {
+        ObjNumberUpdate(ent);
+    }
+
+    private void OnAfterAssign(Entity<CultYoggSummonConditionComponent> ent, ref ObjectiveAfterAssignEvent args)
+    {
+        SacrificialsUpdate(ent);
+    }
+
+    private void OnSacrUpdate(Entity<CultYoggSummonConditionComponent> ent, ref CultYoggUpdateSacrObjEvent args)
+    {
+        SacrificialsUpdate(ent);
+    }
+
+    private void OnGetProgress(Entity<CultYoggSummonConditionComponent> ent, ref ObjectiveGetProgressEvent args)
+    {
+        args.Progress = 0;
+
+        if (!_cultRule.TryGetCultGameRule(out var rule))
+            return;
+
+        args.Progress = rule.Value.Comp.AmountOfSacrifices / (float)ent.Comp.ReqSacrAmount;
+    }
+
+    private void ObjNumberUpdate(Entity<CultYoggSummonConditionComponent> ent)
+    {
+        if (!_cultRule.TryGetCultGameRule(out var rule))
+            return;
+
+        var sacrificesRequired = 0;
+        foreach ((_, var stageDefinition) in rule.Value.Comp.Stages)
+        {
+            if (stageDefinition.SacrificesRequired is null)
+                continue;
+
+            if (sacrificesRequired >= stageDefinition.SacrificesRequired.Value)
+                continue;
+
+            sacrificesRequired = stageDefinition.SacrificesRequired.Value;
+        }
+
+        ent.Comp.ReqSacrAmount = sacrificesRequired;
+    }
+
+    private void SacrificialsUpdate(Entity<CultYoggSummonConditionComponent> ent)
+    {
+        var title = new StringBuilder();
+        title.AppendLine(Loc.GetString("objective-cult-yogg-sacrifice-start"));
+
+        var query = EntityQueryEnumerator<CultYoggSacrificialComponent>();
+        while (query.MoveNext(out var uid, out var _))
+        {
+            var targetName = "Unknown";
+            var jobTitle = "Unknown";
+            if (_minds.TryGetMind(uid, out var mindId, out var mind) && mind.CharacterName != null)
+            {
+                targetName = mind.CharacterName;
+
+                if (_job.MindTryGetJobName(mindId, out var jobName))
+                    jobTitle = jobName;
+            }
+
+            title.AppendLine(Loc.GetString("objective-condition-cult-yogg-sacrifice-person", ("targetName", targetName), ("job", jobTitle)));
+        }
+
+        _metaData.SetEntityName(ent, title.ToString());
+    }
+}
+
+[ByRefEvent, Serializable]
+public sealed class CultYoggUpdateSacrObjEvent : EntityEventArgs
+{
+}

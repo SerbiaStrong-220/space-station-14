@@ -1,0 +1,108 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Server.Zombies;
+using Content.Shared.Body.Events;
+using Content.Shared.Cloning.Events;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Mobs;
+using Content.Shared.Rejuvenate;
+using Content.Shared.SS220.LimitationRevive;
+using Content.Shared.SS220.Pathology;
+using Content.Shared.Traits;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
+
+namespace Content.Server.SS220.LimitationRevive;
+
+/// <summary>
+/// This handles limiting the number of defibrillator resurrections
+/// </summary>
+public sealed partial class LimitationReviveSystem : SharedLimitationReviveSystem
+{
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private SharedPathologySystem _pathology = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged, before: [typeof(ZombieSystem)]);
+        SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
+        SubscribeLocalEvent<LimitationReviveComponent, AddReviveDebuffsEvent>(OnAddReviveDebuffs);
+        SubscribeLocalEvent<LimitationReviveComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<LimitationReviveComponent>();
+
+        while (query.MoveNext(out var ent, out var limitationRevive))
+        {
+            if (limitationRevive.DamageCountingTime is null)
+                continue;
+
+            limitationRevive.DamageCountingTime += TimeSpan.FromSeconds(frameTime / limitationRevive.UpdateIntervalMultiplier);
+
+            DirtyField<LimitationReviveComponent>((ent, limitationRevive), nameof(LimitationReviveComponent.DamageCountingTime));
+            if (limitationRevive.DamageCountingTime < limitationRevive.BeforeDamageDelay)
+                continue;
+
+            _damageableSystem.TryChangeDamage(ent, limitationRevive.Damage, true);
+
+            _pathology.TryAddRandom(ent, limitationRevive.WeightListProto, limitationRevive.ChanceToAddPathology);
+            limitationRevive.DamageCountingTime = null;
+        }
+    }
+
+    private void OnMobStateChanged(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Dead)
+        {
+            ent.Comp.DamageCountingTime = TimeSpan.Zero;
+            return;
+        }
+
+        if (args.OldMobState == MobState.Dead)
+        {
+            if (ent.Comp.DamageCountingTime == null)//is null if we got brain dmg
+                ent.Comp.DeathCounter++;
+            else
+                ent.Comp.DamageCountingTime = null;
+        }
+
+        Dirty(ent);
+    }
+
+    private void OnAddReviveDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviveDebuffsEvent args)
+    {
+        _pathology.TryAddRandom(ent.Owner, ent.Comp.WeightListProto, ent.Comp.ChanceToAddPathology);
+    }
+
+    private void OnCloning(Entity<LimitationReviveComponent> ent, ref CloningEvent args)
+    {
+        var targetComp = EnsureComp<LimitationReviveComponent>(args.CloneUid);
+        _serialization.CopyTo(ent.Comp, ref targetComp, notNullableOverride: true);
+
+        targetComp.DeathCounter = 0;
+    }
+
+    private void OnApplyMetabolicMultiplier(Entity<LimitationReviveComponent> ent, ref ApplyMetabolicMultiplierEvent args)
+    {
+        ent.Comp.UpdateIntervalMultiplier = args.Multiplier;
+    }
+
+    public override void IncreaseTimer(EntityUid ent, TimeSpan addTime)
+    {
+        if (!TryComp<LimitationReviveComponent>(ent, out var limComp))
+            return;
+
+        if (limComp.DamageCountingTime == null)
+            return;
+
+        limComp.DamageCountingTime -= addTime;
+
+        Dirty(ent, limComp);
+    }
+}

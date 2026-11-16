@@ -1,7 +1,4 @@
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
@@ -24,6 +21,8 @@ namespace Content.Shared.Examine
         [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
         [Dependency] protected readonly MobStateSystem MobStateSystem = default!;
 
+        [Dependency] private readonly EntityQuery<GhostComponent> _ghostQuery = default!;
+
         public const float MaxRaycastRange = 100;
 
         /// <summary>
@@ -45,8 +44,6 @@ namespace Content.Shared.Examine
         protected const float ExamineDetailsRange = 3f;
 
         protected const float ExamineBlurrinessMult = 2.5f;
-
-        private EntityQuery<GhostComponent> _ghostQuery;
 
         /// <summary>
         ///     Creates a new examine tooltip with arbitrary info.
@@ -116,7 +113,7 @@ namespace Content.Shared.Examine
             if (!examinerComp.CheckInRangeUnOccluded)
                 return true;
 
-            if (EntityManager.GetComponent<TransformComponent>(examiner).MapID != target.MapId)
+            if (Comp<TransformComponent>(examiner).MapID != target.MapId)
                 return false;
 
             // Do target InRangeUnoccluded which has different checks.
@@ -387,6 +384,8 @@ namespace Content.Shared.Examine
                     totalMessage.PushNewline();
             }
 
+            totalMessage.TrimEnd();
+
             return totalMessage;
         }
 
@@ -411,8 +410,10 @@ namespace Content.Shared.Examine
         private void PopGroup()
         {
             DebugTools.Assert(_currentGroupPart != null);
-            if (_currentGroupPart != null)
+            if (_currentGroupPart != null && !_currentGroupPart.Message.IsEmpty)
+            {
                 Parts.Add(_currentGroupPart);
+            }
 
             _currentGroupPart = null;
         }

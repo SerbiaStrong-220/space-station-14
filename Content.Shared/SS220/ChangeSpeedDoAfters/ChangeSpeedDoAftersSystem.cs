@@ -1,0 +1,54 @@
+using Content.Shared.DoAfter;
+using Content.Shared.Popups;
+using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+
+namespace Content.Shared.SS220.ChangeSpeedDoAfters;
+
+public sealed partial class ChangeSpeedDoAftersSystem : EntitySystem
+{
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<ChangeSpeedDoAftersComponent, BeforeDoAfterStartEvent>(OnDoAfterProccess);
+        SubscribeLocalEvent<ChangeSpeedDoAftersComponent, DoAfterUpdateEvent>(OnDoAfterUpdate);
+    }
+
+    private void OnDoAfterProccess(Entity<ChangeSpeedDoAftersComponent> ent, ref BeforeDoAfterStartEvent args)
+    {
+        if (args.Args.ArgFlags.HasFlag(DoAfterArgFlags.IgnoreTraitsModification))
+            return;
+
+        args.Args.DelayModifier *= ent.Comp.Coefficient;
+
+        if (ent.Comp.ChanceToFail == null)
+            return;
+
+        if (!_random.Prob(ent.Comp.ChanceToFail.Value))
+            return;
+
+        var cancelTime = TimeSpan.FromSeconds(_random.NextFloat(0, (float)args.Args.Delay.TotalSeconds));
+        ent.Comp.ScheduledCancelTimes[args.Id] = cancelTime;
+    }
+
+    private void OnDoAfterUpdate(Entity<ChangeSpeedDoAftersComponent> ent, ref DoAfterUpdateEvent args)
+    {
+        if (!ent.Comp.ScheduledCancelTimes.TryGetValue(args.Index, out var cancelTime))
+            return;
+
+        var elapsed = _timing.CurTime - args.StartTime;
+
+        if (elapsed < cancelTime)
+            return;
+
+        _doAfter.Cancel(ent.Owner, args.Index);
+        ent.Comp.ScheduledCancelTimes.Remove(args.Index);
+
+        _popup.PopupEntity(Loc.GetString("trait-nervousness-popup"), ent.Owner, ent.Owner);
+    }
+}

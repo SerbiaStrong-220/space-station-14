@@ -20,8 +20,9 @@ namespace Content.Client.Ghost
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly SharedActionsSystem _actions = default!;
+        [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
         [Dependency] private readonly ContentEyeSystem _contentEye = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
+        [Dependency] private readonly SpriteSystem _sprite = default!;
 
         public int AvailableGhostRoleCount { get; private set; }
 
@@ -45,7 +46,7 @@ namespace Content.Client.Ghost
                 var query = AllEntityQuery<GhostComponent, SpriteComponent>();
                 while (query.MoveNext(out var uid, out _, out var sprite))
                 {
-                    sprite.Visible = value || uid == _playerManager.LocalEntity;
+                    _sprite.SetVisible((uid, sprite), value || uid == _playerManager.LocalEntity);
                 }
             }
         }
@@ -82,7 +83,7 @@ namespace Content.Client.Ghost
         private void OnStartup(EntityUid uid, GhostComponent component, ComponentStartup args)
         {
             if (TryComp(uid, out SpriteComponent? sprite))
-                sprite.Visible = GhostVisibility || uid == _playerManager.LocalEntity;
+                _sprite.SetVisible((uid, sprite), GhostVisibility || uid == _playerManager.LocalEntity);
         }
 
         private void OnToggleLighting(EntityUid uid, EyeComponent component, ToggleLightingActionEvent args)
@@ -90,41 +91,34 @@ namespace Content.Client.Ghost
             if (args.Handled)
                 return;
 
-            Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup"), args.Performer);
-            _contentEye.RequestToggleLight(uid, component);
+            TryComp<PointLightComponent>(uid, out var light);
+
+            if (!component.DrawLight)
+            {
+                // normal lighting
+                Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-normal"), args.Performer);
+                _contentEye.RequestEye(component.DrawFov, true);
+            }
+            else if (!light?.Enabled ?? false) // skip this option if we have no PointLightComponent
+            {
+                // enable personal light
+                Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-personal-light"), args.Performer);
+                _pointLightSystem.SetEnabled(uid, true, light);
+            }
+            else
+            {
+                // fullbright mode
+                Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-fullbright"), args.Performer);
+                _contentEye.RequestEye(component.DrawFov, false);
+                _pointLightSystem.SetEnabled(uid, false, light);
+            }
             args.Handled = true;
         }
 
+        //SS220 colourful ghost begin
+        // Changing FoV must not modify the server-selected ghost color.
         private void OnToggleFoV(EntityUid uid, EyeComponent component, ToggleFoVActionEvent args)
         {
-            //SS220-colorful-ghosts begin
-            if (TryComp<SpriteComponent>(uid, out var sprite))
-            {
-                var _random = new Random();
-                var color = new Color(_random.Next(1, 255), _random.Next(1, 255), _random.Next(1, 255));
-
-                // sprite.Color = color;
-
-                //sprite.Rotation += Angle.FromDegrees(180.0f);  //SS220 Ghost rotation fix
-
-                sprite.Color = sprite.Color.WithBlue(10);
-                //var t = sprite.GetType();
-
-                //var pr = t.GetProperties();
-
-                //var col =  pr.FirstOrDefault(x => x.Name == "Color");
-
-                //if (col is not null)
-                //{
-
-                //    col.GetSetMethod(true)!.Invoke(sprite, new object[] { color });
-                //}
-
-                // sprite.
-                // PlayerUpdated?.Invoke(Player);
-            }
-            //SS220-colorful-ghosts end
-
             if (args.Handled)
                 return;
 
@@ -132,6 +126,7 @@ namespace Content.Client.Ghost
             _contentEye.RequestToggleFov(uid, component);
             args.Handled = true;
         }
+        //SS220 colourful ghost end
 
         private void OnToggleGhosts(EntityUid uid, GhostComponent component, ToggleGhostsActionEvent args)
         {
@@ -178,45 +173,32 @@ namespace Content.Client.Ghost
             _actions.RemoveAction(uid, component.ToggleFoVActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostsActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostHearingActionEntity);
-            // SS220 ADD GHOST HUD'S
-            _actions.RemoveAction(uid, component.ToggleHudOnOtherActionEntity);
+            //ss220 add filter tts for ghost
+            _actions.RemoveAction(uid, component.ToggleRadioChannelsUIEntity);
             //SS220-ghost-hats
             _actions.RemoveAction(uid, component.ToggleAGhostBodyVisualsActionEntity);
 
             if (uid != _playerManager.LocalEntity)
                 return;
 
-            GhostVisibility = false;
+            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerRemoved?.Invoke(component);
         }
 
+        //SS220 colourful ghost begin
+        // Attaching a player must not replace the networked color with a local random tint.
         private void OnGhostPlayerAttach(EntityUid uid, GhostComponent component, LocalPlayerAttachedEvent localPlayerAttachedEvent)
         {
-            // SS220 colorful ghost begin
-            if (TryComp<SpriteComponent>(uid, out var sprite))
-            {
-                var random = new Random();
-
-                var color = new Color(
-                    (float) random.Next(1, 255) / byte.MaxValue,
-                    (float) random.Next(1, 255) / byte.MaxValue,
-                    (float) random.Next(1, 255) / byte.MaxValue,
-                    sprite.Color.A);
-
-                sprite.Color = color;
-            }
-            // SS220 colorful ghost end
-
-            GhostVisibility = true;
+            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerAttached?.Invoke(component);
         }
+        //SS220 colourful ghost end
 
         private void OnGhostState(EntityUid uid, GhostComponent component, ref AfterAutoHandleStateEvent args)
         {
             if (TryComp<SpriteComponent>(uid, out var sprite))
             {
-                //SS220-colorful-ghosts
-                //sprite.LayerSetColor(0, component.color);
+                _sprite.LayerSetColor((uid, sprite), 0, component.Color); //SS220 colourful ghost
 
                 //SS220-ghost-hats
                 SetBodyVisuals(uid, sprite, component.BodyVisible);
@@ -230,9 +212,17 @@ namespace Content.Client.Ghost
 
         private void OnGhostPlayerDetach(EntityUid uid, GhostComponent component, LocalPlayerDetachedEvent args)
         {
-            GhostVisibility = false;
+            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerDetached?.Invoke();
         }
+
+        // SS220-Fix ghosts visibility for other entities-begin
+        // Just a semantic separation for a better understanding of the logic
+        private void ResetGhostVisibility()
+        {
+            GhostVisibility = true;
+        }
+        // SS220-Fix ghosts visibility for other entities-end
 
         private void OnGhostWarpsResponse(GhostWarpsResponseEvent msg)
         {

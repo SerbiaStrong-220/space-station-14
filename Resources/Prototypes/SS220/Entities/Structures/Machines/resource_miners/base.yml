@@ -1,0 +1,37 @@
+# © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
+
+- type: entity
+  id: BaseResourceMiner
+  abstract: true
+  parent: BaseStructure
+  name: resource miner
+  description: Machine that mines resource from deeps
+  components:
+  - type: Sprite
+    offset: 0, 1
+    drawdepth: Overdoors
+    noRot: true
+    sprite: SS220/Structures/Machines/resource_miner.rsi
+    state: base
+  - type: Transform
+    noRot: false
+  - type: ResourceMiner
+    timeBetweenUpdate: 4
+  - type: ActivatableUI
+    key: enum.ResourceMinerSettings.Key
+  - type: UserInterface
+    interfaces:
+      enum.ResourceMinerSettings.Key:
+        type: ResourceMinerSettingsBUI
+  - type: AmbientSound
+    enabled: true
+    range: 16
+    volume: -2
+    sound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+      params:
+        variation: 1.2
+  - type: PointLight
+    radius: 5
+    energy: 3
+    color: "#e71616" # red goes as "error color"

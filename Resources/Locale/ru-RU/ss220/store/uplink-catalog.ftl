@@ -2,35 +2,102 @@
 uplink-ecrossbow-name = { ent-WeaponMiniEnergyCrossbow }
 uplink-ecrossbow-desc = { ent-WeaponMiniEnergyCrossbow.desc }
 
-#Misc
+uplink-origami-name = Коробка Искусства Оригами
+uplink-origami-desc = В этой коробке заключено забытое Искусство, позволяющее превращать обычную бумагу в смертоносное оружие. Перед применением, требует тщательного прочтения.
+
+# Misc
 
 uplink-clothing-eyes-hud-syndicate-agent-name = Визор агента Синдиката
 uplink-clothing-eyes-hud-syndicate-agent-desc = Продвинутый визор Синдиката с индикатором на стекле, предназначенный для более точного обнаружения гуманоидов с их последующим уничтожением. Способен опеределять уровень здоровья гуманоидов и киборгов.
+
+uplink-clothing-briefcase-with-double-bottom-name = Чемодан с двойным дном
+uplink-clothing-briefcase-with-double-bottom-desc = Чемодан с двойным дном, которое может быть открыто отвёрткой. Вмещает в себя одно огнестрельное оружие.
+
+uplink-pinpointer-syndie-name = Пинпоинтер Cиндиката
+uplink-pinpointer-syndie-desc = Пинпоинтер, способный отследить любой ценный предмет на станции, а так же любое существо по ДНК.
+
+uplink-cqc-manual-name = Старый мануал
+uplink-cqc-manual-desc = Небольшое черное руководство. Внутри есть нарисованные инструкции по тактическому рукопашному бою.
 
 # Disruption
 
 uplink-syndicate-pen-signaller = Ручка-передатчик
 uplink-syndicate-pen-signaller-desc = Ручка, со встроенным передатчиком, способным отправить сигнал на устройство.
 
-# Implants
-uplink-mindslave-implanter-name = Имплантер Подчинитель разума
-uplink-mindslave-implanter-desc = { ent-MindSlaveImplant.desc }
+uplink-detector-ai = Детектор ИИ
+uplink-detector-ai-desc = Устройство, позволяющее определить, есть ли в радиусе 10 метров око ИИ.
 
-#JobItems
+uplink-shutdown-nearest-apc = Подавитель ЛКП
+uplink-shutdown-nearest-apc-desc = Внимание! Активируется сразу после покупки! Активирует локализованный электромагнитный импульс, отключающий ближайшие ЛКП в радиусе 6 метров.
+
+# Implants
+uplink-night-vision-implanter-name = Имплант ночного видения
+uplink-night-vision-implanter-desc = Позволяет включать ночное зрение, не занимая слот очков. Яркий свет засвечивает изображение.
+
+uplink-mindslave-implanter-name = Имплантер Подчинитель разума
+uplink-mindslave-implanter-desc = Получите полный контроль над другим разумным существом! Внимание: продолжительное использование имплантера подчинения может быть вредно для здоровья подчинённого.
+
+uplink-mindslave-fix-surgery-bundle-name = Конфигуратор подчинителя разума
+uplink-mindslave-fix-surgery-bundle-desc = Позволяет вашим подчинённым прожить дольше, требует вмешательства каждый раз при возникновении проблем. Идёт вместе с хирургическим набором и инструкцией!
+
+# JobItems
 uplink-mime-relic-name = { ent-SacredRelicMime }
 uplink-mime-relic-desc = Ценная реликвия Ордена Тишины, Вашего ордена. Зажав в руке, позволяет мимам поставить сразу три невидимые стены, закрывающие широкий проход, раз в 90 секунд.
+
+uplink-fake-ops-name = Набор "Фейк-Опс"
+uplink-fake-ops-desc = Набор высококачественных реплик скафандров и оружия Ядерных Оперативников, специально для создания паники на станции. Оружие подходит для использования клоунами.
 
 # Pointless
 uplink-expensive-lighter-name = { ent-ExpensiveLighterSyndicate }
 uplink-expensive-lighter-desc = { ent-ExpensiveLighterSyndicate.desc }
 
- #Masks-Boxes
+uplink-syndicate-folder-name = Папка синдиката
+uplink-syndicate-folder-desc = Папка, с долей вероятности содержащая информацию о вражеской корпорации. Проверим?
+
+uplink-diplomat-suit-name = Костюм дипломата
+uplink-diplomat-suit-desc = Костюм дипломата преступного синдиката, ничего необычного.
+
+# Masks-Boxes
 uplink-special-delivery-name = Особая посылка
 uplink-special-delivery-desc = Содержит случайную маску животного, что некогда носили майамские психи.
 
 uplink-criminal-delivery-name = Криминальная посылка
 uplink-criminal-delivery-desc = Содержит случайную маску, замешанную в самых громких ограблениях прошлого.
 
+#Contraband-Poster
+uplink-contraband-poster-name = Коробка нелегальных постеров
+uplink-contraband-poster-desc = Обклей станцию пропагандой!
+
 # Wearables
 uplink-helmet-swat-syndicate-name = Шлем пехотинца Синдиката
 uplink-helmet-swat-syndicate-desc = Очень прочный шлем, обычно используемый военизированными формированиями Синдиката. Он украшен зловещим узором из красных и черных полос.
+
+uplink-borg-module-axe-name = Модуль киборга с огнетопором
+uplink-borg-module-axe-desc = Универсальный модуль, дающий киборгам модифицированный пожарный топор, поджигающий жертв при ударе
+
+uplink-silent-shoes-name = Бесшумные ботинки
+uplink-silent-shoes-desc = Совершенно бесшумные ботинки, используемые на шпионских миссиях Синдиката.
+
+uplink-outer-electrification-name = Броня электрификации
+uplink-outer-electrification-desc = Броня, позволяющая конвертировать урон по выносливости в шоковый.
+
+uplink-suit-electrification-name = Костюм электрификации
+uplink-suit-electrification-desc = Костюм, позволяющий конвертировать урон по выносливости в шоковый. Имеет встроенную функцию хамелеона.
+
+uplink-fake-captain-id-card-name = Фальшивая ID карта капитана
+uplink-fake-captain-id-card-desc = ID карта со сломанным модулем доступов, внешне неотличимая от ID карты капитана. Они не заметят подмены.
+
+uplink-clothing-outer-vest-web-elite-name = Огнеупорный тактический жилет
+uplink-clothing-outer-vest-web-elite-desc = Бронежилет класса IIIA с дополнительными огнеупорными элементами.
+
+uplink-assault-suit-name = Штурмовой бронекостюм
+uplink-assault-suit-desc = Костюм,состоящий из бронежилета IV класса, несъёмного встроенного шлема и комплектов защиты для предплечий, шеи и паха.
+
+uplink-chameleon-vest-name = Бронежилет-хамелеон
+uplink-chameleon-vest-desc = Бронежилет III класса, имеющий встроеную маскировку. Идентичен противопульному бронежилету.
+
+uplink-chameleon-stamp-name = Печать-хамелеон
+uplink-chameleon-stamp-desc = Синдикатная печать, способная принимать вид печатей глав станции. Позволяет подделывать документы от имени руководства.
+
+uplink-peashooter-sergeant-name = Пакет семян (cержант горохострел)
+uplink-peashooter-sergeant-desc = Пакет семян генно-модифицированного горохострела, выведенный лучшими умами ботаников Синдиката. Данный вид растения прошёл военную подготовку и побывал в горячих грядочных точках. Растение обучено распознавать агентов Синдиката и чрезвычайно плохо настроено к тем, кто ими не является.

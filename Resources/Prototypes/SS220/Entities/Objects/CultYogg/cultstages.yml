@@ -1,0 +1,95 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: marking
+  id: CultStage-Halo
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: halo
+
+- type: marking
+  id: CultStage-Moth
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: antenna_moth
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: wings_moth
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_moth
+
+- type: marking
+  id: CultStage-Arachnid
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: back_arachnid
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_arachnid
+
+- type: marking
+  id: CultStage-Human
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: back_human
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_human
+
+- type: marking
+  id: CultStage-Dwarf
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: back_human
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_human
+
+- type: marking
+  id: CultStage-Diona
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_diona
+
+- type: marking
+  id: CultStage-Vox
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_vox
+
+- type: marking
+  id: CultStage-SlimePerson
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_diona
+
+- type: marking
+  id: CultStage-Reptilian
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: back_human
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_human
+
+- type: marking
+  id: CultStage-Tajaran
+  bodyPart: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: back_human
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_human

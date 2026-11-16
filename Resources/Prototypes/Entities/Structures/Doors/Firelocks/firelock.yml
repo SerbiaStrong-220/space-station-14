@@ -6,6 +6,10 @@
   description: Apply crowbar.
   components:
     - type: FoVOverlay # SS220 perspective-wall-fov
+    - type: Anchorable
+      flags:
+      - Anchorable
+    - type: Rotatable
     - type: AtmosAlarmable
       syncWith:
         - FireAlarm
@@ -24,6 +28,9 @@
       cost: 4
       delay: 6
       fx: EffectRCDDeconstruct6
+    - type: Tag
+      tags:
+      - ForceFixRotations # Allow fixrotations to target these
     - type: Destructible
       thresholds:
       - trigger:
@@ -38,17 +45,41 @@
         - state: closed
           map: ["enum.DoorVisualLayers.Base"]
         - state: closed_unlit
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           shader: unshaded
           map: ["enum.DoorVisualLayers.BaseUnlit"]
           visible: false
         - state: welded
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           map: ["enum.WeldableLayers.BaseWelded"]
         - state: bolted_unlit
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           shader: unshaded
           map: ["enum.DoorVisualLayers.BaseBolted"]
           visible: false
         - state: panel_open
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           map: ["enum.WiresVisualLayers.MaintenancePanel"]
+        - state: pressure_unlit
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersPressure.Base"]
+        - state: temperature_unlit
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersTemperature.Base"]
+    - type: GenericVisualizer
+      visuals:
+        enum.FirelockVisuals.PressureWarning:
+          enum.FirelockVisualLayersPressure.Base:
+            True: { visible: true }
+            False: { visible: false }
+        enum.FirelockVisuals.TemperatureWarning:
+          enum.FirelockVisualLayersTemperature.Base:
+            True: { visible: true }
+            False: { visible: false }
     - type: AnimationPlayer
     - type: Fixtures
       fixtures:
@@ -105,8 +136,10 @@
       arc: 360
     - type: StaticPrice
       price: 150
+    - type: DoorBolt # SS220 revert "remove fire remote controller"
     - type: AccessReader
       access: [ [ "Engineering" ] ]
+      examinationText: access-reader-examination-functionality-restricted
     - type: PryUnpowered
       pryModifier: 0.5
     - type: PointLight
@@ -115,6 +148,13 @@
       color: Red
       enabled: false
       castShadows: false
+    - type: NavMapDoor
+    - type: GuideHelp
+      guides:
+      - FireAndGasControl
+      - Fires
+      - Spacing
+    - type: SyncSprite
 
 - type: entity
   id: Firelock
@@ -168,6 +208,31 @@
     - type: Sprite
       sprite: Structures/Doors/edge_door_hazard.rsi
       snapCardinals: false
+      # SS220-airlock-common-states begin
+      layers:
+        - state: closed
+          map: ["enum.DoorVisualLayers.Base"]
+        - state: closed_unlit
+          shader: unshaded
+          map: ["enum.DoorVisualLayers.BaseUnlit"]
+          visible: false
+        - state: welded
+          map: ["enum.WeldableLayers.BaseWelded"]
+        - state: bolted_unlit
+          shader: unshaded
+          map: ["enum.DoorVisualLayers.BaseBolted"]
+          visible: false
+        - state: panel_open
+          map: ["enum.WiresVisualLayers.MaintenancePanel"]
+        - state: pressure_unlit
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersPressure.Base"]
+        - state: temperature_unlit
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersTemperature.Base"]
+      # SS220-airlock-common-states end
     - type: Airtight
       airBlocked: false
       noAirWhenFullyAirBlocked: false
@@ -186,6 +251,9 @@
           - GlassAirlockLayer
     - type: Occluder
       enabled: false
+    - type: Tag
+      tags:
+      - ForceNoFixRotations # Prevent fixrotations from targeting these, since the base Firelock is targeted
     - type: Door
       occludes: false
     - type: Physics

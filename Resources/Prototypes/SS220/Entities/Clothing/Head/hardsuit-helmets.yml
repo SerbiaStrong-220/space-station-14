@@ -2,7 +2,7 @@
 
 #Security Pilot Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSecurityPilot
   name: security pilot hardsuit helmet
   description: Armored spacesuit helmet with a modified flashlight for exploring voids.
@@ -27,32 +27,79 @@
         Piercing: 0.8
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitBlueshield
-  categories: [ HideSpawnMenu ]
-  name: blueshield's hardsuit helmet
-  description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the Blue Shield.
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitLightBlueshield
+  name: helmet of the suit "Blue Shield"
+  description: The helmet of a spacesuit designed for the Blue Shield.
   components:
   - type: BreathMask
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/blueshield.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/blueshield_light.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/blueshield.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/blueshield_light.rsi
   - type: PointLight
-    color: "#adeeff"
+    color: "#faf9cc"
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 10000
+
+# Death Squad Commander Hardsuit
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitDeathsquadCommander
+  name: the helmet of the commander of the DQ
+  description: The helmet from the Death Squad commander's costume.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/dq_helmet_commander.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/dq_helmet_commander.rsi
+  - type: PointLight
+    color: cyan
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.8
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.80
+        Heat: 0.80
+        Radiation: 0.80
+        Caustic: 0.95
+
+# Death Squad Alpha Hardsuit
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitDeathsquadAlpha
+  name: the helmet of the specialist of the DQ
+  description: The helmet from the Death Squad specialist's costume.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/dq_alpha_helmet.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/dq_alpha_helmet.rsi
+  - type: PointLight
+    color: cyan
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.80
+        Heat: 0.80
+        Radiation: 0.80
+        Caustic: 0.95
 
 #SuperMatter operator's Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSuperMatterOperator
   name: superMatter operator's hardsuit helmet
   description: Special hardsuit helmet, designed to support the operator in the supermatter crystal chamber.
@@ -68,3 +115,169 @@
   - type: PressureProtection
     highPressureMultiplier: 0.32
     lowPressureMultiplier: 1000
+
+# Centcom's Hardsuit
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitCentcom
+  name: centcom hardsuit helmet
+  description: A combination of unwavering defense and advanced technology, the epitome of power and strategic superiority.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/centcom.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.3
+    lowPressureMultiplier: 1000
+
+#Quartermaster Hardsuit
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitQuartermaster
+  name: quartermaster hardsuit helmet
+  description: A prototype of a special helmet for the Quartermaster to perform his duties in hazardous and low-pressure environments.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/quartermaster.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/quartermaster.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.525
+    lowPressureMultiplier: 1000
+  - type: PointLight
+    radius: 7
+    energy: 3
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitRedWingsSec
+  name: red wings security hardsuit helmet
+  description: Helmet from a Red Wings security officer's hardsuit.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_sec.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_sec.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      - state: off-equipped-HELMET-unshaded
+        shader: unshaded
+      - map: [ "light" ]
+        visible: false
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      - state: on-equipped-HELMET-unshaded
+        shader: unshaded
+  - type: PointLight
+    color: cyan
+    radius: 4.5
+    energy: 3
+  - type: FlashImmunity
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.80
+        Heat: 0.90
+        Radiation: 0.90
+        Caustic: 0.95
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitRedWingsMedic
+  name: red wings medic hardsuit helmet
+  description: Helmet from a Red Wings medic hardsuit.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_medic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_medic.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      - state: off-equipped-HELMET-unshaded
+        shader: unshaded
+      - map: [ "light" ]
+        visible: false
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      - state: on-equipped-HELMET-unshaded
+        shader: unshaded
+  - type: PointLight
+    color: cyan
+    radius: 4.5
+    energy: 3
+  - type: FlashImmunity
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.90
+        Heat: 0.95
+        Radiation: 0.90
+        Caustic: 0.95
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitRedWingsPilot
+  name: red wings pilot's hardsuit helmet
+  description: Helmet from a Red Wings pilot's hardsuit.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_pilot.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/redwings_pilot.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      - state: off-equipped-HELMET-unshaded
+        shader: unshaded
+      - map: [ "light" ]
+        visible: false
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      - state: on-equipped-HELMET-unshaded
+        shader: unshaded
+  - type: PointLight
+    color: cyan
+    radius: 4.5
+    energy: 3
+  - type: FlashImmunity
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.80
+        Slash: 0.80
+        Piercing: 0.85
+        Heat: 0.95
+        Radiation: 0.90
+        Caustic: 0.95

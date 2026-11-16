@@ -43,17 +43,24 @@
     state: qm_clipboard
 
 - type: stealTargetGroup
+  id: ClothingHandsKnuckleDustersQM
+  name: steal-target-groups-clothing-hands-knuckledusters-qm
+  sprite:
+    sprite: Clothing/Hands/Gloves/KnuckleDusters/goldenknuckleduster.rsi
+    state: goldenknuckleduster
+
+- type: stealTargetGroup
   id: FoodMeatCorgi
   name: steal-target-groups-food-meat-corgi
   sprite:
     sprite: Objects/Consumable/Food/meat.rsi
     state: corgi
-    #
+
 - type: stealTargetGroup
   id: CaptainIDCard
   name: steal-target-groups-captain-id-card
   sprite:
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
     state: ert_commander #no one will know the difference.
 
 - type: stealTargetGroup
@@ -77,14 +84,14 @@
     sprite: Objects/Misc/nukedisk.rsi
     state: icon
 
-#SS220 HOS shotgun removal begin
+# SS220-remove-energy-magnum-begin
 # - type: stealTargetGroup
-#   id: WeaponEnergyShotgun
-#   name: steal-target-groups-weapon-energy-shot-gun
+#   id: WeaponEnergyMagnum
+#   name: steal-target-groups-weapon-energy-magnum
 #   sprite:
-#     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
-#     state: base
-#SS220 HOS shotgun removal end
+#     sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+#     state: icon
+# SS220-remove-energy-magnum-end
 
 # Thief Collection
 
@@ -124,6 +131,13 @@
     state: door_remotebase
 
 - type: stealTargetGroup
+  id: OfficerHandgun
+  name: steal-target-groups-officer-handguns
+  sprite:
+    sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
+    state: base
+
+- type: stealTargetGroup
   id: EncryptionKey
   name: steal-target-groups-encryption-keys
   sprite:
@@ -138,10 +152,17 @@
     state: datadisk_base
 
 - type: stealTargetGroup
+  id: Mail
+  name: steal-target-groups-mail
+  sprite:
+    sprite: Objects/Specific/Cargo/mail.rsi
+    state: icon
+
+- type: stealTargetGroup
   id: IDCard
   name: steal-target-groups-id-cards
   sprite:
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
     state: default
 
 - type: stealTargetGroup
@@ -151,6 +172,13 @@
     sprite: Objects/Tools/lantern.rsi
     state: lantern
 
+- type: stealTargetGroup
+  id: ClothingEyesHuds
+  name: steal-target-groups-huds
+  sprite:
+    sprite: Clothing/Eyes/Hud/sec.rsi
+    state: icon
+
 # Thief single item
 
 - type: stealTargetGroup
@@ -158,14 +186,14 @@
   name: steal-target-groups-forensic-scanner
   sprite:
     sprite: Objects/Devices/forensic_scanner.rsi
-    state: forensicnew
+    state: icon
 
-# - type: stealTargetGroup
-#   id: FlippoEngravedLighter
-#   name: detective's Flippo engraved lighter
-#   sprite:
-#     sprite: Objects/Tools/lighters.rsi
-#     state: zippo_engraved_icon_base
+- type: stealTargetGroup
+  id: FlippoEngravedLighter
+  name: steal-target-groups-flippo-engraved-lighter
+  sprite:
+    sprite: Objects/Tools/Lighters/lighters.rsi
+    state: zippo_engraved_icon_base
 
 - type: stealTargetGroup
   id: AmmoTechFabCircuitboard
@@ -224,6 +252,13 @@
     state: ame-part
 
 - type: stealTargetGroup
+  id: ChiefEngineerToolBelt
+  name: steal-target-groups-belt-ce
+  sprite:
+    sprite: Clothing/Belt/ce.rsi
+    state: icon
+
+- type: stealTargetGroup
   id: SalvageExpeditionsComputerCircuitboard
   name: steal-target-groups-salvage-expeditions-computer-circuitboard
   sprite:
@@ -236,13 +271,6 @@
   sprite:
     sprite: Objects/Misc/module.rsi
     state: cpuboard
-
-- type: stealTargetGroup
-  id: ClothingEyesHudBeer
-  name: steal-target-groups-clothing-eyes-hud-beer
-  sprite:
-    sprite: Clothing/Eyes/Hud/beergoggles.rsi
-    state: icon
 
 - type: stealTargetGroup
   id: Bible
@@ -271,6 +299,13 @@
   sprite:
     sprite: Objects/Devices/cartridge.rsi
     state: cart-sec
+
+- type: stealTargetGroup
+  id: CaptainSword
+  name: steal-target-groups-captain-sword
+  sprite:
+    sprite: Objects/Weapons/Melee/captain_sabre.rsi
+    state: icon
 
 #Thief structures
 
@@ -306,7 +341,7 @@
   id: FreezerHeater
   name: steal-target-groups-freezer-heater
   sprite:
-    sprite: Structures/Piping/Atmospherics/thermomachine.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/thermomachine.rsi #ss220-engineering-update-thermomachine
     state: heaterOff
 
 - type: stealTargetGroup
@@ -346,60 +381,58 @@
 
 # Thief Animal
 
-# SS220 Delete thief objective animals begin
-# - type: stealTargetGroup
-#   id: AnimalIan
-#   name: steal-target-groups-animal-ian
-#   sprite:
-#     sprite: Mobs/Pets/corgi.rsi
-#     state: ian
+- type: stealTargetGroup
+  id: AnimalIan
+  name: steal-target-groups-animal-ian
+  sprite:
+    sprite: Mobs/Pets/corgi.rsi
+    state: ian
 
-# - type: stealTargetGroup
-#   id: AnimalNamedCat
-#   name: steal-target-groups-animal-named-cat
-#   sprite:
-#     sprite: Mobs/Pets/bingus.rsi
-#     state: bingus
+- type: stealTargetGroup
+  id: AnimalNamedCat
+  name: steal-target-groups-animal-named-cat
+  sprite:
+    sprite: Mobs/Pets/bingus.rsi
+    state: bingus
 
-# - type: stealTargetGroup
-#   id: AnimalMcGriff
-#   name: steal-target-groups-animal-mc-griff
-#   sprite:
-#     sprite: Mobs/Pets/mcgriff.rsi
-#     state: mcgriff
+- type: stealTargetGroup
+  id: AnimalMcGriff
+  name: steal-target-groups-animal-mc-griff
+  sprite:
+    sprite: Mobs/Pets/mcgriff.rsi
+    state: mcgriff
 
-# - type: stealTargetGroup
-#   id: AnimalWalter
-#   name: steal-target-groups-animal-walter
-#   sprite:
-#     sprite: Mobs/Pets/walter.rsi
-#     state: walter
+- type: stealTargetGroup
+  id: AnimalWalter
+  name: steal-target-groups-animal-walter
+  sprite:
+    sprite: Mobs/Pets/walter.rsi
+    state: walter
 
-# - type: stealTargetGroup
-#   id: AnimalMorty
-#   name: steal-target-groups-animal-morty
-#   sprite:
-#     sprite: Mobs/Animals/possum.rsi
-#     state: possum
+- type: stealTargetGroup
+  id: AnimalMorty
+  name: steal-target-groups-animal-morty
+  sprite:
+    sprite: Mobs/Animals/possum.rsi
+    state: possum
 
-# - type: stealTargetGroup
-#   id: AnimalRenault
-#   name: steal-target-groups-animal-renault
-#   sprite:
-#     sprite: Mobs/Animals/fox.rsi
-#     state: fox
+- type: stealTargetGroup
+  id: AnimalRenault
+  name: steal-target-groups-animal-renault
+  sprite:
+    sprite: Mobs/Animals/fox.rsi
+    state: fox
 
-# - type: stealTargetGroup
-#   id: AnimalShiva
-#   name: steal-target-groups-animal-shiva
-#   sprite:
-#     sprite: Mobs/Pets/shiva.rsi
-#     state: shiva
+- type: stealTargetGroup
+  id: AnimalShiva
+  name: steal-target-groups-animal-shiva
+  sprite:
+    sprite: Mobs/Pets/shiva.rsi
+    state: shiva
 
-# - type: stealTargetGroup
-#   id: AnimalTropico
-#   name: steal-target-groups-animal-tropico
-#   sprite:
-#     sprite: Mobs/Animals/crab.rsi
-#     state: crab
-# SS220 Delete thief objective animals end
+- type: stealTargetGroup
+  id: AnimalTropico
+  name: steal-target-groups-animal-tropico
+  sprite:
+    sprite: Mobs/Animals/crab.rsi
+    state: crab

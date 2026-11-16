@@ -1,7 +1,7 @@
 ﻿- type: entity
   name: basic slime
   id: BaseMobAdultSlimes
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat ]
   abstract: true
   description: It looks so much like jelly. I wonder what it tastes like?
   components:
@@ -31,9 +31,7 @@
     baseSprintSpeed: 4
   - type: FootstepModifier
     footstepSoundCollection:
-      path: /Audio/Effects/Footsteps/slime1.ogg
-      params:
-        volume: 3
+      collection: FootstepSlime
   - type: Tag
     tags:
     - FootstepSound
@@ -55,7 +53,10 @@
     damageContainer: Biological
     damageModifierSet: Slime
   - type: Bloodstream
-    bloodReagent: Slime
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 150
     bloodlossDamage:
       types:
         Bloodloss:
@@ -76,22 +77,18 @@
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashCreamPie
     - reagents: [ Water ]
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
         damage:
           types:
-            Heat: 0.15
+            Heat: 0.05 #Same as slime species
       - !type:PopupMessage
         type: Local
         messages: [ "slime-hurt-by-water-popup" ]
         probability: 0.25
-  - type: Body
-    prototype: Slimes
-    requiredLegs: 1
   - type: MeleeWeapon
     altDisarm: false
     soundHit:
@@ -112,11 +109,12 @@
     speechSounds: Slime
   - type: TypingIndicator
     proto: slime
+  - type: NoSlip #SS220-fauna-update
 
 - type: entity
   name: basic slime
   id: MobAdultSlimes
-  parent: BaseMobAdultSlimes
+  parent: [ BaseMobSlimesAnimal, BaseMobAdultSlimes ] #SS220-fauna-diet-fix
   abstract: true
   description: It looks so much like jelly. I wonder what it tastes like?
   components:
@@ -144,6 +142,13 @@
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
+  #SS220-fauna-damagesets-begin
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: MobBasicSlime
+  - type: StaminaResistance
+    damageCoefficient: 0.2
+  #SS220-fauna-damagesets-ended
 
 - type: entity
   name: blue slime
@@ -169,6 +174,8 @@
     - type: GhostRole
       description: ghost-role-information-angry-slimes-description
       rules: ghost-role-information-angry-slimes-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
 # SS220-partial-revert-raffle-Begin
 #      raffle:
 #        settings: short
@@ -209,6 +216,8 @@
     - type: GhostRole
       description: ghost-role-information-angry-slimes-description
       rules: ghost-role-information-angry-slimes-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
 # SS220-partial-revert-raffle-Begin
 #      raffle:
 #        settings: short
@@ -234,8 +243,7 @@
         types:
           Blunt: 6
           Structural: 4
-          Caustic: 1
-          Cellular: 3
+          Caustic: 4
 
 - type: entity
   name: yellow slime
@@ -249,6 +257,8 @@
     - type: GhostRole
       description: ghost-role-information-angry-slimes-description
       rules: ghost-role-information-angry-slimes-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
 # SS220-partial-revert-raffle-Begin
 #      raffle:
 #        settings: short

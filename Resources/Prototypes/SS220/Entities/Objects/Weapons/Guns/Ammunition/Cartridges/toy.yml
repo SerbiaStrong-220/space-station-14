@@ -1,0 +1,127 @@
+#shotgun caps
+- type: entity
+  id: BaseShellShotgunToy
+  parent: BaseShellShotgun
+  suffix: Toy
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgunToy
+    - Cartridge
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-ammo-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-ammo-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
+
+- type: entity
+  id: ShellShotgunSlugCaps
+  parent: BaseShellShotgunToy
+  suffix: Caps
+  components:
+  - type: Sprite
+    layers:
+      - state: slug
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: BulletCap
+  - type: SpentAmmoVisuals
+    state: "slug"
+
+- type: entity
+  id: ShellShotgunCaps
+  parent: BaseShellShotgunToy
+  suffix: Caps
+  components:
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunSpreadCaps
+
+#shotgun foam
+- type: entity
+  id: ShellShotgunSlugFoam
+  parent: BaseShellShotgunToy
+  suffix: Foam
+  components:
+  - type: Sprite
+    layers:
+      - state: slug
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: BulletFoam
+    deleteOnSpawn: true
+
+- type: entity
+  id: ShellShotgunFoam
+  parent: BaseShellShotgunToy
+  suffix: Foam
+  components:
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunSpreadFoam
+    deleteOnSpawn: true
+
+#special revolver foam ammo
+#Reason for that - revolver cant shoot foam bullets due to revolver's specific. So you can shoot foam from it once, sadly.
+- type: entity
+  id: CartridgeMagnumFoam
+  parent: BaseCartridgeMagnum
+  suffix: Foam
+  components:
+  - type: CartridgeAmmo
+    proto: BulletFoam
+    deleteOnSpawn: true
+
+#for hristov
+#BASE
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: BaseCartridgeAntiMaterielToy
+  suffix: Caps
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - CartridgeAntiMaterielToy
+    - Cartridge
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-ammo-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-ammo-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
+    hiddenName: ent-CartridgeAntiMateriel
+
+#stunning
+- type: entity
+  parent: BaseCartridgeAntiMaterielToy
+  id: CartridgeAntiMaterielToyStun
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielToyStun
+
+#meme headshot
+- type: entity
+  parent: BaseCartridgeAntiMaterielToy
+  id: CartridgeAntiMaterielToyMeme
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielToyMeme
+
+#funny
+- type: entity
+  parent: BaseCartridgeAntiMaterielToy
+  id: CartridgeAntiMaterielToyHappiness
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielToyHappiness

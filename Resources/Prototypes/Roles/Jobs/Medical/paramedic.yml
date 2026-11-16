@@ -6,8 +6,9 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 54000 # SS220-RoleTime 2
+      time: 15h # SS220-RoleTime 2
   startingGear: ParamedicGear
+  experienceDefinition: ParamedicRoleExperience # SS220-experience
   icon: "JobIconParamedic"
   supervisors: job-supervisors-cmo
   access:
@@ -22,7 +23,19 @@
   equipment:
     id: ParamedicPDA
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalEMTFilled
+#    belt: ClothingBeltMedicalEMTFilled #ss220 paramedicinterdyne
   storage:
     back:
     - EmergencyRollerBedSpawnFolded
+    - FilledSurgeryMedkit # ss220-surgery-update
+
+- type: chameleonOutfit
+  id: ParamedicChameleonOutfit
+  job: Paramedic
+  equipment:
+    head: ClothingHeadHatParamedicsoft
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatParamedicWB
+    gloves: ClothingHandsGlovesLatex

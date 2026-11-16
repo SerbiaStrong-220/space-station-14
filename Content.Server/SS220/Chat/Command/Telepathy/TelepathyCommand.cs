@@ -2,6 +2,7 @@
 
 using Content.Server.Chat.Systems;
 using Content.Shared.Administration;
+using Content.Shared.Chat;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
 
@@ -13,6 +14,7 @@ public sealed class TelepathyCommand : IConsoleCommand
     public string Command => "telepathy";
     public string Description => "Send message through the power of mind";
     public string Help => $"{Command} <text>";
+
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (shell.Player is not { } player)
@@ -37,7 +39,8 @@ public sealed class TelepathyCommand : IConsoleCommand
         if (string.IsNullOrEmpty(message))
             return;
 
-        IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ChatSystem>()
+        IoCManager.Resolve<IEntitySystemManager>()
+            .GetEntitySystem<ChatSystem>()
             .TrySendInGameICMessage(
                 playerEntity,
                 message,

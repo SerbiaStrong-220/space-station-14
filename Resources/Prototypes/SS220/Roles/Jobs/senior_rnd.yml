@@ -8,6 +8,7 @@
       department: Science
       time: 216000 #60 hrs
   startingGear: SeniorResearcherGear
+  experienceDefinition: SeniorResearcherRoleExperience
   icon: "JobIconSeniorResearcher"
   supervisors: job-supervisors-rd
   access:
@@ -19,3 +20,14 @@
   equipment:
     id: SeniorResearcherPDA
     ears: ClothingHeadsetScience
+
+- type: chameleonOutfit
+  id: SeniorResearcherChameleonOutfit
+  job: SeniorResearcher
+  equipment:
+    head: ClothingHeadBandSkull
+    eyes: ClothingEyesGlassesSunglasses
+    mask: ClothingMaskGas
+    neck: ClothingNeckTieSci
+    outerClothing: ClothingOuterCoatRnd
+    gloves: ClothingHandsGlovesLatex

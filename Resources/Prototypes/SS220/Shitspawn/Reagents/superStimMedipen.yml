@@ -6,12 +6,12 @@
   description: Одноразовый медипен, содержащий химические вещества, восстанавливающие большинство видов повреждений.
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: ebentpen
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: Item
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     size: Small
   - type: SolutionContainerManager
     solutions:
@@ -20,9 +20,9 @@
         reagents:
           - ReagentId: UnknownSuperStim
             Quantity: 60
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 30
+    currentTransferAmount: 30
   - type: StaticPrice
     price: 500
   - type: Tag

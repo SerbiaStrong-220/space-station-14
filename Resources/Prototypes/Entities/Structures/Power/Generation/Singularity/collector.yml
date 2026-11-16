@@ -14,8 +14,10 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
+          #SS220-TweakHitbox begin
+          !type:PhysShapeCircle
+          radius: 0.45
+          #SS220-TweakHitbox end
         density: 190
         mask:
         - MachineMask
@@ -25,7 +27,7 @@
     anchored: true
     noRot: true
   - type: Sprite
-    sprite: Structures/Power/Generation/Singularity/collector.rsi
+    sprite: SS220/Structures/Power/Generation/Singularity/collector.rsi #SS220 collector sprite fix
     snapCardinals: true
     layers:
       - state: ca_off
@@ -57,7 +59,7 @@
     sprite: Structures/Power/Generation/Singularity/collector.rsi
     state: static
   - type: RadiationCollector
-    chargeModifier: 7500
+    chargeModifier: 15000
     radiationReactiveGases:
       - reactantPrototype: Plasma
         powerGenerationEfficiency: 1
@@ -68,7 +70,9 @@
   - type: Rotatable
   - type: Pullable
   - type: GuideHelp
-    guides: [ Singularity, Power ]
+    guides:
+    - SingularityEngine
+    - Power
   - type: ContainerContainer
     containers:
       gas_tank: !type:ContainerSlot {}

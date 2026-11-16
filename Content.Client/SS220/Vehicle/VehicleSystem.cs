@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Client.SS220.Vehicle;
 
-public sealed class VehicleSystem : SharedVehicleSystem
+public sealed partial class VehicleSystem : SharedVehicleSystem
 {
     [Dependency] private EyeSystem _eye = default!;
 
@@ -23,18 +23,14 @@ public sealed class VehicleSystem : SharedVehicleSystem
     {
         // Center the player's eye on the vehicle
         if (TryComp(uid, out EyeComponent? eyeComp))
-        {
             _eye.SetTarget(uid, eyeComp.Target ?? component.Vehicle, eyeComp);
-        }
     }
 
     private void OnRiderShutdown(EntityUid uid, RiderComponent component, ComponentShutdown args)
     {
         // reset the riders eye centering.
         if (TryComp(uid, out EyeComponent? eyeComp))
-        {
             _eye.SetTarget(uid, null, eyeComp);
-        }
     }
 
     private void OnRiderHandleState(EntityUid uid, RiderComponent component, ref ComponentHandleState args)
@@ -45,9 +41,7 @@ public sealed class VehicleSystem : SharedVehicleSystem
         var entity = EnsureEntity<RiderComponent>(state.Entity, uid);
 
         if (TryComp(uid, out EyeComponent? eyeComp) && eyeComp.Target == component.Vehicle)
-        {
             _eye.SetTarget(uid, entity, eyeComp);
-        }
 
         component.Vehicle = entity;
     }

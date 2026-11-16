@@ -1,15 +1,16 @@
-﻿- type: job
+- type: job
   id: ServiceWorker
   name: job-name-serviceworker
   description: job-description-serviceworker
   playTimeTracker: JobServiceWorker
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 3600 # SS220-RoleTime 2
+      time: 1h # SS220-RoleTime 2
   startingGear: ServiceWorkerGear
+  experienceDefinition: ServiceWorkerRoleExperience # SS220-experience
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
-  canBeAntag: true
+  canBeAntag: true #SS220 https://github.com/SerbiaStrong-220/space-station-14/pull/564
   access:
   - Service
   - Maintenance
@@ -27,3 +28,14 @@
   #storage:
     #back:
     #- Stuff
+
+- type: chameleonOutfit
+  id: ServiceWorkerChameleonOutfit
+  job: ServiceWorker
+  equipment:
+    head: ClothingHeadHatBowlerHat
+    eyes: ClothingEyesGlassesSunglasses
+    mask: ClothingMaskGas
+    neck: ClothingNeckScarfStripedBrown
+    outerClothing: ClothingOuterVest
+    gloves: ClothingHandsGlovesColorBlack

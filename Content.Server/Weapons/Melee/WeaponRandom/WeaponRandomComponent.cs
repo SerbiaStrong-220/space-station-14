@@ -25,4 +25,8 @@ internal sealed partial class WeaponRandomComponent : Component
     [DataField("damageSound")]
     public SoundSpecifier DamageSound = new SoundPathSpecifier("/Audio/Items/bikehorn.ogg");
 
+    // SS220 Add random stamina damage begin
+    [DataField]
+    public float? StaminaDamage;
+    // SS220 Add random stamina damage end
 }

@@ -9,7 +9,9 @@ using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers; // ss220 fix
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Item.ItemToggle;
 /// <summary>
@@ -21,18 +23,18 @@ namespace Content.Shared.Item.ItemToggle;
 public sealed class ItemToggleSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly WieldableSystem _wieldable = default!;//SS220 double_esword-fix
+    [Dependency] private readonly SharedWieldableSystem _wieldable = default!; //SS220 double_esword-fix
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedContainerSystem _sharedContainerSystem = default!; // ss220 fix
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    private EntityQuery<ItemToggleComponent> _query;
+    [Dependency] private readonly EntityQuery<ItemToggleComponent> _itemToggleQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ItemToggleComponent>();
 
         SubscribeLocalEvent<ItemToggleComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ItemToggleComponent, MapInitEvent>(OnMapInit);
@@ -76,11 +78,31 @@ public sealed class ItemToggleSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract || !ent.Comp.OnActivate)
             return;
 
+
+        if (_sharedContainerSystem.IsEntityInContainer(ent.Owner) && HasComp<ItemToggleSizeComponent>(ent.Owner)) return; // ss220 fix
+
         var user = args.User;
+
+        if (ent.Comp.Activated)
+        {
+            var ev = new ItemToggleDeactivateAttemptEvent(args.User);
+            RaiseLocalEvent(ent.Owner, ref ev);
+
+            if (ev.Cancelled)
+                return;
+        }
+        else
+        {
+            var ev = new ItemToggleActivateAttemptEvent(args.User);
+            RaiseLocalEvent(ent.Owner, ref ev);
+
+            if (ev.Cancelled)
+                return;
+        }
 
         args.Verbs.Add(new ActivationVerb()
         {
-            Text = !ent.Comp.Activated ? Loc.GetString("item-toggle-activate") : Loc.GetString("item-toggle-deactivate"),
+            Text = !ent.Comp.Activated ? Loc.GetString(ent.Comp.VerbToggleOn) : Loc.GetString(ent.Comp.VerbToggleOff),
             Act = () =>
             {
                 Toggle((ent.Owner, ent.Comp), user, predicted: ent.Comp.Predictable);
@@ -102,32 +124,32 @@ public sealed class ItemToggleSystem : EntitySystem
     /// Sets its state to the opposite of what it is.
     /// </summary>
     /// <returns>Same as <see cref="TrySetActive"/></returns>
-    public bool Toggle(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true)
+    public bool Toggle(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true, bool showPopup = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return false;
 
-        return TrySetActive(ent, !ent.Comp.Activated, user, predicted);
+        return TrySetActive(ent, !ent.Comp.Activated, user, predicted, showPopup);
     }
 
     /// <summary>
     /// Tries to set the activated bool from a value.
     /// </summary>
     /// <returns>false if the attempt fails for any reason</returns>
-    public bool TrySetActive(Entity<ItemToggleComponent?> ent, bool active, EntityUid? user = null, bool predicted = true)
+    public bool TrySetActive(Entity<ItemToggleComponent?> ent, bool active, EntityUid? user = null, bool predicted = true, bool showPopup = true)
     {
         if (active)
-            return TryActivate(ent, user, predicted: predicted);
+            return TryActivate(ent, user, predicted: predicted, showPopup);
         else
-            return TryDeactivate(ent, user, predicted: predicted);
+            return TryDeactivate(ent, user, predicted: predicted, showPopup);
     }
 
     /// <summary>
     /// Used when an item is attempting to be activated. It returns false if the attempt fails any reason, interrupting the activation.
     /// </summary>
-    public bool TryActivate(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true)
+    public bool TryActivate(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true, bool showPopup = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return false;
 
         var uid = ent.Owner;
@@ -136,25 +158,30 @@ public sealed class ItemToggleSystem : EntitySystem
             return true;
 
         //SS220 double_esword-fix start
-        if (user != null && EntityManager.TryGetComponent<WieldableComponent>(uid, out var wiledable) && !_wieldable.CanWield(uid, wiledable, (EntityUid) user))
+        if (user != null && TryComp<WieldableComponent>(uid, out var wiledable) && !_wieldable.CanWield(uid, wiledable, (EntityUid) user))
             return false;
         //SS220 double_esword-fix end
-
-        if (!comp.Predictable && _netManager.IsClient)
-            return true;
 
         var attempt = new ItemToggleActivateAttemptEvent(user);
         RaiseLocalEvent(uid, ref attempt);
 
-        if (!comp.Predictable) predicted = false;
+        if (!comp.Predictable)
+            predicted = false;
+
+        if (!predicted && _netManager.IsClient)
+            return false;
+
         if (attempt.Cancelled)
         {
+            if (attempt.Silent)
+                return false;
+
             if (predicted)
                 _audio.PlayPredicted(comp.SoundFailToActivate, uid, user);
             else
                 _audio.PlayPvs(comp.SoundFailToActivate, uid);
 
-            if (attempt.Popup != null && user != null)
+            if (showPopup && attempt.Popup != null && user != null)
             {
                 if (predicted)
                     _popup.PopupClient(attempt.Popup, uid, user.Value);
@@ -165,17 +192,16 @@ public sealed class ItemToggleSystem : EntitySystem
             return false;
         }
 
-        Activate((uid, comp), predicted, user);
-
+        Activate((uid, comp), predicted, user, showPopup);
         return true;
     }
 
     /// <summary>
     /// Used when an item is attempting to be deactivated. It returns false if the attempt fails any reason, interrupting the deactivation.
     /// </summary>
-    public bool TryDeactivate(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true)
+    public bool TryDeactivate(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true, bool showPopup = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return false;
 
         var uid = ent.Owner;
@@ -183,28 +209,51 @@ public sealed class ItemToggleSystem : EntitySystem
         if (!comp.Activated)
             return true;
 
-        if (!comp.Predictable && _netManager.IsClient)
-            return true;
+        if (!comp.Predictable)
+            predicted = false;
 
         var attempt = new ItemToggleDeactivateAttemptEvent(user);
         RaiseLocalEvent(uid, ref attempt);
 
-        if (attempt.Cancelled)
+        if (!predicted && _netManager.IsClient)
             return false;
 
-        if (!comp.Predictable) predicted = false;
-        Deactivate((uid, comp), predicted, user);
+        if (attempt.Cancelled)
+        {
+            if (attempt.Silent)
+                return false;
+
+            if (showPopup && attempt.Popup != null && user != null)
+            {
+                if (predicted)
+                    _popup.PopupClient(attempt.Popup, uid, user.Value);
+                else
+                    _popup.PopupEntity(attempt.Popup, uid, user.Value);
+            }
+
+            return false;
+        }
+
+        Deactivate((uid, comp), predicted, user, showPopup);
         return true;
     }
 
-    private void Activate(Entity<ItemToggleComponent> ent, bool predicted, EntityUid? user = null)
+    private void Activate(Entity<ItemToggleComponent> ent, bool predicted, EntityUid? user = null, bool showPopup = true)
     {
         var (uid, comp) = ent;
         var soundToPlay = comp.SoundActivate;
         if (predicted)
+        {
             _audio.PlayPredicted(soundToPlay, uid, user);
+            if (showPopup && ent.Comp.PopupActivate != null && user != null)
+                _popup.PopupClient(Loc.GetString(ent.Comp.PopupActivate), user.Value, user.Value);
+        }
         else
+        {
             _audio.PlayPvs(soundToPlay, uid);
+            if (showPopup && ent.Comp.PopupActivate != null && user != null)
+                _popup.PopupEntity(Loc.GetString(ent.Comp.PopupActivate), user.Value, user.Value);
+        }
 
         comp.Activated = true;
         UpdateVisuals((uid, comp));
@@ -217,14 +266,22 @@ public sealed class ItemToggleSystem : EntitySystem
     /// <summary>
     /// Used to make the actual changes to the item's components on deactivation.
     /// </summary>
-    private void Deactivate(Entity<ItemToggleComponent> ent, bool predicted, EntityUid? user = null)
+    private void Deactivate(Entity<ItemToggleComponent> ent, bool predicted, EntityUid? user = null, bool showPopup = true)
     {
         var (uid, comp) = ent;
         var soundToPlay = comp.SoundDeactivate;
         if (predicted)
+        {
             _audio.PlayPredicted(soundToPlay, uid, user);
+            if (showPopup && ent.Comp.PopupDeactivate != null && user != null)
+                _popup.PopupClient(Loc.GetString(ent.Comp.PopupDeactivate), user.Value, user.Value);
+        }
         else
+        {
             _audio.PlayPvs(soundToPlay, uid);
+            if (showPopup && ent.Comp.PopupDeactivate != null && user != null)
+                _popup.PopupEntity(Loc.GetString(ent.Comp.PopupDeactivate), user.Value, user.Value);
+        }
 
         comp.Activated = false;
         UpdateVisuals((uid, comp));
@@ -234,11 +291,26 @@ public sealed class ItemToggleSystem : EntitySystem
         RaiseLocalEvent(uid, ref toggleUsed);
     }
 
+    /// <summary>
+    /// Sets if this toggleable item can be activated in world by pressing "e"
+    /// </summary>
+    public void SetOnActivate(Entity<ItemToggleComponent?> ent, bool val)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        if (ent.Comp.OnActivate == val)
+            return;
+
+        ent.Comp.OnActivate = val;
+        Dirty(ent);
+    }
+
     private void UpdateVisuals(Entity<ItemToggleComponent> ent)
     {
         if (TryComp(ent, out AppearanceComponent? appearance))
         {
-            _appearance.SetData(ent, ToggleVisuals.Toggled, ent.Comp.Activated, appearance);
+            _appearance.SetData(ent, ToggleableVisuals.Enabled, ent.Comp.Activated, appearance);
         }
     }
 
@@ -255,13 +327,12 @@ public sealed class ItemToggleSystem : EntitySystem
     /// </summary>
     private void TurnOnOnWielded(Entity<ItemToggleComponent> ent, ref ItemWieldedEvent args)
     {
-        // FIXME: for some reason both client and server play sound
-        TryActivate((ent, ent.Comp));
+        TryActivate((ent, ent.Comp), args.User);
     }
 
     public bool IsActivated(Entity<ItemToggleComponent?> ent)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return true; // assume always activated if no component
 
         return ent.Comp.Activated;
@@ -280,6 +351,9 @@ public sealed class ItemToggleSystem : EntitySystem
     /// </summary>
     private void UpdateActiveSound(Entity<ItemToggleActiveSoundComponent> ent, ref ItemToggledEvent args)
     {
+        if (!_gameTiming.IsFirstTimePredicted)
+            return;
+
         var (uid, comp) = ent;
         if (!args.Activated)
         {

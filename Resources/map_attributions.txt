@@ -16,6 +16,9 @@
 - files: ["cluster.yml"]
   authors: Scribbles0
 
+- files: ["elkridge.yml"]
+  authors: Deerstop
+
 - files: ["fland.yml"]
   authors: Emisse
 
@@ -55,9 +58,18 @@
 - files: ["cog.yml"]
   authors: Spacemann
 
+- files: ["convex.yml"]
+  authors: Spacemann
+
+- file: ["amber.yml"]
+  authors: Southbridge, Flipsie27
+
+  - files: ["snowball.yml"]
+  authors: Spacemann
+
 # ss220-maps
 
-- files: ["ss220-box.yml"]
+- files: ["frankenstein.yml"]
   authors: ACJM, Emisse, TheArturZh, ZoNeSRuS
 
 - files: ["nox.yml"]
@@ -76,7 +88,20 @@
   authors: Vnoeg, NightmareStalker, AliceValestray, UrPrice, VictorBoum, RtmFool, Ivan_comi
 
 - files: ["Donuts.yml"]
-  authors: spo9k, Persia
+  authors: Velcroboy, spo9k, Persia
 
 - files: ["astro.yml]
   authors: VictorBoum, UrPrice, AliceValestray, NightmareStalker, RtmFool, Heidem, Nozychek_, evgen_killred, vatzob
+
+- files: ["nightshift.yml"]
+  authors: VictorBoum, AliceValestray, rtmfool, murraingif, NightmareStalker, Thorofare, PorteRianes, Vnoeg
+
+- files: ["cultyogg-teleport-hub.yml"]
+  authors: SkaldetSkaeg, MixNikita
+
+- files: ["tox.yml"]
+  authors: VictorBoum
+
+- files: ["stargate.yml"]
+  authors: Ed, Arcanis, Jojo Cat, Jeb, Zarxis, Xomak404, NikaVich, Abiergo, Adammatic, SVEDETEL, PandionSM, Shiva_Meresh, VoidCat, darkzist, misyk0, sharkysan
+

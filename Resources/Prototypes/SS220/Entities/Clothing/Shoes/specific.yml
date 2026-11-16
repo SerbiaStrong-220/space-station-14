@@ -17,12 +17,12 @@
   id: ClothingShoesOrangeGaloshes
   name: оранжевые галоши
   description: Оранжевые резиновые ботинки.
-  suffix: Не маппить
+  suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+    sprite: SS220/Clothing/Shoes/Boots/janitor_orange.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+    sprite: SS220/Clothing/Shoes/Boots/janitor_orange.rsi
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -40,6 +40,7 @@
   - type: Tag
     tags:
     - Footwraps
+    - WhitelistChameleon
   - type: FootstepModifier
     footstepSoundCollection:
       collection: BarestepHard
@@ -244,6 +245,7 @@
   id: ClothingShoesClownPennywise
   name: dance clown shoes
   description: "Their elegance can cause genuine laughter."
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Specific/clown_pennywise.rsi
@@ -252,3 +254,48 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepClown
+      params:
+        pitch: 0.2
+
+- type: entity
+  parent: ClothingShoesChameleon
+  id: ClothingSilentShoes
+  name: black shoes #actual name and description in uplink_catalog.yml
+  suffix: Silent, Chameleon
+  description: Stylish black shoes.
+  components:
+  - type: FootstepModifier
+    footstepSoundCollection: null
+  # HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge:
+        - corvax-hidden-desc-Chameleon-syndicate
+        - hidden-desc-SilentShoes-syndicate
+      ScienceKnowledge:
+        - corvax-hidden-desc-Chameleon-research
+        - hidden-desc-SilentShoes-research
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: null
+# HiddenDesc-End
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesSpaceNinjaFake
+  name: space ninja shoes
+  description: Stylish ninja boots from the popular anime.
+  suffix: Fake
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi 
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi 
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]

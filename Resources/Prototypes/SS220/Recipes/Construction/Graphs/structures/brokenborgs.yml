@@ -61,7 +61,7 @@
               doAfter: 2
           completed:
             - !type:SpawnPrototype
-              prototype: TorsoBorgEngineer
+              prototype: TorsoBorg
               amount: 1
             - !type:DeleteEntity {}
 
@@ -89,7 +89,7 @@
               doAfter: 2
           completed:
             - !type:SpawnPrototype
-              prototype: HeadBorgJanitor
+              prototype: LightHeadBorg
               amount: 1
             - !type:DeleteEntity {}
 
@@ -117,7 +117,7 @@
               doAfter: 2
           completed:
             - !type:SpawnPrototype
-              prototype: HeadBorgMedical
+              prototype: LightHeadBorg
               amount: 1
             - !type:DeleteEntity {}
 
@@ -145,7 +145,7 @@
               doAfter: 2
           completed:
             - !type:SpawnPrototype
-              prototype: TorsoBorgMining
+              prototype: TorsoBorg
               amount: 1
             - !type:DeleteEntity {}
 
@@ -173,6 +173,6 @@
               doAfter: 2
           completed:
             - !type:SpawnPrototype
-              prototype: HeadBorgService
+              prototype: LightHeadBorg
               amount: 1
             - !type:DeleteEntity {}

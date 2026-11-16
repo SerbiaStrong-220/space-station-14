@@ -1,7 +1,6 @@
 #Base
 - type: entity
   parent:
-  - MobAtmosStandard
   - SimpleMobBase
   - MobCombat
   id: BaseMobSpiderQueen
@@ -9,9 +8,18 @@
   name: Spider queen
   description: spider dance
   components:
-  - type: AutoImplant
-    implants:
-    - ThermalVisionImplant
+  - type: NightVision
+    profile: NightVisionLightGreen
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  - type: Language
+    availableLanguages:
+    - id: SpiderTongue
+      canSpeak: True
+  - type: Emoting
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
   - type: NpcFactionMember
     factions:
     - SpiderQueen
@@ -29,12 +37,6 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: midwife-moving
-  - type: MobThresholds #HP
-    thresholds:
-      0: Alive
-      300: Dead
-  - type: Stamina
-    critThreshold: 150
   - type: DamageStateVisuals
     states:
       Alive:
@@ -49,8 +51,10 @@
       amount: 1
       prob: 0.5
   - type: Bloodstream
-    bloodMaxVolume: 250
-    bloodReagent: Cryoxadone
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Cryoxadone
+        Quantity: 250
   - type: Fixtures
     fixtures:
       fix1:
@@ -89,22 +93,30 @@
       true
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: Barotrauma #Damage
+  - type: Barotrauma
     damage:
       types:
-        Blunt: 1
-        Heat: 1
-  - type: Temperature #Damage
+        Blunt: 0.2
+        Heat: 0.1
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 1.5
+    damageRecovery:
+      types:
+        Asphyxiation: -1.0
+  - type: TemperatureDamage
     heatDamageThreshold: 325
     coldDamageThreshold: 260
-    currentTemperature: 310.15
-    specificHeat: 42
     coldDamage:
       types:
         Cold: 0.1 #per second, scales with temperature & other constants
     heatDamage:
       types:
         Heat: 0.1 #per second, scales with temperature & other constants
+  - type: Temperature
+    currentTemperature: 310.15
+    specificHeat: 42
   - type: Speech #krik
     speechVerb: Arachnid
     speechSounds: Arachnid
@@ -118,19 +130,26 @@
     energy: 0
     color: "#ff4242"
     castShadows: false
-  - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - HiveRadio
-  - type: ActiveRadio
-    channels:
-    - HiveRadio
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelHive
+  - type: FlashImmunity
+  - type: Lifesteal
 
 - type: entity
   parent: BaseMobSpiderQueen
   id: BaseMobSpiderServant
   abstract: true
   components:
+  - type: Language
+    availableLanguages:
+    - id: SpiderTongue
+      canSpeak: true
+  - type: Stamina
+    baseCritThreshold: 150
+  - type: HTN
+    rootTask:
+      task: SpiderServantCompound
   - type: Tag
     tags:
       - CannotSuicide
@@ -163,7 +182,9 @@
     - ActionSpawnSpiderLittleBloodPoints
     - ActionSpawnSpiderCrystalBloodPoints
     - ActionSpawnSingleSpiderWebDurableBloodPoints
+    - ActionSpawnWebTileBloodPoints
     - ActionSpawnSpiderWallWebDurableBloodPoints
+    - ActionSpawnSpiderWebPassageBloodPoints
     - ActionSpiderCoconning
   - type: Hunger
     thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
@@ -196,7 +217,9 @@
       types:
         Piercing: 25 #Damage
         Poison: 5
-        Structural: 25
+        Structural: 50
+  - type: Lifesteal
+    lifesteal: 10
   - type: Gun
     fireRate: 1
     useKey: false
@@ -204,6 +227,9 @@
     availableModes:
       - FullAuto
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderQueen
@@ -213,24 +239,36 @@
         reagents:
         - ReagentId: ChloralHydrate #Iad
           Quantity: 60
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 1
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.5
     baseSprintSpeed : 4
   - type: LizardAccent
   - type: Puller
     needsHands: false
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.Самолечение
+  - type: Stamina
+    baseCritThreshold: 200
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      360: Dead
+  - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 300
     damage:
       types:
-        Bloodloss: -1
-      groups:
-        Brute: -2
-        Toxin: -5
-        Airloss: -2.5
-        Burn: -2.5
+        Piercing: -0.30
+        Blunt: -0.15
+        Slash: -0.15
+        Heat: -0.30
+        Cold: -0.15
+        Poison: -2
+        Radiation: -2
 
 #Spiders-servants
 - type: entity
@@ -251,24 +289,25 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      60: Dead   #HP
+      75: Dead
   - type: DamageStateVisuals
     states:
       Alive:
         Base: guard-moving
       Dead:
         Base: guard_dead
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute. Самолечение
+  - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 60
     damage:
       types:
-        Bloodloss: -3
-      groups:
-        Brute: -2
-        Airloss: -2
-        Burn: -2
+        Piercing: -0.33
+        Blunt: -0.33
+        Slash: -0.33
+        Heat: -0.33
+        Cold: -0.15
+        Poison: -2.0
+        Radiation: -2.0
   - type: MeleeWeapon #Damage
     hidden: true
     soundHit:
@@ -278,15 +317,21 @@
     damage:
       types:
         Piercing: 5 #Damage
-        Structural: 20
+        Structural: 30
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderDrone
   - type: ActionGrant
     actions:
+    - ActionSpawnWebTile
     - ActionSpawnSpiderWallWebDurable
     - ActionSpawnSpiderCrystal
     - ActionSpawnSingleSpiderWebShortDelay
+    - ActionSpawnSingleSpiderWebDurable
+    - ActionSpawnSpiderWebPassage
   - type: Spider
     webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
@@ -311,7 +356,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      110: Dead
+      130: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -321,15 +366,20 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 110
     damage:
       types:
-        Bloodloss: -1.5
-      groups:
-        Brute: -1.5
-        Toxin: -5
-        Airloss: -2
-        Burn: -1
+        Piercing: -0.5
+        Blunt: -0.25
+        Slash: -0.25
+        Heat: -0.5
+        Cold: -0.25
+        Poison: -2.0
+        Radiation: -2.0
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.18
+        Heat: 0.12
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -341,6 +391,11 @@
         Piercing: 20
         Poison: 5
         Structural: 10
+  - type: Lifesteal
+    lifesteal: 7
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderHunter
@@ -352,6 +407,22 @@
   - type: ActionGrant
     actions:
     - ActionSpawnSingleSpiderWebLongDelay
+  - type: JumpAbility
+    jumpDistance: 6
+    jumpSound: /Audio/Voice/Arachnid/arachnid_scream.ogg
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 1
+  - type: BasicEntityAmmoProvider
+    proto: StickyWeb
+    capacity: 1
+    count: 1
+  - type: Gun
+    fireRate: 4
+    useKey: false
+    selectedMode: FullAuto
+    availableModes:
+      - FullAuto
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
 
 - type: entity
   parent:
@@ -371,7 +442,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      90: Dead
+      110: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -381,15 +452,20 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 90
     damage:
       types:
-        Bloodloss: -1
-      groups:
-        Brute: -1.5
-        Toxin: -5
-        Airloss: -2
-        Burn: -1
+        Piercing: -0.5
+        Blunt: -0.25
+        Slash: -0.25
+        Heat: -0.5
+        Cold: -0.25
+        Poison: -2
+        Radiation: -2
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.18
+        Heat: 0.12
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -401,6 +477,9 @@
         Piercing: 5
         Poison: 10
         Structural: 5
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderGhost
@@ -410,6 +489,16 @@
         reagents:
         - ReagentId: ChloralHydrate
           Quantity: 20
+        - ReagentId: MuteToxin
+          Quantity: 5
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 0.4
+      - ReagentId: MuteToxin
+        Quantity: 0.1
   - type: Stealth
   - type: StealthOnMove
     passiveVisibilityRate: -0.37
@@ -442,6 +531,9 @@
   name: spider shooter
   description: spider dance
   components:
+  - type: HTN
+    rootTask:
+      task: SpiderServantShooterCompound
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
@@ -452,7 +544,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      70: Dead
+      90: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -462,15 +554,20 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 70
     damage:
       types:
-        Bloodloss: -0.5
-      groups:
-        Brute: -1
-        Toxin: -5
-        Airloss: -2
-        Burn: -2
+        Piercing: -0.30
+        Blunt: -0.15
+        Slash: -0.15
+        Heat: -0.30
+        Cold: -0.15
+        Poison: -2
+        Radiation: -2
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.18
+        Heat: 0.12
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -482,6 +579,9 @@
         Poison: 5
         Piercing: 5
         Structural: 5
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderShooter
@@ -491,6 +591,12 @@
         reagents:
         - ReagentId: ChloralHydrate
           Quantity: 35
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 0.5
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 1.5
   - type: BasicEntityAmmoProvider
@@ -515,6 +621,7 @@
   parent:
   - BaseMobSpiderQueen
   - MobSpiderLittleGhostRole
+  - MobPassiveCollision # SS220 Add Mob Passive Collision
   id: MobSpiderLittle
   name: small spider
   description: spider dance
@@ -529,7 +636,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      30: Dead
+      40: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -539,13 +646,19 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 30
     damage:
-      groups:
-        Brute: -0.5
-        Toxin: -0.5
-        Airloss: -0.5
-        Burn: -0.5
+      types:
+        Blunt: -0.17
+        Slash: -0.17
+        Piercing: -0.16
+        Heat: -0.13
+        Shock: -0.13
+        Cold: -0.12
+        Caustic: -0.12
+        Poison: -0.25
+        Radiation: -0.25
+        Asphyxiation: -0.25
+        Bloodloss: -0.25
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -583,9 +696,7 @@
     allowMovement: true
     name: spider-royQueen-name
     description: spider-royQueen-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 216000 # 60h
+    job: SpiderQueenJob
     raffle:
       settings: default
   - type: GhostTakeoverAvailable #Ghost role
@@ -601,11 +712,9 @@
     allowMovement: true
     name: spider-royDrone-name
     description: spider-royDrone-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -619,11 +728,9 @@
     allowMovement: true
     name: spider-royHunter-name
     description: spider-royHunter-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -637,11 +744,9 @@
     allowMovement: true
     name: spider-royGhost-name
     description: spider-royGhost-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -655,11 +760,9 @@
     allowMovement: true
     name: spider-royShooter-name
     description: spider-royShooter-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 3600 # 5h
+    job: SpiderQueenServant
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -673,9 +776,7 @@
     allowMovement: true
     name: spider-royLittle-name
     description: spider-royLittle-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 3600 # 1h
+    job: SpiderQueenServant
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role

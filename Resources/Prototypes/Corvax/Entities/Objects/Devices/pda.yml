@@ -6,15 +6,19 @@
   components:
     - type: Pda
       id: IAAIDCard
-      state: pda-iaa #SS220 PDA-Resprite
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-iaa #SS220 PDA-Resprite
     - type: PdaBorderColor
       borderColor: "#414452" #SS220 PDA-Resprite
       accentVColor: "#262c8a" #SS220-Law Department
       accentHColor: "#dfac5c" #SS220 PDA-Resprite
     - type: Sprite #SS220 PDA-Resprite-Start
-      sprite: Objects/Devices/pda.rsi
       layers:
       - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
       - state: "screen-law" #SS220-Law Department
         shader: "unshaded"
       - state: "light_overlay"
@@ -26,3 +30,11 @@
         visible: false #SS220 PDA-Resprite-End
     - type: Icon
       state: pda-iaa #SS220 PDA-Resprite
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonPDA
+    #ss220 add pdaidpainter end

@@ -1,43 +1,45 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Diagnostics.CodeAnalysis;
 using Content.Server.Chat.Systems;
-using Content.Shared.SS220.Photocopier;
-using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Examine;
-using Content.Shared.UserInterface;
-using Content.Server.Power.Components;
 using Content.Server.Popups;
+using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.SS220.Photocopier.Forms;
-using Content.Shared.Damage;
+using Content.Shared.Chat;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Popups;
-using Content.Shared.SS220.ButtScan;
-using Content.Shared.SS220.ShapeCollisionTracker;
-using Robust.Shared.Containers;
-using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Audio.Systems;
 using Content.Shared.Power;
+using Content.Shared.SS220.ButtScan;
+using Content.Shared.SS220.Photocopier;
+using Content.Shared.SS220.ShapeCollisionTracker;
+using Content.Shared.UserInterface;
+using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.SS220.Photocopier;
 
 public sealed partial class PhotocopierSystem : EntitySystem
 {
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
 
     private FormManager? _specificFormManager;
     private readonly ISawmill _sawmill = Logger.GetSawmill("photocopier");
@@ -97,63 +99,60 @@ public sealed partial class PhotocopierSystem : EntitySystem
 
     #region EventListeners
 
-    private void OnComponentInit(EntityUid uid, PhotocopierComponent component, ComponentInit args)
+    private void OnComponentInit(Entity<PhotocopierComponent> ent, ref ComponentInit args)
     {
-        _itemSlots.AddItemSlot(uid, PhotocopierComponent.PaperSlotId, component.PaperSlot);
-        _itemSlots.AddItemSlot(uid, PhotocopierComponent.TonerSlotId, component.TonerSlot);
-        TryUpdateVisualState(uid, component);
+        _itemSlots.AddItemSlot(ent, PhotocopierComponent.PaperSlotId, ent.Comp.PaperSlot);
+        _itemSlots.AddItemSlot(ent, PhotocopierComponent.TonerSlotId, ent.Comp.TonerSlot);
+        TryUpdateVisualState(ent);
     }
 
-    private void OnComponentRemove(EntityUid uid, PhotocopierComponent component, ComponentRemove args)
+    private void OnComponentRemove(Entity<PhotocopierComponent> ent, ref ComponentRemove args)
     {
-        _itemSlots.RemoveItemSlot(uid, component.PaperSlot);
-        _itemSlots.RemoveItemSlot(uid, component.TonerSlot);
+        _itemSlots.RemoveItemSlot(ent, ent.Comp.PaperSlot);
+        _itemSlots.RemoveItemSlot(ent, ent.Comp.TonerSlot);
     }
 
-    private void OnShutdown(EntityUid uid, PhotocopierComponent component, ComponentShutdown args)
+    private void OnShutdown(Entity<PhotocopierComponent> ent, ref ComponentShutdown args)
     {
-        component.EntityOnTop = null;
-        component.HumanoidAppearanceOnTop = null;
-        component.PrintAudioStream = null;
+        ent.Comp.EntityOnTop = null;
+        ent.Comp.HumanoidProfileOnTop = null;
+        ent.Comp.PrintAudioStream = null;
     }
 
-    private void OnCollisionChanged(
-        EntityUid uid,
-        PhotocopierComponent component,
-        ShapeCollisionTrackerUpdatedEvent args)
+    private void OnCollisionChanged(Entity<PhotocopierComponent> ent, ref ShapeCollisionTrackerUpdatedEvent args)
     {
-        if (component.EntityOnTop is { } currentEntity &&
-            component.HumanoidAppearanceOnTop is not null &&
+        if (ent.Comp.EntityOnTop is { } currentEntity &&
+            ent.Comp.HumanoidProfileOnTop is not null &&
             args.Colliding.Contains(currentEntity) &&
             !Deleted(currentEntity))
         {
             return;
         }
 
-        component.EntityOnTop = null;
-        component.HumanoidAppearanceOnTop = null;
+        ent.Comp.EntityOnTop = null;
+        ent.Comp.HumanoidProfileOnTop = null;
 
         foreach (var otherEntity in args.Colliding)
         {
-            if (!TryComp<HumanoidAppearanceComponent>(otherEntity, out var humanoidAppearance))
+            if (!TryComp<HumanoidProfileComponent>(otherEntity, out var humanoidAppearance))
                 continue;
 
-            component.HumanoidAppearanceOnTop = humanoidAppearance;
-            component.EntityOnTop = otherEntity;
+            ent.Comp.HumanoidProfileOnTop = humanoidAppearance;
+            ent.Comp.EntityOnTop = otherEntity;
             break;
         }
 
-        UpdateUserInterface(uid, component);
+        UpdateUserInterface(ent);
     }
 
-    private void OnToggleInterface(EntityUid uid, PhotocopierComponent component, AfterActivatableUIOpenEvent args)
+    private void OnToggleInterface(Entity<PhotocopierComponent> ent, ref AfterActivatableUIOpenEvent args)
     {
-        UpdateUserInterface(uid, component);
+        UpdateUserInterface(ent);
     }
 
-    private void OnExamine(EntityUid uid, PhotocopierComponent component, ExaminedEvent args)
+    private void OnExamine(Entity<PhotocopierComponent> ent, ref ExaminedEvent args)
     {
-        if (component.PaperSlot.Item is null)
+        if (ent.Comp.PaperSlot.Item is null)
             return;
 
         args.PushText(Loc.GetString("photocopier-examine-scan-got-item"));
@@ -179,54 +178,54 @@ public sealed partial class PhotocopierSystem : EntitySystem
         TryUpdateVisualState(uid, component);
     }
 
-    private void OnPowerChanged(EntityUid uid, PhotocopierComponent component, ref PowerChangedEvent args)
+    private void OnPowerChanged(Entity<PhotocopierComponent> ent, ref PowerChangedEvent args)
     {
         if (!args.Powered)
         {
-            StopPrinting(uid, component, false);
-            component.ManualButtBurnAnimationRemainingTime = null;
+            StopPrinting(ent, ent.Comp, false);
+            ent.Comp.ManualButtBurnAnimationRemainingTime = null;
         }
 
-        TryUpdateVisualState(uid, component);
+        TryUpdateVisualState(ent, ent.Comp);
     }
 
-    private void OnCopyButtonPressed(EntityUid uid, PhotocopierComponent component, PhotocopierCopyMessage args)
+    private void OnCopyButtonPressed(Entity<PhotocopierComponent> ent, ref PhotocopierCopyMessage args)
     {
-        if (!component.Initialized)
+        if (!ent.Comp.Initialized)
             return;
 
-        if (component.CopiesQueued > 0)
+        if (ent.Comp.CopiesQueued > 0)
             return;
 
-        if (!TryGetTonerCartridge(component, out var tonerCartridge) || tonerCartridge.Charges <= 0)
+        if (!TryGetTonerCartridge(ent.Comp, out var tonerCartridge) || tonerCartridge.Charges <= 0)
             return;
 
         // Prioritize inserted paper over butt
-        if (TryQueueCopySlot(uid, component, args.Amount))
+        if (TryQueueCopySlot(ent, ent.Comp, args.Amount))
             return;
 
-        if (component.EntityOnTop is not { } entityOnTop ||
-            component.HumanoidAppearanceOnTop is not { } humanoidAppearanceOnTop ||
+        if (ent.Comp.EntityOnTop is not { } entityOnTop ||
+            ent.Comp.HumanoidProfileOnTop is not { } humanoidAppearanceOnTop ||
             Deleted(entityOnTop))
             return;
 
-        TryQueueCopyPhysicalButt(uid, component, humanoidAppearanceOnTop, args.Amount);
-        if (component.BurnsButts)
-            BurnButt(entityOnTop, uid, component);
+        TryQueueCopyPhysicalButt(ent, ent.Comp, humanoidAppearanceOnTop, args.Amount);
+        if (ent.Comp.BurnsButts)
+            BurnButt(entityOnTop, ent, ent.Comp);
     }
 
-    private void OnPrintButtonPressed(EntityUid uid, PhotocopierComponent component, PhotocopierPrintMessage args)
+    private void OnPrintButtonPressed(Entity<PhotocopierComponent> ent, ref PhotocopierPrintMessage args)
     {
-        if (!component.Initialized)
+        if (!ent.Comp.Initialized)
             return;
 
         if (_specificFormManager is null)
             return;
 
-        if (component.CopiesQueued > 0)
+        if (ent.Comp.CopiesQueued > 0)
             return;
 
-        if (!TryGetTonerCartridge(component, out var tonerCartridge) || tonerCartridge.Charges <= 0)
+        if (!TryGetTonerCartridge(ent.Comp, out var tonerCartridge) || tonerCartridge.Charges <= 0)
             return;
 
         var formToCopy = _specificFormManager.TryGetFormFromDescriptor(args.Descriptor);
@@ -234,20 +233,20 @@ public sealed partial class PhotocopierSystem : EntitySystem
             return;
 
         FormToDataToCopy(formToCopy, out var dataToCopy, out var metaDataToCopy);
-        QueueDocument(component, new(dataToCopy, metaDataToCopy));
-        StartPrinting(uid, component, PhotocopierState.Copying, args.Amount);
+        QueueDocument(ent.Comp, new(dataToCopy, metaDataToCopy));
+        StartPrinting(ent, ent.Comp, PhotocopierState.Copying, args.Amount);
     }
 
-    private void OnStopButtonPressed(EntityUid uid, PhotocopierComponent component, PhotocopierStopMessage args)
+    private void OnStopButtonPressed(Entity<PhotocopierComponent> ent, ref PhotocopierStopMessage args)
     {
-        StopPrinting(uid, component);
+        StopPrinting(ent, ent.Comp);
     }
 
     #endregion
 
     private bool IsHumanoidOnTop(PhotocopierComponent component)
     {
-        return component.HumanoidAppearanceOnTop is not null &&
+        return component.HumanoidProfileOnTop is not null &&
                component.EntityOnTop is { } entityOnTop &&
                !Deleted(entityOnTop);
     }
@@ -312,13 +311,12 @@ public sealed partial class PhotocopierSystem : EntitySystem
             return;
 
         var dealtDamage = _damageableSystem.TryChangeDamage(
-            mobUid, component.ButtDamage, false, false, damageable, photocopierUid);
+            (mobUid, damageable), component.ButtDamage, false, false, photocopierUid);
 
         _audio.PlayPvs(component.ButtDamageSound, photocopierUid);
 
-        // AAAAAAAAAAAAAAAAAAAAAAAAAAA
-        if (dealtDamage is null || dealtDamage.Empty)
-            return; //...but only if it dealt damage
+        if (!dealtDamage)
+            return;
 
         _chat.TryEmoteWithChat(mobUid, "Scream", ChatTransmitRange.GhostRangeLimit);
         _popup.PopupEntity(Loc.GetString("photocopier-popup-butt-burn"), photocopierUid, PopupType.SmallCaution);
@@ -331,7 +329,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
     private void TryQueueCopyPhysicalButt(
         EntityUid uid,
         PhotocopierComponent component,
-        HumanoidAppearanceComponent humanoidAppearance,
+        HumanoidProfileComponent humanoidAppearance,
         int amount)
     {
         if (!TryGetTonerCartridge(component, out var tonerCartridge) || tonerCartridge.Charges <= 0)
@@ -481,7 +479,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
             if (component.IsCopyingPhysicalButt)
             {
                 // If there is no butt or someones else butt is in the way - stop copying.
-                if (component.HumanoidAppearanceOnTop is not { } humanoid
+                if (component.HumanoidProfileOnTop is not { } humanoid
                     || component.ButtSpecies is null
                     || component.ButtSpecies != humanoid.Species)
                 {

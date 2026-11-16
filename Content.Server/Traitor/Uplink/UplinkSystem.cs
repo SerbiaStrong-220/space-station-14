@@ -1,97 +1,236 @@
 using System.Linq;
+using Content.Server.PDA.Ringer;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory;
-using Content.Shared.PDA;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Implants;
+using Content.Shared.Inventory;
+using Content.Shared.Mind;
+using Content.Shared.PDA;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
-namespace Content.Server.Traitor.Uplink
+namespace Content.Server.Traitor.Uplink;
+
+public sealed class UplinkSystem : EntitySystem
 {
-    public sealed class UplinkSystem : EntitySystem
+    [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly StoreSystem _store = default!;
+    [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly RingerSystem _ringer = default!;
+
+    public static readonly EntProtoId<StoreComponent> TraitorUplinkStore = "StorePresetRemoteUplink";
+    public static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
+    private static readonly EntProtoId FallbackUplinkImplant = "UplinkImplant";
+    private static readonly ProtoId<ListingPrototype> FallbackUplinkCatalog = "UplinkUplinkImplanter";
+
+    public override void Initialize()
     {
-        [Dependency] private readonly InventorySystem _inventorySystem = default!;
-        [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-        [Dependency] private readonly StoreSystem _store = default!;
+        base.Initialize();
 
-        [ValidatePrototypeId<CurrencyPrototype>]
-        public const string TelecrystalCurrencyPrototype = "Telecrystal";
-
-        /// <summary>
-        /// Adds an uplink to the target
-        /// </summary>
-        /// <param name="user">The person who is getting the uplink</param>
-        /// <param name="balance">The amount of currency on the uplink. If null, will just use the amount specified in the preset.</param>
-        /// <param name="uplinkEntity">The entity that will actually have the uplink functionality. Defaults to the PDA if null.</param>
-        /// <param name="giveDiscounts">Marker that enables discounts for uplink items.</param>
-        /// <returns>Whether or not the uplink was added successfully</returns>
-        public bool AddUplink(
-            EntityUid user,
-            FixedPoint2? balance,
-            EntityUid? uplinkEntity = null,
-            bool giveDiscounts = false
-        )
-        {
-            // Try to find target item if none passed
-            uplinkEntity ??= FindUplinkTarget(user);
-            if (uplinkEntity == null)
-            {
-                return false;
-            }
-
-            EnsureComp<UplinkComponent>(uplinkEntity.Value);
-            var store = EnsureComp<StoreComponent>(uplinkEntity.Value);
-
-            store.AccountOwner = user;
-            store.Balance.Clear();
-            if (balance != null)
-            {
-                store.Balance.Clear();
-                _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, balance.Value } }, uplinkEntity.Value, store);
-            }
-
-            var uplinkInitializedEvent = new StoreInitializedEvent(
-                TargetUser: user,
-                Store: uplinkEntity.Value,
-                UseDiscounts: giveDiscounts,
-                Listings: _store.GetAvailableListings(user, uplinkEntity.Value, store)
-                                .ToArray()
-            );
-            RaiseLocalEvent(ref uplinkInitializedEvent);
-            // TODO add BUI. Currently can't be done outside of yaml -_-
-
-            return true;
-        }
-
-        /// <summary>
-        /// Finds the entity that can hold an uplink for a user.
-        /// Usually this is a pda in their pda slot, but can also be in their hands. (but not pockets or inside bag, etc.)
-        /// </summary>
-        public EntityUid? FindUplinkTarget(EntityUid user)
-        {
-            // Try to find PDA in inventory
-            if (_inventorySystem.TryGetContainerSlotEnumerator(user, out var containerSlotEnumerator))
-            {
-                while (containerSlotEnumerator.MoveNext(out var pdaUid))
-                {
-                    if (!pdaUid.ContainedEntity.HasValue)
-                        continue;
-
-                    if (HasComp<PdaComponent>(pdaUid.ContainedEntity.Value) || HasComp<StoreComponent>(pdaUid.ContainedEntity.Value))
-                        return pdaUid.ContainedEntity.Value;
-                }
-            }
-
-            // Also check hands
-            foreach (var item in _handsSystem.EnumerateHeld(user))
-            {
-                if (HasComp<PdaComponent>(item) || HasComp<StoreComponent>(item))
-                    return item;
-            }
-
-            return null;
-        }
+        SubscribeLocalEvent<RemoteStoreComponent, ImplantImplantedEvent>(OnRemoteStoreImplanted);
     }
+
+    private void OnRemoteStoreImplanted(Entity<RemoteStoreComponent> entity, ref ImplantImplantedEvent args)
+    {
+        if (_mind.GetMind(args.Implanted) is not { } mind )
+            return;
+
+        var storeEnumerator = EntityQueryEnumerator<RingerAccessUplinkComponent, StoreComponent>();
+        while (storeEnumerator.MoveNext(out var uid, out _, out var store))
+        {
+            if (store.AccountOwner != mind)
+                continue;
+
+            entity.Comp.Store = uid;
+            return;
+        }
+
+        // If we didn't have an uplink, make an empty one.
+        entity.Comp.Store = Spawn(TraitorUplinkStore, MapCoordinates.Nullspace);
+        SetUplink(args.Implanted, entity.Comp.Store.Value, 0, false, true); // SS220-add-dynamics-to-implant-uplink
+        Log.Error($"{ToPrettyString(args.Implanted)} did not have an uplink when they were implanted.");
+    }
+
+    /// <summary>
+    /// Adds an uplink to the target
+    /// </summary>
+    /// <param name="user">The person who is getting the uplink</param>
+    /// <param name="balance">The amount of currency on the uplink. If null, will just use the amount specified in the preset.</param>
+    /// <param name="code">The code which was generated, if any.</param>
+    /// <param name="uplinkEntity">The entity that will actually have the uplink functionality. Defaults to the PDA if null.</param>
+    /// <param name="giveDiscounts">Marker that enables discounts for uplink items.</param>
+    /// <param name="bindToPda">Binds the uplink to the specific uplink entity.</param>
+    /// <returns>Whether the uplink was added successfully to a PDA, implant or not at all.</returns>
+    public AddUplinkResult AddUplink(
+        EntityUid user,
+        FixedPoint2 balance,
+        out Note[]? code,
+        EntityUid? uplinkEntity = null,
+        bool giveDiscounts = false,
+        bool bindToPda = false,
+        bool useDynamics = false) // SS220 DynamicTraitor
+    {
+        code = null;
+
+        var storeEntity = Spawn(TraitorUplinkStore, MapCoordinates.Nullspace);
+        if (TryAddEntityUplink(user, balance, out var generatedCode, uplinkEntity, storeEntity, giveDiscounts, bindToPda))
+        {
+            code = generatedCode;
+            return AddUplinkResult.Pda;
+        }
+
+        if (TryImplantUplink(user, storeEntity, balance, giveDiscounts, useDynamics)) // SS220 DynamicTraitor
+        {
+            return AddUplinkResult.Implant;
+        }
+
+        Del(storeEntity);
+        return AddUplinkResult.Failure;
+    }
+
+    public bool TryAddEntityUplink(
+        EntityUid user,
+        FixedPoint2 balance,
+        out Note[]? code,
+        EntityUid? uplinkEntity,
+        EntityUid storeEntity,
+        bool giveDiscounts = false,
+        bool bindToPda = false,
+        bool useDynamics = false)
+    {
+        code = null;
+        uplinkEntity ??= FindUplinkTarget(user);
+
+        if (uplinkEntity == null)
+            return false;
+
+        var ev = new GenerateUplinkCodeEvent();
+        RaiseLocalEvent(storeEntity, ref ev);
+
+        if (ev.Code == null)
+        {
+            QueueDel(storeEntity);
+            return false;
+        }
+
+        code = ev.Code;
+
+        if (bindToPda)
+        {
+            var accessComp = EnsureComp<RingerAccessUplinkComponent>(storeEntity);
+            _ringer.SetBoundUplinkEntity((storeEntity, accessComp), uplinkEntity.Value);
+        }
+
+        SetUplink(user, storeEntity, balance, giveDiscounts, useDynamics); // SS220 DynamicTraitor
+
+        return true;
+    }
+
+    /// <summary>
+    /// Configure TC for the uplink
+    /// </summary>
+    private void SetUplink(EntityUid user, EntityUid store, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
+    {
+        if (!_mind.TryGetMind(user, out var mind, out _))
+            return;
+
+        var storeComp = EnsureComp<StoreComponent>(store);
+
+        storeComp.AccountOwner = mind;
+        storeComp.UseDynamicPrices = useDynamics; // SS220 Dynamics
+
+        storeComp.Balance.Clear();
+        _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, balance } },
+            store,
+            storeComp);
+
+        var uplinkInitializedEvent = new StoreInitializedEvent(
+            TargetUser: mind,
+            Store: store,
+            UseDiscounts: giveDiscounts,
+            Listings: _store.GetAvailableListings(mind, store, storeComp)
+                .ToArray());
+        RaiseLocalEvent(ref uplinkInitializedEvent);
+    }
+
+    /// <summary>
+    /// Implant an uplink as a fallback measure if the traitor had no PDA
+    /// </summary>
+    public bool TryImplantUplink(EntityUid user, EntityUid storeEntity, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
+    {
+        if (!_proto.Resolve(FallbackUplinkCatalog, out var catalog))
+            return false;
+
+        if (!catalog.Cost.TryGetValue(TelecrystalCurrencyPrototype, out var cost))
+            return false;
+
+        if (balance < cost) // Can't use Math functions on FixedPoint2
+            balance = 0;
+        else
+            balance = balance - cost;
+
+        SetUplink(user, storeEntity, balance, giveDiscounts, useDynamics);
+        var implant = _subdermalImplant.AddImplant(user, FallbackUplinkImplant);
+
+        if (!HasComp<RemoteStoreComponent>(implant))
+        {
+            Log.Error($"Implant does not have the store component {implant}");
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Finds the entity that can hold an uplink for a user.
+    /// Usually this is a pda in their pda slot, but can also be in their hands. (but not pockets or inside bag, etc.)
+    /// </summary>
+    public EntityUid? FindUplinkTarget(EntityUid user)
+    {
+        // Try to find PDA in inventory
+        if (_inventorySystem.TryGetContainerSlotEnumerator(user, out var containerSlotEnumerator))
+        {
+            while (containerSlotEnumerator.MoveNext(out var containerSlot))
+            {
+                var pdaUid = containerSlot.ContainedEntity;
+
+                if (HasComp<PdaComponent>(pdaUid) && HasComp<RemoteStoreComponent>(pdaUid))
+                    return pdaUid.Value;
+            }
+        }
+
+        // Also check hands
+        foreach (var item in _handsSystem.EnumerateHeld(user))
+        {
+            if (HasComp<PdaComponent>(item) && HasComp<RemoteStoreComponent>(item))
+                return item;
+        }
+
+        return null;
+    }
+
+    //ss220 adduplink command generate code and open uplink start
+    public void GenerateCodeAndOpenUplink(EntityUid uplinkEntity)
+    {
+        var ev = new GenerateUplinkCodeEvent();
+        RaiseLocalEvent(uplinkEntity, ref ev);
+
+        if (ev.Code != null)
+            _ringer.TryToggleUplink(uplinkEntity, ev.Code);
+    }
+    //ss220 adduplink command generate code and open uplink end
+}
+
+public enum AddUplinkResult
+{
+    Pda,
+    Implant,
+    Failure,
 }

@@ -1,3 +1,4 @@
+using Content.Client.SS220.ChatBans;
 using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Input;
@@ -16,12 +17,15 @@ using static Robust.Client.UserInterface.Controls.LineEdit;
 namespace Content.Client.UserInterface.Systems.Chat.Widgets;
 
 [GenerateTypedNameReferences]
-#pragma warning disable RA0003
+[Virtual]
 public partial class ChatBox : UIWidget
-#pragma warning restore RA0003
 {
+    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private readonly ChatRequirementsManager _chatRequirements = default!; // SS220 Chat bans
+
+    private readonly ISawmill _sawmill;
     private readonly ChatUIController _controller;
-    private readonly IEntityManager _entManager;
 
     public bool Main { get; set; }
 
@@ -30,29 +34,35 @@ public partial class ChatBox : UIWidget
     public ChatBox()
     {
         RobustXamlLoader.Load(this);
-        _entManager = IoCManager.Resolve<IEntityManager>();
+        _sawmill = _log.GetSawmill("chat");
 
         ChatInput.Input.OnTextEntered += OnTextEntered;
         ChatInput.Input.OnKeyBindDown += OnInputKeyBindDown;
         ChatInput.Input.OnTextChanged += OnTextChanged;
-        ChatInput.Input.OnFocusEnter += OnFocusEnter; // Corvax-TypingIndicator
-        ChatInput.Input.OnFocusExit += OnFocusExit; // Corvax-TypingIndicator
+        ChatInput.Input.OnFocusEnter += OnFocusEnter;
+        ChatInput.Input.OnFocusExit += OnFocusExit;
         ChatInput.ChannelSelector.OnChannelSelect += OnChannelSelect;
         ChatInput.FilterButton.Popup.OnChannelFilter += OnChannelFilter;
-
+        ChatInput.FilterButton.Popup.OnNewHighlights += OnNewHighlights;
         _controller = UserInterfaceManager.GetUIController<ChatUIController>();
         _controller.MessageAdded += OnMessageAdded;
+        _controller.HighlightsUpdated += OnHighlightsUpdated;
         _controller.RegisterChat(this);
     }
 
     private void OnTextEntered(LineEditEventArgs args)
     {
+        // SS220 Chat bans begin
+        if (_chatRequirements.IsBanned(SelectedChannel))
+            return;
+        // SS220 Chat bans end
+
         _controller.SendMessage(this, SelectedChannel);
     }
 
     private void OnMessageAdded(ChatMessage msg)
     {
-        Logger.DebugS("chat", $"{msg.Channel}: {msg.Message}");
+        _sawmill.Debug($"{msg.Channel}: {msg.Message}");
         if (!ChatInput.FilterButton.Popup.IsActive(msg.Channel))
         {
             return;
@@ -68,9 +78,15 @@ public partial class ChatBox : UIWidget
         AddLine(msg.WrappedMessage, color);
     }
 
+    private void OnHighlightsUpdated(string highlights)
+    {
+        ChatInput.FilterButton.Popup.UpdateHighlights(highlights);
+    }
+
     private void OnChannelSelect(ChatSelectChannel channel)
     {
         _controller.UpdateSelectedChannel(this);
+        ChatInput.Input.Editable = !_chatRequirements.IsBanned(SelectedChannel); // SS220-chat-bans
     }
 
     public void Repopulate()
@@ -98,13 +114,18 @@ public partial class ChatBox : UIWidget
         }
     }
 
+    private void OnNewHighlights(string highlighs)
+    {
+        _controller.UpdateHighlights(highlighs);
+    }
+
     public void AddLine(string message, Color color)
     {
         var formatted = new FormattedMessage(3);
         formatted.PushColor(color);
         formatted.AddMarkupOrThrow(message);
         formatted.Pop();
-        Contents.AddMessage(formatted);
+        Contents.AddMessage(formatted, tagsAllowed: null);
     }
 
     public void Focus(ChatSelectChannel? channel = null)
@@ -170,6 +191,11 @@ public partial class ChatBox : UIWidget
 
     private void OnTextChanged(LineEditEventArgs args)
     {
+        // SS220 Chat bans begin
+        if (_chatRequirements.IsBanned(SelectedChannel))
+            return;
+        // SS220 Chat bans end
+
         // Update channel select button to correct channel if we have a prefix.
         _controller.UpdateSelectedChannel(this);
 
@@ -180,7 +206,6 @@ public partial class ChatBox : UIWidget
         }
     }
 
-    // Corvax-TypingIndicator-Start
     private void OnFocusEnter(LineEditEventArgs args)
     {
         // Warn typing indicator about focus
@@ -192,7 +217,6 @@ public partial class ChatBox : UIWidget
         // Warn typing indicator about focus
         _controller.NotifyChatFocus(false);
     }
-    // Corvax-TypingIndicator-End
 
     protected override void Dispose(bool disposing)
     {

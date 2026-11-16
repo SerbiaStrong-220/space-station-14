@@ -4,10 +4,18 @@
   id: BulletAntiMateriel
   name: bullet (.60 anti-materiel)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: LargeAntiMaterialCaliberFragment
+    chanceToApply: 1.7
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
-        Piercing: 60 #ss220lowTTKUpdate
-        Structural: 30
-        Stamina: 50 #ss220lowTTKUpdate
-    ignoreResistances: true
+        Piercing: 75
+        Structural: 226
+    penetrationThreshold: 360
+    penetrationDamageTypeRequirement:
+    - Structural
+  - type: StaminaDamageOnCollide
+    damage: 60

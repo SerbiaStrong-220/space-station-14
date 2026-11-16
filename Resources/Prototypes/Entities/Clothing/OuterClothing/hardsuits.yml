@@ -1,34 +1,6 @@
 #When adding new hardsuits, please try to keep the organization consistent with hardsuit-helmets.yml (if possible.)
 
 #CREW HARDSUITS
-#Basic Hardsuit
-- type: entity
-  parent: ClothingOuterHardsuitBase
-  id: ClothingOuterHardsuitBasic
-  name: basic hardsuit
-  description: A basic, universal hardsuit that protects the wearer against the horrors of life in space. Beats not having a hardsuit, at least.
-  components:
-  - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/basic.rsi
-  - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/basic.rsi
-  - type: ExplosionResistance
-    damageCoefficient: 0.9
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Caustic: 0.9
-        Stamina: 0.8
-  - type: ClothingSpeedModifier
-    walkModifier: 0.80
-    sprintModifier: 0.80
-  - type: HeldSpeedModifier
-  - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitBasic
-
 #Atmospherics Hardsuit
 - type: entity
   parent: [ClothingOuterHardsuitBase]
@@ -37,9 +9,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Has thermal shielding.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/atmospherics.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/atmospherics.rsi #ss220-engineering-update-hardsuit
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/atmospherics.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/atmospherics.rsi #ss220-engineering-update-hardsuit
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -58,13 +30,20 @@
         Piercing: 0.9
         Heat: 0.8
         Radiation: 0.5
-        Stamina: 0.50
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.7
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitAtmos
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Engineering Hardsuit
 - type: entity
@@ -74,9 +53,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Has radiation shielding.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/engineering.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/engineering.rsi #ss220-engineering-update-hardsuit
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/engineering.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/engineering.rsi #ss220-engineering-update-hardsuit
   - type: PressureProtection
     highPressureMultiplier: 0.04
     lowPressureMultiplier: 1000
@@ -91,7 +70,10 @@
         Shock: 0.8
         Caustic: 0.5
         Radiation: 0.2
-        Stamina: 0.50
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.7
@@ -107,6 +89,10 @@
       Female: FemaleEngineer
       Unsexed: MaleEngineer
   #ss220 special_sounds end
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Spationaut Hardsuit
 - type: entity
@@ -137,13 +123,21 @@
         Piercing: 0.9
         Radiation: 0.8 #salv is supposed to have radiation hazards in the future # ss220 rad fix 0.3 -> 0.8 (20%)
         Caustic: 0.8
-        Stamina: 0.8
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
+    walkModifier: 0.8
     sprintModifier: 0.8
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSpatio
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+    - HardsuitSpatio
 
 #Salvage Hardsuit
 - type: entity
@@ -167,6 +161,46 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
+    damageCoefficient: 0.7
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.6
+        Piercing: 0.7
+        Heat: 0.7
+        Radiation: 0.3
+        Caustic: 0.7
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
+  - type: ClothingSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.75
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitSalvage
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+
+#Goliath Hardsuit
+- type: entity
+  parent: [ClothingOuterHardsuitBase, BaseCargoContraband]
+  id: ClothingOuterHardsuitGoliath
+  name: goliath hardsuit
+  description: A lightweight hardsuit, adorned with a patchwork of thick, chitinous goliath hide.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/goliath.rsi #SS220 Goliath Hardsuit Repsrite
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/goliath.rsi #SS220 Goliath Hardsuit Repsrite
+  - type: PressureProtection
+    highPressureMultiplier: 0.5
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
     damageCoefficient: 0.3
   - type: Armor
     modifiers:
@@ -174,16 +208,28 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.5
+        Heat: 0.7 #Goliath hide gets grilled instead of you
         Radiation: 0.3
-        Caustic: 0.7
-        Stamina: 0.8
+        Caustic: 0.8
+  # SS220 add stamina resistance for goliath hardsuit begin
+  - type: StaminaResistance
+    damageCoefficient: 0.55
+  # SS220 add stamina resistance for goliath hardsuit end
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
+    walkModifier: 0.8
+    sprintModifier: 0.8
   - type: HeldSpeedModifier
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitSalvage
+    clothingPrototype: ClothingHeadHelmetHardsuitGoliath
+  - type: Construction
+    graph: HardsuitGoliath
+    node: hardsuitGoliath
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
+#Maxim Hardsuit
 - type: entity
   parent: [ClothingOuterHardsuitBase]
   id: ClothingOuterHardsuitMaxim
@@ -218,15 +264,15 @@
 
 #Security Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitSecurity
   name: security hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/security.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/security.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security.rsi #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -238,26 +284,34 @@
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
+        Heat: 0.8
         Caustic: 0.7
-        Stamina: 0.4
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.4
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
+    walkModifier: 0.85 #SS220 sec hardsuit buff
+    sprintModifier: 0.85 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurity
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Brigmedic Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitBrigmedic
   name: brigmedic hardsuit
   description: Special hardsuit of the guardian angel of the brig. It is the medical version of the security hardsuit.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/brigmedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/brigmedic.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/brigmedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/brigmedic.rsi #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -271,7 +325,14 @@
         Piercing: 0.80
         Radiation: 0.7
         Caustic: 0.8  #SS220-MinorTweaks end
-        Stamina: 0.8
+  #ss220 brigmedic hardsuit virus resistance begin
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.5
+  #ss220 brigmedic hardsuit virus resistance end
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.90 #SS220-MinorTweaks
     sprintModifier: 0.90 #SS220-MinorTweaks
@@ -281,15 +342,15 @@
 
 #Warden's Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitWarden
   name: warden's hardsuit
   description: A specialized riot suit geared to combat low pressure environments.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/security-warden.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security-warden.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/security-warden.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security-warden.rsi #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -304,7 +365,10 @@
         Heat: 0.6
         Caustic: 0.4
         Radiation: 0.4 #SS220-WardenJuggernaut-End
-        Stamina: 0.4
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.4
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.65 #SS220-WardenJuggernaut-Begin
     sprintModifier: 0.65 #SS220-WardenJuggernaut-End
@@ -333,17 +397,24 @@
       coefficients:
         Blunt: 0.8
         Slash: 0.8
-        Piercing: 0.6
-        Heat: 0.5
+        Piercing: 0.55
+        Heat: 0.55
         Radiation: 0.5
         Caustic: 0.6
-        Stamina: 0.35
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.35
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9 #SS220 crew hardsuit buff
+    sprintModifier: 0.9 #SS220 crew hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCap
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Chief Engineer's Hardsuit
 - type: entity
@@ -353,9 +424,9 @@
   description: A special hardsuit that protects against hazardous, low pressure environments, made for the chief engineer of the station.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/engineering-white.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/engineering-white.rsi #ss220-engineering-update-hardsuit
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/engineering-white.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/engineering-white.rsi #ss220-engineering-update-hardsuit
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -372,9 +443,12 @@
         Heat: 0.4
         Radiation: 0.0
         Caustic: 0.7
-        Stamina: 0.5
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
+    walkModifier: 0.8
     sprintModifier: 0.8
   - type: HeldSpeedModifier
   - type: ToggleableClothing
@@ -388,6 +462,10 @@
       Female: FemaleEngineer
       Unsexed: MaleEngineer
   #ss220 special_sounds end
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Chief Medical Officer's Hardsuit
 - type: entity
@@ -397,9 +475,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Built with lightweight materials for easier movement.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/medical.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/medical.rsi #ss220 cmo hardsuit resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/medical.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/medical.rsi #ss220 cmo hardsuit resprite
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -407,13 +485,22 @@
     modifiers:
       coefficients:
         Caustic: 0.1
-        Stamina: 0.8
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.4
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
+    walkModifier: 0.95
     sprintModifier: 0.95
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitMedical
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Research Director's Hardsuit
 - type: entity
@@ -438,7 +525,10 @@
         Heat: 0.3
         Radiation: 0.15 #ss-220 armReb
         Caustic: 0.2
-        Stamina: 0.8
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: ClothingSpeedModifier
@@ -453,6 +543,10 @@
     tags:
     - WhitelistChameleon
     - HighRiskItem
+    - Hardsuit
+  #ss220 pinpointer ui add start
+  - type: TrackedItem
+  #ss220 pinpointer ui add end
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitRd
   - type: StaticPrice
@@ -468,26 +562,30 @@
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/security-red.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security-red.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/security-red.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security-red.rsi #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.6
+    damageCoefficient: 0.5
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.6
         Slash: 0.5
         Piercing: 0.5
+        Heat: 0.6 #SS220 sec hardsuit buff
         Radiation: 0.5
         Caustic: 0.6
-        Stamina: 0.35
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.35
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9 #SS220 sec hardsuit buff
+    sprintModifier: 0.9 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurityRed
@@ -497,7 +595,8 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitLuxury #DO NOT MAP - https://github.com/space-wizards/space-station-14/pull/19738#issuecomment-1703486738
   name: luxury mining hardsuit
-  description: A refurbished mining hardsuit, fashioned after the Quartermaster's colors. Graphene lining provides less protection, but is much easier to move.
+  description: A refurbished miner's hardsuit, covered with gold dusting to emphasize your worthiness. The inside of the suit is complemented by a graphene lining, which has lightened the suit itself at the cost of its protective properties. #SS220 Quartermaster_Hardsuit_add
+  categories: [ DoNotMap ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/luxury.rsi #SS220-Salvage Hardsuit Resprite
@@ -513,18 +612,25 @@
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
+    #SS220 Quartermaster_Hardsuit_add start
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.8
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.8
+        Blunt: 0.75
+        Slash: 0.7
+        Piercing: 0.75
+        Heat: 0.8
         Radiation: 0.5
         Caustic: 0.8
+    #SS220 Quartermaster_Hardsuit_add end
+    # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
+    walkModifier: 0.9
     sprintModifier: 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing
@@ -533,22 +639,24 @@
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitBase]
+  parent: [ ClothingOuterHardsuitBase, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitSyndie
   name: blood-red hardsuit
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndicate.rsi  # SS220-hardsuir-resprite
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndicate.rsi  # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.5
+  # - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
+  #   damageCoefficient: 0.75
   - type: Armor
     modifiers:
       coefficients:
@@ -558,7 +666,27 @@
         Heat: 0.6 #ss-220 armReb
         Radiation: 0.5
         Caustic: 0.5
-        Stamina: 0.3 #ss-220 armReb
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 1
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+  # SS220-MIT-add-field-shields-end
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.3
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -578,18 +706,21 @@
     - MonkeyWearable
     - Hardsuit
     - WhitelistChameleon
+    - ScurretWearable
+  - type: StaticPrice
+    price: 5000
 
 # Syndicate Medic Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitSyndie]
+  parent: [ClothingOuterHardsuitSyndie, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitSyndieMedic
   name: blood-red medic hardsuit
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # SS220-hardsuir-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
@@ -604,7 +735,27 @@
         Heat: 0.5 #ss-220 armReb
         Radiation: 0.2
         Caustic: 0.5  #ss-220 armReb
-        Stamina: 0.1
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.1
+  # SS220 add stamina resistance end
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+  # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.9 #ss-220 armReb
     sprintModifier: 0.9 #ss-220 armReb
@@ -617,15 +768,15 @@
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit
-  description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders.
+  description: An elite version of the blood-red hardsuit, with improved radiation resistance and fireproofing. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # SS220-hardsuir-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -636,6 +787,8 @@
     damageCoefficient: 0.2
   - type: FireProtection
     reduction: 0.8
+  # - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
+  #   damageCoefficient: 0.6
   - type: Armor
     modifiers:
       coefficients:
@@ -645,7 +798,27 @@
         Heat: 0.5 #ss-220 armReb
         Radiation: 0.2  #ss-220 armReb
         Caustic: 0.5
-        Stamina: 0.1
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.1
+  # SS220 add stamina resistance end
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+  # SS220-MIT-add-field-shields-end
   - type: Item
     size: Huge
   #ss220 elite-suitReb begin
@@ -664,23 +837,29 @@
       Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Syndicate Commander Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitSyndieCommander
   name: syndicate commander hardsuit
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # SS220-hardsuir-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.2  #ss-220 armReb
+  #- type: StaminaResistance
+  #  damageCoefficient: 0.6
   - type: Armor
     modifiers:
       coefficients:
@@ -690,10 +869,30 @@
         Heat: 0.4 #ss-220 armReb
         Radiation: 0.1  #ss-220 armReb
         Caustic: 0.4
-        Stamina: 0.1
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.1
+  # SS220 add stamina resistance end
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+  # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
-    walkModifier: 0.9 #ss-220 armReb
-    sprintModifier: 0.9 #ss-220 armReb
+    walkModifier: 0.9
+    sprintModifier: 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieCommander
@@ -705,18 +904,23 @@
       Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseToggleClothing] # SS220-toggle-shield
   id: ClothingOuterHardsuitJuggernaut
   name: cybersun juggernaut suit
   description: A suit made by the cutting edge R&D department at cybersun to be hyper resilient.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cybersun.rsi # SS220-hardsuir-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cybersun.rsi # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
@@ -725,22 +929,48 @@
     coolingCoefficient: 0.001 #ss220 armReb
   - type: ExplosionResistance
     damageCoefficient: 0.2  #ss-220 armReb
+  #- type: StaminaResistance # Should not have stamina resistance, this is purely so people know it was not forgotten.
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.2
         Slash: 0.2
         Piercing: 0.2
-        Heat: 0.4 #ss-220 armReb
+        Heat: 0.2
         Radiation: 0.2
         Caustic: 0.2
-        Stamina: 0.1
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.1
+  # SS220 add stamina resistance end
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 40
+    shieldData:
+      shieldMaxCharge: 6
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1.5
+      energy: 6
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+  # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
+    walkModifier: 0.65
     sprintModifier: 0.65
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCybersun
+  - type: Tag
+    tags:
+    - MonkeyWearable
+    - Hardsuit
+    - WhitelistChameleon
   #ss220 special_sounds start
   - type: SpecialSounds
   - type: Vocal
@@ -752,7 +982,7 @@
 
 #Wizard Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ ClothingOuterHardsuitBase, BaseMagicalContraband ]
   id: ClothingOuterHardsuitWizard
   name: wizard hardsuit
   description: A bizarre gem-encrusted suit that radiates magical energies.
@@ -775,13 +1005,20 @@
         Heat: 0.25
         Radiation: 0.25
         Caustic: 0.75
-        Stamina: 0.5
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitWizard
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
 
 #Ling Space Suit
 - type: entity
@@ -806,7 +1043,10 @@
         Slash: 0.95
         Piercing: 1
         Heat: 0.5
-        Stamina: 0.8
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -817,7 +1057,7 @@
 #Pirate EVA Suit (Deep Space EVA Suit)
 #Despite visually appearing like a softsuit, it functions exactly like a hardsuit would (parents off of base hardsuit, has resistances and toggleable clothing, etc.) so it goes here.
 - type: entity
-  parent:  ClothingOuterHardsuitBase
+  parent: [ ClothingOuterHardsuitBase, BaseMajorContraband ]
   id:  ClothingOuterHardsuitPirateEVA
   name: deep space EVA suit
   suffix: Pirate
@@ -825,6 +1065,8 @@
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
+  - type: Item
+    size: Huge
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
   - type: ExplosionResistance
@@ -837,7 +1079,10 @@
         Piercing: 0.9
         Heat: 0.4
         Caustic: 0.75
-        Stamina: 0.5
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.6
     sprintModifier: 0.6
@@ -849,13 +1094,15 @@
 
 #Pirate Captain Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ ClothingOuterHardsuitBase, BaseMajorContraband ]
   id: ClothingOuterHardsuitPirateCap
   name: pirate captain's hardsuit
   description: An ancient armored hardsuit, perfect for defending against space scurvy and toolbox-wielding scallywags.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
+  - type: Item
+    size: Huge
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
   - type: PressureProtection
@@ -871,7 +1118,10 @@
         Piercing: 0.85
         Heat: 0.4
         Caustic: 0.75
-        Stamina: 0.35
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.35
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -884,21 +1134,38 @@
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndieCommander ]
+  parent: [ ClothingOuterHardsuitSyndieCommander, BaseToggleClothing ] # SS220-toggle-shield
   id: ClothingOuterHardsuitERTLeader
   name: ERT leader's hardsuit
   description: A protective hardsuit worn by the leader of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTLeader
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+  # SS220-MIT-add-field-shields-end
 
 #ERT Chaplain Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitJuggernaut ]
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndie ]
   id: ClothingOuterHardsuitERTChaplain
   name: ERT chaplain's hardsuit
   description: A protective hardsuit worn by the chaplains of an Emergency Response Team.
@@ -912,61 +1179,97 @@
 
 #ERT Engineer Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitCBURN
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieElite ]
   id: ClothingOuterHardsuitERTEngineer
   name: ERT engineer's hardsuit
   description: A protective hardsuit worn by the engineers of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTEngineer
+  - type: FireProtection
+    reduction: 0.8
 
 #ERT Medic Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndieMedic ]
+  parent: [ ClothingOuterHardsuitSyndieMedic, BaseToggleClothing ] # SS220-toggle-shield
   id: ClothingOuterHardsuitERTMedical
   name: ERT medic's hardsuit
   description: A protective hardsuit worn by the medics of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTMedical
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+  # SS220-MIT-add-field-shields-end
 
 #ERT Security Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndie ]
+  parent: [ ClothingOuterHardsuitSyndie, BaseToggleClothing ] # SS220-toggle-shield
   id: ClothingOuterHardsuitERTSecurity
   name: ERT security's hardsuit
   description: A protective hardsuit worn by the security officers of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTSecurity
   - type: Tag
     tags:
     - Hardsuit
     - WhitelistChameleon
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 1
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+  # SS220-MIT-add-field-shields-end
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitCBURN
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieElite ]
   id: ClothingOuterHardsuitERTJanitor
   name: ERT janitor's hardsuit
   description: A protective hardsuit worn by the janitors of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTJanitor
 
@@ -978,9 +1281,9 @@
   description: An advanced hardsuit favored by commandos for use in special operations.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/deathsquad.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/deathsquad.rsi # SS220-hardsuits-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -991,60 +1294,104 @@
     damageCoefficient: 0.2
   - type: FireProtection
     reduction: 0.8
+  - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
+    damageCoefficient: 0.15 # Needs 21 hits with a disabler to stun :godo:
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.1 #best armor in the game
-        Slash: 0.1
-        Piercing: 0.1
-        Heat: 0.1
+  #SS220-Deathsquad-Update-Begin
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.2
+        Heat: 0.3
         Radiation: 0.1
-        Stamina: 0.1
         Caustic: 0.1
+  #SS220-Deathsquad-Update-End
   - type: ClothingSpeedModifier
     walkModifier: 1.0
-    sprintModifier: 1.0
+    sprintModifier: 1.2 #SS220-Deathsquad-Update
+  #SS220-Deathsquad-Update-Begin
+  - type: GasTank
+    outputPressure: 101.3
+    air:
+      volume: 20
+      moles:
+        - 10.451303391 # 22% oxygen
+        - 11.600075659 # 78% nitrogen
+        # 32.051379050 total = ~60 min
+      temperature: 293.15
+    tankLowPressure: 30.0
+  - type: PointLight
+    color: SkyBlue
+    radius: 1.5
+    energy: 0.3
+    netsync: false
+  #SS220-Deathsquad-Update-End
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitDeathsquad
 
 #CBURN Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitBase ]
+  parent: [ ClothingOuterHardsuitBase, BaseToggleClothing ] # SS220-toggle-shield
   id: ClothingOuterHardsuitCBURN
   name: CBURN exosuit
   description: A lightweight yet strong exosuit used for special cleanup operations.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/cburn.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cburn.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/cburn.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cburn.rsi # SS220-hardsuits-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     heatingCoefficient: 0.001
     coolingCoefficient: 0.001
+# SS220 CBURN_stats_tweak start
   - type: ExplosionResistance
     damageCoefficient: 0.7
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
+        Blunt: 0.75
         Slash: 0.3
-        Piercing: 0.9
-        Heat: 0.1
-        Cold: 0.1
-        Shock: 0.1
-        Radiation: 0.1
-        Caustic: 0.1
-        Stamina: 0.5
+        Piercing: 0.85
+        Heat: 0.25
+        Cold: 0.25
+        Shock: 0.25
+        Radiation: 0.2
+        Caustic: 0.2
+# SS220 CBURN_stats_tweak end
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  # SS220 add stamina resistance end
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.25
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetCBURN
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
+  # SS220-MIT-add-field-shields-end
 
 #MISC. HARDSUITS
 #Clown Hardsuit
@@ -1070,7 +1417,10 @@
         Slash: 0.9
         Piercing: 0.9
         Caustic: 0.8
-        Stamina: 0.8
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9

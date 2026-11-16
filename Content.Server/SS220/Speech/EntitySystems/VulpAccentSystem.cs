@@ -1,13 +1,14 @@
 using System.Text.RegularExpressions;
 using Robust.Shared.Random;
 using Content.Server.SS220.Speech.Components;
-using Content.Server.Speech;
+using Content.Shared.Speech;
 
 namespace Content.Server.SS220.Speech.EntitySystems;
 
-public sealed class VulpkaninAccentSystem : EntitySystem
+public sealed partial class VulpkaninAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
+
     private static readonly Regex RegexLowerR = new("r+");
     private static readonly Regex RegexUpperR = new("R+");
     private static readonly Regex RegexRuLowerR = new("р+");

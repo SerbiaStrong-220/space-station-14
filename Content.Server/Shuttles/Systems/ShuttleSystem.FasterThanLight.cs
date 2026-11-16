@@ -5,12 +5,9 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.SS220.Shuttles.Components;
 using Content.Server.Station.Events;
-using Content.Shared.Body.Components;
-using Content.Shared.Buckle.Components;
+using Content.Shared.Body;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
-using Content.Shared.Ghost;
-using Content.Shared.Maps;
 using Content.Shared.Parallax;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
@@ -28,6 +25,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using FTLMapComponent = Content.Shared.Shuttles.Components.FTLMapComponent;
+using Robust.Shared.Random;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -50,7 +48,8 @@ public sealed partial class ShuttleSystem
     public float DefaultStartupTime;
     public float DefaultTravelTime;
     public float DefaultArrivalTime;
-    private float FTLCooldown;
+    private TimeSpan FTLCooldown;
+    private TimeSpan ArrivalsFTLCooldown;
     public float FTLMassLimit;
     private TimeSpan _hyperspaceKnockdownTime = TimeSpan.FromSeconds(5);
 
@@ -74,11 +73,8 @@ public sealed partial class ShuttleSystem
     private readonly HashSet<Entity<NoFTLComponent>> _noFtls = new();
 
     private EntityQuery<BodyComponent> _bodyQuery;
-    private EntityQuery<BuckleComponent> _buckleQuery;
     private EntityQuery<FTLSmashImmuneComponent> _immuneQuery;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<StatusEffectsComponent> _statusQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
 
     private void InitializeFTL()
     {
@@ -86,16 +82,14 @@ public sealed partial class ShuttleSystem
         SubscribeLocalEvent<FTLComponent, ComponentShutdown>(OnFtlShutdown);
 
         _bodyQuery = GetEntityQuery<BodyComponent>();
-        _buckleQuery = GetEntityQuery<BuckleComponent>();
         _immuneQuery = GetEntityQuery<FTLSmashImmuneComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _statusQuery = GetEntityQuery<StatusEffectsComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
 
         _cfg.OnValueChanged(CCVars.FTLStartupTime, time => DefaultStartupTime = time, true);
         _cfg.OnValueChanged(CCVars.FTLTravelTime, time => DefaultTravelTime = time, true);
         _cfg.OnValueChanged(CCVars.FTLArrivalTime, time => DefaultArrivalTime = time, true);
-        _cfg.OnValueChanged(CCVars.FTLCooldown, time => FTLCooldown = time, true);
+        _cfg.OnValueChanged(CCVars.FTLCooldown, time => FTLCooldown = TimeSpan.FromSeconds(time), true);
+        _cfg.OnValueChanged(CCVars.ArrivalsFTLCooldown, time => ArrivalsFTLCooldown = TimeSpan.FromSeconds(time), true);
         _cfg.OnValueChanged(CCVars.FTLMassLimit, time => FTLMassLimit = time, true);
         _cfg.OnValueChanged(CCVars.HyperspaceKnockdownTime, time => _hyperspaceKnockdownTime = TimeSpan.FromSeconds(time), true);
     }
@@ -238,12 +232,6 @@ public sealed partial class ShuttleSystem
             shuttlePhysics.Mass > FTLMassLimit &&
             !HasComp<IgnoreFTLMassLimitComponent>(shuttleUid)) //SS220 Add IgnoreFTLMassLimitComponent
         {
-            // Static physics type is set when station anchor is enabled
-            if (shuttlePhysics.BodyType == BodyType.Static)
-            {
-                reason = Loc.GetString("shuttle-console-static");
-                return false;
-            }
 
             // Too large to FTL
             if (FTLMassLimit > 0 &&  shuttlePhysics.Mass > FTLMassLimit)
@@ -253,7 +241,7 @@ public sealed partial class ShuttleSystem
             }
         }
 
-        if (HasComp<PreventPilotComponent>(shuttleUid))
+        if (HasComp<PreventPilotComponent>(shuttleUid) || HasComp<PreventFTLComponent>(shuttleUid))
         {
             reason = Loc.GetString("shuttle-console-prevent");
             return false;
@@ -375,8 +363,6 @@ public sealed partial class ShuttleSystem
         _audio.SetGridAudio(audio);
         component.StartupStream = audio?.Entity;
 
-        // TODO: Play previs here for docking arrival.
-
         // Make sure the map is setup before we leave to avoid pop-in (e.g. parallax).
         EnsureFTLMap();
         return true;
@@ -433,8 +419,6 @@ public sealed partial class ShuttleSystem
         Enable(uid, component: body);
         _physics.SetLinearVelocity(uid, new Vector2(0f, 20f), body: body);
         _physics.SetAngularVelocity(uid, 0f, body: body);
-        _physics.SetLinearDamping(uid, body, 0f);
-        _physics.SetAngularDamping(uid, body, 0f);
 
         _dockSystem.SetDockBolts(uid, true);
         _console.RefreshShuttleConsoles(uid);
@@ -460,7 +444,8 @@ public sealed partial class ShuttleSystem
 
         if (entity.Comp1.VisualizerProto != null)
         {
-            comp.VisualizerEntity = SpawnAtPosition(entity.Comp1.VisualizerProto, entity.Comp1.TargetCoordinates);
+            comp.VisualizerEntity = SpawnAttachedTo(entity.Comp1.VisualizerProto, entity.Comp1.TargetCoordinates);
+            DebugTools.Assert(Transform(comp.VisualizerEntity.Value).ParentUid == entity.Comp1.TargetCoordinates.EntityId);
             var visuals = Comp<FtlVisualizerComponent>(comp.VisualizerEntity.Value);
             visuals.Grid = entity.Owner;
             Dirty(comp.VisualizerEntity.Value, visuals);
@@ -488,8 +473,6 @@ public sealed partial class ShuttleSystem
 
         _physics.SetLinearVelocity(uid, Vector2.Zero, body: body);
         _physics.SetAngularVelocity(uid, 0f, body: body);
-        _physics.SetLinearDamping(uid, body, entity.Comp2.LinearDamping);
-        _physics.SetAngularDamping(uid, body, entity.Comp2.AngularDamping);
 
         var target = entity.Comp1.TargetCoordinates;
 
@@ -564,10 +547,12 @@ public sealed partial class ShuttleSystem
         }
 
         comp.State = FTLState.Cooldown;
-        //comp.StateTime = StartEndTime.FromCurTime(_gameTiming, FTLCooldown); // SS220 FTLCooldown outside CVar begin
-        comp.StateTime = StartEndTime.FromCurTime(_gameTiming, entity.Comp2.FTLCooldown); // SS220 FTLCooldown outside CVar end
+        var cooldown = entity.Comp2.FTLCooldownOverride ?? (HasComp<ArrivalsShuttleComponent>(uid)
+            ? ArrivalsFTLCooldown
+            : FTLCooldown);
+        comp.StateTime = StartEndTime.FromCurTime(_gameTiming, cooldown);
         _console.RefreshShuttleConsoles(uid);
-        _mapManager.SetMapPaused(mapId, false);
+        _mapSystem.SetPaused(mapId, false);
         Smimsh(uid, xform: xform);
 
         var ftlEvent = new FTLCompletedEvent(uid, _mapSystem.GetMap(mapId));
@@ -639,10 +624,7 @@ public sealed partial class ShuttleSystem
         {
             foreach (var child in toKnock)
             {
-                if (!_statusQuery.TryGetComponent(child, out var status))
-                    continue;
-
-                _stuns.TryParalyze(child, _hyperspaceKnockdownTime, true, status);
+                _stuns.TryUpdateParalyzeDuration(child, _hyperspaceKnockdownTime);
 
                 // If the guy we knocked down is on a spaced tile, throw them too
                 if (grid != null)
@@ -702,7 +684,7 @@ public sealed partial class ShuttleSystem
         // only toss if its on lattice/space
         var tile = _mapSystem.GetTileRef(shuttleEntity, shuttleGrid, childXform.Coordinates);
 
-        if (!tile.IsSpace(_tileDefManager))
+        if (!_turf.IsSpace(tile))
             return;
 
         var throwDirection = childXform.LocalPosition - shuttleBody.LocalCenter;
@@ -769,7 +751,7 @@ public sealed partial class ShuttleSystem
         // Set position
         var mapCoordinates = _transform.ToMapCoordinates(config.Coordinates);
         var mapUid = _mapSystem.GetMap(mapCoordinates.MapId);
-        _transform.SetCoordinates(shuttle.Owner, shuttle.Comp, new EntityCoordinates(mapUid, mapCoordinates.Position), rotation: config.Angle);
+        _transform.SetCoordinates(shuttle.Owner, shuttle.Comp, new EntityCoordinates(mapUid, mapCoordinates.Position), rotation: config.Angle + _transform.GetWorldRotation(config.Coordinates.EntityId));
 
         // Connect everything
         foreach (var (dockAUid, dockBUid, dockA, dockB) in config.Docks)
@@ -1015,6 +997,7 @@ public sealed partial class ShuttleSystem
                     continue;
                 }
 
+                // If it has the FTLSmashImmuneComponent ignore it.
                 if (_immuneQuery.HasComponent(ent))
                 {
                     continue;
@@ -1024,7 +1007,7 @@ public sealed partial class ShuttleSystem
                 {
                     _logger.Add(LogType.Gib, LogImpact.Extreme, $"{ToPrettyString(ent):player} got gibbed by the shuttle" +
                                                                 $" {ToPrettyString(uid)} arriving from FTL at {xform.Coordinates:coordinates}");
-                    var gibs = _bobby.GibBody(ent, body: mob);
+                    var gibs = _gibbing.Gib(ent);
                     _immuneEnts.UnionWith(gibs);
                     continue;
                 }

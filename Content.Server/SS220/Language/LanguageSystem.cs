@@ -1,0 +1,155 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Server.GameTicking.Events;
+using Content.Shared.SS220.Language.Components;
+using Content.Shared.SS220.Language;
+using Robust.Shared.Random;
+using System.Diagnostics.CodeAnalysis;
+using Content.Shared.SS220.Language.Systems;
+using Robust.Shared.Configuration;
+using Content.Shared.SS220.CCVars;
+using Content.Shared.Speech;
+using Content.Server.Speech.EntitySystems;
+using System.Linq;
+using Content.Shared.Polymorph;
+
+namespace Content.Server.SS220.Language;
+
+public sealed partial class LanguageSystem : SharedLanguageSystem
+{
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
+        SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<LanguageComponent, SendLanguageMessageAttemptEvent>(OnSendLanguageMessageAttemptEvent);
+        SubscribeLocalEvent<LanguageComponent, AccentGetEvent>(OnAccentGet);
+        SubscribeLocalEvent<LanguageComponent, PolymorphedEvent>(OnPolymorphed);
+
+        // Client
+        SubscribeNetworkEvent<ClientSelectLanguageEvent>(OnClientSelectLanguage);
+        SubscribeNetworkEvent<ClientRequestPaperLanguageNodeInfo>(OnClientRequestPaperNodeInfo);
+    }
+
+    private void OnRoundStart(RoundStartingEvent args)
+    {
+        SetSeed(_random.Next());
+        _paperNodes.Clear();
+    }
+
+    /// <summary>
+    ///     Initializes an entity with a language component,
+    ///     either the first language in the LearnedLanguages list into the CurrentLanguage variable
+    /// </summary>
+    private void OnMapInit(Entity<LanguageComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.SelectedLanguage is not { } languageId || !CanSpeak(ent, languageId))
+            TrySelectRandomLanguage(ent);
+    }
+
+    private void OnSendLanguageMessageAttemptEvent(Entity<LanguageComponent> ent, ref SendLanguageMessageAttemptEvent args)
+    {
+        args.Listener = ent;
+    }
+
+    private void OnAccentGet(EntityUid uid, LanguageComponent component, AccentGetEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var currentLangId = component.SelectedLanguage;
+        if (currentLangId == null)
+            return;
+
+        if (CanSpeak(uid, currentLangId))
+        {
+            args.Cancel();
+        }
+    }
+
+    #region Client
+    private void OnClientSelectLanguage(ClientSelectLanguageEvent msg, EntitySessionEventArgs args)
+    {
+        var entity = args.SenderSession.AttachedEntity;
+        if (entity == null || !TryComp<LanguageComponent>(entity, out var comp))
+            return;
+
+        TrySelectLanguage((entity.Value, comp), msg.LanguageId);
+    }
+
+    private void UpdateSeed()
+    {
+        var ev = new UpdateLanguageSeedEvent(Seed);
+        RaiseNetworkEvent(ev);
+    }
+    #endregion
+
+    /// <summary>
+    ///     Raises event to receive a response is it possible to send a message in the language
+    ///     This is done for the possibility of forwarding
+    /// </summary>
+    public bool SendLanguageMessageAttempt(EntityUid uid, out EntityUid listener)
+    {
+        var ev = new SendLanguageMessageAttemptEvent();
+        RaiseLocalEvent(uid, ref ev);
+        listener = ev.Listener ?? uid;
+        return !ev.Cancelled;
+    }
+
+    /// <summary>
+    ///     Adds languages for <paramref name="target"/> from <paramref name="ent"/>
+    /// </summary>
+    public void AddLanguagesFromSource(Entity<LanguageComponent> ent, EntityUid target)
+    {
+        var targetComp = EnsureComp<LanguageComponent>(target);
+        foreach (var language in ent.Comp.AvailableLanguages)
+        {
+            AddLanguage((target, targetComp), language);
+        }
+    }
+
+    public bool MessageLanguagesLimit(EntityUid source, string message, [NotNullWhen(true)] out string? reason)
+    {
+        reason = null;
+        if (!HasComp<LanguageComponent>(source))
+            return false;
+
+        var defaultLanguage = GetSelectedLanguage(source);
+        if (defaultLanguage == null)
+            return false;
+
+        var languagesLimit = _config.GetCVar(CCVars220.MaxLanguagesInOneMessage);
+        var languagesStrings = SplitMessageByLanguages(source, message, defaultLanguage);
+        if (languagesStrings.Count > languagesLimit)
+        {
+            reason = Loc.GetString("language-message-languages-limit", ("limit", languagesLimit));
+            return true;
+        }
+
+        return false;
+    }
+
+    private void SetSeed(int seed)
+    {
+        Seed = seed;
+        UpdateSeed();
+    }
+
+    private void OnPolymorphed(Entity<LanguageComponent> ent, ref PolymorphedEvent ev)
+    {
+        if (ev.IsRevert)
+            return;
+
+        AddLanguagesFromSource(ent, ev.NewEntity);
+    }
+}
+
+[ByRefEvent]
+public sealed class SendLanguageMessageAttemptEvent : CancellableEntityEventArgs
+{
+    public EntityUid? Listener;
+}

@@ -1,15 +1,15 @@
 using Content.Server.Actions;
 using Content.Server.Chat.Systems;
-using Content.Server.Speech.Components;
+using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.SS220.Speech;// SS220 Chat-Special-Emote
+using Robust.Shared.Timing; // SS220-scream-cooldown
+using Content.Shared.SS220.Speech; // SS220 Chat-Special-Emote
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -20,7 +20,7 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;// SS220 Chat-Special-Emote
+    [Dependency] private readonly IGameTiming _timing = default!; // SS220-scream-cooldown
 
     public override void Initialize()
     {
@@ -31,8 +31,39 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
-        SubscribeLocalEvent<VocalComponent, InitSpecialSoundsEvent>(InitSpecialSounds);// SS220 Chat-Special-Emote
-        SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds);// SS220 Chat-Special-Emote
+        SubscribeLocalEvent<VocalComponent, InitSpecialSoundsEvent>(InitSpecialSounds); // SS220 Chat-Special-Emote
+        SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds); // SS220 Chat-Special-Emote
+    }
+
+    /// <summary>
+    /// Copy this component's datafields from one entity to another.
+    /// This can't use CopyComp because of the ScreamActionEntity DataField, which should not be copied.
+    /// <summary>
+    public void CopyComponent(Entity<VocalComponent?> source, EntityUid target)
+    {
+        if (!Resolve(source, ref source.Comp))
+            return;
+
+        var targetComp = EnsureComp<VocalComponent>(target);
+        targetComp.Sounds = source.Comp.Sounds;
+        targetComp.ScreamId = source.Comp.ScreamId;
+        targetComp.Wilhelm = source.Comp.Wilhelm;
+        targetComp.WilhelmProbability = source.Comp.WilhelmProbability;
+        // SS220-scream-cooldown-begin
+        targetComp.ScreamAction = source.Comp.ScreamAction;
+        targetComp.ScreamCooldown = new ScreamCooldownData
+        {
+            BaseCooldown = source.Comp.ScreamCooldown.BaseCooldown,
+            CooldownStep = source.Comp.ScreamCooldown.CooldownStep,
+            ResetDelay = source.Comp.ScreamCooldown.ResetDelay,
+            Count = source.Comp.ScreamCooldown.Count,
+            LastTime = source.Comp.ScreamCooldown.LastTime,
+            CooldownEnd = source.Comp.ScreamCooldown.CooldownEnd,
+        };
+        // SS220-scream-cooldown-end
+        LoadSounds(target, targetComp);
+
+        Dirty(target, targetComp);
     }
 
     private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
@@ -53,32 +84,51 @@ public sealed class VocalSystem : EntitySystem
 
     private void OnSexChanged(EntityUid uid, VocalComponent component, SexChangedEvent args)
     {
-        LoadSounds(uid, component);
+        LoadSounds(uid, component, args.NewSex);
     }
 
     private void OnEmote(EntityUid uid, VocalComponent component, ref EmoteEvent args)
     {
         if (args.Handled || !args.Emote.Category.HasFlag(EmoteCategory.Vocal))
             return;
-            
+
+        // SS220-scream-cooldown-begin
+        if (args.Emote.ID == component.ScreamId)
+        {
+            if (_timing.CurTime < component.ScreamCooldown.CooldownEnd)
+            {
+                args.Handled = true;
+                return;
+            }
+
+            RegisterScream((uid, component));
+
+            // SS220 Chat-Special-Emote begin
+            if (CheckSpecialSounds(uid, component, args.Emote))
+            {
+                args.Handled = true;
+                return;
+            }
+            // SS220 Chat-Special-Emote end
+
+            args.Handled = TryPlayScreamSound(uid, component);
+            return;
+        }
+        // SS220-scream-cooldown-end
+
         // SS220 Chat-Special-Emote begin
-        //Will play special emote if it exists
-        if(CheckSpecialSounds(uid, component, args.Emote))
+        if (CheckSpecialSounds(uid, component, args.Emote))
         {
             args.Handled = true;
             return;
         }
         // SS220 Chat-Special-Emote end
 
-        // snowflake case for wilhelm scream easter egg
-        if (args.Emote.ID == component.ScreamId)
-        {
-            args.Handled = TryPlayScreamSound(uid, component);
+        if (component.EmoteSounds is not { } sounds)
             return;
-        }
 
         // just play regular sound based on emote proto
-        args.Handled = _chat.TryPlayEmoteSound(uid, component.EmoteSounds, args.Emote);
+        args.Handled = _chat.TryPlayEmoteSound(uid, _proto.Index(sounds), args.Emote);
     }
 
     private void OnScreamAction(EntityUid uid, VocalComponent component, ScreamActionEvent args)
@@ -90,6 +140,30 @@ public sealed class VocalSystem : EntitySystem
         args.Handled = true;
     }
 
+    // SS220-scream-cooldown-begin
+    private void RegisterScream(Entity<VocalComponent> entity)
+    {
+        var now = _timing.CurTime;
+        var data = entity.Comp.ScreamCooldown;
+
+        if (now - data.LastTime > data.ResetDelay)
+            data.Count = 0;
+
+        data.Count++;
+        data.LastTime = now;
+
+        var extra = (data.Count - 1) * data.CooldownStep;
+        var cooldown = data.BaseCooldown + extra;
+        data.CooldownEnd = now + cooldown;
+
+        if (entity.Comp.ScreamActionEntity is not { } actionEnt)
+            return;
+
+        _actions.SetUseDelay(actionEnt, cooldown);
+        _actions.SetIfBiggerCooldown(actionEnt, cooldown);
+    }
+    // SS220-scream-cooldown-end
+
     private bool TryPlayScreamSound(EntityUid uid, VocalComponent component)
     {
         if (_random.Prob(component.WilhelmProbability))
@@ -98,7 +172,10 @@ public sealed class VocalSystem : EntitySystem
             return true;
         }
 
-        return _chat.TryPlayEmoteSound(uid, component.EmoteSounds, component.ScreamId);
+        if (component.EmoteSounds is not { } sounds)
+            return false;
+
+        return _chat.TryPlayEmoteSound(uid, _proto.Index(sounds), component.ScreamId);
     }
 
     private void LoadSounds(EntityUid uid, VocalComponent component, Sex? sex = null)
@@ -106,11 +183,15 @@ public sealed class VocalSystem : EntitySystem
         if (component.Sounds == null)
             return;
 
-        sex ??= CompOrNull<HumanoidAppearanceComponent>(uid)?.Sex ?? Sex.Unsexed;
+        sex ??= CompOrNull<HumanoidProfileComponent>(uid)?.Sex ?? Sex.Unsexed;
 
         if (!component.Sounds.TryGetValue(sex.Value, out var protoId))
             return;
-        _proto.TryIndex(protoId, out component.EmoteSounds);
+
+        if (!_proto.HasIndex(protoId))
+            return;
+
+        component.EmoteSounds = protoId;
     }
 
     // SS220 Chat-Special-Emote begin
@@ -133,19 +214,24 @@ public sealed class VocalSystem : EntitySystem
         if (component.SpecialEmoteSounds == null)
             component.SpecialEmoteSounds = new();
 
-        sex ??= CompOrNull<HumanoidAppearanceComponent>(uid)?.Sex ?? Sex.Unsexed;
+        sex ??= CompOrNull<HumanoidProfileComponent>(uid)?.Sex ?? Sex.Unsexed;
 
         if (!itemComponent.Sounds.TryGetValue(sex.Value, out var protoId))
             return;
 
-        if (!_proto.TryIndex(protoId, out itemComponent.EmoteSounds))
-            return;
+        itemComponent.EmoteSounds = protoId;
 
-        component.SpecialEmoteSounds.Add(itemUid, itemComponent.EmoteSounds);
+        if (!_proto.TryIndex(protoId, out var emoteProto))
+        {
+            Log.Error($"Cant index proto {protoId} for usage in special emotes");
+            return;
+        }
+
+        component.SpecialEmoteSounds.Add(itemUid, emoteProto);
     }
     private void InitSpecialSounds(EntityUid uid, VocalComponent component, InitSpecialSoundsEvent args)
     {
-        _entities.TryGetComponent<VocalComponent>(args.Item, out var itemComponent);
+        TryComp<VocalComponent>(args.Item, out var itemComponent);
 
         if (itemComponent == null)
             return;

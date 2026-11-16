@@ -10,8 +10,9 @@
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
+    - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: KesslerSyndrome
@@ -26,7 +27,9 @@
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
+    - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: AllAtOnce
@@ -40,10 +43,14 @@
     - Traitor
     # - Revolutionary
     - Zombie
+    - Wizard
+    - Xenoborgs
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
+    - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: AllerAtOnce
@@ -60,14 +67,17 @@
     - Traitor
     - Revolutionary
     - Zombie
+    - Wizard
+    - Xenoborgs
     - BasicStationEventScheduler
     - KesslerSyndromeScheduler
     - MeteorSwarmMildScheduler
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
+    - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Extended
@@ -82,7 +92,9 @@
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Greenshift
@@ -92,9 +104,28 @@
   name: greenshift-title
   showInVote: false #4boring4vote
   description: greenshift-description
+  # rules: #SS220 NoTrashStation at GreenShift
+  #- SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls ReWork
+  #- BasicRoundstartVariation #SS220 NoTrashStation at GreenShift
+
+- type: gamePreset
+  id: Dynamic
+  alias:
+  - dynamic
+  - multiantag
+  - director
+  name: dynamic-title
+  showInVote: false # admin-only for now until we fix some bugs
+  description: dynamic-description
   rules:
-  # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+  - DynamicRule
+  - DummyNonAntag
+  - DynamicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Secret
@@ -107,40 +138,18 @@
   rules:
     - Secret
 
-- type: gamePreset
-  id: SecretExtended #For Admin Use: Runs Extended but shows "Secret" in lobby.
-  alias:
-    - secretextended
-  name: secret-title
-  showInVote: false #Admin Use
-  description: secret-description
-  rules:
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - BasicRoundstartVariation
-
-- type: gamePreset
-  id: SecretGreenshift #For Admin Use: Runs Greenshift but shows "Secret" in lobby.
-  alias:
-  - secretgreenshift
-  name: secret-title
-  showInVote: false #Admin Use
-  description: secret-description
-  rules:
-  # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
-  - BasicRoundstartVariation
-
+# SS220-no-sandbox-begin
 # - type: gamePreset
 #   id: Sandbox
 #   alias:
 #     - sandbox
 #   name: sandbox-title
 #   description: sandbox-description
-#   showInVote: false
+#   showInVote: false # Not suitable for use without admin intervention, since entity spamming can quickly crash a server
 #   maxPlayers: 5
 #   rules:
 #     - Sandbox
+# SS220-no-sandbox-end
 
 - type: gamePreset
   id: Traitor
@@ -151,12 +160,15 @@
   description: traitor-description
   showInVote: false
   rules:
-    - Traitor
-    - SubGamemodesRule
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - BasicRoundstartVariation
+  - DummyNonAntagChance
+  - Traitor
+  - SubGamemodesRuleNoWizard
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Deathmatch
@@ -180,12 +192,15 @@
   showInVote: false
   rules:
     - Nukeops
-    # - SubGamemodesRule #SS220 no-thief-on-nukie-round-fix
+    - DummyNonAntagChance
+    # - SubGamemodesRuleNoWizard #SS220 no-thief-on-nukie-round-fix
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
+# SS220 no rev begin
 # - type: gamePreset
 #   id: Revolutionary
 #   alias:
@@ -196,12 +211,50 @@
 #   description: rev-description
 #   showInVote: false
 #   rules:
-#     - Revolutionary
-#     - SubGamemodesRule
-#     - BasicStationEventScheduler
-#     - MeteorSwarmScheduler
-#     - SpaceTrafficControlEventScheduler
-#     - BasicRoundstartVariation
+#   - DummyNonAntagChance
+#   - Revolutionary
+#   - SubGamemodesRuleNoWizard
+#   - BasicStationEventScheduler
+#   - MeteorSwarmScheduler
+#   - SpaceTrafficControlEventScheduler
+#   - BasicRoundstartVariation
+# SS220 no rev end
+
+- type: gamePreset
+  id: Wizard
+  alias:
+  - wizard
+  name: wizard-title
+  description: wizard-description
+  showInVote: false
+  rules:
+  - Wizard
+  - DummyNonAntagChance
+  - SubGamemodesRuleNoWizard #No Dual Wizards at the start, midround is fine
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
+
+- type: gamePreset
+  id: Xenoborgs
+  alias:
+    - xenoborgs
+  name: xenoborgs-title
+  description: xenoborgs-description
+  showInVote: false
+  rules:
+  - Xenoborgs
+  - DummyNonAntagChance
+  - SubGamemodesRuleNoWizardNoXenoborg # no two motherships
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Zombie
@@ -219,7 +272,9 @@
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Zombieteors
@@ -235,4 +290,5 @@
   - BasicStationEventScheduler
   - KesslerSyndromeScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation

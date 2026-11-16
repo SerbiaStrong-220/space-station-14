@@ -18,15 +18,42 @@
       params:
         volume: -3
     damage:
-      groups:
-        Brute: 5
+      types:
+        Piercing: 5
   - type: Wieldable
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.3
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 melee weapon block added end
   - type: IncreaseDamageOnWield
     damage:
-      groups:
-        Brute: 10
       types:
+        Piercing: 10
         Structural: 30
+  # SS220-DwarfMiners
+  - type: StrongMiner
+    species:
+    - Dwarf
+  # SS220-DwarfMiners
   - type: Item
     size: Normal
     shape:
@@ -35,11 +62,23 @@
     sprite: Objects/Weapons/Melee/pickaxe.rsi
     storedRotation: -45
   - type: UseDelay
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+      Wood: 100
+# SS220 new sound_drop effect, add MIXnikita
+  - type: EmitSoundOnLand
     sound:
       path: /Audio/SS220/Effects/Drop/axe.ogg
       params:
-        volume: 2 ##new sound_drop effect, add MIXnikita
+        volume: 2
+# SS220 new sound_drop effect, add MIXnikita
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 10
+# SS220 Throwable Changes end
 
 - type: entity
   name: mining drill
@@ -63,9 +102,8 @@
       path: "/Audio/Items/drill_hit.ogg"
     attackRate: 4
     damage:
-      groups:
-        Brute: 3
       types:
+        Piercing: 3
         Structural: 15
 
 - type: entity
@@ -85,9 +123,8 @@
       path: "/Audio/Items/drill_hit.ogg"
     attackRate: 4
     damage:
-      groups:
-        Brute: 6
       types:
+        Piercing: 6
         Structural: 30
 
 
@@ -104,12 +141,21 @@
       params:
         volume: 2
   - type: Sharp
+  - type: Execution
+    doAfterDuration: 4.0
   - type: UnpoweredFlashlight
   - type: PointLight
     color: "#ffeead"
     enabled: false
     radius: 4
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 12
+# SS220 Throwable Changes end
 
+# Very high burst damage if you land a mark, while also providing a small amount of healing.
 - type: entity
   parent: [BaseWeaponCrusher]
   id: WeaponCrusher
@@ -120,14 +166,48 @@
   - type: Sprite
     sprite: Objects/Weapons/Melee/crusher.rsi
     state: icon
+  - type: Item
+    size: Ginormous
+    sprite: Objects/Weapons/Melee/crusher-inhands.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Melee/crusher.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.4
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 melee weapon block added end
   - type: AmmoCounter
   - type: UseDelayOnShoot
   - type: UseDelay
     delay: 0.9
   - type: LeechOnMarker
     leech:
-      groups:
-        Brute: -10
+      types:
+        Blunt: -2
+        Slash: -2
+        Piercing: -2
   - type: Gun
     soundGunshot: /Audio/Weapons/plasma_cutter.ogg
     fireRate: 1
@@ -141,29 +221,33 @@
     capacity: 1
     count: 1
   - type: MeleeWeapon
-    attackRate: 1.5
+    attackRate: 1
     wideAnimationRotation: -135
     damage:
       types:
-        Blunt: 10
-        Slash: 5
+        Blunt: 6
+        Slash: 4
     soundHit:
       collection: MetalThud
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 2.5
-        Slash: 2.5
+        Blunt: 6
+        Slash: 2
         Structural: 30
+  # SS220-DwarfMiners
+  - type: StrongMiner
+    species:
+    - Dwarf
+  # SS220-DwarfMiners
   - type: GunRequiresWield
-  - type: Item
-    size: Ginormous
   - type: DisarmMalus
   - type: Prying
 
+# No mark ability in exchange for wideswing, autoattack, and being one-handed
 - type: entity
-  parent: [ BaseWeaponCrusher]
+  parent: [ BaseKnife, BaseWeaponCrusher, BaseSecurityCargoContraband]
   id: WeaponCrusherDagger
   name: crusher dagger
   description: A scaled down version of a proto-kinetic crusher. Uses kinetic energy to vibrate the blade at high speeds.
@@ -177,32 +261,107 @@
     attackRate: 2
     damage:
       types:
-        Slash: 15
-  - type: Tag
-    tags:
-    - Knife
+        Slash: 12
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 12.5 # SS220 Throwable Changes
+  - type: DisarmMalus
+    malus: 0.225
+  - type: ThrowingAngle
+    angle: 225
 #SS220-knife-cutter-fix-begin
   - type: Utensil
     types:
       - Knife
 #SS220-knife-cutter-fix-end
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PolygonShape
+          radius: 0.01
+          vertices:
+          - -0.4,-0.2
+          - -0.2,-0.4
+          - 0.4,0.2
+          - 0.2,0.4
+        density: 20 # derived from base_item
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
 
-# Like a crusher... but better
+# Less mark damage in exchange for more healing. Also has a better ratio of blunt to slash damage, but less structural.
 - type: entity
   parent: [ WeaponCrusher]
   id: WeaponCrusherGlaive
   name: crusher glaive
-  description: An early design of the proto-kinetic accelerator, in glaive form.
+  description: An early design of the proto-kinetic accelerator, in glaive form. Provides better healing in exchange for less charged damage.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Melee/crusher_glaive.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+    sprite: Objects/Weapons/Melee/crusher_glaive-inhands.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Melee/crusher_glaive.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
   - type: UseDelay
     delay: 1.9
+  - type: BasicEntityAmmoProvider
+    proto: BulletChargeGlaive
+    capacity: 1
+    count: 1
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.6
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 melee weapon block added end
   - type: LeechOnMarker
     leech:
-      groups:
-        Brute: -21
-  - type: MeleeWeapon
+      types:
+        Blunt: -5
+        Piercing: -5
+        Slash: -5
   - type: Tag
     tags:
       - Pickaxe
+  - type: MeleeWeapon
+    attackRate: 1
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 3
+        Slash: 7
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Blunt: 2
+        Slash: 6
+        Structural: 20

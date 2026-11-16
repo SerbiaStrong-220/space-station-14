@@ -12,14 +12,25 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hoods/Coat/hoodcentcom.rsi
 
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterJanitorJR
+  categories: [ HideSpawnMenu ]
+  name: JR winter coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/janitor_JR.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/janitor_JR.rsi
+
 #Экзокостюм утилизаторов - капюшон
 
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodExosuitSalvage
   categories: [ HideSpawnMenu ]
-  name: капюшон экзокостюма утилизатора
-  description: Капюшон из крепкой ткани, обеспечивающий небольшую защиту.
+  name: salvage exosuit hood
+  description: A hood made of durable fabric, providing a small amount of protection.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hoods/salvage_exosuit.rsi
@@ -56,9 +67,28 @@
   description: Maximum piety in this star system.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hoods/chaplainwhite.rsi
+    sprite: SS220/Clothing/Head/Hoods/chaplain_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hoods/chaplainwhite.rsi
+    sprite: SS220/Clothing/Head/Hoods/chaplain_white.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodSchema
+  categories: [ HideSpawnMenu ]
+  name: schema hood
+  description: On a station where silence is a rarity, the schemonk silence becomes the loudest voice.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/schema.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/schema.rsi
   - type: Tag
     tags:
     - HamsterWearable
@@ -70,13 +100,13 @@
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodHeartFinaly
-  name: сердечный капюшон
-  description: Капюшон.
+  name: heart hood
+  description: A hood.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/HeartHood.rsi
+    sprite: SS220/Clothing/Head/Hoods/heart.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/HeartHood.rsi
+    sprite: SS220/Clothing/Head/Hoods/heart.rsi
 
 # SS220 wintercoats hoods start
 - type: entity
@@ -156,3 +186,21 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hoods/Coat/hoodsyndiearmored.rsi
 # SS220 wintercoats hoods end
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodOwl
+  categories: [ HideSpawnMenu ]
+  name: the owl hero's hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/owl.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/owl.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair

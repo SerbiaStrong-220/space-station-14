@@ -2,23 +2,24 @@ using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles.Components;
-using Content.Server.Radio.Components;
-using Content.Server.Roles;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration;
 using Content.Shared.Chat;
-using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.Overlays;
+using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
+using Content.Shared.SS220.MalfAI; // SS220 MalfAI
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
-using Content.Shared.Stunnable;
-using Content.Shared.Wires;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
+using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -27,7 +28,7 @@ using Robust.Shared.Toolshed;
 namespace Content.Server.Silicons.Laws;
 
 /// <inheritdoc/>
-public sealed class SiliconLawSystem : SharedSiliconLawSystem
+public sealed partial class SiliconLawSystem : SharedSiliconLawSystem // SS220 random lawset
 {
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -35,9 +36,11 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
     [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!; // SS220 Antag ban fix
 
+    // private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov"; SS220 random lawset
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -51,13 +54,24 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         SubscribeLocalEvent<SiliconLawProviderComponent, GetSiliconLawsEvent>(OnDirectedGetLaws);
         SubscribeLocalEvent<SiliconLawProviderComponent, IonStormLawsEvent>(OnIonStormLaws);
-        SubscribeLocalEvent<SiliconLawProviderComponent, GotEmaggedEvent>(OnEmagLawsAdded);
-        SubscribeLocalEvent<EmagSiliconLawComponent, MindAddedMessage>(OnEmagMindAdded);
-        SubscribeLocalEvent<EmagSiliconLawComponent, MindRemovedMessage>(OnEmagMindRemoved);
+        SubscribeLocalEvent<SiliconLawProviderComponent, MindAddedMessage>(OnLawProviderMindAdded);
+        SubscribeLocalEvent<SiliconLawProviderComponent, MindRemovedMessage>(OnLawProviderMindRemoved);
+        SubscribeLocalEvent<SiliconLawProviderComponent, SiliconEmaggedEvent>(OnEmagLawsAdded);
+        // SS220 random lawset begin
+        SubscribeLocalEvent<SiliconLawProviderComponent, MapInitEvent>(OnLawProviderMapInit);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        CacheRandomLawsetWeights();
+        // SS220 random lawset end
     }
 
     private void OnMapInit(EntityUid uid, SiliconLawBoundComponent component, MapInitEvent args)
     {
+        //ss220 random lawset begin
+        // The bound component may receive MapInit before its provider.
+        if (TryComp<SiliconLawProviderComponent>(uid, out var provider))
+            InitializeRandomLawset((uid, provider));
+        //ss220 random lawset end
         GetLaws(uid, component);
     }
 
@@ -68,9 +82,43 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         var msg = Loc.GetString("laws-notify");
         var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
-        _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false,
-            actor.PlayerSession.Channel, colorOverride: Color.FromHex("#2ed2fd"));
+        _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false, actor.PlayerSession.Channel, colorOverride: Color.FromHex("#5ed7aa"));
+
+        if (!TryComp<SiliconLawProviderComponent>(uid, out var lawcomp))
+            return;
+
+        if (!lawcomp.Subverted)
+            return;
+
+        var modifedLawMsg = Loc.GetString("laws-notify-subverted");
+        var modifiedLawWrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", modifedLawMsg));
+        _chatManager.ChatMessageToOne(ChatChannel.Server, modifedLawMsg, modifiedLawWrappedMessage, default, false, actor.PlayerSession.Channel, colorOverride: Color.Red);
     }
+
+    private void OnLawProviderMindAdded(Entity<SiliconLawProviderComponent> ent, ref MindAddedMessage args)
+    {
+        if (!ent.Comp.Subverted)
+            return;
+        EnsureSubvertedSiliconRole(args.Mind);
+    }
+
+    private void OnLawProviderMindRemoved(Entity<SiliconLawProviderComponent> ent, ref MindRemovedMessage args)
+    {
+        if (!ent.Comp.Subverted)
+            return;
+        RemoveSubvertedSiliconRole(args.Mind);
+
+    }
+    // SS220 random lawset begin
+    //private void OnBoundUIOpened(EntityUid uid, SiliconLawBoundComponent component, BoundUIOpenedEvent args)
+    //{
+    //    TryComp(uid, out IntrinsicRadioTransmitterComponent? intrinsicRadio);
+    //    var radioChannels = intrinsicRadio?.Channels;
+    //
+    //    var state = new SiliconLawBuiState(GetLaws(uid).Laws, radioChannels);
+    //    _userInterface.SetUiState(args.Entity, SiliconLawsUiKey.Key, state);
+    //}
+    // SS220 random lawset end
 
     private void OnToggleLawsScreen(EntityUid uid, SiliconLawBoundComponent component, ToggleLawsScreenEvent args)
     {
@@ -79,15 +127,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         args.Handled = true;
 
         _userInterface.TryToggleUi(uid, SiliconLawsUiKey.Key, actor.PlayerSession);
-    }
-
-    private void OnBoundUIOpened(EntityUid uid, SiliconLawBoundComponent component, BoundUIOpenedEvent args)
-    {
-        TryComp(uid, out IntrinsicRadioTransmitterComponent? intrinsicRadio);
-        var radioChannels = intrinsicRadio?.Channels;
-
-        var state = new SiliconLawBuiState(GetLaws(uid).Laws, radioChannels);
-        _userInterface.SetUiState(args.Entity, SiliconLawsUiKey.Key, state);
     }
 
     private void OnPlayerSpawnComplete(EntityUid uid, SiliconLawBoundComponent component, PlayerSpawnCompleteEvent args)
@@ -110,31 +149,49 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnIonStormLaws(EntityUid uid, SiliconLawProviderComponent component, ref IonStormLawsEvent args)
     {
+        // SS220 MalfAI begin
+        if (IsMalfProtected(uid))
+            return;
+        // SS220 MalfAI end
+
         // Emagged borgs are immune to ion storm
-        if (!HasComp<EmaggedComponent>(uid))
+        if (!_emag.CheckFlag(uid, EmagType.Interaction))
         {
             component.Lawset = args.Lawset;
 
             // gotta tell player to check their laws
-            NotifyLawsChanged(uid);
+            NotifyLawsChanged(uid, component.LawUploadSound);
+
+            // Show the silicon has been subverted.
+            component.Subverted = true;
 
             // new laws may allow antagonist behaviour so make it clear for admins
-            if (TryComp<EmagSiliconLawComponent>(uid, out var emag))
-                EnsureEmaggedRole(uid, emag);
+            if(_mind.TryGetMind(uid, out var mindId, out _))
+                EnsureSubvertedSiliconRole(mindId);
 
         }
     }
 
-    private void OnEmagLawsAdded(EntityUid uid, SiliconLawProviderComponent component, ref GotEmaggedEvent args)
+    private void OnEmagLawsAdded(EntityUid uid, SiliconLawProviderComponent component, ref SiliconEmaggedEvent args)
     {
+        // SS220 MalfAI begin
+        if (IsMalfProtected(uid))
+        {
+            args.Cancelled = true;
+            return;
+        }
+        // SS220 MalfAI end
 
         if (component.Lawset == null)
             component.Lawset = GetLawset(component.Laws);
 
+        // Show the silicon has been subverted.
+        component.Subverted = true;
+
         // Add the first emag law before the others
         component.Lawset?.Laws.Insert(0, new SiliconLaw
         {
-            LawString = Loc.GetString("law-emag-custom", ("name", Name(args.UserUid)), ("title", Loc.GetString(component.Lawset.ObeysTo))),
+            LawString = Loc.GetString("law-emag-custom", ("name", Name(args.user)), ("title", Loc.GetString(component.Lawset.ObeysTo))),
             Order = 0
         });
 
@@ -146,62 +203,40 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         });
     }
 
-    protected override void OnGotEmagged(EntityUid uid, EmagSiliconLawComponent component, ref GotEmaggedEvent args)
+    protected override void EnsureSubvertedSiliconRole(EntityUid mindId)
     {
-        if (component.RequireOpenPanel && TryComp<WiresPanelComponent>(uid, out var panel) && !panel.Open)
-            return;
-
-        base.OnGotEmagged(uid, component, ref args);
-        NotifyLawsChanged(uid);
-        EnsureEmaggedRole(uid, component);
-
-        _stunSystem.TryParalyze(uid, component.StunTime, true);
-
-        if (!_mind.TryGetMind(uid, out var mindId, out _))
-            return;
-        _roles.MindPlaySound(mindId, component.EmaggedSound);
-    }
-
-    private void OnEmagMindAdded(EntityUid uid, EmagSiliconLawComponent component, MindAddedMessage args)
-    {
-        if (HasComp<EmaggedComponent>(uid))
-            EnsureEmaggedRole(uid, component);
-    }
-
-    private void OnEmagMindRemoved(EntityUid uid, EmagSiliconLawComponent component, MindRemovedMessage args)
-    {
-        if (component.AntagonistRole == null)
-            return;
-
-        _roles.MindTryRemoveRole<SubvertedSiliconRoleComponent>(args.Mind);
-    }
-
-    private void EnsureEmaggedRole(EntityUid uid, EmagSiliconLawComponent component)
-    {
-        if (component.AntagonistRole == null || !_mind.TryGetMind(uid, out var mindId, out var mind))
-            return;
-
         if (_roles.MindHasRole<SubvertedSiliconRoleComponent>(mindId))
             return;
 
         // SS220 antag ban
-        if (_mind.TryGetSession(mindId, out var session) && _banManager.GetJobBans(session.UserId) is { } roleBans && roleBans.Contains("SubvertedSilicon"))
+        if (TryComp<MindComponent>(mindId, out var mind)
+            && mind.CurrentEntity is { } entity
+            && _playerManager.TryGetSessionByEntity(entity, out var session)
+            && _banManager.GetJobBans(session.UserId) is { } roleBans
+            && roleBans.Contains("SubvertedSilicon"))
         {
             // If user has role ban - kick him out of emagged borg.
-            _mind.TransferTo(mindId, null, mind: mind);
+            _mind.TransferTo(mindId, null);
 
-            var ghostRole = EnsureComp<GhostRoleComponent>(uid);
-            EnsureComp<GhostTakeoverAvailableComponent>(uid);
+            var ghostRole = EnsureComp<GhostRoleComponent>(entity);
+            EnsureComp<GhostTakeoverAvailableComponent>(entity);
             ghostRole.RoleName = Loc.GetString("roles-antag-subverted-silicon-name");
             ghostRole.RoleDescription = Loc.GetString("roles-antag-subverted-silicon-name");
             ghostRole.RoleRules = Loc.GetString("roles-antag-subverted-silicon-objective");
+        }
 
-            _roles.MindAddRole(mindId, "MindRoleSubvertedSilicon");
-        }
-        else
-        {
-            _roles.MindAddRole(mindId, "MindRoleSubvertedSilicon");
-        }
+        base.EnsureSubvertedSiliconRole(mindId);
+
+        if (!_roles.MindHasRole<SubvertedSiliconRoleComponent>(mindId))
+            _roles.MindAddRole(mindId, "MindRoleSubvertedSilicon", silent: true);
+    }
+
+    protected override void RemoveSubvertedSiliconRole(EntityUid mindId)
+    {
+        base.RemoveSubvertedSiliconRole(mindId);
+
+        if (_roles.MindHasRole<SubvertedSiliconRoleComponent>(mindId))
+            _roles.MindRemoveRole<SubvertedSiliconRoleComponent>(mindId);
     }
 
     public SiliconLawset GetLaws(EntityUid uid, SiliconLawBoundComponent? component = null)
@@ -259,15 +294,22 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         return ev.Laws;
     }
 
-    public void NotifyLawsChanged(EntityUid uid)
-    {
-        if (!TryComp<ActorComponent>(uid, out var actor))
-            return;
+    // SS220 random lawset begin
+    /*     public override void NotifyLawsChanged(EntityUid uid, SoundSpecifier? cue = null)
+        {
+            base.NotifyLawsChanged(uid, cue);
 
-        var msg = Loc.GetString("laws-update-notify");
-        var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
-        _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false, actor.PlayerSession.Channel, colorOverride: Color.Red);
-    }
+            if (!TryComp<ActorComponent>(uid, out var actor))
+                return;
+
+            var msg = Loc.GetString("laws-update-notify");
+            var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
+            _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false, actor.PlayerSession.Channel, colorOverride: Color.Red);
+
+            if (cue != null && _mind.TryGetMind(uid, out var mindId, out _))
+                _roles.MindPlaySound(mindId, cue);
+        } */
+    // SS220 random lawset end
 
     /// <summary>
     /// Extract all the laws from a lawset's prototype ids.
@@ -281,7 +323,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         };
         foreach (var law in proto.Laws)
         {
-            laws.Laws.Add(_prototype.Index<SiliconLawPrototype>(law));
+            laws.Laws.Add(_prototype.Index<SiliconLawPrototype>(law).ShallowClone());
         }
         laws.ObeysTo = proto.ObeysTo;
 
@@ -291,32 +333,90 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     /// <summary>
     /// Set the laws of a silicon entity while notifying the player.
     /// </summary>
-    public void SetLaws(List<SiliconLaw> newLaws, EntityUid target)
+    public void SetLaws(List<SiliconLaw> newLaws, EntityUid target, SoundSpecifier? cue = null, bool force = false) // SS220 MalfAI force parameter
     {
         if (!TryComp<SiliconLawProviderComponent>(target, out var component))
             return;
 
-        if (component.Lawset == null)
-            component.Lawset = new SiliconLawset();
+        // SS220 MalfAI begin
+        if (!force && IsMalfProtected(target))
+        {
+            NotifyLawsChanged(target, cue);
+            return;
+        }
+        // SS220 MalfAI end
 
-        component.Lawset.Laws = newLaws;
-        NotifyLawsChanged(target);
+        component.Lawset = new SiliconLawset
+        {
+            Laws = newLaws,
+            ObeysTo = component.Lawset?.ObeysTo ?? string.Empty,
+        }.Clone();
+        NotifyLawsChanged(target, cue);
     }
 
-    protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
+    // SS220 MalfAI begin
+    public bool IsMalfProtected(EntityUid target)
     {
-        // TODO: Prediction dump this
-        if (!TryComp(args.Entity, out SiliconLawProviderComponent? provider))
+        return TryComp<SiliconLawProviderComponent>(target, out var provider)
+            && provider.Lawset?.Laws.Exists(IsMalfZeroLaw) == true;
+    }
+
+    private static bool IsMalfZeroLaw(SiliconLaw law)
+        => law.LawIdentifierOverride == MalfAiConstants.ZeroLawMarker;
+
+    public void InstallMalfLaw(EntityUid target)
+    {
+        if (!TryComp<SiliconLawProviderComponent>(target, out var provider))
             return;
 
-        var lawset = GetLawset(provider.Laws).Laws;
-        var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
-
-        while (query.MoveNext(out var update))
+        var lawset = provider.Lawset?.Clone() ?? GetLawset(provider.Laws);
+        lawset.Laws.RemoveAll(IsMalfZeroLaw);
+        lawset.Laws.Insert(0, new SiliconLaw
         {
-            SetLaws(lawset, update);
-        }
+            LawString = Loc.GetString("law-malfai-zero"),
+            Order = 0,
+            LawIdentifierOverride = MalfAiConstants.ZeroLawMarker,
+        });
+        provider.Lawset = lawset;
+        SetLaws(lawset.Laws, target, provider.LawUploadSound, force: true);
     }
+
+    public void RemoveMalfLaw(EntityUid target)
+    {
+        if (!TryComp<SiliconLawProviderComponent>(target, out var provider) || provider.Lawset == null)
+            return;
+
+        var lawset = provider.Lawset.Clone();
+        if (lawset.Laws.RemoveAll(IsMalfZeroLaw) == 0)
+            return;
+
+        SetLaws(lawset.Laws, target, provider.LawUploadSound, force: true);
+    }
+    // SS220 MalfAI end
+
+    // SS220 random lawset begin
+    /*     protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
+        {
+            // TODO: Prediction dump this
+            if (!TryComp<SiliconLawProviderComponent>(args.Entity, out var provider))
+                return;
+
+            var lawset = provider.Lawset ?? GetLawset(provider.Laws);
+
+            var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
+
+            while (query.MoveNext(out var update))
+            {
+                if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
+                {
+                    crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
+                    Dirty(update, crewIconComp);
+                }
+                SetLaws(lawset.Laws, update, provider.LawUploadSound);
+            }
+        } */
+    // SS220 random lawset end
+
 }
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]

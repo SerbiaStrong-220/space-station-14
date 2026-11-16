@@ -1,7 +1,7 @@
 - type: entity
   id: ReinforcedWindow
   name: reinforced window
-  parent: Window
+  parent: [BaseDeltaPressureReinforcedGlass, Window]
   components:
   - type: Sprite
     drawdepth: WallTops
@@ -14,10 +14,10 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: RGlass
+  # ss220 rcd upd bgn
   - type: RCDDeconstructable
-    cost: 6
-    delay: 6
-    fx: EffectRCDDeconstruct6
+    deconstructable: false
+  # ss220 rcd upd end
   - type: Destructible
     thresholds:
     - trigger:
@@ -58,7 +58,7 @@
 
 - type: entity
   id: WindowReinforcedDirectional
-  parent: WindowDirectional
+  parent: [BaseDeltaPressureReinforcedGlassQuarter, WindowDirectional]
   name: directional reinforced window
   description: Don't smudge up the glass down there.
   placement:
@@ -84,10 +84,10 @@
       sprite: Structures/Windows/cracks_directional.rsi
   - type: Damageable
     damageModifierSet: RGlass
+  # ss220 rcd upd bgn
   - type: RCDDeconstructable
-    cost: 4
-    delay: 4
-    fx: EffectRCDDeconstruct4
+    deconstructable: false
+  # ss220 rcd upd end
   - type: Destructible
     thresholds:
     - trigger:
@@ -129,6 +129,14 @@
     drawdepth: WallTops
     sprite: Structures/Windows/reinforced_window_diagonal.rsi
     state: state0
+  # ss220 rcd upd bgn
+  - type: RCDDeconstructable
+    deconstructable: false
+  # ss220 rcd upd end
+  - type: Tag
+    tags:
+    - Diagonal
+    - Window
   - type: IconSmooth
     mode: Diagonal
     key: walls  # Corvax-Resprite

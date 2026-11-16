@@ -1,9 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.Body.Components;
+
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
@@ -18,14 +21,14 @@ namespace Content.Server.SS220.SpiderQueen.Systems;
 
 public sealed partial class SpiderCocoonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SpiderQueenSystem _spiderQueen = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private SpiderQueenSystem _spiderQueen = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private HungerSystem _hunger = default!;
 
     public override void Initialize()
     {
@@ -80,11 +83,13 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         }
     }
 
-    private void OnAlternativeVerb(EntityUid uid, SpiderCocoonComponent component, GetVerbsEvent<AlternativeVerb> args)
+    private void OnAlternativeVerb(Entity<SpiderCocoonComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess ||
             !TryComp<SpiderQueenComponent>(args.User, out var spiderQueen))
             return;
+
+        var user = args.User;
 
         var extractVerb = new AlternativeVerb
         {
@@ -92,11 +97,11 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
             Act = () =>
             {
                 var doAfterEventArgs = new DoAfterArgs(EntityManager,
-                    args.User,
+                    user,
                     spiderQueen.CocoonExtractTime,
                     new CocoonExtractBloodPointsEvent(),
-                    uid,
-                    uid)
+                    ent.Owner,
+                    ent.Owner)
                 {
                     Broadcast = false,
                     BreakOnDamage = false,
@@ -120,13 +125,10 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         var amountToMax = spiderQueen.MaxBloodPoints - spiderQueen.CurrentBloodPoints;
         var extractedValue = MathF.Min((float)amountToMax, (float)entity.Comp.BloodPointsAmount);
         entity.Comp.BloodPointsAmount -= extractedValue;
-        spiderQueen.CurrentBloodPoints += extractedValue;
+        _spiderQueen.ChangeBloodPointsAmount(args.User, spiderQueen, extractedValue);
 
         _hunger.ModifyHunger(args.User, extractedValue * spiderQueen.HungerExtractCoefficient);
-
-        Dirty(args.User, spiderQueen);
         Dirty(entity);
-        _spiderQueen.UpdateAlert((args.User, spiderQueen));
     }
 
     /// <summary>
@@ -142,7 +144,7 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         if (solutionEnt.Comp.Solution.Volume <= FixedPoint2.Zero)
             return;
 
-        _bloodstream.TryModifyBleedAmount(target, -1f, bloodstream);
+        _bloodstream.TryModifyBleedAmount((target, bloodstream), -1f);
         _solutionContainer.SplitSolution(solutionEnt, amount);
         component.BloodPointsAmount += amount * component.BloodConversionCoefficient;
         Dirty(uid, component);
@@ -154,12 +156,13 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
             component.DamagePerSecond is not { } damagePerSecond)
             return;
 
+        var allDamage = _damageable.GetAllDamage((target, damageable));
         DamageSpecifier causedDamage = new();
         foreach (var damage in damagePerSecond.DamageDict)
         {
             var (type, value) = damage;
             if (component.DamageCap.TryGetValue(type, out var cap) &&
-                damageable.Damage.DamageDict.TryGetValue(type, out var total) &&
+                allDamage.DamageDict.TryGetValue(type, out var total) &&
                 total >= cap)
                 continue;
 

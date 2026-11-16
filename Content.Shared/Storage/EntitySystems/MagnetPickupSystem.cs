@@ -1,7 +1,9 @@
-using Content.Server.Storage.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Storage.Components;
+using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
-using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 
@@ -19,22 +21,47 @@ public sealed class MagnetPickupSystem : EntitySystem
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
+    [Dependency] private ItemToggleSystem _itemToggle = default!; // SS220-MagnetToggle
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private static readonly TimeSpan ScanDelay = TimeSpan.FromSeconds(1);
 
-    private EntityQuery<PhysicsComponent> _physicsQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
         SubscribeLocalEvent<MagnetPickupComponent, MapInitEvent>(OnMagnetMapInit);
+        // SS220-MagnetToggle begin
+        SubscribeLocalEvent<MagnetPickupComponent, ItemToggledEvent>(OnMagnetToggled);
+        SubscribeLocalEvent<MagnetPickupComponent, GetVerbsEvent<ActivationVerb>>(OnMagnetToggleVerb);
+        // SS220-MagnetToggle end
     }
 
     private void OnMagnetMapInit(EntityUid uid, MagnetPickupComponent component, MapInitEvent args)
     {
         component.NextScan = _timing.CurTime;
     }
+
+    // SS220-MagnetToggle begin
+    private void OnMagnetToggled(Entity<MagnetPickupComponent> ent, ref ItemToggledEvent args)
+    {
+        ent.Comp.Enabled = args.Activated;
+        Dirty(ent, ent.Comp);
+    }
+
+    private void OnMagnetToggleVerb(Entity<MagnetPickupComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || !TryComp<ItemToggleComponent>(ent, out var toggle))
+            return;
+
+        var user = args.User;
+        args.Verbs.Add(new ActivationVerb
+        {
+            Text = !toggle.Activated ? Loc.GetString(toggle.VerbToggleOn) : Loc.GetString(toggle.VerbToggleOff),
+            Act = () => _itemToggle.Toggle((ent.Owner, toggle), user, predicted: toggle.Predictable),
+        });
+    }
+    // SS220-MagnetToggle end
 
     public override void Update(float frameTime)
     {
@@ -48,12 +75,24 @@ public sealed class MagnetPickupSystem : EntitySystem
                 continue;
 
             comp.NextScan += ScanDelay;
+            Dirty(uid, comp);
 
-            if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
+            // SS220-MagnetToggle begin
+            if (!comp.Enabled)
                 continue;
+            // SS220-MagnetToggle end
 
-            if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
+            // SS220-OreBagBorgMagnet begin
+            if (!comp.WorksOutsideSlot)
+            {
+
+             if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
                 continue;
+            
+             if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
+                continue;
+            }
+            // SS220-OreBagBorgMagnet end
 
             // No space
             if (!_storage.HasSpace((uid, storage)))
@@ -81,7 +120,7 @@ public sealed class MagnetPickupSystem : EntitySystem
                 // game state handling we can't show a lerp animation for it.
                 var nearXform = Transform(near);
                 var nearMap = _transform.GetMapCoordinates(near, xform: nearXform);
-                var nearCoords = EntityCoordinates.FromMap(moverCoords.EntityId, nearMap, _transform, EntityManager);
+                var nearCoords = _transform.ToCoordinates(moverCoords.EntityId, nearMap);
 
                 if (!_storage.Insert(uid, near, out var stacked, storageComp: storage, playSound: !playedSound))
                     continue;

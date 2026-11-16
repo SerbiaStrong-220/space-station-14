@@ -31,8 +31,18 @@ ghost-role-information-silicon-rules =
     Вам абсолютно [color=red]НЕ[/color] разрешено помнить, скажем, имя, внешность и т. д. вашего предыдущего персонажа.
 ghost-role-information-mouse-name = Мышь
 ghost-role-information-mouse-description = Голодная и озорная мышь.
+ghost-role-information-cancer-mouse-name = Раковая мышь
+ghost-role-information-cancer-mouse-description = Облучённая мышь. Распространяйте свой недуг и ищите еду.
 ghost-role-information-mothroach-name = Таракамоль
 ghost-role-information-mothroach-description = Милая озорная таракамоль.
+ghost-role-information-snail-name = Улитка
+ghost-role-information-snail-description = Маленькая улитка, которая не против немного побыть на свободе. Только не убегай за пределы клетки!
+ghost-role-information-snailspeed-name = Улитка
+ghost-role-information-snailspeed-description = Маленькая улитка с турбоулиточными ускорителями.
+ghost-role-information-moproach-name = Швабракан
+ghost-role-information-moproach-description = Милый швабракан с ещё более милыми тапочками-швабрами на лапках.
+ghost-role-information-snoth-name = Молитка
+ghost-role-information-snoth-description = Маленькая молитка, которая не против немного побыть на свободе. Только не убегай за пределы клетки!
 ghost-role-information-giant-spider-name = Гигантский паук
 ghost-role-information-giant-spider-description = Обитатели этой станции выглядят очень аппетитно, а ваша липкая паутина идеально подходит для их ловли!
 ghost-role-information-giant-spider-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими гигантскими пауками.
@@ -53,7 +63,7 @@ ghost-role-information-xeno-name = Ксено
 ghost-role-information-xeno-description = Вы ксено. Скооперируйтесь со своим ульем, чтобы истребить всех членов экипажа!
 ghost-role-information-xeno-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими ксено.
 ghost-role-information-revenant-name = Ревенант
-ghost-role-information-revenant-description = Вы Ревенант. Используйте свои силы, чтобы собирать души и наводить страх на команду. С помощью собранной эссенции открывайте новые способности.
+ghost-role-information-revenant-description = Вы Ревенант. Используйте свои силы, чтобы собирать души и сеять хаос среди экипажа. Открывайте новые способности с помощью собранной эссенции.
 ghost-role-information-revenant-rules = Вы – антагонист. Собирайте души, оскверняйте и сводите с ума экипаж.
 ghost-role-information-kangaroo-name = Кенгуру
 ghost-role-information-kangaroo-description = Вы кенгуру! Делайте всё, что делают кенгуру.
@@ -137,7 +147,6 @@ ghost-role-information-ert-security-name = ОБР Офицер безопасн�
 ghost-role-information-ert-security-description = Оказывайте содействие в обеспечении безопасности для решения проблем станции.
 ghost-role-information-ert-medical-name = ОБР Медик
 ghost-role-information-ert-medical-description = Оказывайте содействие в медицинской помощи для решения проблем станции.
-# SS220 CBURN questions
 ghost-role-information-cburn-agent-name = РХБЗ Оперативник
 ghost-role-information-cburn-agent-description = Высококвалифицированный агент Центком, способный справиться с любыми угрозами.
 ghost-role-information-centcom-official-name = Представитель Центком
@@ -147,7 +156,7 @@ ghost-role-information-behonker-description = Вы - антагонист, не�
 ghost-role-information-nukeop-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими Ядерными оперативниками. Помощь агентов на станции не гарантируется.
 ghost-role-information-loneop-name = Одинокий оперативник
 ghost-role-information-loneop-description = Вы - одинокий ядерный оперативник. Уничтожьте станцию.
-ghost-role-information-loneop-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими Ядерными оперативниками. Помощь агентов на станции не гарантируется.
+ghost-role-information-loneop-rules = Вы [color=red][bold]Соло-антагонист[/bold][/color]. Помощь агентов на станции не гарантируется.
 ghost-role-information-hellspawn-name = Адское отродье
 ghost-role-information-hellspawn-description = Несите смерть всем, кто не повинуется великой богине Нар'Си.
 ghost-role-information-Death-Squad-name = Оперативник Эскадрона смерти
@@ -165,8 +174,8 @@ ghost-role-information-centcom-NavyOfficier-name = Полевой Офицер �
 ghost-role-information-centcom-NavyOfficier-description = Полевая "бюрократическая" работа со станциями и проведение пояснительных бесед о некомпетентности работников, прямая отчетность.
 ghost-role-information-centcom-Officier-name = Офицер Центком
 ghost-role-information-centcom-Officier-description = Бюрократия Центрального Командования. Прием факсов и сообщений от активов Nanotrasen в секторе. Организация и проведение проверок о некомпетентности.
-ghost-role-information-centcom-SRT-name = Группа Специального Назначения
-ghost-role-information-centcom-SRT-description = Вы оперативник группы специального назначения. Выполните поставленную перед вашим отрядом задачу!
+ghost-role-information-centcom-srt-name = Оперативник ГСН
+ghost-role-information-centcom-srt-description = Вы оперативник Группы Специального Назначения. Выполните поставленную перед вами задачу!
 ghost-role-information-nanotrasen-Diplomat-name = Дипломат NanoTrasen
 ghost-role-information-nanotrasen-Diplomat-description = Устанавливает отношения с инопланетянами и другими фракциями. Тот, кому приходится разгребать казусы с дипломатическими инцидентами, создаваемые экипажем.
 ghost-role-information-nanotrasen-Admiral-name = Адмирал NanoTrasen
@@ -198,22 +207,98 @@ ghost-role-information-syndicate-monkey-reinforcement-rules = Вы [color=red][b
 ghost-role-information-syndicate-kobold-reinforcement-name = Агент Синдиката-кобольд
 ghost-role-information-syndicate-kobold-reinforcement-description = Кому-то нужно подкрепление. Вы, специально обученный кобольд, поможете им.
 ghost-role-information-syndicate-kobold-reinforcement-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с агентом, который вас призвал.
-ghost-role-information-lost-cargo-technical-name = Пропавший грузчик
-ghost-role-information-lost-cargo-technical-description = Что-то пошло не так, и ваш грузовой шаттл с грузом был телепортирован на другую станцию в секторе.
-ghost-role-information-lost-cargo-technical-rules = Вы - обычный грузчик с другой станции. Делайте то, что делают обычные грузчики.
-ghost-role-information-clown-troupe-name = Космический клоун
-ghost-role-information-clown-troupe-description = Вы и ваша труппа прибыли, чтобы развеселить эту станцию своими лучшими шутками. Хонк!
-ghost-role-information-clown-troupe-rules = Действуют обычные правила для экипажа станции.
-ghost-role-information-traveling-chef-name = Путешествующий шеф-повар
-ghost-role-information-traveling-chef-description = Вы - шеф-повар на странствующем шаттле экзотической кухни. Порадуйте станцию вкусными блюдами!
-ghost-role-information-traveling-chef-rules = Действуют обычные правила для экипажа станции.
-ghost-role-information-disaster-victim-name = Жертва катастрофы
-ghost-role-information-disaster-victim-description = Вы спаслись на спасательной капсуле с другой станции, которую постигла ужасная участь. Возможно, вас найдут и спасут.
-ghost-role-information-disaster-victim-rules = Действуют обычные правила для экипажа станции.
+ghost-role-information-syndicate-cyborg-assault-name = Штурмовой киборг Синдиката
+ghost-role-information-syndicate-cyborg-saboteur-name = Саботажный киборг Синдиката
+ghost-role-information-syndicate-cyborg-description = Синдикату нужно подкрепление. Вы, холодная кремниевая машина для убийства, поможете им.
+ghost-role-information-derelict-engineering-cyborg-name = Брошенный киборг-инженер
+ghost-role-information-derelict-engineering-cyborg-description = Вы — инженерный киборг, который заблудился в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
+ghost-role-information-derelict-cyborg-name = Брошенный киборг
+ghost-role-information-derelict-cyborg-description = Вы — обычный киборг, который заблудился в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
+ghost-role-information-derelict-janitor-cyborg-name = Брошенный киборг-уборщик
+ghost-role-information-derelict-janitor-cyborg-description = Вы — киборг-уборщик, который заблудился в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
+ghost-role-information-derelict-medical-cyborg-name = Брошенный киборг-доктор
+ghost-role-information-derelict-medical-cyborg-description = Вы — медицинский киборг, который заблудился в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
+ghost-role-information-derelict-mining-cyborg-name = Брошенный киборг-шахтёр
+ghost-role-information-derelict-mining-cyborg-description = Вы — киборг-шахтёр, который заблудился в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
+ghost-role-information-derelict-syndicate-assault-cyborg-name = Брошенный штурмовой киборг Синдиката
+ghost-role-information-derelict-syndicate-assault-cyborg-description = Вы — раняя модель штурмового киборга Синдиката, которая заблудилась в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
+ghost-role-information-security-name = Служба безопасности
+ghost-role-information-security-description = Вы входите в состав оперативной группы службы безопасности, но, похоже, попали в странную ситуацию...
+ghost-role-information-medical-name = Медицинский
+ghost-role-information-medical-virologist-name = Вирусолог
+ghost-role-information-medical-geneticist-name = Генетик
+ghost-role-information-medical-dentist-name = Стоматолог
+ghost-role-information-medical-description = Вы медицинский работник, но, похоже, попали в странную ситуацию...
+ghost-role-information-cargo-name = Снабжение
+ghost-role-information-cargo-description = Вы являетесь частью логистической миссии, но, похоже, попали в странную ситуацию...
+ghost-role-information-engineering-name = Инженерный
+ghost-role-information-engineering-description = Вы работаете инженером, но, похоже, попали в странную ситуацию...
+ghost-role-information-science-name = Научный
+ghost-role-information-science-description = Вы являетесь частью научной команды, но, похоже, попали в странную ситуацию...
+ghost-role-information-civilian-name = Гражданский
+ghost-role-information-civilian-description = Вы просто гуляли, но, похоже, попали в странную ситуацию...
+ghost-role-information-civilian-centcom-lawyer-name = Адвокат Центкома
+ghost-role-information-civilian-centcom-lawyer-description = Адвокат, прямо из Центрального юридического отдела.
+ghost-role-information-command-name = Коммандир
+ghost-role-information-command-description = Вы являетесь членом командования, но, похоже, попали в странную ситуацию...
+ghost-role-information-lost-challenge-commander-name = Командир в отпуске
+ghost-role-information-lost-challenge-commander-description = Вы - член команды с другого корабля, которому предоставили отпуск вместе с одним из ваших грузовых техников.
+ghost-role-information-lost-challenge-commander-rules =
+    Вы не враждебны к станции и делаете то, что должны, чтобы обеспечить собственное выживание.
+    Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
+    Вам разрешается помнить знания об игре в целом, например, как готовить, как использовать предметы и т.д.
+    Вам [color=red]НЕ[/color] разрешается помнить, имя, внешность и т.д. вашего предыдущего персонажа.
+ghost-role-information-lost-challenge-cargo-technican-name = Грузовой шофер
+ghost-role-information-lost-challenge-cargo-technican-description = Вы - грузовой техник, получивший отпуск на берег вместе с одним из своих командиров.
+ghost-role-information-lost-challenge-cargo-technican-rules =
+    Вы не враждебны станции и делаете то, что должны, чтобы обеспечить собственное выживание.
+    Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
+    Вам разрешается помнить знания об игре в целом, например, как готовить, как использовать предметы и т.д.
+    Вам [color=red]НЕ[/color] разрешается помнить, имя, внешность и т.д. вашего предыдущего персонажа.
+ghost-role-information-syndie-soldier-name = Солдат Синдиката
+ghost-role-information-syndie-soldier-description = Вы солдат Синдиката
+ghost-role-information-syndie-soldier-teamlead-name = Командир команды Синдиката
+ghost-role-information-syndie-soldier-teamlead-description = Вы - командир огневой группы в оперативном отряде Синдиката.
+ghost-role-information-blackmarketeer-name = Торговец чёрного рынка
+ghost-role-information-blackmarketeer-description = Заключайте сделки или беритесь за непосильную работу, чтобы к концу смены собрать самые интересные предметы.
+ghost-role-information-cossack-name = Древний путешественник
+ghost-role-information-cossack-description = Из истории, потерянной во времени, вы попадаете в наш век.
+ghost-role-information-pirate-name = Космический пират
+ghost-role-information-pirate-description = Агх, дружище! Собирайте крутые трофеи, но старайтесь избегать службы безопасности и утилизаторов!
+ghost-role-information-pirate-captain-name = Капитан космических пиратов
+ghost-role-information-pirate-captain-description = Агх, дружище! Ты здесь главный, и тебе нужно разработать план, как заполучить эту сочную добычу с помощью крючка или мошенничества. Только постарайтесь избегать службы безопасности и утилизаторов!
+# ghost-role-information-disaster-victim-name = Жертва катастрофы
+# ghost-role-information-disaster-victim-description = Вы спаслись на спасательной капсуле с другой станции, которую постигла ужасная участь. Возможно, вас найдут и спасут.
+# ghost-role-information-disaster-victim-rules = Действуют обычные правила для экипажа станции.
 ghost-role-information-syndie-disaster-victim-name = Жертва катастрофы из Синдиката
 ghost-role-information-syndie-disaster-victim-description = Вы - обычный пассажир со станции Синдиката. К несчастью, спасательная капсула закинула вас во вражеский сектор...
 ghost-role-information-syndie-disaster-victim-rules = Действуют обычные правила для экипажа станции. Вы НЕ антагонист!
 ghost-role-information-artifact-name = Разумный артефакт
 ghost-role-information-artifact-description = Осуществляйте свои инопланетные прихоти. Принудительно активируйте свои узлы во благо или во зло.
-ghost-role-information-syndie-assaultborg-name = Штурмовой киборг Синдиката
-ghost-role-information-syndie-assaultborg-description = Ядерным оперативникам требуется подкрепление. Вы, хладнокремниевая машина для убийств, будете им помогать. Больше дакки!
+ghost-role-information-gingerbread-name = Пряничный человечек
+ghost-role-information-gingerbread-description =
+    Существо чистого праздничного духа.
+    Распространяйте паточную вкуснятину и хорошее настроение.
+ghost-role-information-tomatokiller-name = Томат-убийца
+ghost-role-information-tomatokiller-description = Этот маленький помидор будет служить ботанику до конца своей жизни... то есть пару минут.
+
+ghost-role-information-syndicate-smuggler-name = Контрабандист Синдиката
+ghost-role-information-syndicate-smuggler-description = Вы - специально обученный контрабандист Синдиката. Отправляйтесь на поиски выданной вам цели и отыщите её любыми средствами.
+
+
+
+ghost-role-information-rules-team-antagonist = Вы [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color]. Ваши намерения ясны и враждебны станции и ее экипажу. Вы должны [bold]работать со своей командой[/bold] или следовать разумным указаниям командиров. Вы не помните ничего из своей прошлой жизни, и вы не помните ничего, что узнали, будучи призраком. Вам разрешено помнить общие игровые знания, такие как: как готовить, как использовать предметы и т.д. Вам абсолютно [color=red]ЗАПРЕЩЕНО[/color] помнить имя, внешность и т.д. вашего предыдущего персонажа.
+
+ghost-role-information-angry-slimes-name = Слайм
+
+ghost-role-information-paradox-clone-name = Парадоксальный клон
+
+ghost-role-information-paradox-clone-description = Ужасающая пространственно-временная аномалия телепортировала вас в другую реальность! Теперь вам нужно найти своего двойника, убить его и занять его место.
+
+ghost-role-information-mothership-core-name = Ядро Материнского Корабля
+
+ghost-role-information-mothership-core-desc = Вы ядро материнского корабля ксеноборгов, помогайте им размножаться, боргируя любой мозг, который они вам принесут.
+
+ghost-role-information-xenoborg-name = Ксеноборг
+
+ghost-role-information-xenoborg-desc = Странный киборг, созданный для репликации самого себя и захвата станции путем превращения любых разумных существ в ксеноборгов.

@@ -1,11 +1,12 @@
+using System.Linq;
 using System.Text.Json.Serialization;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
-using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Utility;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
 
 namespace Content.Shared.Damage
 {
@@ -17,26 +18,16 @@ namespace Content.Shared.Damage
     ///     functions to apply resistance sets and supports basic math operations to modify this dictionary.
     /// </remarks>
     [DataDefinition, Serializable, NetSerializable]
-    public sealed partial class DamageSpecifier : IEquatable<DamageSpecifier>
+    public sealed partial class DamageSpecifier : IEquatable<DamageSpecifier>, IRobustCloneable<DamageSpecifier>
     {
-        // These exist solely so the wiki works. Please do not touch them or use them.
-        [JsonPropertyName("types")]
-        [DataField("types", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, DamageTypePrototype>))]
-        [UsedImplicitly]
-        private Dictionary<string,FixedPoint2>? _damageTypeDictionary;
-
-        [JsonPropertyName("groups")]
-        [DataField("groups", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, DamageGroupPrototype>))]
-        [UsedImplicitly]
-        private Dictionary<string, FixedPoint2>? _damageGroupDictionary;
-
         /// <summary>
         ///     Main DamageSpecifier dictionary. Most DamageSpecifier functions exist to somehow modifying this.
         /// </summary>
-        [JsonIgnore]
-        [ViewVariables(VVAccess.ReadWrite)]
-        [IncludeDataField(customTypeSerializer: typeof(DamageSpecifierDictionarySerializer), readOnly: true)]
-        public Dictionary<string, FixedPoint2> DamageDict { get; set; } = new();
+        [DataField("types")]
+        public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> DamageDict { get; set; } = new();
+
+        [DataField] //SS220 armour piercing added
+        public FixedPoint2 ArmourPiercing = 0; //SS220 armour piercing added
 
         /// <summary>
         ///     Returns a sum of the damage values.
@@ -77,6 +68,16 @@ namespace Content.Shared.Damage
         [JsonIgnore]
         public bool Empty => DamageDict.Count == 0;
 
+        public DamageSpecifier Clone()
+        {
+            return new DamageSpecifier(this);
+        }
+
+        public override string ToString()
+        {
+            return "DamageSpecifier(" + string.Join("; ", DamageDict.Select(x => x.Key + ":" + x.Value)) + ")";
+        }
+
         #region constructors
         /// <summary>
         ///     Constructor that just results in an empty dictionary.
@@ -89,6 +90,7 @@ namespace Content.Shared.Damage
         public DamageSpecifier(DamageSpecifier damageSpec)
         {
             DamageDict = new(damageSpec.DamageDict);
+            ArmourPiercing = damageSpec.ArmourPiercing; //SS220 armor piercing added
         }
 
         /// <summary>
@@ -149,12 +151,21 @@ namespace Content.Shared.Damage
                 if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
                     newValue = Math.Max(0f, newValue - reduction); // flat reductions can't heal you
 
+                //SS220 armor piercing added begin
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
-                    newValue *= coefficient; // coefficients can heal you, e.g. cauterizing bleeding
+                {
+                    var lowerCap = Math.Min(0f, coefficient);
+                    var upperCap = Math.Max(1f, coefficient);
 
-                if(newValue != 0)
+                    newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
+                }
+                //SS220 armor piercing added end
+
+                if (newValue != 0)
                     newDamage.DamageDict[key] = FixedPoint2.New(newValue);
             }
+
+            newDamage.ArmourPiercing = FixedPoint2.Min(FixedPoint2.Zero, damageSpec.ArmourPiercing); //SS220 armor piercing added
 
             return newDamage;
         }
@@ -179,6 +190,38 @@ namespace Content.Shared.Damage
 
             if (!any)
                 newDamage = new DamageSpecifier(damageSpec);
+
+            return newDamage;
+        }
+
+        /// <summary>
+        /// Returns a new DamageSpecifier that only contains the entries with positive value.
+        /// </summary>
+        public static DamageSpecifier GetPositive(DamageSpecifier damageSpec)
+        {
+            DamageSpecifier newDamage = new();
+
+            foreach (var (key, value) in damageSpec.DamageDict)
+            {
+                if (value > 0)
+                    newDamage.DamageDict[key] = value;
+            }
+
+            return newDamage;
+        }
+
+        /// <summary>
+        /// Returns a new DamageSpecifier that only contains the entries with negative value.
+        /// </summary>
+        public static DamageSpecifier GetNegative(DamageSpecifier damageSpec)
+        {
+            DamageSpecifier newDamage = new();
+
+            foreach (var (key, value) in damageSpec.DamageDict)
+            {
+                if (value < 0)
+                    newDamage.DamageDict[key] = value;
+            }
 
             return newDamage;
         }
@@ -281,6 +324,18 @@ namespace Content.Shared.Damage
             return containsMemeber;
         }
 
+        // SS220-EasierModifiers-Start
+        public void AddDamageEvenly(float bonus)
+        {
+            var types = DamageDict.Count;
+
+            foreach (var entry in DamageDict)
+            {
+                DamageDict[entry.Key] += bonus / types;
+            }
+        }
+        // SS220-EasierModifiers-End
+
         /// <summary>
         ///     Returns a dictionary using <see cref="DamageGroupPrototype.ID"/> keys, with values calculated by adding
         ///     up the values for each damage type in that group
@@ -290,15 +345,15 @@ namespace Content.Shared.Damage
         ///     total of each group. If no members of a group are present in this <see cref="DamageSpecifier"/>, the
         ///     group is not included in the resulting dictionary.
         /// </remarks>
-        public Dictionary<string, FixedPoint2> GetDamagePerGroup(IPrototypeManager protoManager)
+        public Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2> GetDamagePerGroup(IPrototypeManager protoManager)
         {
-            var dict = new Dictionary<string, FixedPoint2>();
+            var dict = new Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2>();
             GetDamagePerGroup(protoManager, dict);
             return dict;
         }
 
         /// <inheritdoc cref="GetDamagePerGroup(Robust.Shared.Prototypes.IPrototypeManager)"/>
-        public void GetDamagePerGroup(IPrototypeManager protoManager, Dictionary<string, FixedPoint2> dict)
+        public void GetDamagePerGroup(IPrototypeManager protoManager, Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2> dict)
         {
             dict.Clear();
             foreach (var group in protoManager.EnumeratePrototypes<DamageGroupPrototype>())
@@ -316,6 +371,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value * factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing * factor;//SS220 armour piercing added
             return newDamage;
         }
 
@@ -326,6 +382,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value * factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing * factor;//SS220 armour piercing added
             return newDamage;
         }
 
@@ -336,6 +393,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value / factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing / factor;//SS220 armour piercing added
             return newDamage;
         }
 
@@ -347,6 +405,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value / factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing / factor;//SS220 armour piercing added
             return newDamage;
         }
 
@@ -364,6 +423,7 @@ namespace Content.Shared.Damage
                     newDamage.DamageDict[entry.Key] += entry.Value;
                 }
             }
+            newDamage.ArmourPiercing = damageSpecA.ArmourPiercing + damageSpecB.ArmourPiercing;//SS220 armour piercing added
             return newDamage;
         }
 
@@ -380,6 +440,7 @@ namespace Content.Shared.Damage
                     newDamage.DamageDict[entry.Key] -= entry.Value;
                 }
             }
+            newDamage.ArmourPiercing = damageSpecA.ArmourPiercing - damageSpecB.ArmourPiercing;//SS220 armour piercing added
             return newDamage;
         }
 
@@ -401,6 +462,9 @@ namespace Content.Shared.Damage
                 if (!other.DamageDict.TryGetValue(key, out var otherValue) || value != otherValue)
                     return false;
             }
+
+            if (ArmourPiercing != other.ArmourPiercing) //SS220 armour piercing added
+                return false;//SS220 armour piercing added
 
             return true;
         }

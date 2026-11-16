@@ -183,23 +183,15 @@
   frequency: 1001
   color: "#9932CC"
   longRange: true
+
 - type: radioChannel
   id: ChannelXonk
   name: chat-radio-honk
-  keycode: 'ч'
+  keycode: 'ш'
   frequency: 1001
   color: "#FFB6C1"
   longRange: true
 # Admin memes end
-
-#Spider queen antag
-- type: radioChannel #Connection
-  id: HiveRadio
-  name: chat-radio-hive
-  keycode: 'у'
-  frequency: 2885
-  color: "#cc80ff"
-  longRange: true
 
 #Department Internal Affairs
 - type: radioChannel
@@ -207,4 +199,13 @@
   name: chat-radio-law
   keycode: 'ю'
   frequency: 1373
-  color: "#323ba9"
+  color: "#5b65e2"
+
+# Interdyne
+- type: radioChannel
+  id: Interdyne
+  name: chat-radio-interdyne
+  keycode: 'й'
+  frequency: 1001
+  color: "#60b781"
+  longRange: true

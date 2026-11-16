@@ -56,7 +56,7 @@ public sealed partial class RatKingComponent : Component
     /// </summary>
     [DataField("currentOrders"), ViewVariables(VVAccess.ReadWrite)]
     [AutoNetworkedField]
-    public RatKingOrderType CurrentOrder = RatKingOrderType.Loose;
+    public RatKingOrderType CurrentOrder = RatKingOrderType.Follow;
 
     /// <summary>
     /// The servants that the rat king is currently controlling
@@ -99,6 +99,14 @@ public sealed partial class RatKingComponent : Component
         { RatKingOrderType.CheeseEm, "RatKingCommandCheeseEm" },
         { RatKingOrderType.Loose, "RatKingCommandLoose" }
     };
+
+    // SS220 RatKing Tweaks and Changes begin
+    [ViewVariables]
+    public EntityUid? ActionRummageEntity;
+
+    [DataField("actionRummage")]
+    public EntProtoId ActionRummage = "ActionRatKingRummage";
+    // SS220 RatKing Tweaks and Changes end
 }
 
 [Serializable, NetSerializable]

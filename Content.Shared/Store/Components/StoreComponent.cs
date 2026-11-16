@@ -1,4 +1,5 @@
 using Content.Shared.FixedPoint;
+using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -37,10 +38,17 @@ public sealed partial class StoreComponent : Component
     public HashSet<ProtoId<CurrencyPrototype>> CurrencyWhitelist = new();
 
     /// <summary>
-    /// The person who "owns" the store/account. Used if you want the listings to be fixed
+    /// The expected Faction to use this store. (Optional)
+    /// Used to increase the severity of the admin log upon purchase if the purchaser is not a member of one of the listed factions.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<NpcFactionPrototype>>? ExpectedFaction = new ();
+
+    /// <summary>
+    /// The person/mind who "owns" the store/account. Used if you want the listings to be fixed
     /// regardless of who activated it. I.E. role specific items for uplinks.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public EntityUid? AccountOwner = null;
 
     /// <summary>
@@ -94,7 +102,10 @@ public sealed partial class StoreComponent : Component
     [ViewVariables, DataField]
     public TimeSpan? CurrencyInsertTime;
     //SS220-insert-currency-doafter end
-
+    // ss220 dynamics
+    [DataField]
+    public bool UseDynamicPrices = false;
+    // ss220 dynamics
     #region audio
     /// <summary>
     /// The sound played to the buyer when a purchase is succesfully made.

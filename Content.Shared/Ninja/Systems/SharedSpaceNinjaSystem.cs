@@ -1,4 +1,4 @@
-using Content.Shared.Clothing.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
@@ -15,15 +15,14 @@ public abstract class SharedSpaceNinjaSystem : EntitySystem
     [Dependency] protected readonly SharedNinjaSuitSystem Suit = default!;
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
 
-    public EntityQuery<SpaceNinjaComponent> NinjaQuery;
+    [Dependency] public readonly EntityQuery<SpaceNinjaComponent> NinjaQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        NinjaQuery = GetEntityQuery<SpaceNinjaComponent>();
-
         SubscribeLocalEvent<SpaceNinjaComponent, AttackedEvent>(OnNinjaAttacked);
+        SubscribeLocalEvent<SpaceNinjaComponent, DamageChangedEvent>(OnNinjaDamaged); // SS220 reveal on health damage
         SubscribeLocalEvent<SpaceNinjaComponent, MeleeAttackEvent>(OnNinjaAttack);
         SubscribeLocalEvent<SpaceNinjaComponent, ShotAttemptedEvent>(OnShotAttempted);
     }
@@ -63,7 +62,7 @@ public abstract class SharedSpaceNinjaSystem : EntitySystem
     /// </summary>
     public void BindKatana(Entity<SpaceNinjaComponent?> ent, EntityUid katana)
     {
-        if (!NinjaQuery.Resolve(ent, ref ent.Comp) || ent.Comp.Katana != null)
+        if (!NinjaQuery.Resolve(ent, ref ent.Comp, false) || ent.Comp.Katana != null)
             return;
 
         ent.Comp.Katana = katana;
@@ -86,6 +85,16 @@ public abstract class SharedSpaceNinjaSystem : EntitySystem
     {
         TryRevealNinja(ent, disable: true);
     }
+    // SS220 invis buff start
+    /// <summary>
+    /// Handle revealing ninja if cloaked when taking amount of health damage.
+    /// </summary>
+    private void OnNinjaDamaged(Entity<SpaceNinjaComponent> ent, ref DamageChangedEvent args)
+    {
+        if (args.DamageIncreased && args.DamageDelta is { } delta && delta.GetTotal() >= ent.Comp.RevealDamageThreshold)
+            TryRevealNinja(ent, disable: true);
+    }
+    // SS220 invis buff end
 
     /// <summary>
     /// Handle revealing ninja if cloaked when attacking.

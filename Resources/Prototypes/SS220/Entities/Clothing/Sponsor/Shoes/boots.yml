@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingSponsorShoesBase
   id: ClothingSponsorMothBoots
-  name: твёрдые моле-ботинки
-  description: Сэр, чистка прошла успешно, сэр!
+  name: tough moth boots
+  description: Sir, cleaning was successful, sir!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Shoes/Boots/mothboots.rsi
@@ -19,8 +19,8 @@
 - type: entity
   parent: ClothingSponsorShoesBase
   id: ClothingSponsorGoldClownShoes
-  name: золотые клоунские туфли
-  description: Шааааайни!
+  name: golden clown shoes
+  description: Shiiiiny!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Shoes/Boots/goldclownboots.rsi
@@ -34,8 +34,8 @@
 - type: entity
   parent: ClothingSponsorShoesBase
   id: ClothingSponsorMafiaBoots
-  name: ботинки прекрасного человека
-  description: Цок-цок.
+  name: wonderful person's boots
+  description: Click-clack.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Shoes/Boots/mafia.rsi
@@ -45,8 +45,8 @@
 - type: entity
   parent: ClothingSponsorShoesBase
   id: ClothingSponsorMafiaBlackBoots
-  name: тёмные ботинки прекрасного человека
-  description: Цок-цок.
+  name: dark wonderful person's boots
+  description: Click-clack.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Shoes/Boots/mafia_black.rsi
@@ -57,8 +57,8 @@
 - type: entity
   parent: ClothingSponsorShoesBase
   id: ClothingSponsorBootsMuzhik
-  name: ботинки мужика
-  description: Проложит путь к ближайшим самогонным месторождениям.
+  name: muzhik's boots
+  description: Will pave the way to the nearest moonshine deposits.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Shoes/Boots/laceups_red.rsi
@@ -68,8 +68,8 @@
 - type: entity
   parent: ClothingSponsorShoesBase
   id: ClothingShoesMoryak
-  name: башмаки морячка
-  description: Тесные матроские башмаки, но хотя бы водонепроницаемые.
+  name: sailor's shoes
+  description: Tight sailor shoes, but at least they're waterproof.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Shoes/Boots/moryachok_flops.rsi

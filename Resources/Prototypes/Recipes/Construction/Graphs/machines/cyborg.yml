@@ -5,18 +5,6 @@
   - node: start
     entity: CyborgEndoskeleton
     edges:
-
-    # empty the parts via prying
-    - to: start
-      conditions:
-      - !type:ContainerNotEmpty
-        container: part-container
-      steps:
-      - tool: Prying
-        doAfter: 0.5
-        completed:
-          - !type:EmptyAllContainers
-
     - to: cyborg
       steps:
       - assemblyId: generic
@@ -28,41 +16,14 @@
         store: part-container
 
       - component: Flash
-        name: flash
+        name: construction-graph-component-flash
         store: part-container
         icon:
           sprite: Objects/Weapons/Melee/flash.rsi
           state: flash
 
       - component: Flash
-        name: second flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - tool: Screwing
-        doAfter: 0.5
-    
-    - to: engineer
-      steps:
-      - assemblyId: engineer
-        guideString: borg-construction-guide-string
-
-      - material: Cable
-        amount: 1
-        doAfter: 1
-        store: part-container
-
-      - component: Flash
-        name: flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - component: Flash
-        name: second flash
+        name: construction-graph-component-second-flash
         store: part-container
         icon:
           sprite: Objects/Weapons/Melee/flash.rsi
@@ -71,137 +32,69 @@
       - tool: Screwing
         doAfter: 0.5
 
-    - to: janitor
-      steps:
-      - assemblyId: janitor
-        guideString: borg-construction-guide-string
-
-      - material: Cable
-        amount: 1
-        doAfter: 1
-        store: part-container
-
-      - component: Flash
-        name: flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - component: Flash
-        name: second flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - tool: Screwing
-        doAfter: 0.5
-
-    - to: medical
-      steps:
-      - assemblyId: medical
-        guideString: borg-construction-guide-string
-
-      - material: Cable
-        amount: 1
-        doAfter: 1
-        store: part-container
-
-      - component: Flash
-        name: flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - component: Flash
-        name: second flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - tool: Screwing
-        doAfter: 0.5
-
-    - to: mining
-      steps:
-      - assemblyId: mining
-        guideString: borg-construction-guide-string
-
-      - material: Cable
-        amount: 1
-        doAfter: 1
-        store: part-container
-
-      - component: Flash
-        name: flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - component: Flash
-        name: second flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - tool: Screwing
-        doAfter: 0.5
-
-    - to: service
-      steps:
-      - assemblyId: service
-        guideString: borg-construction-guide-string
-
-      - material: Cable
-        amount: 1
-        doAfter: 1
-        store: part-container
-
-      - component: Flash
-        name: flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - component: Flash
-        name: second flash
-        store: part-container
-        icon:
-          sprite: Objects/Weapons/Melee/flash.rsi
-          state: flash
-
-      - tool: Screwing
-        doAfter: 0.5
-
+#SS220 ClownMimecyborg start
   - node: cyborg
-    entity: BorgChassisGeneric
+    entity: BorgChassisSelectable
+    edges:
+    - to: clownmimecyborg
+      conditions:
+        - !type:ContainerEmpty
+          container: "borg_brain"
+      steps:
+        - material: Cloth
+          amount: 20
+          doAfter: 10
+        - tag: ClownRecorder
+          name: construction-graph-tag-clown-recorder
+          icon:
+            sprite: Objects/Fun/clownrecorder.rsi
+            state: icon
+          doAfter: 2
+        - tag: Baguette
+          name: construction-graph-tag-baguette
+          doAfter: 2
+        - tag: Crayon
+          name: construction-graph-tag-crayon
+          doAfter: 2
+        - tag: Crayon
+          name: construction-graph-tag-crayon
+          doAfter: 2
+        - tag: Crayon
+          name: construction-graph-tag-crayon
+          doAfter: 2
+        - tag: Crayon
+          name: construction-graph-tag-crayon
+          doAfter: 2
+        - tag: Crayon
+          name: construction-graph-tag-crayon
+          doAfter: 2
+        - tag: Crayon
+          name: construction-graph-tag-crayon
+          doAfter: 2
+        - tag: Crayon
+          name: construction-graph-tag-crayon
+          doAfter: 2
+        - tag: Crayon
+          name: construction-graph-tag-crayon
+          doAfter: 2
+        - tag: ClownMask
+          name: construction-graph-tag-clown-mask
+          doAfter: 2
+        - tag: ClownShoes
+          name: construction-graph-tag-clown-shoes
+          doAfter: 2
+        - tag: ClothingMaskMime
+          name: construction-graph-tag-mime-mask
+          doAfter: 2
+        - tag: BananiumHorn
+          name: construction-graph-tag-bananium-horn
+          doAfter: 2
+#SS220 ClownMimecyborg end
 
-  - node: engineer
-    entity: BorgChassisEngineer
+  - node: derelictcyborg
+    entity: BorgChassisDerelict
 
-  - node: janitor
-    entity: BorgChassisJanitor
-
-  - node: mining
-    entity: BorgChassisMining
-
-  - node: medical
-    entity: BorgChassisMedical
-
-  - node: service
-    entity: BorgChassisService
-
-  - node: syndicateassault
-    entity: BorgChassisSyndicateAssault
-
-  - node: syndicatemedical
-    entity: BorgChassisSyndicateMedical
-
-  - node: syndicatesaboteur
-    entity: BorgChassisSyndicateSaboteur
+#SS220 ClownMimecyborg start
+  - node: clownmimecyborg
+    entity: BorgChassisClownMime
+#SS220 ClownMimecyborg end

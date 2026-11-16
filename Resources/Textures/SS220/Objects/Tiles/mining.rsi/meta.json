@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by @Kit0vras (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name":"mining-dark-grating-middle"
+    },
+    {
+      "name":"mining-dark-grating-directed-horizontal"
+    },
+    {
+      "name":"mining-dark-grating-directed-vertical"
+    },
+    {
+      "name":"mining-dark-grating-horizontal"
+    },
+    {
+      "name":"mining-dark-grating-vertical"
+    },
+    {
+      "name":"mining-dark-mono"
+    },
+    {
+      "name":"mining-dark-reinforced"
+    },
+    {
+      "name":"mining-dark"
+    },
+    {
+      "name":"mining-grating-directed-horizontal"
+    },
+    {
+      "name":"mining-grating-horizontal"
+    },
+    {
+      "name":"mining-grating-vertical"
+    },
+    {
+      "name":"mining-grating-middle"
+    },
+    {
+      "name":"mining-light-grating-middle"
+    },
+    {
+      "name":"mining-light-grating-directed-horizontal"
+    },
+    {
+      "name":"mining-light-grating-directed-vertical"
+    },
+    {
+      "name":"mining-light-grating-horizontal"
+    },
+    {
+      "name":"mining-light-grating-vertical"
+    },
+    {
+      "name":"mining-light-mono"
+    },
+    {
+      "name":"mining-light-reinforced"
+    },
+    {
+      "name":"mining-light"
+    },
+    {
+      "name":"mining-mono"
+    },
+    {
+      "name":"mining-reinforced"
+    },
+    {
+      "name":"mining"
+    }
+  ]
+}

@@ -2,6 +2,34 @@ ent-ClothingHandsGlovesCentcom = перчатки Центком
     .desc = Пара высококачественных плотных перчаток Центком, украшенных золотым шитьём.
 ent-ClothingHandsGlovesNanotrasenDiplomat = белые перчатки Центком
     .desc = Пара высококачественных белых плотных перчаток, украшенных золотым шитьём, которые выдаются дипломату Nanotrasen.
-ent-ClothingHandsGlovesJanitorJR = черные резиновые перчатки
+
+ent-ClothingHandsGlovesSecTactical = тактические перчатки охраны
+    .desc = Пара чёрных перчаток с красными элементами, что дополнят ваш тактический образ. Не путать с боевыми.
+
+ent-ClothingHandsGlovesJanitorJR = резиновые перчатки JR
     .suffix = JR, За время в игре
-    .desc = Уборочные перчатки с дополнительным защитным покрытием. Они видели столь много... 
+    .desc = Уборочные перчатки с дополнительным защитным покрытием. Повидали больше, чем кажется.
+
+ent-ClothingHandsGlovesDQ = боевые перчатки Эскадрона Смерти
+    .suffix = Эскадрон Смерти, dq
+    .desc = Силовые перчатки, значительно усиливающие силу удара.
+
+ent-ClothingHandsGlovesPowergloveDisabler = силовые перчатки
+    .suffix = Оперативник СЩ
+    .desc = Силовые перчатки, модифицированные для точечного оглушения противника.
+ent-ActionTogglePowergloveDisabler = Переключить силовые перчатки
+    .desc = Включает или выключает силовые перчатки.
+toggle-powergloves-text = Переключить силовые перчатки
+
+ent-ClothingHandsStormgloves = штормглавы
+    .desc = Наша молодая раса верила, что ресурсы планеты бесконечны. Но когда мы осознали всю глубину заблуждений, было уже поздно.
+    .suffix = За емаг одеждомата
+
+ent-ClothingHandsWhiteGlovesCaptain = белые перчатки капитана
+    .desc = Дорогие перчатки ветерана флотской службы NT.
+ent-ClothingHandsGlovesOrangeJanitor = оранжевые резиновые перчатки
+    .desc = Высококачественные резиновые перчатки, скрипящие от желания сделать уборку!
+
+ent-ClothingHandsGlovesSpaceNinjaFake = { ent-ClothingHandsGlovesSpaceNinja }
+    .desc = Прорезиненные тканевые перчатки для косплея ниндзя.
+    .suffix = Поддельный

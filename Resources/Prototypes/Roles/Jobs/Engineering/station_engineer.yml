@@ -6,8 +6,9 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 18000 # SS220-RoleTime
+      time: 5h # SS220-RoleTime
   startingGear: StationEngineerGear
+  experienceDefinition: StationEngineerRoleExperience # SS220-experience
   icon: "JobIconStationEngineer"
   supervisors: job-supervisors-ce
   access:
@@ -26,3 +27,14 @@
   #storage:
     #back:
     #- Stuff
+
+- type: chameleonOutfit
+  id: StationEngineerChameleonOutfit
+  job: StationEngineer
+  equipment:
+    head: ClothingHeadHatHardhatYellow
+    mask: ClothingMaskBreath
+    neck: ClothingNeckScarfStripedOrange
+    outerClothing: ClothingOuterWinterEngi
+    gloves: ClothingHandsGlovesColorYellow
+    shoes: ClothingShoesBootsMag

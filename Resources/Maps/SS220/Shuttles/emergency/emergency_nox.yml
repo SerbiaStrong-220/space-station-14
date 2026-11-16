@@ -3659,8 +3659,6 @@ entities:
     - type: Transform
       pos: 5.5,13.5
       parent: 603
-    - type: GravityGenerator
-      charge: 100
     - type: PointLight
       radius: 175.75
 - proto: Grille

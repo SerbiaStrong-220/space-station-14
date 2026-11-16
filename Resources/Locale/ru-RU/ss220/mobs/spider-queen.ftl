@@ -2,7 +2,7 @@ spider-royQueen-name = Королева пауков
 spider-royQueen-desc = Ваша задача — построить максимально большой улей. Не позволяйте причинить вред потомству. Экипаж - ваша пища, устройте большой пир!
 
 spider-royDrone-name = Трутень королевы пауков
-spider-royDrone-desc = Ваша задача — защищать свою королеву всеми возможными способами. Вы её охрана и щит, не позволяйте причинять вред вашему потомству. Во имя паучей королевы!
+spider-royDrone-desc = Ваша задача — помогать королеве в расширении улья. Вы её основная рабочая сила. Во имя паучей королевы!
 
 spider-royHunter-name = Паучий охотник
 spider-royHunter-desc = Ваша задача — Добыть достаточно еды для своей королевы. Не позволяйте причинить вред потомству. Экипаж - ваша пища.
@@ -38,4 +38,4 @@ ent-MobSpiderShooter = паучий стрелок
 
 ent-MobSpiderLittle = маленький паучок
     .desc = { ent-MobSpiderQueen.desc }
-    .suffix = { ent-MobSpiderQueenn.suffix }
+    .suffix = { ent-MobSpiderQueen.suffix }

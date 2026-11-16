@@ -25,6 +25,39 @@ public sealed partial class SpiderTargetSpawnEvent : WorldTargetActionEvent
     public Vector2 Offset;
 
     /// <summary>
+    /// Is need to snap to grid
+    /// </summary>
+    [DataField]
+    public bool SnapToGrid = false;
+
+    /// <summary>
+    /// The cost of blood points to use this action
+    /// </summary>
+    [DataField]
+    public FixedPoint2 Cost = FixedPoint2.Zero;
+
+    /// <summary>
+    /// The time it takes before spawn entities
+    /// </summary>
+    [DataField]
+    public TimeSpan DoAfter = TimeSpan.Zero;
+}
+
+public sealed partial class SpiderTileSpawnActionEvent : WorldTargetActionEvent
+{
+    /// <summary>
+    /// A tile prototype to spawn
+    /// </summary>
+    [DataField(required: true)]
+    public string Prototype;
+
+    /// <summary>
+    /// A tile prototype to spawn in space
+    /// </summary>
+    [DataField]
+    public string? InSpacePrototype;
+
+    /// <summary>
     /// The cost of blood points to use this action
     /// </summary>
     [DataField]
@@ -62,6 +95,12 @@ public sealed partial class SpiderNearbySpawnEvent : InstantActionEvent
     public Vector2 Offset;
 
     /// <summary>
+    /// Is need to snap to grid
+    /// </summary>
+    [DataField]
+    public bool SnapToGrid = true;
+
+    /// <summary>
     /// The cost of blood points to use this action
     /// </summary>
     [DataField]
@@ -97,6 +136,35 @@ public sealed partial class SpiderSpawnDoAfterEvent : SimpleDoAfterEvent
     /// Set to 0,0 to have them spawn on the same tile.
     /// </summary>
     public Vector2 Offset;
+
+    /// <summary>
+    /// Is need to snap to grid
+    /// </summary>
+    public bool SnapToGrid;
+
+    /// <summary>
+    /// The cost of blood points to use this action
+    /// </summary>
+    public FixedPoint2 Cost = FixedPoint2.Zero;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class SpiderTileSpawnDoAfterEvent : SimpleDoAfterEvent
+{
+    /// <summary>
+    /// A tile prototype to spawn
+    /// </summary>
+    public string Prototype;
+
+    /// <summary>
+    /// A tile prototype to spawn in space
+    /// </summary>
+    public string? InSpacePrototype;
+
+    /// <summary>
+    /// The coordinates of the location that the user targeted.
+    /// </summary>
+    public NetCoordinates TargetCoordinates;
 
     /// <summary>
     /// The cost of blood points to use this action

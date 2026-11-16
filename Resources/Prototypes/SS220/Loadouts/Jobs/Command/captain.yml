@@ -7,6 +7,25 @@
       !type:RoleTimeRequirement
       role: JobCaptain
       time: 540000 #250 часов, форма для самых лучших
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: CaptainSeniorCloakShoulder
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobCaptain
+      time: 1080000 # 300 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: CapOfficerCutlass
@@ -16,6 +35,25 @@
       !type:RoleTimeRequirement
       role: JobCaptain
       time: 363600 # 101 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: CaptainCloakShoulder
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobCaptain
+      time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout
@@ -102,6 +140,22 @@
   equipment:
     neck: ClothingNeckWhiteMantleCap
 
+- type: loadout
+  id: CaptainShoulderMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainCloakShoulder
+  equipment:
+    neck: ClothingNeckMantleCapShoulder
+
+- type: loadout
+  id: CaptainWhiteShoulderMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSeniorCloakShoulder
+  equipment:
+    neck: ClothingNeckWhiteMantleCapShoulder
+
 # Back
 - type: loadout
   id: CaptainWhiteBackpack
@@ -143,6 +197,11 @@
     proto: CaptainSenior
   equipment:
     outerClothing: ClothingOuterWhiteCoatCaptain
+
+- type: loadout
+  id: CaptainCoat
+  equipment:
+    outerClothing: ClothingOuterCoatCaptain
 
 - type: loadout
   id: CaptainWhiteWintercoat

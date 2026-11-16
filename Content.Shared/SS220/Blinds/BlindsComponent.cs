@@ -8,19 +8,19 @@ namespace Content.Shared.SS220.Blinds;
 [RegisterComponent]
 public sealed partial class BlindsComponent : Component
 {
-    [DataField("isOpen"), ViewVariables(VVAccess.ReadOnly)]
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
     public bool IsOpen = true;
 
-    [DataField("openCloseDuration"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float OpenCloseDuration = 1f;
 
-    [DataField("closedRsiStatePostfix"), ViewVariables(VVAccess.ReadOnly)]
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
     public string ClosedRsiStatePostfix = "_closed";
 
-    [DataField("openSound")]
+    [DataField]
     public SoundSpecifier OpenSound = new SoundPathSpecifier("/Audio/SS220/Blinds/open.ogg");
 
-    [DataField("closeSound")]
+    [DataField]
     public SoundSpecifier CloseSound = new SoundPathSpecifier("/Audio/SS220/Blinds/close.ogg");
 }
 

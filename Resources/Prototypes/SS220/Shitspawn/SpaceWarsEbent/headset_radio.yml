@@ -1,0 +1,55 @@
+- type: entity
+  parent: ClothingHeadsetIAA
+  id: ClothingHeadsetNanotrasenForces
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Тактическая гарнитура "Страж-2570"
+  description: Вершина корпоративной разработки в области личной защиты и связи.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionNanotrasenOperative
+  - type: ActivatableUI
+    key: enum.HeadsetKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.HeadsetKey.Key:
+        type: HeadsetBoundUserInterface
+
+- type: entity
+  parent: ClothingHeadsetNanotrasenForces
+  id: ClothingHeadsetFrequencyNanotrasenForces
+  suffix: Shitspawn, Ebent, Space Wars
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionOnlyFrequencyNanotrasenOperative
+
+- type: entity
+  parent: ClothingHeadsetAltSyndicate
+  id: ClothingHeadsetSyndicateForces
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Тактическая гарнитура "Гром"
+  description: Средство связи и огневой поддержки для штурмовых групп и диверсантов.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionSyndicateOperative
+  - type: ActivatableUI
+    key: enum.HeadsetKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.HeadsetKey.Key:
+        type: HeadsetBoundUserInterface
+
+- type: entity
+  parent: ClothingHeadsetSyndicateForces
+  id: ClothingHeadsetFrequencySyndicateForces
+  suffix: Shitspawn, Ebent, Space Wars
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionOnlyFrequencySyndicateOperative

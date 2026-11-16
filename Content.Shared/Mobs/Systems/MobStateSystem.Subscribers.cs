@@ -1,7 +1,9 @@
 ﻿using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
 using Content.Shared.CombatMode.Pacification;
+using Content.Shared.Damage;
 using Content.Shared.Damage.ForceSay;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Emoting;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
@@ -13,6 +15,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Pointing;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Speech;
+using Content.Shared.SS220.Telepathy;
 using Content.Shared.Standing;
 using Content.Shared.Strip.Components;
 using Content.Shared.Throwing;
@@ -32,6 +35,7 @@ public partial class MobStateSystem
         SubscribeLocalEvent<MobStateComponent, ConsciousAttemptEvent>(CheckConcious);
         SubscribeLocalEvent<MobStateComponent, ThrowAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, SpeakAttemptEvent>(OnSpeakAttempt);
+        SubscribeLocalEvent<MobStateComponent, TelepathySendAttemptEvent>(OnTelepathyAttempt); // SS220 Block telepathy on death
         SubscribeLocalEvent<MobStateComponent, IsEquippingAttemptEvent>(OnEquipAttempt);
         SubscribeLocalEvent<MobStateComponent, EmoteAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, IsUnequippingAttemptEvent>(OnUnequipAttempt);
@@ -44,6 +48,7 @@ public partial class MobStateSystem
         SubscribeLocalEvent<MobStateComponent, TryingToSleepEvent>(OnSleepAttempt);
         SubscribeLocalEvent<MobStateComponent, CombatModeShouldHandInteractEvent>(OnCombatModeShouldHandInteract);
         SubscribeLocalEvent<MobStateComponent, AttemptPacifiedAttackEvent>(OnAttemptPacifiedAttack);
+        SubscribeLocalEvent<MobStateComponent, DamageModifyEvent>(OnDamageModify);
 
         SubscribeLocalEvent<MobStateComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
     }
@@ -54,6 +59,13 @@ public partial class MobStateSystem
         // Shouldn't the interaction have already been blocked by a general interaction check?
         if (args.User == ent.Owner && IsIncapacitated(ent))
             args.Cancelled = true;
+    }
+
+    private void Down(EntityUid target)
+    {
+        _standing.Down(target);
+        var ev = new DropHandItemsEvent();
+        RaiseLocalEvent(target, ref ev);
     }
 
     private void CheckConcious(Entity<MobStateComponent> ent, ref ConsciousAttemptEvent args)
@@ -100,23 +112,33 @@ public partial class MobStateSystem
         switch (state)
         {
             case MobState.Alive:
+            {
                 _standing.Stand(target);
                 _appearance.SetData(target, MobStateVisuals.State, MobState.Alive);
                 break;
+            }
             case MobState.Critical:
-                _standing.Down(target);
+            {
+                Down(target);
                 _appearance.SetData(target, MobStateVisuals.State, MobState.Critical);
                 break;
+            }
             case MobState.Dead:
+            {
                 EnsureComp<CollisionWakeComponent>(target);
-                _standing.Down(target);
+                Down(target);
                 _appearance.SetData(target, MobStateVisuals.State, MobState.Dead);
                 break;
+            }
             case MobState.Invalid:
+            {
                 //unused;
                 break;
+            }
             default:
+            {
                 throw new NotImplementedException();
+            }
         }
     }
 
@@ -148,6 +170,19 @@ public partial class MobStateSystem
         CheckAct(uid, component, args);
     }
 
+    // SS220 Block telepathy on death begin
+    private void OnTelepathyAttempt(Entity<MobStateComponent> entity, ref TelepathySendAttemptEvent args)
+    {
+        switch (entity.Comp.CurrentState)
+        {
+            case MobState.Dead:
+            case MobState.Critical:
+                args.Cancelled = true;
+                break;
+        }
+    }
+    // SS220 Block telepathy on death end
+
     private void CheckAct(EntityUid target, MobStateComponent component, CancellableEntityEventArgs args)
     {
         switch (component.CurrentState)
@@ -162,14 +197,14 @@ public partial class MobStateSystem
     private void OnEquipAttempt(EntityUid target, MobStateComponent component, IsEquippingAttemptEvent args)
     {
         // is this a self-equip, or are they being stripped?
-        if (args.Equipee == target)
+        if (args.User == target)
             CheckAct(target, component, args);
     }
 
     private void OnUnequipAttempt(EntityUid target, MobStateComponent component, IsUnequippingAttemptEvent args)
     {
         // is this a self-equip, or are they being stripped?
-        if (args.Unequipee == target)
+        if (args.User == target)
             CheckAct(target, component, args);
     }
 
@@ -184,6 +219,11 @@ public partial class MobStateSystem
     private void OnAttemptPacifiedAttack(Entity<MobStateComponent> ent, ref AttemptPacifiedAttackEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnDamageModify(Entity<MobStateComponent> ent, ref DamageModifyEvent args)
+    {
+        args.Damage *= _damageable.UniversalMobDamageModifier;
     }
 
     #endregion

@@ -5,7 +5,6 @@ using Content.Shared.Eui;
 using Content.Shared.Ghost.Roles;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
-using Robust.Shared.Utility;
 
 namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
 {
@@ -58,11 +57,13 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             };
         }
 
-        public override void Opened()
-        {
-            base.Opened();
-            _window.OpenCentered();
-        }
+        // ss220 add verb for ghost role start
+        // public override void Opened()
+        // {
+        //     base.Opened();
+        //     _window.OpenCentered();
+        // }
+        // ss220 add verb for ghost role end
 
         public override void Closed()
         {
@@ -75,8 +76,35 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
         {
             base.HandleState(state);
 
+            // ss220 add verb for ghost role start
+            if (state is GhostRoleRuleEuiState ghostRoleState)
+            {
+                _windowRules = new GhostRoleRulesWindow(ghostRoleState.Rules,
+                    _ =>
+                    {
+                        SendMessage(new RequestGhostRoleMessage(ghostRoleState.Identifier));
+                        Closed();
+                    });
+
+                _windowRules.OpenCentered();
+                return;
+            }
+            // ss220 add verb for ghost role end
+
             if (state is not GhostRolesEuiState ghostState)
                 return;
+
+            // ss220 add verb for ghost role start
+            if (!_window.IsOpen)
+                _window.OpenCentered();
+            // ss220 add verb for ghost role end
+
+            // We must save BodyVisible state, so all Collapsible boxes will not close
+            // on adding new ghost role.
+            // Save the current state of each Collapsible box being visible or not
+            _window.SaveCollapsibleBoxesStates();
+
+            // Clearing the container before adding new roles
             _window.ClearEntries();
 
             var entityManager = IoCManager.Resolve<IEntityManager>();
@@ -84,28 +112,35 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             var spriteSystem = sysManager.GetEntitySystem<SpriteSystem>();
             var requirementsManager = IoCManager.Resolve<JobRequirementsManager>();
 
+            // Grouping roles
             var groupedRoles = ghostState.GhostRoles.GroupBy(
-                role => (role.Name, role.Description, role.Requirements));
+                role => (
+                    role.Name,
+                    role.Description,
+                    //  Check the prototypes for role requirements and bans
+                    requirementsManager.IsAllowed(role.RolePrototypes.Item1, role.RolePrototypes.Item2, null, out var reason),
+                    reason));
+
+            // Add a new entry for each role group
             foreach (var group in groupedRoles)
             {
+                var reason = group.Key.reason;
                 var name = group.Key.Name;
                 var description = group.Key.Description;
-                bool hasAccess = true;
-                FormattedMessage? reason;
+                var prototypesAllowed = group.Key.Item3;
 
-                if (!requirementsManager.CheckRoleRequirements(group.Key.Requirements, null, out reason))
-                {
-                    hasAccess = false;
-                }
-
-                _window.AddEntry(name, description, hasAccess, reason, group, spriteSystem);
+                // Adding a new role
+                _window.AddEntry(name, description, prototypesAllowed, reason, group, spriteSystem);
             }
+            // SS220 fix for merging role list end
 
+            // Restore the Collapsible box state if it is saved
+            _window.RestoreCollapsibleBoxesStates();
+
+            // Close the rules window if it is no longer needed
             var closeRulesWindow = ghostState.GhostRoles.All(role => role.Identifier != _windowRulesId);
             if (closeRulesWindow)
-            {
                 _windowRules?.Close();
-            }
         }
     }
 }

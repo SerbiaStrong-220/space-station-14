@@ -1,3 +1,6 @@
+using Content.Shared.Body;
+using Content.Shared.Dataset;
+using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
@@ -6,7 +9,7 @@ using Content.Shared.Roles;
 
 namespace Content.Shared.Humanoid.Prototypes;
 
-[Prototype("species")]
+[Prototype]
 public sealed partial class SpeciesPrototype : IPrototype
 {
     /// <summary>
@@ -35,18 +38,6 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField(required: true)]
     public bool RoundStart { get; private set; } = false;
 
-    // The below two are to avoid fetching information about the species from the entity
-    // prototype.
-
-    // This one here is a utility field, and is meant to *avoid* having to duplicate
-    // the massive SpriteComponent found in every species.
-    // Species implementors can just override SpriteComponent if they want a custom
-    // sprite layout, and leave this null. Keep in mind that this will disable
-    // sprite accessories.
-
-    [DataField("sprites")]
-    public string SpriteSet { get; private set; } = default!;
-
     /// <summary>
     ///     Default skin tone for this species. This applies for non-human skin tones.
     /// </summary>
@@ -59,12 +50,6 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public int DefaultHumanSkinTone { get; private set; } = 20;
-
-    /// <summary>
-    ///     The limit of body markings that you can place on this species.
-    /// </summary>
-    [DataField("markingLimits")]
-    public string MarkingPoints { get; private set; } = default!;
 
     /// <summary>
     ///     Humanoid species variant used by this entity.
@@ -82,20 +67,23 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// Method of skin coloration used by the species.
     /// </summary>
     [DataField(required: true)]
-    public HumanoidSkinColor SkinColoration { get; private set; }
+    public ProtoId<SkinColorationPrototype> SkinColoration { get; private set; }
 
     [DataField]
-    public string MaleFirstNames { get; private set; } = "names_first_male";
+    public ProtoId<LocalizedDatasetPrototype> MaleFirstNames { get; private set; } = "NamesFirstMale";
 
     [DataField]
-    public string FemaleFirstNames { get; private set; } = "names_first_female";
+    public ProtoId<LocalizedDatasetPrototype> FemaleFirstNames { get; private set; } = "NamesFirstFemale";
 
-    // Corvax-LastnameGender-Start: Split lastname field by gender
-    [DataField]
-    public string MaleLastNames { get; private set; } = "names_last_male";
+    // Corvax-LastnameGender-Start: Split lastname field by genderr
+    //[DataField]
+    //public ProtoId<LocalizedDatasetPrototype> LastNames { get; private set; } = "NamesLast";
 
     [DataField]
-    public string FemaleLastNames { get; private set; } = "names_last_female";
+    public ProtoId<LocalizedDatasetPrototype> MaleLastNames { get; private set; } = "NamesHumanLastMale";
+
+    [DataField]
+    public ProtoId<LocalizedDatasetPrototype> FemaleLastNames { get; private set; } = "NamesHumanLastFemale";
     // Corvax-LastnameGender-End
 
     [DataField]
@@ -137,8 +125,21 @@ public sealed partial class SpeciesPrototype : IPrototype
     public string ButtScanTexture = "/Textures/SS220/Interface/Butts/human.png";
 
     //SS220 Species-Job-Requirement
-    [DataField(customTypeSerializer: typeof(DictionarySerializer<string, string[]>))]
-    public Dictionary<string, string[]> BlockedJobsByAccessor { get; } = new();
+    [DataField]
+    public Dictionary<string, string[]> BlockedJobsByAccessor { get; set; } = new();
+
+    //ss220 add species loadout start
+    [DataField]
+    public Dictionary<string, List<string>> StartingGear { get; set; } = new();
+
+    [DataField]
+    public List<string> BlacklistJobsForStartingGear = new();
+    //ss220 add species loadout end
+
+    //SS220-IPCnaming begin
+    [DataField]
+    public bool LatinNamesAllowed { get; private set; }
+    //SS220-IPCnaming end
 }
 
 public enum SpeciesNaming : byte

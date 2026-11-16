@@ -9,20 +9,11 @@ namespace Content.Shared.SS220.Store;
 [Serializable, NetSerializable]
 public sealed partial class InsertCurrencyDoAfterEvent : DoAfterEvent
 {
-    // SERIALIZATION FUCKERY DOWN THERE
-    /// <summary>
-    /// Used to store EntityUid of currncy to avoid using Entity<CurrencyCompoenent?>, cuz it's server-side only.
-    /// </summary>
-    [NonSerialized]
-    public EntityUid Currency;
+    public NetEntity? TargetOverride;
 
-    [NonSerialized]
-    public Entity<StoreComponent?> Store;
-
-    public InsertCurrencyDoAfterEvent(EntityUid currency, Entity<StoreComponent?> store)
+    public InsertCurrencyDoAfterEvent(NetEntity? targetOverride)
     {
-        Currency = currency;
-        Store = store;
+        TargetOverride = targetOverride;
     }
 
     public override DoAfterEvent Clone() => this;

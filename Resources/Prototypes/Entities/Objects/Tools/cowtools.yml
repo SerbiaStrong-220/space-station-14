@@ -86,7 +86,8 @@
     damage:
       types:
         Blunt: 1
-        Stamina: 5
+  - type: StaminaDamageOnHit
+    damage: 5 #have you ever been hit with a plastic bat? that shit hurts
   - type: Tool
     qualities:
     - Prying
@@ -138,6 +139,11 @@
     layers:
     - state: milkalyzer
   - type: GasAnalyzer
+  - type: ActivatableUI
+    inHandsOnly: true
+    singleUser: true
+    requireActiveHand: false
+    key: enum.GasAnalyzerUiKey.Key
   - type: UserInterface
     interfaces:
       enum.GasAnalyzerUiKey.Key:
@@ -166,12 +172,14 @@
   suffix: Filled
   parent: CowToolbox
   components:
-  - type: StorageFill
-    contents:
-    - id: Haycutters
-    - id: Moodriver
-    - id: Wronch
-    - id: Cowbar
-    - id: Mooltitool
-    - id: Cowelder
-    - id: Milkalyzer
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Haycutters
+        - id: Moodriver
+        - id: Wronch
+        - id: Cowbar
+        - id: Mooltitool
+        - id: Cowelder
+        - id: Milkalyzer

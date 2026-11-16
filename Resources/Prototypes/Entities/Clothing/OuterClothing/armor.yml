@@ -1,17 +1,19 @@
 # Numbers for armor here largely taken from /tg/.
-# NOTE: Half of the kind of armor you're probably thinking of is in vests.yml. These should probably be merged some day.
+# armor.yml covers both armored vests (e.g. not just cosmetic) and armor that covers multiple bodyparts/limbs
 
-#Basic armor vest
+
+#Basic armor vest for inheritance
 - type: entity
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing]
-  id: ClothingOuterArmorBasic
+  abstract: true
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
+  id: ClothingOuterArmorBase
   name: armor vest
   description: A standard Type I armored vest that provides decent protection against most types of damage.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/security.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security.rsi #SS220 BugFix
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/security.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security.rsi #SS220 BugFix
   - type: Armor #Based on /tg/ but slightly compensated to fit the fact that armor stacks in SS14.
     modifiers:
       coefficients:
@@ -22,21 +24,30 @@
   - type: ExplosionResistance
     damageCoefficient: 0.90
 
-#Alternate / slim basic armor vest
+#Standard armor vest, allowed for security only
 - type: entity
-  parent: ClothingOuterArmorBasic
+  parent: [ BaseSecurityContraband, ClothingOuterArmorBase ]
+  id: ClothingOuterArmorBasic
+  components:
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+#Alternate / slim basic armor vest, allowed for security and bartenders
+- type: entity
+  parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBasic ]
   id: ClothingOuterArmorBasicSlim
   name: armor vest
   suffix: slim
   description: A slim Type I armored vest that provides decent protection against most types of damage.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/security_slim.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security_slim.rsi #SS220-updated
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/security_slim.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security_slim.rsi #SS220-updated
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSecurityContraband]
   id: ClothingOuterArmorRiot
   name: riot suit
   description: A suit of semi-flexible polycarbonate body armor with heavy padding to protect against melee attacks. Perfect for fighting delinquents around the station.
@@ -99,7 +110,158 @@
     reflectProb: 0.25 # SS220 zones reb
     reflects:
       - Energy
+    reflectingInHands: false
 
+#Detective's vest
+- type: entity
+  parent: [ClothingOuterArmorBasic, BaseSecurityContraband]
+  id: ClothingOuterVestDetective
+  name: detective's vest
+  description: A hard-boiled private investigator's armored vest.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Vests/detvest.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Vests/detvest.rsi
+
+- type: entity
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
+  id: ClothingOuterArmorBaseCarapace
+  abstract: true
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6
+        Heat: 0.5
+        Caustic: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.65
+  - type: GroupExamine
+
+- type: entity
+  parent: [ClothingOuterArmorBaseCarapace, BaseCommandContraband]
+  id: ClothingOuterArmorCaptainCarapace
+  name: captain's carapace
+  description: An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to the station's finest.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: [ClothingOuterArmorBaseCarapace, BaseCentcommContraband]
+  id: ClothingOuterArmorCentcommCarapace
+  name: centcomm carapace
+  description: An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to centcomm officials and agents.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Armor/centcomm_carapace.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Armor/centcomm_carapace.rsi
+
+#Web vest
+- type: entity
+  parent: [ClothingOuterArmorBase, ClothingOuterStorageBase, BaseSyndicateContraband]
+  id: ClothingOuterVestWeb
+  name: web vest
+  description: A synthetic armor vest. This one has added webbing and ballistic plates.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Vests/webvest.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Vests/webvest.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6 #ballistic plates = better protection
+        Slash: 0.6
+        Piercing: 0.7 # ss220 - post upstream - syndie web vest tweak
+        Heat: 0.9
+  - type: StaticPrice
+    price: 1500
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
+
+#Elite web vest
+- type: entity
+  parent: [ClothingOuterArmorBase, ClothingOuterStorageBase, BaseSyndicateContraband]
+  id: ClothingOuterVestWebElite
+  name: elite web vest
+  description: A synthetic armor vest. This one has added webbing and heat resistant fibers.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Vests/elitevest.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Vests/elitevest.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6 #SS220 new armor
+        Heat: 0.3
+        Radiation: 0.5
+        Caustic: 0.5
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.55 #SS220 stamina resist for elite vest to 45%
+  # SS220 add stamina resistance end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
+  - type: ExplosionResistance
+    damageCoefficient: 0.7 #SS220 new armor
+  - type: FireProtection
+    reduction: 0.6 #SS220 new armor
+  - type: StaticPrice
+    price: 2500
+
+#Mercenary web vest
+- type: entity
+  parent: [ BaseMajorContraband, ClothingOuterVestWeb] #web vest so it should have some pockets for ammo
+  id: ClothingOuterVestWebMerc
+  name: mercenary web vest
+  description: A high-quality armored vest made from a hard synthetic material. It's surprisingly flexible and light, despite formidable armor plating.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Vests/mercwebvest.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Vests/mercwebvest.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7 #slightly better overall protection but slightly worse than bulletproof armor against bullets seems sensible
+        Slash: 0.7
+        Piercing: 0.5
+        Heat: 0.7 #SS220 new armor
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
+
+# Armor covering multiple body parts including limbs
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
   id: ClothingOuterArmorRaid
@@ -130,19 +292,25 @@
         Piercing: 0.35
         Heat: 0.35
         Caustic: 0.5
-        Stamina: 0.3 #SS220 stamina resist fix
+        Radiation: 0.85 #ss220 raid suit rework
   - type: ExplosionResistance
     damageCoefficient: 0.35
+  - type: StaminaResistance
+    damageCoefficient: 0.3 #SS220 stamina resist fix
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 1 #ss220 raid suit rework
+    sprintModifier: 0.95 #ss220 raid suit rework
   #Shoulder mounted flashlight
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:
       - state: equipped-OUTERCLOTHING-light
         shader: unshaded
+      outerClothing-vox:
+      - state: equipped-OUTERCLOTHING-light-vox
+        shader: unshaded
+  - type: ItemTogglePointLight
   - type: Appearance
   - type: HandheldLight
     addPrefix: false
@@ -170,15 +338,34 @@
         id: blinking
         interpolate: Nearest
         maxDuration: 1.0
-        minValue: 0.1
-        maxValue: 2.0
+        startValue: 0.1
+        endValue: 2.0
         isLooped: true
   - type: Battery
     maxCharge: 600
     startingCharge: 600
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 2
+  - type: Item
+    size: Normal
+  #ss220 raid suit rework begin
+  - type: TemperatureProtection
+    heatingCoefficient: 0.15
+    coolingCoefficient: 0.15
+  - type: FireProtection
+    reduction: 0.4
+  - type: NeedleProtection # ss220 needleprotection
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
+  #ss220 raid suit rework end
 
 - type: entity
   parent: [ ClothingOuterBaseLarge,  AllowSuitStorageClothing ]
@@ -195,7 +382,7 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.6
+        Piercing: 0.5
         Heat: 0.5
   - type: GroupExamine
 
@@ -267,33 +454,7 @@
     sprite: Clothing/OuterClothing/Armor/magusred.rsi
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
-  id: ClothingOuterArmorCaptainCarapace
-  name: "captain's carapace"
-  description: "An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to the station's finest."
-  components:
-  - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi
-  - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.6
-        Heat: 0.5
-        Caustic: 0.9
-  - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
-  - type: HeldSpeedModifier
-  - type: ExplosionResistance
-    damageCoefficient: 0.65
-  - type: GroupExamine
-
-- type: entity
-  parent: [ ClothingOuterBaseLarge,  AllowSuitStorageClothing ]
+  parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
   id: ClothingOuterArmorChangeling
   name: chitinous armor
   description: Inflates the changeling's body into an all-consuming chitinous mass of armor.
@@ -311,7 +472,7 @@
         Heat: 0.9
         Radiation: 0.8
   - type: ClothingSpeedModifier
-    walkModifier: 0.7
+    walkModifier: 0.65
     sprintModifier: 0.65
   - type: HeldSpeedModifier
   - type: ExplosionResistance
@@ -338,6 +499,7 @@
         Piercing: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.8
+    sprintModifier: 0.8
   - type: HeldSpeedModifier
   - type: ExplosionResistance
     damageCoefficient: 0.4
@@ -369,3 +531,20 @@
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 
+- type: entity
+  parent: ClothingOuterArmorBase
+  id: CardArmour
+  name: cardboard armour
+  description: A medieval chestpiece built from cardboard.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Armor/card_armour.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Armor/card_armour.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+  - type: Construction
+    graph: cardArmour
+    node: cardarmour

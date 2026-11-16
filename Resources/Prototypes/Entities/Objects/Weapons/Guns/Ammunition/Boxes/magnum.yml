@@ -19,15 +19,24 @@
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/magnum.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 3 #SS220-FixAmmoSprite
+    steps: 4
     zeroVisible: false
   - type: Appearance
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/ammobox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/ammobox_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 # Boxes
 - type: entity
   parent: BaseMagazineBoxMagnum
   id: MagazineBoxMagnum
   name: ammunition box (.45 magnum)
+  description: A cardboard box of .45 magnum rounds. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnum
@@ -35,13 +44,14 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   parent: BaseMagazineBoxMagnum
   id: MagazineBoxMagnumPractice
   name: ammunition box (.45 magnum practice)
+  description: A cardboard box of .45 magnum rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumPractice
@@ -49,7 +59,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: practice
 
@@ -57,6 +67,7 @@
   id: MagazineBoxMagnumIncendiary
   parent: BaseMagazineBoxMagnum
   name: ammunition box (.45 magnum incendiary)
+  description: A cardboard box of .45 magnum rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumIncendiary
@@ -64,7 +75,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: incendiary
 
@@ -72,6 +83,7 @@
   id: MagazineBoxMagnumUranium
   parent: BaseMagazineBoxMagnum
   name: ammunition box (.45 magnum uranium)
+  description: A cardboard box of .45 magnum rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumUranium
@@ -79,7 +91,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: uranium
 
@@ -87,6 +99,7 @@
   id: MagazineBoxMagnumAP
   parent: BaseMagazineBoxMagnum
   name: ammunition box (.45 magnum armor-piercing)
+  description: A cardboard box of .45 magnum rounds. Intended to hold specialized armor-piercing ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumAP
@@ -94,6 +107,6 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: piercing

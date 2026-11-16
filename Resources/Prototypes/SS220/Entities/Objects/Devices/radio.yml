@@ -11,17 +11,19 @@
     toggleOnInteract: false
   - type: RadioSpeaker
     toggleOnInteract: false
+  - type: Language
+    knowAllLanguages: true # Used as transponder
   - type: Speech
     speechVerb: Robotic
   - type: HandheldRadio
   - type: Sprite
-    sprite: Objects/Devices/communication.rsi
+    sprite: SS220/Objects/Devices/radio_handheld.rsi
     layers:
     - state: walkietalkie
     - state: walkietalkie-on
     state: walkietalkie
   - type: Item
-    sprite: Objects/Devices/communication.rsi
+    sprite: SS220/Objects/Devices/radio_handheld.rsi
     heldPrefix: walkietalkie
   - type: Tag
     tags:
@@ -43,3 +45,23 @@
   - type: HandheldRadio
     lowerBorder: 1582
     upperBorder: 1591
+
+- type: entity
+  name: Centсom radio
+  description: A handy CentCom radio.
+  parent: [ RadioHandheld ]
+  id: RadioHandheldCentcom
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: CentCom
+  - type: RadioSpeaker
+    channels:
+    - CentCom
+  - type: Sprite
+    sprite: SS220/Objects/Devices/ntradio.rsi
+    layers:
+    - state: NTradio
+    state: NTradio
+  - type: Item
+    sprite: SS220/Objects/Devices/ntradio.rsi
+    heldPrefix: walkietalkie

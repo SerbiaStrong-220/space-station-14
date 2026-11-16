@@ -1,8 +1,8 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Corvax.CCCVars;
-using Content.Shared.SS220.AnnounceTTS;
-using Robust.Shared.Utility;
+using Content.Shared.SS220.TTS;
+using Robust.Shared.Audio;
 
 namespace Content.Client.SS220.TTS;
 
@@ -10,33 +10,35 @@ namespace Content.Client.SS220.TTS;
 public sealed partial class TTSSystem : EntitySystem
 {
     internal float VolumeAnnounce = 0f;
-    internal EntityUid AnnouncementUid = EntityUid.Invalid;
+    internal EntityUid AnnouncementUid = EntityUid.FirstUid;
 
     private void InitializeAnnounces()
     {
         _cfg.OnValueChanged(CCCVars.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged, true);
-        SubscribeNetworkEvent<AnnounceTTSEvent>(OnAnnounceTTSPlay);
+        _ttsManager.PlayAnnounceTtsReceived += OnAnnounceTtsPlay;
     }
 
     private void ShutdownAnnounces()
     {
         _cfg.UnsubValueChanged(CCCVars.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged);
+        _ttsManager.PlayAnnounceTtsReceived -= OnAnnounceTtsPlay;
     }
 
-    private void OnAnnounceTTSPlay(AnnounceTTSEvent ev)
+    private void OnAnnounceTtsPlay(MsgPlayAnnounceTts msg)
     {
         // Early creation of entities can lead to crashes, so we postpone it as much as possible
         if (AnnouncementUid == EntityUid.Invalid)
             AnnouncementUid = Spawn(null);
 
-        var finalParams = ev.AnnouncementParams.WithVolume(VolumeAnnounce);
+        var volume = AdjustVolume(TtsKind.Announce);
 
-        // Play announcement sound
-        var announcementSoundPath = new ResPath(ev.AnnouncementSound);
-        PlaySoundQueued(AnnouncementUid, announcementSoundPath, finalParams, true);
+        var audioParams = AudioParams.Default.WithVolume(volume);
 
-        // Play announcement itself
-        PlayTTSBytes(ev.Data, AnnouncementUid, finalParams, true);
+        if ((msg.PlayAudioMask & AudioWithTTSPlayOperation.PlayAudio) == AudioWithTTSPlayOperation.PlayAudio)
+            PlaySoundQueued(AnnouncementUid, msg.AnnouncementSound, new(TtsKind.Announce, ""), true);
+
+        if ((msg.PlayAudioMask & AudioWithTTSPlayOperation.PlayTTS) == AudioWithTTSPlayOperation.PlayTTS)
+            QueuePlayTts(msg.Data, new(TtsKind.Announce, ""), AnnouncementUid, audioParams, true);
     }
 
     private void OnTtsAnnounceVolumeChanged(float volume)

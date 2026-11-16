@@ -4,18 +4,17 @@ using Content.Shared.Interaction;
 using Content.Shared.SS220.Blinds;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 
 namespace Content.Server.SS220.Blinds;
 
-public sealed class BlindsSystem : EntitySystem
+public sealed partial class BlindsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly OccluderSystem _occluder = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private OccluderSystem _occluder = default!;
 
     private const int MaxConnectedBlinds = 64;
 
@@ -28,10 +27,10 @@ public sealed class BlindsSystem : EntitySystem
         SubscribeLocalEvent<BlindsComponent, ActivateInWorldEvent>(OnActivated);
     }
 
-    public void SetOpen(EntityUid uid, BlindsComponent component, bool state)
+    public void SetOpen(Entity<BlindsComponent> ent, bool state)
     {
-        component.IsOpen = state;
-        UpdateState(uid, component);
+        ent.Comp.IsOpen = state;
+        UpdateState(ent);
     }
 
     private void TrySetOpenAnchoredEntities(bool state, AnchoredEntitiesEnumerator entities, HashSet<EntityUid> processedEntities)
@@ -54,45 +53,45 @@ public sealed class BlindsSystem : EntitySystem
         if (!TryComp<BlindsComponent>(uid, out var component))
             return;
 
-        SetOpen(uid, component, state);
+        SetOpen((uid, component), state);
 
         processedEntities ??= new HashSet<EntityUid>();
         processedEntities.Add(uid);
 
         // Make connected blinds change their state as well
-        if (!TryComp<TransformComponent>(uid, out var transform))
+        if (!TryComp(uid, out TransformComponent? transform))
             return;
 
-        if (transform.Anchored && TryComp<MapGridComponent>(transform.GridUid, out var grid)) //SS220-upstream-merge
+        if (transform.Anchored && transform.GridUid is { Valid: true } gridUid && TryComp<MapGridComponent>(gridUid, out var gridComp)) //SS220-upstream-merge
         {
-            var pos = grid.CoordinatesToTile(transform.Coordinates);
+            var pos = _map.CoordinatesToTile(gridUid, gridComp, transform.Coordinates);
 
-            TrySetOpenAnchoredEntities(component.IsOpen, grid.GetAnchoredEntitiesEnumerator(pos + new Vector2i(1, 0)), processedEntities);
-            TrySetOpenAnchoredEntities(component.IsOpen, grid.GetAnchoredEntitiesEnumerator(pos + new Vector2i(-1, 0)), processedEntities);
-            TrySetOpenAnchoredEntities(component.IsOpen, grid.GetAnchoredEntitiesEnumerator(pos + new Vector2i(0, 1)), processedEntities);
-            TrySetOpenAnchoredEntities(component.IsOpen, grid.GetAnchoredEntitiesEnumerator(pos + new Vector2i(0, -1)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(gridUid, gridComp, pos + new Vector2i(1, 0)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(gridUid, gridComp, pos + new Vector2i(-1, 0)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(gridUid, gridComp, pos + new Vector2i(0, 1)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(gridUid, gridComp, pos + new Vector2i(0, -1)), processedEntities);
         }
     }
 
-    private void OnInit(EntityUid uid, BlindsComponent component, ComponentInit args)
+    private void OnInit(Entity<BlindsComponent> ent, ref ComponentInit args)
     {
-        UpdateState(uid, component);
+        UpdateState(ent);
     }
 
-    private void UpdateState(EntityUid uid, BlindsComponent component)
+    private void UpdateState(Entity<BlindsComponent> ent)
     {
-        _appearance.SetData(uid, BlindsVisualState.State, component.IsOpen);
-        if (TryComp<OccluderComponent>(uid, out var occluder))
-            _occluder.SetEnabled(uid, !component.IsOpen, occluder);
+        _appearance.SetData(ent.Owner, BlindsVisualState.State, ent.Comp.IsOpen);
+        if (TryComp<OccluderComponent>(ent.Owner, out var occluder))
+            _occluder.SetEnabled(ent.Owner, !ent.Comp.IsOpen, occluder);
     }
 
-    private void OnActivated(EntityUid uid, BlindsComponent component, ActivateInWorldEvent args)
+    private void OnActivated(Entity<BlindsComponent> ent, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;
 
-        TrySetOpenAllConnected(uid, !component.IsOpen);
-        var soundToPlay = component.IsOpen ? component.OpenSound : component.CloseSound;
+        TrySetOpenAllConnected(ent.Owner, !ent.Comp.IsOpen);
+        var soundToPlay = ent.Comp.IsOpen ? ent.Comp.OpenSound : ent.Comp.CloseSound;
         _audio.PlayPvs(soundToPlay, args.User);
 
         args.Handled = true;

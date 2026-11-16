@@ -52,7 +52,7 @@ admin-note-editor-type-watchlist = Наблюдение
 admin-note-editor-type-server-ban = Сервер бан
 admin-note-editor-type-role-ban = Роль бан
 admin-note-editor-severity-select = Выбрать
-admin-note-editor-severity-none = Наблюдение
+admin-note-editor-severity-none = Похвала
 admin-note-editor-severity-low = Наблюдение
 admin-note-editor-severity-medium = Предупреждение
 admin-note-editor-severity-high = Бан
@@ -63,6 +63,14 @@ admin-note-editor-expiry-label-params = Истекает: { $date } (через 
 admin-note-editor-expiry-label-expired = Истёк
 admin-note-editor-expiry-placeholder = Укажите срок действия (yyyy-MM-dd HH:mm:ss)
 admin-note-editor-submit = Подтвердить
+# Time
+admin-note-button-minutes = Минут
+admin-note-button-hours = Часов
+admin-note-button-days = Дней
+admin-note-button-weeks = Недель
+admin-note-button-months = Месяцев
+admin-note-button-years = Лет
+admin-note-button-centuries = Веков
 admin-note-editor-submit-confirm = Вы уверены?
 # Watchlist and message login
 admin-notes-watchlist = Наблюдение над { $player }: { $message }
@@ -74,3 +82,7 @@ admin-remarks-command-error = Админ замечания были отклю�
 admin-remarks-title = Админ замечания
 # Misc
 system-user = [Система]
+
+admin-notes-stated-round = Раунд нарушения:
+
+admin-notes-stated-round-not-specified = не указан

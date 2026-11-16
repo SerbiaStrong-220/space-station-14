@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from TG Station, repo https://github.com/tgstation/tgstation",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+  	{
+	  "name": "default"
+	},
+    {
+      "name": "off"
+    },
+	{
+      "name": "on"
+    }
+  ]
+}

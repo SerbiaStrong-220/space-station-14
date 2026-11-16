@@ -12,6 +12,8 @@
       collection: MaleLaugh
     Cough:
       collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
     Yawn:
       collection: MaleYawn
     Sigh:
@@ -19,7 +21,7 @@
     Crying:
       collection: MaleCry
     Whistle:
-      collection: Whistles                                                                      
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:
@@ -48,16 +50,18 @@
       collection: FemaleLaugh
     Giggle:
       collection: FemaleLaugh
+    BloodCough:
+      collection: FemaleCoughs
     Cough:
-      collection: FemaleCoughs 
+      collection: FemaleCoughs
     Yawn:
-      collection: FemaleYawn  
+      collection: FemaleYawn
     Sigh:
       collection: FemaleSigh
     Crying:
       collection: FemaleCry
     Whistle:
-      collection: Whistles                           
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:
@@ -75,93 +79,7 @@
     CritGasp:
       collection: FemaleCritGasp
 # spo9k emote sounds end
-# Lanc emore sounds start
-- type: emoteSounds
-  id: MaleVulpkanin
-  params:
-   variation: 0.125
-   pitch: 0.75
-  sounds:
-    Growl:
-      collection: GrowlVulpin
-    Howl:
-      collection: HowlVulpin
-    Bark:
-      collection: BarkVulpin
-    Scream:
-      collection: MaleScreams
-    Laugh:
-      collection: MaleLaugh
-    Giggle:
-      collection: MaleGiggle
-      params:
-        volume: 2
-    Sigh:
-      collection: MaleSigh
-    Crying:
-      collection: MaleCry
-    Whistle:
-      collection: Whistles
-    Sneeze:
-      collection: MaleSneezes
-    Cough:
-      collection: MaleCoughs
-    Fart: 
-      collection: Fart
-      params:
-        volume: 2
-    DefaultDeathgasp:
-      collection: Deathgasp
-    Gasp:
-      collection: Gasp
-    CritGasp:
-      collection: MaleCritGasp
-    Weh:
-      collection: Weh
 
-- type: emoteSounds
-  id: FemaleVulpkanin
-  params:
-   variation: 0.125
-   pitch: 0.75
-  sounds:
-    Growl:
-      collection: GrowlVulpin
-    Howl:
-      collection: HowlVulpin
-    Bark:
-      collection: BarkVulpin
-    Scream:
-      collection: FemaleScreams
-    Laugh:
-      collection: FemaleLaugh
-    Giggle:
-      collection: FemaleGiggle
-      params:
-        volume: 2
-    Sigh:
-      collection: FemaleSigh
-    Crying:
-      collection: FemaleCry
-    Whistle:
-      collection: Whistles
-    Sneeze:
-      collection: FemaleSneezes
-    Cough:
-      collection: FemaleCoughs
-    Fart: 
-      collection: Fart
-      params:
-        volume: 2
-    DefaultDeathgasp:
-      collection: Deathgasp
-    Gasp:
-      collection: Gasp
-    CritGasp:
-      collection: FemaleCritGasp
-    Weh:
-      collection: Weh
-# Lanc emote sounds end
 # Cat emotes start
 - type: emoteSounds
   id: Cat
@@ -182,3 +100,151 @@
     Purr:
       collection: FelinidPurrs
 # Cat emotes end
+
+- type: emoteSounds
+  id: MaleTajaran
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FelinidScreams
+    Laugh:
+      collection: MaleLaugh
+    Giggle:
+      collection: MaleLaugh
+    Cough:
+      collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Hiss:
+      collection: FelinidHisses
+    Meow:
+      collection: TajaranMeows
+    Mrow:
+      collection: TajaranAnnoyedMeows
+    Mew:
+      collection: FelinidMews
+    Growl:
+      collection: FelinidGrowls
+    Purr:
+      collection: FelinidPurrs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+
+- type: emoteSounds
+  id: FemaleTajaran
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FelinidScreams
+    Laugh:
+      collection: FemaleLaugh
+    Giggle:
+      collection: FemaleLaugh
+    Cough:
+      collection: FemaleCoughs
+    BloodCough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
+    Hiss:
+      collection: FelinidHisses
+    Meow:
+      collection: TajaranMeows
+    Mrow:
+      collection: TajaranAnnoyedMeows
+    Mew:
+      collection: FelinidMews
+    Growl:
+      collection: FelinidGrowls
+    Purr:
+      collection: FelinidPurrs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: FemaleCritGasp
+
+- type: emoteSounds
+  id: MaleMoth
+  params:
+    variation: 0.125
+  sounds:
+    Buzz:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Scream:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Laugh:
+      path: /Audio/Voice/Moth/moth_laugh.ogg
+    Chitter:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+    Squeak:
+      path: /Audio/Voice/Moth/moth_squeak.ogg
+    Cough:
+      collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
+
+- type: emoteSounds
+  id: FemaleMoth
+  params:
+    variation: 0.125
+  sounds:
+    Buzz:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Scream:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Laugh:
+      path: /Audio/Voice/Moth/moth_laugh.ogg
+    Chitter:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+    Squeak:
+      path: /Audio/Voice/Moth/moth_squeak.ogg
+    Cough:
+      collection: FemaleCoughs
+    BloodCough:
+      collection: FemaleCoughs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: FemaleCritGasp
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn

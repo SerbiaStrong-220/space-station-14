@@ -1,9 +1,14 @@
 using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Ghost;
 
+/// <summary>
+/// Represents an observer ghost.
+/// Handles limiting interactions, using ghost abilities, ghost visibility, and ghost warping.
+/// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedGhostSystem))]
 [AutoGenerateComponentState(true)]
 public sealed partial class GhostComponent : Component
@@ -33,27 +38,19 @@ public sealed partial class GhostComponent : Component
     [DataField]
     public EntityUid? ToggleGhostHearingActionEntity;
 
-    // SS220 ADD GHOST HUD'S START
+    //ss220 add filter tts for ghost start
     [DataField]
-    public EntProtoId ToggleHudOnOtherAction = "ActionToggleHudOnOther";
+    public EntProtoId ToggleRadioChannelsUI = "ActionToggleRadioChannelsUI";
 
     [DataField]
-    public EntityUid? ToggleHudOnOtherActionEntity;
-    // SS220 ADD GHOST HUD'S END
+    public EntityUid? ToggleRadioChannelsUIEntity;
+    //ss220 add filter tts for ghost end
 
     [DataField]
     public EntProtoId BooAction = "ActionGhostBoo";
 
     [DataField, AutoNetworkedField]
     public EntityUid? BooActionEntity;
-
-    //SS-220 noDeath
-    [DataField]
-    public EntProtoId RespawnAction = "ActionRespawn";
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? RespawnActionEntity;
-    //SS-220 end noDeath
 
     //SS220-ghost-hats begin
     [DataField]
@@ -64,13 +61,27 @@ public sealed partial class GhostComponent : Component
     //SS220-ghost-hats end
     // End actions
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    /// <summary>
+    /// Time at which the player died and created this ghost.
+    /// Used to determine votekick eligibility.
+    /// </summary>
+    /// <remarks>
+    /// May not reflect actual time of death if this entity has been paused,
+    /// but will give an accurate length of time <i>since</i> death.
+    /// </remarks>
+    [DataField, AutoNetworkedField]
     public TimeSpan TimeOfDeath = TimeSpan.Zero;
 
-    [DataField("booRadius"), ViewVariables(VVAccess.ReadWrite)]
+    /// <summary>
+    /// Range of the Boo action.
+    /// </summary>
+    [DataField]
     public float BooRadius = 3;
 
-    [DataField("booMaxTargets"), ViewVariables(VVAccess.ReadWrite)]
+    /// <summary>
+    /// Maximum number of entities that can affected by the Boo action.
+    /// </summary>
+    [DataField]
     public int BooMaxTargets = 3;
 
     //SS220-ghost-hats begin
@@ -81,47 +92,43 @@ public sealed partial class GhostComponent : Component
     public bool BodyVisible = true;
     //SS220-ghost-hats end
 
-    // TODO: instead of this funny stuff just give it access and update in system dirtying when needed
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool CanGhostInteract
-    {
-        get => _canGhostInteract;
-        set
-        {
-            if (_canGhostInteract == value) return;
-            _canGhostInteract = value;
-            Dirty();
-        }
-    }
-
+    /// <summary>
+    /// Is this ghost allowed to interact with entities?
+    /// </summary>
+    /// <remarks>
+    /// Used to allow admins ghosts to interact with the world.
+    /// Changed by <see cref="SharedGhostSystem.SetCanGhostInteract"/>.
+    /// </remarks>
     [DataField("canInteract"), AutoNetworkedField]
-    private bool _canGhostInteract;
+    public bool CanGhostInteract;
 
     /// <summary>
-    ///     Changed by <see cref="SharedGhostSystem.SetCanReturnToBody"/>
+    /// Is this ghost player allowed to return to their original body?
     /// </summary>
-    // TODO MIRROR change this to use friend classes when thats merged
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool CanReturnToBody
-    {
-        get => _canReturnToBody;
-        set
-        {
-            if (_canReturnToBody == value) return;
-            _canReturnToBody = value;
-            Dirty();
-        }
-    }
+    /// <remarks>
+    /// Changed by <see cref="SharedGhostSystem.SetCanReturnToBody"/>.
+    /// </remarks>
+    [DataField, AutoNetworkedField]
+    public bool CanReturnToBody;
 
+    //SS220 colourful ghost begin
     /// <summary>
-    /// Ghost color
+    /// Networked tint of the ghost's body layer. Randomized on the server when left white.
     /// </summary>
-    /// <remarks>Used to allow admins to change ghost colors. Should be removed if the capability to edit existing sprite colors is ever added back.</remarks>
-    [DataField("color"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public Color color = Color.White;
+    /// <remarks>Also allows admins to change the color. Sprite transparency is applied separately.</remarks>
+    [DataField, AutoNetworkedField]
+    public Color Color = Color.White;
+    //SS220 colourful ghost end
+}
 
-    [DataField("canReturnToBody"), AutoNetworkedField]
-    private bool _canReturnToBody;
+/// <summary>
+/// Ghost sprites dependent on damage by the player body
+/// </summary>
+/// <remarks>Used to change a ghost sprite to better visually represent their cause of death</remarks>
+[Serializable, NetSerializable]
+public enum GhostVisuals : byte
+{
+    Damage
 }
 
 public sealed partial class ToggleFoVActionEvent : InstantActionEvent { }
@@ -139,5 +146,3 @@ public sealed partial class BooActionEvent : InstantActionEvent { }
 public sealed partial class RespawnActionEvent : InstantActionEvent { } //SS-220 noDeath
 
 public sealed partial class ToggleAGhostBodyVisualsActionEvent : InstantActionEvent { } //SS220-ghost-hats
-
-public sealed partial class ToggleHudOnOtherActionEvent : InstantActionEvent { } //SS220 ADD GHOST HUD'S

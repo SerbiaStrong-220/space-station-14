@@ -21,6 +21,8 @@ job-name-hop = глава персонала
 job-name-captain = капитан
 job-name-serviceworker = сервисный работник
 job-name-centcomoff = представитель Центком
+#job-name-cburn = агент карантинной службы Центком
+#job-name-deathsquad = агент Центком
 job-name-reporter = репортёр
 job-name-musician = музыкант
 job-name-librarian = библиотекарь
@@ -33,6 +35,7 @@ job-name-botanist = ботаник
 job-name-bartender = бармен
 job-name-passenger = пассажир
 job-name-salvagespec = утилизатор
+job-name-station-ai = станционный ИИ
 job-name-qm = квартирмейстер
 job-name-cargotech = грузчик
 job-name-chef = шеф-повар
@@ -45,7 +48,6 @@ job-name-ertmedic = медик ОБР
 job-name-ertjanitor = уборщик ОБР
 job-name-boxer = боксёр
 job-name-zookeeper = зоотехник
-job-name-blueshield = офицер "Синий щит"
 job-name-senior-engineer = ведущий инженер
 job-name-senior-researcher = ведущий учёный
 job-name-senior-physician = ведущий врач
@@ -62,12 +64,15 @@ job-name-syndicate = синдикат
 job-name-unknown = неизвестно
 job-name-virologist = вирусолог
 job-name-zombie = зомби
+# Job titles
+job-title-visitor = посетитель
+job-title-cluwne = клувень
+job-title-universal = универсальная
 # Role timers - Make these alphabetical or I cut you
 JobAtmosphericTechnician = атмосферный техник
 JobBartender = бармен
 JobBorg = киборг
 JobBotanist = ботаник
-JobBlueShield = офицер "Синий щит"
 JobCaptain = капитан
 JobCargoTechnician = грузчик
 JobCentralCommandOfficial = представитель Центком
@@ -107,7 +112,30 @@ JobSecurityCadet = кадет СБ
 JobSecurityOfficer = офицер СБ
 JobServiceWorker = сервисный работник
 JobStationEngineer = инженер
+JobStationAi = станционный ИИ
 JobTechnicalAssistant = технический ассистент
 JobWarden = смотритель
 JobBoxer = боксёр
 JobZookeeper = зоотехник
+
+job-name-cburn = Офицер карантина ЦентКома
+
+job-name-centcommoff = Представитель ЦентКома
+
+job-name-cluwne = Клувень
+
+job-name-deathsquad = Эскадрон смерти
+
+job-name-ninja = Ниндзя
+
+job-name-syndicate-commander = Командир Синдиката
+
+job-name-syndicate-corpsman = Медик Синдиката
+
+job-name-syndicate-operative = Оперативник Синдиката
+
+job-name-pirate = Пират
+
+job-name-wizard = Волшебник
+
+JobVisitor = Посетитель

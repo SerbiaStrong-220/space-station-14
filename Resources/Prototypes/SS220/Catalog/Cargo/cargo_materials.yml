@@ -1,0 +1,11 @@
+# SS220-wood-and-plants-in-cargo-begin
+- type: cargoProduct
+  id: MaterialWoodPlanks
+  icon:
+    sprite: Objects/Materials/materials.rsi
+    state: wood_3
+  product: CrateMaterialCargoWood
+  cost: 3300
+  category: cargoproduct-category-name-materials
+  group: market
+# SS220-wood-and-plants-in-cargo-end

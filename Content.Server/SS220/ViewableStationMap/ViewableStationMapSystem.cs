@@ -1,12 +1,11 @@
-using Content.Server.GameTicking;
 using Content.Server.Station.Systems;
 using Content.Shared.SS220.ViewableStationMap;
 
 namespace Content.Server.SS220.ViewableStationMap;
 
-public sealed class ViewableStationMapSystem : EntitySystem
+public sealed partial class ViewableStationMapSystem : EntitySystem
 {
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
 
     public override void Initialize()
     {
@@ -14,14 +13,14 @@ public sealed class ViewableStationMapSystem : EntitySystem
         SubscribeLocalEvent<ViewableStationMapComponent, AnchorStateChangedEvent>(OnAnchored);
     }
 
-    private void OnAnchored(EntityUid entity, ViewableStationMapComponent component, ref AnchorStateChangedEvent args)
+    private void OnAnchored(Entity<ViewableStationMapComponent> ent, ref AnchorStateChangedEvent args)
     {
-        UpdateMap(entity, component);
+        UpdateMap(ent, ent.Comp);
     }
 
-    private void OnCompUiOpened(EntityUid entity, ViewableStationMapComponent component, BoundUIOpenedEvent args)
+    private void OnCompUiOpened(Entity<ViewableStationMapComponent> ent, ref BoundUIOpenedEvent args)
     {
-        UpdateMap(entity, component);
+        UpdateMap(ent, ent.Comp);
     }
 
     private void UpdateMap(EntityUid entity, ViewableStationMapComponent component)

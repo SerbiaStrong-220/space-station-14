@@ -7,9 +7,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/yellow1.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/yellow1.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -18,9 +18,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/yellow2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/yellow2.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -29,9 +29,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/yellow3.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/yellow3.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -40,9 +40,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/yellow4.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/yellow4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/yellow4.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -51,9 +51,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/red1.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/red1.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -62,9 +62,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/red2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/red2.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -73,9 +73,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/red3.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/red3.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -84,9 +84,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/red4.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/red4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/red4.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -95,9 +95,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/orange1.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/orange1.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -106,9 +106,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/orange2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/orange2.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -117,9 +117,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/orange3.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/orange3.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -128,9 +128,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/orange4.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/orange4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/orange4.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -139,9 +139,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/green1.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/green1.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -150,9 +150,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/green2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/green2.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -161,9 +161,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/green3.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/green3.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -172,9 +172,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/green4.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/green4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/green4.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -183,9 +183,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/gray1.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/gray1.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -194,9 +194,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/gray2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/gray2.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -205,9 +205,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/gray3.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/gray3.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -216,9 +216,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/gray4.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/gray4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/gray4.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -227,9 +227,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/blue1.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue1.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/blue1.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -238,9 +238,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/blue2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue2.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/blue2.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -249,9 +249,9 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/blue3.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue3.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/blue3.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -260,6 +260,6 @@
   description: Uniform for star travelers.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/blue4.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/STAR-TREK/Jumpskirt/blue4.rsi
+    sprite: SS220/Clothing/Uniforms/Other/STAR-TREK/Jumpskirt/blue4.rsi

@@ -6,3 +6,13 @@
   - adventure_core
   - sentrybot
   - fact_core
+
+- type: randomVoicesList
+  id: Demons
+  voices:
+  - arc_warden_dota_2
+  - enigma_dota_2
+  - nyx_assassin_dota_2
+  - shadow_fiend_dota_2
+  - broodmother_dota_2
+  - phantom_assassin_arcana_dota_2

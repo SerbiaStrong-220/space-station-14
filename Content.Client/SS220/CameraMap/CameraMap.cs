@@ -87,7 +87,7 @@ public sealed class CameraMap : PictureViewer.PictureViewer
 
         foreach (var (_, subnetCameras) in cameras)
         {
-            foreach (var (address, (name, position)) in subnetCameras)
+            foreach (var (address, (_, position)) in subnetCameras)
             {
                 if (!_cameraButtons.TryGetValue(address, out var button))
                 {

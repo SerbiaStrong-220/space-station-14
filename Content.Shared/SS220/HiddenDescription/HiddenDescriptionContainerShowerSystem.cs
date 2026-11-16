@@ -1,0 +1,33 @@
+// Original code by Corvax dev team, no specific for SS220 license
+
+using Content.Shared.Examine;
+using Robust.Shared.Containers;
+
+namespace Content.Shared.SS220.HiddenDescription;
+
+public sealed partial class HiddenDescriptionContainerShowerSystem : EntitySystem
+{
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHiddenDescriptionSystem _hiddenDescription = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<HiddenDescriptionContainerShowerComponent, ExaminedEvent>(OnExamine);
+    }
+
+    private void OnExamine(Entity<HiddenDescriptionContainerShowerComponent> entity, ref ExaminedEvent args)
+    {
+        foreach (var container in _container.GetAllContainers(entity.Owner))
+        {
+            foreach (var containedEntity in container.ContainedEntities)
+            {
+                if (TryComp<HiddenDescriptionComponent>(containedEntity, out var hiddenDescription))
+                {
+                    _hiddenDescription.PushExamineInformation(hiddenDescription, ref args);
+                }
+            }
+        }
+    }
+}

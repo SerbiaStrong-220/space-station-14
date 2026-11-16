@@ -4,19 +4,13 @@
   categories: [ HideSpawnMenu ]
   parent: BaseItem
   description: base soap for SS220 sprites.
+  abstract: true
   components:
   - type: Tag
     tags:
     - Soap
   - type: Sprite
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
-    layers:
-    - state: snot-4
-      map: ["enum.SolutionContainerLayers.Fill"]
-  - type: SolutionContainerVisuals
-    maxFillLevels: 4
-    fillBaseName: snot-
-    changeColor: false
   - type: Appearance
   - type: Item
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
@@ -64,7 +58,7 @@
   - type: FlavorProfile
     flavors:
       - clean
-  - type: Food
+  - type: Edible
     solution: soap
   - type: BadFood
   - type: CleansForensics
@@ -93,14 +87,13 @@
     fillBaseName: snot-
     changeColor: false
   - type: Appearance
-  - type: ClusterGrenade
-    fillPrototype: snotlet
-    maxGrenadesCount: 30
-    grenadeTriggerIntervalMax: 0
-    grenadeTriggerIntervalMin: 0
-    baseTriggerDelay: 60
-    randomSpread: true
+  - type: ScatteringGrenade
+    fillPrototype: Snotlet
+    capacity: 30
+    delayBeforeTriggerContents: 60
+    randomDistance: true
     velocity: 3
+    triggerKey: trigger
   - type: Item
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
     storedRotation: -90
@@ -133,17 +126,17 @@
 
 - type: entity
   name: snotlet
-  id: snotlet
+  id: Snotlet
   categories: [ HideSpawnMenu ]
   parent: SS220Soap
   description: A tiny piece of snots.
   components:
   - type: Sprite
-    layers:
-    - state: snotlet
+    state: snotlet
   - type: Slippery
-    paralyzeTime: 1.5
-    launchForwardsMultiplier: 1.5
+    slipData:
+      knockdownTime: 1.5
+      launchForwardsMultiplier: 1.5
   - type: SolutionContainerManager
     solutions:
       soap:
@@ -181,3 +174,24 @@
       path: "/Audio/Effects/Fluids/splat.ogg"
       params:
         volume: -20
+
+- type: entity
+  parent: SS220Soap
+  id: SoapJR
+  name: soap JR
+  description: It cleanses the blood so well!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    layers:
+    - state: JR-4
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: JR-
+    changeColor: false
+  - type: Item
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    storedRotation: -90
+    heldPrefix: JR
+

@@ -1,7 +1,11 @@
-﻿using Content.Shared.Emag.Systems;
+using Content.Shared.Emag.Systems;
+using Content.Shared.Mind;
+using Content.Shared.Overlays;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Laws.Components;
+using Content.Shared.Stunnable;
 using Content.Shared.Wires;
+using Robust.Shared.Audio;
 
 namespace Content.Shared.Silicons.Laws;
 
@@ -11,22 +15,29 @@ namespace Content.Shared.Silicons.Laws;
 public abstract partial class SharedSiliconLawSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
+    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         InitializeUpdater();
         SubscribeLocalEvent<EmagSiliconLawComponent, GotEmaggedEvent>(OnGotEmagged);
-        SubscribeLocalEvent<EmagSiliconLawComponent, OnAttemptEmagEvent>(OnAttemptEmag);
     }
 
-    protected virtual void OnAttemptEmag(EntityUid uid, EmagSiliconLawComponent component, ref OnAttemptEmagEvent args)
+    private void OnGotEmagged(EntityUid uid, EmagSiliconLawComponent component, ref GotEmaggedEvent args)
     {
-        //prevent self emagging
+        if (!_emag.CompareFlag(args.Type, EmagType.Interaction))
+            return;
+
+        if (_emag.CheckFlag(uid, EmagType.Interaction))
+            return;
+
+        // prevent self-emagging
         if (uid == args.UserUid)
         {
             _popup.PopupClient(Loc.GetString("law-emag-cannot-emag-self"), uid, args.UserUid);
-            args.Handled = true;
             return;
         }
 
@@ -35,14 +46,63 @@ public abstract partial class SharedSiliconLawSystem : EntitySystem
             !panel.Open)
         {
             _popup.PopupClient(Loc.GetString("law-emag-require-panel"), uid, args.UserUid);
-            args.Handled = true;
+            return;
         }
 
-    }
+        var ev = new SiliconEmaggedEvent(args.UserUid);
+        RaiseLocalEvent(uid, ref ev);
+        if (ev.Cancelled)
+            return;
 
-    protected virtual void OnGotEmagged(EntityUid uid, EmagSiliconLawComponent component, ref GotEmaggedEvent args)
-    {
         component.OwnerName = Name(args.UserUid);
+
+        NotifyLawsChanged(uid, component.EmaggedSound);
+        if(_mind.TryGetMind(uid, out var mindId, out _))
+            EnsureSubvertedSiliconRole(mindId);
+
+        _stunSystem.TryUpdateParalyzeDuration(uid, component.StunTime);
+
         args.Handled = true;
     }
+
+    public virtual void NotifyLawsChanged(EntityUid uid, SoundSpecifier? cue = null)
+    {
+
+    }
+
+    protected virtual void EnsureSubvertedSiliconRole(EntityUid mindId)
+    {
+        if (TryComp<MindComponent>(mindId, out var mind))
+        {
+            var owner = mind.OwnedEntity;
+            if (TryComp<ShowCrewIconsComponent>(owner, out var crewIconComp))
+            {
+                crewIconComp.UncertainCrewBorder = true;
+                Dirty(owner.Value, crewIconComp);
+            }
+        }
+    }
+
+    protected virtual void RemoveSubvertedSiliconRole(EntityUid mindId)
+    {
+        if (TryComp<MindComponent>(mindId, out var mind))
+        {
+            var owner = mind.OwnedEntity;
+            // SS220 MalfAI begin
+            if (owner is { } owned
+                && !TerminatingOrDeleted(owned)
+                && TryComp<ShowCrewIconsComponent>(owned, out var crewIconComp))
+            {
+                crewIconComp.UncertainCrewBorder = false;
+                Dirty(owner.Value, crewIconComp);
+            }
+            // SS220 MalfAI end
+        }
+    }
+}
+
+[ByRefEvent]
+public record struct SiliconEmaggedEvent(EntityUid user)
+{
+    public bool Cancelled;
 }

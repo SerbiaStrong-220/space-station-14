@@ -1,5 +1,6 @@
 // Original code github.com/CM-14 Licence MIT, all edits under EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.IgnoreLightVision.Components;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.IgnoreLightVision;
@@ -9,7 +10,6 @@ namespace Content.Shared.SS220.IgnoreLightVision;
 /// </summary>
 public abstract class SharedAddIgnoreLightVisionOverlaySystem<T> : EntitySystem where T : AddIgnoreLightVisionOverlayComponent
 {
-
     public override void Initialize()
     {
         SubscribeLocalEvent<T, MapInitEvent>(OnMapInit);
@@ -41,6 +41,7 @@ public abstract class SharedAddIgnoreLightVisionOverlaySystem<T> : EntitySystem 
     {
         VisionChanged((ent.Owner, ent.Comp));
     }
+
     protected virtual void OnComponentRemove(Entity<T> ent, ref ComponentRemove args)
     {
         VisionRemoved((ent.Owner, ent.Comp));

@@ -1,0 +1,42 @@
+- type: constructionGraph
+  id: SingingFish
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: SingingFishNode
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: WoodPlank
+              amount: 5
+              doAfter: 4
+            - material: Cable
+              amount: 10
+              doAfter: 4
+            - material: SpaceCarpTooth
+              amount: 5
+              doAfter: 5
+            - material: Plasma
+              amount: 10
+              doAfter: 4
+            - material: Cloth
+              amount: 5
+              doAfter: 5
+
+    - node: SingingFishNode
+      entity: SingingFish
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: MaterialWoodPlank
+                amount: 2
+          - !type:SpawnPrototype
+                prototype: FoodMeatFish
+                amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Prying
+              doAfter: 5

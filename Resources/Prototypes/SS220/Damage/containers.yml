@@ -1,0 +1,17 @@
+- type: damageContainer
+  id: Forcefield
+  supportedTypes:
+  - Forcefield
+
+- type: damageContainer
+  id: Invulnerable
+
+- type: damageContainer
+  id: Ipc
+  supportedGroups:
+  - Brute
+  supportedTypes:
+  - Heat
+  - Shock
+  - Caustic
+

@@ -1,0 +1,15 @@
+ent-MobGiantFly = Веспия
+    .suffix = Злая
+    .desc = Это - боевая оса. Она НЕ опыляет. Она НЕ делает мёд. Это НЕ пчела. Это чертова Веспия.
+ent-MobGiantFlyGhostRole = Веспия
+    .desc = { ent-MobGiantFly.desc }
+    .suffix = Роль Призрака
+ent-MobSecDog = охранная собака
+    .desc = Как ни странно, эта свинья на самом деле собака.
+ent-MobCrocodile = крокодил
+    .desc = Он не кусается, наверное.
+ent-MobCrocodileAngry = крокодил
+    .suffix = Злой
+    .desc = Он кусается, наверное.
+ent-MobAlbinoCrocodile = альбино
+    .desc = Добрейшей души крокодил.

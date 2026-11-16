@@ -114,10 +114,10 @@
         {
             "name": "closed",
             "directions": 4
+        },
+        {
+            "name": "welded",
+            "directions": 1
         }
-    ],
-    "license": "CC-BY-SA-3.0",
-    "copyright": "by MIXnikita for SS220",
-    "version": 1
-
+    ]
 }

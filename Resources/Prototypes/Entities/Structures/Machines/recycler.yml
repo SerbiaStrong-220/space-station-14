@@ -64,11 +64,13 @@
     enabled: false
     scaleProcessSpeed: false #instant!
     minimumProcessDuration: 0
+    emagDuration: 300 #SS220-ReclaimerEmaggedTime
     whitelist:
       components:
       - PhysicalComposition
       - MobState
       - SpaceGarbage
+      - Delivery #ss220 made letters and packages recyclable
       tags:
       - Trash
       - Recyclable
@@ -108,3 +110,10 @@
     interactFailureString: petting-failure-generic
     interactSuccessSound:
       path: /Audio/Items/drill_hit.ogg
+  - type: SpookySpeaker
+    speakChance: 0.1
+    cooldown: 120
+    messageSet: SpookySpeakerMessagesRecycler
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: SyndieBorg

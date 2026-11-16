@@ -22,16 +22,50 @@
     rules:
     - id: Thief
       prob: 0.5
+    - id: SubWizard
+      prob: 0.05
+    - id: SubXenoborgs
+      prob: 0.05
 
-#SS220 survival minimum players begin
 - type: entity
-  categories: [ GameRules ]
   parent: BaseGameRule
-  id: SurvivalRule
+  id: SubGamemodesRuleNoWizard
   components:
-  - type: GameRule
-    minPlayers: 30
-#SS220 survival minimum players end
+  - type: SubGamemodes
+    rules:
+    - id: Thief
+      prob: 0.5
+    - id: SubXenoborgs
+      prob: 0.05
+
+- type: entity
+  parent: BaseGameRule
+  id: SubGamemodesRuleNoXenoborg
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: Thief
+      prob: 0.5
+    - id: SubWizard
+      prob: 0.05
+
+- type: entity
+  parent: BaseGameRule
+  id: SubGamemodesRuleNoWizardNoXenoborg
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: Thief
+      prob: 0.5
+
+- type: entity
+  parent: BaseGameRule
+  id: DummyNonAntagChance
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: DummyNonAntag
+      prob: 0.3
 
 - type: entity
   id: DeathMatch31
@@ -86,8 +120,9 @@
   components:
   - type: RandomMetadata #this generates the random operation name cuz it's cool.
     nameSegments:
-    - operationPrefix
-    - operationSuffix
+    - NamesOperationPrefix
+    - NamesOperationSuffix
+    nameFormat: name-format-nuclear-operation
   - type: NukeopsRule
   - type: RuleGrids
   - type: AntagSelection
@@ -104,7 +139,7 @@
   id: Nukeops
   components:
   - type: GameRule
-    minPlayers: 20
+    minPlayers: 25 # SS220 Nukeops ratio fix
   - type: LoadMapRule
     mapPath: /Maps/SS220/ss220-nukeoutpost.yml
   - type: AntagSelection
@@ -113,15 +148,23 @@
     - prefRoles: [ NukeopsCommander ]
       fallbackRoles: [ Nukeops, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsCommander
+      #ss220 ratio-fix bgn
+      max: 1
+      playerRatio: 1
+      #ss220 ratio-fix end
       startingGear: SyndicateCommanderGearFull
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: ExperienceAddition
+        definitionId: SyndicateCommanderRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
-        - nukeops-role-commander
-        - SyndicateNamesElite
+        - NamesSyndicateElite
+        nameFormat: name-format-nukie-commander
       - type: NpcFactionMember
         factions:
         - Syndicate
@@ -130,15 +173,23 @@
     - prefRoles: [ NukeopsMedic ]
       fallbackRoles: [ Nukeops, NukeopsCommander ]
       spawnerPrototype: SpawnPointNukeopsMedic
+      #ss220 ratio-fix bgn
+      max: 1
+      playerRatio: 1
+      #ss220 ratio-fix end
       startingGear: SyndicateOperativeMedicFull
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: ExperienceAddition
+        definitionId: SyndicateMedicRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
-        - nukeops-role-agent
-        - SyndicateNamesNormal
+        - NamesSyndicateNormal
+        nameFormat: name-format-nukie-agent
       - type: NpcFactionMember
         factions:
         - Syndicate
@@ -147,22 +198,29 @@
     - prefRoles: [ Nukeops ]
       fallbackRoles: [ NukeopsCommander, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsOperative
+      min: 0 # SS220 Nukeops ratio fix
       max: 3
-      playerRatio: 10
+      playerRatio: 23 # SS220 Nukeops ratio fix
       startingGear: SyndicateOperativeGearFull
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: ExperienceAddition
+        definitionId: SyndicateOperativeRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
-        - nukeops-role-operator
-        - SyndicateNamesNormal
+        - NamesSyndicateNormal
+        nameFormat: name-format-nukie-operator
       - type: NpcFactionMember
         factions:
         - Syndicate
       mindRoles:
       - MindRoleNukeops
+  - type: DynamicRuleCost
+    cost: 200
 
 - type: entity
   abstract: true
@@ -178,6 +236,8 @@
     maxDifficulty: 5
   - type: AntagSelection
     agentName: traitor-round-end-agent-name
+  - type: DynamicRuleCost
+    cost: 100
 
 - type: entity
   parent: BaseTraitorRule
@@ -189,16 +249,27 @@
       min: 240
       max: 420
   - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
     definitions:
     - prefRoles: [ Traitor ]
       max: 8
       playerRatio: 10
       blacklist:
         components:
+        - ArenaParticipant #SS220 prevent arena participants from getting antag roles
         - AntagImmune
-      lateJoinAdditional: true
+      lateJoinAdditional: true # ss220 traitor latejoin back
       mindRoles:
       - MindRoleTraitor
+      # SS220-experience-update-begin
+      components:
+      - type: TryAddExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges:
+            - SyndicateAgentKnowledge
+      # SS220-experience-update-end
 
 #- type: entity
 #  id: Sandbox
@@ -208,6 +279,79 @@
 #  - type: SandboxRule
 
 - type: entity
+  id: TraitorReinforcement
+  parent: BaseTraitorRule
+  components:
+  - type: TraitorRule
+    giveUplink: false
+    giveCodewords: false # It would actually give them a different set of codewords than the regular traitors, anyway
+    giveBriefing: false
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ Traitor ]
+      mindRoles:
+      - MindRoleTraitorReinforcement
+      # SS220-experience-update-begin
+      components:
+      - type: TryAddExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges:
+            - SyndicateAgentKnowledge
+      # SS220-experience-update-end
+  #ss220 reinforcement objective fix begin
+  - type: AntagRandomObjectives
+    enabled: false
+  #ss220 reinforcement objective fix end
+
+- type: entity
+  id: Changeling
+  parent: BaseGameRule
+  components:
+  - type: GameRule
+    minPlayers: 25
+  - type: AntagSelection
+    agentName: changeling-round-end-agent-name
+    selectionTime: IntraPlayerSpawn
+    definitions:
+    - prefRoles: [ Changeling ]
+      max: 3
+      playerRatio: 15
+      briefing:
+        text: changeling-role-greeting
+        color: Red
+        sound: /Audio/Ambience/Antag/changeling_start.ogg
+      components:
+      # SS220-experience-update-begin
+      - type: TryAddExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges: []
+      # SS220-experience-update-end
+      - type: ChangelingDevour
+      - type: ChangelingIdentity
+      - type: ChangelingTransform
+      - type: ActionGrant
+        actions:
+        - ActionChangelingStore
+      # TODO: Make it so the changeling gamerule changeling can inherit from the changeling store preset somehow
+      - type: Store
+        name: store-preset-name-changeling
+        categories:
+        - ChangelingAbilities
+        currencyWhitelist:
+        - ChangelingDNA
+        balance:
+          ChangelingDNA: 50
+      mindRoles:
+      - MindRoleChangeling
+  - type: AntagObjectives
+    objectives:
+    - ChangelingSurviveObjective
+
+- type: entity
   id: Revolutionary
   parent: BaseGameRule
   components:
@@ -215,6 +359,7 @@
     minPlayers: 15
   - type: RevolutionaryRule
   - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
     definitions:
     - prefRoles: [ HeadRev ]
       max: 3
@@ -225,16 +370,78 @@
         sound: "/Audio/Ambience/Antag/headrev_start.ogg"
       startingGear: HeadRevGear
       components:
+      # SS220-experience-update-begin
+      - type: TryAddExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges: []
+      # SS220-experience-update-end
       - type: Revolutionary
       - type: HeadRevolutionary
       mindRoles:
       - MindRoleHeadRevolutionary
+  - type: DynamicRuleCost
+    cost: 200
 
 - type: entity
   id: Secret
   parent: BaseGameRule
   components:
   - type: SecretRule
+
+- type: entity
+  abstract: true
+  parent: BaseGameRule
+  id: BaseWizardRule
+  components:
+  - type: AntagObjectives
+    objectives:
+    - WizardSurviveObjective
+    - WizardDemonstrateObjective
+  - type: LoadMapRule
+    mapPath: /Maps/Nonstations/wizardsden.yml
+  - type: RuleGrids
+  - type: AntagSelection
+  - type: AntagLoadProfileRule
+    speciesOverride: Human
+
+- type: entity
+  parent: BaseWizardRule
+  id: Wizard
+  components:
+  - type: GameRule
+    minPlayers: 30 # SS 220 Wiz Req 30 players min
+  - type: AntagSelection
+    agentName: wizard-round-end-name
+    selectionTime: PrePlayerSpawn
+    definitions:
+    - prefRoles: [ Wizard ]
+      max: 1
+      playerRatio: 1
+      spawnerPrototype: SpawnPointGhostWizard
+      roleLoadout:
+       - RoleSurvivalExtended
+      briefing:
+        text: wizard-role-greeting
+        color: Turquoise
+        # TODO: Need Wizard Start sound
+        #sound: "/Audio/Ambience/Antag/wizard_start.ogg"
+      startingGear: WizardBlueGear
+      # TODO: WizardComp as needed
+      components:
+      - type: NpcFactionMember
+        factions:
+        - Wizard
+      - type: RandomMetadata
+        nameSegments:
+        - NamesWizardFirst
+        - NamesWizardLast
+        nameFormat: name-format-wizard
+      mindRoles:
+      - MindRoleWizard
+  - type: DynamicRuleCost
+    cost: 150
 
 - type: entity
   id: Zombie
@@ -247,6 +454,7 @@
       max: 900
   - type: ZombieRule
   - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
     definitions:
     - prefRoles: [ InitialInfected ]
       max: 6
@@ -264,15 +472,71 @@
       - type: ZombifyOnDeath
       - type: IncurableZombie
       - type: InitialInfected
+      # Corvax-MRP
+      - type: NpcFactionMember
+        addFriendlyFactions:
+        - Zombie
+      # Corvax
       mindRoles:
       - MindRoleInitialInfected
+  - type: DynamicRuleCost
+    cost: 200
 
 - type: entity
-  id: EmergencyShuttleAutoCall
+  abstract: true
   parent: BaseGameRule
-  categories: [ GameRules ]
+  id: BaseXenoborgsRule
   components:
-  - type: EmergencyShuttleAutoCallRule
+  - type: XenoborgsRule
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/Shuttles/mothership.yml
+
+- type: entity
+  parent: BaseXenoborgsRule
+  id: Xenoborgs
+  components:
+  - type: GameRule
+    minPlayers: 30
+  - type: AntagMultipleRoleSpawner
+    antagRoleToPrototypes:
+      MothershipCore: [ MothershipCore ]
+      Xenoborg: [ XenoborgEngi, XenoborgHeavy, XenoborgScout, XenoborgStealth ]
+    pickAndTake: true
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn
+    definitions:
+    - prefRoles: [ MothershipCore ]
+      fallbackRoles: [ Xenoborg ]
+      spawnerPrototype: SpawnPointGhostRoleMothershipCore
+      mindRoles:
+      - MindRoleMothershipCore
+    - prefRoles: [ Xenoborg ]
+      fallbackRoles: [ MothershipCore ]
+      spawnerPrototype: SpawnPointGhostRoleXenoborg
+      mindRoles:
+      - MindRoleXenoborg
+      min: 4
+      max: 4
+  - type: DynamicRuleCost
+    cost: 200
+
+
+# This rule makes the chosen players unable to get other antag rules, as a way to prevent metagaming job rolls.
+# Put this before antags assigned to station jobs, but after non-job antags (NukeOps/Wiz).
+- type: entity
+  id: DummyNonAntag
+  parent: BaseGameRule
+  components:
+  - type: GameRule
+    minPlayers: 5
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn # Pre-selection before jobs; assignment doesn't really matter though, we only care about the pre-selection to block other antags.
+    removeUponFailedSpawn: false
+    definitions:
+    - prefRoles: [ InitialInfected, Traitor, Thief, HeadRev ]
+      max: 2
+      playerRatio: 30
 
 # event schedulers
 
@@ -285,25 +549,33 @@
       - !type:NestedSelector
         tableId: BasicAntagEventsTable
       - !type:NestedSelector
+        tableId: ModerateAntagEventsTable
+      - !type:NestedSelector
         tableId: CargoGiftsTable
       - !type:NestedSelector
         tableId: CalmPestEventsTable
       - !type:NestedSelector
         tableId: SpicyPestEventsTable
 
+- type: entityTable
+  id: DynamicGameRulesTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    children:
+    - !type:NestedSelector
+      tableId: BasicCalmEventsTable
+    - !type:NestedSelector
+      tableId: BasicAntagEventsTable
+    - !type:NestedSelector
+      tableId: CargoGiftsTable
+    - !type:NestedSelector
+      tableId: CalmPestEventsTable
+    - !type:NestedSelector
+      tableId: SpicyPestEventsTable
 
-# SS220-NoUnknownShuttles begin
-# - type: entityTable
-#   id: SpaceTrafficControlTable
-#   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
-#     children:
-#       - !type:NestedSelector
-#         tableId: UnknownShuttlesFriendlyTable
-#       - !type:NestedSelector
-#         tableId: UnknownShuttlesFreelanceTable
-#       - !type:NestedSelector
-#         tableId: UnknownShuttlesHostileTable
-# SS220-NoUnknownShuttles end
+- type: entityTable
+  id: SpaceTrafficControlTable
+  table: !type:NestedSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    tableId: UnknownShuttlesHostileTable
 
 - type: entity
   id: BasicStationEventScheduler
@@ -314,6 +586,14 @@
       tableId: BasicGameRulesTable
 
 - type: entity
+  id: DynamicStationEventScheduler # this isn't the dynamic mode, but rather the station event scheduler used for dynamic
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    scheduledGameRules: !type:NestedSelector
+      tableId: DynamicGameRulesTable
+
+- type: entity
   id: RampingStationEventScheduler
   parent: BaseGameRule
   components:
@@ -322,30 +602,34 @@
       tableId: BasicGameRulesTable
 
 # SS220-NoUnknownShuttles begin
-#- type: entity
-#  id: SpaceTrafficControlEventScheduler # iff we make a selector for EntityTables that can respect StationEventComp restrictions, or somehow impliment them otherwise in said tables,
-#  parent: BaseGameRule                  # we can remerge this with the other schedulers, but it will silently fail due to that limitation without a separate scheduler to balance atm.
-#  components:
-#  - type: BasicStationEventScheduler
-#    minimumTimeUntilFirstEvent: 2700 # 45 mins #shows up like half way through shift.
-#    minMaxEventTiming:
-#      min: 1200 # 20 mins
-#      max: 7200 # 120 mins # you probably arent getting a second visitor shuttle in one round, but it is possible.
-#    scheduledGameRules: !type:NestedSelector
-#      tableId: SpaceTrafficControlTable
-
 # - type: entity
-#   id: SpaceTrafficControlFriendlyEventScheduler
-#   parent: BaseGameRule
+#   id: SpaceTrafficControlEventScheduler # iff we make a selector for EntityTables that can respect StationEventComp restrictions, or somehow impliment them otherwise in said tables,
+#   parent: BaseGameRule                  # we can remerge this with the other schedulers, but it will silently fail due to that limitation without a separate scheduler to balance atm.
 #   components:
 #   - type: BasicStationEventScheduler
-#     minimumTimeUntilFirstEvent: 1200 # 20 mins
+#     minimumTimeUntilFirstEvent: 2700 # 45 mins #shows up like half way through shift.
+#     maximumSpanUntilFirstEvent: 900 # At longest takes an hour to show up.
 #     minMaxEventTiming:
-#       min: 600 # 10 mins
-#       max: 1800 # 30 mins
+#       min: 1200 # 20 mins
+#       max: 7200 # 120 mins # you probably arent getting a second visitor shuttle in one round, but it is possible.
 #     scheduledGameRules: !type:NestedSelector
-#       tableId: UnknownShuttlesFriendlyTable
-# SS220-NoUnknownShuttles begin end
+#       prob: 0.05 # Only 1 in 20 rounds...
+#       tableId: SpaceTrafficControlTable
+# SS220-NoUnknownShuttles end
+
+#SS220-LostSoulsRevive begin
+- type: entity
+  id: SpaceTrafficControlFriendlyEventScheduler
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    minimumTimeUntilFirstEvent: 2400 # 40 mins
+    minMaxEventTiming:
+      min: 3000 # 40 mins
+      max: 3600 # 60 mins
+    scheduledGameRules: !type:NestedSelector
+      tableId: UnknownShuttlesNeutralTable
+#SS220-LostSoulsRevive end
 
 # variation passes
 - type: entity
@@ -358,9 +642,22 @@
     - id: BasicTrashVariationPass
     - id: SolidWallRustingVariationPass
     - id: ReinforcedWallRustingVariationPass
+    - id: CutWireVariationPass
     - id: BasicPuddleMessVariationPass
       prob: 0.99
       orGroup: puddleMess
     - id: BloodbathPuddleMessVariationPass
       prob: 0.01
       orGroup: puddleMess
+    - id: SmugglerStashVariationPass
+      prob: 0.90
+    - id: SolarPanelDamageVariationPass
+    - id: SolarPanelEmptyVariationPass
+    - id: BasicDecalDirtVariationPass
+    - id: BasicDecalGraffitiVariationPass
+    - id: BasicDecalBurnsVariationPass
+      prob: 0.50
+      orGroup: monospaceDecals
+    - id: BasicDecalDirtMonospaceVariationPass
+      prob: 0.50
+      orGroup: monospaceDecals

@@ -21,14 +21,13 @@ public sealed class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IComponentFactory _compFact = default!;
 
     private string _ruleCompName = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        _ruleCompName = _compFact.GetComponentName(typeof(GameRuleComponent));
+        _ruleCompName = Factory.GetComponentName<GameRuleComponent>();
     }
 
     protected override void Added(EntityUid uid, SecretRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
@@ -78,6 +77,27 @@ public sealed class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
     {
         var options = _prototypeManager.Index(weights).Weights.ShallowClone();
         var players = GameTicker.ReadyPlayerCount();
+
+        // SS220 Cult Yogg begin
+        var optionsToRemove = new HashSet<string>();
+        foreach ((var presetId, _) in options)
+        {
+            if (_prototypeManager.TryIndex<GamePresetPrototype>(presetId, out var presetToCheck)
+                && players >= (presetToCheck.MinPlayers ?? 0)
+                && players <= (presetToCheck.MaxPlayers ?? int.MaxValue))
+            {
+                // Passed
+                continue;
+            }
+
+            // Will be removed
+            optionsToRemove.Add(presetId);
+        }
+        foreach (var presetId in optionsToRemove)
+        {
+            options.Remove(presetId);
+        }
+        // SS220 Cult Yogg end
 
         GamePresetPrototype? selectedPreset = null;
         var sum = options.Values.Sum();

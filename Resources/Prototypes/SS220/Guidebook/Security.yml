@@ -1,0 +1,65 @@
+- type: guideEntry
+  id: SS220SpaceLaw
+  name: guide-entry-ss220-spacelaw
+  priority: 1
+  text: "/ServerInfo/SS220/Guidebook/Security/SpaceLaw.xml"
+  children:
+  - SS220LethalForce
+  - SS220ArticleDirectory
+  - SS220Modificator
+
+- type: guideEntry
+  id: SS220LethalForce
+  name: guide-entry-ss220-lethal-force
+  priority: 2
+  text: "/ServerInfo/SS220/Guidebook/Security/LethalForce.xml"
+
+- type: guideEntry
+  id: SS220Modificator
+  name: guide-entry-ss220-modificator
+  priority: 3
+  text: "/ServerInfo/SS220/Guidebook/Security/Modificator.xml"
+
+# ТАБЛИЦА КЗ
+
+- type: guideEntry
+  id: SS220ArticleDirectory
+  name: guide-entry-ss220-articles
+  priority: 1
+  text: "/ServerInfo/SS220/Guidebook/Security/ArticleDirectory.xml"
+  children:
+  - SS2201xxArticle
+  - SS2202xxArticle
+  - SS2203xxArticle
+  - SS2204xxArticle
+  - SS2205xxArticle
+
+- type: guideEntry
+  id: SS2201xxArticle
+  name: guide-entry-ss220-1xx
+  priority: 1
+  text: "/ServerInfo/SS220/Guidebook/Security/1xx.xml"
+
+- type: guideEntry
+  id: SS2202xxArticle
+  name: guide-entry-ss220-2xx
+  priority: 2
+  text: "/ServerInfo/SS220/Guidebook/Security/2xx.xml"
+
+- type: guideEntry
+  id: SS2203xxArticle
+  name: guide-entry-ss220-3xx
+  priority: 3
+  text: "/ServerInfo/SS220/Guidebook/Security/3xx.xml"
+
+- type: guideEntry
+  id: SS2204xxArticle
+  name: guide-entry-ss220-4xx
+  priority: 4
+  text: "/ServerInfo/SS220/Guidebook/Security/4xx.xml"
+
+- type: guideEntry
+  id: SS2205xxArticle
+  name: guide-entry-ss220-5xx
+  priority: 5
+  text: "/ServerInfo/SS220/Guidebook/Security/5xx.xml"

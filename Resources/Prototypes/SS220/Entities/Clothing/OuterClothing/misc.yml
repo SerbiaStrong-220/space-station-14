@@ -26,44 +26,83 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterJacketChefWhite
-  name: белый жакет шеф-повара
-  description: Фартук-жакет, используемый первоклассным шеф-поваром.
+  name: white chef's jacket
+  description: A jacket-apron worn by high-class chefs.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_white.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_white.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_white.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterJacketChefGreen
-  name: зелёный жакет шеф-повара
-  description: Фартук-жакет, используемый первоклассным шеф-поваром.
+  name: green chef's jacket
+  description: A jacket-apron worn by high-class chefs.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_green.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_green.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_green.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_green.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterJacketChefBlack
-  name: чёрный жакет шеф-повара
-  description: Фартук-жакет, используемый первоклассным шеф-поваром.
+  name: black chef's jacket
+  description: A jacket-apron worn by high-class chefs.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_black.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_black.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_black.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_black.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterJacketChefNanotrasen
-  name: жакет заслуженного шеф-повара NanoTrasen
-  description: Фартук-жакет, используемый шеф-поваром высочайшего класса - его мастерство неоспоримо.
-  suffix: Не маппить, Сеньор
+  name: NanoTrasen distinguished chef's jacket
+  description: A jacket-apron used by top-tier chefs — their mastery is beyond question.
+  suffix: За время в игре, Сеньор
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_nt.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_nt.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterScarletTyphoon
+  name: the scarlet typhoon
+  description: You know, it's kind of awkward for me to introduce myself, but if you insist, then I'm a peaceful hunter chasing a mirage named love.
+  suffix: For emagg clothesmate
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
+
+- type: entity
+  parent: ClothingOuterBaseMedium
+  id: ClothingOuterArmorElectricity
+  suffix: Electrification armor
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/security.rsi #SS220 BugFix
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Armor/security.rsi #SS220 BugFix
+  - type: StaminaConvertArmor
+    damageType: Shock
+    damageCoefficient: 0.3
+    ignoredEffects:
+    - Paralyze
+
+- type: entity
+  parent: ClothingOuterHoodieChaplain
+  id: ClothingOuterHoodieFollower
+  name: follower's hoodie
+  description: Even closer to paradise.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/chaplain_follower.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/chaplain_follower.rsi

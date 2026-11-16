@@ -1,0 +1,7 @@
+- type: construction
+  id: PumpkinLantern
+  graph: PumpkinLanternCraft
+  startNode: start
+  targetNode: pumpkinLantern
+  category: construction-category-misc
+  objectType: Item

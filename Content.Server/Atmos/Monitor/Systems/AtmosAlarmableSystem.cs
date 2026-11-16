@@ -1,19 +1,19 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Atmos.Monitor.Components;
-using Content.Server.DeviceNetwork;
-using Content.Server.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Server.Power.Components;
 using Content.Shared.Atmos.Monitor;
 using Content.Shared.DeviceNetwork;
+using Content.Shared.DeviceNetwork.Events;
+using Content.Shared.SS220.MalfAI; // SS220 MalfAI
+using Content.Shared.Station;
 using Content.Shared.Power;
 using Content.Shared.Tag;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
+using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.Atmos.Monitor.Systems;
 
@@ -23,6 +23,7 @@ public sealed class AtmosAlarmableSystem : EntitySystem
     [Dependency] private readonly AudioSystem _audioSystem = default!;
     [Dependency] private readonly DeviceNetworkSystem _deviceNet = default!;
     [Dependency] private readonly AtmosDeviceNetworkSystem _atmosDevNetSystem = default!;
+    [Dependency] private SharedStationSystem _station = default!; // SS220 MalfAI
 
     /// <summary>
     ///     An alarm. Has three valid states: Normal, Warning, Danger.
@@ -43,6 +44,9 @@ public sealed class AtmosAlarmableSystem : EntitySystem
     public const string SyncAlerts = "atmos_alarmable_sync_alerts";
 
     public const string ResetAll = "atmos_alarmable_reset_all";
+
+    // SS220 MalfAI: fire alarm packets can still pass through thermal jamming.
+    private static readonly ProtoId<TagPrototype> FireAlarmTag = "FireAlarm";
 
     public override void Initialize()
     {
@@ -84,7 +88,15 @@ public sealed class AtmosAlarmableSystem : EntitySystem
     {
         if (component.IgnoreAlarms) return;
 
-        if (!EntityManager.TryGetComponent(uid, out DeviceNetworkComponent? netConn))
+        // SS220 MalfAI begin
+        if (Count<MalfAiThermalOverrideComponent>() > 0
+            && IsThermalJammed(uid)
+            && (!args.Data.TryGetValue(AlertSource, out HashSet<ProtoId<TagPrototype>>? jamSrc)
+                || !jamSrc.Contains(FireAlarmTag)))
+            return;
+        // SS220 MalfAI end
+
+        if (!TryComp(uid, out DeviceNetworkComponent? netConn))
             return;
 
         if (!args.Data.TryGetValue(DeviceNetworkConstants.Command, out string? cmd)
@@ -110,9 +122,9 @@ public sealed class AtmosAlarmableSystem : EntitySystem
                     break;
                 }
 
-                if (args.Data.TryGetValue(AlertTypes, out HashSet<AtmosMonitorThresholdType>? types) && component.MonitorAlertTypes != null)
+                if (args.Data.TryGetValue(AlertTypes, out AtmosMonitorThresholdTypeFlags types) && component.MonitorAlertTypes != AtmosMonitorThresholdTypeFlags.None)
                 {
-                    isValid = types.Any(type => component.MonitorAlertTypes.Contains(type));
+                    isValid = (types & component.MonitorAlertTypes) != 0;
                 }
 
                 if (!component.NetworkAlarmStates.ContainsKey(args.SenderAddress))
@@ -142,6 +154,9 @@ public sealed class AtmosAlarmableSystem : EntitySystem
 
                 break;
             case ResetAll:
+                // SS220 MalfAI: do not reset jammed fire alarms through the network.
+                if (HasComp<FireAlarmComponent>(uid) && IsThermalJammed(uid))
+                    break;
                 Reset(uid, component);
                 break;
             case SyncAlerts:
@@ -167,6 +182,14 @@ public sealed class AtmosAlarmableSystem : EntitySystem
                 break;
         }
     }
+
+    // SS220 MalfAI begin
+    public bool IsThermalJammed(EntityUid uid)
+    {
+        return _station.GetOwningStation(uid) is { } station
+            && HasComp<MalfAiThermalOverrideComponent>(station);
+    }
+    // SS220 MalfAI end
 
     private void TryUpdateAlert(EntityUid uid, AtmosAlarmType type, AtmosAlarmableComponent alarmable, bool sync = true)
     {
@@ -265,6 +288,18 @@ public sealed class AtmosAlarmableSystem : EntitySystem
 
             _deviceNet.QueuePacket(uid, null, payload);
         }
+    }
+
+    /// <summary>
+    /// Resets this alarm without changing the state of other devices on its network.
+    /// </summary>
+    public void ResetLocal(EntityUid uid, AtmosAlarmableComponent? alarmable = null)
+    {
+        if (!Resolve(uid, ref alarmable, false) || alarmable.LastAlarmState == AtmosAlarmType.Normal)
+            return;
+
+        alarmable.NetworkAlarmStates.Clear();
+        TryUpdateAlert(uid, AtmosAlarmType.Normal, alarmable, sync: false);
     }
 
     public void ResetAllOnNetwork(EntityUid uid, AtmosAlarmableComponent? alarmable = null)

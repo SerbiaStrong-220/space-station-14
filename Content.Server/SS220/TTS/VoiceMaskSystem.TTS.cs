@@ -1,14 +1,11 @@
 using Content.Server.Speech.Components;
 using Content.Server.SS220.TTS;
-using Content.Shared.Inventory;
 using Content.Shared.VoiceMask;
 
 namespace Content.Server.VoiceMask;
 
 public partial class VoiceMaskSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-
     private void InitializeTTS()
     {
         SubscribeLocalEvent<VoiceMaskComponent, TransformSpeakerVoiceEvent>(OnSpeakerVoiceTransform);
@@ -17,6 +14,9 @@ public partial class VoiceMaskSystem
 
     private void OnSpeakerVoiceTransform(Entity<VoiceMaskComponent> entity, ref TransformSpeakerVoiceEvent args)
     {
+        if (!entity.Comp.Active)
+            return;
+
         args.VoiceId = entity.Comp.VoiceId;
     }
 
@@ -34,9 +34,7 @@ public partial class VoiceMaskSystem
     private void TrySetLastKnownVoice(EntityUid maskWearer, string? voiceId)
     {
         if (!TryComp<VoiceOverrideComponent>(maskWearer, out var comp))
-        {
             return;
-        }
 
         comp.LastSetVoice = voiceId;
     }

@@ -56,6 +56,15 @@
       "name": "fire_open"
     },
     {
+      "name": "freezer"
+    },
+    {
+      "name": "freezer_door"
+    },
+    {
+      "name": "freezer_open"
+    },
+    {
       "name": "wardrobe_open"
     },
     {

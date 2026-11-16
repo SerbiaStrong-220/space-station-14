@@ -1,11 +1,11 @@
-ent-ClothingHandsGlovesSyntheticBase = { ent-ClothingHandsButcherable }
-    .desc = { ent-ClothingHandsButcherable.desc }
 ent-ClothingHandsGlovesColorPurple = фиолетовые перчатки
     .desc = Обычные фиолетовые перчатки, которые не спасут вас от поджаривания.
 ent-ClothingHandsGlovesColorRed = красные перчатки
     .desc = Обычные красные перчатки, которые не спасут вас от поджаривания.
 ent-ClothingHandsGlovesColorBlack = чёрные перчатки
     .desc = Обычные чёрные перчатки, которые не спасут вас от поджаривания.
+ent-ClothingHandsGlovesColorTeal = аквамариновые перчатки
+    .desc = Обычные аквамариновые перчатки, которые не спасут вас от поджаривания.
 ent-ClothingHandsGlovesColorBlue = синие перчатки
     .desc = Обычные синие перчатки, которые не спасут вас от поджаривания.
 ent-ClothingHandsGlovesColorBrown = коричневые перчатки

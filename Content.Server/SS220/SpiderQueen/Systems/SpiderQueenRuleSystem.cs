@@ -7,21 +7,21 @@ using Content.Server.Roles;
 using Content.Server.SS220.Markers;
 using Content.Server.SS220.Roles;
 using Content.Server.SS220.SpiderQueen.Components;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 
 namespace Content.Server.SS220.SpiderQueen.Systems;
 
-public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleComponent>
+public sealed partial class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleComponent>
 {
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly SpecialRespawnSystem _specialRespawn = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private SpecialRespawnSystem _specialRespawn = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
 
     public override void Initialize()
     {
@@ -39,11 +39,10 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
             return;
 
         List<MapCoordinates> validCoordinates = new();
-        var query = EntityQueryEnumerator<AntagSpawnMarkerComponent>();
-        while (query.MoveNext(out var uid, out _))
+        var query = EntityQueryEnumerator<AntagSpawnMarkerComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var transform))
         {
-            if (_entityWhitelist.IsWhitelistFail(ent.Comp.MarkersWhitelist, uid) ||
-                !TryComp<TransformComponent>(uid, out var transform))
+            if (_entityWhitelist.IsWhitelistFail(ent.Comp.MarkersWhitelist, uid))
                 continue;
 
             validCoordinates.Add(_transform.ToMapCoordinates(transform.Coordinates));
@@ -60,7 +59,7 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
                 if (!TryComp<StationDataComponent>(station, out var data))
                     continue;
 
-                grid = _station.GetLargestGrid(data);
+                grid = _station.GetLargestGrid((station, data));
                 if (!grid.HasValue)
                     continue;
 

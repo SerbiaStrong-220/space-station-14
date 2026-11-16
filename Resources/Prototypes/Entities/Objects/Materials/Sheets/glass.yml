@@ -15,6 +15,7 @@
   - type: Tag
     tags:
     - Sheet
+    - ConstructionMaterial
   - type: Material
   - type: Damageable
     damageContainer: Inorganic
@@ -48,6 +49,14 @@
     solutions:
       glass:
         canReact: false
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Materials/glass_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Materials/glass_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   parent: SheetGlassBase
@@ -107,15 +116,6 @@
   - type: Stack
     stackType: Glass
     count: 1
-
-- type: entity
-  parent: SheetGlass
-  id: SheetGlassLingering0
-  suffix: Lingering, 0
-  components:
-  - type: Stack
-    lingering: true
-    count: 0
 
 - type: entity
   parent: SheetGlassBase
@@ -520,7 +520,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Extractable
-    grindableSolutionName: brassglass
+    grindableSolutionName: cglass
   - type: SolutionContainerManager
     solutions:
       cglass:

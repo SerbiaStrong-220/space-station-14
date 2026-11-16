@@ -13,6 +13,7 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         public ScrubberPumpDirection PumpDirection { get; set; } = ScrubberPumpDirection.Scrubbing;
         public float VolumeRate { get; set; } = 200f;
         public bool WideNet { get; set; } = false;
+        public bool AirAlarmPanicWireCut { get; set; }
 
         //SS220-AirAlarm start
         public static HashSet<Gas> DefaultFilterGases = new()
@@ -105,8 +106,20 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             FilterGases = new(GasVentScrubberData.DefaultPanicFilterGases), //SS220-AirAlarm
             PumpDirection = ScrubberPumpDirection.Siphoning,
             VolumeRate = 200f,
-            WideNet = true //SS220-AirAlarm
+            WideNet = true
         };
+
+        // SS220 MalfAI: Flood shuts scrubbers off while vents dump to 500 kPa.
+        public static GasVentScrubberData FloodModePreset = new GasVentScrubberData
+        {
+            Enabled = false,
+            Dirty = true,
+            FilterGases = new(GasVentScrubberData.DefaultFullFilterGases),
+            PumpDirection = ScrubberPumpDirection.Scrubbing,
+            VolumeRate = 200f,
+            WideNet = false
+        };
+        // SS220 MalfAI end
 
         public static GasVentScrubberData ReplaceModePreset = new GasVentScrubberData
         {

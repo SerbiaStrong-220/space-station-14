@@ -12,7 +12,9 @@
     sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
   - type: Item
     sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
-    size: Normal
+    size: Large
+    shape:
+    - 0,0,2,1
   - type: GunWieldBonus
   - type: Gun
     fireRate: 0.5
@@ -21,6 +23,7 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
+    projectileSpeed: 25
   - type: AmmoCounter
   - type: Appearance
   - type: GenericVisualizer

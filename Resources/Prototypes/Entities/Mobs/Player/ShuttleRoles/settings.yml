@@ -8,7 +8,10 @@
 - type: randomHumanoidSettings
   id: VisitorHead
   parent: EventHumanoidMindShielded
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-command-name
       description: ghost-role-information-command-description
@@ -20,6 +23,8 @@
   id: VisitorCaptain
   parent: VisitorHead
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: CaptainRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-captain
       description: ghost-role-information-command-description
@@ -31,6 +36,8 @@
   id: VisitorCE
   parent: VisitorHead
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ChiefEngineerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-ce
       description: ghost-role-information-command-description
@@ -42,6 +49,8 @@
   id: VisitorCMO
   parent: VisitorHead
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ChiefMedicalOfficerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-cmo
       description: ghost-role-information-command-description
@@ -53,6 +62,8 @@
   id: VisitorHOP
   parent: VisitorHead
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: HeadOfPersonnelRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-hop
       description: ghost-role-information-command-description
@@ -64,6 +75,8 @@
   id: VisitorHOS
   parent: VisitorHead
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: HeadOfSecurityRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-hos
       description: ghost-role-information-command-description
@@ -75,6 +88,8 @@
   id: VisitorResearchDirector
   parent: VisitorHead
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ResearchDirectorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-rd
       description: ghost-role-information-command-description
@@ -86,6 +101,8 @@
   id: VisitorQM
   parent: VisitorHead
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: QuartermasterRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-qm
       description: ghost-role-information-command-description
@@ -99,7 +116,10 @@
 - type: randomHumanoidSettings
   id: VisitorSecurity
   parent: EventHumanoidMindShielded
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-security-name
       description: ghost-role-information-security-description
@@ -111,6 +131,8 @@
   id: VisitorSecurityCadet
   parent: VisitorSecurity
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: SecurityCadetRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-cadet
     - type: Loadout
@@ -121,6 +143,8 @@
   id: VisitorSecurityOfficer
   parent: VisitorSecurity
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: SecurityOfficerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-security
     - type: Loadout
@@ -131,6 +155,8 @@
   id: VisitorDetective
   parent: VisitorSecurity
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: DetectiveRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-detective
     - type: Loadout
@@ -141,6 +167,8 @@
   id: VisitorWarden
   parent: VisitorSecurity
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: WardenRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-warden
     - type: Loadout
@@ -152,7 +180,10 @@
 - type: randomHumanoidSettings
   id: VisitorCargonian
   parent: EventHumanoid
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-cargo-name
       description: ghost-role-information-cargo-description
@@ -164,6 +195,8 @@
   id: VisitorCargoTechnician
   parent: VisitorCargonian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: CargoTechnicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-cargotech
     - type: Loadout
@@ -174,6 +207,8 @@
   id: VisitorSalvageSpecialist
   parent: VisitorCargonian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: SalvageSpecialistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-salvagespec
     - type: Loadout
@@ -185,7 +220,10 @@
 - type: randomHumanoidSettings
   id: VisitorEngineering
   parent: EventHumanoid
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-engineering-name
       description: ghost-role-information-engineering-description
@@ -197,6 +235,8 @@
   id: VisitorAtmosTech
   parent: VisitorEngineering
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: AtmosphericTechnicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-atmostech
     - type: Loadout
@@ -207,6 +247,8 @@
   id: VisitorTechnicalAssistant
   parent: VisitorEngineering
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: TechnicalAssistantRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-technical-assistant
     - type: Loadout
@@ -217,6 +259,8 @@
   id: VisitorEngineer
   parent: VisitorEngineering
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: StationEngineerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-engineer
     - type: Loadout
@@ -228,7 +272,10 @@
 - type: randomHumanoidSettings
   id: VisitorMedical
   parent: EventHumanoid
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-medical-name
       description: ghost-role-information-medical-description
@@ -240,6 +287,8 @@
   id: VisitorMedicalIntern
   parent: VisitorMedical
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: MedicalInternRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-intern
     - type: Loadout
@@ -250,6 +299,8 @@
   id: VisitorMedicalDoctor
   parent: VisitorMedical
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: MedicalDoctorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-doctor
     - type: Loadout
@@ -260,6 +311,8 @@
   id: VisitorParamedic
   parent: VisitorMedical
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ParamedicRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-paramedic
     - type: Loadout
@@ -270,6 +323,8 @@
   id: VisitorVirologist
   parent: VisitorMedical
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: MedicalDoctorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-medical-virologist-name
     - type: Loadout
@@ -280,6 +335,8 @@
   id: VisitorGeneticist
   parent: VisitorMedical
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: MedicalDoctorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-medical-geneticist-name
     - type: Loadout
@@ -290,6 +347,8 @@
   id: VisitorPsychologist
   parent: VisitorMedical
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: PsychologistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-psychologist
     - type: Loadout
@@ -300,6 +359,8 @@
   id: VisitorChemist
   parent: VisitorMedical
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ChemistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-chemist
     - type: Loadout
@@ -321,7 +382,10 @@
 - type: randomHumanoidSettings
   id: VisitorScience
   parent: EventHumanoid
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-science-name
       description: ghost-role-information-science-description
@@ -333,6 +397,8 @@
   id: VisitorResearchAssistant
   parent: VisitorScience
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ResearchAssistantRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-research-assistant
     - type: Loadout
@@ -343,6 +409,8 @@
   id: VisitorScientist
   parent: VisitorScience
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ScientistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-scientist
     - type: Loadout
@@ -354,7 +422,10 @@
 - type: randomHumanoidSettings
   id: VisitorCivilian
   parent: EventHumanoid
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-civilian-name
       description: ghost-role-information-civilian-description
@@ -366,6 +437,8 @@
   id: VisitorBartender
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: BartenderRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-bartender
     - type: Loadout
@@ -376,6 +449,8 @@
   id: VisitorBotanist
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: BotanistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-botanist
     - type: Loadout
@@ -386,6 +461,8 @@
   id: VisitorBoxer
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: NoSpecialRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-boxer
     - type: Loadout
@@ -396,6 +473,8 @@
   id: VisitorChaplain
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ChaplainRoleExperience #SS220-visitor-experience
     - type: BibleUser
     - type: GhostRole
       name: job-name-chaplain
@@ -407,6 +486,8 @@
   id: VisitorChef
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ChefRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-chef
     - type: Loadout
@@ -418,6 +499,8 @@
   parent: VisitorCivilian
   randomizeName: false
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ClownRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-clown
     - type: Loadout
@@ -425,12 +508,29 @@
       roleLoadout: [ RoleSurvivalClown ]
     - type: RandomMetadata
       nameSegments:
-      - names_clown
-      
+      - NamesClown
+#SS220 fix ghost-clown begin
+    - type: RenameStart #SS220-RenameStart
+    - type: Clumsy
+      gunShootFailDamage:
+        types: #literally just picked semi random valus. i tested this once and tweaked it.
+          Blunt: 5
+          Piercing: 4
+          Heat: 0.75
+          Shock: 0.75
+          Cold: 0.75
+          Caustic: 0.75
+    - type: SleepEmitSound
+      snore: /Audio/Voice/Misc/silly_snore.ogg
+      interval: 10
+#SS220 fix ghost-clown end
+
 - type: randomHumanoidSettings
   id: VisitorJanitor
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: JanitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-janitor
     - type: Loadout
@@ -441,6 +541,8 @@
   id: VisitorLawyer
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: LawyerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-lawyer
     - type: Loadout
@@ -451,6 +553,8 @@
   id: VisitorLawyerCentcom
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: LawyerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-civilian-centcom-lawyer-name
       description: ghost-role-information-civilian-centcom-lawyer-description
@@ -462,6 +566,8 @@
   id: VisitorLibrarian
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: LibrarianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-librarian
     - type: Loadout
@@ -472,6 +578,8 @@
   id: VisitorMusician
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: MusicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-musician
     - type: Loadout
@@ -482,6 +590,8 @@
   id: VisitorMusicianFancy
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: MusicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-musician
     - type: Loadout
@@ -492,6 +602,8 @@
   id: VisitorMusicianRelaxed
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: MusicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-musician
     - type: Loadout
@@ -502,6 +614,8 @@
   id: VisitorMime
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: MimeRoleExperience #SS220-visitor-experience
     - type: MimePowers
     - type: GhostRole
       name: job-name-mime
@@ -513,6 +627,8 @@
   id: VisitorReporter
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: NoSpecialRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-reporter
     - type: Loadout
@@ -523,6 +639,8 @@
   id: VisitorServiceWorker
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ServiceWorkerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-serviceworker
     - type: Loadout
@@ -533,6 +651,8 @@
   id: VisitorZookeeper
   parent: VisitorCivilian
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: NoSpecialRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-zookeeper
     - type: Loadout
@@ -563,6 +683,8 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: CaptainRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
@@ -575,13 +697,17 @@
       roleLoadout: [ RoleSurvivalVoxSupport ]
     - type: RandomMetadata
       nameSegments:
-      - names_first
-      - names_last
+      - NamesFirst
+      - NamesLast
+      nameFormat: name-format-standard
 
 - type: randomHumanoidSettings
   id: ChallengeVictimChiefEngineer
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ChiefEngineerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
@@ -594,13 +720,17 @@
       roleLoadout: [ RoleSurvivalVoxSupport ]
     - type: RandomMetadata
       nameSegments:
-      - names_first
-      - names_last
+      - NamesFirst
+      - NamesLast
+      nameFormat: name-format-standard
 
 - type: randomHumanoidSettings
   id: ChallengeVictimCMO
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ChiefMedicalOfficerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
@@ -613,13 +743,17 @@
       roleLoadout: [ RoleSurvivalVoxSupport ]
     - type: RandomMetadata
       nameSegments:
-      - names_first
-      - names_last
+      - NamesFirst
+      - NamesLast
+      nameFormat: name-format-standard
 
 - type: randomHumanoidSettings
   id: ChallengeVictimHeadOfPersonnel
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: HeadOfPersonnelRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
@@ -632,13 +766,17 @@
       roleLoadout: [ RoleSurvivalVoxSupport ]
     - type: RandomMetadata
       nameSegments:
-      - names_first
-      - names_last
+      - NamesFirst
+      - NamesLast
+      nameFormat: name-format-standard
 
 - type: randomHumanoidSettings
   id: ChallengeVictimHeadOfSecurity
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: HeadOfSecurityRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
@@ -651,13 +789,17 @@
       roleLoadout: [ RoleSurvivalVoxSupport ]
     - type: RandomMetadata
       nameSegments:
-      - names_first
-      - names_last
+      - NamesFirst
+      - NamesLast
+      nameFormat: name-format-standard
 
 - type: randomHumanoidSettings
   id: ChallengeVictimResearchDirector
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: ResearchDirectorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
@@ -670,13 +812,17 @@
       roleLoadout: [ RoleSurvivalVoxSupport ]
     - type: RandomMetadata
       nameSegments:
-      - names_first
-      - names_last
+      - NamesFirst
+      - NamesLast
+      nameFormat: name-format-standard
 
 - type: randomHumanoidSettings
   id: ChallengeVictimQuartermaster
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: QuartermasterRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
@@ -689,8 +835,9 @@
       roleLoadout: [ RoleSurvivalVoxSupport ]
     - type: RandomMetadata
       nameSegments:
-      - names_first
-      - names_last
+      - NamesFirst
+      - NamesLast
+      nameFormat: name-format-standard
 
 # Security
 # Following use EventHumanoidMindShielded since they are heads and probably should have mindshields
@@ -701,6 +848,8 @@
   id: ChallengeCargoTechnician
   randomizeName: false
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: CargoTechnicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-cargo-technican-name
       description: ghost-role-information-lost-challenge-cargo-technican-description
@@ -713,8 +862,9 @@
       roleLoadout: [ RoleSurvivalVoxSupport ]
     - type: RandomMetadata
       nameSegments:
-      - names_first
-      - names_last
+      - NamesFirst
+      - NamesLast
+      nameFormat: name-format-standard
 
 # Engineering
 
@@ -740,6 +890,8 @@
       name: ghost-role-information-syndie-soldier-teamlead-name
       description: ghost-role-information-syndie-soldier-teamlead-description
       rules: ghost-role-information-rules-team-antagonist
+      mindRoles:
+      - MindRoleGhostRoleTeamAntagonist
       raffle:
         settings: default
     - type: Loadout
@@ -758,6 +910,8 @@
       name: ghost-role-information-syndie-soldier-name
       description: ghost-role-information-syndie-soldier-description
       rules: ghost-role-information-rules-team-antagonist
+      mindRoles:
+      - MindRoleGhostRoleTeamAntagonist
       raffle:
         settings: default
     - type: Loadout
@@ -775,6 +929,8 @@
       name: ghost-role-information-syndie-disaster-victim-name
       description: ghost-role-information-syndie-disaster-victim-description
       rules: ghost-role-information-freeagent-rules
+      mindRoles:
+      - MindRoleGhostRoleFreeAgent
       raffle:
         settings: short
     - type: Loadout
@@ -792,6 +948,8 @@
       name: ghost-role-information-pirate-name
       description: ghost-role-information-pirate-description
       rules: ghost-role-information-rules-team-antagonist
+      mindRoles:
+      - MindRoleGhostRoleTeamAntagonist
       raffle:
         settings: default
     - type: Loadout
@@ -809,6 +967,8 @@
       name: ghost-role-information-pirate-captain-name
       description: ghost-role-information-pirate-captain-description
       rules: ghost-role-information-rules-team-antagonist
+      mindRoles:
+      - MindRoleGhostRoleTeamAntagonist
       raffle:
         settings: default
     - type: Loadout
@@ -821,10 +981,14 @@
   id: VisitorBlackmarketeer
   parent: EventHumanoid
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-blackmarketeer-name
       description: ghost-role-information-blackmarketeer-description
       rules: ghost-role-information-freeagent-rules
+      mindRoles:
+      - MindRoleGhostRoleFreeAgent
       raffle:
         settings: default
     - type: Loadout
@@ -835,6 +999,8 @@
   id: Cossack
   parent: EventHumanoid
   components:
+    - type: ExperienceAddition #SS220-visitor-experience
+      definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: RussianAccent
     - type: ScrambledAccent
     - type: SlurredAccent
@@ -843,6 +1009,8 @@
       name: ghost-role-information-cossack-name
       description: ghost-role-information-cossack-description
       rules: ghost-role-information-freeagent-rules
+      mindRoles:
+      - MindRoleGhostRoleFreeAgent
       raffle:
         settings: default
     - type: Loadout

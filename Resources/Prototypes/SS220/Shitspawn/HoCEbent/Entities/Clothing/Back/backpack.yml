@@ -1,0 +1,11 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackArmy
+  name: army backpack
+  description: Solid satchel with sleeping bag. Helps you survive long marches.
+  suffix: Ebent, HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/HoCEbent/Clothing/Back/Backpacks/armybackpack.rsi

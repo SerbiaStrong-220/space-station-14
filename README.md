@@ -13,11 +13,11 @@ Space Station 14 это ремейк SS13, который работает на 
 
 ## Ссылки
 
-[Наш Discord](https://discord.gg/ss220) | [Наша Вики](https://wiki14.ss220.club) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Клиент без Steam](https://spacestation14.io/about/nightlies/) | [Основной репозиторий](https://github.com/space-wizards/space-station-14)
+[Наш Discord](https://discord.gg/ss220) | [Наша Вики](https://wiki14.ss220.club) | [Вики для разработчиков](https://serbiastrong-220.github.io/ss220-docs/) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Клиент без Steam](https://spacestation14.io/about/nightlies/) | [Основной репозиторий](https://github.com/space-wizards/space-station-14)
 
 ## Лицензия
 
-Код репозитория лицензирован как под [MIT](https://github.com/space-syndicate/space-station-14/blob/master/LICENSE.TXT) - это касается кода [Space Wizards Federation](https://github.com/space-wizards/space-station-14) и кода проекта [Corvax](https://github.com/space-syndicate/space-station-14), так и под [CLA](https://github.com/SerbiaStrong-220/space-station-14/blob/master/CLA.txt) - это касается наших изменений, определение которых дано в тексте CLA. Мы не стремимся к полному разграничению нашего кода и кода выше указанных проектов, поэтому во избежание инцидентов рекомендуется брать их код из их репозиториев.
+Код репозитория лицензирован как под [MIT](https://github.com/space-syndicate/space-station-14/blob/master/LICENSE.TXT) - это касается кода [Space Wizards Federation](https://github.com/space-wizards/space-station-14), кода проекта [Corvax](https://github.com/space-syndicate/space-station-14) и некоторых участков кода SerbiaStrong-220, так и под [CLA](https://github.com/SerbiaStrong-220/space-station-14/blob/master/CLA.txt) - это касается наших изменений, определение которых дано в тексте CLA. Мы не стремимся к полному разграничению нашего кода и кода выше указанных проектов, поэтому во избежание инцидентов рекомендуется брать их код из их репозиториев.
 
 Мы в полной мере используем наше право на сублицензирование.
 
@@ -27,13 +27,13 @@ Space Station 14 это ремейк SS13, который работает на 
 
 ## Документация
 
-На официальном сайте с [документацией](https://docs.spacestation14.io/) имеется вся необходимая информация о контенте SS14, движке, дизайне игры и многом другом. Также имеется много информации для начинающих разработчиков.  
+На официальном сайте с [документацией](https://docs.spacestation14.io/) имеется вся необходимая информация о контенте SS14, движке, дизайне игры и многом другом. Также имеется много информации для начинающих разработчиков.
 Также существует [вики для разработчиков](https://serbiastrong-220.github.io/ss220-docs/), созданное [командой разработки SS220](https://discord.gg/D9qwBBy8yx).
 
 ## Контрибьют
 
-В случае если вы хотите добавить новый контент будет лучше, если сначала вы предложите его в [основной репозиторий](https://github.com/space-wizards/space-station-14) или обсудите его необходимость на нашем сервере [Discord](https://discord.gg/ss220).  
-Если вы хотите, чтобы ваш pull request был замёрджен в этот репозиторий, то **обязательно** ознакомтесь с [наставлением по работе с репозиторием SS220](https://serbiastrong-220.github.io/ss220-docs/development/ss220-guidelines/).
+В случае если вы хотите добавить новый контент будет лучше, если сначала вы предложите его в [основной репозиторий](https://github.com/space-wizards/space-station-14) или обсудите его необходимость на нашем сервере [Discord](https://discord.gg/ss220).
+Если вы хотите, чтобы ваш pull request был замёрджен в этот репозиторий, то **обязательно** ознакомьтесь с [наставлением по работе с репозиторием SS220](https://serbiastrong-220.github.io/ss220-docs/development/ss220-guidelines/).
 
 ## Сборка
 

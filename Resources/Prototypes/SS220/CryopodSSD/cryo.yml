@@ -6,7 +6,7 @@
   name: портал в крио
   components:
     - type: Sprite
-      sprite: /Textures/Effects/portal.rsi
+      sprite: /Textures/SS220/Effects/portal.rsi # SS220 Portal Resprite
       state: portal-blue
     - type: PointLight
       netsync: false
@@ -19,9 +19,10 @@
 
 - type: entity
   id: ActionCryoGhost
-  name: action-name-cryo-ghost
-  description: action-desc-cryo-ghost
+  name: cryo ghost
+  description: desc cryo ghost
   components:
-    - type: InstantAction
+    - type: Action
       checkCanInteract: false
+    - type: InstantAction
       event: !type:CryopodGhostActionEvent

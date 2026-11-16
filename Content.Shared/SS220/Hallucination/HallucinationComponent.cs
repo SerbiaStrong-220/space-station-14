@@ -13,7 +13,7 @@ namespace Content.Shared.SS220.Hallucination;
 [NetworkedComponent]
 public abstract partial class SharedHallucinationComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public List<HallucinationSetting> Hallucinations = [];
 }
 

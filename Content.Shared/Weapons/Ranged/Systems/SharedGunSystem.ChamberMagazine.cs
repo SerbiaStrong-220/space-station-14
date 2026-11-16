@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -12,7 +13,6 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem
 {
-    protected const string ChamberSlot = "gun_chamber";
 
     protected virtual void InitializeChamberMagazine()
     {
@@ -29,8 +29,8 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<InteractionVerb>>(OnChamberInteractionVerb);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnMagazineVerb);
 
-        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, ActivateInWorldEvent>(OnChamberActivate);
-        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, UseInHandEvent>(OnChamberUse);
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, InteractUsingEvent>(OnInteractUsing); //SS220 weapon overhaul
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, AmmoFillDoAfterEvent>(OnChamberMagAmmoFillDoAfter); //SS220 weapon overhaul
 
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, EntInsertedIntoContainerMessage>(OnMagazineSlotChange);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, EntRemovedFromContainerMessage>(OnMagazineSlotChange);
@@ -42,40 +42,45 @@ public abstract partial class SharedGunSystem
         // Appearance data doesn't get serialized and want to make sure this is correct on spawn (regardless of MapInit) so.
         if (component.BoltClosed != null)
         {
-           Appearance.SetData(uid, AmmoVisuals.BoltClosed, component.BoltClosed.Value);
+            Appearance.SetData(uid, AmmoVisuals.BoltClosed, component.BoltClosed.Value);
         }
     }
 
-    /// <summary>
-    /// Called when user "Activated In World" (E) with the gun as the target
-    /// </summary>
-    private void OnChamberActivate(EntityUid uid, ChamberMagazineAmmoProviderComponent component, ActivateInWorldEvent args)
-    {
-        if (args.Handled || !args.Complex)
-            return;
+    //SS220 do not use this begin
+    ///// <summary>
+    ///// Called when user "Activated In World" (E) with the gun as the target
+    ///// </summary>
+    //private void OnChamberActivate(EntityUid uid, ChamberMagazineAmmoProviderComponent component, ActivateInWorldEvent args)
+    //{
+    //    if (args.Handled || !args.Complex)
+    //        return;
 
-        args.Handled = true;
-        ToggleBolt(uid, component, args.User);
-    }
+    //    args.Handled = true;
+    //    ToggleBolt(uid, component, args.User);
+    //}
 
-    /// <summary>
-    /// Called when gun was "Activated In Hand" (Z)
-    /// </summary>
-    private void OnChamberUse(EntityUid uid, ChamberMagazineAmmoProviderComponent component, UseInHandEvent args)
-    {
-        if (args.Handled)
-            return;
+    ///// <summary>
+    ///// Called when gun was "Activated In Hand" (Z)
+    ///// </summary>
+    //private void OnChamberUse(EntityUid uid, ChamberMagazineAmmoProviderComponent component, UseInHandEvent args)
+    //{
+    //    if (args.Handled)
+    //        return;
 
-        args.Handled = true;
-        UseChambered(uid, component, args.User);
-    }
+    //    args.Handled = true;
+    //    if (component.CanRack)
+    //        UseChambered(uid, component, args.User);
+    //    else
+    //        ToggleBolt(uid, component, args.User);
+    //}
+    //SS220 do not use this end
 
     /// <summary>
     /// Creates "Rack" verb on the gun
     /// </summary>
     private void OnChamberActivationVerb(EntityUid uid, ChamberMagazineAmmoProviderComponent component, GetVerbsEvent<ActivationVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || component.BoltClosed == null)
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || args.Hands == null || component.BoltClosed == null || !component.CanRack)
             return;
 
         args.Verbs.Add(new ActivationVerb()
@@ -128,7 +133,7 @@ public abstract partial class SharedGunSystem
     /// </summary>
     private void OnChamberInteractionVerb(EntityUid uid, ChamberMagazineAmmoProviderComponent component, GetVerbsEvent<InteractionVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || component.BoltClosed == null)
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || args.Hands == null || component.BoltClosed == null)
             return;
 
         args.Verbs.Add(new InteractionVerb()
@@ -181,7 +186,7 @@ public abstract partial class SharedGunSystem
                     // The problem is client will dump the cartridge on the ground and the new server state
                     // won't correspond due to randomness so looks weird
                     // but we also need to always take it from the chamber or else ammocount won't be correct.
-                    TransformSystem.DetachParentToNull(chambered.Value, Transform(chambered.Value));
+                    TransformSystem.DetachEntity(chambered.Value, Transform(chambered.Value));
                 }
 
                 UpdateAmmoCount(uid);

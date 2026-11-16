@@ -12,15 +12,15 @@
     tags:
       - MagazinePistolSubMachineGunUssp_PPSh
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/ussp_magppsh.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Ammunition/Magazine/ussp_magppsh.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 2
     zeroVisible: false
 
 - type: entity
@@ -39,15 +39,15 @@
   - type: Item
   - type: Sprite
     scale: 0.5, 0.5
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/MagazineUssp_RPK.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Ammunition/Magazine/MagazineUssp_RPK.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 2
     zeroVisible: false
   - type: Appearance
 
@@ -75,7 +75,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/iron_MagazineMG34.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Ammunition/Magazine/iron_MagazineMG34.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

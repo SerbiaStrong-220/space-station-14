@@ -1,0 +1,36 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#Objectives base for a cult
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseCultYoggObjective
+  components:
+  - type: Objective
+    # difficulty isn't used at all since objective are fixed
+    difficulty: 1.5
+    issuer: objective-issuer-cult-yogg
+  - type: RoleRequirement
+    roles:
+    - CultYoggRole
+
+#Objective to win the game by summoning
+- type: entity
+  parent: BaseCultYoggObjective
+  id: CultYoggSacrificeObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/Structures/CultYogg/altar.rsi
+      state: cultaltar
+  - type: CultYoggSummonCondition
+
+- type: entity
+  parent: BaseCultYoggObjective
+  id: CultYoggEnslaveObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/Objects/CultYogg/Botany/migomycete.rsi
+      state: produce
+  - type: CultYoggEnslaveCondition

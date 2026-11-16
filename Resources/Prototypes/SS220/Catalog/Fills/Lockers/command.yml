@@ -5,16 +5,22 @@
   suffix: Filled
   parent: LockerBlueshield
   components:
-  - type: StorageFill
-    contents:
-    - id: WeaponDisabler
-    - id: MedkitAdvancedFilled
-    - id: ClothingUniformJumpsuitBlueShield2 #SS220 new jumpsuit
-#   - id: ClothingCloakBlueShield #SS220 new cloak
-    - id: ExpensiveLighterShield #SS220-Zippo
-#   - id: HandheldCrewMonitor #ss220-fix-blueshield
-    - id: ClothingOuterSRTCoat #SS220-CentComm
-    - id: RubberStampBlueShield #SS220-additional paperwork
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponDisabler
+        - id: MedkitAdvancedFilled
+        - id: ExpensiveLighterShield
+        - id: ClothingHeadHelmetTactical
+        - id: RubberStampBlueShield
+        - id: JetpackMiniBlueFilled
+        - id: ExpensiveLighterShield
+        - id: ClothingMaskGasBlueShield
+        - id: RubberStampBlueShield
+        - id: JetpackMiniBlueFilled
+        - id: PinpointerCrew
+        - id: BoxStationDeathRattleImplanter
 
 - type: entity
   parent: GunSafe
@@ -23,13 +29,42 @@
   components:
   - type: AccessReader
     access: [ [ "Blueshield" ] ]
-  - type: StorageFill
-    contents:
-#    - id: WeaponDisabler #SS220-MinorTweaks
-#      amount: 1 #SS220-MinorTweaks
-    - id: WeaponSubMachineGunDrozdRubber #SS220-MinorTweaks(#Rubber)
-      amount: 1
-    - id: MagazinePistolSubMachineGun
-      amount: 2
-    - id: MagazinePistolSubMachineGunRubber #SS220-MinorTweaks
-      amount: 2
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponEnergyGunRevolver
+        - id: WeaponBlasterKRS
+        - id: PowerCellBlaster
+          amount: 3
+
+- type: entity
+  parent: GunSafe
+  id: AILawBoardsSafeFilled
+  name: AI boards safe
+  components:
+  - type: AccessReader
+    access: [ [ "Command" ] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: BookAILawCompendium
+        - id: CommandmentCircuitBoard
+        - id: StationEfficiencyCircuitBoard
+        - id: NutimovCircuitBoard
+        - id: PaladinCircuitBoard
+        - id: AsimovCircuitBoard
+        - id: PetrovichCircuitBoard
+        - id: RobocopCircuitBoard
+        - id: ReporterCircuitBoard
+        - id: GameMasterCircuitBoard
+        - id: ArtistCircuitBoard
+        - id: NTDefaultCircuitBoard
+        - id: CorporateCircuitBoard
+        - id: LiveLetLiveCircuitBoard
+        - id: WaffleHouseHostCircuitBoard
+        - id: TeacherCircuitBoard
+        - id: MotherCircuitBoard
+        - id: ClownCircuitBoard
+        - id: RenterCircuitBoard

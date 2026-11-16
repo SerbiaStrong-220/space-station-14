@@ -12,21 +12,21 @@
   id: DummyGrind
   verbText: mixing-verb-default-grind
   icon:
-    sprite: Structures/Machines/juicer.rsi
-    state: juicer0
+    sprite: Structures/Machines/grinder.rsi
+    state: grinder_empty
 
 - type: mixingCategory
   id: DummyJuice
   verbText: mixing-verb-default-juice
   icon:
-    sprite: Structures/Machines/juicer.rsi
-    state: juicer0
+    sprite: Structures/Machines/grinder.rsi
+    state: grinder_empty
 
 - type: mixingCategory
   id: DummyCondense
   verbText: mixing-verb-default-condense
   icon:
-    sprite: Structures/Piping/Atmospherics/condenser.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/condenser.rsi # SS220 atmospherics-sprite-update
     state: display
 
 # Alternative Mixing Methods
@@ -56,7 +56,7 @@
   id: Shake
   verbText: mixing-verb-shake
   icon:
-    sprite: Objects/Consumable/Drinks/shaker.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker.rsi #SS220 Resprite
     state: icon
 
 - type: mixingCategory

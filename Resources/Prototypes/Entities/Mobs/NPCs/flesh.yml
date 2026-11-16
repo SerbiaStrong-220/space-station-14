@@ -41,13 +41,17 @@
       0: Alive
       75: Dead
   - type: Stamina
-    critThreshold: 50
+    baseCritThreshold: 50
+    animationThreshold: 25
   - type: Butcherable
     spawned:
     - id: FoodMeat
       amount: 1
   - type: Bloodstream
-    bloodMaxVolume: 100
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 100
   - type: CombatMode
   - type: MeleeWeapon
     soundHit:
@@ -59,6 +63,11 @@
         Slash: 6
   - type: ReplacementAccent
     accent: genericAggressive
+  # SS220 Add stamina resistence begin
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+    worn: false
+  # SS220 Add stamina resistence end
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Zombie
@@ -242,13 +251,17 @@
       0: Alive
       75: Dead
   - type: Stamina
-    critThreshold: 50
+    baseCritThreshold: 50
+    animationThreshold: 25
   - type: Butcherable
     spawned:
     - id: FoodMeat
       amount: 1
   - type: Bloodstream
-    bloodMaxVolume: 100
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 100
   - type: CombatMode
   - type: MeleeWeapon
     soundHit:

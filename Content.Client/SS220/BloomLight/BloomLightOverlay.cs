@@ -10,13 +10,16 @@ namespace Content.Client.SS220.BloomLight;
 
 public sealed class BloomLightOverlay : Overlay
 {
-    private EntityManager _entity;
-    private SharedTransformSystem _transform;
-    private SpriteSystem _sprite;
-    private IPrototypeManager _prototype = default!;
+    private readonly EntityManager _entity;
+    private readonly SharedTransformSystem _transform;
+    private readonly SpriteSystem _sprite;
+    private readonly IPrototypeManager _prototype;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
     public override bool RequestScreenTexture => true;
+
+    private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "BlurryLighting";
+    private static readonly ProtoId<ShaderPrototype> ShaderUnshadedProtoId = "unshaded";
 
     private readonly ShaderInstance _shader;
     private readonly ShaderInstance _shader_unshaded;
@@ -27,8 +30,8 @@ public sealed class BloomLightOverlay : Overlay
         _transform = entMan.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
         _sprite = entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
         _prototype = protoMan;
-        _shader = _prototype.Index<ShaderPrototype>("BlurryLighting").InstanceUnique();
-        _shader_unshaded = _prototype.Index<ShaderPrototype>("unshaded").InstanceUnique();
+        _shader = _prototype.Index(ShaderProtoId).InstanceUnique();
+        _shader_unshaded = _prototype.Index(ShaderUnshadedProtoId).InstanceUnique();
 
         ZIndex = (int) Shared.DrawDepth.DrawDepth.Overdoors;
     }
@@ -60,7 +63,7 @@ public sealed class BloomLightOverlay : Overlay
             if (!bounds.Contains(worldPos))
                 continue;
 
-            Color color = Color.White;
+            var color = Color.White;
             if (lightQuery.TryGetComponent(uid, out var lightComp))
             {
                 if (!lightComp.Enabled)
@@ -70,7 +73,7 @@ public sealed class BloomLightOverlay : Overlay
                     color = lightComp.Color;
             }
 
-            var (_, worldRot, worldMatrix) = xform.GetWorldPositionRotationMatrix(xformQuery);
+            var worldMatrix = _transform.GetWorldMatrix(xform);
             handle.SetTransform(worldMatrix);
 
             foreach (var mask in comp.LightMasks)

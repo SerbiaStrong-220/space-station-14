@@ -1,0 +1,15 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                xmlns:headsetUI="clr-namespace:Content.Client.SS220.Headset"
+                MaxSize="450 500"
+                MinSize="350 300"
+                Title="{Loc headset-ui-title}">
+
+    <PanelContainer>
+        <BoxContainer Name="ContentContainer" Orientation="Vertical">
+            <BoxContainer Access="Public" Name="ChannelsList" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <headsetUI:HeadsetEncryptionRadioSetting Access="Public" Name="RadioSetting" Visible="False"/>
+        </BoxContainer>
+    </PanelContainer>
+
+</ui:FancyWindow>

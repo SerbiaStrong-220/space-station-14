@@ -15,16 +15,17 @@
     state: icon
   - type: TimedDespawn
     lifetime: 90
+  - type: Clickable
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 30
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   id: HoloFan
@@ -32,11 +33,6 @@
   name: holofan
   description: A barrier of hard light that blocks air, but nothing else.
   components:
-  #SS220 atmos holo buff, physics start
-  - type: Physics
-    bodyType: Static
-    canCollide: true
-  #SS220 atmos holo buff, physics end
   - type: Sprite
     sprite: Structures/Holo/holofan.rsi
     state: icon
@@ -46,18 +42,47 @@
         shape:
           !type:PhysShapeAabb
             bounds: "-0.5,-0.5,0.5,0.5"
-        #SS220 Atmos holo buff start
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
-        #SS220 Atmos holo end
   - type: TimedDespawn
-    lifetime: 10800 #3 hours IRL. SS220 Atmos Holo Buff
+    lifetime: 300 #5 minutes IRL. SS220 Atmos Holo Revert
   - type: Airtight
     noAirWhenFullyAirBlocked: false
-  - type: Climbable #SS220 Atmos holo buff
-  - type: Clickable #SS220 Atmos holo buff
+
+- type: entity
+  id: HoloPeel
+  parent: HolosignWetFloor
+  name: holopeel
+  description: A banana peel made of slippery hard light, watch your step!
+  components:
+  - type: Sprite
+    sprite: Structures/Holo/peel.rsi
+    state: icon
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Slippery
+  - type: StepTrigger
+    intersectRatio: 0.2
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        hard: false
+        layer:
+        - SlipLayer
+  - type: TimedDespawn
+    lifetime: 30
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   id: HolosignSecurity
@@ -80,7 +105,7 @@
           mask:
             - TableMask
           layer:
-            - TableLayer
+            - CounterLayer
     - type: TimedDespawn
       lifetime: 180
     - type: PointLight
@@ -88,7 +113,6 @@
       radius: 3
       color: red
     - type: Climbable
-    - type: Clickable
 
 - type: entity
   id: HolosignForcefield
@@ -118,14 +142,13 @@
     enabled: true
     radius: 3
     color: blue
-  - type: Clickable
   - type: ContainmentField
     throwForce: 0
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 60
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

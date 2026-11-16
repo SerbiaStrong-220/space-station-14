@@ -7,8 +7,37 @@
       !type:RoleTimeRequirement
       role: JobResearchAssistant
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: ResearchAssistantBachelor
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobResearchAssistant
+      time: 72000 # 20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
+- type: loadout
+  id: ResearchAssistantJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitResearchAssistant
+
+- type: loadout
+  id: ResearchAssistantJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtResearchAssistant
+
 - type: loadout
   id: ResearchAssistantJumpsuitTurtleneck
   effects:
@@ -40,3 +69,19 @@
     proto: ResearchAssistantTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorWhite
+
+- type: loadout
+  id: ResearchAssistantBachelor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ResearchAssistantBachelor
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBachelor
+
+- type: loadout
+  id: ResearchAssistantBachelorSkirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ResearchAssistantBachelor
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtBachelor

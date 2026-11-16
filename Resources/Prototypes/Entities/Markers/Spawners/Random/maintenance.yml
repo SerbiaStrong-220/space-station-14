@@ -6,6 +6,9 @@
     - !type:GroupSelector
       weight: 75
       children:
+      - !type:NestedSelector
+        weight: 5 # Roughly 7% chance
+        tableId: AllToysTable
       # Smoker's specialty
       - !type:AllSelector
         children:
@@ -60,7 +63,7 @@
       - id: ClothingHeadHatPaper
       - id: ClothingHeadHatPirate
       - id: ClothingMaskSterile
-      - id: ClothingNeckHeadphones
+      - id: ClothingMultipleHeadphones
       - id: ClothingNeckTieRed
       - id: ClothingOuterCoatGentle
       - !type:AllSelector
@@ -96,6 +99,7 @@
     - !type:GroupSelector
       weight: 23
       children:
+      - id: TravelCamera
       - id: ClothingNeckCloakHerald
       - id: ClothingHeadHelmetTemplar
       # Cloaks
@@ -108,19 +112,15 @@
       #  - id: ClothingNeckCloakGoliathCloak #ss220 goliath-cloak-upgrade
         - id: ClothingNeckCloakAce
         - id: ClothingNeckCloakAro
+        - id: ClothingNeckCloakAroace
         - id: ClothingNeckCloakBi
         - id: ClothingNeckCloakIntersex
         - id: ClothingNeckCloakLesbian
         - id: ClothingNeckCloakGay
         - id: ClothingNeckCloakEnby
         - id: ClothingNeckCloakPan
-      - id: ToySkeleton
-      - id: Basketball
-      - id: Football
-      - id: BalloonNT
-      - id: BalloonCorgi
+      - id: ToyFigurineSkeleton
       - id: MysteryFigureBox
-      - id: RubberChicken
       # Cult
       - !type:AllSelector
         children:
@@ -145,14 +145,20 @@
       - !type:GroupSelector
         children:
         - id: ClothingNeckLGBTPin
+        - id: ClothingNeckAllyPin
         - id: ClothingNeckAromanticPin
         - id: ClothingNeckAsexualPin
+        - id: ClothingNeckAroacePin
         - id: ClothingNeckBisexualPin
         - id: ClothingNeckGayPin
         - id: ClothingNeckIntersexPin
         - id: ClothingNeckLesbianPin
         - id: ClothingNeckNonBinaryPin
         - id: ClothingNeckPansexualPin
+        - id: ClothingNeckPluralPin
+        - id: ClothingNeckOmnisexualPin
+        - id: ClothingNeckGenderqueerPin
+        - id: ClothingNeckGenderfluidPin
         - id: ClothingNeckTransPin
         - id: ClothingNeckAutismPin
         - id: ClothingNeckGoldAutismPin
@@ -171,10 +177,6 @@
     - !type:GroupSelector
       weight: 2
       children:
-      - id: Skub
-      - id: PonderingOrb
-      - id: CluwneHorn
-      - id: ClothingShoesSkates
       - id: DrinkMugDog
       - id: CigarGold
       - id: ClothingUniformJumpsuitFamilyGuy
@@ -182,6 +184,7 @@
       - id: ClothingWristWatch # SS220 Wristwatch
       - id: CigPackWEH #SS220 Cigarettes
       - id: RubberStampGreytide
+      - id: MysteryLighterBox
 
 - type: entity
   name: Maint Loot Spawner
@@ -235,7 +238,8 @@
       - id: Plunger
       - id: PowerCellMedium
       - id: PowerCellSmall
-      - id: Soap
+      - !type:NestedSelector
+        tableId: AllSoapsTable
       - id: Wirecutter
       - id: Screwdriver
       - id: Wrench
@@ -281,7 +285,7 @@
       - id: trayScanner
       - id: HandheldGPSBasic
       - id: HandLabeler
-      - id: GlowstickBase
+      - id: GlowstickGreen
       - id: Bucket
       - id: HandheldRadio #SS220 Radio
       - id: AppraisalTool
@@ -296,6 +300,7 @@
     - !type:GroupSelector
       weight: 2
       children:
+      - id: Binoculars
       - id: LotteryCash #SS220 Lottery
       - id: LanternFlash
       - id: PowerCellHigh
@@ -316,6 +321,8 @@
         - id: DrinkBankateJarFull
           prob: 0.20
       #SS220 Maint-Drinks End
+      - id: DrinkMopwataBottleRandom
+      - id: SpectralLocator
       - id: LidSalami
         weight: 0.05
 
@@ -344,6 +351,7 @@
       weight: 95
       children:
       - id: Machete
+      - id: Claymore
       - id: BaseBallBat
       - id: CombatKnife
       - id: Spear
@@ -375,6 +383,9 @@
       - id: Shiv
       - id: SawImprov
       - id: HydroponicsToolMiniHoe
+      - id: ClothingHandsKnuckleDusters
+      - !type:NestedSelector
+        tableId: AllToyWeaponsTable
 
 - type: entity
   name: Maint Loot Spawner
@@ -398,13 +409,47 @@
   id: MaintenancePlantSpawner
   parent: MarkerBase
   components:
-    - type: Sprite
-      layers:
-        - state: red
-        - sprite: Objects/Misc/spaceshroom.rsi
-          state: structure
-    - type: RandomSpawner
-      prototypes:
-        - Spaceshroom
-      chance: 0.6
-      offset: 0.0
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Objects/Misc/spaceshroom.rsi
+        state: structure
+  - type: EntityTableSpawner
+    table: !type:GroupSelector #SS220 anti shroom meta
+      children:
+      - id: Spaceshroom
+        prob: 0.6
+      #SS220 anti shroom meta start
+      - id: FoodMiGomyceteCult
+        prob: 0.03
+      #SS220 anti shroom meta end
+    offset: 0.0
+
+
+- type: entityTable
+  id: InsulsTable
+  table: !type:GroupSelector
+    children:
+    - id: ClothingHandsGlovesColorYellowBudget # budget insuls
+      weight: 85
+    - id: ClothingHandsGlovesColorYellow # true insuls
+      weight: 10
+    - id: ClothingHandsGlovesFingerlessInsulated # fingerless
+      weight: 4
+    - id: ClothingHandsGlovesConducting # conducting
+      weight: 1
+
+- type: entity
+  name: Maint Loot Spawner
+  id: MaintenanceInsulsSpawner
+  suffix: Insuls, safe
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Clothing/Hands/Gloves/Color/yellow.rsi
+      state: icon
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: InsulsTable

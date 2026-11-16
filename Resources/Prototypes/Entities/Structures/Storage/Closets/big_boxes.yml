@@ -29,7 +29,7 @@
       isCollidableWhenOpen: false
       openOnMove: false
       airtight: false
-      capacity: 4 #4 Entities seems like a nice comfy fit for a cardboard box.
+      capacity: 5 #5 entity capacity to fit all of your friends (or teammates on your nuclear operation without reinforcements).
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -73,6 +73,7 @@
       node: basebigbox
       containers:
         - entity_storage
+    - type: GravityAffected
 
 - type: entity
   id: StealthBox
@@ -89,22 +90,17 @@
       # SS220 Changes invis so that box is less visible at all times.
     - type: StealthOnMove
       passiveVisibilityRate: -1
-      movementVisibilityRate: 0
-# Corvax-HiddenDesc-Start
+      movementVisibilityRate: 0.20
+    # SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-StealthBox-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
-      - label: corvax-hidden-desc-StealthBox-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-# Corvax-HiddenDesc-End
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-StealthBox-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-StealthBox-research ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: ent-BaseBigBox
+    # SS220-hidden-desc-end
 
 - type: entity
   id: BigBox

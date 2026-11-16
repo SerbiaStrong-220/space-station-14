@@ -1,0 +1,55 @@
+- type: entity
+  id: CrystalPurple
+  parent: CrystalBase
+  suffix: purple
+  components:
+    - type: Sprite
+      color: "#bc13fe" #Неоновый фиолетовый
+    - type: PointLight
+      radius: 3
+      energy: 3
+      color: "#bc13fe" #Неоновый фиолетовый
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 20
+          behaviors:
+            - !type:PlaySoundBehavior
+              sound:
+                collection: GlassBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                ShardCrystalPurple:
+                  min: 1
+                  max: 2
+            - !type:DoActsBehavior
+               acts: [ "Destruction" ]
+
+- type: entity
+  id: CrystalWhite
+  parent: CrystalBase
+  suffix: white
+  components:
+    - type: Sprite
+      color: "#ffffff" #Белый
+    - type: PointLight
+      radius: 3
+      energy: 3
+      color: "#ffffff" #Белый
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 20
+          behaviors:
+            - !type:PlaySoundBehavior
+              sound:
+                collection: GlassBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                ShardCrystalWhite:
+                  min: 1
+                  max: 2
+            - !type:DoActsBehavior
+               acts: [ "Destruction" ]

@@ -1,3 +1,4 @@
-ent-OrganVoxLungs = { ent-OrganHumanLungs }
-    .suffix = вокс
-    .desc = { ent-OrganHumanLungs.desc }
+ent-OrganVoxTongueA = язык
+    .desc = Мясная мышца, в основном используемая для крика.
+ent-OrganVoxTongueB = язык
+    .desc = Мясная мышца, в основном используемая для крика.

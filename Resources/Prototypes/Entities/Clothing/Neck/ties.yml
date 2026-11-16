@@ -8,11 +8,16 @@
     sprite: Clothing/Neck/Ties/redtie.rsi
   - type: Clothing
     sprite: Clothing/Neck/Ties/redtie.rsi
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: Clothing/Neck/Ties/redtie.rsi
   - type: Tag
     tags:
     - HamsterWearable
     - WhitelistChameleon
     - ClothMade
+    - Recyclable
 
 - type: entity
   parent: ClothingNeckBase
@@ -24,6 +29,10 @@
     sprite: Clothing/Neck/Ties/dettie.rsi
   - type: Clothing
     sprite: Clothing/Neck/Ties/dettie.rsi
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: Clothing/Neck/Ties/dettie.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -35,9 +44,14 @@
     sprite: Clothing/Neck/Ties/scitie.rsi
   - type: Clothing
     sprite: Clothing/Neck/Ties/scitie.rsi
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: Clothing/Neck/Ties/scitie.rsi
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
   #ss220 special_sounds start

@@ -32,6 +32,11 @@
     sprite: Clothing/Head/Misc/chickenhead.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: ClothingHeadBase
@@ -74,6 +79,12 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - FacialHair
 
 - type: entity
   parent: ClothingHeadBase
@@ -85,12 +96,16 @@
     sprite: Clothing/Head/Misc/pwig.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/pwig.rsi
+  - type: HideLayerClothing
+    slots:
+    - HeadTop
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadMirror
   name: head mirror
   description: I doubt even the CMO knows how to use this thing.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Head/Misc/head_mirror.rsi
@@ -107,8 +122,16 @@
     sprite: Clothing/Head/Misc/richard.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/richard.rsi
+  - type: Item
+    storedRotation: 0
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - FacialHair
 
 - type: entity
   parent: ClothingHeadBase
@@ -122,6 +145,11 @@
     sprite: Clothing/Head/Misc/skubhead.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: ClothingHeadBase
@@ -130,14 +158,19 @@
   description: The tag reads "All proceeds go to the Hakurei Shrine."
   components:
   - type: Sprite
-    sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
+    sprite: SS220/Clothing/Head/Misc/shrine-maidens-wig.rsi #SS220 resprited
   - type: Clothing
-    sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
+    sprite: SS220/Clothing/Head/Misc/shrine-maidens-wig.rsi #SS220 resprited
   - type: Tag
     tags:
     - HamsterWearable
     - WhitelistChameleon
     - ShrineMaidenWig #SS220 tohoUpdate
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: ClothingHeadBase
@@ -164,10 +197,12 @@
   description: It smells like dead rat. Lets you speak like one!
   components:
   - type: Sprite
-    sprite: Clothing/Head/Misc/fancycrown.rsi
+    sprite: SS220/Clothing/Head/Misc/fancycrown.rsi #SS220 resprited
   - type: Clothing
-    sprite: Clothing/Head/Misc/fancycrown.rsi
-  - type: MobPrice
+    sprite: SS220/Clothing/Head/Misc/fancycrown.rsi #SS220 resprited
+  - type: TypingIndicatorClothing
+    proto: regal
+  - type: StaticPrice
     price: 3000
   - type: AddAccentClothing
     accent: MobsterAccent
@@ -177,7 +212,7 @@
   id: ClothingHeadHatCatEars
   name: cat ears
   description: "NYAH!"
-  suffix: DO NOT MAP
+  categories: [ DoNotMap ]
   components:
   - type: Tag
     tags: [] # ignore "WhitelistChameleon" tag
@@ -200,12 +235,14 @@
   - type: ClothingSpecialEmotes
     emotes: ['Meow', 'Mew', 'Growl', 'Purr', 'Hiss']
   #SS220 clothing special emotes end
-
+  - type: StaticPrice
+    price: 15000
 
 - type: entity
   parent: [ClothingHeadHatCatEars, BaseToggleClothing]
   id: ClothingHeadHatCatEarsValid
   suffix: Valid, DO NOT MAP
+  categories: [ DoNotMap ]
   components:
   - type: ToggleClothing
     action: ActionBecomeValid
@@ -224,20 +261,17 @@
     accent: OwOAccent
 
 - type: entity
-  categories: [ Actions, HideSpawnMenu ]
+  parent: BaseToggleAction
   id: ActionBecomeValid
   name: Become Valid
   description: "*notices your killsign* owo whats this"
-  components:
-  - type: InstantAction
-    event: !type:ToggleActionEvent
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatDogEars
   name: doggy ears
   description: Only for good boys.
-  suffix: DO NOT MAP
+  categories: [ DoNotMap ]
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/dogears.rsi
@@ -258,6 +292,12 @@
     sprite: Clothing/Head/Misc/squiddy.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - FacialHair
 
 - type: entity
   parent: ClothingHeadBase
@@ -269,6 +309,12 @@
     sprite: Clothing/Head/Misc/red_racoon.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/red_racoon.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - FacialHair
 
 - type: entity
   parent: Clothing
@@ -286,15 +332,17 @@
   - type: Clothing
     slots:
     - HEAD
-  - type: Food
+  - type: Edible
+    edible: Drink
     solution: drink
-    useSound: /Audio/Items/drink.ogg
-    eatMessage: drink-component-try-use-drink-success-slurp
     delay: 0.5
     forceFeedDelay: 1.5
+    utensil: Spoon
   - type: FlavorProfile
     flavors:
       - water
+  - type: DrainableSolution
+    solution: drink
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -338,3 +386,19 @@
     sprite: Clothing/Head/Misc/hairflower.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/hairflower.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadPerformerWig
+  name: performer's wig
+  description: On a closer inspection, it appears that it is made from optic fiber.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Misc/performer-wig.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Misc/performer-wig.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide

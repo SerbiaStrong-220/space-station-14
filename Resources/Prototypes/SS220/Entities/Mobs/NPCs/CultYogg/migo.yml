@@ -1,0 +1,177 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: MiGo
+  parent: #SimpleSpaceMobBase
+    - BaseMob
+    - FlyingMobBase
+    - MobCombat
+    - BaseSimpleMob
+    - MobFlammable
+    - MobPolymorphable
+  description: The child of the Dark God.
+  id: MobMiGo
+  suffix: CultYogg
+  components:
+  - type: NightVision
+    profile: NightVisionLightGreen
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  #cultists comps
+  - type: MiGo
+    eraseWhitelist:
+      components:
+      - CultYoggBuilding
+      - CultYoggBuildingFrame
+    constructionGridsBlacklist:
+      tags:
+      - MiGoBuildingBlocker
+  - type: Body
+  - type: Hands
+    hands:
+      body_part_slot_far right hand:
+        location: Right
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+      body_part_slot_right hand:
+        location: Right
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+      body_part_slot_left hand:
+        location: Left
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+      body_part_slot_far left hand:
+        location: Left
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+    sortedHands:
+    - body_part_slot_far right hand
+    - body_part_slot_right hand
+    - body_part_slot_left hand
+    - body_part_slot_far left hand
+    showInHands: false
+    disableExplosionRecursion: true
+    canBeStripped: false
+  - type: ComplexInteraction #For UI opening only
+  - type: ShowHealthBars
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelYoggSothothCult
+  - type: RandomMetadata
+    nameSegments: [ cult_yogg_migo ]
+  - type: UserInterface
+    interfaces:
+      enum.MiGoUiKey.Erect:
+        type: MiGoErectBoundUserInterface
+  - type: AstralLeap
+    astralAction: ActionMiGoAstral
+    astralEnt: MiGoInAstral
+    astralLeapDoAfterTime: 3
+    gridsBlacklist:
+      tags:
+      - AstralBlocker
+  - type: StatusIcon
+  - type: ShowCultYoggIcons
+  - type: NpcFactionMember
+    factions:
+    - CultYogg
+  #situational for logic
+  - type: Puller
+    needsHands: false
+  - type: Insulated
+  - type: FlashImmunity
+  - type: Speech
+    speechVerb: LargeMob
+  - type: TTS
+    voice: forester
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
+    changeIconOverlaySpace: true
+  #visual
+  - type: PointLight
+    netsync: false
+    radius: 6
+    castShadows: false
+    enabled: false
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/CultYogg/MiGo.rsi
+    layers:
+      - map: ["enum.DamageStateVisualLayers.Base"]
+        state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Critical:
+        Base: critical
+      Dead:
+        Base: dead
+  - type: Visibility
+    layer: 1
+  #other
+  - type: Experience
+  - type: ExperienceAddition
+    definitionId: MiGoRoleExperience
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 6
+    baseSprintSpeed : 6
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 80
+        mask:
+          - FlyingMobMask
+        layer:
+          - FlyingMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      140: Critical
+      150: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 800
+      behaviors:
+      - !type:GibBehavior { }
+  - type: Stamina
+    baseCritThreshold: 200
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Blunt: 4
+        Slash: 7
+        Structural: 40 #anti-useless in base
+  - type: TemperatureDamage
+    heatDamageThreshold: 360
+    coldDamageThreshold: -150
+  - type: Temperature
+    currentTemperature: 310.15
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener

@@ -22,6 +22,8 @@ ban-banned-1 = You, or another user of this computer or connection, are banned f
 ban-banned-2 = The ban reason is: "{$reason}"
 ban-banned-3 = If you don't agree with the sanction, you can apeal it in our Discord: https://discord.gg/ss220
 ban-banned-4 = Attempts to circumvent this ban such as creating a new account will be logged.
+ban-banned-8 = Ban number: { $banId }
+ban-banned-9 = Banned player login: "{$login}".
 
 soft-player-cap-full = The server is full!
 panic-bunker-account-denied = This server is in panic bunker mode, often enabled as a precaution against raids. New connections by accounts not meeting certain requirements are temporarily not accepted. Try again later
@@ -36,7 +38,6 @@ whitelist-manual = You are not whitelisted on this server.
 whitelist-blacklisted = You are blacklisted from this server.
 whitelist-always-deny = You are not allowed to join this server.
 whitelist-fail-prefix = Not whitelisted: {$msg}
-whitelist-misconfigured = The server is misconfigured and is not accepting players. Please contact the server owner and try again later.
 
 cmd-blacklistadd-desc = Adds the player with the given username to the server blacklist.
 cmd-blacklistadd-help = Usage: blacklistadd <username>
@@ -58,3 +59,11 @@ baby-jail-account-reason-account = Your Space Station 14 account is too old. It 
 baby-jail-account-reason-overall = Your overall playtime on the server must be younger than {$minutes} $minutes
 
 kick-afk = You were kicked for AFK
+
+generic-misconfigured = The server is misconfigured and is not accepting players. Please contact the server owner and try again later.
+
+ipintel-server-ratelimited = This server uses an auditing system with external verification, but the server has reached its maximum verification limit with the external service. Please contact the administration team of the server to inform them and for further assistance, or try again later.
+ipintel-unknown = This server uses an auditing system with external verification, but an error was encountered while verifying your connection. Please contact the administration team of the server to inform them and for further assistance, or try again later.
+ipintel-suspicious = You seem to be attempting to connect using a datacenter, proxy, VPN or otherwise suspicious connection. For administrative reasons, we do not allow these connections to play. If you have a VPN or similar enabled, please turn it off and attempt to reconnect or contact the administration team of the server for assistance on how to continue if you believe this is false or require using these services to play.
+
+hwid-required = Your client has refused to send a hardware id. Please contact the administration team for further assistance.

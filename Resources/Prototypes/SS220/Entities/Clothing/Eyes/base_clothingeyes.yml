@@ -1,0 +1,41 @@
+- type: entity
+  parent: [ClothingEyesBase, BaseFoldable]
+  id: ClothingHeadEyeBaseFlippableAlt
+  abstract: true
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-flip-verb
+    foldVerbText: fold-flip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  parent: ClothingHeadEyeBaseFlippableAlt
+  id: ClothingHeadEyeBaseFlippedAlt
+  suffix: flipped
+  abstract: true
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: flipped
+  - type: Item
+    heldPrefix: flipped
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: true

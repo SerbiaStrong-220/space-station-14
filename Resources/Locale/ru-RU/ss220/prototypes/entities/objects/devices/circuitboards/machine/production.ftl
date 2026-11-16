@@ -1,0 +1,14 @@
+ent-ThrusterShuntingMachineCircuitboard = маневровый ракетный двигатель (машинная плата)
+    .desc = { ent-BaseMachineCircuitboard.desc }
+ent-ThrusterBigLeftMachineCircuitboard = большой ракетный двигатель (левый) (машинная плата)
+    .desc = { ent-BaseMachineCircuitboard.desc }
+ent-ThrusterBigRightMachineCircuitboard = большой ракетный двигатель (правый) (машинная плата)
+    .desc = { ent-BaseMachineCircuitboard.desc }
+ent-ThrusterBigCenterMachineCircuitboard = большой ракетный двигатель (середина) (машинная плата)
+    .desc = { ent-BaseMachineCircuitboard.desc }
+ent-ShuttleGunMLGSWCircuitboard = SPG-300 "Мародёр" (машинная плата)
+    .desc = Печатная плата SPG-300 "Мародёр"
+ent-KitchenElectricGrillAdvancedCircuitboard = продвинутый электрогриль (машинная плата)
+    .desc = Печатная плата для продвинутого электрогриля.
+ent-FoodProcessorMachineCircuitboard = кухонный комбайн (машинная плата)
+    .desc = Печатная плата для кухонного комбайна.

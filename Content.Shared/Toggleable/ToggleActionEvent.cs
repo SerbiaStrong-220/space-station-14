@@ -9,14 +9,36 @@ namespace Content.Shared.Toggleable;
 /// <remarks>
 /// If you are using <c>ItemToggleComponent</c> subscribe to <c>ItemToggledEvent</c> instead.
 /// </remarks>
-public sealed partial class ToggleActionEvent : InstantActionEvent;
+public sealed partial class ToggleActionEvent : InstantActionEvent
+{
+    // SS220 checking the toggle value start
+    [DataField]
+    public bool ToggleAction;
+    // SS220 checking the toggle value end
+}
 
 /// <summary>
 ///     Generic enum keys for toggle-visualizer appearance data & sprite layers.
 /// </summary>
 [Serializable, NetSerializable]
-public enum ToggleVisuals : byte
+public enum ToggleableVisuals : byte
 {
-    Toggled,
-    Layer
+    Enabled,
+    Layer,
+    Color,
+}
+
+/// <summary>
+///     Generic sprite layer keys.
+/// </summary>
+[Serializable, NetSerializable]
+public enum LightLayers : byte
+{
+    Light,
+
+    /// <summary>
+    ///     Used as a key for generic unshaded layers. Not necessarily related to an entity with an actual light source.
+    ///     Use this instead of creating a unique single-purpose "unshaded" enum for every visualizer.
+    /// </summary>
+    Unshaded,
 }

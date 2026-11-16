@@ -2,7 +2,9 @@
 
 - type: entityTable
   id: CargoGiftsTable
-  table: !type:GroupSelector # ~~we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp~~ But we arent doing that shit yet, it picks a random one StationEventComp be damned.
+  # SS220 Midround events fix begin
+  table: !type:AllSelector # ~~we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp~~ But we arent doing that shit yet, it picks a random one StationEventComp be damned.
+  # SS220 Midround events fix end
     children:
     - id: GiftsEngineering
     - id: GiftsFireProtection
@@ -16,7 +18,7 @@
     - id: GiftsVendingRestock
 
 # Game Rules
-    
+
 - type: entity
   id: CargoGiftsBase
   parent: BaseGameRule
@@ -63,9 +65,9 @@
     description: cargo-gift-pizza-large
     dest: cargo-gift-dest-bar
     gifts:
-      FoodPizzaLarge: 1              # 16 pizzas
+      FoodPizza: 4              # 16 pizzas
       FoodBarSupply: 1
-      FoodSoftdrinksLarge: 1
+      FoodSoftdrinks: 2         # 32 sodas
 
 - type: entity
   id: GiftsEngineering
@@ -196,6 +198,7 @@
       ArmorySmg: 1
       ArmoryShotgun: 1
       ArmoryLaser: 1
+      ArmoryRifle: 1
 
 - type: entity
   id: GiftsSecurityRiot
@@ -213,45 +216,4 @@
       SecurityRiot: 2
       SecurityRestraints: 2
       SecurityNonLethal: 2
-
-#ss220-gamma
-- type: entity
-  id: GiftsGamma
-  parent: CargoGiftsBase #SS220 GiftsGamma event fix
-  categories: [ GameRules ]
-  components:
-  #SS220 GiftsGamma event fix begin
-  - type: StationEvent
-    cannotStartRandomly: true
-  #SS220 GiftsGamma event fix end
-  - type: CargoGiftsRule
-    description: cargo-gift-dest-gamma
-    sender: cargo-gift-default-sender
-    dest: cargo-gift-dest-all
-    gifts:
-      SecurityArmor: 2
-      SecurityHelmet: 2
-      ArmorySmg: 3
-      ArmoryShotgun: 3
-#ss220-gammaend
-
-#ss220 cooking supplies begin
-- type: entity
-  id: GiftsKitchen
-  parent: CargoGiftsBase
-  components:
-  - type: StationEvent
-    weight: 6
-    duration: 120
-    minimumPlayers: 30
-    earliestStart: 20
-  - type: CargoGiftsRule
-    description: cargo-gift-kitchen
-    dest: cargo-gift-dest-kitchen
-    gifts:
-      MeatCrate: 1
-      ExoticMeatCrate: 1
-      FoodDinnerware: 1
-      FoodCook: 1
-      CrateVendingMachineRestockChefvend: 1
-#ss220 cooking supplies end
+      SecurityNonlethalThrowables: 1

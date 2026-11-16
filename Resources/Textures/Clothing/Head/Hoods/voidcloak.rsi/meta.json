@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Made by Dezzzix; Discord: dezzzix",
+  "copyright": "Made by Dezzzix; Discord: dezzzix, SS220-add-vox-coat-hood-sprite (equipped-HELMET-vox) resprited for SS220 by dinazewwr (Discord)",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,10 @@
     },
     {
       "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-vox",
       "directions": 4
     }
   ]

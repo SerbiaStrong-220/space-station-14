@@ -9,3 +9,11 @@
         - state: idiaa
     - type: PresetIdCard
       job: IAA
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+    #ss220 add pdaidpainter end

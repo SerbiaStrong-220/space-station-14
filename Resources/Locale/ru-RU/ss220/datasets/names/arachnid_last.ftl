@@ -1,0 +1,16 @@
+ss220-names-arachnid-last-dataset-1 = 'Офесхи
+ss220-names-arachnid-last-dataset-2 = 'Оранху
+ss220-names-arachnid-last-dataset-3 = 'Кхар
+ss220-names-arachnid-last-dataset-4 = 'Марунсха
+ss220-names-arachnid-last-dataset-5 = 'Жаруве
+ss220-names-arachnid-last-dataset-6 = 'Крунаф
+ss220-names-arachnid-last-dataset-7 = 'Шорани
+ss220-names-arachnid-last-dataset-8 = 'Хадар
+ss220-names-arachnid-last-dataset-9 = 'Фарунша
+ss220-names-arachnid-last-dataset-10 = 'Жафесхи
+ss220-names-arachnid-last-dataset-11 = 'Нарефхи
+ss220-names-arachnid-last-dataset-12 = 'Кхаару
+ss220-names-arachnid-last-dataset-13 = 'Харо
+ss220-names-arachnid-last-dataset-14 = 'Коро
+ss220-names-arachnid-last-dataset-15 = 'Скаало
+ss220-names-arachnid-last-dataset-16 = Коошо

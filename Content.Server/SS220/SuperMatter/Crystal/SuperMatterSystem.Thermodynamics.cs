@@ -1,14 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Diagnostics.CodeAnalysis;
-using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Server.Atmos.EntitySystems;
-using Content.Shared.SS220.SuperMatter.Functions;
+using Content.Server.SS220.SuperMatter.Crystal.Components;
+using Content.Server.SS220.SuperMatter.Crystal.SuperMatterInterior;
 using Content.Shared.Atmos;
+using Content.Shared.SS220.SuperMatter.Functions;
 using Robust.Shared.Random;
 
-namespace Content.Server.SS220.SuperMatterCrystal;
+namespace Content.Server.SS220.SuperMatter.Crystal;
 
-public sealed partial class SuperMatterSystem : EntitySystem
+public sealed partial class SuperMatterSystem
 {
     /* TODOs:
         [ ] Make Internal log of starting SM
@@ -16,14 +18,14 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     */
 
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
 
     private float GetDecayMatterMultiplier(float temperature, float pressure) => SuperMatterInternalProcess.GetDecayMatterMultiplier(temperature, pressure);
     private float GetMolesReactionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetMolesReactionEfficiency(temperature, pressure);
     private float GetDeltaChemistryPotential(float temperature, float pressure) => SuperMatterInternalProcess.GetDeltaChemistryPotential(temperature, pressure);
     private float GetChemistryPotential(float temperature, float pressure) => CHEMISTRY_POTENTIAL_BASE + GetDeltaChemistryPotential(temperature, pressure);
-    private float GetHeatCapacity(float temperature, float matter) => SuperMatterInternalProcess.GetHeatCapacity(temperature, matter);
+    private float GetHeatCapacity(float temperature, float matter) => SuperMatterInternalProcess.GetHeatCapacity(temperature, matter / MatterNondimensionalization);
     private float GetReleaseEnergyConversionEfficiency(float temperature, float pressure) => SuperMatterInternalProcess.GetReleaseEnergyConversionEfficiency(temperature, pressure);
     private float GetZapToRadiationRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetZapToRadiationRatio(temperature, pressure, smState);
     private float GetOxygenToPlasmaRatio(float temperature, float pressure, SuperMatterPhaseState smState) => SuperMatterInternalProcess.GetOxygenToPlasmaRatio(temperature, pressure, smState);
@@ -34,9 +36,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
     public const float CHEMISTRY_POTENTIAL_BASE = 12f; // parrots now, but need to concrete in future
     public const float MATTER_DECAY_BASE_RATE = 85f; // parrots now, but need to concrete in future
     /// <summary> Defines how fast SM gets in thermal equilibrium with gas in it. Do not make it greater than 1! </summary>
-    public const float SM_HEAT_TRANSFER_RATIO = 0.07f;
+    public const float SM_HEAT_TRANSFER_RATIO = 0.17f;
 
-    private const float RestructureProbability = 0.0002f; // remember that we have about 30 times trying it in a second. 2e-4 is like one chance in 3 minutes.
+    private const float RestructureProbability = 0.001f;
     private const float RestructureAdditionalMatterDimensionLess = 42f;
 
     private void EvaluateDeltaInternalEnergy(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime)
@@ -58,24 +60,26 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var deltaInternalEnergy = (smDeltaT * (matterToTemperatureRatio - newMatterToTemperatureRatio) * smComp.Temperature / Atmospherics.T0C
                                     - chemistryPotential * normalizedDeltaMatter)
                                     / (1 + newMatterToTemperatureRatio * smDeltaT);
-        deltaInternalEnergy = Math.Clamp(deltaInternalEnergy, -SuperMatterComponent.MinimumInternalEnergy / 5f, SuperMatterComponent.MinimumInternalEnergy / 5f);
+        deltaInternalEnergy = Math.Clamp(deltaInternalEnergy, -SuperMatterComponent.MinimumInternalEnergy / 5f, SuperMatter.Crystal.Components.SuperMatterComponent.MinimumInternalEnergy / 5f);
         smComp.InternalEnergy += deltaInternalEnergy * frameTime;
 
         if (smComp.InternalEnergy == SuperMatterComponent.MinimumInternalEnergy
             && _robustRandom.Prob(RestructureProbability))
         {
-            smComp.Matter += _robustRandom.GetRandom().NextFloat(0.7f, 1.3f) * RestructureAdditionalMatterDimensionLess * MatterNondimensionalization;
-            smComp.InternalEnergy = GetSafeInternalEnergyToMatterValue(crystal.Comp.Matter) * _robustRandom.GetRandom().NextFloat(0.7f, 1.3f);
+            smComp.Matter += _robustRandom.NextFloat(0.7f, 1.3f) * RestructureAdditionalMatterDimensionLess * MatterNondimensionalization;
+            // explicitly take energy for first mode
+            smComp.InternalEnergy = GetSafeInternalEnergyToMatterValue(crystal.Comp.Matter)[0].Energy * _robustRandom.NextFloat(0.7f, 1.3f);
             _popupSystem.PopupEntity(Loc.GetString("supermatter-crystal-restructure"), crystalUid);
 
             smComp.Integrity = MathF.Max(smComp.Integrity * 0.8f, 0.1f);
             smComp.Temperature *= 0.6f;
         }
 
-        smComp.Matter = smComp.Matter + deltaMatter * frameTime;
-        smComp.Temperature = smComp.Temperature + smDeltaT * frameTime;
+        smComp.Matter += deltaMatter * frameTime;
+        smComp.Temperature += smDeltaT * frameTime;
         _atmosphere.AddHeat(gasMixture, -crystalHeatFromGas * frameTime);
     }
+
     /// <summary> We dont apply it to Matter field of SMComp because we need this value in internal energy evaluation </summary>
     private float CalculateDecayedMatter(Entity<SuperMatterComponent> crystal, GasMixture gasMixture)
     {
@@ -83,12 +87,13 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var gasEffectMultiplier = GetRelativeGasesInfluenceToMatterDecay(smComp, gasMixture);
         var gasFlatInfluence = GetFlatGasesInfluenceToMatterDecay(smComp, gasMixture);
 
-        /// gas effect multiplier should affects only Base decay rate, f.e. for gases which mostly occupy SM decay
+        // gas effect multiplier should affects only Base decay rate, f.e. for gases which mostly occupy SM decay
         var environmentMultiplier = GetDecayMatterMultiplier(smComp.Temperature, gasMixture.Pressure);
         environmentMultiplier = Math.Min(environmentMultiplier, 20f); // cut off enormous numbers, our goal fun not overwhelm
 
         return (MATTER_DECAY_BASE_RATE * (gasEffectMultiplier + 1) + gasFlatInfluence) * environmentMultiplier;
     }
+
     /// <summary> Calculate how much matter will be added this step
     ///  and distract used gas from its inner gasMixture if deleteUsedGases true
     /// We dont apply it to Matter field of SMComp because we need this value in internal energy evaluation </summary>
@@ -114,6 +119,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         return resultAdditionalMatter;
     }
+
     /// <summary>
     /// In future maybe useful if a need to make/init own SM gasStructs
     /// </summary>

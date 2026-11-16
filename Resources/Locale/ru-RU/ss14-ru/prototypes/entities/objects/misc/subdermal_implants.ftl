@@ -1,15 +1,19 @@
+# TODO:
+# On upstream don't move it all to our locale, instead use HiddenDescriptionComponent.
 ent-BaseSubdermalImplant = имплант
-    .desc = Микрочип, который вживляют под кожу.
-# Corvax-HiddenDesc-Start
+    .desc = Имплант без подписи.
+
+# to make implant correct name not code-by use .true-name placed like .desc
+
 ent-SadTromboneImplant = { ent-BaseSubdermalImplant }
     .suffix = Грустный тромбон
-    .desc = { ent-BaseSubdermalImplant.desc }
+    .desc = Имплант подписан "грустный тромбон"
 ent-LightImplant = { ent-BaseSubdermalImplant }
     .suffix = Свет
-    .desc = { ent-BaseSubdermalImplant.desc }
+    .desc = Имплант подписан "свет"
 ent-BikeHornImplant = { ent-BaseSubdermalImplant }
-    .suffix = хонк-имплант
-    .desc = { ent-BaseSubdermalImplant.desc }
+    .suffix = Хонк-имплант
+    .desc = Имплант подписан "велосипедный клаксон"
 ent-TrackingImplant = { ent-BaseSubdermalImplant }
     .suffix = Трекер
     .desc = { ent-BaseSubdermalImplant.desc }
@@ -31,6 +35,9 @@ ent-ScramImplant = { ent-BaseSubdermalImplant }
 ent-DnaScramblerImplant = { ent-BaseSubdermalImplant }
     .suffix = Миксер ДНК
     .desc = { ent-BaseSubdermalImplant.desc }
+ent-ChameleonControllerImplant = { ent-BaseSubdermalImplant }
+    .suffix = Контроллер хамелеона
+    .desc = { ent-BaseSubdermalImplant.desc }
 ent-MicroBombImplant = { ent-BaseSubdermalImplant }
     .suffix = Микробомба
     .desc = { ent-BaseSubdermalImplant.desc }
@@ -41,9 +48,18 @@ ent-DeathAcidifierImplant = { ent-BaseSubdermalImplant }
     .suffix = Посмертный растворитель
     .desc = { ent-BaseSubdermalImplant.desc }
 ent-DeathRattleImplant = { ent-BaseSubdermalImplant }
-    .suffix = Предсмертный хрип
+    .suffix = Предсмертный хрип, Синдикат
     .desc = { ent-BaseSubdermalImplant.desc }
+    .true-name = имплант "Предсмертный хрип" образца Синдикат
 ent-MindShieldImplant = { ent-BaseSubdermalImplant }
     .suffix = Щит разума
     .desc = { ent-BaseSubdermalImplant.desc }
-# Corvax-HiddenDesc-End
+ent-FakeMindShieldImplant = { ent-BaseSubdermalImplant }
+    .suffix = Фальшивый щит разума
+    .desc = { ent-BaseSubdermalImplant.desc }
+ent-RadioImplant = { ent-BaseSubdermalImplant }
+    .suffix = Радио Синдикат
+    .desc = { ent-BaseSubdermalImplant.desc }
+ent-RadioImplantCentcomm = { ent-BaseSubdermalImplant }
+    .suffix = Радио ЦК
+    .desc = Имплант подписан "Радио"

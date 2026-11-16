@@ -3,12 +3,12 @@ namespace Content.Server.SS220.AutoEngrave;
 [RegisterComponent]
 public sealed partial class EngraveNameOnOpenComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite), DataField("activated")]
+    [DataField]
     public bool Activated;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("autoEngraveLocKey")]
+    [DataField]
     public string? AutoEngraveLocKey;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("toEngrave")]
+    [DataField]
     public HashSet<string> ToEngrave = new();
 }

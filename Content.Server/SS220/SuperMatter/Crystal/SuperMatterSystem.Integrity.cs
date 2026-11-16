@@ -1,12 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using System.ComponentModel;
-using Content.Server.SS220.SuperMatterCrystal.Components;
+
+using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Shared.Atmos;
 using Content.Shared.SS220.SuperMatter.Functions;
 
-namespace Content.Server.SS220.SuperMatterCrystal;
+namespace Content.Server.SS220.SuperMatter.Crystal;
 
-public sealed partial class SuperMatterSystem : EntitySystem
+public sealed partial class SuperMatterSystem
 {
     /// <summary> Based lie, negative damage = heal, no exception will thrown </summary>
     /// <returns> if positive - damage, if negative - heal </returns>
@@ -18,22 +18,40 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var damage = damageFromDelta > 0 ? damageFromDelta * temperatureFactor : damageFromDelta;
         return damage;
     }
+
     public float GetInternalEnergyToMatterDamageFactor(float internalEnergy, float matter)
     {
-        var safeInternalEnergy = GetSafeInternalEnergyToMatterValue(matter);
-        var delta = internalEnergy - safeInternalEnergy;
+        var safeInternalEnergyForModes = GetSafeInternalEnergyToMatterValue(matter);
+
+        float delta = 0;
+        var minMagnitude = float.MaxValue;
+        foreach (var item in safeInternalEnergyForModes)
+        {
+            var currentDelta = item.Energy - internalEnergy;
+            var magnitude = currentDelta * currentDelta;
+
+            if (magnitude > minMagnitude)
+                continue;
+
+            minMagnitude = magnitude;
+            delta = currentDelta;
+        }
+
         var damageFromDelta = SuperMatterFunctions.EnergyToMatterDamageFactorFunction(delta, matter / MatterNondimensionalization);
         return damageFromDelta;
     }
-    public float GetSafeInternalEnergyToMatterValue(float matter)
+
+    public SuperMatterFunctions.ModeSafeEnergy[] GetSafeInternalEnergyToMatterValue(float matter)
     {
         var normalizedMatter = matter / MatterNondimensionalization;
         return SuperMatterFunctions.SafeInternalEnergyToMatterFunction(normalizedMatter);
     }
+
     public void AddIntegrityDamage(SuperMatterComponent smComp, float damage)
     {
         smComp.IntegrityDamageAccumulator += damage;
     }
+
     public float GetIntegrity(SuperMatterComponent smComp)
     {
         return MathF.Round(smComp.Integrity, 2);
@@ -41,6 +59,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     private const float MaxDamagePerSecond = 0.5f;
     private const float MaxRegenerationPerSecond = 1.2f;
+
     /// <summary> Based lie: negative damage = heal, no exception will thrown </summary>
     /// <returns> Return false only if SM integrity WILL fall below zero, but wont set it to zero </returns>
     private bool TryImplementIntegrityDamage(Entity<SuperMatterComponent> entity)
@@ -65,21 +84,27 @@ public sealed partial class SuperMatterSystem : EntitySystem
     }
 
     private const float TemperatureDamageFactorCoeff = 3f;
-    private const float TemperatureDamageFactorSlowerOffset = 20f;
-    private float TemperatureDamageFactorFunction(float normalizedTemperature)
-    {
-        var normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
-        var maxFuncValue = MathF.Pow(normalizedMaxTemperature, 1.5f) /
-                (normalizedMaxTemperature - TemperatureDamageFactorSlowerOffset);
+    private const float TemperatureDamageFactorSlowerOffset = 1f;
+    private const float MinDamageFactor = 1e-2f;
 
-        return TemperatureDamageFactorCoeff * (MathF.Pow(normalizedTemperature, 1.5f) /
-                (normalizedTemperature - TemperatureDamageFactorSlowerOffset)) / maxFuncValue;
+    public static float TemperatureDamageFactorFunction(float normalizedTemperature)
+    {
+        const float normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
+
+        var maxFuncValue = MathF.Pow(normalizedMaxTemperature, 1.5f) /
+                (normalizedMaxTemperature + TemperatureDamageFactorSlowerOffset);
+
+        var funcValue = TemperatureDamageFactorCoeff * (MathF.Pow(normalizedTemperature, 1.5f) /
+                (normalizedTemperature + TemperatureDamageFactorSlowerOffset));
+
+        return MinDamageFactor + funcValue / maxFuncValue;
     }
     /// <summary>
     /// Just slowes down destroying the crystal to make effect of "last seconds"
     /// </summary>
     private const float StartIntegrityDecrease = 50f;
     private const float DepthOfCoefficient = 0.75f;
+
     private float GetIntegrityDamageCoefficient(float integrity)
     {
         var coeff = 1f;

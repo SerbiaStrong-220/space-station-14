@@ -7,13 +7,16 @@ using Content.Client.Corvax.JoinQueue;
 using Content.Client.Corvax.Sponsors;
 using Content.Client.DebugMon;
 using Content.Client.Eui;
+using Content.Client.FeedbackPopup;
 using Content.Client.Fullscreen;
+using Content.Client.GameTicking.Managers;
 using Content.Client.GhostKick;
 using Content.Client.Guidebook;
 using Content.Client.Launcher;
 using Content.Client.Mapping;
 using Content.Client.Parallax.Managers;
 using Content.Client.Players.PlayTimeTracking;
+using Content.Client.Playtime;
 using Content.Client.Replay;
 using Content.Client.Screenshot;
 using Content.Client.Stylesheets;
@@ -22,21 +25,26 @@ using Content.Client.Voting;
 using Content.Shared.Administration.Logs;
 using Content.Client.Lobby;
 using Content.Client.Players.RateLimiting;
+using Content.Client.SS220.ChatBans;
 using Content.Shared.Administration.Managers;
 using Content.Client.SS220.Discord;
 using Content.Shared.Chat;
+using Content.Shared.FeedbackSystem;
+using Content.Shared.IoC;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
+using Content.Client.SS220.TTS;
+using Content.Client.SS220.Species;
 
 namespace Content.Client.IoC
 {
     internal static class ClientContentIoC
     {
-        public static void Register()
+        public static void Register(IDependencyCollection collection)
         {
-            var collection = IoCManager.Instance!;
-
+            SharedContentIoC.Register(collection);
             collection.Register<IParallaxManager, ParallaxManager>();
+            collection.Register<GeneratedParallaxCache>();
             collection.Register<IChatManager, ChatManager>();
             collection.Register<ISharedChatManager, ChatManager>();
             collection.Register<IClientPreferencesManager, ClientPreferencesManager>();
@@ -61,10 +69,17 @@ namespace Content.Client.IoC
             collection.Register<DiscordPlayerInfoManager>(); //SS220 discord user info
             collection.Register<ContentReplayPlaybackManager>();
             collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
+            collection.Register<SpeciesRequirementsManager>(); // SS220 Species bans
+            collection.Register<ChatRequirementsManager>(); // SS220 Chat bans
             collection.Register<MappingManager>();
             collection.Register<DebugMonitorManager>();
             collection.Register<PlayerRateLimitManager>();
             collection.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
+            collection.Register<TitleWindowManager>();
+            collection.Register<ClientsidePlaytimeTrackingManager>();
+            collection.Register<TTSManager>(); // SS220 TTS
+            collection.Register<ClientFeedbackManager>();
+            collection.Register<ISharedFeedbackManager, ClientFeedbackManager>();
         }
     }
 }

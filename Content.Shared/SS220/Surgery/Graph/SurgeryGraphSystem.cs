@@ -1,0 +1,88 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+
+namespace Content.Shared.SS220.Surgery.Graph;
+
+public sealed partial class SurgeryGraphSystem : EntitySystem
+{
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+
+    public SoundSpecifier? GetSoundSpecifier(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.EndSound);
+    }
+
+    public IReadOnlyList<ISurgeryGraphEdgeAction> GetActions(SurgeryGraphEdge edge)
+    {
+        return GetList(edge, (x) => x.Actions);
+    }
+    public IReadOnlyList<LocId> GetActionsLocIds(SurgeryGraphEdge edge)
+    {
+        return GetList(edge, (x) => x.ActionLocIds);
+    }
+
+    public IReadOnlyList<SurgeryGraphRequirement> GetRequirements(SurgeryGraphEdge edge)
+    {
+        return GetList(edge, (x) => x.Requirements);
+    }
+
+    public IReadOnlyList<SurgeryGraphRequirement> GetVisibilityRequirements(SurgeryGraphEdge edge)
+    {
+        return GetList(edge, (x) => x.VisibilityRequirements);
+    }
+
+    public LocId? ExamineDescription(SurgeryGraphNode node)
+    {
+        return Get(node, (x) => x.NodeText.ExamineDescription);
+    }
+
+    public LocId? Popup(SurgeryGraphNode node)
+    {
+        return Get(node, (x) => x.NodeText.Popup);
+    }
+
+    public float? Delay(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.Delay);
+    }
+
+    public SpriteSpecifier? EdgeIcon(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.EdgeIcon);
+    }
+
+    public IReadOnlyList<T> GetList<T>(SurgeryGraphEdge edge, Func<SurgeryGraphEdge, IReadOnlyList<T>> listGetter) where T : notnull
+    {
+        if (edge.BaseEdge.HasValue
+            && listGetter(edge).Count == 0
+            && _prototypeManager.TryIndex(edge.BaseEdge, out var baseEdgeProto))
+            return listGetter(baseEdgeProto.Edge);
+
+        return listGetter(edge);
+    }
+
+    public T? Get<T>(SurgeryGraphNode node, Func<SurgeryGraphNode, T?> getter)
+    {
+        if (getter(node) != null)
+            return getter(node);
+
+        if (_prototypeManager.TryIndex(node.BaseNode, out var prototype))
+            return getter(prototype.Node);
+
+        return default;
+    }
+
+    public T? Get<T>(SurgeryGraphEdge edge, Func<SurgeryGraphEdge, T?> getter)
+    {
+        if (getter(edge) != null)
+            return getter(edge);
+
+        if (_prototypeManager.TryIndex(edge.BaseEdge, out var prototype))
+            return getter(prototype.Edge);
+
+        return default;
+    }
+}

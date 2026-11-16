@@ -2,8 +2,10 @@ using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.SS220.Power.Components;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
+using Robust.Shared.Random;
 
 namespace Content.Server.StationEvents.Events;
 
@@ -17,7 +19,7 @@ public sealed class BreakerFlipRule : StationEventSystem<BreakerFlipRuleComponen
         if (!TryComp<StationEventComponent>(uid, out var stationEvent))
             return;
 
-        var str = Loc.GetString("station-event-breaker-flip-announcement", ("data", Loc.GetString(Loc.GetString($"random-sentience-event-data-{RobustRandom.Next(1, 6)}"))));
+        var str = Loc.GetString("station-event-breaker-flip-announcement", ("data", Loc.GetString($"random-sentience-event-data-{RobustRandom.Next(1, 6)}")));
         stationEvent.StartAnnouncement = str;
 
         base.Added(uid, component, gameRule, args);
@@ -35,7 +37,9 @@ public sealed class BreakerFlipRule : StationEventSystem<BreakerFlipRuleComponen
         var query = EntityQueryEnumerator<ApcComponent, TransformComponent>();
         while (query.MoveNext(out var apcUid, out var apc, out var xform))
         {
-            if (apc.MainBreakerEnabled && CompOrNull<StationMemberComponent>(xform.GridUid)?.Station == chosenStation)
+            //SS220-SM-fix-begin
+            if (apc.MainBreakerEnabled && !HasComp<HighPriorityAPCComponent>(apcUid)
+                && CompOrNull<StationMemberComponent>(xform.GridUid)?.Station == chosenStation) //SS220-SM-fix-end
             {
                 stationApcs.Add((apcUid, apc));
             }

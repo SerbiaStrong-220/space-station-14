@@ -1,0 +1,116 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.Body.Systems;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
+using Content.Shared.SS220.Pathology;
+using Robust.Shared.Timing;
+
+namespace Content.Shared.SS220.CultYogg.MiGo;
+
+public abstract partial class SharedCultYoggHealSystem : EntitySystem
+{
+    [Dependency] private SharedBloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedPathologySystem _pathology = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<CultYoggHealComponent, ComponentStartup>(SetupMiGoHeal);
+        SubscribeLocalEvent<CultYoggHealComponent, DamageChangedEvent>(OnDamageChanged);
+    }
+
+    private void SetupMiGoHeal(Entity<CultYoggHealComponent> ent, ref ComponentStartup args)
+    {
+        ent.Comp.NextHealingTickTime = _time.CurTime + ent.Comp.TimeBetweenHealingTicks;
+    }
+
+    private void OnDamageChanged(Entity<CultYoggHealComponent> ent, ref DamageChangedEvent args)
+    {
+        if (!args.DamageIncreased || args.DamageDelta == null)
+            return;
+
+        if (!ent.Comp.ShouldStopOnDamage)
+            return;
+
+        var delta = args.DamageDelta.GetTotal();
+        if (delta < ent.Comp.CancelDamageTreshhold)
+            return;
+
+        RemCompDeferred<CultYoggHealComponent>(ent);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<CultYoggHealComponent>();
+        while (query.MoveNext(out var ent, out var healComp))
+        {
+            if (healComp.HealingEffectTime is { } endTime && endTime <= _time.CurTime)
+            {
+                RemCompDeferred<CultYoggHealComponent>(ent);
+                continue;
+            }
+
+            if (healComp.NextHealingTickTime > _time.CurTime)
+                continue;
+
+            Heal((ent, healComp));
+
+            healComp.NextHealingTickTime = _time.CurTime + healComp.TimeBetweenHealingTicks;
+        }
+    }
+
+    public void Heal(Entity<CultYoggHealComponent> ent)
+    {
+        if (!TryComp<MobStateComponent>(ent, out var mobComp))
+            return;
+
+        if (!TryComp<DamageableComponent>(ent, out var damageableComp))
+            return;
+
+        _damageable.TryChangeDamage(ent.Owner, ent.Comp.Heal, true, interruptsDoAfters: false);
+
+        _bloodstreamSystem.TryModifyBleedAmount(ent.Owner, ent.Comp.BloodlossModifier);
+        _bloodstreamSystem.TryModifyBloodLevel(ent.Owner, ent.Comp.ModifyBloodLevel);
+
+        _stamina.TryTakeStamina(ent, ent.Comp.ModifyStamina);
+
+        if (TryComp<PathologyHolderComponent>(ent, out var pathologyHolder))
+        {
+            foreach (var (key, _) in pathologyHolder.ActivePathologies)
+            {
+                if (!_pathology.TryRemovePathology(ent.Owner, key))
+                    _pathology.TryChangePathologyStack(ent.Owner, key, ent.Comp.PathologiesChangeAmount);
+            }
+        }
+
+        if (!_mobState.IsDead(ent, mobComp))
+            return;
+
+        if (!_mobThreshold.TryGetDeadThreshold(ent, out var threshold))
+            return;
+
+        if (_damageable.GetTotalDamage((ent.Owner, damageableComp)) > threshold)//ToDo_SS220 see when wiz give smth instead
+            return;
+
+        _mobState.ChangeMobState(ent, MobState.Critical);
+        _popup.PopupEntity(Loc.GetString("cult-yogg-resurrected-by-heal", ("target", ent)), ent, PopupType.Medium);
+
+        SendReturnToBodyEui(ent);
+    }
+
+    protected virtual void SendReturnToBodyEui(EntityUid ent) { }
+}

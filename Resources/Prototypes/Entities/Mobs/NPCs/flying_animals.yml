@@ -9,4 +9,4 @@
   - type: NoSlip
   - type: MovementAlwaysTouching
   - type: CanMoveInAir
-  - type: IgnoreOnfloorSlowers #SS220 Flying mobs slowdown fix
+  - type: MovementSpeedModifier

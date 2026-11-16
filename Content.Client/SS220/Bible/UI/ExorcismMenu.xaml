@@ -1,0 +1,11 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<controls:FancyWindow xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Title="{Loc 'bible-exorcism-menu-title'}"
+    MinSize="400 225">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="5">
+        <TextEdit Name="MessageInput" HorizontalExpand="True" VerticalExpand="True" Margin="0 0 0 5" MinHeight="100" />
+        <Label Name="LengthLabel"></Label>
+        <Button Name="ReadButton" Text="{Loc 'bible-exorcism-menu-read-button'}" StyleClasses="OpenLeft" Access="Public" />
+    </BoxContainer>
+</controls:FancyWindow>

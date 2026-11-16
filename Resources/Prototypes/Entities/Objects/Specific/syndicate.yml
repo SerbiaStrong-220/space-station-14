@@ -22,24 +22,18 @@
   - type: Currency
     price:
       Telecrystal: 1
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-Telecrystal-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
-    - label: corvax-hidden-desc-Telecrystal-cargo
-      jobRequired:
-        - SalvageSpecialist
-    - label: corvax-hidden-desc-Telecrystal-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-Telecrystal-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-Telecrystal-research ]
+      CargoKnowledge: [ corvax-hidden-desc-Telecrystal-cargo ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    - [CargoKnowledge, null]
+    hiddenName: ent-Telecrystal
+# SS220-hidden-desc-end
 
 - type: entity
   parent: Telecrystal
@@ -115,8 +109,23 @@
   suffix: 40 TC, NukeOps
   components:
   - type: Store
+    categories:
+#SS220 NukeOpsUplink begin
+    - UplinkWeaponry
+    - UplinkAmmo
+    - UplinkExplosives
+    - UplinkChemicals
+    - UplinkDeception
+    - UplinkDisruption
+    - UplinkImplants
+    - UplinkChemicalImplants # SS220 - chemical-implants
+    - UplinkAllies
+    - UplinkWearables
+    - UplinkPointless
+#SS220 NukeOpsUplink end
     balance:
       Telecrystal: 40
+    useDiscounts: true # SS220 Lone-Ops-Uplink
   - type: Tag
     tags:
     - NukeOpsUplink
@@ -127,8 +136,23 @@
   suffix: 40 TC, LoneOps # SS220 Lone-Ops-Uplink
   components:
   - type: Store
+    categories:
+#SS220 NukeOpsUplink begin
+    - UplinkWeaponry
+    - UplinkAmmo
+    - UplinkExplosives
+    - UplinkChemicals
+    - UplinkDeception
+    - UplinkDisruption
+    - UplinkImplants
+    - UplinkChemicalImplants # SS220 - chemical-implants
+    - UplinkAllies
+    - UplinkWearables
+    - UplinkPointless
+#SS220 NukeOpsUplink end
     balance:
-      Telecrystal: 40 # SS220 Lone-Ops-Uplink
+      Telecrystal: 40 # SS220 Lone-Ops-Uplink start
+    useDiscounts: true # SS220 Lone-Ops-Uplink end
   - type: Tag
     tags:
     - LoneOpsUplink # SS220 Lone-Ops-Uplink
@@ -141,3 +165,9 @@
   - type: Store
     balance:
       Telecrystal: 99999
+    expectedFaction: #nulls out the expected faction
+  # SS220-debug-uplink-fix-begin
+  - type: Tag
+    tags:
+    - DebugUplink
+  # SS220-debug-uplink-fix-end

@@ -5,7 +5,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.Corvax.Sponsors;
-using Content.Server.MoMMI;
+using Content.Server.Discord.DiscordLink;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Players;
@@ -50,7 +50,6 @@ internal sealed partial class ChatManager : IChatManager
 
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IServerNetManager _netManager = default!;
-    [Dependency] private readonly IMoMMILink _mommiLink = default!;
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
@@ -59,6 +58,11 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
     [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly DiscordChatLink _discordLink = default!;
+    [Dependency] private readonly ILogManager _logManager = default!;
+
+    private ISawmill _sawmill = default!;
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -77,6 +81,8 @@ internal sealed partial class ChatManager : IChatManager
 
         _configurationManager.OnValueChanged(CCVars.OocEnabled, OnOocEnabledChanged, true);
         _configurationManager.OnValueChanged(CCVars.AdminOocEnabled, OnAdminOocEnabledChanged, true);
+
+        _sawmill = _logManager.GetSawmill("SERVER");
 
         RegisterRateLimits();
     }
@@ -125,7 +131,7 @@ internal sealed partial class ChatManager : IChatManager
     {
         var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", FormattedMessage.EscapeText(message)));
         ChatMessageToAll(ChatChannel.Server, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride);
-        Logger.InfoS("SERVER", message);
+        _sawmill.Info(message);
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server announcement: {message}");
     }
@@ -174,13 +180,19 @@ internal sealed partial class ChatManager : IChatManager
 
     public void SendAdminAlert(string message)
     {
-        var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
-
         var wrappedMessage = Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
             ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")), ("message", FormattedMessage.EscapeText(message)));
 
-        ChatMessageToMany(ChatChannel.AdminAlert, message, wrappedMessage, default, false, true, clients);
+        SendAdminAlertNoFormatOrEscape(wrappedMessage);
     }
+
+    public void SendAdminAlertNoFormatOrEscape(string message)
+    {
+        var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
+
+        ChatMessageToMany(ChatChannel.AdminAlert, message, message, default, false, true, clients);
+    }
+
 
     public void SendAdminAlert(EntityUid player, string message)
     {
@@ -194,7 +206,12 @@ internal sealed partial class ChatManager : IChatManager
         var adminSystem = _entityManager.System<AdminSystem>();
         var antag = mind.UserId != null && (adminSystem.GetCachedPlayerInfo(mind.UserId.Value)?.Antag ?? false);
 
-        SendAdminAlert($"{mind.Session?.Name}{(antag ? " (ANTAG)" : "")} {message}");
+        // We shouldn't be repeating this but I don't want to touch any more chat code than necessary
+        var playerName = mind.UserId is { } userId && _player.TryGetSessionById(userId, out var session)
+            ? session.Name
+            : "Unknown";
+
+        SendAdminAlert($"{playerName}{(antag ? " (ANTAG)" : "")} {message}");
     }
 
     public void SendHookOOC(string sender, string message)
@@ -206,6 +223,28 @@ internal sealed partial class ChatManager : IChatManager
         var wrappedMessage = Loc.GetString("chat-manager-send-hook-ooc-wrap-message", ("senderName", sender), ("message", FormattedMessage.EscapeText(message)));
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, source: EntityUid.Invalid, hideChat: false, recordReplay: true);
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Hook OOC from {sender}: {message}");
+    }
+
+    public void SendHookAdmin(string sender, string message)
+    {
+        var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
+
+        var wrappedMessage = Loc.GetString("chat-manager-send-hook-admin-wrap-message", ("senderName", sender), ("message", FormattedMessage.EscapeText(message)));
+        foreach (var client in clients)
+        {
+            ChatMessageToOne(
+                ChatChannel.AdminChat,
+                message,
+                wrappedMessage,
+                source: EntityUid.Invalid,
+                hideChat: false,
+                client: client,
+                recordReplay: false,
+                audioPath: _netConfigManager.GetClientCVar(client, CCVars.AdminChatSoundPath),
+                audioVolume: _netConfigManager.GetClientCVar(client, CCVars.AdminChatSoundVolume));
+        }
+
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Hook admin from {sender}: {message}");
     }
 
     #endregion
@@ -233,6 +272,7 @@ internal sealed partial class ChatManager : IChatManager
         switch (type)
         {
             case OOCChatType.OOC:
+                message = DeleteProhibitedCharacters(message, player); // SS220 delete prohibited characters
                 SendOOC(player, message);
                 break;
             case OOCChatType.Admin:
@@ -259,9 +299,14 @@ internal sealed partial class ChatManager : IChatManager
             return;
         }
 
+        // SS220-chat-bans-begin
+        if (_banManager.IsChatBanned(player, BannableChats.OOC))
+            return;
+        // SS220-chat-bans-end
+
         Color? colorOverride = null;
         var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));
-        if (_adminManager.HasAdminFlag(player, AdminFlags.Admin))
+        if (_adminManager.HasAdminFlag(player, AdminFlags.NameColor))
         {
             var prefs = _preferencesManager.GetPreferences(player.UserId);
             colorOverride = prefs.AdminOOCColor;
@@ -291,7 +336,7 @@ internal sealed partial class ChatManager : IChatManager
 
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);
-        _mommiLink.SendOOCMessage(player.Name, message.Replace("@", "\\@").Replace("<", "\\<").Replace("/", "\\/")); // @ and < are both problematic for discord due to pinging. / is sanitized solely to kneecap links to murder embeds via blunt force
+        _discordLink.SendMessage(message, player.Name, ChatChannel.OOC);
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"OOC from {player:Player}: {message}");
     }
 
@@ -322,6 +367,7 @@ internal sealed partial class ChatManager : IChatManager
                 author: player.UserId);
         }
 
+        _discordLink.SendMessage(message, player.Name, ChatChannel.AdminChat);
         _adminLogger.Add(LogType.Chat, $"Admin chat from {player:Player}: {message}");
     }
 
@@ -353,6 +399,10 @@ internal sealed partial class ChatManager : IChatManager
 
     public void ChatMessageToMany(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, bool recordReplay, List<INetChannel> clients, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, NetUserId? author = null)
     {
+        // SS220-add-chat-bans-begin
+        if (ChatBannedForAuthor(channel, author))
+            return;
+        // SS220-add-chat-bans-end
         var user = author == null ? null : EnsurePlayer(author);
         var netSource = _entityManager.GetNetEntity(source);
         user?.AddEntity(netSource);
@@ -387,6 +437,10 @@ internal sealed partial class ChatManager : IChatManager
 
     public void ChatMessageToAll(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, bool recordReplay, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, NetUserId? author = null)
     {
+        // SS220-add-chat-bans-begin
+        if (ChatBannedForAuthor(channel, author))
+            return;
+        // SS220-add-chat-bans-end
         var user = author == null ? null : EnsurePlayer(author);
         var netSource = _entityManager.GetNetEntity(source);
         user?.AddEntity(netSource);

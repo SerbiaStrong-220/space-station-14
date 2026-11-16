@@ -1,0 +1,53 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: latheRecipe
+  id: ClothingBeltChiefEngineer
+  result: ClothingBeltChiefEngineer
+  categories: [ Tools ]
+  completetime: 1
+  materials:
+    Steel: 200
+    Cloth: 500
+
+- type: latheRecipe
+  id: WelderIndustrial
+  result: WelderIndustrial
+  categories: [ Tools ]
+  completetime: 1
+  materials:
+    Steel: 800
+
+- type: latheRecipe
+  id: WelderIndustrialAdvanced
+  result: WelderIndustrialAdvanced
+  categories: [ Tools ]
+  completetime: 1
+  materials:
+    Steel: 800
+
+- type: latheRecipe
+  id: SawAdvanced
+  result: SawAdvanced
+  categories: [ Tools ]
+  completetime: 1
+  materials:
+    Steel: 1200
+
+- type: latheRecipe
+  id: GlowstickBlue
+  result: GlowstickBlue
+  categories: [ Tools ]
+  completetime: 1
+  materials:
+    Steel: 250
+
+- type: latheRecipe
+  id: ClothingEyesGlassesMeson
+  icon:
+    sprite: Clothing/Eyes/Glasses/meson.rsi
+    state: icon
+  result: ClothingEyesGlassesMeson
+  completetime: 4
+  materials:
+    Steel: 150
+    Glass: 350

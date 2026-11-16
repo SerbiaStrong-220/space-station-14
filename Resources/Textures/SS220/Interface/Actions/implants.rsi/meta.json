@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise station, repo https://github.com/ss220-space/Paradise. surgery_nanomachines from https://github.com/Baystation12/Baystation12/blob/HEAD/icons/mob/robots_flying.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "adrenal"
+    },
+    {
+      "name": "dna-copy"
+    },
+    {
+      "name": "mindslave_fixer"
+    },
+    {
+      "name": "surgery_nanomachines"
+    }
+  ]
+}

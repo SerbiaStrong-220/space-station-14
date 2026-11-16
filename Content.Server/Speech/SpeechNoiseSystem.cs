@@ -1,12 +1,11 @@
-using Robust.Shared.Audio;
-using Content.Server.Chat;
-using Content.Server.Chat.Systems;
+using Content.Shared.Chat;
 using Content.Shared.Speech;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Speech
 {
@@ -26,7 +25,7 @@ namespace Content.Server.Speech
 
         public SoundSpecifier? GetSpeechSound(Entity<SpeechComponent> ent, string message)
         {
-            if (ent.Comp.SpeechSounds == null)
+            if (ent.Comp.SpeechSounds == null || /* SS220 fix */ string.IsNullOrEmpty(message))
                 return null;
 
             // Play speech sound
@@ -60,6 +59,11 @@ namespace Content.Server.Speech
 
         private void OnEntitySpoke(EntityUid uid, SpeechComponent component, EntitySpokeEvent args)
         {
+            // SS220-speech-cooldown-begin
+            DebugTools.Assert( _gameTiming.CurTime > component.LastTimeSpoke + component.SpeechCooldownTime);
+            component.LastTimeSpoke = _gameTiming.CurTime;
+            // SS220-speech-cooldown-end
+
             if (component.SpeechSounds == null)
                 return;
 

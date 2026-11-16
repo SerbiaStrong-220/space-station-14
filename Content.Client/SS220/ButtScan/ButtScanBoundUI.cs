@@ -1,17 +1,15 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Client.Paper;
 using Content.Client.Paper.UI;
 using Content.Client.SS220.ButtScan.UI;
 using Content.Shared.Paper;
 using Content.Shared.SS220.ButtScan;
-using Robust.Client.GameObjects;
 
 namespace Content.Client.SS220.ButtScan;
 
-public sealed class ButtScanBoundUserInterface : BoundUserInterface
+public sealed partial class ButtScanBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entityMgr = default!;
+    [Dependency] private IEntityManager _entityMgr = default!;
 
     private ButtScanWindow? _window;
     private readonly EntityUid _paperEntity;
@@ -25,6 +23,8 @@ public sealed class ButtScanBoundUserInterface : BoundUserInterface
     /// <inheritdoc/>
     protected override void Open()
     {
+        base.Open();
+
         _window = new ButtScanWindow();
         _window.OnClose += Close;
 
@@ -44,7 +44,7 @@ public sealed class ButtScanBoundUserInterface : BoundUserInterface
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
-        if(disposing)
+        if (disposing)
             _window?.Dispose();
     }
 }

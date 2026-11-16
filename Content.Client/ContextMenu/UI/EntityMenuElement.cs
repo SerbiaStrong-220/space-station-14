@@ -2,6 +2,10 @@ using System.Linq;
 using Content.Client.Administration.Managers;
 using Content.Client.Administration.Systems;
 using Content.Client.UserInterface;
+//SS220-LabelColors begin
+using Content.Client.SS220.Labels;
+using Content.Shared.Labels.Components;
+//SS220-LabelColors end
 using Content.Shared.Administration;
 using Content.Shared.IdentityManagement;
 using Robust.Client.GameObjects;
@@ -78,7 +82,10 @@ namespace Content.Client.ContextMenu.UI
         {
             var representation = _entityManager.ToPrettyString(entity);
 
-            var name = representation.Name;
+            //SS220-LabelColors begin
+            _entityManager.TryGetComponent<LabelComponent>(entity, out var labelComp);
+            var name = LabelNameMarkup.BuildName(labelComp, representation.Name ?? string.Empty);
+            //SS220-LabelColors end
             var prototype = representation.Prototype;
             var playerName = representation.Session?.Name ?? SearchPlayerName(entity);
             var deleted = representation.Deleted;
@@ -93,7 +100,11 @@ namespace Content.Client.ContextMenu.UI
                 return GetEntityDescriptionAdmin(entity);
             }
 
-            return Identity.Name(entity, _entityManager, _playerManager.LocalEntity!);
+            //SS220-LabelColors begin
+            var name = Identity.Name(entity, _entityManager, _playerManager.LocalEntity!);
+            _entityManager.TryGetComponent<LabelComponent>(entity, out var labelComp);
+            return LabelNameMarkup.BuildName(labelComp, name);
+            //SS220-LabelColors end
         }
 
         /// <summary>

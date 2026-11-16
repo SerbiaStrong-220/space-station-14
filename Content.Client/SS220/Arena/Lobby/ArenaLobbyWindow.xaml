@@ -1,0 +1,33 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:controls="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
+               MinSize="520 520"
+               SetSize="560 600"
+               Title="{Loc 'arena-lobby-title'}">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="6">
+
+        <BoxContainer Name="CategoriesBar" Orientation="Horizontal" SeparationOverride="4" Margin="0 2 0 2" />
+
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'arena-lobby-existing'}" StyleClasses="LabelKeyText" HorizontalExpand="True" Margin="2 4 0 0" />
+            <Label Name="CounterLabel" HorizontalExpand="True" HorizontalAlignment="Right" StyleClasses="LabelSubText" />
+        </BoxContainer>
+
+        <PanelContainer StyleClasses="LowDivider" />
+
+        <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False" MinSize="0 120">
+            <BoxContainer Name="ArenasList" Orientation="Vertical" VerticalExpand="True" SeparationOverride="4" />
+        </ScrollContainer>
+
+        <Label Text="{Loc 'arena-lobby-create-header'}" StyleClasses="LabelKeyText" HorizontalExpand="True" Margin="2 4 0 0" />
+        <Label Name="CooldownLabel" StyleClasses="LabelSubText" Visible="False" Margin="2 0 0 0" />
+
+        <PanelContainer StyleClasses="LowDivider" />
+
+        <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False" MinSize="0 180">
+            <BoxContainer Name="TemplatesList" Orientation="Vertical" SeparationOverride="4" />
+        </ScrollContainer>
+
+        <Button Name="RefreshButton" Text="{Loc 'arena-lobby-refresh'}" HorizontalAlignment="Right" />
+
+    </BoxContainer>
+</DefaultWindow>

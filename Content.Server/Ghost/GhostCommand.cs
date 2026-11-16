@@ -25,6 +25,14 @@ namespace Content.Server.Ghost
                 return;
             }
 
+            var gameTicker = _entities.System<GameTicker>();
+            if (!gameTicker.PlayerGameStatuses.TryGetValue(player.UserId, out var playerStatus) ||
+                playerStatus is not PlayerGameStatus.JoinedGame)
+            {
+                shell.WriteLine(Loc.GetString("ghost-command-error-lobby"));
+                return;
+            }
+
             if (player.AttachedEntity is { Valid: true } frozen &&
                 _entities.HasComponent<AdminFrozenComponent>(frozen))
             {
@@ -36,7 +44,6 @@ namespace Content.Server.Ghost
             }
 
             //SS220-lobby-ghost-bug begin
-            var gameTicker = _entities.System<GameTicker>();
             if (!gameTicker.PlayerGameStatuses.TryGetValue(player.UserId, out var status) || status is not PlayerGameStatus.JoinedGame)
             {
                 shell.WriteLine("You can't ghost right now. You are not in the game!");
@@ -51,7 +58,7 @@ namespace Content.Server.Ghost
                 mind = _entities.GetComponent<MindComponent>(mindId);
             }
 
-            if (!_entities.System<GhostSystem>().OnGhostAttempt(mindId, true, true, mind))
+            if (!_entities.System<GhostSystem>().OnGhostAttempt(mindId, true, true, mind: mind))
             {
                 shell.WriteLine(Loc.GetString("ghost-command-denied"));
             }

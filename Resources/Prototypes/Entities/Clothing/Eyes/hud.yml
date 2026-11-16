@@ -1,4 +1,13 @@
 - type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesHudBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StealTarget
+    stealGroup: ClothingEyesHuds
+
+- type: entity
   id: ShowSecurityIcons
   abstract: true
   categories: [ HideSpawnMenu ]
@@ -6,6 +15,11 @@
   - type: ShowJobIcons
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
+  # - type: ShowContrabandDetails # SS220-unused-info
+  # ss220 add criminal records for hud's start
+  - type: SecHudRecords
+    verbSprite: SS220/Interface/VerbIcons/protection_glasses.png
+  # ss220 add criminal records for hud's end
 
 - type: entity
   id: ShowMedicalIcons
@@ -13,14 +27,10 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ShowHealthBars
-    damageContainers:
-    - Biological
   - type: ShowHealthIcons
-    damageContainers:
-    - Biological
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: ClothingEyesHudBase
   id: ClothingEyesHudDiagnostic
   name: diagnostic hud
   description: A heads-up display capable of analyzing the integrity and status of robotics and exosuits. Made out of see-borg-ium.
@@ -33,9 +43,11 @@
     damageContainers:
     - Inorganic
     - Silicon
+    - Ipc #SS220-IPC
+  - type: ShowAccessReaderSettings
 
 - type: entity
-  parent: [ClothingEyesBase, ShowMedicalIcons]
+  parent: [ClothingEyesHudBase, ShowMedicalIcons]
   id: ClothingEyesHudMedical
   name: medical hud
   description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
@@ -47,9 +59,11 @@
   - type: Tag
     tags:
     - HudMedical
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons]
+  parent: [ClothingEyesHudBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesHudSecurity
   name: security hud
   description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status and security records.
@@ -61,9 +75,11 @@
   - type: Tag
     tags:
     - HudSecurity
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingEyesBase]
+  parent: [ClothingEyesHudBase, BaseCommandContraband]
   id: ClothingEyesHudCommand
   name: administration hud
   description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status.
@@ -73,9 +89,13 @@
   - type: Clothing
     sprite: Clothing/Eyes/Hud/command.rsi
   - type: ShowJobIcons
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesHudBase, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesHudBeer
   name: beer goggles
   description: A pair of sunHud outfitted with apparatus to scan reagents, as well as providing an innate understanding of liquid viscosity while in motion.
@@ -83,14 +103,30 @@
   - type: Sprite
     sprite: Clothing/Eyes/Hud/beergoggles.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Hud/beergoggles.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/beergoggles.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/beergoggles.rsi
+        state: equipped-HELMET-arachnid
+      head-moth:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/beergoggles.rsi
+        state: equipped-HELMET-moth
+    # SS220-glasses-on-forehead-end
+
   - type: ShowThirstIcons
-  - type: StealTarget
-    stealGroup: ClothingEyesHudBeer
   - type: SolutionScanner
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: ClothingEyesHudBase
   id: ClothingEyesHudFriedOnion
   name: fried onion goggles
   description: Filler
@@ -100,7 +136,7 @@
   - type: Clothing
     sprite: Clothing/Eyes/Hud/friedonion.rsi
   - type: ShowHungerIcons
-  - type: Food
+  - type: Edible
   - type: SolutionContainerManager
     solutions:
       food:
@@ -114,7 +150,7 @@
       - greasey
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: ClothingEyesHudBase
   id: ClothingEyesHudOnionBeer
   name: thungerst goggles
   description: Filler
@@ -127,7 +163,7 @@
   - type: ShowThirstIcons
 
 - type: entity
-  parent: [ClothingEyesBase, ShowMedicalIcons]
+  parent: [ClothingEyesHudBase, ShowMedicalIcons]
   id: ClothingEyesHudMedOnion
   name: medonion hud
   description: Filler
@@ -139,7 +175,7 @@
   - type: ShowHungerIcons
 
 - type: entity
-  parent: [ClothingEyesBase, ShowMedicalIcons]
+  parent: [ClothingEyesHudBase, ShowMedicalIcons]
   id: ClothingEyesHudMedOnionBeer
   name: medthungerst hud
   description: Filler
@@ -152,7 +188,7 @@
   - type: ShowThirstIcons
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons]
+  parent: [ClothingEyesHudBase, ShowSecurityIcons, ShowMedicalIcons, BaseSecurityCommandContraband]
   id: ClothingEyesHudMedSec
   name: medsec hud
   description: An eye display that looks like a mixture of medical and security huds.
@@ -166,7 +202,7 @@
     node: medsecHud
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons]
+  parent: [ClothingEyesHudBase, ShowSecurityIcons, ShowMedicalIcons]
   id: ClothingEyesHudMultiversal
   name: multiversal hud
   description: Filler
@@ -182,7 +218,7 @@
   - type: ShowSyndicateIcons
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons]
+  parent: [ClothingEyesHudBase, ShowSecurityIcons, ShowMedicalIcons]
   id: ClothingEyesHudOmni
   name: omni hud
   description: Filler
@@ -200,7 +236,7 @@
   - type: ShowSyndicateIcons
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons]
+  parent: [ClothingEyesHudBase, ShowSecurityIcons, BaseSyndicateContraband, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesHudSyndicate
   name: syndicate visor
   description: The syndicate's professional head-up display, designed for better detection of humanoids and their subsequent elimination.
@@ -208,7 +244,18 @@
   - type: Sprite
     sprite: Clothing/Eyes/Hud/synd.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Hud/synd.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/synd.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/synd.rsi
+        state: equipped-HELMET-arachnid
+    # SS220-glasses-on-forehead-end
+
   - type: ShowSyndicateIcons
   #SS220 Syndie visor buff start
   - type: EyeProtection
@@ -216,17 +263,32 @@
   - type: IdentityBlocker
     coverage: EYES
   #SS220 Syndie visor buff end
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons]
+  parent: [ClothingEyesHudBase, ShowSecurityIcons, BaseSyndicateContraband, SS220GlassesOnForeheadBase] # SS220-glasses-on-forehead
   id: ClothingEyesHudSyndicateAgent
-  name: syndicate agent visor
-  description: The Syndicate Agent's professional heads-up display, designed for quick diagnosis of their team's status.
+  name: syndicate medical visor
+  description: The Syndicate Corpsman's professional heads-up display, designed for quick diagnosis of their team's status.
   components:
   - type: Sprite
     sprite: Clothing/Eyes/Hud/syndagent.rsi
   - type: Clothing
+    slots: [EYES, HEAD] # SS220-glasses-on-forehead
     sprite: Clothing/Eyes/Hud/syndagent.rsi
+    # SS220-glasses-on-forehead-begin
+    clothingVisuals:
+      head:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/syndagent.rsi
+        state: equipped-HELMET
+      head-arachnid:
+      - sprite: SS220/Clothing/Eyes/Forehead/Hud/syndagent.rsi
+        state: equipped-HELMET-arachnid
+    # SS220-glasses-on-forehead-end
+
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
     damageContainers:
@@ -234,6 +296,7 @@
   #SS220 Syndie visor buff start
     - Silicon #to destroy borgs or heal syndie assault borg
     - Inorganic
+    - Ipc #SS220-MicroFixesIPC
   - type: ShowHealthIcons
     damageContainers:
     - Biological
@@ -245,11 +308,18 @@
     coverage: EYES
   - type: SolutionScanner #because nukie medic should make chems
   #SS220 Syndie visor buff end
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: [ClothingEyesGlassesSunglasses, ShowSecurityIcons]
   id: ClothingEyesGlassesHiddenSecurity
   suffix: Syndicate
+  components:
+  - type: StealTarget
+    stealGroup: ClothingEyesHuds
 
 - type: entity
   parent: [ClothingEyesHudMedical, ClothingHeadEyeBaseFlippable]
@@ -261,6 +331,11 @@
     sprite: Clothing/Eyes/Hud/medpatch.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/medpatch.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
+    - HudMedical
 
 - type: entity
   parent: [ClothingEyesEyepatchHudMedical, ClothingHeadEyeBaseFlipped]
@@ -277,6 +352,11 @@
     sprite: Clothing/Eyes/Hud/secpatch.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/secpatch.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
+    - HudSecurity
 
 - type: entity
   parent: [ClothingEyesEyepatchHudSecurity,  ClothingHeadEyeBaseFlipped]
@@ -292,6 +372,7 @@
   - type: Sprite
     sprite: Clothing/Eyes/Hud/beerpatch.rsi
   - type: Clothing
+    slots: EYES # SS220-glasses-on-forehead: keep the eyepatch in its original slot.
     sprite: Clothing/Eyes/Hud/beerpatch.rsi
 
 - type: entity

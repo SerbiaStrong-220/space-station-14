@@ -49,12 +49,13 @@ public sealed partial class RandomWalkComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public bool StepOnStartup = false;
 
+    // SS220 anom_run (PR #461) begin
     /// <summary>
     /// Speed modifier for each tick
     /// </summary>
-    [DataField("change")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float Сhange = 1f;
+    [DataField]
+    public float TickSpeedModifier = 1f;
+    // SS220 anom_run (PR #461) end
 
     #region Update Timing
 

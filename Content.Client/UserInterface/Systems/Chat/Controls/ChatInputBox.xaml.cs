@@ -1,18 +1,24 @@
-﻿﻿using Content.Client.Stylesheets;
+using Content.Client.Stylesheets;
 using Content.Client.SS220.UserInterface.System.Chat.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Input;
 using Robust.Client.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.Chat.Controls.LanguageSettings;
 
 namespace Content.Client.UserInterface.Systems.Chat.Controls;
 
 [Virtual]
 public class ChatInputBox : PanelContainer
 {
+    public const string StyleClassChatPanel = "ChatPanel";
+    public const string StyleClassChatLineEdit = "ChatLineEdit";
+    public const string StyleClassChatFilterOptionButton = "ChatFilterOptionButton";
+
     public readonly ChannelSelectorButton ChannelSelector;
     public readonly HistoryLineEdit Input;
     public readonly ChannelFilterButton FilterButton;
     public readonly HighlightButton HighlightButton; //ss220 highlight words
+    public readonly LanguageSettingsButton LanguageSettings; // SS220 languages
     protected readonly BoxContainer Container;
     protected ChatChannel ActiveChannel { get; private set; } = ChatChannel.Local;
 
@@ -29,7 +35,7 @@ public class ChatInputBox : PanelContainer
         {
             Name = "ChannelSelector",
             ToggleMode = true,
-            StyleClasses = {"chatSelectorOptionButton"},
+            StyleClasses = { ChannelSelectorItemButton.StyleClassChatSelectorOptionButton },
             MinWidth = 75
         };
         Container.AddChild(ChannelSelector);
@@ -38,13 +44,13 @@ public class ChatInputBox : PanelContainer
             Name = "Input",
             PlaceHolder = GetChatboxInfoPlaceholder(),
             HorizontalExpand = true,
-            StyleClasses = {"chatLineEdit"}
+            StyleClasses = { StyleClassChatLineEdit }
         };
         Container.AddChild(Input);
         FilterButton = new ChannelFilterButton
         {
             Name = "FilterButton",
-            StyleClasses = {"chatFilterOptionButton"}
+            StyleClasses = { StyleClassChatFilterOptionButton }
         };
         //ss220 highlight words start
         HighlightButton = new HighlightButton()
@@ -53,9 +59,17 @@ public class ChatInputBox : PanelContainer
             StyleClasses = {"chatFilterOptionButton"}
         };
         //ss220 highlight words end
+        // SS220 languages begin
+        LanguageSettings = new LanguageSettingsButton()
+        {
+            Name = "LanguageSettings",
+            StyleClasses = { "chatFilterOptionButton" }
+        };
+        // SS220 languages end
         Container.AddChild(FilterButton);
         Container.AddChild(HighlightButton); //ss220 highlight words
-        AddStyleClass(StyleNano.StyleClassChatSubPanel);
+        Container.AddChild(LanguageSettings); // SS220 languages
+        AddStyleClass(StyleClassChatPanel);
         ChannelSelector.OnChannelSelect += UpdateActiveChannel;
     }
 
@@ -66,12 +80,17 @@ public class ChatInputBox : PanelContainer
 
     private static string GetChatboxInfoPlaceholder()
     {
-        return (BoundKeyHelper.IsBound(ContentKeyFunctions.FocusChat), BoundKeyHelper.IsBound(ContentKeyFunctions.CycleChatChannelForward)) switch
-        {
-            (true, true) => Loc.GetString("hud-chatbox-info", ("talk-key", BoundKeyHelper.ShortKeyName(ContentKeyFunctions.FocusChat)), ("cycle-key", BoundKeyHelper.ShortKeyName(ContentKeyFunctions.CycleChatChannelForward))),
-            (true, false) => Loc.GetString("hud-chatbox-info-talk", ("talk-key", BoundKeyHelper.ShortKeyName(ContentKeyFunctions.FocusChat))),
-            (false, true) => Loc.GetString("hud-chatbox-info-cycle", ("cycle-key", BoundKeyHelper.ShortKeyName(ContentKeyFunctions.CycleChatChannelForward))),
-            (false, false) => Loc.GetString("hud-chatbox-info-unbound")
-        };
+        return (BoundKeyHelper.IsBound(ContentKeyFunctions.FocusChat),
+                BoundKeyHelper.IsBound(ContentKeyFunctions.CycleChatChannelForward)) switch
+            {
+                (true, true) => Loc.GetString("hud-chatbox-info",
+                    ("talk-key", BoundKeyHelper.ShortKeyName(ContentKeyFunctions.FocusChat)),
+                    ("cycle-key", BoundKeyHelper.ShortKeyName(ContentKeyFunctions.CycleChatChannelForward))),
+                (true, false) => Loc.GetString("hud-chatbox-info-talk",
+                    ("talk-key", BoundKeyHelper.ShortKeyName(ContentKeyFunctions.FocusChat))),
+                (false, true) => Loc.GetString("hud-chatbox-info-cycle",
+                    ("cycle-key", BoundKeyHelper.ShortKeyName(ContentKeyFunctions.CycleChatChannelForward))),
+                (false, false) => Loc.GetString("hud-chatbox-info-unbound")
+            };
     }
 }

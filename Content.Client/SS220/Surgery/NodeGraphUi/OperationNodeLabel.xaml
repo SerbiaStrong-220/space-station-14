@@ -1,0 +1,19 @@
+<NodeGraphUi:OperationNodeLabel xmlns="https://spacestation14.io"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:NodeGraphUi="clr-namespace:Content.Client.SS220.Surgery.NodeGraphUi"
+    VerticalExpand="True"
+    HorizontalExpand="True"
+    Orientation="Vertical">
+    <BoxContainer Name="NodeHeaderContainer" Orientation="Horizontal" MouseFilter="Stop">
+        <TextureRect Name="CurrentNodeFoldedIcon" Stretch="KeepAspectCentered" Margin="4"
+            TexturePath="/Textures/Interface/Nano/triangle_right.png" SetSize="8 8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextureRect Name="CurrentNodeOpenIcon" Stretch="KeepAspectCentered" Margin="4"
+            TexturePath="/Textures/Interface/Nano/inverted_triangle.svg.png" SetSize="8 8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextureRect Name="CurrentNodeNoEdgeIcon" Stretch="KeepAspectCentered" Margin="4"
+            TexturePath="/Textures/Interface/Nano/triangle_right_hollow.svg.png" SetSize="8 8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <RichTextLabel Name="NodeRichTextLabel"/>
+    </BoxContainer>
+    <BoxContainer Name="EdgesDescriptionContainer" Orientation="Vertical" Margin="20 0 0 0">
+        <!-- Added by code -->
+    </BoxContainer>
+</NodeGraphUi:OperationNodeLabel>
