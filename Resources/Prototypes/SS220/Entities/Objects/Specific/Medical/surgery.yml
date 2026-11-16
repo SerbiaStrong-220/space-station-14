@@ -14,7 +14,7 @@
   - type: Tag
     tags:
     - SurgeryTool
-    - SurgeryDrapes # SS220-surgery-update
+    - SurgeryDrapes
   - type: SurgeryStarter
   - type: ActivatableUI
     key: enum.SurgeryDrapeUiKey.Key
@@ -43,7 +43,7 @@
   - type: Tag
     tags:
     - SurgeryTool
-    - SurgeryBoneGel # SS220-surgery-update
+    - SurgeryBoneGel
 
 - type: entity
   parent: BaseToolSurgery
@@ -164,31 +164,28 @@
     - Surgery
 
 - type: entity
-  parent: BaseToolSurgery
-  id: SurgicalTape
-  name: surgical tape
-  description: Adhesive medical tape used to mend fractures and secure surgical incisions.
+  name: bone setter
+  id: BoneSetter
+  parent: Retractor
+  description: A surgical tool used for setting bones.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
-    state: surgical_tape
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: bonesetter
   - type: Item
-    size: Small
+    heldPrefix: setter
+    storedRotation: 90
   - type: Tag
     tags:
     - SurgeryTool
-    - SurgeryTape
+    - SurgeryBoneSetter
   - type: SurgeryTool
-    toolType: SurgicalTape
-    additionalToolTypes:
-    - BoneGel
-    - Cautery
-    isPainless: true
     failureDamage:
       types:
-        Blunt: 3
+        Blunt: 8
+    toolType: Bonesetter
     sound:
-      path: /Audio/SS220/Surgery/organ.ogg
+      path: /Audio/SS220/Surgery/retractor.ogg
       params:
         variation: 0.125
 
@@ -199,7 +196,7 @@
   description: An agglomerate of gears and levers that combines a retractor, hemostat, and bonesetter.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
     state: adv_retractor
   - type: Item
     storedRotation: 90
@@ -229,7 +226,7 @@
   description: A high-powered laser unit used for instant cauterization and precision bone drilling.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
     state: e_cautery
   - type: Item
     storedRotation: 90
@@ -258,7 +255,7 @@
   description: Heavy-duty surgical shears designed for rapid bone cutting and limb amputation.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
     state: shears
   - type: Item
     size: Normal
@@ -283,7 +280,7 @@
   description: A compact surgical pump used for filtering toxins and reagents from a patient's bloodstream during open-chest surgery.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
     state: bloodfilter
   - type: Item
     size: Small
@@ -422,7 +419,6 @@
     - id: BoneGel
     - id: BoneSetter
     - id: Drill
-    - id: SurgicalTape
     - id: BodyAnalyzer
 
 - type: Tag

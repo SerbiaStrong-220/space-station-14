@@ -20,7 +20,7 @@
 - type: pathology
   id: HeadProjectileFragment
   name: pathology-head-projectile-name
-  armorSlotFlags: FULLHEAD
+  armorSlotFlags: HEAD
   targetZone: Head
   operationRecommendation: pathology-head-projectile-operation
   definition:
@@ -682,7 +682,7 @@
   name: pathology-head-necrosis-name
   examineDescription: pathology-head-necrosis-examine
   isSevere: true
-  armorSlotFlags: FULLHEAD
+  armorSlotFlags: HEAD
   targetZone: Head
   operationRecommendation: pathology-necrosis-operation
   definition:

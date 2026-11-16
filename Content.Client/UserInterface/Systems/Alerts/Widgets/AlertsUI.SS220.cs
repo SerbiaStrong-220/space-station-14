@@ -3,13 +3,16 @@
 using System.Numerics;
 using Content.Client.SS220.Surgery.SurgeryStartUi;
 using Content.Client.UserInterface.Systems.Alerts.Controls;
+using Content.Shared.Alert;
 using Content.Shared.SS220.Pathology;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Systems.Alerts.Widgets;
 
 public sealed partial class AlertsUI
 {
-    private const float PathologyPuppetScale = 1.5f;
+    private const float PathologyPuppetScale = 2f;
+    private static readonly ProtoId<AlertCategoryPrototype> HealthAlertCategory = "Health";
 
     private SurgeryPuppetBox? _pathologyPuppet;
 
@@ -30,8 +33,10 @@ public sealed partial class AlertsUI
             _pathologyPuppet = new SurgeryPuppetBox
             {
                 Interactive = false,
+                ShowBackground = false,
                 Scale = new Vector2(PathologyPuppetScale, PathologyPuppetScale),
                 HorizontalAlignment = HAlignment.Center,
+                Margin = new Thickness(0, 4, 0, 0),
             };
             _pathologyPuppet.Initialize();
         }
@@ -59,7 +64,7 @@ public sealed partial class AlertsUI
                 continue;
             }
 
-            if (child is AlertControl control && control.Alert.Category?.Id == "Health")
+            if (child is AlertControl control && control.Alert.Category == HealthAlertCategory)
                 desiredIndex = seenBefore + 1;
 
             seenBefore++;

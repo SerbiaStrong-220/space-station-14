@@ -1,7 +1,7 @@
 treatment-suggestion-header = [head=4] АссистентВрача [/head]
 
 treatment-recommendation-target-less = Нету цели для анализа!
-treatment-recommendation-table-not-linked = [color=red]Операционный стол не привязан к консоли![/color]
+treatment-recommendation-table-not-linked = [color=red]Операционный стол не привязан к консоли сканера тела![/color]
 treatment-recommendation-empty = У пациента известных проблем не обнаружено!
 
 treatment-recommendation-problem-section-name = [bold] Обнаруженные проблемы: [/bold]

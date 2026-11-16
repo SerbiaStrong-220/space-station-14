@@ -17,9 +17,9 @@ surgery-foot-complex-description = Позволяет вправить выви�
     лечить переломы и поверхностные раны стопы.
 
 surgery-hand-complex-inventory-requirement-description = На руках не должно быть перчаток
-surgery-hand-complex-inventory-requirement-failure = Снимите перчатки с { CAPITALIZE($target) }!
+surgery-hand-complex-inventory-requirement-failure = Снимите перчатки с { THE($target) }!
 surgery-foot-complex-inventory-requirement-description = На ногах не должно быть обуви
-surgery-foot-complex-inventory-requirement-failure = Снимите обувь с { CAPITALIZE($target) }!
+surgery-foot-complex-inventory-requirement-failure = Снимите обувь с { THE($target) }!
 
 surgery-limb-examine-start = Пациент готов к операции на конечности.
 to-limb-skin-incision = Сделать надрез на конечности
@@ -29,7 +29,7 @@ to-seal-limb-incision = Зашить разрез на конечности
 
 remove-limb-bullet-fragments = Извлечь инородное тело из конечности
 surgery-pathology-requirement-description-limb-fragments = Инородное тело в этой конечности
-surgery-pathology-requirement-failure-limb-fragments = Инородных тел в данной конечности не обнаружено!
+surgery-pathology-requirement-failure-limb-fragments = Инородных тел в этой конечности не обнаружено!
 
 start-leftarm-surgery = Подготовка операции на левой руке
 leftarm-skin-incision = Надрез на левой руке

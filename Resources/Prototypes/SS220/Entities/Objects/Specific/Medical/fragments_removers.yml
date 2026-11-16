@@ -26,6 +26,11 @@
     curePathologyStacksSelectors:
     - TorsoProjectileFragment: -1
       HeadProjectileFragment: -1
+      LowerTorsoProjectileFragment: -1
+      LeftArmProjectileFragment: -1
+      RightArmProjectileFragment: -1
+      LeftLegProjectileFragment: -1
+      RightLegProjectileFragment: -1
   - type: ItemSlots
     slots:
       cell_slot:
@@ -46,6 +51,11 @@
     curePathologyStacksSelectors:
     - TorsoProjectileFragment: -1
       HeadProjectileFragment: -1
+      LowerTorsoProjectileFragment: -1
+      LeftArmProjectileFragment: -1
+      RightArmProjectileFragment: -1
+      LeftLegProjectileFragment: -1
+      RightLegProjectileFragment: -1
     damagePerCure:
       types:
         Blunt: 8

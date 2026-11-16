@@ -414,7 +414,6 @@
 - type: Tag
   id: YoggEquipment
 
-# SS220-surgery-update begin
 - type: Tag
   id: SurgeryDrapes
 
@@ -456,4 +455,3 @@
 
 - type: Tag
   id: SurgeryBloodFilter
-# SS220-surgery-update end

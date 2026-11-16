@@ -93,6 +93,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (HasComp<SurgeryStarterComponent>(args.Used) && entity.Comp.OngoingSurgeries.Where(x => _prototype.Index(x.Key).Start == x.Value).ToArray() is { Length: > 0 } startSurgeries)
         {
             EndOperation(entity!, startSurgeries[0].Key, args.User);
+            args.Handled = true;
             return;
         }
 

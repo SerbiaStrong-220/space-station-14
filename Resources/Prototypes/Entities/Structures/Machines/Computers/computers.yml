@@ -690,7 +690,7 @@
     radius: 1.5
     energy: 4.0
     color: "#1f8c28"
-  # SS220 Surgery begin
+  #SS220-surgery-update begin
   - type: OperatingComputer
   - type: BodyAnalyzer
   - type: DeviceLinkSource
@@ -716,7 +716,7 @@
     containers:
       board: !type:Container
       surgery_disk_slot: !type:ContainerSlot
-  # SS220 Surgery end
+  #SS220-surgery-update end
 
 - type: entity
   parent: BaseComputerAiAccess

@@ -76,7 +76,6 @@
         - id: Hemostat
         - id: Cautery
         - id: BoneSetter
-        - id: SurgicalTape
         - id: BodyAnalyzer
         - id: ChemistryBottleMorphine
         - id: ChemistryBottleTricordrazine

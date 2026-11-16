@@ -48,7 +48,6 @@ public sealed partial class TreatmentSuggestion : Control
             TreatmentSuggestionText.Text = builder.ToString();
         else
             TreatmentSuggestionText.Text = Loc.GetString(EmptyTreatmentPlaceholder);
-
     }
 
     private void AddSection(List<string> dataText, string sectionName, StringBuilder builder)

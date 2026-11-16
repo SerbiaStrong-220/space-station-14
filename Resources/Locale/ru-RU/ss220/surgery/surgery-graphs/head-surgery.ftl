@@ -1,4 +1,4 @@
-surgery-head-complex-name = Операции на голове
+surgery-head-complex-name = Хирургия головы
 surgery-head-complex-description = Комплексная операция на голове.
     Позволяет сканировать и извлекать импланты,
     а также проводить глубокое вмешательство в мозг.
@@ -15,7 +15,7 @@ brain-exposed = Мозг открыт
 
 to-head-skin-incision = Сделать надрез на голове
 to-head-skin-clamp-bleeders = Зажать сосуды в разрезе на голове
-to-retract-head-skin = Расширить надрез на голвое
+to-retract-head-skin = Расширить надрез на голове
 to-head-check-implant = Проверить наличие имплантов
 to-head-change-tts = Изменить структуру связок
 to-saw-skull-bone = Распилить череп
@@ -65,7 +65,7 @@ to-repair-cranial-fissure = Заделать трещину черепа
 surgery-pathology-requirement-description-cranial-fissure = Наличие трещины черепа
 surgery-pathology-requirement-failure-cranial-fissure = Трещины черепа не обнаружено!
 
-surgery-eyes-complex-name = Операции на глазах
+surgery-eyes-complex-name = Хирургия глаз
 surgery-eyes-complex-description = Операция для лечения повреждений роговицы и ран век.
 surgery-eyes-complex-inventory-requirement-description = Глаза пациента не должны быть закрыты очками
 surgery-eyes-complex-inventory-requirement-failure = Снимите защиту с глаз { THE($target) }!
@@ -77,11 +77,11 @@ to-seal-eyes-surgery = Завершить операцию на глазах
 surgery-pathology-requirement-description-eye-corneal = Повреждение роговицы глаза
 surgery-pathology-requirement-failure-eye-corneal = Повреждения роговицы не обнаружено!
 
-surgery-mouth-complex-name = Операции на челюсти и рте
+surgery-mouth-complex-name = Хирургия челюсти и рта
 surgery-mouth-complex-description = Позволяет вправить вывих челюсти и обработать мягкие ткани.
 surgery-mouth-complex-inventory-requirement-description = Рот пациента не должен быть закрыт маской
 surgery-mouth-complex-inventory-requirement-failure = Снимите маску с { THE($target) }!
-surgery-mouth-examine-start = Пациент готов к операции на рте и челюсти.
+surgery-mouth-examine-start = Пациент готов к операции на челюсти и рте.
 to-repair-jaw-dislocation = Вправить вывих челюсти
 to-mouth-skin-incision = Сделать надрез в области челюсти
 to-mouth-skin-clamp-bleeders = Зажать сосуды
@@ -100,5 +100,5 @@ eyes-cornea-prepped = Подготовка роговицы
 
 start-mouth-surgery = Подготовка операции на челюсти и рте
 mouth-skin-incision = Надрез в области челюсти
-mouth-skin-clamp-bleeders = Остановка кровотечения
-retract-mouth-skin = Расширение разреза
+mouth-skin-clamp-bleeders = Остановка кровотечения в области челюсти
+retract-mouth-skin = Расширение разреза в области челюсти

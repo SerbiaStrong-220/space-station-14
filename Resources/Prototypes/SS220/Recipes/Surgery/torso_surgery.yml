@@ -110,6 +110,7 @@
       - !type:SurgeryToolRequirement
         subject: used
         surgeryTool: retractor
+        requirementPriority: -1
         description: surgery-requirement-tool-required-retractor
         failureMessage: surgery-requirement-tool-miss
       - !type:SurgeryPathologyRequirement
@@ -400,7 +401,7 @@
       edgeTooltip: remove-lowertorso-bullet-fragments
       edgeIcon:
         sprite: Objects/Specific/Medical/Surgery/scissors.rsi
-        state: hemostat
+        state: retractor
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
         params:
@@ -408,9 +409,9 @@
       requirements:
       - !type:SurgeryToolRequirement
         subject: used
-        surgeryTool: hemostat
+        surgeryTool: retractor
         requirementPriority: -1
-        description: surgery-requirement-tool-required-hemostat
+        description: surgery-requirement-tool-required-retractor
         failureMessage: surgery-requirement-tool-miss
       - !type:SurgeryPathologyRequirement
         subject: target

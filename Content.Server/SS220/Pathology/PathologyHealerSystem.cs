@@ -52,6 +52,9 @@ public sealed partial class PathologyHealerSystem : EntitySystem
         if (!TryComp<PathologyHealerComponent>(args.Used, out var healing))
             return;
 
+        if (!HasAnyCurablePathology(healing, target))
+            return;
+
         if (!_powerCell.TryUseActivatableCharge(args.Used.Value, user: args.User))
             return;
 
@@ -75,6 +78,20 @@ public sealed partial class PathologyHealerSystem : EntitySystem
             return;
 
         _damageable.TryChangeDamage(target.Owner, healing.DamagePerCure * damageModifier, origin: args.User, ignoreResistances: true);
+    }
+
+    private bool HasAnyCurablePathology(PathologyHealerComponent healing, Entity<PathologyHolderComponent> target)
+    {
+        foreach (var selector in healing.CurePathologyStacksSelectors)
+        {
+            foreach (var (id, _) in selector)
+            {
+                if (_pathology.HavePathology(target!, id))
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     private bool TryHeal(Entity<PathologyHealerComponent> healing, Entity<PathologyHolderComponent?> target, EntityUid user)

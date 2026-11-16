@@ -11,9 +11,9 @@
   - type: Icon
     sprite: Structures/Furniture/Tables/optable.rsi
     state: operating_table
-  # SS220 Surgery begin
+  #SS220-surgery-update begin
   - type: OperatingTable
   - type: DeviceLinkSink
     ports:
     - OperatingTableReceiver
-  # SS220 Surgery end
+  #SS220-surgery-update end

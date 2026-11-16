@@ -17,7 +17,7 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private RottingSystem _rotting = default!;
     [Dependency] private DamageableSystem _damageable = default!;
-    [Dependency] private readonly SurgerySystem _surgery = default!;
+    [Dependency] private SurgerySystem _surgery = default!;
 
     private const int MaxBrainRotPercentage = 100;
 

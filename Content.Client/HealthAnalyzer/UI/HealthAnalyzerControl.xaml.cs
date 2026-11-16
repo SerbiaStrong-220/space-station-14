@@ -72,7 +72,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         _solSystem = _entityManager.System<SharedSolutionContainerSystem>(); // ss220 add reagents to health analyzer
 
         _randomShuffle.MakeNewRandomChange(SkillIssueReshuffleChance); // SS220-experience-update
-        PathologyPuppet.Initialize(); // SS220-pathology-indication
+        PathologyPuppet.Initialize(); //SS220-surgery-update
     }
 
     public void Populate(HealthAnalyzerUiState state)
@@ -88,7 +88,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             || !_entityManager.TryGetComponent<DamageableComponent>(target, out var damageable))
         {
             NoPatientDataText.Visible = true;
-            PathologyPuppet.Visible = false; // SS220-pathology-indication
+            PathologyPuppetContainer.Visible = false; //SS220-surgery-update
             return;
         }
 
@@ -123,14 +123,6 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         // ss220 add reagents to health analyzer end
 
         NoPatientDataText.Visible = false;
-
-        // SS220-pathology-indication begin
-        var showPuppet = _entityManager.TryGetComponent<PathologyHolderComponent>(target.Value, out var holder) &&
-                         holder.LifeStage < ComponentLifeStage.Stopping;
-        PathologyPuppet.Visible = showPuppet;
-        if (showPuppet)
-            PathologyPuppet.UpdateFromTarget(target.Value);
-        // SS220-pathology-indication end
 
         // SS220 clinic death analyzer - start
         _entityManager.TryGetComponent<LimitationReviveComponent>(target.Value, out var reviveComp);
@@ -183,9 +175,20 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         // Patient Information
 
+        //SS220-surgery-update begin
+        var scanActive = state.ScanMode.HasValue && state.ScanMode.Value;
+        var showPuppet = scanActive &&
+                         _entityManager.TryGetComponent<PathologyHolderComponent>(target.Value, out var holder) &&
+                         holder.LifeStage < ComponentLifeStage.Stopping;
+
+        PathologyPuppetContainer.Visible = showPuppet;
+        if (showPuppet)
+            PathologyPuppet.UpdateFromTarget(target.Value);
+
         SpriteView.SetEntity(target.Value);
-        SpriteView.Visible = state.ScanMode.HasValue && state.ScanMode.Value;
-        NoDataTex.Visible = !SpriteView.Visible;
+        SpriteView.Visible = scanActive && !showPuppet;
+        NoDataTex.Visible = !scanActive;
+        //SS220-surgery-update end
 
         var name = new FormattedMessage();
         name.PushColor(Color.White);

@@ -63,8 +63,8 @@ torso-necrosis-excised = Иссечение некроза на торсе
 
 start-lowertorso-surgery = Подготовка операции в области паха
 lowertorso-skin-incision = Надрез в области паха
-lowertorso-skin-clamp-bleeders = Остановка кровотечения
-retract-lowertorso-skin = Расширение разреза
+lowertorso-skin-clamp-bleeders = Остановка кровотечения в области паха
+retract-lowertorso-skin = Расширение разреза в области паха
 lowertorso-compound-reset = Вправление отломков таза
 lowertorso-arterial-clamped = Пережатие бедренной артерии
 lowertorso-necrosis-excised = Иссечение некроза в области паха

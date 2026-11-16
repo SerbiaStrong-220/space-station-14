@@ -184,10 +184,11 @@ public abstract partial class SharedPathologySystem
                 ApplyPathologyContext(entity!, instanceData.PathologyContexts.Pop());
         }
 
-        var ev = new PathologyStackCountChanged(pathologyId, instanceData.Level, instanceData.StackCount, newStackCount);
-        RaiseLocalEvent(entity, ref ev);
-
+        var previousCount = instanceData.StackCount;
         instanceData.StackCount = newStackCount;
+
+        var ev = new PathologyStackCountChanged(pathologyId, instanceData.Level, previousCount, newStackCount);
+        RaiseLocalEvent(entity, ref ev);
 
         DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
         Dirty(entity);

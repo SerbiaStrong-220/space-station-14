@@ -165,6 +165,8 @@ public abstract partial class SharedPathologySystem : EntitySystem
             {
                 if (!IsStatusEffectInUse(entity.Comp, effect))
                     _statusEffects.TryRemoveStatusEffect(entity, effect);
+                else
+                    UpdateStackableStatusEffect(entity, effect);
             }
 
             if (pathologyPrototype.Definition[i].Trait is { } traitId && !IsTraitInUse(entity.Comp, traitId))
@@ -220,26 +222,39 @@ public abstract partial class SharedPathologySystem : EntitySystem
     protected virtual void ApplyPathologyContext(Entity<PathologyHolderComponent> entity, IPathologyContext? context) { }
 
     // Kill it with TraitPrototype pls
-    private void AddTrait(EntityUid uid, ProtoId<TraitPrototype>? traitId)
+    private void AddTrait(Entity<PathologyHolderComponent> entity, ProtoId<TraitPrototype>? traitId)
     {
-        if (!_prototype.Resolve(traitId, out var traitPrototype))
+        if (traitId is not { } id || !_prototype.Resolve(id, out var traitPrototype))
             return;
 
         if (traitPrototype.Components is null)
             return;
 
-        EntityManager.AddComponents(uid, traitPrototype.Components, false);
+        if (entity.Comp.AppliedTraits.Contains(id))
+            return;
+
+        foreach (var entry in traitPrototype.Components.Values)
+        {
+            if (HasComp(entity.Owner, entry.Component.GetType()))
+                return;
+        }
+
+        EntityManager.AddComponents(entity.Owner, traitPrototype.Components, false);
+        entity.Comp.AppliedTraits.Add(id);
     }
 
     // and it
-    private void RemoveTrait(EntityUid uid, ProtoId<TraitPrototype>? traitId)
+    private void RemoveTrait(Entity<PathologyHolderComponent> entity, ProtoId<TraitPrototype>? traitId)
     {
-        if (!_prototype.Resolve(traitId, out var traitPrototype))
+        if (traitId is not { } id || !_prototype.Resolve(id, out var traitPrototype))
             return;
 
         if (traitPrototype.Components is null)
             return;
 
-        EntityManager.RemoveComponents(uid, traitPrototype.Components);
+        if (!entity.Comp.AppliedTraits.Remove(id))
+            return;
+
+        EntityManager.RemoveComponents(entity.Owner, traitPrototype.Components);
     }
 }

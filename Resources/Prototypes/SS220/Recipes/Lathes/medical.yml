@@ -67,14 +67,6 @@
     Steel: 250
 
 - type: latheRecipe
-  id: SurgicalTape
-  result: SurgicalTape
-  completetime: 2
-  materials:
-    Cloth: 150
-    Plastic: 100
-
-- type: latheRecipe
   id: BloodFilter
   result: BloodFilter
   completetime: 3

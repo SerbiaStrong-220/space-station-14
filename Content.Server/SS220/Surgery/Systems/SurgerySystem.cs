@@ -14,9 +14,9 @@ namespace Content.Server.SS220.Surgery.Systems;
 
 public sealed partial class SurgerySystem : SharedSurgerySystem
 {
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private static readonly ProtoId<EmotePrototype> ScreamEmote = "Scream";
 

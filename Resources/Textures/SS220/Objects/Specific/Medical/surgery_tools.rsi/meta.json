@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tg station, repo https://github.com/tgstation/tgstation and baystation12, repo https://github.com/Baystation12/Baystation12",
+  "copyright": "Taken from tg station, repo https://github.com/tgstation/tgstation, baystation12, repo https://github.com/Baystation12/Baystation12, and BandaStation, repo https://github.com/ss220club/BandaStation",
   "size": {
     "x": 32,
     "y": 32
@@ -38,6 +38,24 @@
     },
     {
       "name": "direct-defibrillator"
+    },
+    {
+      "name": "bonesetter"
+    },
+    {
+      "name": "surgical_tape"
+    },
+    {
+      "name": "adv_retractor"
+    },
+    {
+      "name": "e_cautery"
+    },
+    {
+      "name": "shears"
+    },
+    {
+      "name": "bloodfilter"
     }
   ]
 }

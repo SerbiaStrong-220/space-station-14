@@ -13,7 +13,7 @@
         - id: Saw
         - id: SawElectric # ss220-surgery-update
         - id: BoneGel # ss220-surgery-update
-        - id: BoneSetter # ss220-surgery-update
+        - id: BoneSetter #SS220-surgery-update
         - id: Drill
         - id: Cautery
         - id: Retractor
@@ -38,7 +38,7 @@
         - id: Drill
         - id: Cautery
         - id: Retractor
-        - id: BoneSetter # ss220-surgery-update
+        - id: BoneSetter #SS220-surgery-update
         - id: ScalpelAdvanced
         - id: ClothingHandsGlovesNitrile
         - id: EmergencyRollerBedSpawnFolded

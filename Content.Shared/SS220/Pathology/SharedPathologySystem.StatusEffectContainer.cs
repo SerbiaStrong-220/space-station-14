@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.PathologyStatusEffects;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Pathology;
 
@@ -26,14 +27,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
         var definition = pathologyPrototype.Definition[args.Severity];
         foreach (var effectId in definition.StatusEffects)
         {
-            if (!_statusEffects.TryUpdateStatusEffectDuration(entity.Owner, effectId, out var effect, null, null))
-                continue;
-
-            if (!TryComp<PathologyStatusEffectStackableComponent>(effect, out var stackableComponent))
-                continue;
-
-            stackableComponent.StackCount = args.NewCount;
-            Dirty(effect.Value, stackableComponent);
+            UpdateStackableStatusEffect(entity, effectId);
         }
     }
 
@@ -51,8 +45,39 @@ public abstract partial class SharedPathologySystem : EntitySystem
         var definition = pathologyPrototype.Definition[args.CurrentSeverity];
         foreach (var effectId in definition.StatusEffects)
         {
-            if (!_statusEffects.TryUpdateStatusEffectDuration(entity, effectId, null, null))
-                continue;
+            UpdateStackableStatusEffect(entity, effectId);
         }
+    }
+
+    public void UpdateStackableStatusEffect(Entity<PathologyHolderComponent> entity, EntProtoId effectId)
+    {
+        var totalStacks = 0;
+        foreach (var (otherId, otherData) in entity.Comp.ActivePathologies)
+        {
+            if (!_prototype.Resolve(otherId, out var otherProto))
+                continue;
+
+            var level = Math.Min(otherData.Level, otherProto.Definition.Length - 1);
+            if (level < 0)
+                continue;
+
+            if (otherProto.Definition[level].StatusEffects.Contains(effectId))
+                totalStacks += otherData.StackCount;
+        }
+
+        if (totalStacks <= 0)
+            return;
+
+        if (!_statusEffects.TryUpdateStatusEffectDuration(entity.Owner, effectId, out var effect, null, null))
+            return;
+
+        if (!TryComp<PathologyStatusEffectStackableComponent>(effect, out var stackableComponent))
+            return;
+
+        if (stackableComponent.StackCount == totalStacks)
+            return;
+
+        stackableComponent.StackCount = totalStacks;
+        Dirty(effect.Value, stackableComponent);
     }
 }

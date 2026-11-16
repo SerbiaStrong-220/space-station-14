@@ -110,5 +110,4 @@ public sealed partial class EdgeDescription : BoxContainer
 
         return tooltip;
     }
-
 }

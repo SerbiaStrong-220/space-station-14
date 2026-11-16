@@ -186,7 +186,7 @@
     edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/organ.ogg
     edgeIcon:
-      sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
       state: bonesetter
     requirements:
     - !type:SurgeryToolRequirement
@@ -287,7 +287,7 @@
 #    edgeTooltip: to-tend-burn-wounds
 #    sound: /Audio/SS220/Surgery/organ.ogg
 #    edgeIcon:
-#      sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+#      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
 #      state: surgical_tape
 #    requirements:
 #    - !type:SurgeryToolRequirement
@@ -323,7 +323,7 @@
     edgeTooltip: to-repair-dislocation
     sound: /Audio/SS220/Surgery/organ.ogg
     edgeIcon:
-      sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
       state: bonesetter
 
 - type: abstractSurgeryEdge
@@ -349,7 +349,7 @@
     edgeTooltip: to-reset-compound-fracture
     sound: /Audio/SS220/Surgery/organ.ogg
     edgeIcon:
-      sprite: SS220/Objects/Specific/Medical/banda_surgery_tools.rsi
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
       state: bonesetter
 
 - type: abstractSurgeryEdge

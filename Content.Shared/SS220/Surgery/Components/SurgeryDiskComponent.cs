@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Surgery.Components;
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SurgeryDiskComponent : Component
 {
-    [DataField(required: true)]
+    [DataField]
     [AutoNetworkedField]
     public HashSet<ProtoId<SurgeryGraphPrototype>> Surgeries = new();
 }

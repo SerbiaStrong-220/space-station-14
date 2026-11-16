@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Traits;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -13,6 +14,10 @@ public sealed partial class PathologyHolderComponent : Component
     [ViewVariables]
     [AutoNetworkedField]
     public Dictionary<ProtoId<PathologyPrototype>, PathologyInstanceData> ActivePathologies = new();
+
+    [ViewVariables]
+    [AutoNetworkedField]
+    public HashSet<ProtoId<TraitPrototype>> AppliedTraits = new();
 }
 
 [Serializable, NetSerializable]

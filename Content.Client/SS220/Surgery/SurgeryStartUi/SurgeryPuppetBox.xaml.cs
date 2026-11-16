@@ -24,6 +24,9 @@ public sealed partial class SurgeryPuppetBox : Control
     private static readonly Color OngoingSurgeryTint = Color.FromHex("#FFA500");
     private static readonly Color ModerateTraumaTint = Color.FromHex("#FFCC44");
     private static readonly Color SevereTraumaTint = Color.FromHex("#FF5555");
+    private static readonly Color HealthyZoneTint = Color.FromHex("#4AC4FF");
+    private static readonly Vector2 CompactCropOffset = new(11f, 5f);
+    private static readonly Vector2 CompactBaseSize = new(19f, 31f);
     private static readonly IReadOnlySet<SurgeryPuppetPart> EmptyZones = new HashSet<SurgeryPuppetPart>();
     private static readonly SurgeryPuppetPart[] HeadSubZones =
     {
@@ -35,6 +38,7 @@ public sealed partial class SurgeryPuppetBox : Control
     private Vector2 _scale = new Vector2(1f);
     private SurgeryPuppetPart? _selectedPart;
     private bool _interactive = true;
+    private bool _showBackground = true;
 
     private SortedDictionary<SurgeryPuppetPart, TextureRect> _parts = new();
     private SortedDictionary<SurgeryPuppetPart, TextureRect> _highlightedPart = new();
@@ -82,6 +86,25 @@ public sealed partial class SurgeryPuppetBox : Control
         }
     }
 
+    /// <summary>
+    /// Controls visibility of the surgical tablet background and side labels.
+    /// When disabled, crops to the body silhouette and tints healthy zones blue.
+    /// </summary>
+    public bool ShowBackground
+    {
+        get => _showBackground;
+        set
+        {
+            if (_showBackground == value)
+                return;
+
+            _showBackground = value;
+            ResizeAll();
+            if (!_showBackground)
+                UpdateZoneStates(EmptyZones, EmptyZones, EmptyZones);
+        }
+    }
+
     public SurgeryPuppetBox()
     {
         RobustXamlLoader.Load(this);
@@ -116,6 +139,8 @@ public sealed partial class SurgeryPuppetBox : Control
         }
 
         ResizeAll();
+        if (!_showBackground)
+            UpdateZoneStates(EmptyZones, EmptyZones, EmptyZones);
     }
 
     private Control? MakePuppetPartButton(SurgeryPuppetPart part, SortedDictionary<SurgeryPuppetPart, TextureRect> bodyPartTexture, Func<SurgeryPuppetPart, string?> pathSpecifier)
@@ -144,7 +169,7 @@ public sealed partial class SurgeryPuppetBox : Control
         if (offset == null || size == null)
             return null;
 
-        var thickness = GetPartThickness(offset.Value, size.Value, Scale);
+        var thickness = GetPartThickness(offset.Value, size.Value, Scale, _baseTextureSize);
 
         var button = new PuppetButton
         {
@@ -198,13 +223,29 @@ public sealed partial class SurgeryPuppetBox : Control
 
     private void ResizeAll()
     {
+        var cropOffset = _showBackground ? Vector2.Zero : CompactCropOffset;
+        var activeBaseSize = _showBackground ? _baseTextureSize : CompactBaseSize;
+        var textureMargin = _showBackground
+            ? default
+            : new Thickness(
+                -cropOffset.X * _scale.X,
+                -cropOffset.Y * _scale.Y,
+                -(_baseTextureSize.X - cropOffset.X - activeBaseSize.X) * _scale.X,
+                -(_baseTextureSize.Y - cropOffset.Y - activeBaseSize.Y) * _scale.Y);
+
+        Background.Visible = _showBackground;
+        Background.TextureScale = _scale;
+        RectClipContent = !_showBackground;
+
         foreach (var texture in _parts.Values)
         {
             texture.TextureScale = _scale;
+            texture.Margin = textureMargin;
         }
         foreach (var texture in _highlightedPart.Values)
         {
             texture.TextureScale = _scale;
+            texture.Margin = textureMargin;
         }
         foreach (var button in _partButtons)
         {
@@ -214,11 +255,11 @@ public sealed partial class SurgeryPuppetBox : Control
             if (size == null || offset == null)
                 continue;
 
-            button.Margin = GetPartThickness(offset.Value, size.Value, Scale);
+            button.Margin = GetPartThickness(offset.Value - cropOffset, size.Value, Scale, activeBaseSize);
             button.SetSize = size.Value * Scale;
         }
-        Background.TextureScale = _scale;
-        var scaledSize = _baseTextureSize * _scale;
+
+        var scaledSize = activeBaseSize * _scale;
         MinSize = scaledSize;
         SetSize = scaledSize;
     }
@@ -311,7 +352,7 @@ public sealed partial class SurgeryPuppetBox : Control
 
                 var label = Loc.GetString(pathologyProto.Name);
                 if (instanceData.StackCount > SharedPathologySystem.OneStack)
-                    label = $"{label} (x{instanceData.StackCount})";
+                    label = Loc.GetString("pathology-hud-entry-with-stack", ("name", label), ("count", instanceData.StackCount));
 
                 if (!zoneEntries.TryGetValue(zone, out var entries))
                 {
@@ -358,6 +399,7 @@ public sealed partial class SurgeryPuppetBox : Control
         IReadOnlySet<SurgeryPuppetPart> ongoingSurgeryZones)
     {
         var includeHeadSubZones = Interactive;
+        Color? healthyTint = _showBackground ? null : HealthyZoneTint;
 
         foreach (var (part, texture) in _parts)
         {
@@ -366,7 +408,8 @@ public sealed partial class SurgeryPuppetBox : Control
                 moderateTraumaZones,
                 severeTraumaZones,
                 ongoingSurgeryZones,
-                includeHeadSubZones);
+                includeHeadSubZones,
+                healthyTint);
         }
 
         if (!Interactive)
@@ -385,7 +428,7 @@ public sealed partial class SurgeryPuppetBox : Control
         if (!_highlightedPart.TryGetValue(subPart, out var overlay))
             return;
 
-        var tint = ResolveZoneTint(subPart, moderateTraumaZones, severeTraumaZones, ongoingSurgeryZones, false);
+        var tint = ResolveZoneTint(subPart, moderateTraumaZones, severeTraumaZones, ongoingSurgeryZones, false, null);
         overlay.Visible = tint != null;
         overlay.ModulateSelfOverride = tint;
     }
@@ -455,7 +498,8 @@ public sealed partial class SurgeryPuppetBox : Control
         IReadOnlySet<SurgeryPuppetPart> moderateTraumaZones,
         IReadOnlySet<SurgeryPuppetPart> severeTraumaZones,
         IReadOnlySet<SurgeryPuppetPart> ongoingSurgeryZones,
-        bool includeHeadSubZones)
+        bool includeHeadSubZones,
+        Color? healthyTint)
     {
         var checkHeadSub = includeHeadSubZones && part == SurgeryPuppetPart.Head;
 
@@ -474,7 +518,7 @@ public sealed partial class SurgeryPuppetBox : Control
                               moderateTraumaZones.Contains(SurgeryPuppetPart.Mouth))))
             return ModerateTraumaTint;
 
-        return null;
+        return healthyTint;
     }
 
     /// <summary> If you still think why we need new med to make surgery just look into this method. </summary>
@@ -565,9 +609,9 @@ public sealed partial class SurgeryPuppetBox : Control
         };
     }
 
-    private Thickness GetPartThickness(Vector2 offset, Vector2 size, Vector2 scale)
+    private Thickness GetPartThickness(Vector2 offset, Vector2 size, Vector2 scale, Vector2 baseSize)
     {
-        var trueTextureSize = _baseTextureSize * scale;
+        var trueTextureSize = baseSize * scale;
         Vector2 otherMargin = trueTextureSize - (offset + size) * scale;
         return new Thickness(offset.X * scale.X, offset.Y * scale.Y, otherMargin.X, otherMargin.Y);
     }

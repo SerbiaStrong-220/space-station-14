@@ -83,12 +83,12 @@ surgery-requirement-tend-burn-description = У пациента есть зна�
 surgery-requirement-tend-burn-failure = Ожоги слишком незначительны для хирургической обработки!
 
 surgery-pathology-requirement-description-dislocation = Наличие вывиха в этой зоне
-surgery-pathology-requirement-failure-dislocation = Вывиха в данной зоне не обнаружено!
+surgery-pathology-requirement-failure-dislocation = Вывиха в этой зоне не обнаружено!
 surgery-pathology-requirement-description-hairline = Наличие трещины кости в этой зоне
-surgery-pathology-requirement-failure-hairline = Трещин кости в данной зоне не обнаружено!
+surgery-pathology-requirement-failure-hairline = Трещин кости в этой зоне не обнаружено!
 surgery-pathology-requirement-description-compound = Наличие открытого перелома в этой зоне
-surgery-pathology-requirement-failure-compound = Открытого перелома в данной зоне не обнаружено!
+surgery-pathology-requirement-failure-compound = Открытого перелома в этой зоне не обнаружено!
 surgery-pathology-requirement-description-arterial = Наличие разрыва артерии в этой зоне
-surgery-pathology-requirement-failure-arterial = Разрыва артерии в данной зоне не обнаружено!
+surgery-pathology-requirement-failure-arterial = Разрыва артерии в этой зоне не обнаружено!
 surgery-pathology-requirement-description-necrosis = Наличие ожогового некроза в этой зоне
-surgery-pathology-requirement-failure-necrosis = Ожогового некроза в данной зоне не обнаружено!
+surgery-pathology-requirement-failure-necrosis = Ожогового некроза в этой зоне не обнаружено!
