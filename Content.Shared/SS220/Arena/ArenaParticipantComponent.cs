@@ -3,7 +3,7 @@
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.Arena;
+namespace Content.Shared.SS220.Arena;
 
 [RegisterComponent]
 public sealed partial class ArenaParticipantComponent : Component
