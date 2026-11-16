@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Photography;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class PhotoComponent : Component, IPhotocopyableComponent
 {
     /// <summary>
@@ -140,11 +140,13 @@ public sealed class PhotoDataRequest : EntityEventArgs
     public string Id { get; }
 
     public NetEntity Photo { get; }
+    public bool Thumbnail { get; }
 
-    public PhotoDataRequest(string id, NetEntity photo)
+    public PhotoDataRequest(string id, NetEntity photo, bool thumbnail = false)
     {
         Id = id;
         Photo = photo;
+        Thumbnail = thumbnail;
     }
 }
 
@@ -159,4 +161,10 @@ public sealed class PhotoDataRequestResponse : EntityEventArgs
         Data = data;
         Id = id;
     }
+}
+
+[Serializable, NetSerializable]
+public enum PhotoVisualLayers : byte
+{
+    Image
 }

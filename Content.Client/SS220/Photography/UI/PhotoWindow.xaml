@@ -2,7 +2,6 @@
 <ui:PhotoWindow xmlns="https://spacestation14.io"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:ui="clr-namespace:Content.Client.SS220.Photography.UI"
-                xmlns:viewport="clr-namespace:Content.Client.Viewport"
 
                 MouseFilter="Stop"
                 Resizable="False">
@@ -12,18 +11,12 @@
             <TextureButton Name="CloseButton" StyleClasses="windowCloseButton"/>
         </PanelContainer>
 
-        <PanelContainer Name="PhotoBackground" StyleClasses="PhotoBorder" VerticalExpand="True" HorizontalExpand="True">
+        <PanelContainer Name="PhotoBackground" VerticalExpand="True" HorizontalExpand="True">
             <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" Margin="5 5 5 5">
                 <Control VerticalExpand="True" HorizontalExpand="True" Name="PhotoViewBox">
-                    <PanelContainer StyleClasses="PhotoBackground" VerticalExpand="True" HorizontalExpand="True" MinSize="500 500">
+                    <PanelContainer Name="LoadingBackground" VerticalExpand="True" HorizontalExpand="True" MinSize="500 500">
                         <Label Name="LoadingTextLabel" HorizontalAlignment="Center" Text="{Loc 'photo-loading-text-label'}"/>
                     </PanelContainer>
-                    <viewport:ScalingViewport
-                        Name="PhotoView"
-                        VerticalExpand="True"
-                        HorizontalExpand="True"
-                        MinSize="500 500"
-                        MouseFilter="Ignore"/>
                     <TextureRect
                         Name="PhotoViewStatic"
                         VerticalExpand="True"

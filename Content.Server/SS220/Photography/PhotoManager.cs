@@ -6,6 +6,8 @@ using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Decals;
 using Content.Shared.GameTicking;
+using Content.Shared.Examine;
+using Robust.Shared.Containers;
 using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
@@ -31,6 +33,8 @@ public sealed partial class PhotoManager : EntitySystem
     [Dependency] private ISerializationManager _serialization = default!;
     [Dependency] private PlayerRateLimitManager _rateLimit = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly MapSystem _mapSys = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
@@ -82,7 +86,7 @@ public sealed partial class PhotoManager : EntitySystem
             !TryGetEntity(message.Photo, out var photo) || photo is not { } photoUid ||
             !TryComp<PhotoComponent>(photoUid, out var component) ||
             component.PhotoID != message.Id ||
-            !_ui.IsUiOpen(photoUid, PhotoUiKey.Key, actor) ||
+            !(message.Thumbnail ? CanViewThumbnail(actor, photoUid) : _ui.IsUiOpen(photoUid, PhotoUiKey.Key, actor)) ||
             !_photos.TryGetValue(component.PhotoID, out var photoData))
         {
             RaiseNetworkEvent(new PhotoDataRequestResponse(null, message.Id), sender);
@@ -90,6 +94,26 @@ public sealed partial class PhotoManager : EntitySystem
         }
 
         RaiseNetworkEvent(new PhotoDataRequestResponse(photoData, message.Id), sender);
+    }
+
+    /// <summary>
+    /// Background previews may only reveal snapshots belonging to visible physical photographs.
+    /// Knowing a photo id or a NetEntity is not sufficient authorization.
+    /// </summary>
+    public bool CanViewThumbnail(EntityUid actor, EntityUid photo)
+    {
+        if (!HasComp<PhotoComponent>(photo) ||
+            !Exists(actor) ||
+            !TryComp<EyeComponent>(actor, out var eye) ||
+            (eye.VisibilityMask & MetaData(photo).VisibilityMask) != MetaData(photo).VisibilityMask ||
+            !_containers.IsInSameOrTransparentContainer(actor, photo, userSeeInsideSelf: true))
+            return false;
+
+        // Use the physical viewer, not unrestricted ghost/admin examine overrides or a client-supplied location.
+        var origin = _transform.GetMapCoordinates(actor);
+        var target = _transform.GetMapCoordinates(photo);
+        return _examine.InRangeUnOccluded(origin, target, ExamineSystemShared.ExamineRange,
+            uid => uid == actor || uid == photo);
     }
 
     public bool TryCapture(

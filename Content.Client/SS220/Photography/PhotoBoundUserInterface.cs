@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.Photography.UI;
+using Robust.Client.Graphics;
 using Content.Shared.SS220.Photography;
 
 namespace Content.Client.SS220.Photography;
@@ -20,17 +21,17 @@ public sealed class PhotoBoundUserInterface : BoundUserInterface
         _disposeCallback = new(OnVisualizationDisposed);
     }
 
-    private Action<EyeComponent, float> _initCallback;
+    private Action<Texture> _initCallback;
     private Action _disposeCallback;
 
-    private void OnPhotoDataReceived(EyeComponent eye, float size)
+    private void OnPhotoDataReceived(Texture texture)
     {
-        _window?.SetVisuals(eye, size);
+        _window?.SetTexture(texture);
     }
 
     private void OnVisualizationDisposed()
     {
-        _window?.SetVisuals(null, 5);
+        _window?.SetTexture(null);
         _photoEyeRequest = null;
     }
 
@@ -41,19 +42,15 @@ public sealed class PhotoBoundUserInterface : BoundUserInterface
 
         _window = new PhotoWindow();
         _window.OnClose += Close;
-        _window.ScreenshotComplete += () =>
-        {
-            _photoEyeRequest?.Dispose();
-        };
 
         if (_entityMgr.TryGetComponent<PhotoComponent>(Owner, out var photo))
         {
             _photoEyeRequest = new(Owner, photo.PhotoID)
             {
-                OnVisualizationInit = _initCallback,
+                OnTextureReady = _initCallback,
                 OnDispose = _disposeCallback
             };
-            _photoVisualizer.RequestPhotoEye(_photoEyeRequest);
+            _photoVisualizer.RequestPhotoTexture(_photoEyeRequest);
         }
 
         if (_entityMgr.TryGetComponent<MetaDataComponent>(Owner, out var metaData))

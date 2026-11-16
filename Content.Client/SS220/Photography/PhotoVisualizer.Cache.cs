@@ -30,12 +30,15 @@ public sealed partial class PhotoVisualizer
 
     public override void Shutdown()
     {
+        CleanupThumbnails();
+        _overlayManager.RemoveOverlay<PhotoThumbnailOverlay>();
         CleanupRequests();
         base.Shutdown();
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent args)
     {
+        CleanupThumbnails();
         CleanupRequests();
         _reservedMap = null;
     }
@@ -92,6 +95,8 @@ public sealed partial class PhotoVisualizer
     public override void FrameUpdate(float frameTime)
     {
         base.FrameUpdate(frameTime);
+        UpdateThumbnails();
+        UpdateTextureQueue();
         var start = Stopwatch.GetTimestamp();
 
         while (_cleanupEntities.TryDequeue(out var entity))
@@ -151,7 +156,7 @@ public sealed partial class PhotoVisualizer
             {
                 request.RequestedAt = _timing.RealTime;
                 _nextRequestTime = _timing.RealTime + RequestInterval;
-                RaiseNetworkEvent(new PhotoDataRequest(request.PhotoId, GetNetEntity(request.Owner)));
+                RaiseNetworkEvent(new PhotoDataRequest(request.PhotoId, GetNetEntity(request.Owner), request.Thumbnail));
             }
             return;
         }
@@ -210,6 +215,8 @@ public sealed class PhotoEyeRequest(EntityUid owner, string photoId) : IDisposab
     public Action<EyeComponent, float>? OnVisualizationInit;
     public Action? OnDispose;
     public bool Disposed { get; private set; }
+    public Action<Robust.Client.Graphics.Texture>? OnTextureReady;
+    public bool Thumbnail;
     internal Action<PhotoEyeRequest>? Cleanup;
     internal TimeSpan? RequestedAt;
 
@@ -222,6 +229,7 @@ public sealed class PhotoEyeRequest(EntityUid owner, string photoId) : IDisposab
         Cleanup?.Invoke(this);
         Cleanup = null;
         OnVisualizationInit = null;
+        OnTextureReady = null;
         var onDispose = OnDispose;
         OnDispose = null;
         onDispose?.Invoke();

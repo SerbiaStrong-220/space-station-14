@@ -18,14 +18,17 @@
     shoes: ClothingShoesColorWhite
     id: ReporterPDA
     ears: ClothingHeadsetService
+    #SS220 photo camera begin
+    pocket1: PhotoCamera
+    pocket2: PhotoCameraFilm
+    #SS220 photo camera end
 # SS220 Tape Recorder #32234 early merge begin
   storage:
     back:
     - TapeRecorder
     - CassetteTape
     - CassetteTape
-    pocket1: PhotoCamera
-    pocket2: PhotoCameraFilm
+    #SS220 photo camera: camera and film belong in equipment, not storage.
 # SS220 Tape Recorder #32234 early merge end
 
 - type: chameleonOutfit

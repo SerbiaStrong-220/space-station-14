@@ -45,6 +45,8 @@ public sealed partial class PhotoVisualizer : EntitySystem
         _rotationVisualsQuery = GetEntityQuery<RotationVisualsComponent>();
         SubscribeNetworkEvent<PhotoReservedMapMessage>(OnMapReserved);
         InitializeCache();
+        InitializeThumbnails();
+        InitializeTextures();
 
         // Mid-round joins may have missed the map announcement.
         RaiseNetworkEvent(new PhotoRequestMapMessage());
