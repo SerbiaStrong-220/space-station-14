@@ -8,22 +8,22 @@ using Content.Shared.Roles;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.MalfAI;
+using Robust.Server.Player;
 using Robust.Shared.Configuration;
-using Robust.Shared.Player;
-using Robust.Shared.Toolshed;
+using Robust.Shared.Console;
 
 namespace Content.Server.SS220.MalfAI;
 
-[ToolshedCommand(Name = "malfai_make"), AdminCommand(AdminFlags.Admin)]
-public sealed class MalfAiMakeCommand : ToolshedCommand
+[AdminCommand(AdminFlags.Admin)]
+public sealed partial class MalfAiMakeCommand : LocalizedEntityCommands
 {
     [Dependency] private IAdminLogManager _admin = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-
-    private MindSystem? _mind;
-    private SharedRoleSystem? _roles;
-    private MalfAiRuleSystem? _rules;
-    private SharedStationAiSystem? _stationAi;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private MalfAiRuleSystem _rules = default!;
+    [Dependency] private SharedStationAiSystem _stationAi = default!;
 
     private static readonly LocId NoEntity = "cmd-malfai_make-no-entity";
     private static readonly LocId NotStationAi = "cmd-malfai_make-not-station-ai";
@@ -33,55 +33,70 @@ public sealed class MalfAiMakeCommand : ToolshedCommand
     private static readonly LocId Failed = "cmd-malfai_make-failed";
     private static readonly LocId Done = "cmd-malfai_make-done";
 
-    [CommandImplementation]
-    public void Make(IInvocationContext ctx, ICommonSession session)
+    public override string Command => "malfai_make";
+
+    public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        _mind ??= GetSys<MindSystem>();
-        _roles ??= GetSys<SharedRoleSystem>();
-        _rules ??= GetSys<MalfAiRuleSystem>();
-        _stationAi ??= GetSys<SharedStationAiSystem>();
+        if (args.Length != 1)
+        {
+            shell.WriteError(Help);
+            return;
+        }
+
+        if (!_players.TryGetSessionByUsername(args[0], out var session))
+        {
+            shell.WriteError(Loc.GetString("shell-target-player-does-not-exist"));
+            return;
+        }
 
         var name = session.Name;
 
         var attached = session.AttachedEntity;
         if (attached == null)
         {
-            ctx.WriteLine(Loc.GetString(NoEntity, ("player", name)));
+            shell.WriteError(Loc.GetString(NoEntity, ("player", name)));
             return;
         }
 
         if (!_stationAi.TryGetCore(attached.Value, out _))
         {
-            ctx.WriteLine(Loc.GetString(NotStationAi, ("player", name)));
+            shell.WriteError(Loc.GetString(NotStationAi, ("player", name)));
             return;
         }
 
         if (!_mind.TryGetMind(session, out var mindId, out var mind))
         {
-            ctx.WriteLine(Loc.GetString(NoMind, ("player", name)));
+            shell.WriteError(Loc.GetString(NoMind, ("player", name)));
             return;
         }
 
         if (!_cfg.GetCVar(CCVars220.MalfAiEnabled))
         {
-            ctx.WriteLine(Loc.GetString(Disabled));
+            shell.WriteError(Loc.GetString(Disabled));
             return;
         }
 
         if (_roles.MindHasRole<MalfAiRoleComponent>(mindId))
         {
-            ctx.WriteLine(Loc.GetString(Already, ("player", name)));
+            shell.WriteError(Loc.GetString(Already, ("player", name)));
             return;
         }
 
         if (!_rules.AssignMalf((mindId, mind)))
         {
-            ctx.WriteLine(Loc.GetString(Failed, ("player", name)));
+            shell.WriteError(Loc.GetString(Failed, ("player", name)));
             return;
         }
 
         _admin.Add(LogType.Action, LogImpact.High,
-            $"{ctx.Session?.Name ?? "An administrator"} assigned Malfunctioning AI to {name}.");
-        ctx.WriteLine(Loc.GetString(Done, ("player", name)));
+            $"{shell.Player?.Name ?? "An administrator"} assigned Malfunctioning AI to {name}.");
+        shell.WriteLine(Loc.GetString(Done, ("player", name)));
+    }
+
+    public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+    {
+        return args.Length == 1
+            ? CompletionResult.FromOptions(CompletionHelper.SessionNames(true, _players))
+            : CompletionResult.Empty;
     }
 }
