@@ -8,7 +8,7 @@
   - type: Photo
   - type: ActivatableUI
     key: enum.PhotoUiKey.Key
-    closeOnHandDeselect: false
+    inHandsOnly: true
   - type: UserInterface
     interfaces:
       enum.PhotoUiKey.Key:
@@ -45,7 +45,6 @@
     state: camera_base
   - type: LimitedCharges
     maxCharges: 5
-    charges: 5
   - type: Item
     size: Normal
   - type: UseDelay
