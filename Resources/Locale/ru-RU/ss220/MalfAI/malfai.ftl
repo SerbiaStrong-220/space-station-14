@@ -113,7 +113,6 @@ malfai-doomsday-wave-announcement = Импульс Устройства Судн
 
 malfai-machine-override-done = Машина взломана и ожила.
 malfai-machine-override-already = Эта машина уже действует.
-malfai-machine-override-limit = Лимит конструктов исчерпан: {$max} оживших машин уже на этой станции.
 malfai-emag-done = Устройство взломано.
 malfai-emag-failed = Сигнал не возымел эффекта.
 malfai-emag-already = Уже взломано.
