@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Based on Borg icon and modified by ID_SNAIL_RU (Discord) for SS220",
+    "size": {
+        "x": 8,
+        "y": 8
+    },
+    "states": [
+        {
+            "name": "generic"
+        },
+        {
+            "name": "engineering"
+        },
+        {
+            "name": "mining"
+        },
+        {
+            "name": "medical"
+        },
+        {
+            "name": "service"
+        }
+    ]
+}

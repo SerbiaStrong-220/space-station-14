@@ -1,0 +1,52 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconBorgGeneric
+  icon:
+    sprite: /Textures/SS220/CrewManifest/BorgIcons.rsi
+    state: generic
+  jobName: job-name-borg
+  isCrewJob: false
+  allowSelection: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconBorgEngineering
+  icon:
+    sprite: /Textures/SS220/CrewManifest/BorgIcons.rsi
+    state: engineering
+  jobName: job-name-borg
+  isCrewJob: false
+  allowSelection: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconBorgMining
+  icon:
+    sprite: /Textures/SS220/CrewManifest/BorgIcons.rsi
+    state: mining
+  jobName: job-name-borg
+  isCrewJob: false
+  allowSelection: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconBorgMedical
+  icon:
+    sprite: /Textures/SS220/CrewManifest/BorgIcons.rsi
+    state: medical
+  jobName: job-name-borg
+  isCrewJob: false
+  allowSelection: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconBorgService
+  icon:
+    sprite: /Textures/SS220/CrewManifest/BorgIcons.rsi
+    state: service
+  jobName: job-name-borg
+  isCrewJob: false
+  allowSelection: false
+

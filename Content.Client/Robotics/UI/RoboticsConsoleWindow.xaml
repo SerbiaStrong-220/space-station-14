@@ -28,6 +28,7 @@
                 </PanelContainer>
                 <!-- TODO: button to open camera window for this borg -->
             </BoxContainer>
+            <Button Name="ManifestButton" HorizontalExpand="True" Margin="5 0 5 5"/> <!-- SS220 Silicon-Manifest -->
             <controls:StripeBack>
                 <BoxContainer Name="DangerZone" Margin="5" Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Center" Visible="False">
                     <Button Name="DisableButton" Text="{Loc 'robotics-console-disable'}" StyleClasses="OpenRight"/>

@@ -12,23 +12,30 @@ public enum RoboticsConsoleUiKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class RoboticsConsoleState : BoundUserInterfaceState
+// SS220 Silicon-Manifest begin
+public sealed class RoboticsConsoleState(
+    Dictionary<string, CyborgControlData> cyborgs,
+    bool allowBorgControl,
+    bool allowManifest) : BoundUserInterfaceState
+// SS220 Silicon-Manifest end
 {
     /// <summary>
     /// Map of device network addresses to cyborg data.
     /// </summary>
-    public Dictionary<string, CyborgControlData> Cyborgs;
+    public Dictionary<string, CyborgControlData> Cyborgs = cyborgs; // SS220 Silicon-Manifest
 
     /// <summary>
     /// If the UI will have the buttons to disable and destroy.
     /// </summary>
-    public bool AllowBorgControl;
+    // SS220 Silicon-Manifest begin
+    public bool AllowBorgControl = allowBorgControl;
 
-    public RoboticsConsoleState(Dictionary<string, CyborgControlData> cyborgs, bool allowBorgControl)
-    {
-        Cyborgs = cyborgs;
-        AllowBorgControl = allowBorgControl;
-    }
+    // SS220 Silicon-Manifest begin
+    /// <summary>
+    /// If the UI will have the button to toggle manifest membership.
+    /// </summary>
+    public bool AllowManifest = allowManifest;
+    // SS220 Silicon-Manifest end
 }
 
 /// <summary>
@@ -58,6 +65,17 @@ public sealed class RoboticsConsoleDestroyMessage : BoundUserInterfaceMessage
         Address = address;
     }
 }
+
+// SS220 Silicon-Manifest begin
+/// <summary>
+/// Message to toggle whether the selected cyborg is listed in the crew manifest.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class RoboticsConsoleToggleManifestMessage(string address) : BoundUserInterfaceMessage
+{
+    public readonly string Address = address;
+}
+// SS220 Silicon-Manifest end
 
 /// <summary>
 /// All data a client needs to render the console UI for a single cyborg.
@@ -115,6 +133,20 @@ public partial record struct CyborgControlData
     /// </summary>
     [DataField]
     public bool CanDisable;
+
+    // SS220 Silicon-Manifest begin
+    /// <summary>
+    /// The borg entity, used to toggle manifest membership.
+    /// </summary>
+    [DataField]
+    public NetEntity Entity;
+
+    /// <summary>
+    /// Whether the borg is currently listed in the station's crew manifest.
+    /// </summary>
+    [DataField]
+    public bool InManifest;
+    // SS220 Silicon-Manifest end
 
     /// <summary>
     /// When this cyborg's data will be deleted.

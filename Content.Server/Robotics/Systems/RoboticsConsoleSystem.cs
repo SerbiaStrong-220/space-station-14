@@ -1,6 +1,8 @@
 using Content.Server.Administration.Logs;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Radio.EntitySystems;
+using Content.Server.SS220.CrewManifest;
+using Content.Server.Station.Systems;
 using Content.Shared.Lock;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
@@ -25,6 +27,10 @@ public sealed class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    // SS220 Silicon-Manifest begin
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private CrewManifestSiliconSystem _siliconManifest = default!;
+    // SS220 Silicon-Manifest end
 
     // almost never timing out more than 1 per tick so initialize with that capacity
     private List<string> _removing = new(1);
@@ -39,6 +45,7 @@ public sealed class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
             subs.Event<BoundUIOpenedEvent>(OnOpened);
             subs.Event<RoboticsConsoleDisableMessage>(OnDisable);
             subs.Event<RoboticsConsoleDestroyMessage>(OnDestroy);
+            subs.Event<RoboticsConsoleToggleManifestMessage>(OnToggleManifest); // SS220 Silicon-Manifest
             // TODO: camera stuff
         });
     }
@@ -143,9 +150,42 @@ public sealed class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
         Dirty(ent, ent.Comp);
     }
 
+    // SS220 Silicon-Manifest begin
+    private void OnToggleManifest(Entity<RoboticsConsoleComponent> ent, ref RoboticsConsoleToggleManifestMessage args)
+    {
+        if (!ent.Comp.AllowManifest || _lock.IsLocked(ent.Owner))
+            return;
+
+        if (!ent.Comp.Cyborgs.TryGetValue(args.Address, out var data))
+            return;
+
+        if (!TryGetEntity(data.Entity, out var borg) ||
+            _station.GetOwningStation(ent.Owner) is not { } station)
+        {
+            return;
+        }
+
+        _siliconManifest.Toggle(borg.Value, station);
+        UpdateUserInterface(ent);
+    }
+    // SS220 Silicon-Manifest end
+
     private void UpdateUserInterface(Entity<RoboticsConsoleComponent> ent)
     {
-        var state = new RoboticsConsoleState(ent.Comp.Cyborgs, ent.Comp.AllowBorgControl);
+        // SS220 Silicon-Manifest begin
+        var station = _station.GetOwningStation(ent.Owner);
+        var cyborgs = new Dictionary<string, CyborgControlData>(ent.Comp.Cyborgs);
+        foreach (var address in cyborgs.Keys)
+        {
+            var data = cyborgs[address];
+            data.InManifest = station is { } stationUid &&
+                TryGetEntity(data.Entity, out var borg) &&
+                _siliconManifest.IsRegistered(borg.Value, stationUid);
+            cyborgs[address] = data;
+        }
+
+        var state = new RoboticsConsoleState(cyborgs, ent.Comp.AllowBorgControl, ent.Comp.AllowManifest);
+        // SS220 Silicon-Manifest end
         _ui.SetUiState(ent.Owner, RoboticsConsoleUiKey.Key, state);
     }
 }
