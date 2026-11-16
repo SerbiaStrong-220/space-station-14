@@ -6,16 +6,19 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Photography;
+using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Robust.Server.Audio;
+using Robust.Shared.Map;
 
 namespace Content.Server.SS220.Photography;
 
-public sealed class PhotoCameraSystem : EntitySystem
+public sealed partial class PhotoCameraSystem : EntitySystem
 {
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
     [Dependency] private readonly PhotoManager _photo = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedChargesSystem _charges = default!;
@@ -27,7 +30,7 @@ public sealed class PhotoCameraSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PhotoCameraComponent, UseInHandEvent>(OnCameraActivate);
+        SubscribeLocalEvent<PhotoCameraComponent, BeforeRangedInteractEvent>(OnCameraInteract);
         SubscribeLocalEvent<PhotoCameraComponent, GetVerbsEvent<Verb>>(OnVerb);
         SubscribeLocalEvent<PhotoCameraComponent, ExaminedEvent>(OnCameraExamine);
         SubscribeLocalEvent<PhotoComponent, ExaminedEvent>(OnPhotoExamine);
@@ -93,34 +96,47 @@ public sealed class PhotoCameraSystem : EntitySystem
             return;
 
         _charges.AddCharges(target, entity.Comp.Charges);
-        EntityManager.DeleteEntity(entity);
+        Del(entity);
     }
 
-    private void OnCameraActivate(Entity<PhotoCameraComponent> entity, ref UseInHandEvent args)
+    private void OnCameraInteract(Entity<PhotoCameraComponent> entity, ref BeforeRangedInteractEvent args)
     {
         if (args.Handled)
             return;
 
+        // The camera owns this click even if the focus is invalid or the film is empty.
+        args.Handled = true;
+        if (_useDelay.IsDelayed(entity.Owner) || !args.ClickLocation.IsValid(EntityManager))
+            return;
+
+        var focus = _transform.ToMapCoordinates(args.ClickLocation);
+        if (!float.IsFinite(focus.X) || !float.IsFinite(focus.Y) ||
+            !_examine.InRangeUnOccluded(args.User, focus, entity.Comp.MaxCaptureDistance, ignoreInsideBlocker: false))
+        {
+            _popup.PopupEntity(Loc.GetString("photo-camera-component-invalid-focus"), entity, args.User);
+            return;
+        }
+
         TryComp<LimitedChargesComponent>(entity, out var charges);
-        if (_charges.IsEmpty(entity, charges))
+        if (!_charges.HasCharges((entity, charges), 1))
         {
             _popup.PopupEntity(Loc.GetString("photo-camera-component-no-charges-message"), entity, args.User, PopupType.Medium);
             return;
         }
 
-        if (!TryPhoto(entity, out var photo))
+        if (!TryPhoto(entity, focus, out var photo))
             return;
 
         if (TryComp<HandsComponent>(args.User, out var hands))
         {
-            if (_hands.TryGetEmptyHand(args.User, out var emptyHand, hands))
+            if (_hands.TryGetEmptyHand((args.User, hands), out var emptyHand))
                 _hands.TryPickup(args.User, photo.Value, emptyHand, checkActionBlocker: false, handsComp: hands);
         }
 
-        _charges.UseCharge(entity, charges);
+        _charges.AddCharges((entity, charges, null), -1);
+        _useDelay.TryResetDelay(entity.Owner);
         _audio.PlayPvs(entity.Comp.ShotSound, entity);
         Dirty(entity);
-        args.Handled = true;
     }
 
     private string GetPhotoSizeLoc(float size)
@@ -128,15 +144,14 @@ public sealed class PhotoCameraSystem : EntitySystem
         return Loc.GetString("photo-camera-component-photo-size", ("size", size));
     }
 
-    private bool TryPhoto(Entity<PhotoCameraComponent> entity, [NotNullWhen(true)] out EntityUid? photoEntity)
+    private bool TryPhoto(Entity<PhotoCameraComponent> entity, MapCoordinates focus, [NotNullWhen(true)] out EntityUid? photoEntity)
     {
         photoEntity = null;
 
         if (entity.Comp.FilmLeft <= 0)
             return false;
 
-        if (!TryComp<TransformComponent>(entity, out var xform))
-            return false;
+        var xform = Transform(entity);
 
         Angle cameraRotation;
 
@@ -145,7 +160,7 @@ public sealed class PhotoCameraSystem : EntitySystem
         else
             cameraRotation = _transform.GetWorldRotation(xform);
 
-        if (!_photo.TryCapture(xform.MapPosition, cameraRotation, entity.Comp.SelectedPhotoDimensions, out var id, out var seenObjects))
+        if (!_photo.TryCapture(focus, cameraRotation, entity.Comp.SelectedPhotoDimensions, out var id, out var seenObjects))
             return false;
 
         photoEntity = Spawn(entity.Comp.PhotoPrototypeId, xform.MapPosition);

@@ -1,14 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Client.Hands.Systems;
-using Content.Shared.Damage;
+using Content.Shared.Body;
+using Robust.Shared.Containers;
+using Content.Shared.Damage.Components;
 using Content.Shared.Decals;
 using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Rotation;
 using Content.Shared.SS220.Photography;
+using Content.Shared.SSDIndicator;
 using Content.Shared.StatusEffect;
 using Robust.Client.GameObjects;
 using Robust.Shared.GameStates;
@@ -19,6 +21,7 @@ namespace Content.Client.SS220.Photography;
 
 public sealed partial class PhotoVisualizer : EntitySystem
 {
+    [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -26,103 +29,92 @@ public sealed partial class PhotoVisualizer : EntitySystem
     [Dependency] private readonly EyeSystem _eye = default!;
     [Dependency] private readonly MapSystem _map = default!;
 
-    private ISawmill _sawmill = Logger.GetSawmill("photo-visualizer");
-    private Dictionary<string, PhotoVisualisation> _currentlyVisualized = new();
+    private const int TileBatchSize = 32;
+    private readonly List<EntityUid> _sceneEntities = new();
+    private readonly List<EntityUid> _sceneGrids = new();
+    private readonly List<(Vector2i, Tile)> _sceneTiles = new(TileBatchSize);
+    private EntityQuery<RotationVisualsComponent> _rotationVisualsQuery;
+    private EyeComponent? _sceneEye;
+    private readonly Queue<EntityUid> _cleanupEntities = new();
     private MapId? _reservedMap;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        _rotationVisualsQuery = GetEntityQuery<RotationVisualsComponent>();
         SubscribeNetworkEvent<PhotoReservedMapMessage>(OnMapReserved);
         InitializeCache();
 
-        // Request a map, just in case it was already created
-        // Needed for mid-round joins
-        var ev = new PhotoRequestMapMessage();
-        RaiseNetworkEvent(ev);
+        // Mid-round joins may have missed the map announcement.
+        RaiseNetworkEvent(new PhotoRequestMapMessage());
     }
 
     private void OnMapReserved(PhotoReservedMapMessage args)
     {
-        _sawmill.Debug($"Reserved map received. MapId: {args.Map}");
         _reservedMap = args.Map;
     }
 
-    public bool TryGetVisualization(string id, [NotNullWhen(true)] out EyeComponent? eye)
+    /// <summary>
+    /// Reconstruct a server-authored snapshot in small steps, never a whole scene in one frame.
+    /// The caller owns the enumerator and must dispose it before cleaning up the scene.
+    /// </summary>
+    private IEnumerator<bool> CreateVisualization(PhotoData data, MapId mapId)
     {
-        if (!_photoDataCache.TryGetValue(id, out var data))
+        var origin = new MapCoordinates(Vector2.Zero, mapId);
+        var entities = _sceneEntities;
+        var grids = _sceneGrids;
+        var tiles = _sceneTiles;
+
+        var camera = Spawn(null, origin);
+        entities.Add(camera);
+        var cameraXform = Transform(camera);
+        _transform.SetWorldPosition(cameraXform, data.CameraPosition);
+        var eye = EnsureComp<EyeComponent>(camera);
+        _eye.SetZoom(camera, Vector2.One, eye);
+        _eye.SetRotation(camera, -data.CameraRotation, eye);
+        _sceneEye = eye;
+        yield return true;
+
+        foreach (var gridDesc in data.Grids)
         {
-            eye = null;
-            return false;
-        }
-
-        return TryGetVisualization(data, out eye);
-    }
-
-    public bool TryGetVisualization(PhotoData data, [NotNullWhen(true)] out EyeComponent? eye)
-    {
-        if (_currentlyVisualized.TryGetValue(data.Id, out var existingVisualization))
-        {
-            eye = existingVisualization.Eye;
-            return true;
-        }
-
-        if (!_reservedMap.HasValue || !_mapMan.MapExists(_reservedMap.Value))
-        {
-            _sawmill.Debug($"Visualisation has not been loaded. Reason: No reserved map!");
-            eye = null;
-            return false;
-        }
-
-        var origin = new MapCoordinates(Vector2.Zero, _reservedMap.Value);
-        var entities = new List<EntityUid>(data.Entities.Count + data.Grids.Count + 1);
-        List<EntityUid> grids = new(data.Grids.Count);
-
-        // Add grids
-        for (var i = 0; i < data.Grids.Count; i++)
-        {
-            var gridDesc = data.Grids[i];
-            var grid = _mapMan.CreateGrid(_reservedMap.Value);
+            var grid = _mapMan.CreateGrid(mapId);
             var gridEnt = grid.Owner;
-            var gridXform = EnsureComp<TransformComponent>(gridEnt);
+            var gridXform = Transform(gridEnt);
             entities.Add(gridEnt);
             grids.Add(gridEnt);
 
-            _transform.SetParent(gridEnt, gridXform, _mapMan.GetMapEntityId(_reservedMap.Value));
             _transform.SetLocalRotationNoLerp(gridEnt, gridDesc.Rotation, gridXform);
             _transform.SetLocalPositionNoLerp(gridEnt, gridDesc.Position, gridXform);
+            yield return true;
 
             foreach (var (indices, tileType) in gridDesc.Tiles)
             {
-                var tile = new Tile(tileType);
-                _map.SetTile(gridEnt, grid, indices, tile);
+                tiles.Add((indices, new Tile(tileType)));
+                if (tiles.Count < TileBatchSize)
+                    continue;
+
+                _map.SetTiles(gridEnt, grid, tiles);
+                tiles.Clear();
+                yield return true;
             }
 
-            // Handle decal state
+            if (tiles.Count > 0)
+            {
+                _map.SetTiles(gridEnt, grid, tiles);
+                tiles.Clear();
+                yield return true;
+            }
+
             if (gridDesc.DecalGridState is not null)
             {
                 var decalGrid = EnsureComp<DecalGridComponent>(gridEnt);
                 var ev = new ComponentHandleState(gridDesc.DecalGridState, null);
-                RaiseLocalEvent(gridEnt, ref ev);
+                EntityManager.EventBus.RaiseComponentEvent(gridEnt, decalGrid, ref ev);
+                yield return true;
             }
         }
 
-
-        // Create and setup camera
-        var camera = Spawn(null, origin);
-        entities.Add(camera);
-
-        var cameraXform = EnsureComp<TransformComponent>(camera);
-        _transform.SetWorldPosition(cameraXform, data.CameraPosition);
-
-        eye = EnsureComp<EyeComponent>(camera);
-        _eye.SetZoom(camera, Vector2.One, eye);
-        //Align with grid by subtracting grid angle (I have no idea why, but it works)
-        _eye.SetRotation(camera, -data.CameraRotation, eye);
-
-
-        // Add entities
         foreach (var entityDesc in data.Entities)
         {
             // Make sure entity transforms are parented
@@ -132,7 +124,7 @@ public sealed partial class PhotoVisualizer : EntitySystem
             {
                 parent = maybeParent;
             }
-            else if (_mapMan.GetMapEntityId(_reservedMap.Value) is { Valid: true } mapEnt)
+            else if (_mapMan.GetMapEntityId(mapId) is { Valid: true } mapEnt)
             {
                 parent = mapEnt;
             }
@@ -149,64 +141,31 @@ public sealed partial class PhotoVisualizer : EntitySystem
             var xform = EnsureComp<TransformComponent>(entity);
             _transform.SetLocalRotationNoLerp(entity, entityDesc.Rotation, xform);
 
-            if (TryComp<RotationVisualsComponent>(entity, out var rotationVisualsComp))
+            if (_rotationVisualsQuery.TryComp(entity, out var rotationVisualsComp))
                 rotationVisualsComp.AnimationTime = 0;
 
-            // Handle appearance state
-            if (entityDesc.Appearance is not null)
-            {
-                var appearanceComp = EnsureComp<AppearanceComponent>(entity);
-                var ev = new ComponentHandleState(entityDesc.Appearance, null);
-                RaiseLocalEvent(entity, ref ev);
-            }
+            ApplyState<AppearanceComponent>(entity, entityDesc.Appearance);
+            ApplyState<HumanoidProfileComponent>(entity, entityDesc.HumanoidProfile);
+            ApplyState<SSDIndicatorComponent>(entity, entityDesc.SsdIndicator);
+            ApplyState<PointLightComponent>(entity, entityDesc.PointLight);
+            ApplyState<OccluderComponent>(entity, entityDesc.Occluder);
+            ApplyState<DamageableComponent>(entity, entityDesc.Damageable);
+            ApplyState<HandsComponent>(entity, entityDesc.Hands);
+            ApplyState<StatusEffectsComponent>(entity, entityDesc.StatusEffects);
+            yield return true;
 
-            // TODO: deduplicate
-            // Handle humanoid appearance state
-            if (entityDesc.HumanoidAppearance is not null)
+            if (entityDesc.Organs is { } organs)
             {
-                var humanoidAppearanceComp = EnsureComp<HumanoidAppearanceComponent>(entity);
-                var ev = new ComponentHandleState(entityDesc.HumanoidAppearance, null);
-                RaiseLocalEvent(entity, ref ev);
-            }
-
-            // Handle point light state
-            if (entityDesc.PointLight is not null)
-            {
-                var pointLightComp = EnsureComp<PointLightComponent>(entity);
-                var ev = new ComponentHandleState(entityDesc.PointLight, null);
-                RaiseLocalEvent(entity, ref ev);
-            }
-
-            // Handle occluder state
-            if (entityDesc.Occluder is not null)
-            {
-                var occluderComp = EnsureComp<OccluderComponent>(entity);
-                var ev = new ComponentHandleState(entityDesc.Occluder, null);
-                RaiseLocalEvent(entity, ref ev);
-            }
-
-            // Handle damageable state
-            if (entityDesc.Damageable is not null)
-            {
-                var damageableComp = EnsureComp<DamageableComponent>(entity);
-                var ev = new ComponentHandleState(entityDesc.Damageable, null);
-                RaiseLocalEvent(entity, ref ev);
-            }
-
-            // Handle hands state
-            if (entityDesc.Hands is not null)
-            {
-                var handsComp = EnsureComp<HandsComponent>(entity);
-                var ev = new ComponentHandleState(entityDesc.Hands, null);
-                RaiseLocalEvent(entity, ref ev);
-            }
-
-            // Status Effects
-            if (entityDesc.StatusEffects is not null)
-            {
-                var statusEffectsComp = EnsureComp<StatusEffectsComponent>(entity);
-                var ev = new ComponentHandleState(entityDesc.StatusEffects, null);
-                RaiseLocalEvent(entity, ref ev);
+                var container = _containers.EnsureContainer<Container>(entity, BodyComponent.ContainerID);
+                foreach (var organDesc in organs)
+                {
+                    var organ = Spawn(organDesc.Prototype, coords);
+                    entities.Add(organ);
+                    ApplyState<VisualOrganComponent>(organ, organDesc.Visual);
+                    ApplyState<VisualOrganMarkingsComponent>(organ, organDesc.Markings);
+                    _containers.Insert(organ, container);
+                    yield return true;
+                }
             }
 
             // Handle inventory
@@ -218,6 +177,9 @@ public sealed partial class PhotoVisualizer : EntitySystem
                     if (_inventory.TryUnequip(entity, slotEntry.Key, out var item, true, true, false, inventoryComp))
                         QueueDel(item);
                     _inventory.SpawnItemInSlot(entity, slotEntry.Key, slotEntry.Value, true, true, inventoryComp);
+                    if (_inventory.TryGetSlotEntity(entity, slotEntry.Key, out var equipped, inventoryComp))
+                        entities.Add(equipped.Value);
+                    yield return true;
                 }
             }
 
@@ -228,53 +190,42 @@ public sealed partial class PhotoVisualizer : EntitySystem
 
                 foreach (var handEntry in entityDesc.HandsContents)
                 {
-                    if (!_hands.TryGetHand(entity, handEntry.Key, out var hand, handsComp))
+                    if (!_hands.TryGetHand((entity, handsComp), handEntry.Key, out _))
                         continue;
 
-                    var inhandEntity = EntityManager.SpawnEntity(handEntry.Value, coords);
-                    if (!_hands.TryPickup(entity, inhandEntity, hand, false, false, handsComp))
+                    var inhandEntity = Spawn(handEntry.Value, coords);
+                    entities.Add(inhandEntity);
+                    if (!_hands.TryPickup(entity, inhandEntity, handEntry.Key, checkActionBlocker: false,
+                            animate: false, handsComp: handsComp))
                         QueueDel(inhandEntity);
+                    yield return true;
                 }
             }
+            yield return true;
         }
-
-        var photoVisDesc = new PhotoVisualisation(_reservedMap.Value, camera, origin, eye, entities, data.PhotoSize);
-        _currentlyVisualized.Add(data.Id, photoVisDesc);
-        _sawmill.Debug("Created map for visualization of the photo " + data.Id);
-
-        return true;
     }
 
-    public void DisposeVisualization(string id)
+    private void ApplyState<T>(EntityUid entity, IComponentState? state) where T : Component, new()
     {
-        if (!_currentlyVisualized.TryGetValue(id, out var photoVisualisation))
+        if (state == null)
             return;
 
-        //_mapMan.DeleteMap(photoVisualisation.MapId);
-        _currentlyVisualized.Remove(id);
-        foreach (var entity in photoVisualisation.Entities)
-        {
-            EntityManager.DeleteEntity(entity);
-        }
+        var component = EnsureComp<T>(entity);
+        var ev = new ComponentHandleState(state, null);
+        EntityManager.EventBus.RaiseComponentEvent(entity, component, ref ev);
     }
-}
 
-public sealed class PhotoVisualisation
-{
-    public readonly MapId MapId;
-    public readonly EntityUid Camera;
-    public readonly EyeComponent Eye;
-    public readonly MapCoordinates Origin;
-    public readonly List<EntityUid> Entities;
-    public readonly float Size;
-
-    public PhotoVisualisation(MapId mapId, EntityUid camera, MapCoordinates origin, EyeComponent eye, List<EntityUid> entities, float size)
+    private void DisposeVisualization()
     {
-        MapId = mapId;
-        Origin = origin;
-        Camera = camera;
-        Eye = eye;
-        Entities = entities;
-        Size = size;
+        // Children first: deleting a populated grid would otherwise delete the whole scene at once.
+        for (var i = _sceneEntities.Count - 1; i >= 0; i--)
+        {
+            _cleanupEntities.Enqueue(_sceneEntities[i]);
+        }
+
+        _sceneEye = null;
+        _sceneEntities.Clear();
+        _sceneGrids.Clear();
+        _sceneTiles.Clear();
     }
 }

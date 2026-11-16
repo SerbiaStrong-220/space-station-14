@@ -28,6 +28,12 @@ public sealed partial class PhotoCameraComponent : Component
     public float SelectedPhotoDimensions = 5;
 
     /// <summary>
+    /// Maximum distance from the photographer to the selected center of the frame, in meters.
+    /// </summary>
+    [DataField]
+    public float MaxCaptureDistance = 10f;
+
+    /// <summary>
     /// Available dimensions of a photo, can be switched via context menu of a camera.
     /// </summary>
     [DataField]

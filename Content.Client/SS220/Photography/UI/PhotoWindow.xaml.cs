@@ -16,6 +16,7 @@ public sealed partial class PhotoWindow : BaseWindow
     [Dependency] private readonly IClyde _displayManager = default!;
 
     private readonly FixedEye _defaultEye = new();
+    private OwnedTexture? _photoTexture;
     public Action? ScreenshotComplete;
 
     public PhotoWindow()
@@ -37,19 +38,29 @@ public sealed partial class PhotoWindow : BaseWindow
 
     public void PostScreenshot(Image<Rgba32> image)
     {
-        var rgba32Image = image.CloneAs<Rgba32>(SixLabors.ImageSharp.Configuration.Default);
-        PhotoViewStatic.Texture = _displayManager.LoadTextureFromImage(rgba32Image);
-        PhotoViewStatic.Visible = true;
-        PhotoView.Visible = false;
-        PhotoView.Eye = null;
-        ScreenshotComplete?.Invoke();
+        // This window owns its viewport and its sole screenshot request, including the readback image.
+        using (image)
+        {
+            if (Disposed)
+                return;
+
+            _photoTexture?.Dispose();
+            _photoTexture = _displayManager.LoadTextureFromImage(image);
+            PhotoViewStatic.Texture = _photoTexture;
+            PhotoViewStatic.Visible = true;
+            PhotoView.Visible = false;
+            PhotoView.Eye = null;
+            ScreenshotComplete?.Invoke();
+        }
     }
 
     public void SetVisuals(EyeComponent? eye, float size)
     {
-        PhotoView.ViewportSize = new Vector2i(
-            (int) size * EyeManager.PixelsPerMeter,
-            (int) size * EyeManager.PixelsPerMeter);
+        if (Disposed || PhotoViewStatic.Visible)
+            return;
+
+        var pixels = Math.Max(1, (int) MathF.Ceiling(size * EyeManager.PixelsPerMeter));
+        PhotoView.ViewportSize = new Vector2i(pixels, pixels);
 
         PhotoView.Visible = eye != null;
 
@@ -63,6 +74,20 @@ public sealed partial class PhotoWindow : BaseWindow
             PhotoView.Eye = _defaultEye;
             LoadingTextLabel.Text = Loc.GetString("photo-failed-text-label");
         }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            ScreenshotComplete = null;
+            PhotoView.Eye = null;
+            PhotoViewStatic.Texture = null;
+            _photoTexture?.Dispose();
+            _photoTexture = null;
+        }
+
+        base.Dispose(disposing);
     }
 
     // Drag by grabbing anywhere

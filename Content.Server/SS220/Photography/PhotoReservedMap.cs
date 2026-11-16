@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.GameTicking;
+using Content.Server.Players.RateLimiting;
+using Content.Shared.Players.RateLimiting;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Photography;
 using Robust.Shared.Map;
@@ -7,9 +9,11 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SS220.Photography;
 
-public sealed class PhotoReservedMap : EntitySystem
+public sealed partial class PhotoReservedMap : EntitySystem
 {
     [Dependency] private readonly IMapManager _mapMan = default!;
+
+    [Dependency] private PlayerRateLimitManager _rateLimit = default!;
 
     public MapId? ReservedMap { get; private set; }
     private ISawmill _sawmill = Logger.GetSawmill("photo-manager");
@@ -29,7 +33,7 @@ public sealed class PhotoReservedMap : EntitySystem
         {
             ReservedMap = _mapMan.CreateMap();
             _mapMan.SetMapPaused(ReservedMap.Value, true);
-            _mapMan.AddUninitializedMap(ReservedMap.Value);
+            // New maps are uninitialized by default; do not run gameplay MapInit on photo replicas.
             _sawmill.Debug($"Reserved map created! MapId: {ReservedMap}");
         }
 
@@ -38,6 +42,9 @@ public sealed class PhotoReservedMap : EntitySystem
 
     private void OnMapRequest(PhotoRequestMapMessage args, EntitySessionEventArgs eventArgs)
     {
+        if (_rateLimit.CountAction(eventArgs.SenderSession, PhotoManager.RequestRateLimitKey) != RateLimitStatus.Allowed)
+            return;
+
         var ev = new PhotoReservedMapMessage(ReservedMap);
         RaiseNetworkEvent(ev, eventArgs.SenderSession);
     }

@@ -20,8 +20,8 @@ public sealed class PhotoBoundUserInterface : BoundUserInterface
         _disposeCallback = new(OnVisualizationDisposed);
     }
 
-    private PhotoEyeRequest.OnVisualizationInitCallback _initCallback;
-    private PhotoEyeRequest.OnDisposeCallback _disposeCallback;
+    private Action<EyeComponent, float> _initCallback;
+    private Action _disposeCallback;
 
     private void OnPhotoDataReceived(EyeComponent eye, float size)
     {
@@ -48,7 +48,7 @@ public sealed class PhotoBoundUserInterface : BoundUserInterface
 
         if (_entityMgr.TryGetComponent<PhotoComponent>(Owner, out var photo))
         {
-            _photoEyeRequest = new(photo.PhotoID)
+            _photoEyeRequest = new(Owner, photo.PhotoID)
             {
                 OnVisualizationInit = _initCallback,
                 OnDispose = _disposeCallback

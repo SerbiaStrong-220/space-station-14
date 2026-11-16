@@ -1,12 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Numerics;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Decals;
 using Content.Shared.Hands.Components;
 using Content.Shared.SS220.Photocopier;
 using Content.Shared.StatusEffect;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Photography;
 
@@ -64,7 +65,9 @@ public sealed class PhotoEntityData
     public int? GridIndex = null;
     public Angle Rotation;
     public AppearanceComponentState? Appearance;
-    public IComponentState? HumanoidAppearance;
+    public IComponentState? HumanoidProfile;
+    public IComponentState? SsdIndicator;
+    public List<PhotoOrganData>? Organs;
     public PointLightComponentState? PointLight;
     public OccluderComponent.OccluderComponentState? Occluder;
     public DamageableComponentState? Damageable;
@@ -82,6 +85,14 @@ public sealed class PhotoEntityData
         Position = position;
         Rotation = rotation;
     }
+}
+
+[Serializable, NetSerializable]
+public sealed class PhotoOrganData(EntProtoId prototype, IComponentState visual, IComponentState? markings)
+{
+    public readonly EntProtoId Prototype = prototype;
+    public readonly IComponentState Visual = visual;
+    public readonly IComponentState? Markings = markings;
 }
 
 [Serializable, NetSerializable]
@@ -128,9 +139,12 @@ public sealed class PhotoDataRequest : EntityEventArgs
 {
     public string Id { get; }
 
-    public PhotoDataRequest(string id)
+    public NetEntity Photo { get; }
+
+    public PhotoDataRequest(string id, NetEntity photo)
     {
         Id = id;
+        Photo = photo;
     }
 }
 
