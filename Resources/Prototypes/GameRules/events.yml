@@ -180,7 +180,7 @@
   # SS220 MoreAnonces (sound and alert upgrades) end
     startAnnouncement: station-event-bureaucratic-error-announcement
     minimumPlayers: 25
-    weight: 3
+    weight: 2 #SS220-november-event-balance
     duration: 1
   - type: BureaucraticErrorRule
     ignoredJobs:
@@ -195,14 +195,7 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
-    startAnnouncement: station-event-clerical-error-announcement
-  # SS220 MoreAnonces (sound and alert upgrades) bgn
-    startAnnouncementColor: "#18abf5"
-    startAudio:
-      path: /Audio/Announcements/attention.ogg
-      params:
-        volume: -4
-  # SS220 MoreAnonces (sound and alert upgrades) end
+    # startAnnouncement: station-event-clerical-error-announcement #SS220-november-event-balance
     minimumPlayers: 15
     weight: 5
     duration: 1
@@ -328,7 +321,7 @@
   id: ParadoxCloneSpawn
   components:
   - type: StationEvent
-    weight: 8 # ss220 upraise midround events
+    weight: 5 #SS220-november-event-balance
     duration: null
     earliestStart: 20
     reoccurrenceDelay: 20
@@ -366,7 +359,7 @@
   id: RevenantSpawn
   components:
   - type: StationEvent
-    weight: 10.5 # ss220 upraise midround events
+    weight: 5 #SS220-november-event-balance
     duration: 1
     earliestStart: 45
     minimumPlayers: 20
@@ -449,8 +442,10 @@
   components:
   - type: StationEvent
     earliestStart: 15
-    minimumPlayers: 15
-    weight: 7
+    #SS220-november-event-balance begin
+    minimumPlayers: 20
+    weight: 5
+    #SS220-november-event-balance end
     duration: 240
   - type: KudzuGrowthRule
 
@@ -543,7 +538,7 @@
   # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
-    weight: 5
+    weight: 6 #SS220-november-event-balance
     duration: 5
     maxDuration: 20
   - type: VentHordeRule
@@ -569,7 +564,7 @@
   # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
-    weight: 5
+    weight: 6 #SS220-november-event-balance
     duration: 5
     maxDuration: 20
   - type: VentHordeRule
@@ -597,7 +592,7 @@
   # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
-    weight: 5
+    weight: 6 #SS220-november-event-balance
     duration: 5
     maxDuration: 20
   - type: VentHordeRule
@@ -699,7 +694,7 @@
       - RoleSurvivalNukie
       components:
       # SS220-experience-update-begin
-      - type: RoleExperienceAdd
+      - type: ExperienceAddition
         definitionId: SyndicateCommanderRoleExperience
       # SS220-experience-update-end
       - type: NukeOperative
@@ -745,11 +740,12 @@
       - MindRoleTraitorSleeper
       # SS220-experience-update-begin
       components:
-      - type: AntagFreeSublevelPointsAdd
-        addFreeSublevelPoints: 10
-      - type: AntagAddKnowledge
-        knowledgesToAdd:
-        - SyndicateAgentKnowledge
+      - type: TryAddExperienceAddition
+        sources:
+          Antag:
+            freeSublevelPoints: 10
+            knowledges:
+            - SyndicateAgentKnowledge
       # SS220-experience-update-end
 
 - type: entity
@@ -822,7 +818,7 @@
       params:
         volume: -4
   # SS220 MoreAnonces (sound and alert upgrades) end
-    weight: 5
+    weight: 3.5 #SS220-november-event-balance
     minimumPlayers: 25
     reoccurrenceDelay: 20
   - type: GreytideVirusRule
@@ -861,7 +857,7 @@
   id: DerelictEngineerCyborgSpawn
   components:
   - type: StationEvent
-    weight: 2.5
+    weight: 2 #SS220-november-event-balance
     earliestStart: 15
     reoccurrenceDelay: 20
     minimumPlayers: 4
@@ -882,7 +878,7 @@
   id: DerelictGenericCyborgSpawn
   components:
   - type: StationEvent
-    weight: 2.5
+    weight: 2 #SS220-november-event-balance
     earliestStart: 15
     reoccurrenceDelay: 20
     minimumPlayers: 4
@@ -903,7 +899,7 @@
   id: DerelictJanitorCyborgSpawn
   components:
   - type: StationEvent
-    weight: 2.5
+    weight: 2 #SS220-november-event-balance
     earliestStart: 15
     reoccurrenceDelay: 20
     minimumPlayers: 4
@@ -924,7 +920,7 @@
   id: DerelictMedicalCyborgSpawn
   components:
   - type: StationEvent
-    weight: 2.5
+    weight: 2 #SS220-november-event-balance
     earliestStart: 15
     reoccurrenceDelay: 20
     minimumPlayers: 4
@@ -945,7 +941,7 @@
   id: DerelictMiningCyborgSpawn
   components:
   - type: StationEvent
-    weight: 2.5
+    weight: 2 #SS220-november-event-balance
     earliestStart: 15
     reoccurrenceDelay: 20
     minimumPlayers: 4

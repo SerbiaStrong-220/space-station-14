@@ -520,7 +520,7 @@
 #SS220 languages revive end
   # SS220-station-ai-experience begin
   - type: Experience
-  - type: RoleExperienceAdd
+  - type: ExperienceAddition
     definitionId: StationAiRoleExperience
   - type: ContainerContainer
     containers:
