@@ -5,7 +5,8 @@
   categories: [ GameRules ]
   components:
   - type: StationEvent
-    weight: 7.5
+    weight: 5
+    maxOccurrences: 1
     duration: 1
     earliestStart: 45
     minimumPlayers: 30
@@ -46,7 +47,7 @@
     weight: 5.5
     duration: 1
     earliestStart: 30
-    minimumPlayers: 40
+    minimumPlayers: 25
   - type: AntagSpawner
     prototype: MobSpiderQueen
   - type: AntagObjectives
