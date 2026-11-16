@@ -39,6 +39,7 @@ public sealed partial class SurgeryPuppetBox : Control
     private SurgeryPuppetPart? _selectedPart;
     private bool _interactive = true;
     private bool _showBackground = true;
+    private bool _showTooltips = true;
 
     private SortedDictionary<SurgeryPuppetPart, TextureRect> _parts = new();
     private SortedDictionary<SurgeryPuppetPart, TextureRect> _highlightedPart = new();
@@ -102,6 +103,22 @@ public sealed partial class SurgeryPuppetBox : Control
             ResizeAll();
             if (!_showBackground)
                 UpdateZoneStates(EmptyZones, EmptyZones, EmptyZones);
+        }
+    }
+
+    /// <summary>
+    /// Controls whether hovering over puppet zones displays zone and pathology tooltips.
+    /// </summary>
+    public bool ShowTooltips
+    {
+        get => _showTooltips;
+        set
+        {
+            if (_showTooltips == value)
+                return;
+
+            _showTooltips = value;
+            ApplyTooltipVisibility();
         }
     }
 
@@ -176,7 +193,7 @@ public sealed partial class SurgeryPuppetBox : Control
             Part = part,
             SetSize = size.Value * Scale,
             Margin = thickness,
-            ToolTip = GetPartDisplayName(part),
+            ToolTip = _showTooltips ? GetPartDisplayName(part) : null,
         };
 
         ApplyButtonInteractivity(button);
@@ -210,6 +227,19 @@ public sealed partial class SurgeryPuppetBox : Control
     {
         button.MuteSounds = !_interactive;
         button.DefaultCursorShape = _interactive ? CursorShape.Pointer : CursorShape.Arrow;
+        button.MouseFilter = (_interactive || _showTooltips) ? MouseFilterMode.Stop : MouseFilterMode.Ignore;
+        if (!_showTooltips)
+            button.ToolTip = null;
+    }
+
+    private void ApplyTooltipVisibility()
+    {
+        foreach (var button in _partButtons)
+        {
+            ApplyButtonInteractivity(button);
+            if (_showTooltips && button.ToolTip == null)
+                button.ToolTip = GetPartDisplayName(button.Part);
+        }
     }
 
     private void ResetHeadSubOverlayIfUnselected(SurgeryPuppetPart subPart)
@@ -435,6 +465,15 @@ public sealed partial class SurgeryPuppetBox : Control
 
     private void UpdateTooltips(IReadOnlyDictionary<SurgeryPuppetPart, List<string>> zoneEntries)
     {
+        if (!_showTooltips)
+        {
+            foreach (var button in _partButtons)
+            {
+                button.ToolTip = null;
+            }
+            return;
+        }
+
         foreach (var (part, button) in _partButtonMap)
         {
             if (part == SurgeryPuppetPart.Head)

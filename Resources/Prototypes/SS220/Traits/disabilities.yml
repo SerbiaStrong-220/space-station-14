@@ -10,7 +10,7 @@
     - Nervousness
   components:
   - type: ChangeSpeedDoAfters
-    coefficient: 1.5
+    coefficient: 1.3
 
 - type: trait
   id: Nervousness

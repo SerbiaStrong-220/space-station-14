@@ -54,6 +54,18 @@ public sealed partial class PathologyDefinition
     [DataField]
     public ProtoId<TraitPrototype>? Trait;
 
+    /// <summary>
+    /// Multiplier applied to DoAfter delays while this pathology level is active.
+    /// </summary>
+    [DataField]
+    public float DoAfterDelayModifier = 1f;
+
+    /// <summary>
+    /// Additional gun spread angle applied when firing with the injured hand (or any wielded gun).
+    /// </summary>
+    [DataField]
+    public Angle GunSpreadPenalty = Angle.Zero;
+
     [DataField]
     public PathologyProgressCondition[] ProgressConditions = Array.Empty<PathologyProgressCondition>();
 

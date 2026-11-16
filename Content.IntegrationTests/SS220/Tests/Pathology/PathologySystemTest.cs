@@ -1,17 +1,33 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.DoAfter;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.SS220.ChangeSpeedDoAfters;
+using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 using Content.Shared.SS220.Pathology;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
+using Robust.Server.Console;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.SS220.Tests.Pathology;
 
 [RegisterComponent]
 public sealed partial class TestPathologyProgressionTraitComponent : Component { }
 
+[Serializable]
+public sealed partial class TestPathologyDoAfterEvent : SimpleDoAfterEvent { }
+
 [TestFixture]
 public sealed class PathologySystemTest
 {
+    private static readonly ProtoId<PathologyPrototype> LeftHandDislocationProto = "LeftHandDislocation";
+    private static readonly ProtoId<PathologyPrototype> LeftHandHairlineFractureProto = "LeftHandHairlineFracture";
+    private static readonly ProtoId<PathologyPrototype> LeftHandCompoundFractureProto = "LeftHandCompoundFracture";
     [TestPrototypes]
     private const string PathologyHolderPrototype = @"
 - type: entity
@@ -217,6 +233,176 @@ public sealed class PathologySystemTest
                 Assert.That(pathologySystem.HavePathology(entity, pathologyId), Is.False);
                 Assert.That(entMng.HasComponent<TestPathologyProgressionTraitComponent>(dummy), Is.False);
             });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [TestPrototypes]
+    private const string HandTraumaTestPrototypes = @"
+- type: entity
+  id: TestTraumaPistol
+  components:
+  - type: Item
+  - type: Gun
+    minAngle: 1
+    maxAngle: 2
+    fireRate: 2
+
+- type: entity
+  id: TestTraumaRifle
+  components:
+  - type: Item
+    size: Large
+  - type: Wieldable
+  - type: Gun
+    minAngle: 10
+    maxAngle: 20
+    fireRate: 2
+  - type: GunWieldBonus
+    minAngle: -9
+    maxAngle: -18
+";
+
+    [Test]
+    public async Task HandTraumaEffectsTest()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false
+        });
+
+        var server = pair.Server;
+        var mapData = await pair.CreateTestMap();
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var protoMan = server.ResolveDependency<IPrototypeManager>();
+        var pathologySystem = entMng.System<SharedPathologySystem>();
+        var handsSystem = entMng.System<SharedHandsSystem>();
+        var wieldSystem = entMng.System<SharedWieldableSystem>();
+
+        EntityUid human = default!;
+        EntityUid pistol = default!;
+        EntityUid rifle = default!;
+        PathologyHolderComponent holder = default!;
+
+        await server.WaitAssertion(() =>
+        {
+            var dislocation = protoMan.Index(LeftHandDislocationProto).Definition[0];
+            var hairline = protoMan.Index(LeftHandHairlineFractureProto).Definition[0];
+            var compound = protoMan.Index(LeftHandCompoundFractureProto).Definition[0];
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(dislocation.Trait, Is.Null);
+                Assert.That(dislocation.DoAfterDelayModifier, Is.EqualTo(1.2f).Within(0.001f));
+                Assert.That(dislocation.GunSpreadPenalty.Degrees, Is.EqualTo(5d).Within(0.001d));
+
+                Assert.That(hairline.Trait, Is.Null);
+                Assert.That(hairline.DoAfterDelayModifier, Is.EqualTo(1.35f).Within(0.001f));
+                Assert.That(hairline.GunSpreadPenalty.Degrees, Is.EqualTo(5d).Within(0.001d));
+
+                Assert.That(compound.Trait, Is.Null);
+                Assert.That(compound.DoAfterDelayModifier, Is.EqualTo(1.6f).Within(0.001f));
+                Assert.That(compound.GunSpreadPenalty.Degrees, Is.EqualTo(5d).Within(0.001d));
+            });
+
+            human = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            pistol = entMng.SpawnEntity("TestTraumaPistol", mapData.MapCoords);
+            rifle = entMng.SpawnEntity("TestTraumaRifle", mapData.MapCoords);
+            Assert.That(entMng.TryGetComponent(human, out holder!), Is.True);
+        });
+
+        await pair.RunTicksSync(5);
+
+        await server.WaitAssertion(() =>
+        {
+            var entity = new Entity<PathologyHolderComponent>(human, holder);
+            Assert.That(pathologySystem.TryAddPathology(entity, "LeftHandDislocation"), Is.True);
+            Assert.That(entMng.HasComponent<ChangeSpeedDoAftersComponent>(human), Is.False);
+
+            var delayArgs = new DoAfterArgs(entMng, human, TimeSpan.FromSeconds(2), new TestPathologyDoAfterEvent(), human);
+            entMng.EventBus.RaiseLocalEvent(human, new BeforeDoAfterStartEvent(delayArgs, 0), true);
+            Assert.That(delayArgs.DelayModifier, Is.EqualTo(1.2f).Within(0.001f));
+
+            // Stack a second trauma on the other hand and verify separate removal
+            Assert.That(pathologySystem.TryAddPathology(entity, "RightHandCompoundFracture"), Is.True);
+            var stackedArgs = new DoAfterArgs(entMng, human, TimeSpan.FromSeconds(2), new TestPathologyDoAfterEvent(), human);
+            entMng.EventBus.RaiseLocalEvent(human, new BeforeDoAfterStartEvent(stackedArgs, 1), true);
+            Assert.That(stackedArgs.DelayModifier, Is.EqualTo(1.2f * 1.6f).Within(0.001f));
+
+            Assert.That(pathologySystem.TryRemovePathology(entity, "RightHandCompoundFracture", checkStacks: false), Is.True);
+            var afterRemoveArgs = new DoAfterArgs(entMng, human, TimeSpan.FromSeconds(2), new TestPathologyDoAfterEvent(), human);
+            entMng.EventBus.RaiseLocalEvent(human, new BeforeDoAfterStartEvent(afterRemoveArgs, 2), true);
+            Assert.That(afterRemoveArgs.DelayModifier, Is.EqualTo(1.2f).Within(0.001f));
+
+            // Test gun spread: +5 deg when held in injured left hand, +0 deg in healthy right hand
+            var gunComp = entMng.GetComponent<GunComponent>(pistol);
+            Assert.That(handsSystem.TryPickup(human, pistol, "left", checkActionBlocker: false, animate: false), Is.True);
+            Assert.That(gunComp.MinAngleModified.Degrees, Is.EqualTo(6d).Within(0.01d));
+            Assert.That(gunComp.MaxAngleModified.Degrees, Is.EqualTo(7d).Within(0.01d));
+
+            Assert.That(handsSystem.TryDrop(human, pistol, checkActionBlocker: false), Is.True);
+            Assert.That(handsSystem.TryPickup(human, pistol, "right", checkActionBlocker: false, animate: false), Is.True);
+            Assert.That(gunComp.MinAngleModified.Degrees, Is.EqualTo(1d).Within(0.01d));
+            Assert.That(gunComp.MaxAngleModified.Degrees, Is.EqualTo(2d).Within(0.01d));
+
+            // Two-handed rifle in healthy right hand gets +5 deg once wielded, then reverts when trauma is cured
+            Assert.That(handsSystem.TryDrop(human, pistol, checkActionBlocker: false), Is.True);
+            Assert.That(handsSystem.TryPickup(human, rifle, "right", checkActionBlocker: false, animate: false), Is.True);
+            var rifleGun = entMng.GetComponent<GunComponent>(rifle);
+            var rifleWield = entMng.GetComponent<WieldableComponent>(rifle);
+            Assert.That(rifleGun.MinAngleModified.Degrees, Is.EqualTo(10d).Within(0.01d));
+
+            Assert.That(wieldSystem.TryWield(rifle, rifleWield, human), Is.True);
+            Assert.That(rifleWield.Wielded, Is.True);
+            Assert.That(rifleGun.MinAngleModified.Degrees, Is.EqualTo(6d).Within(0.01d));
+            Assert.That(rifleGun.MaxAngleModified.Degrees, Is.EqualTo(7d).Within(0.01d));
+
+            Assert.That(pathologySystem.TryRemovePathology(entity, "LeftHandDislocation", checkStacks: false), Is.True);
+            Assert.That(rifleGun.MinAngleModified.Degrees, Is.EqualTo(1d).Within(0.01d));
+            Assert.That(rifleGun.MaxAngleModified.Degrees, Is.EqualTo(2d).Within(0.01d));
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task PathologyAdminCommandsTest()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false
+        });
+
+        var server = pair.Server;
+        var mapData = await pair.CreateTestMap();
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var console = server.ResolveDependency<IServerConsoleHost>();
+        var pathologySystem = entMng.System<SharedPathologySystem>();
+
+        EntityUid human = default!;
+        PathologyHolderComponent holder = default!;
+
+        await server.WaitAssertion(() =>
+        {
+            human = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            Assert.That(entMng.TryGetComponent(human, out holder!), Is.True);
+        });
+
+        await pair.RunTicksSync(5);
+
+        await server.WaitAssertion(() =>
+        {
+            var netHuman = entMng.GetNetEntity(human);
+            var entity = new Entity<PathologyHolderComponent>(human, holder);
+
+            console.ExecuteCommand($"addpathology {netHuman} {LeftHandDislocationProto}");
+            Assert.That(pathologySystem.HavePathology(entity, LeftHandDislocationProto), Is.True);
+
+            console.ExecuteCommand($"removepathology {netHuman} {LeftHandDislocationProto}");
+            Assert.That(pathologySystem.HavePathology(entity, LeftHandDislocationProto), Is.False);
         });
 
         await pair.CleanReturnAsync();

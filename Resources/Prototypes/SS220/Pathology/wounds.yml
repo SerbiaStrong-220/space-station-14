@@ -122,7 +122,7 @@
   operationRecommendation: pathology-arm-dislocation-operation
   definition:
   - description: pathology-leftarm-dislocation-description
-    trait: Slowness
+    doAfterDelayModifier: 1.2
 
 - type: pathology
   id: RightArmDislocation
@@ -133,7 +133,7 @@
   operationRecommendation: pathology-arm-dislocation-operation
   definition:
   - description: pathology-rightarm-dislocation-description
-    trait: Slowness
+    doAfterDelayModifier: 1.2
 
 - type: pathology
   id: LeftHandDislocation
@@ -144,7 +144,8 @@
   operationRecommendation: pathology-hand-dislocation-operation
   definition:
   - description: pathology-lefthand-dislocation-description
-    trait: Slowness
+    doAfterDelayModifier: 1.2
+    gunSpreadPenalty: 5
 
 - type: pathology
   id: RightHandDislocation
@@ -155,7 +156,8 @@
   operationRecommendation: pathology-hand-dislocation-operation
   definition:
   - description: pathology-righthand-dislocation-description
-    trait: Slowness
+    doAfterDelayModifier: 1.2
+    gunSpreadPenalty: 5
 
 - type: pathology
   id: LeftLegDislocation
@@ -264,7 +266,7 @@
   operationRecommendation: pathology-arm-fracture-operation
   definition:
   - description: pathology-leftarm-hairline-description
-    trait: Slowness
+    doAfterDelayModifier: 1.35
 
 - type: pathology
   id: RightArmHairlineFracture
@@ -275,7 +277,7 @@
   operationRecommendation: pathology-arm-fracture-operation
   definition:
   - description: pathology-rightarm-hairline-description
-    trait: Slowness
+    doAfterDelayModifier: 1.35
 
 - type: pathology
   id: LeftHandHairlineFracture
@@ -286,7 +288,8 @@
   operationRecommendation: pathology-hand-fracture-operation
   definition:
   - description: pathology-lefthand-hairline-description
-    trait: Slowness
+    doAfterDelayModifier: 1.35
+    gunSpreadPenalty: 5
 
 - type: pathology
   id: RightHandHairlineFracture
@@ -297,7 +300,8 @@
   operationRecommendation: pathology-hand-fracture-operation
   definition:
   - description: pathology-righthand-hairline-description
-    trait: Slowness
+    doAfterDelayModifier: 1.35
+    gunSpreadPenalty: 5
 
 - type: pathology
   id: LeftLegHairlineFracture
@@ -434,7 +438,7 @@
   operationRecommendation: pathology-arm-fracture-operation
   definition:
   - description: pathology-leftarm-compound-description
-    trait: Slowness
+    doAfterDelayModifier: 1.6
     statusEffects:
     - StatusEffectInternalBloodLoss
     effects:
@@ -451,7 +455,7 @@
   operationRecommendation: pathology-arm-fracture-operation
   definition:
   - description: pathology-rightarm-compound-description
-    trait: Slowness
+    doAfterDelayModifier: 1.6
     statusEffects:
     - StatusEffectInternalBloodLoss
     effects:
@@ -468,7 +472,8 @@
   operationRecommendation: pathology-hand-fracture-operation
   definition:
   - description: pathology-lefthand-compound-description
-    trait: Slowness
+    doAfterDelayModifier: 1.6
+    gunSpreadPenalty: 5
 
 - type: pathology
   id: RightHandCompoundFracture
@@ -480,7 +485,8 @@
   operationRecommendation: pathology-hand-fracture-operation
   definition:
   - description: pathology-righthand-compound-description
-    trait: Slowness
+    doAfterDelayModifier: 1.6
+    gunSpreadPenalty: 5
 
 - type: pathology
   id: LeftLegCompoundFracture

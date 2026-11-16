@@ -32,6 +32,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
         InitializeStatusEffectContainerEvents();
         InitializeExamineEvents();
+        InitializeTraumaEffectsEvents();
     }
 
     public override void Update(float frameTime)
@@ -181,6 +182,9 @@ public abstract partial class SharedPathologySystem : EntitySystem
         data.PathologyContexts.Clear();
 
         Dirty(entity);
+
+        var removedEv = new PathologyRemovedEvent(pathologyPrototype.ID);
+        RaiseLocalEvent(entity, ref removedEv);
     }
 
     private bool IsStatusEffectInUse(PathologyHolderComponent holder, EntProtoId effect)

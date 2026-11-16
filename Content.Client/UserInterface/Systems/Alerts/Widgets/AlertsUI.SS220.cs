@@ -34,6 +34,7 @@ public sealed partial class AlertsUI
             {
                 Interactive = false,
                 ShowBackground = false,
+                ShowTooltips = false,
                 Scale = new Vector2(PathologyPuppetScale, PathologyPuppetScale),
                 HorizontalAlignment = HAlignment.Center,
                 Margin = new Thickness(0, 4, 0, 0),

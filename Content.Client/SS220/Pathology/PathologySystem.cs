@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client.SS220.Pathology;
 
-public sealed class PathologySystem : SharedPathologySystem
+public sealed partial class PathologySystem : SharedPathologySystem
 {
     public event Action<EntityUid>? OnTargetUpdated;
     public event Action<EntityUid?>? OnLocalPlayerChanged;
@@ -34,7 +34,10 @@ public sealed class PathologySystem : SharedPathologySystem
         => OnTargetUpdated?.Invoke(ent.Owner);
 
     private void OnHolderStateHandled(Entity<PathologyHolderComponent> ent, ref AfterAutoHandleStateEvent args)
-        => OnTargetUpdated?.Invoke(ent.Owner);
+    {
+        RefreshHeldGuns(ent.Owner);
+        OnTargetUpdated?.Invoke(ent.Owner);
+    }
 
     private void OnPatientStartup(Entity<SurgeryPatientComponent> ent, ref ComponentStartup args)
         => OnTargetUpdated?.Invoke(ent.Owner);

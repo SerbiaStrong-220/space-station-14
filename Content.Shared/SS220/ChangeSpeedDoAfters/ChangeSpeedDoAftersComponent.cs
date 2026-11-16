@@ -3,13 +3,13 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.ChangeSpeedDoAfters;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[NetworkedComponent]
 public sealed partial class ChangeSpeedDoAftersComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public float Coefficient = 1f;
+    [DataField]
+    public float Coefficient;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float? ChanceToFail;
 
     public Dictionary<int, TimeSpan> ScheduledCancelTimes = new();

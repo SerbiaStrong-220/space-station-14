@@ -47,6 +47,8 @@ public abstract partial class SharedPathologySystem : EntitySystem
         {
             UpdateStackableStatusEffect(entity, effectId);
         }
+
+        HandleTraumaSeverityChanged(entity, ref args);
     }
 
     public void UpdateStackableStatusEffect(Entity<PathologyHolderComponent> entity, EntProtoId effectId)

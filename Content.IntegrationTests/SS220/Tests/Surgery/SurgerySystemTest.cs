@@ -14,7 +14,8 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Components;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Content.Shared.SS220.Pathology;
 using Content.Shared.SS220.Surgery;
 using Content.Shared.SS220.Surgery.Components;
@@ -193,6 +194,7 @@ public sealed class SurgerySystemTest
             dummyUser = entMng.SpawnEntity("MobHuman", MapCoordinates.Nullspace);
             patientComp = entMng.GetComponent<SurgeryPatientComponent>(dummyPatient);
             scalpel = entMng.SpawnEntity("SurgeryDummyScalpel", MapCoordinates.Nullspace);
+            entMng.GetComponent<SurgeryToolComponent>(scalpel).FailureModifier = -1f;
         });
 
         await server.WaitAssertion(() =>
