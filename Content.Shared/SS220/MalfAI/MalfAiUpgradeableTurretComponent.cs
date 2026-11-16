@@ -5,11 +5,11 @@ namespace Content.Shared.SS220.MalfAI;
 public sealed partial class MalfAiUpgradeableTurretComponent : Component
 {
     [DataField]
-    public float FireRateMult = 2f;
+    public float FireRateMult = 2.5f;
 
     [DataField]
-    public float DamageMult = 1.25f;
+    public float DamageMult = 1.5f;
 
     [DataField]
-    public int HpBonus = 30;
+    public int HpBonus = 60;
 }
