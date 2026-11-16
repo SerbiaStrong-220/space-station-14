@@ -8,6 +8,16 @@
   - type: TransferMaterialsInStorage
   #ss220 add transfer items in storage end
   - type: MagnetPickup
+  #SS220-MagnetToggle begin
+  - type: ItemToggle
+    activated: true
+    onUse: false
+    onActivate: false
+    verbToggleOn: magnet-toggle-verb-on
+    verbToggleOff: magnet-toggle-verb-off
+    popupActivate: magnet-toggle-popup-on
+    popupDeactivate: magnet-toggle-popup-off
+  #SS220-MagnetToggle end
   - type: Sprite
     sprite: Objects/Specific/Mining/ore_bag.rsi
     state: icon

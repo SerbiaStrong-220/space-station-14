@@ -136,8 +136,8 @@ public sealed partial class SiliconLawSystem
                 (target != LawUploadTarget.All && kind != target))
                 continue;
 
-            ApplyUploadedLawset((uid, provider), id, lawset, cue);
-            count++;
+            if (ApplyUploadedLawset((uid, provider), id, lawset, cue))
+                count++;
         }
 
         RaiseLocalEvent(new StationLawsetsChangedEvent(station));
@@ -153,13 +153,20 @@ public sealed partial class SiliconLawSystem
         Dirty(uid, crewIconComp);
     }
 
-    private void ApplyUploadedLawset(Entity<SiliconLawProviderComponent> entity,
+    private bool ApplyUploadedLawset(Entity<SiliconLawProviderComponent> entity,
         ProtoId<SiliconLawsetPrototype> id, SiliconLawset lawset, SoundSpecifier? cue)
     {
+        if (IsMalfProtected(entity.Owner))
+        {
+            NotifyLawsChanged(entity.Owner, cue);
+            return false;
+        }
+
         entity.Comp.Laws = id;
         entity.Comp.Lawset = lawset.Clone();
         UpdateCrewLawIndicator(entity.Owner, id);
         NotifyLawsChanged(entity.Owner, cue);
+        return true;
     }
 
     private void OnBoundUIOpened(EntityUid uid, SiliconLawBoundComponent component, BoundUIOpenedEvent args)
