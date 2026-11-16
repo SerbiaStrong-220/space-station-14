@@ -5,9 +5,9 @@ using Content.Shared.Construction.Steps;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Components;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Content.Shared.Verbs;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -16,7 +16,7 @@ namespace Content.Server.Construction
     public sealed partial class ConstructionSystem
     {
         [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly ExperienceSystem _experience = default!; // SS220-experience-skill
+        [Dependency] private ExperienceSystem _experience = default!; // SS220-experience-skill
 
         private readonly ProtoId<SkillPrototype> _skillToSeeInstruction = "ConstructionTrained"; // SS220-experience-skill
 

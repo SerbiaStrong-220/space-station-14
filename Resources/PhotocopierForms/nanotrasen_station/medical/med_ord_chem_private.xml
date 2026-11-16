@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>med_ord_chem_private</FormId>
+  <PrototypeId>PaperNtFormMed</PrototypeId>
+  <EntityName>форма НТ-МЕД-ЗАКЧ</EntityName>
+  <PhotocopierTitle>Заказ на химические вещества (частный)</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-МЕД-ЗАКЧ[/bold]
+[head=2]Заказ на химические вещества[/head]
+
+Заявитель: (ПОЛНОЕ ИМЯ)
+Должность: (ДОЛЖНОСТЬ)
+Вещество:
+Количество:
+Исполнение: (УКАЗАТЬ: таблетка/тара)
+Причина:
+
+[italic]Место для печатей - Главный Врач[/italic]]]></Content>
+</Form>
