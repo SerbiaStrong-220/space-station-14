@@ -68,9 +68,9 @@ pathology-leftarm-hairline-description = В кости левой руки им�
 pathology-rightarm-hairline-name = Трещина кости правой руки
 pathology-rightarm-hairline-description = В кости правой руки имеется трещина, моторика снижена.
 pathology-lefthand-hairline-name = Трещина костей левой кисти
-pathology-lefthand-hairline-description = В костях левой кисти имеется трещина, мелкая моторика снижена.
+pathology-lefthand-hairline-description = В костях левой кисти имеется трещина, мелкая моторика нарушена.
 pathology-righthand-hairline-name = Трещина костей правой кисти
-pathology-righthand-hairline-description = В костях правой кисти имеется трещина, мелкая моторика снижена.
+pathology-righthand-hairline-description = В костях правой кисти имеется трещина, мелкая моторика нарушена.
 pathology-leftleg-hairline-name = Трещина кости левой ноги
 pathology-leftleg-hairline-description = В кости левой ноги имеется трещина, бег и ходьба замедлены.
 pathology-rightleg-hairline-name = Трещина кости правой ноги
@@ -99,13 +99,13 @@ pathology-lefthand-compound-description = Тяжёлый перелом кост
 pathology-righthand-compound-name = Открытый перелом правой кисти
 pathology-righthand-compound-description = Тяжёлый перелом костей правой кисти.
 pathology-leftleg-compound-name = Открытый перелом левой ноги
-pathology-leftleg-compound-description = Тяжёлый перелом кости левой ноги, движение резко затруднено.
+pathology-leftleg-compound-description = Тяжёлый перелом кости левой ноги, передвижение сильно затруднено.
 pathology-rightleg-compound-name = Открытый перелом правой ноги
-pathology-rightleg-compound-description = Тяжёлый перелом кости правой ноги, движение резко затруднено.
+pathology-rightleg-compound-description = Тяжёлый перелом кости правой ноги, передвижение сильно затруднено.
 pathology-leftfoot-compound-name = Открытый перелом левой стопы
-pathology-leftfoot-compound-description = Тяжёлый перелом костей левой стопы, движение резко затруднено.
+pathology-leftfoot-compound-description = Тяжёлый перелом костей левой стопы, передвижение сильно затруднено.
 pathology-rightfoot-compound-name = Открытый перелом правой стопы
-pathology-rightfoot-compound-description = Тяжёлый перелом костей правой стопы, движение резко затруднено.
+pathology-rightfoot-compound-description = Тяжёлый перелом костей правой стопы, передвижение сильно затруднено.
 
 pathology-torso-fracture-operation = Хирургия торса: восстановите кость костным гелем (при открытом переломе сперва вправьте костоправом).
 pathology-lowertorso-fracture-operation = Хирургия паховой области и таза: восстановите кости таза костным гелем (при открытом переломе сперва вправьте костоправом).
@@ -155,26 +155,26 @@ pathology-necrosis-operation = Хирургия поражённой зоны: �
 # Eyes & Mouth
 
 pathology-eye-corneal-name = Повреждение роговицы
-pathology-eye-corneal-description = Роговица глаза повреждена, зрение резко снижено.
+pathology-eye-corneal-description = Роговица глаза повреждена, зрение ухудшено.
 pathology-eye-corneal-operation = Хирургия глаз: разведите веки ретрактором, очистите гемостатом и зафиксируйте прижигателем.
 
 pathology-mouth-jaw-dislocation-name = Вывих челюсти
-pathology-mouth-jaw-dislocation-description = Нижняя челюсть вывихнута, речь пациента искажена.
+pathology-mouth-jaw-dislocation-description = Нижняя челюсть вывихнута, речь нарушена.
 pathology-mouth-jaw-dislocation-operation = Хирургия челюсти и рта: вправьте вывих челюсти костоправом (без разреза).
 
 # Визуально заметные травмы при осмотре здоровья (HealthExaminable)
 
 pathology-leftarm-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } левая рука неестественно вывернута.
 pathology-rightarm-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } правая рука неестественно вывернута.
-pathology-lefthand-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } левая кисть странно вывернута.
-pathology-righthand-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } правая кисть странно вывернута.
+pathology-lefthand-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } левая кисть неестественно вывернута.
+pathology-righthand-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } правая кисть неестественно вывернута.
 pathology-leftleg-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } левая нога неестественно вывернута.
 pathology-rightleg-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } правая нога неестественно вывернута.
 pathology-leftfoot-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } левая стопа подвёрнута под неестественным углом.
 pathology-rightfoot-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } правая стопа подвёрнута под неестественным углом.
 pathology-mouth-jaw-dislocation-examine = { CAPITALIZE(POSS-ADJ($target)) } нижняя челюсть заметно перекошена.
 
-pathology-torso-hairline-examine = На { POSS-ADJ($target) } груди виден крупный синяк и припухлость.
+pathology-torso-hairline-examine = На { POSS-ADJ($target) } груди виден крупный синяк с припухлостью.
 pathology-lowertorso-hairline-examine = В нижней части { POSS-ADJ($target) } живота заметны синяк и припухлость.
 pathology-leftarm-hairline-examine = { CAPITALIZE(POSS-ADJ($target)) } левая рука распухла и покрылась синяками.
 pathology-rightarm-hairline-examine = { CAPITALIZE(POSS-ADJ($target)) } правая рука распухла и покрылась синяками.
@@ -186,7 +186,7 @@ pathology-leftfoot-hairline-examine = { CAPITALIZE(POSS-ADJ($target)) } лева
 pathology-rightfoot-hairline-examine = { CAPITALIZE(POSS-ADJ($target)) } правая стопа распухла и посинела.
 
 pathology-head-cranial-fissure-examine = { CAPITALIZE(POSS-ADJ($target)) } голова сильно разбита и окровавлена.
-pathology-torso-compound-examine = { CAPITALIZE(POSS-ADJ($target)) } грудь сильно искалечена, из раны виднеется сломанная кость.
+pathology-torso-compound-examine = { CAPITALIZE(POSS-ADJ($target)) } грудь сильно искалечена, из раны видна сломанная кость.
 pathology-lowertorso-compound-examine = На { POSS-ADJ($target) } бедре зияет глубокая рана со сломанной костью.
 pathology-leftarm-compound-examine = { CAPITALIZE(POSS-ADJ($target)) } левая рука сильно искривлена, из раны торчит кость.
 pathology-rightarm-compound-examine = { CAPITALIZE(POSS-ADJ($target)) } правая рука сильно искривлена, из раны торчит кость.
