@@ -45,7 +45,7 @@ public sealed partial class MalfAiMakeCommand : LocalizedEntityCommands
 
         if (!_players.TryGetSessionByUsername(args[0], out var session))
         {
-            shell.WriteError(Loc.GetString("cmd-parse-failure-session", ("username", args[0])));
+            shell.WriteError(Loc.GetString("shell-target-player-does-not-exist"));
             return;
         }
 
@@ -54,37 +54,37 @@ public sealed partial class MalfAiMakeCommand : LocalizedEntityCommands
         var attached = session.AttachedEntity;
         if (attached == null)
         {
-            shell.WriteLine(Loc.GetString(NoEntity, ("player", name)));
+            shell.WriteError(Loc.GetString(NoEntity, ("player", name)));
             return;
         }
 
         if (!_stationAi.TryGetCore(attached.Value, out _))
         {
-            shell.WriteLine(Loc.GetString(NotStationAi, ("player", name)));
+            shell.WriteError(Loc.GetString(NotStationAi, ("player", name)));
             return;
         }
 
         if (!_mind.TryGetMind(session, out var mindId, out var mind))
         {
-            shell.WriteLine(Loc.GetString(NoMind, ("player", name)));
+            shell.WriteError(Loc.GetString(NoMind, ("player", name)));
             return;
         }
 
         if (!_cfg.GetCVar(CCVars220.MalfAiEnabled))
         {
-            shell.WriteLine(Loc.GetString(Disabled));
+            shell.WriteError(Loc.GetString(Disabled));
             return;
         }
 
         if (_roles.MindHasRole<MalfAiRoleComponent>(mindId))
         {
-            shell.WriteLine(Loc.GetString(Already, ("player", name)));
+            shell.WriteError(Loc.GetString(Already, ("player", name)));
             return;
         }
 
         if (!_rules.AssignMalf((mindId, mind)))
         {
-            shell.WriteLine(Loc.GetString(Failed, ("player", name)));
+            shell.WriteError(Loc.GetString(Failed, ("player", name)));
             return;
         }
 
