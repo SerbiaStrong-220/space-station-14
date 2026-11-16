@@ -8,7 +8,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Random;
 using Content.Shared.SS220.Pathology;
@@ -19,7 +18,6 @@ namespace Content.Server.SS220.PathologyProvider;
 
 public sealed partial class PathologyProviderSystem : EntitySystem
 {
-    [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private PathologySystem _pathology = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
 
@@ -50,7 +48,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
 
     private void OnProjectileHit(Entity<PathologyOnProjectileHitComponent> entity, ref ProjectileHitEvent args)
     {
-        if (HasComp<GodmodeComponent>(args.Target) || _mobState.IsDead(args.Target))
+        if (HasComp<GodmodeComponent>(args.Target))
             return;
 
         ProtoId<DamageTypePrototype>? maxDamageType = null;
@@ -76,7 +74,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
         if (!args.DamageIncreased || args.DamageDelta is not { } delta)
             return;
 
-        if (HasComp<GodmodeComponent>(entity.Owner) || _mobState.IsDead(entity.Owner))
+        if (HasComp<GodmodeComponent>(entity.Owner))
             return;
 
         var blunt = GetDamageAmount(delta, DamageBlunt);

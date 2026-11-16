@@ -24,7 +24,7 @@ public sealed partial class PatientStatus : Control
         OverallDamage.Visible = true;
 
         if (data.OverallDamage >= 0)
-            OverallDamage.SetMarkup(Loc.GetString("patient-status-overall-damage", ("damage", data.OverallDamage.ToString())));
+            OverallDamage.SetMarkup(Loc.GetString("patient-status-overall-damage", ("damage", data.OverallDamage.Int())));
         else
             OverallDamage.Visible = false;
 

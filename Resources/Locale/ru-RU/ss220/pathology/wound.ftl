@@ -6,32 +6,32 @@ pathology-torso-projectile-operation = Хирургия торса: вскрой
 pathology-head-projectile-name = Инородное тело в голове
 pathology-head-projectile-description = Инородное тело застряло в голове
     пациента и вызывает внутреннее кровотечение.
-pathology-head-projectile-operation = Хирургия головы: вскройте череп и извлеките инородное тело гемостатом.
+pathology-head-projectile-operation = Хирургия головы: вскройте череп и извлеките инородное тело ретрактором.
 
 pathology-lowertorso-projectile-name = Инородное тело в тазу
 pathology-lowertorso-projectile-description = Инородное тело застряло в области паха
     и вызывает внутреннее кровотечение.
-pathology-lowertorso-projectile-operation = Хирургия паховой области и таза: вскройте ткани, расширьте разрез и извлеките инородное тело гемостатом.
+pathology-lowertorso-projectile-operation = Хирургия паховой области и таза: вскройте ткани, расширьте разрез и извлеките инородное тело ретрактором.
 
 pathology-leftarm-projectile-name = Инородное тело в левой руке
 pathology-leftarm-projectile-description = Осколок застрял в мягких тканях левой руки
     и вызывает внутреннее кровотечение.
-pathology-leftarm-projectile-operation = Хирургия левой руки: вскройте ткани, расширьте разрез и извлеките осколок гемостатом.
+pathology-leftarm-projectile-operation = Хирургия левой руки: вскройте ткани, расширьте разрез и извлеките осколок ретрактором.
 
 pathology-rightarm-projectile-name = Инородное тело в правой руке
 pathology-rightarm-projectile-description = Осколок застрял в мягких тканях правой руки
     и вызывает внутреннее кровотечение.
-pathology-rightarm-projectile-operation = Хирургия правой руки: вскройте ткани, расширьте разрез и извлеките осколок гемостатом.
+pathology-rightarm-projectile-operation = Хирургия правой руки: вскройте ткани, расширьте разрез и извлеките осколок ретрактором.
 
 pathology-leftleg-projectile-name = Инородное тело в левой ноге
 pathology-leftleg-projectile-description = Осколок застрял в мышцах левой ноги
     и вызывает внутреннее кровотечение.
-pathology-leftleg-projectile-operation = Хирургия левой ноги: вскройте ткани, расширьте разрез и извлеките осколок гемостатом.
+pathology-leftleg-projectile-operation = Хирургия левой ноги: вскройте ткани, расширьте разрез и извлеките осколок ретрактором.
 
 pathology-rightleg-projectile-name = Инородное тело в правой ноге
 pathology-rightleg-projectile-description = Осколок застрял в мышцах правой ноги
     и вызывает внутреннее кровотечение.
-pathology-rightleg-projectile-operation = Хирургия правой ноги: вскройте ткани, расширьте разрез и извлеките осколок гемостатом.
+pathology-rightleg-projectile-operation = Хирургия правой ноги: вскройте ткани, расширьте разрез и извлеките осколок ретрактором.
 
 # Dislocations
 
@@ -84,7 +84,7 @@ pathology-rightfoot-hairline-description = В костях правой стоп
 
 pathology-head-cranial-fissure-name = Трещина черепа
 pathology-head-cranial-fissure-description = В своде черепа обнаружена трещина с внутренним кровотечением и нарушением зрения.
-pathology-head-cranial-fissure-operation = Хирургия головы: расчистите края трещины дрелью и зафиксируйте костным гелем или хирургической лентой.
+pathology-head-cranial-fissure-operation = Хирургия головы: расчистите края трещины дрелью и зафиксируйте костным гелем.
 
 pathology-torso-compound-name = Открытый перелом рёбер
 pathology-torso-compound-description = Грубый оскольчатый перелом рёбер, сопровождающийся кашлем и внутренним кровотечением.
@@ -107,12 +107,12 @@ pathology-leftfoot-compound-description = Тяжёлый перелом кост
 pathology-rightfoot-compound-name = Открытый перелом правой стопы
 pathology-rightfoot-compound-description = Тяжёлый перелом костей правой стопы, движение резко затруднено.
 
-pathology-torso-fracture-operation = Хирургия торса: восстановите кость костным гелем или хирургической лентой (при открытом переломе сперва вправьте костоправом).
-pathology-lowertorso-fracture-operation = Хирургия паховой области и таза: восстановите кости таза костным гелем или хирургической лентой (при открытом переломе сперва вправьте костоправом).
-pathology-arm-fracture-operation = Хирургия руки: восстановите кость костным гелем или хирургической лентой (при открытом переломе сперва вправьте костоправом).
-pathology-hand-fracture-operation = Хирургия кисти: восстановите кости костным гелем или хирургической лентой (при открытом переломе сперва вправьте костоправом).
-pathology-leg-fracture-operation = Хирургия ноги: восстановите кость костным гелем или хирургической лентой (при открытом переломе сперва вправьте костоправом).
-pathology-foot-fracture-operation = Хирургия стопы: восстановите кости костным гелем или хирургической лентой (при открытом переломе сперва вправьте костоправом).
+pathology-torso-fracture-operation = Хирургия торса: восстановите кость костным гелем (при открытом переломе сперва вправьте костоправом).
+pathology-lowertorso-fracture-operation = Хирургия паховой области и таза: восстановите кости таза костным гелем (при открытом переломе сперва вправьте костоправом).
+pathology-arm-fracture-operation = Хирургия руки: восстановите кость костным гелем (при открытом переломе сперва вправьте костоправом).
+pathology-hand-fracture-operation = Хирургия кисти: восстановите кости костным гелем (при открытом переломе сперва вправьте костоправом).
+pathology-leg-fracture-operation = Хирургия ноги: восстановите кость костным гелем (при открытом переломе сперва вправьте костоправом).
+pathology-foot-fracture-operation = Хирургия стопы: восстановите кости костным гелем (при открытом переломе сперва вправьте костоправом).
 
 # Arterial punctures
 
@@ -131,7 +131,7 @@ pathology-leftleg-arterial-description = Повреждена артерия л�
 pathology-rightleg-arterial-name = Разрыв артерии правой ноги
 pathology-rightleg-arterial-description = Повреждена артерия правой ноги — обильное кровотечение!
 
-pathology-arterial-operation = Хирургия поражённой зоны: вскройте ткани, пережмите сосуд гемостатом и запаяйте прижигателем или хирургической лентой.
+pathology-arterial-operation = Хирургия поражённой зоны: вскройте ткани, пережмите сосуд гемостатом и запаяйте прижигателем.
 
 # Burn necrosis
 
@@ -156,7 +156,7 @@ pathology-necrosis-operation = Хирургия поражённой зоны: �
 
 pathology-eye-corneal-name = Повреждение роговицы
 pathology-eye-corneal-description = Роговица глаза повреждена, зрение резко снижено.
-pathology-eye-corneal-operation = Хирургия глаз: разведите веки ретрактором, очистите гемостатом и зафиксируйте прижигателем или хирургической лентой.
+pathology-eye-corneal-operation = Хирургия глаз: разведите веки ретрактором, очистите гемостатом и зафиксируйте прижигателем.
 
 pathology-mouth-jaw-dislocation-name = Вывих челюсти
 pathology-mouth-jaw-dislocation-description = Нижняя челюсть вывихнута, речь пациента искажена.

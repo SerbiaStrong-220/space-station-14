@@ -16,7 +16,7 @@ patient-status-brain-rot-degree = Мозг пациента повреждён �
 patient-status-brain-rot-none = Мозговая активность в норме
 patient-status-brain-rot-invalid = Мозговая активность: -
 
-patient-status-anesthesia-active = Анестезия: [color=green]активна (наркоз / анальгетик)[/color]
+patient-status-anesthesia-active = Анестезия: [color=green]активна[/color]
 patient-status-anesthesia-none = Анестезия: [color=red]отсутствует[/color]
 patient-status-anesthesia-invalid = Анестезия: -
 

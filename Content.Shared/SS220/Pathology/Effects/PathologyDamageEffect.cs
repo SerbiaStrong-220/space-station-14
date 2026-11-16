@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Mobs.Systems;
 
 namespace Content.Shared.SS220.Pathology.Effects;
 
@@ -16,6 +17,9 @@ public sealed partial class PathologyDamageEffect : IPathologyEffect
     public void ApplyEffect(EntityUid uid, PathologyInstanceData data, IEntityManager entityManager)
     {
         if (entityManager.System<SharedPathologySystem>().IsClient)
+            return;
+
+        if (entityManager.System<MobStateSystem>().IsDead(uid))
             return;
 
         var damageable = entityManager.System<DamageableSystem>();

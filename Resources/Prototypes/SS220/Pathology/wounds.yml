@@ -691,7 +691,7 @@
     - !type:PathologyDamageEffect
       damage:
         types:
-          Poison: 0.15
+          Poison: 0.05
 
 - type: pathology
   id: TorsoBurnNecrosis
@@ -707,7 +707,7 @@
     - !type:PathologyDamageEffect
       damage:
         types:
-          Poison: 0.15
+          Poison: 0.05
 
 - type: pathology
   id: LowerTorsoBurnNecrosis
@@ -723,7 +723,7 @@
     - !type:PathologyDamageEffect
       damage:
         types:
-          Poison: 0.15
+          Poison: 0.05
 
 - type: pathology
   id: LeftArmBurnNecrosis
@@ -739,7 +739,7 @@
     - !type:PathologyDamageEffect
       damage:
         types:
-          Poison: 0.15
+          Poison: 0.05
 
 - type: pathology
   id: RightArmBurnNecrosis
@@ -755,7 +755,7 @@
     - !type:PathologyDamageEffect
       damage:
         types:
-          Poison: 0.15
+          Poison: 0.05
 
 - type: pathology
   id: LeftLegBurnNecrosis
@@ -771,7 +771,7 @@
     - !type:PathologyDamageEffect
       damage:
         types:
-          Poison: 0.15
+          Poison: 0.05
 
 - type: pathology
   id: RightLegBurnNecrosis
@@ -787,7 +787,7 @@
     - !type:PathologyDamageEffect
       damage:
         types:
-          Poison: 0.15
+          Poison: 0.05
 
 # Eyes & Mouth Traumas
 
