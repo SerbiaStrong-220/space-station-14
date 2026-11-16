@@ -90,7 +90,7 @@ public sealed partial class CrewManifestSiliconSystem : EntitySystem
             entries.Add(new SyntheticManifestEntry(
                 MetaData(aiUid.Value).EntityName,
                 Loc.GetString(AiChassisLocId),
-                StationAiJobIcon.Id,
+                StationAiJobIcon,
                 true));
         }
 
@@ -137,10 +137,10 @@ public sealed partial class CrewManifestSiliconSystem : EntitySystem
         return Loc.GetString("borg-type-prototype-generic");
     }
 
-    private string? GetBorgJobIcon(EntityUid borg)
+    private ProtoId<JobIconPrototype>? GetBorgJobIcon(EntityUid borg)
     {
         if (TryComp<JobStatusComponent>(borg, out var jobStatus))
-            return jobStatus.JobStatusIcon?.Id;
+            return jobStatus.JobStatusIcon;
 
         return null;
     }

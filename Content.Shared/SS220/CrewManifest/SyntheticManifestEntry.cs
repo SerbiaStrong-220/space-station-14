@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.StatusIcon;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CrewManifest;
@@ -11,7 +13,7 @@ namespace Content.Shared.SS220.CrewManifest;
 public sealed class SyntheticManifestEntry(
     string name,
     string chassisName,
-    string? jobIcon,
+    ProtoId<JobIconPrototype>? jobIcon,
     bool isAi)
 {
     public string Name { get; } = name;
@@ -24,7 +26,7 @@ public sealed class SyntheticManifestEntry(
     /// <summary>
     ///     Job icon prototype displayed for this synthetic.
     /// </summary>
-    public string? JobIcon { get; } = jobIcon;
+    public ProtoId<JobIconPrototype>? JobIcon { get; } = jobIcon;
 
     /// <summary>
     ///     Whether this entry is the station AI. Used to format the chassis label.
