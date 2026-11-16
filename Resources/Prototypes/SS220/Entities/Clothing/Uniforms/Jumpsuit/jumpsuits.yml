@@ -910,6 +910,14 @@
   name: black jumpsuit
   description: A generic black jumpsuit with no rank markings.
   components:
+  - type: ItemToggle
+    activated: true
+    onUse: false
+    onActivate: false
+    verbToggleOn: stamina-convert-toggle-verb-on
+    verbToggleOff: stamina-convert-toggle-verb-off
+    popupActivate: stamina-convert-toggle-popup-on
+    popupDeactivate: stamina-convert-toggle-popup-off
   - type: StaminaResistance
     damageCoefficient: 0.1
   - type: StaminaConvertArmor
