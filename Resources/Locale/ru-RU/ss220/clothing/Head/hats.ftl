@@ -149,6 +149,12 @@ ent-ClothingHeadHatFollower = шляпа последователя
     .desc = Настало время небес.
     .suffix = За время в игре
 
+ent-ClothingHeadHatCone2 = { ent-ClothingHeadHatCone }
+    .desc = { ent-ClothingHeadHatCone.desc }
+
+ent-ClothingHeadHatCone3 = { ent-ClothingHeadHatCone }
+    .desc = { ent-ClothingHeadHatCone.desc }
+
 ent-ClothingHeadHatMimeHarlequin = колпак готического арлекина
     .desc = Высокий колпак как символ успеха и признания.
     .suffix = За время в игре
