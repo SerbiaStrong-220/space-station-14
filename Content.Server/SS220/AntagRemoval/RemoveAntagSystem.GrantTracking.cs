@@ -209,7 +209,7 @@ public sealed partial class RemoveAntagSystem
         {
             if (uid == body)
                 return true;
-            if (!TryComp<TransformComponent>(uid, out var transform))
+            if (!TryComp(uid, out TransformComponent? transform))
                 break;
             var parent = transform.ParentUid;
             if (parent == uid)
