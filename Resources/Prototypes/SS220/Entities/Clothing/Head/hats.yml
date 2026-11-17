@@ -578,6 +578,20 @@
     - HamsterWearable
     - WhitelistChameleon
 
+  # Офицер
+- type: entity
+  parent: ClothingHeadHatPilotBeret
+  id: ClothingHeadHatBeretSecurityBlack
+  name: security beret
+  description: Black officer's beret. Issued for diligent service within the ranks of the Asset Protection Department.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_sec_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_sec_black.rsi
+
+
 # Карго
   # Квартирмейстер
 - type: entity

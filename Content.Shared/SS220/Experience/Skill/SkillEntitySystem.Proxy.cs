@@ -3,9 +3,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Content.Shared.Database;
-using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -38,30 +37,13 @@ public partial class SkillEntitySystem : EntitySystem
 
         if (!TryComp<ExperienceComponent>(experienceUid, out var experienceComponent))
         {
-            Log.Error($"Got entity {ToPrettyString(experienceUid)} in container which entity owner don't have {nameof(ExperienceComponent)}");
+            Log.Error($"Got entity {ToPrettyString(skillUid)} in container which entity owner don't have {nameof(ExperienceComponent)}! Queued that entity to be deleted");
+            QueueDel(skillUid);
             return false;
         }
 
         experienceEntity = (experienceUid, experienceComponent);
         return true;
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool TryChangeStudyingProgress(EntityUid skillUid, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
-    {
-        if (!ResolveExperienceEntityFromSkillEntity(skillUid, out var experienceEntity))
-            return false;
-
-        return Experience.TryChangeStudyingProgress(experienceEntity.Value!, skillTree, info);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool TryChangeStudyingProgress(EntityUid skillUid, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
-    {
-        if (!ResolveExperienceEntityFromSkillEntity(skillUid, out var experienceEntity))
-            return false;
-
-        return Experience.TryChangeStudyingProgress(experienceEntity.Value!, skillTree, delta);
     }
 
     /// <summary>
@@ -84,10 +66,10 @@ public partial class SkillEntitySystem : EntitySystem
     public IRobustRandom GetPredictedRandom(in List<int> valuesForSeed)
     {
         var seed = SharedRandomExtensions.HashCodeCombine(valuesForSeed);
-        var rand = new RobustRandom();
-        rand.SetSeed(seed);
+        var random = new RobustRandom();
+        random.SetSeed(seed);
 
-        return rand;
+        return random;
     }
 
     /// <summary>
