@@ -197,7 +197,7 @@ public sealed partial class TraitorRuleSystem : GameRuleSystem<TraitorRuleCompon
         // SS220-removeantag-begin
         var uplinked = _uplink.AddUplink(traitor, startingBalance,
             out var code, out var grantedStore, out var grantedImplant, pda,
-            giveDiscounts: true, bindToPda: false, useDynamics: true);
+            giveDiscounts: true, bindToPda: false, useDynamics: true); // SS220 Dynamics
         if (uplinked != AddUplinkResult.Failure && grantedStore is { } store)
             EntityManager.System<RemoveAntagSystem>()
                 .RecordGrantedTraitorUplink(traitor, store, grantedImplant);
