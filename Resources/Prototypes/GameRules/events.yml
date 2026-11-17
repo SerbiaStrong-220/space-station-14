@@ -21,6 +21,7 @@
     - id: RandomSentience
     - id: SlimesSpawnHorde
     - id: SolarFlare
+    - id: StationLockdown # SS220 randomlawset fix
     - id: ApcMalfunction # SS220 randomlawset fix
     - id: SnakeSpawnHorde
     - id: SpiderClownSpawnHorde
