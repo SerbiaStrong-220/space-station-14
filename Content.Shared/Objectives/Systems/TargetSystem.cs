@@ -3,6 +3,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Filters;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.SS220.Arena;
 using Robust.Shared.Random;
 
 namespace Content.Shared.Objectives.Systems;
@@ -43,6 +44,11 @@ public sealed class TargetSystem : EntitySystem
             // the player has to be alive
             if (!_mind.TryGetMind(uid, out var mind, out var mindComp) || mind == exclude || !_mobState.IsAlive(uid, mobState))
                 continue;
+
+            // SS220-arena-antag-fix begin
+            if (HasComp<ArenaParticipantComponent>(uid))
+                continue;
+            // SS220-arena-antag-fix end
 
             allHumans.Add((mind, mindComp));
         }
