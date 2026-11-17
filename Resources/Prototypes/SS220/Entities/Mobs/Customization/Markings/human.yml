@@ -69,3 +69,290 @@
   sprites:
   - sprite: SS220/Mobs/Customization/human_hair.rsi
     state: mullet
+
+- type: marking
+  id: HumanHair80s2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: 80s2
+
+- type: marking
+  id: HumanHairAntenna2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: antenna2
+
+- type: marking
+  id: HumanHairBeehivev3
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: beehivev3
+
+- type: marking
+  id: HumanHairBedheadv4
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: bedheadv4
+
+- type: marking
+  id: HumanHairBowlcut3
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: bowlcut3
+
+- type: marking
+  id: HumanHairBraided2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: braided2
+
+- type: marking
+  id: HumanHairBraidfront2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: braidfront2
+
+- type: marking
+  id: HumanHairBun4
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: bun4
+
+- type: marking
+  id: HumanHairBusiness5
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: business5
+
+- type: marking
+  id: HumanHairCornrowbraid2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: cornrowbraid2
+
+- type: marking
+  id: HumanHairCornrowbun2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: cornrowbun2
+
+- type: marking
+  id: HumanHairCornrows3
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: cornrows3
+
+- type: marking
+  id: HumanHairCornrowtail2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: cornrowtail2
+
+- type: marking
+  id: HumanHairCurtain
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: curtain
+
+- type: marking
+  id: HumanHairCurtain2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: curtain2
+
+- type: marking
+  id: HumanHairFeather2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: feather2
+
+- type: marking
+  id: HumanHairHalfbang2alt
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: halfbang2alt
+
+- type: marking
+  id: HumanHairHalfbangalt
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: halfbangalt
+
+- type: marking
+  id: HumanHairHalfshaved2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: halfshaved2
+
+- type: marking
+  id: HumanHairHedgehog2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: hedgehog2
+
+- type: marking
+  id: HumanHairHighfade2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: highfade2
+
+- type: marking
+  id: HumanHairHitop2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: hitop2
+
+- type: marking
+  id: HumanHairJade2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: jade2
+
+- type: marking
+  id: HumanHairKagami2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: kagami2
+
+- type: marking
+  id: HumanHairKusanagi2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: kusanagi2
+
+- type: marking
+  id: HumanHairLargebun2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: largebun2
+
+- type: marking
+  id: HumanHairLbangs2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: lbangs2
+
+- type: marking
+  id: HumanHairLongmessy
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: longmessy
+
+- type: marking
+  id: HumanHairManbun2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: manbun2
+
+- type: marking
+  id: HumanHairOdango2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: odango2
+
+- type: marking
+  id: HumanHairOmbre2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: ombre2
+
+- type: marking
+  id: HumanHairOneshoulder2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: oneshoulder2
+
+- type: marking
+  id: HumanHairPart2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: part2
+
+- type: marking
+  id: HumanHairRonin2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: ronin2
+
+- type: marking
+  id: HumanHairRosa2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: rosa2
+
+- type: marking
+  id: HumanHairShaped2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: shaped2
+
+- type: marking
+  id: HumanHairShortbraid2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: shortbraid2
+
+- type: marking
+  id: HumanHairSidetail5
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: sidetail5
+
+- type: marking
+  id: HumanHairUneven2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: uneven2
+
+- type: marking
+  id: HumanHairUpdo2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: updo2
+
+- type: marking
+  id: HumanHairLongemo2
+  bodyPart: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: longemo2
