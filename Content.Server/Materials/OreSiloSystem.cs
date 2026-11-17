@@ -49,9 +49,19 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
         if (!TryComp<MaterialStorageComponent>(entity, out var storageComp) || !storageComp.DropOnTerminating)
             return;
 
+        var xform = Transform(entity);
+        if (TerminatingOrDeleted(xform.ParentUid))
+            return;
+
+        if (xform.GridUid is { } gridUid && TerminatingOrDeleted(gridUid))
+            return;
+
+        if (xform.MapUid is { } mapUid && TerminatingOrDeleted(mapUid))
+            return;
+
         foreach (var (material, amount) in storageComp.Storage)
         {
-            _materialStorage.SpawnMultipleFromMaterial(amount, material, Transform(entity).Coordinates);
+            _materialStorage.SpawnMultipleFromMaterial(amount, material, xform.Coordinates);
         }
     }
     // ss220 ore silo tweak end

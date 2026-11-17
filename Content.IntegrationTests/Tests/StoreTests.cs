@@ -33,17 +33,6 @@ public sealed class StoreTests : GameTest
 ";
 
     [Test]
-    [Ignore("""
-        This currently causes the client to crash, failing the test.
-        When this is fixed, this test should be removed and StoreDiscountAndRefund
-        should just use the default pair config.
-    """)]
-    public async Task StoreDiscountAndRefundWithClient()
-    {
-        await StoreDiscountAndRefund();
-    }
-
-    [Test]
     [PairConfig(nameof(PsDisconnected))]
     public async Task StoreDiscountAndRefund()
     {
