@@ -370,6 +370,7 @@ public sealed partial class MindSlaveSystem : EntitySystem
         var slaveTelepathy = EnsureComp<TelepathyComponent>(target);
         slaveTelepathy.CanSend = true;
         slaveTelepathy.TelepathyChannelPrototype = channelId;
+        Dirty(target, slaveTelepathy);
     }
 
     private void RemoveSlaveTelepathy(EntityUid? master, EntityUid slave)

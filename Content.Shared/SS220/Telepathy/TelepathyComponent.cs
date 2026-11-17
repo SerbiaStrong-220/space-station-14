@@ -10,18 +10,36 @@ namespace Content.Shared.SS220.Telepathy;
 /// This is used for giving telepathy ability
 /// </summary>
 [RegisterComponent]
-[NetworkedComponent]
+[NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class TelepathyComponent : Component
 {
-    [DataField(required: true)]
+    /// <summary>
+    /// Whether the entity can send telepathic messages.
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
     public bool CanSend;
 
-    [DataField]
+    /// <summary>
+    /// The entity's channel, including channels allocated dynamically by the server.
+    /// </summary>
+    [DataField, AutoNetworkedField]
     public ProtoId<TelepathyChannelPrototype>? TelepathyChannelPrototype;
 
-    [DataField]
+    /// <summary>
+    /// Whether the entity receives messages from every telepathy channel.
+    /// </summary>
+    [DataField, AutoNetworkedField]
     public bool ReceiveAllChannels;
+
+    public override bool SendOnlyToOwner => true;
 }
+
+/// <summary>
+/// Raised locally when a telepathy component starts, is removed, or receives networked state.
+/// Removal listeners must wait until removal finishes before querying component presence.
+/// </summary>
+[ByRefEvent]
+public readonly record struct TelepathyChangedEvent(EntityUid Entity);
 
 public sealed partial class TelepathySendEvent : InstantActionEvent
 {

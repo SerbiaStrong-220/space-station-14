@@ -465,6 +465,9 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void OnTelepathySpoke(TelepathySpokeEvent args)
     {
+        if (!_isEnabled)
+            return;
+
         if (args.Receivers.Length == 0)
             return;
 
