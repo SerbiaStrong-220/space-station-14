@@ -36,7 +36,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.SS220.MindSlave;
-using Content.Server.SS220.AntagRemoval;
+using Content.Server.SS220.AntagRemoval; // SS220-removeantag
 using Content.Shared.SS220.Experience.Systems;
 
 namespace Content.Server.Antag;
@@ -489,12 +489,12 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             // The following is where we apply components, equipment, and other changes to our antagonist entity.
             // TODO: fix this remove disaster
             EntityManager.AddComponents(player, def.Components);
-    
+
             // Equip the entity's RoleLoadout and LoadoutGroup
             List<ProtoId<StartingGearPrototype>> gear = new();
             if (def.StartingGear is not null)
                 gear.Add(def.StartingGear.Value);
-    
+
             // SS220-experience-update-begin
             if (def.StartingGear is not null && _prototype.Resolve(def.StartingGear, out var gearPrototype))
             {
@@ -503,13 +503,13 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             }
             _experienceAddition.EnqueueRecalculation(antagEnt.Value);
             // SS220-experience-update-end
-    
+
             _loadout.Equip(player, gear, def.RoleLoadout);
-    
+
             if (session != null)
             {
                 var curMind = session.GetMind();
-    
+
                 if (curMind == null ||
                     !TryComp<MindComponent>(curMind.Value, out var mindComp) ||
                     mindComp.OwnedEntity != antagEnt)
@@ -517,16 +517,16 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
                     curMind = _mind.CreateMind(session.UserId, Name(antagEnt.Value));
                     _mind.SetUserId(curMind.Value, session.UserId);
                 }
-    
+
                 _mind.TransferTo(curMind.Value, antagEnt, ghostCheckOverride: true);
                 _role.MindAddRoles(curMind.Value, def.MindRoles, null, true);
                 ent.Comp.AssignedMinds.Add((curMind.Value, Name(player)));
                 SendBriefing(session, def.Briefing);
-    
+
                 Log.Debug($"Assigned {ToPrettyString(curMind)} as antagonist: {ToPrettyString(ent)}");
                 _adminLogger.Add(LogType.AntagSelection, $"Assigned {ToPrettyString(curMind)} as antagonist: {ToPrettyString(ent)}");
             }
-    
+
             var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
             RaiseLocalEvent(ent, ref afterEv, true);
             removeAntag.RegisterGrantExperience(antagEnt.Value, def);
@@ -536,7 +536,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         {
             removeAntag.CancelGrant(snapshot);
         }
-        // SS220-removeantag-end
+// SS220-removeantag-end
     }
 
     /// <summary>

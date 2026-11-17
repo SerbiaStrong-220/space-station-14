@@ -13,6 +13,7 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.Pinpointer;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
+using Content.Server.SS220.AntagRemoval;
 using Content.Server.SS220.AntagRemoval.Notifications;
 using Content.Server.SS220.CultYogg.Cultists;
 using Content.Server.SS220.CultYogg.Sacrificials;
@@ -49,8 +50,6 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
-
-using Content.Server.SS220.AntagRemoval;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 

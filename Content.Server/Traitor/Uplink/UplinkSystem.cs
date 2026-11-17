@@ -77,7 +77,7 @@ public sealed class UplinkSystem : EntitySystem
         bool bindToPda = false,
         bool useDynamics = false) // SS220 DynamicTraitor
     {
-        // SS220-removeantag begin
+        // SS220-removeantag-begin
         // Keep the original API for every existing caller; only the traitor
         // selection path requests the exact granted store/implant entities.
         return AddUplink(user, balance, out code, out _, out _, uplinkEntity,
@@ -119,7 +119,7 @@ public sealed class UplinkSystem : EntitySystem
         Del(storeEntity);
         return AddUplinkResult.Failure;
     }
-    // SS220-removeantag end
+    // SS220-removeantag-end
 
     public bool TryAddEntityUplink(
         EntityUid user,
@@ -189,7 +189,7 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Implant an uplink as a fallback measure if the traitor had no PDA
     /// </summary>
-    // SS220-removeantag begin
+    // SS220-removeantag-begin
     public bool TryImplantUplink(EntityUid user, EntityUid storeEntity, FixedPoint2 balance, bool giveDiscounts, bool useDynamics)
         => TryImplantUplink(user, storeEntity, balance, giveDiscounts, useDynamics, out _);
 
@@ -220,7 +220,7 @@ public sealed class UplinkSystem : EntitySystem
         grantedImplant = implant;
         return true;
     }
-    // SS220-removeantag end
+    // SS220-removeantag-end
 
     /// <summary>
     /// Finds the entity that can hold an uplink for a user.

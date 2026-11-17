@@ -23,8 +23,8 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.StationRecords;
 using Robust.Shared.Map;
 
-using Content.Server.SS220.AntagRemoval;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Server.SS220.AntagRemoval; // SS220-removeantag
+using Content.Shared.SS220.Experience.Systems; // SS220-removeantag
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -184,7 +184,7 @@ public sealed partial class TraitorRuleSystem : GameRuleSystem<TraitorRuleCompon
         _npcFaction.AddFaction(traitor, component.SyndicateFaction);
 
 
-        EntityManager.System<RemoveAntagSystem>().GrantAntagKnowledge(traitor, RemoveAntagRoles.Traitor, "SyndicateAgentKnowledge"); //SS220-removeantag
+        EntityManager.System<RemoveAntagSystem>().GrantAntagKnowledge(traitor, RemoveAntagRoles.Traitor, "SyndicateAgentKnowledge"); // SS220-removeantag
         Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Finished");
         return true;
     }
@@ -194,14 +194,14 @@ public sealed partial class TraitorRuleSystem : GameRuleSystem<TraitorRuleCompon
         var pda = _uplink.FindUplinkTarget(traitor);
 
         Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Uplink add");
-        // SS220-removeantag begin
+        // SS220-removeantag-begin
         var uplinked = _uplink.AddUplink(traitor, startingBalance,
             out var code, out var grantedStore, out var grantedImplant, pda,
             giveDiscounts: true, bindToPda: false, useDynamics: true);
         if (uplinked != AddUplinkResult.Failure && grantedStore is { } store)
             EntityManager.System<RemoveAntagSystem>()
                 .RecordGrantedTraitorUplink(traitor, store, grantedImplant);
-        // SS220-removeantag end
+        // SS220-removeantag-end
 
         if (code != null && uplinked == AddUplinkResult.Pda)
         {

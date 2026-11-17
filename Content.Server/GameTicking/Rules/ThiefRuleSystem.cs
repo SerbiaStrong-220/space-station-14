@@ -1,5 +1,5 @@
 using Content.Server.Antag;
-using Content.Server.SS220.AntagRemoval;
+using Content.Server.SS220.AntagRemoval; // SS220-removeantag
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Roles;
 using Content.Shared.Humanoid;
