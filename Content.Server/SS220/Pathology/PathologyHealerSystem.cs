@@ -46,18 +46,19 @@ public sealed partial class PathologyHealerSystem : EntitySystem
 
     private void OnDoAfter(Entity<PathologyHolderComponent> target, ref HealingPathologyDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled)
+        if (args.Handled || args.Cancelled || args.Used is not { } used)
             return;
 
-        if (!TryComp<PathologyHealerComponent>(args.Used, out var healing))
+        if (!TryComp<PathologyHealerComponent>(used, out var healing))
             return;
 
         if (!HasAnyCurablePathology(healing, target))
             return;
 
-        if (!_powerCell.TryUseActivatableCharge(args.Used.Value, user: args.User))
+        if (!_powerCell.HasActivatableCharge(used, user: args.User))
             return;
 
+        var curedAny = false;
         var damageModifier = 0f;
         foreach (var selector in healing.CurePathologyStacksSelectors)
         {
@@ -66,13 +67,19 @@ public sealed partial class PathologyHealerSystem : EntitySystem
                 if (!_pathology.TryChangePathologyStack(target!, id, deltaStack))
                     continue;
 
+                curedAny = true;
                 var modifierEv = new GetPathologyHealerDamageModifier(id, target.Owner, args.User);
                 RaiseLocalEvent(target, ref modifierEv);
 
-                damageModifier += (modifierEv.Modifier * Math.Abs(deltaStack));
+                damageModifier += modifierEv.Modifier * Math.Abs(deltaStack);
                 break;
             }
         }
+
+        if (!curedAny)
+            return;
+
+        _powerCell.TryUseActivatableCharge(used, user: args.User);
 
         if (damageModifier == 0f)
             return;
@@ -97,6 +104,12 @@ public sealed partial class PathologyHealerSystem : EntitySystem
     private bool TryHeal(Entity<PathologyHealerComponent> healing, Entity<PathologyHolderComponent?> target, EntityUid user)
     {
         if (!Resolve(target.Owner, ref target.Comp, logMissing: false))
+            return false;
+
+        if (!HasAnyCurablePathology(healing.Comp, (target.Owner, target.Comp)))
+            return false;
+
+        if (!_powerCell.HasActivatableCharge(healing.Owner, user: user))
             return false;
 
         var doAfterEventArgs =

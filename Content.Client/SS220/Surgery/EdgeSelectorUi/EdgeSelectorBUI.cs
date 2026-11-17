@@ -24,6 +24,7 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         base.Open();
         _menu = this.CreateWindow<SimpleRadialMenu>();
         _menu.Track(Owner);
+        _menu.OpenOverMouseScreenPosition();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -36,8 +37,6 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
 
                 var buttons = ConvertInfosToButtons(msg.Infos);
                 _menu?.SetButtons(buttons);
-
-                _menu?.OpenOverMouseScreenPosition();
 
                 break;
         }

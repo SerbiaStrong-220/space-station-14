@@ -10,7 +10,8 @@ surgery-cant-be-cancelled-on-start = Вы не можете завершить �
 cant-start-undefined-surgery = неизвестная операция!
 cant-start-surgery-while-on-surgery = Эта операция уже проводится!
 
-surgery-tool-damage-on-failure = Неосторожнее движение { $used } повреждает ткани { CAPITALIZE(THE($target)) }
+surgery-tool-damage-on-failure = Неосторожное движение { $used } повреждает ткани { CAPITALIZE(THE($target)) }
+surgery-step-failed = Неосторожное движение { $used } срывает этап операции { CAPITALIZE(THE($target)) }
 surgery-need-to-be-started-before-operating = Чтобы оперировать необходимо начать операцию с помощью предмета { ent-SurgeryDrapes }!
 
 surgery-start-ui-target = Начать операцию над {CAPITALIZE($target)}

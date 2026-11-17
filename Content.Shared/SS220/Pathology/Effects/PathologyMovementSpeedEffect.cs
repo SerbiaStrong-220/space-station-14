@@ -21,9 +21,6 @@ public sealed partial class PathologyMovementSpeedEffect : IPathologyEffect
 
     public void ApplyEffect(EntityUid uid, PathologyInstanceData data, IEntityManager entityManager)
     {
-        if (entityManager.System<SharedPathologySystem>().IsClient)
-            return;
-
         var movementMod = entityManager.System<MovementModStatusSystem>();
         movementMod.TryUpdateMovementSpeedModDuration(uid, StatusEffect, null, WalkSpeedModifier, SprintSpeedModifier);
     }

@@ -572,7 +572,6 @@
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-head-arterial-description
-    maxStackCount: 2
     statusEffects:
     - StatusEffectArterialBleeding
     effects:
@@ -589,7 +588,6 @@
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-torso-arterial-description
-    maxStackCount: 2
     statusEffects:
     - StatusEffectArterialBleeding
     effects:
@@ -606,7 +604,6 @@
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-lowertorso-arterial-description
-    maxStackCount: 2
     statusEffects:
     - StatusEffectArterialBleeding
     effects:
@@ -623,7 +620,6 @@
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-leftarm-arterial-description
-    maxStackCount: 2
     statusEffects:
     - StatusEffectArterialBleeding
     effects:
@@ -640,7 +636,6 @@
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-rightarm-arterial-description
-    maxStackCount: 2
     statusEffects:
     - StatusEffectArterialBleeding
     effects:
@@ -657,7 +652,6 @@
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-leftleg-arterial-description
-    maxStackCount: 2
     statusEffects:
     - StatusEffectArterialBleeding
     effects:
@@ -674,7 +668,6 @@
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-rightleg-arterial-description
-    maxStackCount: 2
     statusEffects:
     - StatusEffectArterialBleeding
     effects:

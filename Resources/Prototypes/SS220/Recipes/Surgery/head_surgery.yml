@@ -10,11 +10,11 @@
     failureMessage: surgery-head-complex-inventory-requirement-failure
     slotNames:
     - head
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -399,11 +399,11 @@
     failureMessage: surgery-eyes-complex-inventory-requirement-failure
     slotNames:
     - eyes
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -455,7 +455,9 @@
       edgeTooltip: to-seal-eyes-surgery
 
   - node: eyes-cornea-prepped
-    baseNode: arterial-puncture-clamped
+    nodeText:
+      examineDescription: eyes-cornea-prepped-examine-description
+      popup: eyes-cornea-prepped-popup
     edges:
     - to: eyes-retract-lids
       id: eyes-cornea-repair
@@ -490,11 +492,11 @@
     failureMessage: surgery-mouth-complex-inventory-requirement-failure
     slotNames:
     - mask
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:

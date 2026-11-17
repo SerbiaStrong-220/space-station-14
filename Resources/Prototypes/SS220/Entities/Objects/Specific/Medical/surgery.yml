@@ -390,10 +390,6 @@
         whitelist:
           tags:
           - SurgeryBoneGel
-      tape:
-        whitelist:
-          tags:
-          - SurgeryTape
       filter:
         whitelist:
           tags:

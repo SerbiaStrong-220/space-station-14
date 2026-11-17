@@ -30,7 +30,7 @@ public abstract partial class SharedPathologySystem
             if (pathologyProto.ExamineDescription is not { } examineLocId)
                 continue;
 
-            var color = pathologyProto.IsSevere || instanceData.Level > 0 || instanceData.StackCount > OneStack
+            var color = IsSevere(pathologyProto, instanceData)
                 ? SevereExamineColor
                 : ModerateExamineColor;
 

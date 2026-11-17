@@ -28,7 +28,7 @@ public sealed partial class TreatmentSuggestion : Control
 
     public void ShowTargetlessSuggestion()
     {
-        TreatmentSuggestionText.Text = Loc.GetString(EmptyTargetless);
+        TreatmentSuggestionText.SetMarkup(Loc.GetString(EmptyTargetless));
     }
 
     public void ShowTableNotLinked()
@@ -45,9 +45,9 @@ public sealed partial class TreatmentSuggestion : Control
         AddSection(recommendation.Suggestions, Loc.GetString(SuggestionSectionName), builder);
 
         if (builder.Length > 0)
-            TreatmentSuggestionText.Text = builder.ToString();
+            TreatmentSuggestionText.SetMarkup(builder.ToString());
         else
-            TreatmentSuggestionText.Text = Loc.GetString(EmptyTreatmentPlaceholder);
+            TreatmentSuggestionText.SetMarkup(Loc.GetString(EmptyTreatmentPlaceholder));
     }
 
     private void AddSection(List<string> dataText, string sectionName, StringBuilder builder)

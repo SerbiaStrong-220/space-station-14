@@ -16,11 +16,11 @@
             <SpriteView OverrideDirection="South" Scale="2 2" Name="SpriteView" Access="Public" SetSize="64 64" />
             <TextureRect Name="NoDataTex" Access="Public" SetSize="64 64" Visible="false" Stretch="KeepAspectCentered" TexturePath="/Textures/Interface/Misc/health_analyzer_out_of_range.png"/>
             <!-- SS220-surgery-update begin -->
-            <Control Name="PathologyPuppetContainer" SetSize="64 64" Visible="False">
+            <Control Name="PathologyPuppetContainer" MinSize="64 64" Visible="False">
                 <surgery:SurgeryPuppetBox Name="PathologyPuppet"
                                           Interactive="False"
                                           ShowBackground="False"
-                                          Scale="2 2"
+                                          Scale="3 3"
                                           HorizontalAlignment="Center"
                                           VerticalAlignment="Center" />
             </Control>

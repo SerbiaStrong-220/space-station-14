@@ -18,6 +18,9 @@ public sealed partial class PathologyHolderComponent : Component
     [ViewVariables]
     [AutoNetworkedField]
     public HashSet<ProtoId<TraitPrototype>> AppliedTraits = new();
+
+    [ViewVariables]
+    public TimeSpan NextUpdate;
 }
 
 [Serializable, NetSerializable]

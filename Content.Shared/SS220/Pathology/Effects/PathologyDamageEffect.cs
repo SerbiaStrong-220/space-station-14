@@ -16,9 +16,6 @@ public sealed partial class PathologyDamageEffect : IPathologyEffect
 
     public void ApplyEffect(EntityUid uid, PathologyInstanceData data, IEntityManager entityManager)
     {
-        if (entityManager.System<SharedPathologySystem>().IsClient)
-            return;
-
         if (entityManager.System<MobStateSystem>().IsDead(uid))
             return;
 

@@ -48,6 +48,7 @@ public sealed partial class AlertsUI : UIWidget
         }
 
         _alertControls.Clear();
+        ClearPathologyPuppet(); //SS220-surgery-update
     }
 
     public event EventHandler<ProtoId<AlertPrototype>>? AlertPressed;

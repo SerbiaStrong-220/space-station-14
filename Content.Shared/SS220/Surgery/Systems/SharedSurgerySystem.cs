@@ -1,10 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Numerics;
+using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Damage;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -14,7 +18,10 @@ using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Ui;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
@@ -27,9 +34,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ISharedAdminLogManager _adminLogManager = default!;
     [Dependency] private SharedMeleeWeaponSystem _meleeWeapon = default!;
+    [Dependency] private MeleeSoundSystem _meleeSound = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
@@ -44,6 +56,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     private static readonly LocId SurgeryCancelledOnStart = "surgery-cancelled-on-start";
     private static readonly LocId SurgeryCantCancelOnStart = "surgery-cant-be-cancelled-on-start";
     private static readonly LocId SurgeryToolFailureDamage = "surgery-tool-damage-on-failure";
+    private static readonly LocId SurgeryStepFailed = "surgery-step-failed";
     private static readonly LocId SurgeryNeedToBeStarted = "surgery-need-to-be-started-before-operating";
     private static readonly LocId SurgeryPatientFeelsPain = "surgery-patient-feels-pain";
 
@@ -98,9 +111,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         }
 
         // TODO: maybe allow under heavy painkillers
-        if (HasComp<SurgeryToolComponent>(args.Used) && args.User == args.Target)
+        if (args.User == args.Target)
         {
-            _popup.PopupPredictedCursor(Loc.GetString(SurgeryCantPerformOnYourself), args.User);
+            if (HasComp<SurgeryToolComponent>(args.Used))
+                _popup.PopupPredictedCursor(Loc.GetString(SurgeryCantPerformOnYourself), args.User);
+
             return;
         }
 
@@ -148,10 +163,16 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 else
                 {
                     // skip showing ui for other interactions
-                    if (!HasComp<SurgeryToolComponent>(args.Used))
+                    if (!HasComp<SurgeryToolComponent>(args.Used) && metedEdges.Length == 0)
                         return;
 
                     var buiOwner = entity.Owner;
+
+                    if (!_gameTiming.IsFirstTimePredicted)
+                    {
+                        args.Handled = _userInterface.IsUiOpen(buiOwner, EdgeSelectorBUIKey, args.User);
+                        break;
+                    }
 
                     // We send full state so no reason for ui being at any entity.
                     if (!_userInterface.TryOpenUi(buiOwner, EdgeSelectorBUIKey, args.User))
@@ -166,10 +187,21 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private void OnSurgeryEdgeSelectorEdgeSelectedMessage(Entity<SurgeryPatientComponent> entity, ref SurgeryEdgeSelectorEdgeSelectedMessage args)
     {
+        if (!_interaction.InRangeUnobstructed(args.Actor, entity.Owner))
+            return;
+
+        EntityUid? used = null;
+        if (args.Used is { } netUsed)
+        {
+            used = GetEntity(netUsed);
+            if (!Exists(used) || !_hands.IsHolding(args.Actor, used.Value, out _))
+                return;
+        }
+
         if (GetEdgeTargeting(entity, args.SurgeryId, args.TargetId) is not { } chosenEdge)
             return;
 
-        TryPerformOperationStep(entity, args.SurgeryId, chosenEdge, GetEntity(args.Used), args.Actor);
+        TryPerformOperationStep(entity, args.SurgeryId, chosenEdge, used, args.Actor);
     }
 
 
@@ -184,13 +216,18 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
-        if (CanPerformAnyEdgeInSurgery(entity, surgeryGraphProto, args.Used, args.User))
+        if (!CanPerformAnyEdgeInSurgery(entity, surgeryGraphProto, args.Used, args.User))
+        {
+            PopupSurgeryGraphFailures(entity, surgeryGraphProto, args.Used, args.User);
+            ev.Cancel();
             return;
+        }
 
-        PopupSurgeryGraphFailures(entity, surgeryGraphProto, args.Used, args.User);
-
-        ev.Cancel();
-        return;
+        if (GetEdgeTargeting(entity, args.SurgeryGraph, args.EdgeId) is not { } edge ||
+            !CanMeetRequirements(entity, edge, args.Used, args.User))
+        {
+            ev.Cancel();
+        }
     }
 
     private void OnSurgeryDoAfter(Entity<SurgeryPatientComponent> entity, ref SurgeryDoAfterEvent args)
@@ -211,23 +248,40 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
 
         if (!CanMeetRequirements(entity, chosenEdge, args.Used, args.User))
+        {
+            ResyncPatient(entity);
             return;
+        }
 
         var failChance = GetStepFailureChance(entity.Owner, args.User, args.Used, chosenEdge);
-        if (failChance > 0f)
+        var serverOnly = failChance > 0f;
+        if (serverOnly)
         {
-            var rand = SharedRandomExtensions.PredictedRandom(_gameTiming, GetNetEntity(entity.Owner), GetNetEntity(args.User));
-            if (rand.NextSingle() < failChance)
+            // client and server can finish the DoAfter on different ticks, so a predicted roll would desync
+            if (_net.IsClient)
+                return;
+
+            if (_random.NextFloat() < failChance)
             {
                 OnSurgeryFailure(args, isStepRollFailure: true);
+                ResyncPatient(entity);
                 return;
             }
         }
 
         if (!TryMeetRequirement(entity, chosenEdge, args.Used, args.User))
+        {
+            ResyncPatient(entity);
             return;
+        }
 
-        ProceedToNextStep(entity, args.User, args.Used, args.SurgeryGraph, chosenEdge);
+        ProceedToNextStep(entity, args.User, args.Used, args.SurgeryGraph, chosenEdge, predicted: !serverOnly);
+    }
+
+    private void ResyncPatient(Entity<SurgeryPatientComponent> entity)
+    {
+        if (_net.IsServer)
+            Dirty(entity);
     }
 
     private void OnSurgeryStarterAfterInteract(Entity<SurgeryStarterComponent> entity, ref AfterInteractEvent args)
@@ -288,20 +342,25 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             if (OperationCanBeEnded(target, args.SurgeryGraphId))
             {
-                _popup.PopupPredicted(Loc.GetString(SurgeryCancelledOnStart, ("target", args.Target), ("user", args.User)), target, user);
+                _popup.PopupPredicted(
+                    Loc.GetString(SurgeryCancelledOnStart,
+                        ("target", Identity.Entity(target, EntityManager)),
+                        ("user", Identity.Entity(user, EntityManager))),
+                    target,
+                    user);
                 EndOperation(target, args.SurgeryGraphId, user);
             }
             else
             {
-                _popup.PopupCursor(Loc.GetString(SurgeryCantCancelOnStart));
+                _popup.PopupPredictedCursor(Loc.GetString(SurgeryCantCancelOnStart), user);
             }
 
             return;
         }
 
-        if (!CanStartSurgery(target, args.SurgeryGraphId, target, used, out var reason))
+        if (!CanStartSurgery(user, args.SurgeryGraphId, target, used, out var reason))
         {
-            _popup.PopupClient(reason, user, user);
+            _popup.PopupPredictedCursor(reason, user);
             args.Cancel();
             return;
         }
@@ -311,7 +370,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         DebugTools.Assert(surgeryPatientComp.OngoingSurgeries.ContainsKey(args.SurgeryGraphId));
 
-        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(args.User):user} started surgery {args.SurgeryGraphId}) on {ToPrettyString(args.Target):target}!");
+        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):user} started surgery {args.SurgeryGraphId}) on {ToPrettyString(target):target}!");
     }
 
     public bool TryStartSurgery(Entity<SurgeryPatientComponent?> target, ProtoId<SurgeryGraphPrototype> surgery, EntityUid performer, EntityUid used)
@@ -319,11 +378,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (!Resolve(target.Owner, ref target.Comp, logMissing: false))
             return false;
 
-
         if (target.Comp.OngoingSurgeries.ContainsKey(surgery))
             return false;
 
-        DebugTools.Assert(CanStartSurgery(target.Owner, surgery, target, used, out _));
+        DebugTools.Assert(CanStartSurgery(performer, surgery, target, used, out _));
 
         StartSurgeryNode(target!, surgery, performer, used);
 
@@ -360,6 +418,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             {
                 NeedHand = true,
                 BreakOnMove = true,
+                BreakOnDamage = true,
                 MovementThreshold = DoAfterMovementThreshold,
                 AttemptFrequency = AttemptFrequency.EveryTick
             };
@@ -385,38 +444,82 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private void OnSurgeryFailure(SurgeryDoAfterEvent args, bool isStepRollFailure = false)
     {
+        if (_net.IsClient)
+            return;
+
         if (args.Target is not { Valid: true } target)
             return;
 
         var damaged = false;
 
-        if (args.Used is { } usedToolUid && TryComp<SurgeryToolComponent>(usedToolUid, out var surgeryTool) && surgeryTool.FailureDamage is not null)
+        if (args.Used is { } used && TryGetFailureDamage(used, args.User, isStepRollFailure, out var failureDamage))
         {
-            if (isStepRollFailure || _gameTiming.CurTime >= surgeryTool.NextFailureDamageTime)
-            {
-                surgeryTool.NextFailureDamageTime = _gameTiming.CurTime + surgeryTool.FailureDamageDelay;
-                Dirty(usedToolUid, surgeryTool);
-                _damageable.TryChangeDamage(target, surgeryTool.FailureDamage, origin: args.User);
-                damaged = true;
-            }
-        }
-        else if (args.Used is { } usedUid && TryComp<MeleeWeaponComponent>(usedUid, out var meleeWeapon))
-        {
-            damaged = _meleeWeapon.AttemptLightAttack(args.User, usedUid, meleeWeapon, target, checkCombatMode: false);
+            damaged = _damageable.TryChangeDamage(target, failureDamage, out var appliedDamage, origin: args.User);
+
+            if (damaged && TryComp<MeleeWeaponComponent>(used, out var melee))
+                PlayFailureStrike(args.User, (used, melee), target, appliedDamage);
         }
 
         if (!damaged && !isStepRollFailure)
             return;
 
-        if (args.Used is { } usedTool)
+        PopupStepFailure(args, target, damaged);
+
+        _adminLogManager.Add(
+            LogType.Action,
+            damaged ? LogImpact.Medium : LogImpact.Low,
+            $"{ToPrettyString(args.User):user} failed performing edge of surgery{(damaged ? " and damaged" : " on")} {ToPrettyString(target):target}!");
+    }
+
+    private bool TryGetFailureDamage(EntityUid used, EntityUid user, bool isStepRollFailure, [NotNullWhen(true)] out DamageSpecifier? damage)
+    {
+        damage = null;
+
+        if (TryComp<SurgeryToolComponent>(used, out var surgeryTool) && surgeryTool.FailureDamage is not null)
         {
-            _popup.PopupPredicted(
-                Loc.GetString(SurgeryToolFailureDamage, ("used", usedTool), ("target", Identity.Entity(target, EntityManager))),
-                target,
-                args.User,
-                PopupType.SmallCaution);
+            if (!isStepRollFailure && _gameTiming.CurTime < surgeryTool.NextFailureDamageTime)
+                return false;
+
+            surgeryTool.NextFailureDamageTime = _gameTiming.CurTime + surgeryTool.FailureDamageDelay;
+            Dirty(used, surgeryTool);
+            damage = surgeryTool.FailureDamage;
+            return true;
         }
 
-        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(args.User):user} failed performing edge of surgery and damaged {ToPrettyString(target):target}!");
+        if (!TryComp<MeleeWeaponComponent>(used, out var melee))
+            return false;
+
+        damage = _meleeWeapon.GetDamage(used, user, melee);
+        return true;
+    }
+
+    private void PlayFailureStrike(EntityUid user, Entity<MeleeWeaponComponent> weapon, EntityUid target, DamageSpecifier appliedDamage)
+    {
+        var userXform = Transform(user);
+        var targetPos = _transform.GetMapCoordinates(target).Position;
+        var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
+
+        if (localPos.LengthSquared() > 0f)
+        {
+            localPos = userXform.LocalRotation.RotateVec(localPos);
+
+            var visualLength = weapon.Comp.Range - 0.2f;
+            if (localPos.Length() > visualLength)
+                localPos = localPos.Normalized() * visualLength;
+
+            _meleeWeapon.DoLunge(user, weapon, weapon.Comp.Angle, localPos, weapon.Comp.Animation, predicted: false);
+        }
+
+        var damageSound = SharedMeleeWeaponSystem.GetHighestDamageSound(appliedDamage, _prototype);
+        _meleeSound.PlayHitSound(target, null, damageSound, null, weapon.Comp);
+    }
+
+    private void PopupStepFailure(SurgeryDoAfterEvent args, EntityUid target, bool damaged)
+    {
+        var message = Loc.GetString(damaged ? SurgeryToolFailureDamage : SurgeryStepFailed,
+            ("used", args.Used is { } used ? used : Loc.GetString("surgery-null-used")),
+            ("target", Identity.Entity(target, EntityManager)));
+
+        _popup.PopupEntity(message, target, Filter.Pvs(target), true, PopupType.SmallCaution);
     }
 }

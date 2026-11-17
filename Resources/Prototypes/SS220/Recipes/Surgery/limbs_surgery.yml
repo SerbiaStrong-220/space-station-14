@@ -13,11 +13,11 @@
     slotNames:
     - jumpsuit
     - outerClothing
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -278,11 +278,11 @@
     slotNames:
     - jumpsuit
     - outerClothing
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -542,11 +542,11 @@
     failureMessage: surgery-hand-complex-inventory-requirement-failure
     slotNames:
     - gloves
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -700,11 +700,11 @@
     failureMessage: surgery-hand-complex-inventory-requirement-failure
     slotNames:
     - gloves
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -859,11 +859,11 @@
     slotNames:
     - jumpsuit
     - outerClothing
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -1124,11 +1124,11 @@
     slotNames:
     - jumpsuit
     - outerClothing
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -1388,11 +1388,11 @@
     failureMessage: surgery-foot-complex-inventory-requirement-failure
     slotNames:
     - shoes
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -1546,11 +1546,11 @@
     failureMessage: surgery-foot-complex-inventory-requirement-failure
     slotNames:
     - shoes
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:

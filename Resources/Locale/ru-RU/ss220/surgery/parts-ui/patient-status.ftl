@@ -3,7 +3,7 @@ patient-status-header = [head=5] Состояние пациента [/head]
 patient-status-overall-damage = Повреждения пациента: { $damage }
 
 patient-status-mob-state-alive = Статус пациента: [color=green] в сознании [/color]
-patient-status-mob-state-critical = Статус пациента: [color=green] в критическом состояния [/color]
+patient-status-mob-state-critical = Статус пациента: [color=red] в критическом состоянии [/color]
 patient-status-mob-state-dead = Статус пациента: мёртв
 patient-status-mob-state-invalid = Статус пациента: -
 

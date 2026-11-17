@@ -74,6 +74,8 @@ to-retract-eyelids = Развести веки
 to-prep-eye-cornea = Подготовить повреждённую роговицу
 to-repair-eye-cornea = Зафиксировать роговицу
 to-seal-eyes-surgery = Завершить операцию на глазах
+eyes-cornea-prepped-examine-description = Повреждённая роговица глаза зафиксирована гемостатом.
+eyes-cornea-prepped-popup = {THE($user)} фиксирует повреждённую роговицу {THE($target)}, используя {$used}
 surgery-pathology-requirement-description-eye-corneal = Повреждение роговицы глаза
 surgery-pathology-requirement-failure-eye-corneal = Повреждения роговицы не обнаружено!
 

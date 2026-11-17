@@ -7,7 +7,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace Content.Shared.SS220.Pathology;
 
@@ -16,7 +15,10 @@ public abstract partial class SharedPathologySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private INetManager _net = default!;
 
-    internal bool IsClient => _net.IsClient;
+    public static bool IsSevere(PathologyPrototype prototype, PathologyInstanceData data)
+    {
+        return prototype.IsSevere || data.Level > 0 || data.StackCount > OneStack;
+    }
 
     public Dictionary<ProtoId<PathologyPrototype>, PathologyDefinition> GetActivePathologies(Entity<PathologyHolderComponent?> entity)
     {
@@ -55,7 +57,12 @@ public abstract partial class SharedPathologySystem
         if (chance < 1f && !_random.Prob(chance))
             return false;
 
-        var correctInput = weightsPathology.Where((entry) => _prototype.HasIndex<PathologyPrototype>(entry.Key) && CanAddPathology(entity, entry.Key)).ToDictionary();
+        var correctInput = new Dictionary<string, float>(weightsPathology.Count);
+        foreach (var (pathologyId, weight) in weightsPathology)
+        {
+            if (_prototype.HasIndex<PathologyPrototype>(pathologyId) && CanAddPathology(entity, pathologyId))
+                correctInput[pathologyId] = weight;
+        }
 
         if (correctInput.Count == 0)
             return false;
@@ -144,7 +151,7 @@ public abstract partial class SharedPathologySystem
     public bool TryGetPathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, [NotNullWhen(true)] out int? stackCount)
     {
         stackCount = null;
-        if (!Resolve(entity.Owner, ref entity.Comp))
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
         if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
@@ -156,7 +163,7 @@ public abstract partial class SharedPathologySystem
 
     public bool TryChangePathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, int toAdd = 1, IPathologyContext? context = null)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp))
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
         if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
@@ -170,9 +177,15 @@ public abstract partial class SharedPathologySystem
         if (newStackCount == instanceData.StackCount)
             return false;
 
-        if (newStackCount > instanceData.StackCount)
+        if (newStackCount < OneStack)
+            return TryRemovePathology(entity, pathologyId, checkStacks: false);
+
+        var previousCount = instanceData.StackCount;
+        instanceData.StackCount = newStackCount;
+
+        if (newStackCount > previousCount)
         {
-            for (var _ = 0; _ < newStackCount - instanceData.StackCount; _++)
+            for (var _ = 0; _ < newStackCount - previousCount; _++)
                 instanceData.PathologyContexts.Add(context);
 
             foreach (var stackAddEffect in pathologyPrototype.Definition[instanceData.Level].AddStackEffects)
@@ -180,21 +193,15 @@ public abstract partial class SharedPathologySystem
         }
         else
         {
-            for (var _ = 0; _ < instanceData.StackCount - newStackCount; _++)
+            for (var _ = 0; _ < previousCount - newStackCount; _++)
                 ApplyPathologyContext(entity!, instanceData.PathologyContexts.Pop());
         }
-
-        var previousCount = instanceData.StackCount;
-        instanceData.StackCount = newStackCount;
 
         var ev = new PathologyStackCountChanged(pathologyId, instanceData.Level, previousCount, newStackCount);
         RaiseLocalEvent(entity, ref ev);
 
         DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
         Dirty(entity);
-
-        if (instanceData.StackCount == OneStack - 1)
-            return TryRemovePathology(entity, pathologyId);
 
         return true;
     }

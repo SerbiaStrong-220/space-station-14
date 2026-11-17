@@ -451,7 +451,4 @@
   id: SurgeryBoneGel
 
 - type: Tag
-  id: SurgeryTape
-
-- type: Tag
   id: SurgeryBloodFilter

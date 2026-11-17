@@ -28,4 +28,7 @@ public sealed partial class OperatingComputerComponent : Component
     [DataField]
     [AutoNetworkedField]
     public HashSet<ProtoId<SurgeryGraphPrototype>> UnlockedSurgeries = new();
+
+    [ViewVariables]
+    public HashSet<ProtoId<SurgeryGraphPrototype>> BaseUnlockedSurgeries = new();
 }

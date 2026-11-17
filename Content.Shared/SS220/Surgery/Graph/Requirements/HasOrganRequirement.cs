@@ -12,6 +12,9 @@ public sealed partial class HasOrganRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public ProtoId<OrganCategoryPrototype> Category;
 
+    [DataField(required: true)]
+    public LocId OrganName;
+
     protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (uid is null)
@@ -39,11 +42,11 @@ public sealed partial class HasOrganRequirement : SurgeryGraphRequirement
 
     public override string RequirementDescription(IPrototypeManager prototypeManager, IEntityManager entityManager)
     {
-        return Loc.GetString(Description, ("organ", Category.Id));
+        return Loc.GetString(Description, ("organ", Loc.GetString(OrganName)));
     }
 
     public override string RequirementFailureReason(EntityUid? uid, IPrototypeManager prototypeManager, IEntityManager entityManager)
     {
-        return Loc.GetString(FailureMessage, ("organ", Category.Id));
+        return Loc.GetString(FailureMessage, ("organ", Loc.GetString(OrganName)));
     }
 }

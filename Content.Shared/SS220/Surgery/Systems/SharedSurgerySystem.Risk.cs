@@ -4,10 +4,12 @@ using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
+using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Placeable;
 using Content.Shared.Power.EntitySystems;
-using Content.Shared.SS220.NightVision;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.StatusEffectNew;
@@ -22,9 +24,7 @@ namespace Content.Shared.SS220.Surgery.Systems;
 public abstract partial class SharedSurgerySystem
 {
     [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
-    [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private SharedPointLightSystem _pointLight = default!;
     [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -32,10 +32,8 @@ public abstract partial class SharedSurgerySystem
     private const float UnanesthetizedFailurePenalty = 0.25f;
     private const float NoOperatingTableFailurePenalty = 0.20f;
     private const float NoOperatingTableDelayMultiplier = 1.35f;
-    private const float PoorLightingFailurePenalty = 0.15f;
-    private const float LightCheckRange = 3.5f;
-
-    private readonly HashSet<EntityUid> _lightEntityBuffer = new();
+    private const float FloorFailurePenalty = 0.35f;
+    private const float FloorDelayMultiplier = 1.5f;
 
     private void InitializeRisk()
     {
@@ -43,9 +41,11 @@ public abstract partial class SharedSurgerySystem
         SubscribeLocalEvent<SurgeryToolComponent, GetSurgeryFailureChanceEvent>(OnToolGetFailureChance);
         SubscribeLocalEvent<OperatingTableComponent, ComponentInit>(OnOperatingTableInit);
         SubscribeLocalEvent<OperatingTableComponent, PortDisconnectedEvent>(OnOperatingTablePortDisconnected);
+        SubscribeLocalEvent<OperatingTableComponent, AfterInteractUsingEvent>(OnOperatingTableAfterInteractUsing, before: [typeof(PlaceableSurfaceSystem)]);
         SubscribeLocalEvent<OperatingTableComponent, GetSurgeryDelayModifiersEvent>(OnTableGetDelayModifiers);
         SubscribeLocalEvent<OperatingTableComponent, GetSurgeryFailureChanceEvent>(OnTableGetFailureChance);
         SubscribeLocalEvent<OperatingComputerComponent, ComponentInit>(OnOperatingComputerInit);
+        SubscribeLocalEvent<OperatingComputerComponent, MapInitEvent>(OnOperatingComputerMapInit);
         SubscribeLocalEvent<OperatingComputerComponent, NewLinkEvent>(OnOperatingComputerNewLink);
         SubscribeLocalEvent<OperatingComputerComponent, PortDisconnectedEvent>(OnOperatingComputerPortDisconnected);
         SubscribeLocalEvent<OperatingComputerComponent, EntInsertedIntoContainerMessage>(OnComputerSlotInserted);
@@ -101,7 +101,8 @@ public abstract partial class SharedSurgerySystem
 
         foreach (var surgery in disk.Surgeries)
         {
-            entity.Comp.UnlockedSurgeries.Remove(surgery);
+            if (!entity.Comp.BaseUnlockedSurgeries.Contains(surgery))
+                entity.Comp.UnlockedSurgeries.Remove(surgery);
         }
 
         Dirty(entity);
@@ -122,6 +123,11 @@ public abstract partial class SharedSurgerySystem
             return true;
 
         return false;
+    }
+
+    public bool IsBuckled(EntityUid patient)
+    {
+        return TryComp<BuckleComponent>(patient, out var buckle) && buckle.Buckled;
     }
 
     /// <summary>
@@ -151,6 +157,28 @@ public abstract partial class SharedSurgerySystem
     private void OnOperatingComputerInit(Entity<OperatingComputerComponent> ent, ref ComponentInit args)
     {
         _deviceLink.EnsureSourcePorts(ent.Owner, ent.Comp.TablePort);
+        ent.Comp.BaseUnlockedSurgeries.UnionWith(ent.Comp.UnlockedSurgeries);
+    }
+
+    private void OnOperatingComputerMapInit(Entity<OperatingComputerComponent> ent, ref MapInitEvent args)
+    {
+        if (!TryComp<DeviceLinkSourceComponent>(ent, out var source))
+            return;
+
+        foreach (var (sink, ports) in source.LinkedPorts)
+        {
+            if (!TryComp<OperatingTableComponent>(sink, out var table))
+                continue;
+
+            foreach (var (sourcePort, sinkPort) in ports)
+            {
+                if (sourcePort != ent.Comp.TablePort || sinkPort != table.ComputerPort)
+                    continue;
+
+                SetOperatingLink(ent, (sink, table));
+                return;
+            }
+        }
     }
 
     private void OnOperatingComputerNewLink(Entity<OperatingComputerComponent> ent, ref NewLinkEvent args)
@@ -169,10 +197,23 @@ public abstract partial class SharedSurgerySystem
         if (table.LinkedComputer is { } prevComputer && prevComputer != ent.Owner)
             _deviceLink.RemoveSinkFromSource(prevComputer, args.Sink);
 
-        ent.Comp.LinkedTable = args.Sink;
-        table.LinkedComputer = ent.Owner;
-        Dirty(ent);
-        Dirty(args.Sink, table);
+        SetOperatingLink(ent, (args.Sink, table));
+    }
+
+    private void SetOperatingLink(Entity<OperatingComputerComponent> computer, Entity<OperatingTableComponent> table)
+    {
+        computer.Comp.LinkedTable = table.Owner;
+        table.Comp.LinkedComputer = computer.Owner;
+        Dirty(computer);
+        Dirty(table);
+    }
+
+    private void OnOperatingTableAfterInteractUsing(Entity<OperatingTableComponent> ent, ref AfterInteractUsingEvent args)
+    {
+        if (args.Handled || !HasComp<NetworkConfiguratorComponent>(args.Used))
+            return;
+
+        args.Handled = true;
     }
 
     private void OnOperatingComputerPortDisconnected(Entity<OperatingComputerComponent> ent, ref PortDisconnectedEvent args)
@@ -265,34 +306,6 @@ public abstract partial class SharedSurgerySystem
     }
 
     /// <summary>
-    /// Checks whether the surgeon has sufficient light (either active NightVision or an enabled unoccluded point light nearby).
-    /// </summary>
-    public bool HasSufficientLight(EntityUid patient, EntityUid surgeon)
-    {
-        var xform = Transform(patient);
-        if (xform.MapID == MapId.Nullspace)
-            return true;
-
-        var nvQuery = EntityQueryEnumerator<NightVisionComponent>();
-        while (nvQuery.MoveNext(out var nv))
-        {
-            if (nv.Enabled && nv.Wearer == surgeon)
-                return true;
-        }
-
-        _lightEntityBuffer.Clear();
-        _lookup.GetEntitiesInRange(xform.Coordinates, LightCheckRange, _lightEntityBuffer, LookupFlags.All);
-
-        foreach (var uid in _lightEntityBuffer)
-        {
-            if (_pointLight.TryGetLight(uid, out var light) && light.Enabled && !light.ContainerOccluded)
-                return true;
-        }
-
-        return false;
-    }
-
-    /// <summary>
     /// Calculates the modified delay of a surgery edge taking into account surgeon skills, tool, and table.
     /// </summary>
     public float GetStepDelay(EntityUid patient, EntityUid surgeon, EntityUid? tool, SurgeryGraphEdge edge)
@@ -300,10 +313,9 @@ public abstract partial class SharedSurgerySystem
         var baseDelay = SurgeryGraph.Delay(edge) ?? ErrorGettingDelayDelay;
         var skillEv = new GetSurgeryDelayModifiersEvent(0f, 1f);
 
-        RaiseLocalEvent(patient, ref skillEv);
         RaiseLocalEvent(surgeon, ref skillEv);
 
-        var skillMultiplier = edge.DeceaseSkillBonus && skillEv.Multiplier > 1f
+        var skillMultiplier = edge.DeceaseSkillBonus && skillEv.Multiplier < 1f
             ? (skillEv.Multiplier - 1f) / 2f + 1f
             : skillEv.Multiplier;
 
@@ -314,8 +326,11 @@ public abstract partial class SharedSurgerySystem
 
         if (IsOnOperatingTable(patient, out var table))
             RaiseLocalEvent(table, ref envEv);
-        else if (HasComp<BuckleComponent>(patient))
-            envEv.Multiplier *= NoOperatingTableDelayMultiplier;
+        else
+            envEv.Multiplier *= IsBuckled(patient) ? NoOperatingTableDelayMultiplier : FloorDelayMultiplier;
+
+        if (IsImprovisedForEdge(tool, edge))
+            envEv.Multiplier *= ImprovisedToolDelayMultiplier;
 
         var totalDelay = baseDelay * skillMultiplier * envEv.Multiplier + skillEv.FlatModifier + envEv.FlatModifier;
         return MathF.Max(0.5f, totalDelay);
@@ -336,14 +351,14 @@ public abstract partial class SharedSurgerySystem
 
         if (IsOnOperatingTable(patient, out var table))
             RaiseLocalEvent(table, ref failEv);
-        else if (HasComp<BuckleComponent>(patient))
-            failEv.FlatModifier += NoOperatingTableFailurePenalty;
+        else
+            failEv.FlatModifier += IsBuckled(patient) ? NoOperatingTableFailurePenalty : FloorFailurePenalty;
+
+        if (IsImprovisedForEdge(tool, edge))
+            failEv.FlatModifier += ImprovisedToolFailurePenalty;
 
         if (!IsPatientAnesthetized(patient) && !IsPainlessTool(tool))
             failEv.FlatModifier += UnanesthetizedFailurePenalty;
-
-        if (!HasSufficientLight(patient, surgeon))
-            failEv.FlatModifier += PoorLightingFailurePenalty;
 
         var total = failEv.FlatModifier * failEv.Multiplier;
         return Math.Clamp(total, 0f, 0.95f);

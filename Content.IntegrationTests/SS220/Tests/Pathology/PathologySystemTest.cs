@@ -262,6 +262,17 @@ public sealed class PathologySystemTest
   - type: GunWieldBonus
     minAngle: -9
     maxAngle: -18
+
+- type: entity
+  id: TestTraumaPlainRifle
+  components:
+  - type: Item
+    size: Large
+  - type: Wieldable
+  - type: Gun
+    minAngle: 4
+    maxAngle: 8
+    fireRate: 2
 ";
 
     [Test]
@@ -284,6 +295,7 @@ public sealed class PathologySystemTest
         EntityUid human = default!;
         EntityUid pistol = default!;
         EntityUid rifle = default!;
+        EntityUid plainRifle = default!;
         PathologyHolderComponent holder = default!;
 
         await server.WaitAssertion(() =>
@@ -310,6 +322,7 @@ public sealed class PathologySystemTest
             human = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
             pistol = entMng.SpawnEntity("TestTraumaPistol", mapData.MapCoords);
             rifle = entMng.SpawnEntity("TestTraumaRifle", mapData.MapCoords);
+            plainRifle = entMng.SpawnEntity("TestTraumaPlainRifle", mapData.MapCoords);
             Assert.That(entMng.TryGetComponent(human, out holder!), Is.True);
         });
 
@@ -347,8 +360,23 @@ public sealed class PathologySystemTest
             Assert.That(gunComp.MinAngleModified.Degrees, Is.EqualTo(1d).Within(0.01d));
             Assert.That(gunComp.MaxAngleModified.Degrees, Is.EqualTo(2d).Within(0.01d));
 
-            // Two-handed rifle in healthy right hand gets +5 deg once wielded, then reverts when trauma is cured
+            // Plain wieldable gun (without GunWieldBonusComponent) also refreshes spread when wielded/unwielded
             Assert.That(handsSystem.TryDrop(human, pistol, checkActionBlocker: false), Is.True);
+            Assert.That(handsSystem.TryPickup(human, plainRifle, "right", checkActionBlocker: false, animate: false), Is.True);
+            var plainRifleGun = entMng.GetComponent<GunComponent>(plainRifle);
+            var plainRifleWield = entMng.GetComponent<WieldableComponent>(plainRifle);
+            Assert.That(plainRifleGun.MinAngleModified.Degrees, Is.EqualTo(4d).Within(0.01d));
+
+            Assert.That(wieldSystem.TryWield(plainRifle, plainRifleWield, human), Is.True);
+            Assert.That(plainRifleGun.MinAngleModified.Degrees, Is.EqualTo(9d).Within(0.01d));
+            Assert.That(plainRifleGun.MaxAngleModified.Degrees, Is.EqualTo(13d).Within(0.01d));
+
+            Assert.That(wieldSystem.TryUnwield(plainRifle, plainRifleWield, human), Is.True);
+            Assert.That(plainRifleGun.MinAngleModified.Degrees, Is.EqualTo(4d).Within(0.01d));
+            Assert.That(plainRifleGun.MaxAngleModified.Degrees, Is.EqualTo(8d).Within(0.01d));
+
+            // Two-handed rifle in healthy right hand gets +5 deg once wielded, then reverts when trauma is cured
+            Assert.That(handsSystem.TryDrop(human, plainRifle, checkActionBlocker: false), Is.True);
             Assert.That(handsSystem.TryPickup(human, rifle, "right", checkActionBlocker: false, animate: false), Is.True);
             var rifleGun = entMng.GetComponent<GunComponent>(rifle);
             var rifleWield = entMng.GetComponent<WieldableComponent>(rifle);

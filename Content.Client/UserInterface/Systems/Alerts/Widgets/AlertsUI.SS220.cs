@@ -47,6 +47,16 @@ public sealed partial class AlertsUI
         UpdatePathologyPuppetPosition();
     }
 
+    private void ClearPathologyPuppet()
+    {
+        if (_pathologyPuppet == null)
+            return;
+
+        _pathologyPuppet.Visible = false;
+        _pathologyPuppet.UpdateFromTarget(null);
+        _pathologyPuppet.Parent?.RemoveChild(_pathologyPuppet);
+    }
+
     private void UpdatePathologyPuppetPosition()
     {
         if (_pathologyPuppet == null)

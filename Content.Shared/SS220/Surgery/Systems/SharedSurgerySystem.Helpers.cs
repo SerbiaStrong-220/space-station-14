@@ -3,8 +3,10 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Database;
+using Content.Shared.IdentityManagement;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Surgery.Systems;
@@ -102,20 +104,24 @@ public abstract partial class SharedSurgerySystem
         return buckleComponent.BuckledTo;
     }
 
-    protected virtual void ProceedToNextStep(Entity<SurgeryPatientComponent> entity, EntityUid user, EntityUid? used, ProtoId<SurgeryGraphPrototype> surgeryGraph, SurgeryGraphEdge chosenEdge)
+    protected virtual void ProceedToNextStep(Entity<SurgeryPatientComponent> entity, EntityUid user, EntityUid? used, ProtoId<SurgeryGraphPrototype> surgeryGraph, SurgeryGraphEdge chosenEdge, bool predicted)
     {
-        ChangeSurgeryNode(entity, surgeryGraph, chosenEdge.Target, user, used);
+        ChangeSurgeryNode(entity, surgeryGraph, chosenEdge.Target, user, used, predicted);
 
-        _audio.PlayPredicted(SurgeryGraph.GetSoundSpecifier(chosenEdge), entity.Owner, user);
+        var sound = SurgeryGraph.GetSoundSpecifier(chosenEdge);
+        if (predicted)
+            _audio.PlayPredicted(sound, entity.Owner, user);
+        else
+            _audio.PlayPvs(sound, entity.Owner);
 
         if (OperationCanBeEnded(entity!, surgeryGraph))
             EndOperation(entity!, surgeryGraph, user);
     }
 
-    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, string targetNode, EntityUid performer, EntityUid? used)
+    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, string targetNode, EntityUid performer, EntityUid? used, bool predicted = true)
     {
         var surgeryProto = _prototype.Index(surgeryGraph);
-        ChangeSurgeryNode(entity, performer, used, surgeryProto, targetNode);
+        ChangeSurgeryNode(entity, performer, used, surgeryProto, targetNode, predicted);
     }
 
     protected void StartSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, EntityUid performer, EntityUid? used)
@@ -126,7 +132,7 @@ public abstract partial class SharedSurgerySystem
         ChangeSurgeryNode(entity, performer, used, surgeryProto, surgeryProto.Start);
     }
 
-    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, EntityUid performer, EntityUid? used, SurgeryGraphPrototype surgeryGraph, string targetNode)
+    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, EntityUid performer, EntityUid? used, SurgeryGraphPrototype surgeryGraph, string targetNode, bool predicted = true)
     {
         if (!surgeryGraph.TryGetNode(targetNode, out var foundNode))
         {
@@ -142,8 +148,15 @@ public abstract partial class SharedSurgerySystem
         if (SurgeryGraph.Popup(foundNode) is null)
             return;
 
-        _popup.PopupPredicted(Loc.GetString(SurgeryGraph.Popup(foundNode)!, ("target", entity.Owner),
-            ("user", performer), ("used", used == null ? Loc.GetString("surgery-null-used") : used)), entity.Owner, performer);
+        var message = Loc.GetString(SurgeryGraph.Popup(foundNode)!,
+            ("target", Identity.Entity(entity.Owner, EntityManager)),
+            ("user", Identity.Entity(performer, EntityManager)),
+            ("used", used == null ? Loc.GetString("surgery-null-used") : used));
+
+        if (predicted)
+            _popup.PopupPredicted(message, entity.Owner, performer);
+        else
+            _popup.PopupEntity(message, entity.Owner, Filter.Pvs(entity.Owner), true);
     }
 
     protected void EndOperation(Entity<SurgeryPatientComponent?> entity, ProtoId<SurgeryGraphPrototype> surgeryGraphId, EntityUid user)

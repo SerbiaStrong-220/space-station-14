@@ -6,4 +6,3 @@ operation-description-edge-to-same-node = [bullet/] { $edgeName }, которо�
 
 operation-description-condition-section-name = Для проведения этого действия необходимо:
 operation-description-action-description-section-name = Это действие:
-operation-description-edge-delay = Базовая длительность этапа: [color=lightblue]{ $delay } сек.[/color]

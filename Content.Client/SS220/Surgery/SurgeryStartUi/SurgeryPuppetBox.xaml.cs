@@ -371,11 +371,7 @@ public sealed partial class SurgeryPuppetBox : Control
                 if (pathologyProto.TargetZone is not { } zone)
                     continue;
 
-                var isSevere = pathologyProto.IsSevere ||
-                               instanceData.Level > 0 ||
-                               instanceData.StackCount > SharedPathologySystem.OneStack;
-
-                if (isSevere)
+                if (SharedPathologySystem.IsSevere(pathologyProto, instanceData))
                     severeZones.Add(zone);
                 else
                     moderateZones.Add(zone);

@@ -38,8 +38,11 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
         if (DamageMultipliers is not null && SkillTree is not null)
         {
             var experienceSystem = entityManager.System<ExperienceSystem>();
-            _ = experienceSystem.TryGetSkillTreeLevel(user, SkillTree, out var skillProto)
-                && DamageMultipliers.TryGetValue(skillProto.Value, out modifier);
+            if (experienceSystem.TryGetSkillTreeLevel(user, SkillTree, out var skillProto) &&
+                DamageMultipliers.TryGetValue(skillProto.Value, out var skillMod))
+            {
+                modifier = skillMod;
+            }
         }
 
         if (DamageGroup is not null)

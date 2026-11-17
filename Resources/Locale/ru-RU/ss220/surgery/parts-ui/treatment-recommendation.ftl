@@ -24,8 +24,8 @@ treatment-recommendation-body-near-decay-help = Остановить гниен�
 treatment-recommendation-body-decay = Тело пациента сгнило!
 treatment-recommendation-body-decay-help = Восстановить потерянные ткани может химическое средство { reagent-name-opporozidone }.
 
-treatment-recommendation-near-brain-rot = Внимание! Мозг пациент близок к гниению!
-treatment-recommendation-near-brain-rot-help = Чтобы замедлить гниение мозга введите { reagent-name-formalin } пациенту.
+treatment-recommendation-near-brain-rot = Внимание! Мозг пациента близок к гниению!
+treatment-recommendation-near-brain-rot-help = Чтобы замедлить гниение мозга введите { reagent-name-nicergoline } пациенту.
 
 treatment-recommendation-brain-rot = Мозг пациента повреждён!
 treatment-recommendation-brain-rot-help = Лечение с помощью { reagent-name-cerebrin }

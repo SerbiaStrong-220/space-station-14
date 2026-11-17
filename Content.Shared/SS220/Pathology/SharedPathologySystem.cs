@@ -24,8 +24,6 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
     public static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1f);
 
-    private TimeSpan _lastUpdate;
-
     public override void Initialize()
     {
         SubscribeLocalEvent<PathologyHolderComponent, RejuvenateEvent>(OnRejuvenate);
@@ -42,19 +40,19 @@ public abstract partial class SharedPathologySystem : EntitySystem
         if (_net.IsClient || _gameTiming.Paused)
             return;
 
-        if (_lastUpdate == TimeSpan.Zero)
-            _lastUpdate = _gameTiming.CurTime;
-
-        if (_gameTiming.CurTime < _lastUpdate)
-            return;
-
-        _lastUpdate += UpdateInterval;
-
         var query = EntityQueryEnumerator<PathologyHolderComponent>();
         while (query.MoveNext(out var uid, out var holder))
         {
             if (holder.ActivePathologies.Count == 0)
                 continue;
+
+            if (holder.NextUpdate > _gameTiming.CurTime)
+                continue;
+
+            if (holder.NextUpdate == TimeSpan.Zero || _gameTiming.CurTime - holder.NextUpdate > UpdateInterval)
+                holder.NextUpdate = _gameTiming.CurTime + UpdateInterval;
+            else
+                holder.NextUpdate += UpdateInterval;
 
             foreach (var (protoId, data) in holder.ActivePathologies)
             {
@@ -101,12 +99,25 @@ public abstract partial class SharedPathologySystem : EntitySystem
         if (instanceData.Level + 1 >= pathologyPrototype.Definition.Length)
             return false;
 
+        var preservedContext = context;
+        if (preservedContext == null)
+        {
+            foreach (var existingContext in instanceData.PathologyContexts)
+            {
+                if (existingContext != null)
+                {
+                    preservedContext = existingContext;
+                    break;
+                }
+            }
+        }
+
         instanceData.Level++;
         // we drop all previous
         instanceData.StackCount = OneStack;
         instanceData.PathologyContexts.Clear();
 
-        instanceData.PathologyContexts.Add(context);
+        instanceData.PathologyContexts.Add(preservedContext);
         AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[instanceData.Level]);
         DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
 
