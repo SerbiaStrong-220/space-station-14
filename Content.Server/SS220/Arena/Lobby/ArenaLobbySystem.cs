@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Antag.Components;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
 using Content.Server.Station.Systems;
@@ -7,6 +8,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.SS220.Arena;
 using Content.Shared.SS220.Arena.Lobby;
 using Content.Shared.SS220.CCVars;
 using Robust.Server.Player;
@@ -347,6 +349,7 @@ public sealed partial class ArenaLobbySystem : EntitySystem
         var part = EnsureComp<ArenaParticipantComponent>(newBody);
         part.Team = oldPart?.Team ?? "a";
         part.Icon = oldPart?.Icon;
+        EnsureComp<AntagImmuneComponent>(newBody);
         return newBody;
     }
 

@@ -28,16 +28,6 @@
   - Maintenance
   - External
   special:
-  - !type:AddComponentSpecial
-    components:
-    - type: MentorRole
-      teachInfo:
-        CombatTraining:
-          multiplier: 1.5
-          maxBuffSkillLevel: 3
-        PhysicalTraining:
-          multiplier: 1.5
-          maxBuffSkillLevel: 3
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
 

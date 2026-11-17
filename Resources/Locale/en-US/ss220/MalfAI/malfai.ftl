@@ -113,7 +113,6 @@ malfai-doomsday-wave-announcement = Doomsday Device pulse. A lethal field is exp
 
 malfai-machine-override-done = Machine overridden and animated.
 malfai-machine-override-already = This machine is already active.
-malfai-machine-override-limit = Construct limit reached: {$max} animated machines already serve you on this station.
 malfai-emag-done = Device emagged.
 malfai-emag-failed = The signal has no effect.
 malfai-emag-already = Already emagged.
@@ -154,4 +153,5 @@ cmd-malfai_make-already = '{$player}' is already a Malfunctioning AI.
 cmd-malfai_make-disabled = Malfunctioning AI is disabled by server configuration.
 cmd-malfai_make-failed = Could not assign Malfunctioning AI to '{$player}'.
 cmd-malfai_make-done = Assigned Malfunctioning AI to '{$player}'.
-command-description-MalfAiMakeCommand = Assign the Malfunctioning AI role to the attached station AI.
+cmd-malfai_make-desc = Assign the Malfunctioning AI role to the attached station AI.
+cmd-malfai_make-help = Usage: {$command} <username>
