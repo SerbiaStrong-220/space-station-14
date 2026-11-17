@@ -111,3 +111,13 @@
       - id: MobGiantSpiderAngry
       - id: MobGiantFly
 
+- type: entity
+  id: ApcMalfunction
+  parent: BaseGameRule
+  components:
+  - type: StationEvent
+    weight: 4
+    earliestStart: 15
+    minimumPlayers: 1
+    duration: 1
+  - type: PowerMalfunctionRule

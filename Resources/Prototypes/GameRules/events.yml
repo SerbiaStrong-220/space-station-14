@@ -21,6 +21,7 @@
     - id: RandomSentience
     - id: SlimesSpawnHorde
     - id: SolarFlare
+    - id: ApcMalfunction # SS220 randomlawset fix
     - id: SnakeSpawnHorde
     - id: SpiderClownSpawnHorde
     - id: SpiderSpawnHorde
@@ -486,6 +487,7 @@
     duration: 120
     maxDuration: 240
   - type: SolarFlareRule
+    apcFailureChance: 0.1 # SS220 randomlawset fix
     onlyJamHeadsets: true
     affectedChannels:
     - Common

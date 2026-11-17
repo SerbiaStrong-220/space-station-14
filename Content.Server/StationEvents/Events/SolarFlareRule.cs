@@ -4,6 +4,7 @@ using Robust.Shared.Random;
 using Content.Server.Light.EntitySystems;
 using Content.Server.Light.Components;
 using Content.Server.StationEvents.Components;
+using Content.Server.SS220.StationEvents.Events;
 using Content.Shared.Radio.Components;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
@@ -28,6 +29,11 @@ public sealed class SolarFlareRule : StationEventSystem<SolarFlareRuleComponent>
     protected override void Started(EntityUid uid, SolarFlareRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, comp, gameRule, args);
+
+        // SS220 randomlawset fix begin
+        var powerSurge = new SolarFlarePowerSurgeEvent(comp.ApcFailureChance);
+        RaiseLocalEvent(ref powerSurge);
+        // SS220 randomlawset fix end
 
         for (var i = 0; i < comp.ExtraCount; i++)
         {

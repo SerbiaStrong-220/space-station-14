@@ -3,6 +3,12 @@
   abstract: true
   id: CoreSubstation
   components:
+  # SS220 randomlawset fix begin
+  - type: PowerMalfunction
+    repairDelay: 20
+    requiredCables: [Cable, CableMV, CableHV]
+  - type: WiresPanel
+  # SS220 randomlawset fix end
   # Core power behavior
   - type: Battery
     # Very important:
