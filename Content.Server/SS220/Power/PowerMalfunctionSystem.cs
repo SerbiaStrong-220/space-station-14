@@ -68,7 +68,7 @@ public sealed partial class PowerMalfunctionSystem : EntitySystem
         }
 
         DebugTools.Assert(!ent.Comp.PowerDisabled || !battery.Enabled);
-        UpdateApcIndicator(ent);
+        UpdateControllerIndicator(ent);
         _adminLog.Add(LogType.Action, LogImpact.Medium,
             $"{ToPrettyString(ent):target} suffered a power controller fault (power disabled: {disablePower}).");
         return true;
@@ -89,10 +89,9 @@ public sealed partial class PowerMalfunctionSystem : EntitySystem
                 TryComp<PowerMalfunctionComponent>(ent, out var malfunction) && malfunction.Faulty);
     }
 
-    private void UpdateApcIndicator(Entity<PowerMalfunctionComponent> ent)
+    private void UpdateControllerIndicator(Entity<PowerMalfunctionComponent> ent)
     {
-        if (HasComp<ApcComponent>(ent))
-            _appearance.SetData(ent, ApcVisuals.Hacked, ent.Comp.Faulty || HasComp<MalfAiHackedApcComponent>(ent));
+        _appearance.SetData(ent, ApcVisuals.Hacked, ent.Comp.Faulty || HasComp<MalfAiHackedApcComponent>(ent));
     }
 
     private bool NeedsRepair(Entity<PowerMalfunctionComponent> ent)
@@ -192,7 +191,7 @@ public sealed partial class PowerMalfunctionSystem : EntitySystem
         ent.Comp.InsertedCables.Clear();
         ent.Comp.Revision++;
         RemComp<MalfAiHackedApcComponent>(ent);
-        UpdateApcIndicator(ent);
+        UpdateControllerIndicator(ent);
 
         args.Handled = true;
         _popup.PopupEntity(Loc.GetString("power-malfunction-repaired"), ent, args.User);

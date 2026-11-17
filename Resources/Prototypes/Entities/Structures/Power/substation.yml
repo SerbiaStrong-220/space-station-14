@@ -4,6 +4,16 @@
   id: CoreSubstation
   components:
   # SS220 randomlawset fix begin
+  - type: MalfAiHackable
+    hackCooldown: 15
+    rewardMultiplier: 3
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ApcVisuals.Hacked:
+        controller:
+          True: { color: "#87CEEB" }
+          False: { color: "#FFFFFF" }
   - type: PowerMalfunction
     repairDelay: 20
     requiredCables: [Cable, CableMV, CableHV]
@@ -91,6 +101,7 @@
     layers:
     - state: substation
     - state: screen
+      map: [controller] # SS220 randomlawset fix
       shader: unshaded
     - state: full
       shader: unshaded
@@ -195,6 +206,7 @@
     layers:
     - state: substation_wall
     - state: screen_wall
+      map: [controller] # SS220 randomlawset fix
       shader: unshaded
   - type: Battery
     maxCharge: 2000000

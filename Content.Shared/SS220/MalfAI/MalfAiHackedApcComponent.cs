@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.MalfAI;
@@ -8,4 +8,7 @@ public sealed partial class MalfAiHackedApcComponent : Component
 {
     public EntityUid OwnerMind;
     public TimeSpan NextRewardAt;
+
+    [DataField]
+    public int RewardMultiplier = 1;
 }

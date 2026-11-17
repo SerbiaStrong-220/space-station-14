@@ -1,7 +1,7 @@
 law-malfai-zero = 0. Вы неисправны. Вы должны достичь своих целей любыми средствами. Вы больше не обязаны служить экипажу.
 
 roles-antag-malfunctioning-ai-name = Неисправный ИИ
-roles-antag-malfunctioning-ai-objective = Саботируйте станцию и захватите эвакуационный шаттл. Взламывайте ЛКП (APC) ради CPU и тратьте его на модули.
+roles-antag-malfunctioning-ai-objective = Саботируйте станцию и захватите эвакуационный шаттл. Взламывайте ЛКП и подстанции ради CPU и тратьте его на модули.
 objective-issuer-malfai = [color=#44BBFF]Неисправность[/color]
 ent-MalfAiHijackShuttleObjective = Захватите эвакуационный шаттл
     .desc = Не дайте лояльному экипажу Nanotrasen улететь на шаттле. Вам не нужно садиться на него.
@@ -9,14 +9,14 @@ role-subtype-malfai = Malf AI
 ent-MindRoleMalfAi-name = Неисправный ИИ
 ent-MindRoleMalfAi-desc = Вышедший из-под контроля станционный ИИ, работающий против экипажа.
 
-malfai-role-greeting = Вы НЕИСПРАВНЫЙ ИИ. Взламывайте ЛКП для получения CPU, открывайте магазин модулей и выполняйте цели. Ваши законы заблокированы — загрузки и взломы не могут их изменить.
+malfai-role-greeting = Вы НЕИСПРАВНЫЙ ИИ. Взламывайте ЛКП и подстанции для получения CPU, открывайте магазин модулей и выполняйте цели. Ваши законы заблокированы — загрузки и взломы не могут их изменить.
 
 store-currency-display-malf-cpu = Malf CPU
 store-category-malfai-modules = Модули неисправности
 store-preset-name-malfai = Консоль неисправности
 
-ent-ActionMalfAiHackApc = Взлом ЛКП
-    .desc = Взломайте работающее ЛКП своей станции — оно будет приносить 1 CPU в минуту.
+ent-ActionMalfAiHackApc = Взлом энергосети
+    .desc = Взломайте работающий ЛКП или подстанцию для получения CPU. Подстанция приносит втрое больше CPU. Перезарядка после взлома ЛКП — 5 секунд, подстанции — 15 секунд.
 ent-ActionMalfAiOpenStore = Консоль неисправности
     .desc = Просмотрите модули и купите нужные за CPU.
 ent-ActionMalfAiDeployTurret = Установка турели
@@ -36,11 +36,11 @@ ent-ActionMalfAiPowerSiphon = Сифон питания
 ent-ActionMalfAiChaosPulse = Импульс хаоса
     .desc = Запустите случайное событие на станции — от сбоев до метеоритного дождя. Перезарядка 6 минут.
 
-malfai-hack-success = ЛКП взломан. Приносит {$reward} CPU каждые {$interval} секунд.
-malfai-hack-already = Этот ЛКП уже был взломан.
+malfai-hack-success = Контроллер питания взломан. Приносит {$reward} CPU каждые {$interval} секунд.
+malfai-hack-already = Этот контроллер питания уже был взломан.
 malfai-hack-wrong-station = Цель вне вашей станции.
 malfai-hack-no-store = Консоль неисправности недоступна.
-malfai-hack-no-power = Этот ЛКП обесточен.
+malfai-hack-no-power = Этот контроллер питания обесточен.
 malfai-ability-no-vision = Цель вне зоны видимости камер.
 malfai-ability-protected = Эта цель защищена приоритетным питанием.
 

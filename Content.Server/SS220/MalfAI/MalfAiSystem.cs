@@ -23,6 +23,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
@@ -40,6 +41,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.MalfAI;
 
@@ -74,7 +76,7 @@ public sealed partial class MalfAiSystem : EntitySystem
     private readonly HashSet<EntityUid> _deadStores = new();
     private readonly Dictionary<EntityUid, (TimeSpan At, float Size)> _visionExpansionCache = new();
     private TimeSpan _nextApcPayout;
-    private readonly Dictionary<EntityUid, int> _apcPayoutCounts = new();
+    private readonly Dictionary<EntityUid, int> _apcPayoutWeights = new();
     private readonly Dictionary<string, FixedPoint2> _apcPayoutCurrency = new();
 
     private static readonly TimeSpan VisionExpansionTtl = TimeSpan.FromSeconds(1);
@@ -284,7 +286,11 @@ public sealed partial class MalfAiSystem : EntitySystem
         var mindId = ctx.Value.MindId;
         var role = ctx.Value.Role;
 
-        if (TerminatingOrDeleted(target) || !TryComp<ApcComponent>(target, out var apc))
+        if (TerminatingOrDeleted(target) ||
+            !TryComp<MalfAiHackableComponent>(target, out var hackable) ||
+            !TryComp<PowerNetworkBatteryComponent>(target, out var networkBattery) ||
+            !TryComp<PowerMonitoringDeviceComponent>(target, out var monitor) ||
+            (monitor.Group != PowerMonitoringConsoleGroup.APC && monitor.Group != PowerMonitoringConsoleGroup.Substation))
             return;
 
         if (HasComp<HighPriorityAPCComponent>(target))
@@ -293,7 +299,8 @@ public sealed partial class MalfAiSystem : EntitySystem
             return;
         }
 
-        if (!apc.MainBreakerEnabled || _battery.GetCharge(target) <= 0f)
+        if (!networkBattery.Enabled || !networkBattery.CanDischarge || _battery.GetCharge(target) <= 0f ||
+            (TryComp<ApcComponent>(target, out var apc) && !apc.MainBreakerEnabled))
         {
             _popup.PopupEntity(Loc.GetString(HackNoPower), performer, performer);
             return;
@@ -317,12 +324,15 @@ public sealed partial class MalfAiSystem : EntitySystem
             return;
         }
 
-        var reward = FixedPoint2.New(_cfg.GetCVar(CCVars220.MalfAiApcReward));
+        DebugTools.Assert(hackable.RewardMultiplier > 0 && hackable.HackCooldown >= TimeSpan.Zero);
+        var reward = FixedPoint2.New(_cfg.GetCVar(CCVars220.MalfAiApcReward)) * hackable.RewardMultiplier;
         var rewardInterval = GetApcRewardInterval();
         var hackedApc = EnsureComp<MalfAiHackedApcComponent>(target);
         hackedApc.OwnerMind = mindId;
+        hackedApc.RewardMultiplier = hackable.RewardMultiplier;
         var hackedAt = _timing.CurTime;
         hackedApc.NextRewardAt = _nextApcPayout > hackedAt ? _nextApcPayout : hackedAt + rewardInterval;
+        _actions.SetUseDelay(args.Action.Owner, hackable.HackCooldown);
 
         args.Handled = true;
         _popup.PopupEntity(Loc.GetString(HackSuccess,
@@ -349,7 +359,7 @@ public sealed partial class MalfAiSystem : EntitySystem
         _nextApcPayout = now + interval;
 
         var rewardPerApc = FixedPoint2.New(_cfg.GetCVar(CCVars220.MalfAiApcReward));
-        _apcPayoutCounts.Clear();
+        _apcPayoutWeights.Clear();
         var payoutQuery = EntityQueryEnumerator<MalfAiHackedApcComponent>();
         while (payoutQuery.MoveNext(out _, out var hacked))
         {
@@ -363,17 +373,17 @@ public sealed partial class MalfAiSystem : EntitySystem
                 || !TryGetOwnedStore(hacked.OwnerMind, out _))
                 continue;
 
-            _apcPayoutCounts.TryGetValue(hacked.OwnerMind, out var count);
-            _apcPayoutCounts[hacked.OwnerMind] = count + 1;
+            _apcPayoutWeights.TryGetValue(hacked.OwnerMind, out var weight);
+            _apcPayoutWeights[hacked.OwnerMind] = weight + hacked.RewardMultiplier;
         }
 
         _apcPayoutCurrency.Clear();
-        foreach (var (mindId, count) in _apcPayoutCounts)
+        foreach (var (mindId, weight) in _apcPayoutWeights)
         {
             if (!TryGetOwnedStore(mindId, out var store))
                 continue;
 
-            _apcPayoutCurrency[MalfAiConstants.CpuCurrency] = rewardPerApc * count;
+            _apcPayoutCurrency[MalfAiConstants.CpuCurrency] = rewardPerApc * weight;
             _store.TryAddCurrency(_apcPayoutCurrency, store.Value.Owner, store.Value.Comp);
         }
     }

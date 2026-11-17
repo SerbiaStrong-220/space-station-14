@@ -10,6 +10,8 @@ using Content.Server.Silicons.Laws;
 using Content.Server.Station.Systems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions;
+using Content.Shared.Power.EntitySystems;
+using Content.Shared.Power.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
@@ -236,9 +238,11 @@ public sealed class MalfAiMvpTest : GameTest
         });
     }
 
-    [Test]
+    [TestCase("APCBasic", 1, 5)]
+    [TestCase("SubstationBasic", 3, 15)]
+    [TestCase("SubstationWallBasic", 3, 15)]
     [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfApcHackAndStore()
+    public async Task MalfApcHackAndStore(string secondPrototype, int rewardMultiplier, int hackCooldown)
     {
         var pair = Pair;
         var server = pair.Server;
@@ -302,8 +306,10 @@ public sealed class MalfAiMvpTest : GameTest
 
             bool Hack(EntityUid performer, EntityUid target)
             {
+                var actionId = entMan.GetComponent<MalfAiActorComponent>(performer).GrantedActions[0];
+                var action = entMan.GetComponent<ActionComponent>(actionId);
                 var ev = new MalfAiHackApcEvent { Performer = performer, Target = target };
-                entMan.EventBus.RaiseLocalEvent(performer, ev);
+                entMan.System<SharedActionsSystem>().PerformAction(performer, (actionId, action), ev);
                 return ev.Handled;
             }
 
@@ -316,7 +322,9 @@ public sealed class MalfAiMvpTest : GameTest
             Assert.That(StoreBalance(store), Is.EqualTo(startCpu));
 
             apc1 = entMan.SpawnEntity("APCBasic", map.GridCoords);
-            apc2 = entMan.SpawnEntity("APCBasic", map.GridCoords);
+            apc2 = entMan.SpawnEntity(secondPrototype, map.GridCoords);
+            var battery = entMan.GetComponent<BatteryComponent>(apc2);
+            entMan.System<SharedBatterySystem>().SetCharge((apc2, battery), battery.MaxCharge);
 
             Assert.That(Hack(body, apc1), Is.True);
             Assert.That(StoreBalance(store), Is.EqualTo(startCpu));
@@ -327,6 +335,13 @@ public sealed class MalfAiMvpTest : GameTest
 
             Assert.That(Hack(body, apc2), Is.True);
             Assert.That(StoreBalance(store), Is.EqualTo(startCpu));
+            Assert.That(entMan.GetComponent<MalfAiHackedApcComponent>(apc2).RewardMultiplier,
+                Is.EqualTo(rewardMultiplier));
+            var hackActionId = entMan.GetComponent<MalfAiActorComponent>(body).GrantedActions[0];
+            var hackAction = entMan.GetComponent<ActionComponent>(hackActionId);
+            Assert.That(hackAction.UseDelay, Is.EqualTo(TimeSpan.FromSeconds(hackCooldown)));
+            Assert.That(hackAction.Cooldown?.End - hackAction.Cooldown?.Start,
+                Is.EqualTo(TimeSpan.FromSeconds(hackCooldown)));
         });
 
         var tickRate = server.ResolveDependency<IGameTiming>().TickRate;
@@ -348,7 +363,7 @@ public sealed class MalfAiMvpTest : GameTest
                 return ev.Handled;
             }
 
-            Assert.That(StoreBalance(store), Is.EqualTo(startCpu + FixedPoint2.New(reward * 2)));
+            Assert.That(StoreBalance(store), Is.EqualTo(startCpu + FixedPoint2.New(reward * (1 + rewardMultiplier))));
 
             entMan.DeleteEntity(apc2);
             Assert.That(Hack(body, apc2), Is.False);
