@@ -1,0 +1,77 @@
+name: "Labels: PR size"
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr-size-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  label:
+    if: github.actor != 'IanComradeBot'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set PR size label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pullRequest } = await github.rest.pulls.get({
+              ...context.repo,
+              pull_number: context.issue.number,
+            });
+            const sizeLabels = ['V: Small', 'V: Medium', 'V: Large', 'V: Huge'];
+            const changedLines = pullRequest.additions + pullRequest.deletions;
+
+            const sizeLabel =
+              changedLines <= 100 ? 'V: Small' :
+              changedLines <= 1000 ? 'V: Medium' :
+              changedLines <= 10000 ? 'V: Large' :
+              'Huge';
+
+            const labelParams = { ...context.repo, name: sizeLabel };
+            try {
+              await github.rest.issues.getLabel(labelParams);
+            } catch (error) {
+              if (error.status !== 404) {
+                throw error;
+              }
+
+              try {
+                await github.rest.issues.createLabel({
+                  ...labelParams,
+                  color: 'ededed',
+                });
+              } catch (error) {
+                // Another PR may have created the same label in the meantime.
+                if (error.status !== 422) {
+                  throw error;
+                }
+                await github.rest.issues.getLabel(labelParams);
+              }
+            }
+
+            for (const label of pullRequest.labels) {
+              if (sizeLabels.includes(label.name) && label.name !== sizeLabel) {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  name: label.name,
+                });
+              }
+            }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: [sizeLabel],
+            });
+
+            console.log(`PR has ${changedLines} changed lines; applied "${sizeLabel}" label.`);

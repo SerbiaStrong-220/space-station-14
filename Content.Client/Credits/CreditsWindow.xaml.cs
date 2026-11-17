@@ -49,6 +49,7 @@ public sealed partial class CreditsWindow : DefaultWindow
         RobustXamlLoader.Load(this);
 
         TabContainer.SetTabTitle(Ss14ContributorsTab, Loc.GetString("credits-window-ss14contributorslist-tab"));
+        TabContainer.SetTabTitle(Ss220ContributorsTab, Loc.GetString("credits-window-ss220contributorslist-tab")); // SS220 add contributors
         TabContainer.SetTabTitle(PatronsTab, Loc.GetString("credits-window-patrons-tab"));
         TabContainer.SetTabTitle(LicensesTab, Loc.GetString("credits-window-licenses-tab"));
         TabContainer.SetTabTitle(AttributionsTab, Loc.GetString("credits-window-attributions-tab"));
@@ -70,6 +71,10 @@ public sealed partial class CreditsWindow : DefaultWindow
     {
         if (tab == Ss14ContributorsTab.GetPositionInParent())
             PopulateContributors(Ss14ContributorsContainer);
+        // SS220 add contributors begin
+        else if (tab == Ss220ContributorsTab.GetPositionInParent())
+            PopulateContributors(Ss220ContributorsContainer, ss220: true);
+        // SS220 add contributors end
         else if (tab == PatronsTab.GetPositionInParent())
             PopulatePatrons(PatronsContainer);
         else if (tab == LicensesTab.GetPositionInParent())
@@ -320,7 +325,7 @@ public sealed partial class CreditsWindow : DefaultWindow
             .Select(m => new PatronEntry(m["Name"].AsString(), m["Tier"].AsString()));
     }
 
-    private void PopulateContributors(BoxContainer ss14ContributorsContainer)
+    private void PopulateContributors(BoxContainer ss14ContributorsContainer, bool ss220 = false) // SS220 add contributors
     {
         ss14ContributorsContainer.RemoveAllChildren();
 
@@ -359,15 +364,26 @@ public sealed partial class CreditsWindow : DefaultWindow
             ss14ContributorsContainer.AddChild(label);
         }
 
-        AddSection(Loc.GetString("credits-window-contributors-section-title"), "GitHub.txt");
-        AddSection(Loc.GetString("credits-window-codebases-section-title"), "SpaceStation13.txt");
-        AddSection(Loc.GetString("credits-window-tts-title"), "TTS.txt"); // Corvax-TTS
-        AddSection(Loc.GetString("credits-window-original-remake-team-section-title"), "OriginalRemake.txt");
-        AddSection(Loc.GetString("credits-window-immortals-title"), "Immortals.txt", true);
-        AddSection(Loc.GetString("credits-window-special-thanks-section-title"), "SpecialThanks.txt", true);
+        // SS220 contributors begin
+        // Contributors have their own list; keep the upstream credits unchanged.
+        if (ss220)
+        {
+            AddSection(Loc.GetString("credits-window-ss220contributors-section-title"), "SS220GitHub.txt");
+        }
+        else
+        {
+            AddSection(Loc.GetString("credits-window-contributors-section-title"), "GitHub.txt");
+            AddSection(Loc.GetString("credits-window-codebases-section-title"), "SpaceStation13.txt");
+            AddSection(Loc.GetString("credits-window-tts-title"), "TTS.txt"); // Corvax-TTS
+            AddSection(Loc.GetString("credits-window-original-remake-team-section-title"), "OriginalRemake.txt");
+            AddSection(Loc.GetString("credits-window-immortals-title"), "Immortals.txt", true);
+            AddSection(Loc.GetString("credits-window-special-thanks-section-title"), "SpecialThanks.txt", true);
+        }
 
-        var linkGithub = _cfg.GetCVar(CCVars.InfoLinksGithub);
-
+        var linkGithub = ss220
+            ? "https://github.com/SerbiaStrong-220/space-station-14"
+            : _cfg.GetCVar(CCVars.InfoLinksGithub);
+        // SS220 add contributors end
         contributeButton.OnPressed += _ =>
             IoCManager.Resolve<IUriOpener>().OpenUri(linkGithub);
 
