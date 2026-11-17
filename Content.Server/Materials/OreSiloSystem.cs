@@ -19,6 +19,7 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
     [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly DeviceListSystem _deviceList = default!; // SS220 Add silo linking in mapping
     [Dependency] private readonly MaterialStorageSystem _materialStorage = default!; // ss220 ore silo tweak
+    [Dependency] private SharedTransformSystem _xform = default!; //SS220-FIX-Silos
 
     private const float OreSiloPreloadRangeSquared = 225f; // ~1 screen
 
@@ -48,9 +49,19 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
         if (!TryComp<MaterialStorageComponent>(entity, out var storageComp) || !storageComp.DropOnTerminating)
             return;
 
+        var xform = Transform(entity);
+        if (TerminatingOrDeleted(xform.ParentUid))
+            return;
+
+        if (xform.GridUid is { } gridUid && TerminatingOrDeleted(gridUid))
+            return;
+
+        if (xform.MapUid is { } mapUid && TerminatingOrDeleted(mapUid))
+            return;
+
         foreach (var (material, amount) in storageComp.Storage)
         {
-            _materialStorage.SpawnMultipleFromMaterial(amount, material, Transform(entity).Coordinates);
+            _materialStorage.SpawnMultipleFromMaterial(amount, material, xform.Coordinates);
         }
     }
     // ss220 ore silo tweak end
@@ -139,7 +150,7 @@ public sealed class OreSiloSystem : SharedOreSiloSystem
                 if (actorXform.GridUid != clientXform.GridUid)
                     continue;
 
-                if ((actorXform.LocalPosition - clientXform.LocalPosition).LengthSquared() <= OreSiloPreloadRangeSquared)
+                if ((_xform.GetWorldPosition(actorXform) - _xform.GetWorldPosition(clientXform)).LengthSquared() <= OreSiloPreloadRangeSquared) //SS220-FIX-Silos
                 {
                     _silosToAdd.Add(clientComp.Silo.Value);
                 }

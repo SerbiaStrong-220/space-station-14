@@ -458,7 +458,7 @@
 - type: entity
   name: Mousi
   id: MobMousi
-  parent: [ SimpleMobBase, BaseMobRuminant ]
+  parent: [ BaseMobRuminant, SimpleMobBase ]
   description: Peep?...
   components:
   - type: NightVision

@@ -1,0 +1,33 @@
+<messenger:MessengerUiFragment
+    xmlns:messenger="clr-namespace:Content.Client.SS220.Cartridges.Messenger"
+    xmlns="https://spacestation14.io" Margin="1 0 2 0"
+    Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+    <PanelContainer StyleClasses="BackgroundDark"></PanelContainer>
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 2 0 2">
+            <Button Name="BackButton" Visible="False" Text="{Loc 'messenger-ui-back-button'}"/>
+            <Label Name="ChatNameLabel" Visible="False" Align="Center" ClipText="True" HorizontalExpand="True"/>
+            <Control Name="HeaderSpacer" HorizontalExpand="True"/>
+            <Button Name="MuteButton" Visible="False" ToggleMode="True" Text="{Loc 'messenger-ui-mute-button'}" ToolTip="{Loc 'messenger-ui-mute-tooltip'}"/>
+            <Button Name="RefreshButton" Text="{Loc 'messenger-ui-refresh-button'}" ToolTip="{Loc 'messenger-ui-refresh-tooltip'}"/>
+        </BoxContainer>
+        <LineEdit Name="ChatsSearch" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'messenger-ui-search-line'}"/>
+        <CheckBox Name="NameLockBox" Text="{Loc 'messenger-ui-name-lock'}" ToolTip="{Loc 'messenger-ui-name-lock-tooltip'}"/>
+        <ScrollContainer Name="ChatsScroll" HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" Name="ChatsContainer" HorizontalExpand="True" VerticalExpand="True"/>
+        </ScrollContainer>
+        <PanelContainer Name="EmojiPanel" Visible="False" StyleClasses="Inset" HorizontalExpand="True">
+            <messenger:MessengerEmojiPicker Name="EmojiGrid" Margin="2"/>
+        </PanelContainer>
+        <BoxContainer Name="ReplyBar" Orientation="Horizontal" HorizontalExpand="True" Visible="False">
+            <RichTextLabel Name="ReplyLabel" HorizontalExpand="True" Margin="4 0 0 0"/>
+            <Button Name="CancelReplyButton" Text="{Loc 'messenger-ui-cancel-reply-button'}"/>
+        </BoxContainer>
+        <BoxContainer Name="InputRow" Orientation="Horizontal" HorizontalExpand="True" Visible="False">
+            <Button Name="EmojiButton" ToggleMode="True" ToolTip="{Loc 'messenger-ui-emoji-tooltip'}"/>
+            <LineEdit Name="MessageInput" HorizontalExpand="True" SetHeight="32" PlaceHolder="{Loc 'messenger-ui-message-placeholder'}"/>
+            <Button Name="SendButton" Text="{Loc 'messenger-ui-send-message-button'}"/>
+        </BoxContainer>
+        <Label Visible="False" Name="ErrorLabel"/>
+    </BoxContainer>
+</messenger:MessengerUiFragment>

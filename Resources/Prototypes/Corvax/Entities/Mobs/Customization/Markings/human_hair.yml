@@ -37,8 +37,10 @@
   id: HumanHairAstolfo
   bodyPart: Hair
   sprites:
-    - sprite: Corvax/Mobs/Customization/human_hair.rsi
-      state: astolfo
+#SS220 new haircut START
+    - sprite: SS220/Mobs/Customization/human_hair.rsi
+      state: astolfo2
+#SS220 new haircut END
 
 - type: marking
   id: HumanHairBaum
@@ -114,8 +116,10 @@
   id: HumanHairDave
   bodyPart: Hair
   sprites:
-    - sprite: Corvax/Mobs/Customization/human_hair.rsi
-      state: dave
+#SS220 new haircut START
+    - sprite: SS220/Mobs/Customization/human_hair.rsi
+      state: dave2
+#SS220 new haircut END
 
 - type: marking
   id: HumanHairDiagonalBangs
