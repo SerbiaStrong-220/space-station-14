@@ -53,6 +53,12 @@ public sealed partial class TraitPrototype : IPrototype
     [DataField(serverOnly: true)]
     public List<JobSpecial> Specials { get; private set; } = new();
 
+    //SS220-TraitOptions begin
+    /// <summary>Optional variants shown as a dropdown in the profile editor first entry is default.</summary>
+    [DataField]
+    public Dictionary<string, LocId>? Options { get; private set; }
+    //SS220-TraitOptions end
+
     /// <summary>
     /// Gear that is given to the player, when they pick this trait.
     /// </summary>
