@@ -74,24 +74,24 @@ public sealed partial class AudioTab : Control
 
         // SS220-TTS-begin
         Control.AddOptionPercentSlider(
-            CCVars220.TtsVolume,
+            CCCVars.TTSVolume,
             SliderVolumeTts,
             scale: ContentAudioSystem.TTSMultiplier);
 
         Control.AddOptionPercentSlider(
-            CCVars220.TtsRadioVolume,
+            CCCVars.TTSRadioVolume,
             SliderVolumeTtsRadio,
             scale: ContentAudioSystem.TTSRadioMultiplier);
 
         Control.AddOptionPercentSlider(
-            CCVars220.TtsAnnounceVolume,
+            CCCVars.TTSAnnounceVolume,
             SliderVolumeTtsAnnounce,
             scale: ContentAudioSystem.TTSAnnounceMultiplier);
 
-        Control.AddOptionCheckBox(CCVars220.RecieveTts, ReceiveTTSCheckbox);
-        Control.AddOptionCheckBox(CCVars220.TtsPlayDifferentRadioTogether, PlayDifferentRadioTogetherCheckbox);
-        Control.AddOptionCheckBox(CCVars220.TtsPlayDifferentTalkingTogether, PlayDifferentTalkingTogetherCheckbox);
-        Control.AddOptionCheckBox(CCVars220.TtsPlayDifferentRadioSourcesTogether, PlayDifferentRadioSourcesTogetherCheckbox);
+        Control.AddOptionCheckBox(CCVars220.RecieveTTS, ReceiveTTSCheckbox);
+        Control.AddOptionCheckBox(CCVars220.PlayDifferentRadioTogether, PlayDifferentRadioTogetherCheckbox);
+        Control.AddOptionCheckBox(CCVars220.PlayDifferentTalkingTogether, PlayDifferentTalkingTogetherCheckbox);
+        Control.AddOptionCheckBox(CCVars220.PlayDifferentRadioSourcesTogether, PlayDifferentRadioSourcesTogetherCheckbox);
         // SS220-TTS-end
 
         Control.Initialize();

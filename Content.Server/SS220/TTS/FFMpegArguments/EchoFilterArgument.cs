@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Content.Server.SS220.TTS.FFMPegArguments;
 
 public sealed class EchoFilterArgument : IAudioFilterArgument
 {
-    private readonly Dictionary<string, string> _arguments = [];
+    private readonly Dictionary<string, string> _arguments = new Dictionary<string, string>();
 
     public EchoFilterArgument(
         double inGain = 1d,

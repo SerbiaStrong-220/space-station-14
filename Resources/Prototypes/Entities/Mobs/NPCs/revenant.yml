@@ -31,10 +31,8 @@
     damageContainer: ManifestedSpirit
     damageModifierSet: ManifestedSpirit
   - type: NoSlip
-  # SS220 Tts begin
-  - type: Tts # SS220 Tts
-    randomVoicePreferences: Demons
-  # SS220 Tts end
+  - type: TTS # Corvax-TTS
+    randomVoicesList: Demons
   - type: Eye
     drawFov: false
     visMask:

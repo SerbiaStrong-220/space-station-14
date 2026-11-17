@@ -1,23 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.DialogWindowDescUI;
-using Content.Client.SS220.DialogWindowTtsVoicePreferencesUI;
+using Content.Client.SS220.DialogWindowProtoIdUI;
+using Content.Client.SS220.TTS;
 using Content.Shared.Administration;
 using Content.Shared.Humanoid;
-using Content.Shared.SS220.TTS.Components;
-using Content.Shared.SS220.TTS.Requirements;
-using Robust.Client.Player;
+using Content.Shared.SS220.TTS;
 
 namespace Content.Client.SS220.QuickDialog;
 
-public sealed partial class QuickDialogSystem : EntitySystem
+public sealed class QuickDialogSystem : EntitySystem
 {
-    [Dependency] private IPlayerManager _player = default!;
-
     /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeNetworkEvent<QuickDialogDescOpenEvent>(OpenDialog);
-        SubscribeNetworkEvent<QuickDialogTtsVoicePreferencesOpenEvent>(OpenDialogVoicePreferences);
+        SubscribeNetworkEvent<QuickDialogTTSProtoIdOpenEvent>(OpenDialogProtoId);
     }
 
     private void OpenDialog(QuickDialogDescOpenEvent ev)
@@ -35,12 +32,12 @@ public sealed partial class QuickDialogSystem : EntitySystem
         window.OnCancelled += () =>
         {
             RaiseNetworkEvent(new QuickDialogResponseEvent(ev.DialogId,
-                [],
+                new(),
                 QuickDialogButtonFlag.CancelButton));
         };
     }
 
-    private void OpenDialogVoicePreferences(QuickDialogTtsVoicePreferencesOpenEvent ev)
+    private void OpenDialogProtoId(QuickDialogTTSProtoIdOpenEvent ev)
     {
         var targetUid = GetEntity(ev.Target);
 
@@ -52,49 +49,39 @@ public sealed partial class QuickDialogSystem : EntitySystem
             return;
         }
 
-        MakeDialogTtsVoicePreferences(uid, ev, ok);
+        MakeDialogTTSProtoId(uid, ev, ok);
     }
 
-    private void CancelDialog(QuickDialogTtsVoicePreferencesOpenEvent ev)
+    private void CancelDialog(QuickDialogTTSProtoIdOpenEvent ev)
     {
         RaiseNetworkEvent(new QuickDialogResponseEvent(ev.DialogId,
-            [],
+            new(),
             QuickDialogButtonFlag.CancelButton));
     }
 
-    private void MakeDialogTtsVoicePreferences(EntityUid target, QuickDialogTtsVoicePreferencesOpenEvent ev, bool ok)
+    private void MakeDialogTTSProtoId(EntityUid target, QuickDialogTTSProtoIdOpenEvent ev, bool ok)
     {
-        if (ev.Prompts.Count != 1)
-        {
-            CancelDialog(ev);
-            return;
-        }
-
         if (!TryComp<HumanoidProfileComponent>(target, out var humanoidProfile))
         {
             CancelDialog(ev);
             return;
         }
 
-        TryComp<TtsComponent>(target, out var ttsComp);
+        var currentId = CompOrNull<TTSComponent>(target)?.VoicePrototypeId;
 
-        var voiceCheckData = new TtsVoiceRequirementCheckData()
+        var window = new DialogWindowTTSProtoId(ev.Title, ev.Description, ev.Prompts,
+        prototype =>
         {
-            Session = _player.LocalSession,
-            Entity = target
-        };
+            if (prototype is not TTSVoicePrototype voicePrototype)
+                return false;
 
-        var window = new DialogWindowTtsVoicePreferences(ev.Title,
-            ev.Description,
-            ev.Prompts[0],
-            voiceCheckData: voiceCheckData,
-            preferences: ttsComp?.VoicePreferencesRO.Clone(),
-            ok: ok);
+            return voicePrototype.RoundStart && (voicePrototype.Sex == Sex.Unsexed || humanoidProfile.Sex == Sex.Unsexed || voicePrototype.Sex == humanoidProfile.Sex);
+        }, ok: ok, currentVoiceId: currentId);
 
-        window.OnConfirmed += (promptFieldId, newPreferences) =>
+        window.OnConfirmed += responses =>
         {
             RaiseNetworkEvent(new QuickDialogResponseEvent(ev.DialogId,
-                new() { [promptFieldId] = newPreferences.ToString() },
+                responses,
                 QuickDialogButtonFlag.OkButton));
         };
 

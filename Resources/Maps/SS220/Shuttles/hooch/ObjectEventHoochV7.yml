@@ -3018,6 +3018,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -6.5,-9.5
       parent: 1
+    - type: TTS
+      voice: glados
   - uid: 173
     components:
     - type: Transform
@@ -3029,11 +3031,15 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 25.5,-1.5
       parent: 1
+    - type: TTS
+      voice: glados
   - uid: 175
     components:
     - type: Transform
       pos: 58.5,8.5
       parent: 1
+    - type: TTS
+      voice: glados
   - uid: 176
     components:
     - type: Transform
@@ -3064,16 +3070,22 @@ entities:
     - type: Transform
       pos: -13.5,20.5
       parent: 1
+    - type: TTS
+      voice: glados
   - uid: 3162
     components:
     - type: Transform
       pos: 50.5,-6.5
       parent: 1
+    - type: TTS
+      voice: glados
   - uid: 3223
     components:
     - type: Transform
       pos: 54.5,-56.5
       parent: 1
+    - type: TTS
+      voice: glados
   - uid: 3628
     components:
     - type: Transform

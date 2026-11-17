@@ -34,17 +34,18 @@ public sealed partial class QuickDialogSystem
     }
 
     [PublicAPI]
-    public void OpenDialogForTtsVoicePrefereces(ICommonSession session, string title, string description, string prompt, Action<string> okAction,
+    public void OpenDialogForTTSPrototypeId(ICommonSession session, string title, string description, string prompt, Action<string> okAction,
         EntityUid target, Action? cancelAction = null)
     {
-        OpenDialogInternalForTtsVoicePreferences(
+        OpenDialogInternalForTTSPrototypeId(
             session,
             title,
             description,
             target,
-            [
+            new List<QuickDialogEntry>
+            {
                 new("1", TypeToEntryType(typeof(string)), prompt)
-            ],
+            },
             QuickDialogButtonFlag.OkButton | QuickDialogButtonFlag.CancelButton,
             (ev =>
             {

@@ -89,4 +89,4 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-  - type: Tts # SS220 Tts
+  - type: TTS # Corvax-TTS

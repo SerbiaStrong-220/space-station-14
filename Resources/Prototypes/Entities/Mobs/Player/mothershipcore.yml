@@ -250,10 +250,10 @@
   - type: ShowElectrocutionHUD
   - type: PowerMonitoringCableNetworks
   - type: RadarConsole
-  #SS220-AddMotherShip begin
-  - type: Tts
-    randomVoicePreferences: Borg
-  #SS220-AddMotherShip end
+  #SS220-AddMotherShipTTS begin
+  - type: TTS
+    voice: glados
+  #SS220-AddMotherShipTTS end
 
 - type: entity
   parent: BaseAGhostAction

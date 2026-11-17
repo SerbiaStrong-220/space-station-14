@@ -1,0 +1,1917 @@
+- type: ttsVoice
+  name: Папич
+  description: Голос популярного стримера Папича
+  sex: Male
+  speaker: papich
+  id: papich
+
+- type: ttsVoice
+  name: Бэбэй
+  description: Голос популярного стримера Бэбэя
+  sex: Male
+  speaker: bebey
+  id: bebey
+
+- type: ttsVoice
+  name: Дмитрий Пучков
+  description: ""
+  sex: Male
+  speaker: puchkow
+  id: puchkow
+
+- type: ttsVoice
+  name: Мориарти
+  description: ""
+  sex: Male
+  speaker: moriarti
+  id: moriarti
+
+- type: ttsVoice
+  name: Шарлотта
+  description: Голос виртуального ютубера Charlotte Ch
+  sex: Female
+  speaker: charlotte
+  id: charlotte
+
+- type: ttsVoice
+  name: Планя
+  description: Голос виртуального ютубера Planya Ch
+  sex: Female
+  speaker: planya
+  id: planya
+
+- type: ttsVoice
+  name: Мана
+  description: Голос виртуального ютубера Mana Renewal
+  sex: Female
+  speaker: mana
+  id: mana
+
+- type: ttsVoice
+  name: Амина
+  description: Голос виртуального ютубера St. Amina Renewal
+  sex: Female
+  speaker: amina
+  id: amina
+
+- type: ttsVoice
+  name: Джо Байден
+  description: Голос американского президента Джо Байдена
+  sex: Male
+  speaker: biden
+  id: biden
+
+- type: ttsVoice
+  name: Барак Обама
+  description: Голос американского президента Барака Обамы
+  sex: Male
+  speaker: obama
+  id: obama
+
+- type: ttsVoice
+  name: Дональд Трамп
+  description: Голос американского президента Дональда Трампа
+  sex: Male
+  speaker: trump
+  id: trump
+
+- type: ttsVoice
+  name: Добакин
+  description: Голос начинающего диктора Добакина
+  sex: Male
+  speaker: dbkn
+  id: dbkn
+
+- type: ttsVoice
+  name: Хреноид
+  description: Голос начинающего диктора Хреноида
+  sex: Male
+  speaker: xrenoid
+  id: xrenoid
+
+- type: ttsVoice
+  name: PlayBoyzTV
+  description: Голос канала PlayBoyzTV
+  sex: Male
+  speaker: playboyztv
+  id: playboyztv
+
+- type: ttsVoice
+  name: Уоллес Брин
+  description: Голос персонажа Уоллес Брин из игры Half-Life 2
+  sex: Male
+  speaker: briman
+  id: briman
+
+- type: ttsVoice
+  name: Отец Григорий
+  description: Голос персонажа Отец Григорий из игры Half-Life 2
+  sex: Male
+  speaker: father_grigori
+  id: father_grigori
+
+- type: ttsVoice
+  name: Доктор Кляйнер
+  description: Голос персонажа Доктор Кляйнер из игры Half-Life 2
+  sex: Male
+  speaker: kleiner
+  id: kleiner
+
+- type: ttsVoice
+  name: Джудит Моссман
+  description: Голос персонажа Джудит Моссман из игры Half-Life 2
+  sex: Female
+  speaker: mossman
+  id: mossman
+
+- type: ttsVoice
+  name: Илай Вэнс
+  description: Голос персонажа Илай Вэнс из игры Half-Life 2
+  sex: Male
+  speaker: vance
+  id: vance
+
+- type: ttsVoice
+  name: Аликс Вэнс
+  description: Голос персонажа Аликс Вэнс из игры Half-Life 2
+  sex: Female
+  speaker: alyx
+  id: alyx
+
+- type: ttsVoice
+  name: G-Man
+  description: Голос персонажа G-Man из игры Half-Life 2
+  sex: Male
+  speaker: gman
+  id: gman
+
+- type: ttsVoice
+  name: Барни Калхун
+  description: Голос персонажа Барни Калхун из игры Half-Life 2
+  sex: Male
+  speaker: barni
+  id: barni
+
+- type: ttsVoice
+  name: Неко-Арк
+  description: Голос персонажа Неко-Арк из Fate
+  sex: Female
+  speaker: neco
+  id: neco
+
+- type: ttsVoice
+  name: Неко-Арк 2
+  description: Голос персонажа Неко-Арк из Fate
+  sex: Female
+  speaker: neco_arc_2
+  id: neco_arc_2
+
+- type: ttsVoice
+  name: Злая Неко-Арк
+  description: Злой голос персонажа Неко-Арк из Fate
+  sex: Female
+  speaker: angry_neco_arc
+  id: angry_neco_arc
+
+- type: ttsVoice
+  name: Сквидвард
+  description: Голос персонажа Сквидвард из мультфильма Губка Боб
+  sex: Male
+  speaker: squidward
+  id: squidward
+
+- type: ttsVoice
+  name: SentryBot
+  description: Голос персонажа SentryBot из Fallout 3
+  sex: Male
+  speaker: sentrybot
+  id: sentrybot
+
+- type: ttsVoice
+  name: Мойра Браун
+  description: Голос персонажа Мойра Браун из Fallout 3
+  sex: Female
+  speaker: moira_brown
+  id: moira_brown
+
+- type: ttsVoice
+  name: Робер МакКриди
+  description: Голос персонажа Робер МакКриди из Fallout 3
+  sex: Male
+  speaker: robert_maccready
+  id: robert_maccready
+
+- type: ttsVoice
+  name: Тридогнайт
+  description: Голос персонажа Тридогнайт из Fallout 3
+  sex: Male
+  speaker: threedog
+  id: threedog
+
+- type: ttsVoice
+  name: Тридогнайт Радио
+  description: Голос персонажа Тридогнайт версия по радио из Fallout 3
+  sex: Male
+  speaker: threedog_radio
+  id: threedog_radio
+
+- type: ttsVoice
+  name: Мистер Помощник
+  description: Голос персонажа Мистер Помощник из Fallout 3
+  sex: Male
+  speaker: mister_handy_fl3
+  id: mister_handy_fl3
+
+- type: ttsVoice
+  name: Мистер Храбрец
+  description: Голос персонажа Мистер Храбрец из Fallout 3
+  sex: Male
+  speaker: mister_gutsy_fl3
+  id: mister_gutsy_fl3
+
+- type: ttsVoice
+  name: Джерико
+  description: Голос персонажа Джерико из Fallout 3
+  sex: Male
+  speaker: jericho_fl3
+  id: jericho_fl3
+
+- type: ttsVoice
+  name: Старейшина Лайонс
+  description: Голос персонажа Старейшина Лайонс из Fallout 3
+  sex: Male
+  speaker: elder_lyons_fl3
+  id: elder_lyons_fl3
+
+- type: ttsVoice
+  name: Сара Лайонс
+  description: Голос персонажа Сара Лайонс из Fallout 3
+  sex: Female
+  speaker: sarah_lyons_fl3
+  id: sarah_lyons_fl3
+
+- type: ttsVoice
+  name: Колин Мориарти
+  description: Голос персонажа Колин Мориарти из Fallout 3
+  sex: Male
+  speaker: colin_moriarty_fl3
+  id: colin_moriarty_fl3
+
+- type: ttsVoice
+  name: Джон Генри Эдем
+  description: Голос персонажа Джон Генри Эдем из Fallout 3
+  sex: Male
+  speaker: john_henry_eden_fl3
+  id: john_henry_eden_fl3
+
+- type: ttsVoice
+  name: Супер-Мутант
+  description: Голос персонажа Супер-Мутант из Fallout 3
+  sex: Male
+  speaker: super_mutant_fl3
+  id: super_mutant_fl3
+
+- type: ttsVoice
+  name: Полина Морозова
+  description: Голос персонажа Полина Морозова из игры Tiny Bunny
+  sex: Female
+  speaker: polina
+  id: polina
+
+- type: ttsVoice
+  name: Рома Пятифанов
+  description: Голос персонажа Рома Пятифанов из игры Tiny Bunny
+  sex: Unsexed
+  speaker: romka
+  id: romka
+
+- type: ttsVoice
+  name: Борис Петров
+  description: Голос персонажа Борис Петров из игры Tiny Bunny
+  sex: Male
+  speaker: boris_petrov_father_tb
+  id: boris_petrov_father_tb
+
+- type: ttsVoice
+  name: Карина Петрова
+  description: Голос персонажа Карина Петрова из игры Tiny Bunny
+  sex: Female
+  speaker: karina_petrova_tb
+  id: karina_petrova_tb
+
+- type: ttsVoice
+  name: Катя Смирнова
+  description: Голос персонажа Катя Смирнова из игры Tiny Bunny
+  sex: Female
+  speaker: kate_smirnova_tb
+  id: kate_smirnova_tb
+
+- type: ttsVoice
+  name: Семён Бабурин
+  description: Голос персонажа Семён Бабурин из игры Tiny Bunny
+  sex: Male
+  speaker: semen_baburin_tb
+  id: semen_baburin_tb
+
+- type: ttsVoice
+  name: Лейтенант Тихонов
+  description: Голос персонажа Лейтенант Тихонов из игры Tiny Bunny
+  sex: Male
+  speaker: tihonov_tb
+  id: tihonov_tb
+
+- type: ttsVoice
+  name: Цицерон
+  description: Голос персонажа Цицерон из игры TES 5 Skyrim
+  sex: Male
+  speaker: cicero
+  id: cicero
+
+- type: ttsVoice
+  name: Шеогорат
+  description: Голос персонажа Шеогорат из игры TES 5 Skyrim
+  sex: Male
+  speaker: sheogorath
+  id: sheogorath
+
+- type: ttsVoice
+  name: Кодлак Белая Грива
+  description: Голос персонажа Кодлак Белая Грива из игры TES 5 Skyrim
+  sex: Male
+  speaker: kodlakwhitemane
+  id: kodlakwhitemane
+
+- type: ttsVoice
+  name: Каджит
+  description: Голос персонажа Каджит из игры TES 5 Skyrim
+  sex: Male
+  speaker: khajiit
+  id: khajiit
+
+- type: ttsVoice
+  name: Эленвен
+  description: Голос персонажа Эленвен из игры TES 5 Skyrim
+  sex: Female
+  speaker: elenwen
+  id: elenwen
+
+- type: ttsVoice
+  name: Тит Мид II
+  description: Голос персонажа Тит Мид II из игры TES 5 Skyrim
+  sex: Male
+  speaker: emperor
+  id: emperor
+
+- type: ttsVoice
+  name: Стражник
+  description: Голос Стражников из игры TES 5 Skyrim
+  sex: Male
+  speaker: guard
+  id: guard
+
+- type: ttsVoice
+  name: Ворожея
+  description: Голос Ворожей из игры TES 5 Skyrim
+  sex: Male
+  speaker: hagraven
+  id: hagraven
+
+- type: ttsVoice
+  name: Хермеус Мора
+  description: Голос персонажа Хермеус Мора из игры TES 5 Skyrim
+  sex: Male
+  speaker: hermaeus_mora
+  id: hermaeus_mora
+
+- type: ttsVoice
+  name: Норд
+  description: Голос Нордов из игры TES 5 Skyrim
+  sex: Male
+  speaker: nord
+  id: nord
+
+- type: ttsVoice
+  name: Ульфрик Буревестник
+  description: Голос персонажа Ульфрик Буревестник из игры TES 5 Skyrim
+  sex: Male
+  speaker: ulfric
+  id: ulfric
+
+- type: ttsVoice
+  name: Астрид
+  description: Голос персонажа Астрид из игры TES 5 Skyrim
+  sex: Female
+  speaker: astrid
+  id: astrid
+
+- type: ttsVoice
+  name: Мавен Чёрный Вереск
+  description: Голос персонажа Мавен Чёрный Вереск из игры TES 5 Skyrim
+  sex: Female
+  speaker: maven
+  id: maven
+
+- type: ttsVoice
+  name: Назир
+  description: Голос персонажа Назир из игры TES 5 Skyrim
+  sex: Male
+  speaker: nazir
+  id: nazir
+
+- type: ttsVoice
+  name: Женщина командир
+  description: Голос женских персонажей командиров из игры TES 5 Skyrim
+  sex: Female
+  speaker: female_commander
+  id: female_commander
+
+- type: ttsVoice
+  name: Лорд Харкон
+  description: Голос персонажа Лорд Харкон из игры TES 5 Skyrim
+  sex: Male
+  speaker: lord_harkon
+  id: lord_harkon
+
+- type: ttsVoice
+  name: Серана
+  description: Голос персонажа Серана из игры TES 5 Skyrim
+  sex: Female
+  speaker: serana
+  id: serana
+
+- type: ttsVoice
+  name: GLaDOS
+  description: Голос персонажа GLaDOS из игры Portal 2
+  sex: Female
+  speaker: glados
+  id: glados
+
+- type: ttsVoice
+  name: Модуль Приключений
+  description: Голос персонажа Модуль Приключений из игры Portal 2
+  sex: Male
+  speaker: adventure_core
+  id: adventure_core
+
+- type: ttsVoice
+  name: Модуль Фактов
+  description: Голос персонажа Модуль Фактов из игры Portal 2
+  sex: Male
+  speaker: fact_core
+  id: fact_core
+
+- type: ttsVoice
+  name: Модуль Космоса
+  description: Голос персонажа Модуль Космоса из игры Portal 2
+  sex: Male
+  speaker: space_core
+  id: space_core
+
+- type: ttsVoice
+  name: Турель
+  description: Голос персонажа Турель из игры Portal 2
+  sex: Female
+  speaker: turret_floor
+  id: turret_floor
+
+- type: ttsVoice
+  name: Геральт из Ривии
+  description: Голос персонажа Геральт из Ривии из игры The Witcher 3
+  sex: Male
+  speaker: geralt
+  id: geralt
+
+- type: ttsVoice
+  name: Цирилла
+  description: Голос персонажа Цирилла из игры The Witcher 3
+  sex: Female
+  speaker: cirilla
+  id: cirilla
+
+- type: ttsVoice
+  name: Керис ан Крайт
+  description: Голос персонажа Керис ан Крайт из игры The Witcher 3
+  sex: Female
+  speaker: cerys
+  id: cerys
+
+- type: ttsVoice
+  name: Ламберт
+  description: Голос персонажа Ламберт из игры The Witcher 3
+  sex: Male
+  speaker: lambert
+  id: lambert
+
+- type: ttsVoice
+  name: Трисс
+  description: Голос персонажа Трисс из игры The Witcher 3
+  sex: Female
+  speaker: triss
+  id: triss
+
+- type: ttsVoice
+  name: Ковир Ноблеман
+  description: Голос персонажа Ковир Ноблеман из игры The Witcher 3
+  sex: Male
+  speaker: kovir_nobleman
+  id: kovir_nobleman
+
+- type: ttsVoice
+  name: Золтан Хивай
+  description: Голос персонажа Золтан Хивай из игры The Witcher 3
+  sex: Male
+  speaker: zoltan_chivay
+  id: zoltan_chivay
+
+- type: ttsVoice
+  name: Весемир
+  description: Голос персонажа Весемир из игры The Witcher 3
+  sex: Male
+  speaker: vesemir
+  id: vesemir
+
+- type: ttsVoice
+  name: Гильом де Лонфаль
+  description: Голос персонажа Гильом де Лонфаль из игры The Witcher 3
+  sex: Male
+  speaker: guillaume_de_launfal
+  id: guillaume_de_launfal
+
+- type: ttsVoice
+  name: Филиппа Эйльхарт
+  description: Голос персонажа Филиппа Эйльхарт из игры The Witcher 3
+  sex: Female
+  speaker: philippa_eilhart
+  id: philippa_eilhart
+
+- type: ttsVoice
+  name: Эвальд Борсоди
+  description: Голос персонажа Эвальд Борсоди из игры The Witcher 3
+  sex: Male
+  speaker: ewald_borsodi
+  id: ewald_borsodi
+
+- type: ttsVoice
+  name: Лютик
+  description: Голос персонажа Лютик из игры The Witcher 3
+  sex: Male
+  speaker: dandelion
+  id: dandelion
+
+- type: ttsVoice
+  name: Шани
+  description: Голос персонажа Шани из игры The Witcher 3
+  sex: Female
+  speaker: shani
+  id: shani
+
+- type: ttsVoice
+  name: Азир
+  description: Голос персонажа Азир из игры League of Legends
+  sex: Male
+  speaker: azir
+  id: azir
+
+- type: ttsVoice
+  name: Экко
+  description: Голос персонажа Экко из игры League of Legends
+  sex: Male
+  speaker: ekko
+  id: ekko
+
+- type: ttsVoice
+  name: Твич
+  description: Голос персонажа Твич из игры League of Legends
+  sex: Male
+  speaker: twitch
+  id: twitch
+
+- type: ttsVoice
+  name: Зиггс
+  description: Голос персонажа Зиггс из игры League of Legends
+  sex: Male
+  speaker: ziggs
+  id: ziggs
+
+- type: ttsVoice
+  name: Кэйтлин
+  description: Голос персонажа Кэйтлин из игры League of Legends
+  sex: Female
+  speaker: caitlyn
+  id: caitlyn
+
+- type: ttsVoice
+  name: Артас Менетил
+  description: Голос персонажа Артас Менетил из игры Warcraft 3
+  sex: Male
+  speaker: arthas
+  id: arthas
+
+- type: ttsVoice
+  name: Иллидан Ярость Бури
+  description: Голос персонажа Иллидан Ярость Бури из игры Warcraft 3
+  sex: Male
+  speaker: illidan
+  id: illidan
+
+- type: ttsVoice
+  name: Рексар
+  description: Голос персонажа Рексар из игры Warcraft 3
+  sex: Male
+  speaker: rexxar
+  id: rexxar
+
+- type: ttsVoice
+  name: Вол'джин
+  description: Голос персонажа Вол'джин из игры Warcraft 3
+  sex: Male
+  speaker: voljin
+  id: voljin
+
+- type: ttsVoice
+  name: Бандит
+  description: Голос персонажа Бандита из игры S.T.A.L.K.E.R.
+  sex: Male
+  speaker: bandit
+  id: bandit
+
+- type: ttsVoice
+  name: Лесник
+  description: Голос персонажа Лесник из игры S.T.A.L.K.E.R.
+  sex: Male
+  speaker: forester
+  id: forester
+
+- type: ttsVoice
+  name: Сидорович
+  description: Голос персонажа Сидорович из игры S.T.A.L.K.E.R.
+  sex: Male
+  speaker: sidorovich
+  id: sidorovich
+
+- type: ttsVoice
+  name: Стрелок
+  description: Голос персонажа Стрелок из игры S.T.A.L.K.E.R.
+  sex: Male
+  speaker: strelok
+  id: strelok
+
+- type: ttsVoice
+  name: Трэйсер
+  description: Голос персонажа Трэйсер из игры Overwatch
+  sex: Female
+  speaker: tracer
+  id: tracer
+
+- type: ttsVoice
+  name: Солдат
+  description: Голос персонажа Солдат из Team Fortress 2 из английской озвучки
+  sex: Male
+  speaker: soldier
+  id: soldier
+
+- type: ttsVoice
+  name: Инженер
+  description: Голос персонажа Инженер из игры Team Fortress 2
+  sex: Male
+  speaker: engineer
+  id: engineer
+
+- type: ttsVoice
+  name: Хэви
+  description: Голос персонажа Хэви из игры Team Fortress 2
+  sex: Male
+  speaker: heavy
+  id: heavy
+
+- type: ttsVoice
+  name: Медик
+  description: Голос персонажа Медик из игры Team Fortress 2
+  sex: Male
+  speaker: medic
+  id: medic
+
+- type: ttsVoice
+  name: Подрывник
+  description: Голос персонажа Подрывник из игры Team Fortress 2
+  sex: Male
+  speaker: demoman
+  id: demoman
+
+- type: ttsVoice
+  name: Снайпер
+  description: Голос персонажа Снайпер из игры Team Fortress 2
+  sex: Male
+  speaker: sniper
+  id: sniper
+
+- type: ttsVoice
+  name: Шпион
+  description: Голос персонажа Шпион из игры Team Fortress 2
+  sex: Male
+  speaker: spy
+  id: spy
+
+- type: ttsVoice
+  name: Каратель
+  description: Голос персонажа Каратель из игры The Punisher
+  sex: Male
+  speaker: punisher
+  id: punisher
+
+- type: ttsVoice
+  name: Джонни Сильверхенд
+  description: Голос персонажа Джонни Сильверхенд из игры Cyberpunk 2077
+  sex: Male
+  speaker: johnny
+  id: johnny
+
+- type: ttsVoice
+  name: Панам Палмер
+  description: Голос персонажа Панам Палмер из игры Cyberpunk 2077
+  sex: Female
+  speaker: panam
+  id: panam
+
+- type: ttsVoice
+  name: Ви
+  description: Голос персонажа Ви из игры Cyberpunk 2077
+  sex: Female
+  speaker: v_female
+  id: v_female
+
+- type: ttsVoice
+  name: Джуди Альварес
+  description: Голос персонажа Джуди Альварес из игры Cyberpunk 2077
+  sex: Female
+  speaker: judy
+  id: judy
+
+- type: ttsVoice
+  name: Митч Андерсон
+  description: Голос персонажа Митч Андерсон из игры Cyberpunk 2077
+  sex: Male
+  speaker: mitch
+  id: mitch
+
+- type: ttsVoice
+  name: Скиппи
+  description: Голос персонажа Скиппи из игры Cyberpunk 2077
+  sex: Male
+  speaker: skippy
+  id: skippy
+
+- type: ttsVoice
+  name: Джеки Уэллс
+  description: Голос персонажа Джеки Уэллс из игры Cyberpunk 2077
+  sex: Male
+  speaker: jackie
+  id: jackie
+
+- type: ttsVoice
+  name: Майко Маэда
+  description: Голос персонажа Майко Маэда из игры Cyberpunk 2077
+  sex: Female
+  speaker: maiko
+  id: maiko
+
+- type: ttsVoice
+  name: Брендан
+  description: Голос персонажа Брендан из игры Cyberpunk 2077
+  sex: Male
+  speaker: brendan
+  id: brendan
+
+- type: ttsVoice
+  name: Нэнси Хартли
+  description: Голос персонажа Нэнси Хартли из игры Cyberpunk 2077
+  sex: Female
+  speaker: nancy_hartley
+  id: nancy_hartley
+
+- type: ttsVoice
+  name: Освальд Форрест
+  description: Голос персонажа Освальд Форрест из игры Cyberpunk 2077
+  sex: Male
+  speaker: oswald_forrest
+  id: oswald_forrest
+
+- type: ttsVoice
+  name: Стив Санчес
+  description: Голос персонажа Стив Санчес из игры Cyberpunk 2077
+  sex: Male
+  speaker: steve
+  id: steve
+
+- type: ttsVoice
+  name: Сержант Дорнан
+  description: Голос персонажа Сержант Дорнан из игры Fallout 2
+  sex: Male
+  speaker: dornan
+  id: dornan
+
+- type: ttsVoice
+  name: Офицер Анклава
+  description: Голос персонажа Офицер Анклава из игры Fallout 2
+  sex: Male
+  speaker: officer_enclave
+  id: officer_enclave
+
+- type: ttsVoice
+  name: Дик Ричардсон
+  description: Голос персонажа Ричард «Дик» Ричардсон из игры Fallout 2
+  sex: Male
+  speaker: richardson
+  id: richardson
+
+- type: ttsVoice
+  name: Бутч Харрис
+  description: Голос персонажа Бутч Харрис из игры Fallout 2
+  sex: Male
+  speaker: butch
+  id: butch
+
+- type: ttsVoice
+  name: Маркус
+  description: Голос персонажа Маркус из игры Fallout 2
+  sex: Male
+  speaker: marcus
+  id: marcus
+
+- type: ttsVoice
+  name: Сулик
+  description: Голос персонажа Сулик из игры Fallout 2
+  sex: Male
+  speaker: sulik
+  id: sulik
+
+- type: ttsVoice
+  name: Майрон
+  description: Голос персонажа Майрон из игры Fallout 2
+  sex: Male
+  speaker: myron
+  id: myron
+
+- type: ttsVoice
+  name: Добрая Талия
+  description: Голос персонажа Добрая Талия из игры Dungeons 3
+  sex: Female
+  speaker: good_thalya
+  id: good_thalya
+
+- type: ttsVoice
+  name: Злая Талия
+  description: Голос персонажа Злая Талия из игры Dungeons 3
+  sex: Female
+  speaker: evil_thalya
+  id: evil_thalya
+
+- type: ttsVoice
+  name: Рассказчик
+  description: Голос персонажа Рассказчик из игры Dungeons 3
+  sex: Male
+  speaker: narrator_d3
+  id: narrator_d3
+
+- type: ttsVoice
+  name: Чувак
+  description: Голос персонажа Чувак из игры Postal 2
+  sex: Male
+  speaker: dude
+  id: dude
+
+- type: ttsVoice
+  name: Андуин Ринн
+  description: Голос персонажа Андуин Ринн из игры Hearthstone
+  sex: Male
+  speaker: anduin
+  id: anduin
+
+- type: ttsVoice
+  name: Бру'кан
+  description: Голос персонажа Бру'кан из игры Hearthstone
+  sex: Male
+  speaker: brukan
+  id: brukan
+
+- type: ttsVoice
+  name: Гаррош Адский Крик
+  description: Голос персонажа Гаррош Адский Крик из игры Hearthstone
+  sex: Male
+  speaker: garrosh
+  id: garrosh
+
+- type: ttsVoice
+  name: Джайна Праудмур
+  description: Голос персонажа Джайна Праудмур из игры Hearthstone
+  sex: Female
+  speaker: jaina
+  id: jaina
+
+- type: ttsVoice
+  name: Утер Светоносный
+  description: Голос персонажа Утер Светоносный из игры Hearthstone
+  sex: Male
+  speaker: uther_hs
+  id: uther_hs
+
+- type: ttsVoice
+  name: Адъютант
+  description: Голос персонажа Адъютант из игры StarCraft 2
+  sex: Female
+  speaker: adjutant
+  id: adjutant
+
+- type: ttsVoice
+  name: Ариэль Хэнсон
+  description: Голос персонажа Ариэль Хэнсон из игры StarCraft 2
+  sex: Female
+  speaker: hanson
+  id: hanson
+
+- type: ttsVoice
+  name: Бралик
+  description: Голос персонажа Бралик из игры StarCraft 2
+  sex: Male
+  speaker: bralik
+  id: bralik
+
+- type: ttsVoice
+  name: Мэтт Хорнер
+  description: Голос персонажа Мэтт Хорнер из игры StarCraft 2
+  sex: Male
+  speaker: horner
+  id: horner
+
+- type: ttsVoice
+  name: Габриэль Тош
+  description: Голос персонажа Габриэль Тош из игры StarCraft 2
+  sex: Male
+  speaker: tosh
+  id: tosh
+
+- type: ttsVoice
+  name: Тайкус Финдли
+  description: Голос персонажа Тайкус Финдли из игры StarCraft 2
+  sex: Male
+  speaker: tychus
+  id: tychus
+
+- type: ttsVoice
+  name: Амит Таккар
+  description: Голос персонажа Амит Таккар из игры Hogwarts Legacy
+  sex: Male
+  speaker: amitkakkar
+  id: amitkakkar
+
+- type: ttsVoice
+  name: Элеазар Фиг
+  description: Голос персонажа Элеазар Фиг из игры Hogwarts Legacy
+  sex: Male
+  speaker: eleazarfig
+  id: eleazarfig
+
+- type: ttsVoice
+  name: Эрни Ларк
+  description: Голос персонажа Эрни Ларк из игры Hogwarts Legacy
+  sex: Male
+  speaker: ernielark
+  id: ernielark
+
+- type: ttsVoice
+  name: Игнатия Уайлдсмит
+  description: Голос персонажа Игнатия Уайлдсмит из игры Hogwarts Legacy
+  sex: Female
+  speaker: ignatiaflootravel
+  id: ignatiaflootravel
+
+- type: ttsVoice
+  name: Лодгок
+  description: Голос персонажа Лодгок из игры Hogwarts Legacy
+  sex: Male
+  speaker: lodgok
+  id: lodgok
+
+- type: ttsVoice
+  name: Финеас Найджелус Блэк
+  description: Голос персонажа Финеас Найджелус Блэк из игры Hogwarts Legacy
+  sex: Male
+  speaker: phineasblack
+  id: phineasblack
+
+- type: ttsVoice
+  name: Ранрок
+  description: Голос персонажа Ранрок из игры Hogwarts Legacy
+  sex: Male
+  speaker: ranrak
+  id: ranrak
+
+- type: ttsVoice
+  name: Виктор Руквуд
+  description: Голос персонажа Виктор Руквуд из игры Hogwarts Legacy
+  sex: Male
+  speaker: victorrookwood
+  id: victorrookwood
+
+- type: ttsVoice
+  name: Зенобия Ноук
+  description: Голос персонажа Зенобия Ноук из игры Hogwarts Legacy
+  sex: Female
+  speaker: zenobianoke
+  id: zenobianoke
+
+- type: ttsVoice
+  name: Глэдвин Мун
+  description: Голос персонажа Глэдвин Мун из игры Hogwarts Legacy
+  sex: Male
+  speaker: gladwinmoon
+  id: gladwinmoon
+
+- type: ttsVoice
+  name: Матильда Уизли
+  description: Голос персонажа Матильда Уизли из игры Hogwarts Legacy
+  sex: Female
+  speaker: matildaweasley
+  id: matildaweasley
+
+- type: ttsVoice
+  name: Натсай Онай
+  description: Голос персонажа Натсай Онай из игры Hogwarts Legacy
+  sex: Female
+  speaker: natsaionai
+  id: natsaionai
+
+- type: ttsVoice
+  name: Оминис Мракс
+  description: Голос персонажа Оминис Мракс из игры Hogwarts Legacy
+  sex: Male
+  speaker: ominisgaunt
+  id: ominisgaunt
+
+- type: ttsVoice
+  name: Поппи Добринг
+  description: Голос персонажа Поппи Добринг из игры Hogwarts Legacy
+  sex: Female
+  speaker: poppysweeting
+  id: poppysweeting
+
+- type: ttsVoice
+  name: Гоблин В
+  description: Голос персонажа Гоблин В из игры Hogwarts Legacy
+  sex: Male
+  speaker: generic_goblin_c
+  id: generic_goblin_c
+
+- type: ttsVoice
+  name: Дина Гекат
+  description: Голос персонажа Дина Гекат из игры Hogwarts Legacy
+  sex: Female
+  speaker: dinah_hecat
+  id: dinah_hecat
+
+- type: ttsVoice
+  name: Эзоп Шарп
+  description: Голос персонажа Эзоп Шарп из игры Hogwarts Legacy
+  sex: Male
+  speaker: aesop_sharp
+  id: aesop_sharp
+
+- type: ttsVoice
+  name: Абрахам Ронен
+  description: Голос персонажа Абрахам Ронен из игры Hogwarts Legacy
+  sex: Male
+  speaker: abraham_ronen
+  id: abraham_ronen
+
+- type: ttsVoice
+  name: Саманта Дейл
+  description: Голос персонажа Саманта Дейл из игры Hogwarts Legacy
+  sex: Female
+  speaker: samantha_dale
+  id: samantha_dale
+
+- type: ttsVoice
+  name: Сирона Райан
+  description: Голос персонажа Сирона Райан из игры Hogwarts Legacy
+  sex: Female
+  speaker: sirona_ryan
+  id: sirona_ryan
+
+- type: ttsVoice
+  name: Софрония Франклин
+  description: Голос персонажа Софрония Франклин из игры Hogwarts Legacy
+  sex: Female
+  speaker: sophronia_franklin
+  id: sophronia_franklin
+
+- type: ttsVoice
+  name: Эверетт Клоптон
+  description: Голос персонажа Эверетт Клоптон из игры Hogwarts Legacy
+  sex: Male
+  speaker: everett_clopton
+  id: everett_clopton
+
+- type: ttsVoice
+  name: Гоблин Б
+  description: Голос персонажа Гоблин Б из игры Hogwarts Legacy
+  sex: Male
+  speaker: generic_goblin_b
+  id: generic_goblin_b
+
+- type: ttsVoice
+  name: Домовой эльф из святилища
+  description: Голос персонажа Домовой эльф из святилища из игры Hogwarts Legacy
+  sex: Male
+  speaker: sanctuary_house_elf
+  id: sanctuary_house_elf
+
+- type: ttsVoice
+  name: Abaddon
+  description: Голос персонажа Abaddon из игры Dota 2
+  sex: Male
+  speaker: abaddon_dota_2
+  id: abaddon_dota_2
+
+- type: ttsVoice
+  name: Achemist
+  description: Голос персонажа Achemist из игры Dota 2
+  sex: Male
+  speaker: alchemist_dota_2
+  id: alchemist_dota_2
+
+- type: ttsVoice
+  name: Anti-Mage
+  description: Голос персонажа Anti-Mage из игры Dota 2
+  sex: Male
+  speaker: anti-mage_dota_2
+  id: anti-mage_dota_2
+
+- type: ttsVoice
+  name: Arc Warden
+  description: Голос персонажа Arc Warden из игры Dota 2
+  sex: Male
+  speaker: arc_warden_dota_2
+  id: arc_warden_dota_2
+
+- type: ttsVoice
+  name: Batrider
+  description: Голос персонажа Batrider из игры Dota 2
+  sex: Male
+  speaker: batrider_dota_2
+  id: batrider_dota_2
+
+- type: ttsVoice
+  name: Bloodseeker
+  description: Голос персонажа Bloodseeker из игры Dota 2
+  sex: Male
+  speaker: bloodseeker_dota_2
+  id: bloodseeker_dota_2
+
+- type: ttsVoice
+  name: Bounty Hunter
+  description: Голос персонажа Bounty Hunter из игры Dota 2
+  sex: Male
+  speaker: bounty_hunter_dota_2
+  id: bounty_hunter_dota_2
+
+- type: ttsVoice
+  name: Bristleback
+  description: Голос персонажа Bristleback из игры Dota 2
+  sex: Male
+  speaker: bristleback_dota_2
+  id: bristleback_dota_2
+
+- type: ttsVoice
+  name: Broodmother
+  description: Голос персонажа Broodmother из игры Dota 2
+  sex: Female
+  speaker: broodmother_dota_2
+  id: broodmother_dota_2
+
+- type: ttsVoice
+  name: Centaur Warrunner
+  description: Голос персонажа Centaur Warrunner из игры Dota 2
+  sex: Male
+  speaker: centaur_warrunner_dota_2
+  id: centaur_warrunner_dota_2
+
+- type: ttsVoice
+  name: Clinkz
+  description: Голос персонажа Clinkz из игры Dota 2
+  sex: Male
+  speaker: clinkz_dota_2
+  id: clinkz_dota_2
+
+- type: ttsVoice
+  name: Clockwerk
+  description: Голос персонажа Clockwerk из игры Dota 2
+  sex: Male
+  speaker: clockwerk_dota_2
+  id: clockwerk_dota_2
+
+- type: ttsVoice
+  name: Crystal Maiden
+  description: Голос персонажа Crystal Maiden из игры Dota 2
+  sex: Female
+  speaker: crystal_maiden_dota_2
+  id: crystal_maiden_dota_2
+
+- type: ttsVoice
+  name: Dazzle
+  description: Голос персонажа Dazzle из игры Dota 2
+  sex: Male
+  speaker: dazzle_dota_2
+  id: dazzle_dota_2
+
+- type: ttsVoice
+  name: Disruptor
+  description: Голос персонажа Disruptor из игры Dota 2
+  sex: Male
+  speaker: disruptor_dota_2
+  id: disruptor_dota_2
+
+- type: ttsVoice
+  name: Doom
+  description: Голос персонажа Doom из игры Dota 2
+  sex: Male
+  speaker: doom_dota_2
+  id: doom_dota_2
+
+- type: ttsVoice
+  name: Dragon Knight
+  description: Голос персонажа Dragon Knight из игры Dota 2
+  sex: Male
+  speaker: dragon_knight_dota_2
+  id: dragon_knight_dota_2
+
+- type: ttsVoice
+  name: Dragon Knight Dragon
+  description: Голос персонажа Dragon Knight Dragon из игры Dota 2
+  sex: Male
+  speaker: dragon_knight_dragon_dota_2
+  id: dragon_knight_dragon_dota_2
+
+- type: ttsVoice
+  name: Drow Ranger
+  description: Голос персонажа Drow Ranger из игры Dota 2
+  sex: Female
+  speaker: drow_ranger_dota_2
+  id: drow_ranger_dota_2
+
+- type: ttsVoice
+  name: Earthshaker
+  description: Голос персонажа Earthshaker из игры Dota 2
+  sex: Male
+  speaker: earthshaker_dota_2
+  id: earthshaker_dota_2
+
+- type: ttsVoice
+  name: Ember Spirit
+  description: Голос персонажа Ember Spirit из игры Dota 2
+  sex: Male
+  speaker: ember_spirit_dota_2
+  id: ember_spirit_dota_2
+
+- type: ttsVoice
+  name: Enigma
+  description: Голос персонажа Enigma из игры Dota 2
+  sex: Male
+  speaker: enigma_dota_2
+  id: enigma_dota_2
+
+- type: ttsVoice
+  name: Gyrocopter
+  description: Голос персонажа Gyrocopter из игры Dota 2
+  sex: Male
+  speaker: gyrocopter_dota_2
+  id: gyrocopter_dota_2
+
+- type: ttsVoice
+  name: Huskar
+  description: Голос персонажа Huskar из игры Dota 2
+  sex: Male
+  speaker: huskar_dota_2
+  id: huskar_dota_2
+
+- type: ttsVoice
+  name: Invoker
+  description: Голос персонажа Invoker из игры Dota 2
+  sex: Male
+  speaker: invoker_dota_2
+  id: invoker_dota_2
+
+- type: ttsVoice
+  name: Juggernaut
+  description: Голос персонажа Juggernaut из игры Dota 2
+  sex: Male
+  speaker: juggernaut_dota_2
+  id: juggernaut_dota_2
+
+- type: ttsVoice
+  name: Keeper Of The Light
+  description: Голос персонажа Keeper Of The Light из игры Dota 2
+  sex: Male
+  speaker: keeper_of_the_light_dota_2
+  id: keeper_of_the_light_dota_2
+
+- type: ttsVoice
+  name: Kunkka
+  description: Голос персонажа Kunkka из игры Dota 2
+  sex: Male
+  speaker: kunkka_dota_2
+  id: kunkka_dota_2
+
+- type: ttsVoice
+  name: Legion Commander Demon
+  description: Голос персонажа Legion Commander Demon из игры Dota 2
+  sex: Female
+  speaker: legion_commander_demon_dota_2
+  id: legion_commander_demon_dota_2
+
+- type: ttsVoice
+  name: Legion Commander
+  description: Голос персонажа Legion Commander из игры Dota 2
+  sex: Female
+  speaker: legion_commander_dota_2
+  id: legion_commander_dota_2
+
+- type: ttsVoice
+  name: Lich
+  description: Голос персонажа Lich из игры Dota 2
+  sex: Male
+  speaker: lich_dota_2
+  id: lich_dota_2
+
+- type: ttsVoice
+  name: Lina
+  description: Голос персонажа Lina из игры Dota 2
+  sex: Female
+  speaker: lina_dota_2
+  id: lina_dota_2
+
+- type: ttsVoice
+  name: Luna
+  description: Голос персонажа Luna из игры Dota 2
+  sex: Female
+  speaker: luna_dota_2
+  id: luna_dota_2
+
+- type: ttsVoice
+  name: Lycan
+  description: Голос персонажа Lycan из игры Dota 2
+  sex: Male
+  speaker: lycan_dota_2
+  id: lycan_dota_2
+
+- type: ttsVoice
+  name: Lycan Wolf
+  description: Голос персонажа Lycan Wolf из игры Dota 2
+  sex: Male
+  speaker: lycan_wolf_dota_2
+  id: lycan_wolf_dota_2
+
+- type: ttsVoice
+  name: Meepo
+  description: Голос персонажа Meepo из игры Dota 2
+  sex: Male
+  speaker: meepo_dota_2
+  id: meepo_dota_2
+
+- type: ttsVoice
+  name: Mirana
+  description: Голос персонажа Mirana из игры Dota 2
+  sex: Female
+  speaker: mirana_dota_2
+  id: mirana_dota_2
+
+- type: ttsVoice
+  name: Monkey King Crown
+  description: Голос персонажа Monkey King Crown из игры Dota 2
+  sex: Male
+  speaker: monkey_king_crown_dota_2
+  id: monkey_king_crown_dota_2
+
+- type: ttsVoice
+  name: Monkey King
+  description: Голос персонажа Monkey King из игры Dota 2
+  sex: Male
+  speaker: monkey_king_dota_2
+  id: monkey_king_dota_2
+
+- type: ttsVoice
+  name: Necrophos
+  description: Голос персонажа Necrophos из игры Dota 2
+  sex: Male
+  speaker: necrophos_dota_2
+  id: necrophos_dota_2
+
+- type: ttsVoice
+  name: Nyx Assassin
+  description: Голос персонажа Nyx Assassin из игры Dota 2
+  sex: Male
+  speaker: nyx_assassin_dota_2
+  id: nyx_assassin_dota_2
+
+- type: ttsVoice
+  name: Omniknight
+  description: Голос персонажа Omniknight из игры Dota 2
+  sex: Male
+  speaker: omniknight_dota_2
+  id: omniknight_dota_2
+
+- type: ttsVoice
+  name: Outworld Destroyer
+  description: Голос персонажа Outworld Destroyer из игры Dota 2
+  sex: Male
+  speaker: outworld_destroyer_dota_2
+  id: outworld_destroyer_dota_2
+
+- type: ttsVoice
+  name: Phantom Assassin Arcana
+  description: Голос персонажа Phantom Assassin Arcana из игры Dota 2
+  sex: Female
+  speaker: phantom_assassin_arcana_dota_2
+  id: phantom_assassin_arcana_dota_2
+
+- type: ttsVoice
+  name: Phantom Assassin
+  description: Голос персонажа Phantom Assassin из игры Dota 2
+  sex: Female
+  speaker: phantom_assassin_dota_2
+  id: phantom_assassin_dota_2
+
+- type: ttsVoice
+  name: Phantom Lancer
+  description: Голос персонажа Phantom Lancer из игры Dota 2
+  sex: Male
+  speaker: phantom_lancer_dota_2
+  id: phantom_lancer_dota_2
+
+- type: ttsVoice
+  name: Pudge
+  description: Голос персонажа Pudge из игры Dota 2
+  sex: Male
+  speaker: pudge_dota_2
+  id: pudge_dota_2
+
+- type: ttsVoice
+  name: Queen Of Pain
+  description: Голос персонажа Queen Of Pain из игры Dota 2
+  sex: Female
+  speaker: queen_of_pain_dota_2
+  id: queen_of_pain_dota_2
+
+- type: ttsVoice
+  name: Razor
+  description: Голос персонажа Razor из игры Dota 2
+  sex: Male
+  speaker: razor_dota_2
+  id: razor_dota_2
+
+- type: ttsVoice
+  name: Riki
+  description: Голос персонажа Riki из игры Dota 2
+  sex: Male
+  speaker: riki_dota_2
+  id: riki_dota_2
+
+- type: ttsVoice
+  name: Rubick
+  description: Голос персонажа Rubick из игры Dota 2
+  sex: Male
+  speaker: rubick_dota_2
+  id: rubick_dota_2
+
+- type: ttsVoice
+  name: Sand King
+  description: Голос персонажа Sand King из игры Dota 2
+  sex: Male
+  speaker: sand_king_dota_2
+  id: sand_king_dota_2
+
+- type: ttsVoice
+  name: Shadow Fiend
+  description: Голос персонажа Shadow Fiend из игры Dota 2
+  sex: Male
+  speaker: shadow_fiend_dota_2
+  id: shadow_fiend_dota_2
+
+- type: ttsVoice
+  name: Shadow Shaman
+  description: Голос персонажа Shadow Shaman из игры Dota 2
+  sex: Male
+  speaker: shadow_shaman_dota_2
+  id: shadow_shaman_dota_2
+
+- type: ttsVoice
+  name: Skywrath Mage
+  description: Голос персонажа Skywrath Mage из игры Dota 2
+  sex: Male
+  speaker: skywrath_mage_dota_2
+  id: skywrath_mage_dota_2
+
+- type: ttsVoice
+  name: Slardar
+  description: Голос персонажа Slardar из игры Dota 2
+  sex: Male
+  speaker: slardar_dota_2
+  id: slardar_dota_2
+
+- type: ttsVoice
+  name: Slark
+  description: Голос персонажа Slark из игры Dota 2
+  sex: Male
+  speaker: slark_dota_2
+  id: slark_dota_2
+
+- type: ttsVoice
+  name: Spirit Breaker
+  description: Голос персонажа Spirit Breaker из игры Dota 2
+  sex: Male
+  speaker: spirit_breaker_dota_2
+  id: spirit_breaker_dota_2
+
+- type: ttsVoice
+  name: Storm Spirit
+  description: Голос персонажа Storm Spirit из игры Dota 2
+  sex: Male
+  speaker: storm_spirit_dota_2
+  id: storm_spirit_dota_2
+
+- type: ttsVoice
+  name: Sven
+  description: Голос персонажа Sven из игры Dota 2
+  sex: Male
+  speaker: sven_dota_2
+  id: sven_dota_2
+
+- type: ttsVoice
+  name: Templar Assassin
+  description: Голос персонажа Templar Assassin из игры Dota 2
+  sex: Female
+  speaker: templar_assassin_dota_2
+  id: templar_assassin_dota_2
+
+- type: ttsVoice
+  name: Tidehunter
+  description: Голос персонажа Tidehunter из игры Dota 2
+  sex: Male
+  speaker: tidehunter_dota_2
+  id: tidehunter_dota_2
+
+- type: ttsVoice
+  name: Treant Protector
+  description: Голос персонажа Treant Protector из игры Dota 2
+  sex: Male
+  speaker: treant_protector_dota_2
+  id: treant_protector_dota_2
+
+- type: ttsVoice
+  name: Underlord
+  description: Голос персонажа Underlord из игры Dota 2
+  sex: Male
+  speaker: underlord_dota_2
+  id: underlord_dota_2
+
+- type: ttsVoice
+  name: Ursa
+  description: Голос персонажа Ursa из игры Dota 2
+  sex: Male
+  speaker: ursa_dota_2
+  id: ursa_dota_2
+
+- type: ttsVoice
+  name: Windranger
+  description: Голос персонажа Windranger из игры Dota 2
+  sex: Female
+  speaker: windranger_dota_2
+  id: windranger_dota_2
+
+- type: ttsVoice
+  name: Winter Wyvern
+  description: Голос персонажа Winter Wyvern из игры Dota 2
+  sex: Female
+  speaker: winter_wyvern_dota_2
+  id: winter_wyvern_dota_2
+
+- type: ttsVoice
+  name: Witch Doctor
+  description: Голос персонажа Witch Doctor из игры Dota 2
+  sex: Male
+  speaker: witch_doctor_dota_2
+  id: witch_doctor_dota_2
+
+- type: ttsVoice
+  name: Wraith King
+  description: Голос персонажа Wraith King из игры Dota 2
+  sex: Male
+  speaker: wraith_king_dota_2
+  id: wraith_king_dota_2
+
+- type: ttsVoice
+  name: Zeus
+  description: Голос персонажа Zeus из игры Dota 2
+  sex: Male
+  speaker: zeus_dota_2
+  id: zeus_dota_2
+
+- type: ttsVoice
+  name: Мита
+  description: Голос персонажа Мита из игры MiSide
+  sex: Female
+  speaker: mita
+  id: mita
+
+- type: ttsVoice
+  name: Сонная Мита
+  description: Голос персонажа Сонная Мита из игры MiSide
+  sex: Female
+  speaker: mitadream
+  id: mitadream
+
+- type: ttsVoice
+  name: Мита Призрак
+  description: Голос персонажа Мита Призрак из игры MiSide
+  sex: Female
+  speaker: mitaghost
+  id: mitaghost
+
+- type: ttsVoice
+  name: Добрая Мита
+  description: Голос персонажа Добрая Мита из игры MiSide
+  sex: Female
+  speaker: mitakind
+  id: mitakind
+
+- type: ttsVoice
+  name: Коротковолосая Мита
+  description: Голос персонажа Коротковолосая Мита из игры MiSide
+  sex: Female
+  speaker: mitashorthairs
+  id: mitashorthairs
+
+- type: ttsVoice
+  name: Культисты Хаоса
+  description: "Голос юнита Культисты Хаоса из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: chaos_marines_cultists_dow
+  id: chaos_marines_cultists_dow
+
+- type: ttsVoice
+  name: Космодесантники Хаоса
+  description: "Голос юнита Космодесантники Хаоса из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: chaos_marines_dow
+  id: chaos_marines_dow
+
+- type: ttsVoice
+  name: Лорд Хаоса
+  description: "Голос юнита Лорд Хаоса из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: chaos_marines_lord_dow
+  id: chaos_marines_lord_dow
+
+- type: ttsVoice
+  name: Колдун Хаоса
+  description: "Голос юнита Колдун Хаоса из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: chaos_marines_sorceror_dow
+  id: chaos_marines_sorceror_dow
+
+- type: ttsVoice
+  name: Архон Тёмных Эльдар
+  description: "Голос юнита Архон Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: dark_eldar_archon_dow
+  id: dark_eldar_archon_dow
+
+- type: ttsVoice
+  name: Мандрагор Тёмных Эльдар
+  description: "Голос юнита Мандрагор Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: dark_eldar_mandrake_dow
+  id: dark_eldar_mandrake_dow
+
+- type: ttsVoice
+  name: Воин Тёмных Эльдар
+  description: "Голос юнита Воин Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: dark_eldar_warrior_dow
+  id: dark_eldar_warrior_dow
+
+- type: ttsVoice
+  name: Ведьма Тёмных Эльдар
+  description: "Голос юнита Ведьма Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: dark_eldar_wych_dow
+  id: dark_eldar_wych_dow
+
+- type: ttsVoice
+  name: Стражи Эльдар
+  description: "Голос юнита Стражи Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: eldar_dow
+  id: eldar_dow
+
+- type: ttsVoice
+  name: Провидец Эльдар
+  description: "Голос юнита Провидец Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: eldar_farseer_dow
+  id: eldar_farseer_dow
+
+- type: ttsVoice
+  name: Огненный Дракон Эльдар
+  description: "Голос юнита Огненный Дракон Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: eldar_fire_dragon_dow
+  id: eldar_fire_dragon_dow
+
+- type: ttsVoice
+  name: Колдун Эльдар
+  description: "Голос юнита Колдун Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: eldar_warlock_dow
+  id: eldar_warlock_dow
+
+- type: ttsVoice
+  name: Ассасин Имперской Гвардии
+  description: "Голос юнита Ассасин Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_assassin_dow
+  id: guard_assassin_dow
+
+- type: ttsVoice
+  name: Капитан Имперской Гвардии
+  description: "Голос юнита Капитан Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_captain_dow
+  id: guard_captain_dow
+
+- type: ttsVoice
+  name: Комиссар Имперской Гвардии
+  description: "Голос юнита Комиссар Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_commissar_dow
+  id: guard_commissar_dow
+
+- type: ttsVoice
+  name: Техножрец Имперской Гвардии
+  description: "Голос юнита Техножрец Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_enginseer_dow
+  id: guard_enginseer_dow
+
+- type: ttsVoice
+  name: Сержант Имперской Гвардии
+  description: "Голос юнита Сержант Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_guardsman_sergeant_dow
+  id: guard_guardsman_sergeant_dow
+
+- type: ttsVoice
+  name: Команда тяжёлого оружия Имперской Гвардии
+  description: "Голос юнита Команда тяжёлого оружия Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_heavy_weapons_platoon_dow
+  id: guard_heavy_weapons_platoon_dow
+
+- type: ttsVoice
+  name: Касркин Имперской Гвардии
+  description: "Голос юнита Касркин Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_karskin_dow
+  id: guard_karskin_dow
+
+- type: ttsVoice
+  name: Огрин Имперской Гвардии
+  description: "Голос юнита Огрин Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_ogryn_dow
+  id: guard_ogryn_dow
+
+- type: ttsVoice
+  name: Священник Имперской Гвардии
+  description: "Голос юнита Священник Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_priest_dow
+  id: guard_priest_dow
+
+- type: ttsVoice
+  name: Псайкер Имперской Гвардии
+  description: "Голос юнита Псайкер Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_psyker_dow
+  id: guard_psyker_dow
+
+- type: ttsVoice
+  name: Бойзы Орков
+  description: "Голос юнита Бойзы Орков из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: orks_dow
+  id: orks_dow
+
+- type: ttsVoice
+  name: Флэш Гитз и Нобы Орков
+  description: "Голос юнитов Флэш Гитз и Нобы Орков из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: orks_flashgitznobs_dow
+  id: orks_flashgitznobs_dow
+
+- type: ttsVoice
+  name: Гретчины Орков
+  description: "Голос юнита Гретчины Орков из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: orks_grots_dow
+  id: orks_grots_dow
+
+- type: ttsVoice
+  name: Варбосс Орков
+  description: "Голос юнита Варбосс Орков из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: orks_warboss_dow
+  id: orks_warboss_dow
+
+- type: ttsVoice
+  name: Сестры Битвы
+  description: "Голос юнита Сестры Битвы из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: sisters_battle_sister_dow
+  id: sisters_battle_sister_dow
+
+- type: ttsVoice
+  name: Миссионер Сестёр Битвы
+  description: "Голос юнита Миссионер Сестёр Битвы из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: sisters_missionary_dow
+  id: sisters_missionary_dow
+
+- type: ttsVoice
+  name: Космодесантники 2
+  description: "Голос юнита Космодесантники 2 из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_2_dow
+  id: space_marines_2_dow
+
+- type: ttsVoice
+  name: Капеллан Космодесантников
+  description: "Голос юнита Капеллан Космодесантников из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_chaplain_dow
+  id: space_marines_chaplain_dow
+
+- type: ttsVoice
+  name: Космодесантники
+  description: "Голос юнита Космодесантники из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_dow
+  id: space_marines_dow
+
+- type: ttsVoice
+  name: Командир Сил Космодесантников
+  description: "Голос юнита Командир Сил Космодесантников из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_force_commander_dow
+  id: space_marines_force_commander_dow
+
+- type: ttsVoice
+  name: Библиарий Космодесантников
+  description: "Голос юнита Библиарий Космодесантников из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_librarian_dow
+  id: space_marines_librarian_dow
+
+- type: ttsVoice
+  name: Эфирный Тау
+  description: "Голос юнита Эфирный Тау из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: tau_ethereal_dow
+  id: tau_ethereal_dow
+
+- type: ttsVoice
+  name: Крууты Тау
+  description: "Голос юнита Крууты Тау из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: tau_kroot_dow
+  id: tau_kroot_dow
+
+- type: ttsVoice
+  name: Инструкторша DOW
+  description: "Женский голос инструктора из туториала игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: tutorial_f_dow
+  id: tutorial_f_dow
+
+- type: ttsVoice
+  name: Инструктор DOW
+  description: "Мужской голос из туториала игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: tutorial_m_dow
+  id: tutorial_m_dow
+
+- type: ttsVoice
+  name: Кингпин
+  description: "Голос Кингпина из игры Kingpin Life of Crime"
+  sex: Male
+  speaker: kingpin
+  id: kingpin

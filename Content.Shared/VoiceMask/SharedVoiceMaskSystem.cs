@@ -1,4 +1,3 @@
-using Content.Shared.SS220.TTS;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.VoiceMask;
@@ -16,15 +15,15 @@ public sealed class VoiceMaskBuiState : BoundUserInterfaceState
     public readonly string? Verb;
     public readonly bool Active;
     public readonly bool AccentHide;
-    public readonly TtsVoicePreferences VoicePreferences; // SS220 tts
+    public string Voice { get; } // Corvax-TTS
 
-    public VoiceMaskBuiState(string name, string? verb, bool active, bool accentHide, TtsVoicePreferences voicePreferences /* SS220 tts */)
+    public VoiceMaskBuiState(string name, string? verb, bool active, bool accentHide, string voice /* Corvax-TTS */)
     {
         Name = name;
         Verb = verb;
         Active = active;
         AccentHide = accentHide;
-        VoicePreferences = voicePreferences; // SS220 tts
+        Voice = voice;  // Corvax-TTS
     }
 }
 

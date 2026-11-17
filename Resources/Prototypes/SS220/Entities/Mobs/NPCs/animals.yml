@@ -233,8 +233,8 @@
     fuelCost: 10
   - type: MobPrice
     price: 1000
-  - type: Tts
-    randomVoicePreferences: Borg
+  - type: TTS
+    randomVoicesList: Borg
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -559,9 +559,8 @@
       Male: Mouse
       Female: Mouse
       Unsexed: Mouse
-  - type: Tts
-    voicePreferences:
-      NTTS: mana
+  - type: TTS
+    voice: mana
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
@@ -654,9 +653,8 @@
       Male: Mouse
       Female: Mouse
       Unsexed: Mouse
-  - type: Tts
-    voicePreferences:
-      NTTS: horner
+  - type: TTS
+    voice: horner
   - type: Butcherable
     spawned:
     - id: FoodMeat

@@ -3,8 +3,6 @@ using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
-using Content.Shared.SS220.TTS;
-using Content.Shared.SS220.TTS.Systems;
 using Content.Shared.Store;
 
 namespace Content.Shared.Implants;
@@ -18,7 +16,6 @@ public abstract partial class SharedSubdermalImplantSystem
         SubscribeLocalEvent<ImplantedComponent, TransformSpeakerNameEvent>(RelayToImplantEvent);
         SubscribeLocalEvent<ImplantedComponent, TransformSpeechEvent>(RelayToImplantEvent);
         SubscribeLocalEvent<ImplantedComponent, SeeIdentityAttemptEvent>(RelayToImplantEvent);
-        SubscribeLocalEvent<ImplantedComponent, GetTtsVoiceOverrideEvent>(RelayToImplantEvent); // SS220 tts
 
         // Ref relays, for when you need to write to the event!
         SubscribeLocalEvent<ImplantedComponent, CurrencyInsertAttemptEvent>(RefRelayToImplantEvent);

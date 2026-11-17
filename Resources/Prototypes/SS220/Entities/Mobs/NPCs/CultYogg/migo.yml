@@ -87,9 +87,8 @@
   - type: FlashImmunity
   - type: Speech
     speechVerb: LargeMob
-  - type: Tts
-    voicePreferences:
-      NTTS: forester
+  - type: TTS
+    voice: forester
   - type: Language
     availableLanguages:
     - id: Galactic

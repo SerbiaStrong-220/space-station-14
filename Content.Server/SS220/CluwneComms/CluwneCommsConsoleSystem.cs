@@ -10,6 +10,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
+using Content.Shared.SS220.TTS;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
 using Robust.Shared.Timing;
@@ -26,8 +27,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.Station.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
-using Content.Server.SS220.TTS;
-using Content.Shared.SS220.TTS.Prototypes;
 
 namespace Content.Server.SS220.CluwneComms;
 
@@ -48,7 +47,6 @@ public sealed partial class CluwneCommsConsoleSystem : EntitySystem
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private TtsSystem _tts = default!;
 
     public override void Initialize()
     {
@@ -139,7 +137,7 @@ public sealed partial class CluwneCommsConsoleSystem : EntitySystem
         var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
         var msg = SharedChatSystem.SanitizeAnnouncement(args.Message, maxLength);
         var author = Loc.GetString("cluwne-comms-console-announcement-unknown-sender");
-        ProtoId<TtsVoicePrototype>? voiceId = null;
+        var voiceId = string.Empty;
 
         if (args.Actor is { Valid: true } mob)
         {
@@ -154,7 +152,8 @@ public sealed partial class CluwneCommsConsoleSystem : EntitySystem
             if (tryGetIdentityShortInfoEvent.Title is not null)
                 author = tryGetIdentityShortInfoEvent.Title;
 
-            _tts.TryGetAvailableVoiceId(mob, out voiceId);
+            if (TryComp<TTSComponent>(mob, out var tts))
+                voiceId = tts.VoicePrototypeId;
         }
 
         // allow admemes with vv

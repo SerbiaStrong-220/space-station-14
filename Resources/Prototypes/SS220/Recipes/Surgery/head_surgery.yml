@@ -73,7 +73,7 @@
       delay: 15
       edgeTooltip: to-head-change-tts
       actions:
-      - !type:ChangeTtsAction
+      - !type:ChangeTTSAction
     # deeper
     - to: saw-skull-bone
       id: saw-skull-bone

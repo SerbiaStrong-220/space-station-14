@@ -15,8 +15,6 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
-using Content.Shared.SS220.TTS;
-using Content.Shared.SS220.TTS.Systems;
 using Content.Shared.Traits;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -103,18 +101,11 @@ namespace Content.Server.Preferences.Managers
             if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
                 sex = sexVal;
 
-            // SS220 tts begin
-            var voicePreferences = new TtsVoicePreferences();
-            foreach (var pref in profile.TtsVoicePreferences.OrderBy(x => x.PositionIndex))
-            {
-                if (!Enum.TryParse<TtsProvider>(pref.ProviderName, out var provider))
-                    continue;
-
-                voicePreferences.Add(provider, pref.VoiceId);
-            }
-
-            voicePreferences.SoftMergeWith(SharedTtsSystem.DefaultVoicePreferences);
-            // SS220 tts end
+            // Corvax-TTS-Start
+            var voice = profile.Voice;
+            if (voice == String.Empty)
+                voice = HumanoidCharacterProfile.DefaultVoice;
+            // Corvax-TTS-End
 
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
 
@@ -190,6 +181,7 @@ namespace Content.Server.Preferences.Managers
                 profile.CharacterName,
                 profile.FlavorText,
                 species,
+                profile.Voice,
                 profile.Age,
                 sex,
                 gender,
@@ -205,7 +197,6 @@ namespace Content.Server.Preferences.Managers
                 antags.ToHashSet(),
                 traits.ToHashSet(),
                 loadouts,
-                voicePreferences, // SS220 tts
                 signatureData,
                 profile.TeleportAfkToCryoStorage
             );
