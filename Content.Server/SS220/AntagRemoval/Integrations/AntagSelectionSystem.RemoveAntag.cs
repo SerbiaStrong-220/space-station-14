@@ -73,7 +73,7 @@ public sealed partial class AntagSelectionSystem
     {
         found = null;
         if (!rule.Comp.AssignmentComplete ||
-            rule.Comp.SelectionTime != AntagSelectionTime.PostPlayerSpawn ||
+            rule.Comp.SelectionTime == AntagSelectionTime.PrePlayerSpawn ||
             !_adminFreedDefinitions.TryGetValue(rule.Owner, out var indices))
             return false;
 
