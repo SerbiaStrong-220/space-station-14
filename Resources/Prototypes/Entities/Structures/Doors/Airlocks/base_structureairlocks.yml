@@ -21,18 +21,23 @@
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
     - state: closed_unlit
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi #SS220-airlock-common-states
       shader: unshaded
       map: ["enum.DoorVisualLayers.BaseUnlit"]
       visible: false
     - state: welded
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi #SS220-airlock-common-states
       map: ["enum.WeldableLayers.BaseWelded"]
     - state: bolted_unlit
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi #SS220-airlock-common-states
       shader: unshaded
       map: ["enum.DoorVisualLayers.BaseBolted"]
     - state: emergency_unlit
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi #SS220-airlock-common-states
       map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
       shader: unshaded
     - state: panel_open
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi #SS220-airlock-common-states
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
     - state: electrified_ai
       sprite: Interface/Misc/ai_hud.rsi
@@ -45,6 +50,7 @@
       visible: false
       map: ["enum.ElectrifiedLayers.Sparks"]
     - state: sparks
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi #SS220-airlock-common-states
       map: ["enum.DoorVisualLayers.BaseEmagging"]
       shader: unshaded
       visible: false
