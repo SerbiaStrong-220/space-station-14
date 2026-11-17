@@ -1,17 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Client.Eui;
+using Content.Shared.Eui;
+using Content.Shared.SS220.AntagRemoval.Notifications;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 
-namespace Content.Client.SS220.CultYogg.DeCultReminder;
+namespace Content.Client.SS220.AntagRemoval.Notifications;
 
 [UsedImplicitly]
-public sealed class DeCultReminderEui : BaseEui
+public sealed class RoleRemovalNoticeEui : BaseEui
 {
-    private readonly DeCultReminderWindow _window;
+    private readonly RoleRemovalNoticeWindow _window;
 
-    public DeCultReminderEui()
+    public RoleRemovalNoticeEui()
     {
         _window = new();
 
@@ -22,6 +24,12 @@ public sealed class DeCultReminderEui : BaseEui
     {
         IoCManager.Resolve<IClyde>().RequestWindowAttention();
         _window.OpenCentered();
+    }
+
+    public override void HandleState(EuiStateBase state)
+    {
+        if (state is RoleRemovalNoticeEuiState notice)
+            _window.SetRemovedRole(notice.RemovedRole);
     }
 
     public override void Closed()

@@ -87,6 +87,9 @@ public sealed partial class ExperienceEditorSystem : EntitySystem
             }
 
             playerChangedComp.Skills[skillId] += (sublevel - ExperienceSystem.StartSublevel);
+            // SS220-removeantag: preserve purchase order for temporary-point rollback.
+            if (sublevel > ExperienceSystem.StartSublevel)
+                playerChangedComp.RemoveAntagPurchases.Add(new ExperienceSublevelPurchase(skillId, sublevel - ExperienceSystem.StartSublevel));
         }
 
         _adminLog.Add(LogType.Experience, LogImpact.Low, $"{ToPrettyString(playerEntity):user} used free points for adding sublevels. Used to {GetSublevelStringView(validInput)}");

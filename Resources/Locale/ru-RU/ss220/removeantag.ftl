@@ -1,0 +1,17 @@
+ss220-removeantag-hidden = Скрытое послание: роль «{$role}» снята. Связанные с ней цели больше не действуют. Остальные роли сохраняются.
+ss220-removeantag-command-description = Снять одну роль антагониста у подключённого игрока, сохранив профессию.
+ss220-removeantag-command-help = removeantag <логин> [traitor|thief|cult|initialinfected|headrev] — показать роли или снять выбранную
+ss220-removeantag-error-not-connected = Игрок не подключён или не найден.
+ss220-removeantag-error-unsupported = Неизвестная или неподдерживаемая роль.
+ss220-removeantag-error-role-missing = У игрока нет роли {$role}.
+ss220-removeantag-error-invalid-target = Нельзя снять роль у этого персонажа.
+ss220-removeantag-error-unavailable = Безопасное снятие роли невозможно.
+ss220-removeantag-error-incomplete = Не удалось полностью снять роль. Проверьте состояние персонажа.
+ss220-removeantag-result-success = Снята роль {$role} у {$player}. Профессия {$job} сохранена, игрок уведомлён.
+ss220-removeantag-role-traitor = Предатель
+ss220-removeantag-role-thief = Вор
+ss220-removeantag-role-cult = Культист Йог-Сотота
+ss220-removeantag-role-initial-infected = Нулевой пациент
+ss220-removeantag-role-headrev = Глава революции
+ss220-removeantag-list-roles = {$player} / {$character} / тело UID: {$body} / Mind UID: {$mind} / профессия: {$job} / доступные роли: {$roles}
+ss220-removeantag-list-empty = нет поддерживаемых ролей

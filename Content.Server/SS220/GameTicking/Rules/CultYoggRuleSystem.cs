@@ -13,7 +13,7 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.Pinpointer;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
-using Content.Server.SS220.CultYogg.DeCultReminder;
+using Content.Server.SS220.AntagRemoval.Notifications;
 using Content.Server.SS220.CultYogg.Cultists;
 using Content.Server.SS220.CultYogg.Sacrificials;
 using Content.Server.SS220.GameTicking.Rules.Components;
@@ -49,6 +49,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
+
+using Content.Server.SS220.AntagRemoval;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
@@ -316,6 +318,9 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
 
     public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule)
     {
+        // Capture pre-conversion faction/pacifism even for mid-round converts.
+        var remover = EntityManager.System<RemoveAntagSystem>();
+        remover.BeforeCultConversion(uid);
         // Change the faction
         _npcFaction.RemoveFaction(uid, rule.Comp.NanoTrasenFaction, false);
         _npcFaction.AddFaction(uid, rule.Comp.CultYoggFaction);
@@ -349,6 +354,7 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
 
         var cultifiedEv = new GotCultifiedEvent();
         RaiseLocalEvent(uid, ref cultifiedEv);
+        remover.AfterCultConversion(uid, rule.Owner);
 
         DirtyEntity(uid);
     }
@@ -382,7 +388,7 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
         if (mindComp.UserId != null &&
             _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
         {
-            _euiManager.OpenEui(new DeCultReminderEui(), session);
+            _euiManager.OpenEui(new RoleRemovalNoticeEui(), session);
         }
 
         DirtyEntity(mindId);//Not quite sure if it is required
@@ -406,6 +412,10 @@ public sealed partial class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComp
 
         RemComp<ShowCultYoggIconsComponent>(uid);
         RemComp<ZombieImmuneComponent>(uid);
+
+        // Restore the experience budget after ordinary or administrative deconversion.
+        var liberation = new LiberationFromCultEvent();
+        RaiseLocalEvent(uid, ref liberation);
 
         DirtyEntity(uid);
     }
