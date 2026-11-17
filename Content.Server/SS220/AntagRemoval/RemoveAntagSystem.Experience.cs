@@ -14,7 +14,7 @@ public sealed partial class RemoveAntagSystem
     {
         RemoveAntagRoles.Traitor => ExperienceAddSource.AntagTraitor,
         RemoveAntagRoles.Thief => ExperienceAddSource.AntagThief,
-        RemoveAntagRoles.Cult => ExperienceAddSource.Antag,
+        RemoveAntagRoles.Cult => ExperienceAddSource.AntagCult,
         RemoveAntagRoles.InitialInfected => ExperienceAddSource.AntagInitialInfected,
         RemoveAntagRoles.HeadRevolutionary => ExperienceAddSource.AntagHeadRevolutionary,
         _ => null
