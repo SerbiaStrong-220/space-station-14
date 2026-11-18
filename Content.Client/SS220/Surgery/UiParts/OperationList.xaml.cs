@@ -97,5 +97,3 @@ public sealed partial class OperationList : Control
         }
     }
 }
-
-

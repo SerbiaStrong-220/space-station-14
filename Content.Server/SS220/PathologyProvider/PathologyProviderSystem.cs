@@ -13,6 +13,7 @@ using Content.Shared.Random;
 using Content.Shared.SS220.Pathology;
 using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.PathologyProvider;
 
@@ -20,6 +21,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
 {
     [Dependency] private PathologySystem _pathology = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     // Having any armor on a zone reduces trauma chance on top of damage absorption.
     private const float AnyArmorModifierBonus = 0.85f;
@@ -38,6 +40,12 @@ public sealed partial class PathologyProviderSystem : EntitySystem
     private static readonly ProtoId<WeightedRandomPrototype> ArterialPunctureTable = "ArterialPuncturePathology";
     private static readonly ProtoId<WeightedRandomPrototype> BurnNecrosisTable = "BurnNecrosisPathology";
 
+    private static readonly TraumaRoll CompoundFractureRoll = new(35f, 20f, 0.035f, 0.50f, 0.90f);
+    private static readonly TraumaRoll HairlineFractureRoll = new(22f, 15f, 0.03f, 0.20f, 0.55f);
+    private static readonly TraumaRoll DislocationRoll = new(12f, 10f, 0.025f, 0.05f, 0.35f);
+    private static readonly TraumaRoll ArterialPunctureRoll = new(18f, 14f, 0.025f, 0.10f, 0.65f);
+    private static readonly TraumaRoll BurnNecrosisRoll = new(20f, 15f, 0.025f, 0.12f, 0.65f);
+
     public override void Initialize()
     {
         base.Initialize();
@@ -48,7 +56,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
 
     private void OnProjectileHit(Entity<PathologyOnProjectileHitComponent> entity, ref ProjectileHitEvent args)
     {
-        if (HasComp<GodmodeComponent>(args.Target))
+        if (HasComp<GodmodeComponent>(args.Target) || !TryComp<PathologyHolderComponent>(args.Target, out var holder))
             return;
 
         ProtoId<DamageTypePrototype>? maxDamageType = null;
@@ -67,6 +75,9 @@ public sealed partial class PathologyProviderSystem : EntitySystem
 
         _pathology.TryMakeEntityContext(entity.Owner, entity.Comp.WeightedRandomProviderEntity, out var context);
         TryAddArmoredRandom(args.Target, entity.Comp.WeightedRandomPathology, maxDamageType.Value, entity.Comp.ChanceToApply, context);
+
+        // one hit gives one trauma roll: the damage of this projectile is applied right after this event
+        holder.ProjectileTraumaTick = _timing.CurTick;
     }
 
     private void OnDamageChanged(Entity<PathologyHolderComponent> entity, ref DamageChangedEvent args)
@@ -77,43 +88,47 @@ public sealed partial class PathologyProviderSystem : EntitySystem
         if (HasComp<GodmodeComponent>(entity.Owner))
             return;
 
+        if (entity.Comp.ProjectileTraumaTick == _timing.CurTick)
+        {
+            entity.Comp.ProjectileTraumaTick = GameTick.Zero;
+            return;
+        }
+
         var blunt = GetDamageAmount(delta, DamageBlunt);
-        if (blunt >= 35)
-        {
-            var chance = Math.Clamp((blunt.Float() - 20f) * 0.035f, 0.50f, 0.90f);
-            TryAddArmoredRandom(entity.Owner, CompoundFractureTable, DamageBlunt, chance);
-        }
-        else if (blunt >= 22)
-        {
-            var chance = Math.Clamp((blunt.Float() - 15f) * 0.03f, 0.20f, 0.55f);
-            TryAddArmoredRandom(entity.Owner, HairlineFractureTable, DamageBlunt, chance);
-        }
-        else if (blunt >= 12)
-        {
-            var chance = Math.Clamp((blunt.Float() - 10f) * 0.025f, 0.05f, 0.35f);
-            TryAddArmoredRandom(entity.Owner, DislocationTable, DamageBlunt, chance);
-        }
+        if (TryGetRollChance(CompoundFractureRoll, blunt, out var compoundChance))
+            TryAddArmoredRandom(entity.Owner, CompoundFractureTable, DamageBlunt, compoundChance);
+        else if (TryGetRollChance(HairlineFractureRoll, blunt, out var hairlineChance))
+            TryAddArmoredRandom(entity.Owner, HairlineFractureTable, DamageBlunt, hairlineChance);
+        else if (TryGetRollChance(DislocationRoll, blunt, out var dislocationChance))
+            TryAddArmoredRandom(entity.Owner, DislocationTable, DamageBlunt, dislocationChance);
 
         var slash = GetDamageAmount(delta, DamageSlash);
         var piercing = GetDamageAmount(delta, DamagePiercing);
-        var sharp = slash + piercing;
-        if (sharp >= 18)
+        if (TryGetRollChance(ArterialPunctureRoll, slash + piercing, out var arterialChance))
         {
             var sharpType = piercing >= slash ? DamagePiercing : DamageSlash;
-            var chance = Math.Clamp((sharp.Float() - 14f) * 0.025f, 0.10f, 0.65f);
-            TryAddArmoredRandom(entity.Owner, ArterialPunctureTable, sharpType, chance);
+            TryAddArmoredRandom(entity.Owner, ArterialPunctureTable, sharpType, arterialChance);
         }
 
         var heat = GetDamageAmount(delta, DamageHeat);
         var caustic = GetDamageAmount(delta, DamageCaustic);
         var shock = GetDamageAmount(delta, DamageShock);
-        var burn = heat + caustic + shock;
-        if (burn >= 20)
+        if (TryGetRollChance(BurnNecrosisRoll, heat + caustic + shock, out var burnChance))
         {
             var burnType = GetMaxDamageType(heat, DamageHeat, caustic, DamageCaustic, shock, DamageShock);
-            var chance = Math.Clamp((burn.Float() - 15f) * 0.025f, 0.12f, 0.65f);
-            TryAddArmoredRandom(entity.Owner, BurnNecrosisTable, burnType, chance);
+            TryAddArmoredRandom(entity.Owner, BurnNecrosisTable, burnType, burnChance);
         }
+    }
+
+    private static bool TryGetRollChance(TraumaRoll roll, FixedPoint2 damage, out float chance)
+    {
+        chance = 0f;
+        var amount = damage.Float();
+        if (amount < roll.Threshold)
+            return false;
+
+        chance = Math.Clamp((amount - roll.ChanceOffset) * roll.ChancePerDamage, roll.MinChance, roll.MaxChance);
+        return true;
     }
 
     private void TryAddArmoredRandom(
@@ -207,4 +222,9 @@ public sealed partial class PathologyProviderSystem : EntitySystem
 
         return b >= c ? typeB : typeC;
     }
+
+    /// <summary>
+    /// Damage of one type needed to roll a trauma: from <see cref="Threshold"/> the chance grows linearly and is clamped.
+    /// </summary>
+    private readonly record struct TraumaRoll(float Threshold, float ChanceOffset, float ChancePerDamage, float MinChance, float MaxChance);
 }

@@ -326,6 +326,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
+      #SS220-surgery-update end
       - !type:AdjustReagent
         conditions:
         - !type:ReagentCondition

@@ -13,7 +13,6 @@
   components:
   - type: InternalBloodLossStatusEffect
     bloodLossRatePerStack: 0.9
-  - type: PathologyStatusEffectStackable
 
 - type: entity
   parent: StatusEffectSlowdown

@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Ui;
@@ -24,7 +24,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             if (!CanPerformAnyEdgeInSurgery(entity, surgeryId, used, user))
                 continue;
 
-            foreach (var edge in GetEdges(surgeryId, node))
+            if (!TryGetSurgeryNode(surgeryId, node, out var currentNode))
+                continue;
+
+            foreach (var edge in currentNode.Edges)
             {
                 var requirementPriority = RequirementPriorityFailureMessageEdgeSelectorDrop;
                 string? failureReason = null;
@@ -54,21 +57,19 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         return new SurgeryEdgeSelectorEdgesState { Infos = edgesInfoList, Used = GetNetEntity(used) };
     }
 
-    private IEnumerable<SurgeryGraphEdge> GetEdges(ProtoId<SurgeryGraphPrototype> surgeryGraphId, string node)
+    private bool TryGetSurgeryNode(ProtoId<SurgeryGraphPrototype> surgeryGraphId, string node, [NotNullWhen(true)] out SurgeryGraphNode? foundNode)
     {
+        foundNode = null;
         if (!_prototype.Resolve(surgeryGraphId, out var graphProto))
-            yield break;
+            return false;
 
-        if (!graphProto.TryGetNode(node, out var currentNode))
+        if (!graphProto.TryGetNode(node, out foundNode))
         {
             Log.Fatal($"Current node has incorrect value {node} for graph proto {surgeryGraphId}");
-            yield break;
+            return false;
         }
 
-        foreach (var edge in currentNode.Edges)
-        {
-            yield return edge;
-        }
+        return true;
     }
 
     private void PopupSurgeryGraphFailures(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraphId, EntityUid? used, EntityUid user)
@@ -97,7 +98,16 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return null;
         }
 
-        return GetEdges(surgeryGraphId, currentNode).FirstOrDefault<SurgeryGraphEdge?>(x => x?.Id == edgeId);
+        if (!TryGetSurgeryNode(surgeryGraphId, currentNode, out var node))
+            return null;
+
+        foreach (var edge in node.Edges)
+        {
+            if (edge.Id == edgeId)
+                return edge;
+        }
+
+        return null;
     }
 
     public bool CanPerformAnyEdgeInSurgery(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> graphProtoId, EntityUid? used, EntityUid user)

@@ -17,6 +17,6 @@ public sealed partial class SurgeryPatientComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public Dictionary<ProtoId<SurgeryGraphPrototype>, string> OngoingSurgeries = new();
 
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float OnSurgeryMoveBleed = 0.2f;
 }

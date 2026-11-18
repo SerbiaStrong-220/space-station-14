@@ -35,8 +35,11 @@ public sealed partial class ApplyDamageAction : ISurgeryGraphEdgeAction
         if (DamageBonuses is not null && SkillTree is not null)
         {
             var experienceSystem = entityManager.System<ExperienceSystem>();
-            _ = experienceSystem.TryGetSkillTreeLevel(userUid, SkillTree, out var skillProto)
-                && DamageBonuses.TryGetValue(skillProto.Value, out modifier);
+            if (experienceSystem.TryGetSkillTreeLevel(userUid, SkillTree, out var skillProto) &&
+                DamageBonuses.TryGetValue(skillProto.Value, out var skillModifier))
+            {
+                modifier = skillModifier;
+            }
         }
 
         var damagableSystem = entityManager.System<DamageableSystem>();

@@ -36,7 +36,7 @@ surgery-torso-popup-start = Начинает операцию на торсе.
 surgery-torso-node-start = Начало операции.
 
 surgery-requirement-total-damage-requirement-body-heal-description = Тело пациента должно иметь обширные повреждения
-surgery-requirement-total-damage-requirement-body-heal-not-enough-damage = Для дальнейшего лечения нужно менее грубый метод
+surgery-requirement-total-damage-requirement-body-heal-not-enough-damage = Для дальнейшего лечения нужен менее грубый метод
 
 direct-compact-defibrillator-cant-zap = Это оборудование должно быть использовано непосредственно на сердце пациента
 

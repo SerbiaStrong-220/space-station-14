@@ -43,7 +43,3 @@ ent-SurgeryTrayFilled = хирургический лоток
 
 ent-BaseSurgeryDisk = хирургическая дискета
     .desc = Дискета с протоколами специализированных операций для консоли сканера тела.
-
-ent-ChemistryBottleMorphine = бутылочка морфина
-    .suffix = морфин
-    .desc = { ent-BaseChemistryBottleFilled.desc }

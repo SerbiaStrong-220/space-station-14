@@ -248,38 +248,3 @@
         reagent: Nicergoline
         addTime: 60
         decay: 0.8
-
-- type: reagent
-  id: Morphine
-  name: reagent-name-morphine
-  group: Medicine
-  desc: reagent-desc-morphine
-  physicalDesc: reagent-physical-desc-translucent
-  flavor: bitter
-  color: "#d4f1f9"
-  metabolisms:
-    Bloodstream:
-      metabolismRate: 0.15
-      effects:
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectPainNumbness
-        type: Add
-        time: 8
-      - !type:ModifyStatusEffect
-        conditions:
-        - !type:ReagentCondition
-          reagent: Morphine
-          min: 12
-        probability: 0.4
-        effectProto: StatusEffectForcedSleeping
-        time: 3
-        type: Update
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: Morphine
-          min: 20
-        damage:
-          types:
-            Asphyxiation: 2.5
-            Poison: 1.5

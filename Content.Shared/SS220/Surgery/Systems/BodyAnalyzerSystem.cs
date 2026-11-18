@@ -36,6 +36,7 @@ public sealed partial class BodyAnalyzerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        var computerQuery = GetEntityQuery<OperatingComputerComponent>();
         var analyzerQuery = EntityQueryEnumerator<BodyAnalyzerComponent, TransformComponent>();
         while (analyzerQuery.MoveNext(out var uid, out var component, out var transform))
         {
@@ -47,7 +48,7 @@ public sealed partial class BodyAnalyzerSystem : EntitySystem
             else
                 component.NextUpdate += component.UpdateInterval;
 
-            if (TryComp<OperatingComputerComponent>(uid, out var computerComp))
+            if (computerQuery.TryComp(uid, out var computerComp))
             {
                 if (!_userInterface.IsUiOpen(uid, BodyAnalyzerUiKey.Key))
                     continue;

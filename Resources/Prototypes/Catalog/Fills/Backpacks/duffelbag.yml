@@ -8,11 +8,11 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: SurgeryDrapes # ss220-surgery-update
+        - id: SurgeryDrapes #SS220-surgery-update
         - id: Hemostat
         - id: Saw
-        - id: SawElectric # ss220-surgery-update
-        - id: BoneGel # ss220-surgery-update
+        - id: SawElectric #SS220-surgery-update
+        - id: BoneGel #SS220-surgery-update
         - id: BoneSetter #SS220-surgery-update
         - id: Drill
         - id: Cautery

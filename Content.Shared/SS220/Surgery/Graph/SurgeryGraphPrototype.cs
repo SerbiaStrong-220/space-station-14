@@ -48,7 +48,6 @@ public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHo
 
     public IReadOnlyList<SurgeryGraphNode> Nodes => _graph;
 
-
     public SurgeryGraphNode? GetStartNode()
     {
         TryGetNode(Start, out var startNode);
@@ -68,6 +67,7 @@ public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHo
 
         return true;
     }
+
     public bool TryGetNode(string target, [NotNullWhen(true)] out SurgeryGraphNode? foundNode)
     {
         foundNode = null;

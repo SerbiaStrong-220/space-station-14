@@ -13,6 +13,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Surgery.Actions;
 
+[DataDefinition]
 public sealed partial class ChangeTtsAction : ISurgeryGraphEdgeAction
 {
     private static readonly LocId QuiTitle = "tts-change-surgery-window-title";

@@ -435,18 +435,3 @@
   - type: GuideHelp
     guides:
     - Surgery
-
-- type: entity
-  id: ChemistryBottleMorphine
-  suffix: morphine
-  parent: BaseChemistryBottleFilled
-  components:
-  - type: Label
-    currentLabel: reagent-name-morphine
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Morphine
-          Quantity: 30

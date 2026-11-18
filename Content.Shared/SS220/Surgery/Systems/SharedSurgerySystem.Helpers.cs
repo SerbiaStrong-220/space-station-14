@@ -50,7 +50,7 @@ public abstract partial class SharedSurgerySystem
             && surgeryPatient.OngoingSurgeries.ContainsKey(surgeryGraph.ID))
         {
             reason = Loc.GetString(CantStartSurgeryWhileOneOngoing);
-            return reason is null;
+            return false;
         }
 
         foreach (var requirement in surgeryGraph.Requirements)
@@ -146,10 +146,10 @@ public abstract partial class SharedSurgerySystem
         entity.Comp.OngoingSurgeries[surgeryGraph.ID] = foundNode.Name;
         Dirty(entity);
 
-        if (SurgeryGraph.Popup(foundNode) is null)
+        if (SurgeryGraph.Popup(foundNode) is not { } popup)
             return;
 
-        var message = Loc.GetString(SurgeryGraph.Popup(foundNode)!,
+        var message = Loc.GetString(popup,
             ("target", Identity.Entity(entity.Owner, EntityManager)),
             ("user", Identity.Entity(performer, EntityManager)),
             ("used", used == null ? Loc.GetString("surgery-null-used") : used));

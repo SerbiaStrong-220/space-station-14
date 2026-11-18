@@ -117,7 +117,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
         foreach (var req in pathologyPrototype.Definition[instanceData.Level].ProgressConditions)
         {
-            if (req.CheckCondition(entity, instanceData, EntityManager))
+            if (req.CheckCondition(entity, instanceData, _gameTiming.CurTime, EntityManager))
                 continue;
 
             return false;

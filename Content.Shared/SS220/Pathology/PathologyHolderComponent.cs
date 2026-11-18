@@ -4,6 +4,7 @@ using Content.Shared.Traits;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Pathology;
 
@@ -21,6 +22,13 @@ public sealed partial class PathologyHolderComponent : Component
 
     [ViewVariables]
     public TimeSpan NextUpdate;
+
+    /// <summary>
+    /// Tick in which a projectile already rolled its own trauma for a hit.
+    /// The damage of that hit is applied right after and must not roll a second trauma.
+    /// </summary>
+    [ViewVariables]
+    public GameTick ProjectileTraumaTick = GameTick.Zero;
 }
 
 [Serializable, NetSerializable]

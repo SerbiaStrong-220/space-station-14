@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -20,36 +21,39 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
     [DataField(required: true)]
     public FixedPoint2 ConsumedAmount;
 
-    [DataField]
-    public string SolutionName = "drink";
-
     protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (uid is null)
             return false;
 
-        var handSystem = entityManager.System<SharedHandsSystem>();
-        var solutionSystem = entityManager.System<SharedSolutionContainerSystem>();
-
-        foreach (var heldItem in handSystem.EnumerateHeld(uid.Value))
-        {
-            if (solutionSystem.GetTotalPrototypeQuantity(heldItem, ReagentId) >= ConsumedAmount)
-                return true;
-        }
-
-        return false;
+        return TryFindSolution(uid.Value, entityManager, out _);
     }
 
     protected override void AfterRequirementMet(EntityUid? uid, IEntityManager entityManager)
     {
-        // whatever makes compiler happy
         if (uid is null)
             return;
+
+        if (!TryFindSolution(uid.Value, entityManager, out var solution))
+        {
+            entityManager.System<SharedSurgerySystem>().Log.Error($"Trying to meet {nameof(HaveReagentInHandRequirement)} but cant find any solution to drain reagent from");
+            return;
+        }
+
+        entityManager.System<SharedSolutionContainerSystem>().RemoveReagent(solution.Value, ReagentId, ConsumedAmount);
+    }
+
+    /// <summary>
+    /// Finds a single held solution with enough reagent, so the check and the consumption always agree.
+    /// </summary>
+    private bool TryFindSolution(EntityUid holder, IEntityManager entityManager, [NotNullWhen(true)] out Entity<SolutionComponent>? found)
+    {
+        found = null;
 
         var handSystem = entityManager.System<SharedHandsSystem>();
         var solutionSystem = entityManager.System<SharedSolutionContainerSystem>();
 
-        foreach (var heldItem in handSystem.EnumerateHeld(uid.Value))
+        foreach (var heldItem in handSystem.EnumerateHeld(holder))
         {
             if (!entityManager.TryGetComponent<SolutionContainerManagerComponent>(heldItem, out var heldSolutionManager))
                 continue;
@@ -60,15 +64,15 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
                 if (!solutionSystem.ResolveSolution(heldItem, solutionName, ref solutionEntity, out var solution))
                     continue;
 
-                if (!(solution.GetTotalPrototypeQuantity(ReagentId) >= ConsumedAmount))
+                if (solution.GetTotalPrototypeQuantity(ReagentId) < ConsumedAmount)
                     continue;
 
-                solutionSystem.RemoveReagent(solutionEntity.Value, ReagentId, ConsumedAmount);
-                return;
+                found = solutionEntity;
+                return true;
             }
         }
 
-        entityManager.System<SharedSurgerySystem>().Log.Error($"Trying to meet {nameof(HaveReagentInHandRequirement)} but cant find any solution to drain reagent from");
+        return false;
     }
 
     public override string RequirementDescription(IPrototypeManager prototypeManager, IEntityManager entityManager)

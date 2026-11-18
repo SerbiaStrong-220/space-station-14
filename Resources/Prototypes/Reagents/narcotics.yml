@@ -84,6 +84,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
+      #SS220-surgery-update end
       # Main effects
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.08 #ss220 combat medicine be-gone
@@ -142,6 +148,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
+      #SS220-surgery-update end
       # Main effects
       - !type:MovementSpeedModifier
         #SS220-speed stimulants fix start
@@ -279,6 +291,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
+      #SS220-surgery-update end
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
         time: 16
@@ -345,6 +363,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
+      #SS220-surgery-update end
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
         type: Add
@@ -530,6 +554,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
+      #SS220-surgery-update end
       - !type:Emote
         emote: Laugh
         showInChat: true

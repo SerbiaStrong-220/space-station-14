@@ -20,23 +20,6 @@ public abstract partial class SharedPathologySystem
         return prototype.IsSevere || data.Level > 0 || data.StackCount > OneStack;
     }
 
-    public Dictionary<ProtoId<PathologyPrototype>, PathologyDefinition> GetActivePathologies(Entity<PathologyHolderComponent?> entity)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp, false))
-            return new();
-
-        Dictionary<ProtoId<PathologyPrototype>, PathologyDefinition> result = new();
-        foreach (var (pathologyId, instanceData) in entity.Comp.ActivePathologies)
-        {
-            if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
-                continue;
-
-            result.Add(pathologyId, pathologyPrototype.Definition[instanceData.Level]);
-        }
-
-        return result;
-    }
-
     public bool TryAddRandom(Entity<PathologyHolderComponent?> entity, ProtoId<WeightedRandomPrototype> weightedPathology, float chance, IPathologyContext? context = null)
     {
         if (!_prototype.Resolve(weightedPathology, out var weightedRandomPrototype))
@@ -107,9 +90,8 @@ public abstract partial class SharedPathologySystem
         if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
             return false;
 
-        // we actually removed so true, anyQ?
         if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
-            return true;
+            return false;
 
         if (checkStacks && instanceData.StackCount > OneStack)
             return false;

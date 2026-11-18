@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Numerics;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
@@ -30,6 +30,7 @@ namespace Content.Shared.SS220.Surgery.Systems;
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
     [Dependency] protected SurgeryGraphSystem SurgeryGraph = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ISharedAdminLogManager _adminLogManager = default!;
     [Dependency] private SharedMeleeWeaponSystem _meleeWeapon = default!;
@@ -92,8 +93,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             if (!graphProto.TryGetNode(node, out var currentNode))
                 continue;
 
-            if (node != null && SurgeryGraph.ExamineDescription(currentNode) != null)
-                args.PushMarkup(Loc.GetString(SurgeryGraph.ExamineDescription(currentNode)!), SurgeryExaminePushPriority);
+            if (SurgeryGraph.ExamineDescription(currentNode) is { } description)
+                args.PushMarkup(Loc.GetString(description), SurgeryExaminePushPriority);
         }
     }
 
@@ -149,11 +150,19 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 break;
 
             default:
-                var metedEdges = edgeSelectorState.Infos.Where(x => x.MetEdgeRequirement).ToArray();
-                if (metedEdges.Length == 1)
+                EdgeSelectInfo? metedInfo = null;
+                var metedCount = 0;
+                foreach (var selectInfo in edgeSelectorState.Infos)
                 {
-                    var metedInfo = metedEdges[0];
+                    if (!selectInfo.MetEdgeRequirement)
+                        continue;
 
+                    metedInfo = selectInfo;
+                    metedCount++;
+                }
+
+                if (metedCount == 1 && metedInfo is not null)
+                {
                     if (GetEdgeTargeting(entity, metedInfo.SurgeryProtoId, metedInfo.TargetEdgeId) is not { } metedEdge)
                         return;
 
@@ -162,7 +171,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 else
                 {
                     // skip showing ui for other interactions
-                    if (!HasComp<SurgeryToolComponent>(args.Used) && metedEdges.Length == 0)
+                    if (!HasComp<SurgeryToolComponent>(args.Used) && metedCount == 0)
                         return;
 
                     var buiOwner = entity.Owner;
@@ -450,7 +459,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         var damaged = false;
 
-        if (args.Used is { } used && TryGetFailureDamage(used, args.User, isStepRollFailure, out var failureDamage))
+        if (args.Used is { } used && TryGetFailureDamage(used, args.User, target, isStepRollFailure, out var failureDamage))
         {
             damaged = _damageable.TryChangeDamage(target, failureDamage, out var appliedDamage, origin: args.User);
 
@@ -469,7 +478,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             $"{ToPrettyString(args.User):user} failed performing edge of surgery{(damaged ? " and damaged" : " on")} {ToPrettyString(target):target}!");
     }
 
-    private bool TryGetFailureDamage(EntityUid used, EntityUid user, bool isStepRollFailure, [NotNullWhen(true)] out DamageSpecifier? damage)
+    private bool TryGetFailureDamage(EntityUid used, EntityUid user, EntityUid target, bool isStepRollFailure, [NotNullWhen(true)] out DamageSpecifier? damage)
     {
         damage = null;
 
@@ -486,6 +495,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         if (!TryComp<MeleeWeaponComponent>(used, out var melee))
             return false;
+
+        // a failure with a weapon is a hit, so it obeys the same cooldown and attack restrictions (e.g. pacifism)
+        var curTime = _gameTiming.CurTime;
+        if (curTime < melee.NextAttack || !_actionBlocker.CanAttack(user, target, (used, melee)))
+            return false;
+
+        melee.NextAttack = curTime + TimeSpan.FromSeconds(1f / _meleeWeapon.GetAttackRate(used, user, melee));
+        DirtyField(used, melee, nameof(MeleeWeaponComponent.NextAttack));
 
         damage = _meleeWeapon.GetDamage(used, user, melee);
         return true;

@@ -11,7 +11,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
 {
     [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
 
-    public void InitializeStatusEffectContainerEvents()
+    private void InitializeStatusEffectContainerEvents()
     {
         SubscribeLocalEvent<PathologyHolderComponent, PathologyStackCountChanged>(OnStatusEffectPathologyStackChange);
         SubscribeLocalEvent<PathologyHolderComponent, PathologySeverityChanged>(OnStatusEffectPathologySeverityChange);
