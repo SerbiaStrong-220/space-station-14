@@ -9,6 +9,7 @@ using Content.Shared.SS220.Pathology;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
+using Content.Server.Zombies;
 using Robust.Server.Console;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -48,6 +49,39 @@ public sealed class PathologySystemTest
 ";
 
     private const int MaxStackCount = 4;
+
+    [Test]
+    public async Task ZombieGetsNoPathologiesTest()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false
+        });
+
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var pathologySystem = entMng.System<SharedPathologySystem>();
+        var zombieSystem = entMng.System<ZombieSystem>();
+
+        await server.WaitAssertion(() =>
+        {
+            var human = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            Assert.That(pathologySystem.TryAddPathology(human, LeftHandDislocationProto), Is.True);
+
+            zombieSystem.ZombifyEntity(human);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(pathologySystem.HavePathology(human, LeftHandDislocationProto), Is.False);
+                Assert.That(pathologySystem.TryAddPathology(human, LeftHandCompoundFractureProto), Is.False);
+                Assert.That(pathologySystem.HavePathology(human, LeftHandCompoundFractureProto), Is.False);
+            });
+        });
+
+        await pair.CleanReturnAsync();
+    }
 
     [Test]
     public async Task AddChangeRemoveStackablePathologyTest()

@@ -5,6 +5,7 @@ using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Traits;
+using Content.Shared.Zombies;
 using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -27,6 +28,8 @@ public abstract partial class SharedPathologySystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<PathologyHolderComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<ZombieComponent, PathologyAddedAttempt>(OnZombiePathologyAddAttempt);
+        SubscribeLocalEvent<PathologyHolderComponent, EntityZombifiedEvent>(OnZombified);
 
         InitializeStatusEffectContainerEvents();
         InitializeExamineEvents();
@@ -69,7 +72,22 @@ public abstract partial class SharedPathologySystem : EntitySystem
         }
     }
 
+    private void OnZombiePathologyAddAttempt(Entity<ZombieComponent> entity, ref PathologyAddedAttempt args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnZombified(Entity<PathologyHolderComponent> entity, ref EntityZombifiedEvent args)
+    {
+        RemoveAllPathologies(entity);
+    }
+
     private void OnRejuvenate(Entity<PathologyHolderComponent> entity, ref RejuvenateEvent args)
+    {
+        RemoveAllPathologies(entity);
+    }
+
+    private void RemoveAllPathologies(Entity<PathologyHolderComponent> entity)
     {
         var pathologies = new ValueList<ProtoId<PathologyPrototype>>();
         foreach (var pathologyId in entity.Comp.ActivePathologies.Keys)
