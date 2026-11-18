@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Discord;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Prototypes;
 using Content.Shared.SS220.TTS.Requirements;
@@ -22,7 +23,15 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
 
     private const int AllCategoriesOptionId = 0;
 
+    private static readonly Type[] SexCheckAllowedRequirements =
+    [
+        typeof(TtsSexRequirement),
+        typeof(TtsAllRequirement),
+        typeof(TtsAnyRequirement),
+    ];
+
     private readonly Dictionary<int, string> _categoryOptionIds = [];
+    private readonly HashSet<SponsorTier> _selectedSponsorTiers = [];
     private string? _selectedCategoryId;
 
     public readonly TtsProvider Provider;
@@ -61,6 +70,11 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
         Title = Loc.GetString("ui-tts-provider-voice-selector-window-title", ("providerName", Provider.ToString()));
         SearchLineEdit.OnTextChanged += _ => RefreshSearchState();
         OnlyAvailableCheckBox.OnToggled += _ => RefreshSearchState();
+        OnlyMySexCheckBox.OnToggled += _ => RefreshSearchState();
+        ShlopaTierCheckBox.OnToggled += _ => RefreshSearchState();
+        BigShlopaTierCheckBox.OnToggled += _ => RefreshSearchState();
+        HugeShlopaTierCheckBox.OnToggled += _ => RefreshSearchState();
+        CriticalMassShlopaTierCheckBox.OnToggled += _ => RefreshSearchState();
         CategoryOptionButton.OnItemSelected += args =>
         {
             CategoryOptionButton.SelectId(args.Id);
@@ -129,6 +143,21 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
     {
         var searchText = SearchLineEdit.Text.Trim();
         var onlyAvailable = OnlyAvailableCheckBox.Pressed;
+        var onlyMySex = OnlyMySexCheckBox.Pressed;
+
+        _selectedSponsorTiers.Clear();
+        if (ShlopaTierCheckBox.Pressed)
+            _selectedSponsorTiers.Add(SponsorTier.Shlopa);
+        if (BigShlopaTierCheckBox.Pressed)
+            _selectedSponsorTiers.Add(SponsorTier.BigShlopa);
+        if (HugeShlopaTierCheckBox.Pressed)
+            _selectedSponsorTiers.Add(SponsorTier.HugeShlopa);
+        if (CriticalMassShlopaTierCheckBox.Pressed)
+            _selectedSponsorTiers.Add(SponsorTier.CriticalMassShlopa);
+
+        TtsVoiceRequirementCheckData? sexCheckData = onlyMySex && _requirementsCheckData is { } checkData
+            ? checkData with { AllowedRequirements = SexCheckAllowedRequirements }
+            : null;
 
         var totalVisible = 0;
         foreach (var child in CategoryEntriesContainer.Children)
@@ -150,7 +179,17 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
                     voiceEntry.Voice.ID.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
                     voiceEntry.Voice.LocalizedName.Contains(searchText, StringComparison.CurrentCultureIgnoreCase);
 
-                var voiceVisible = categoryPassFilter && voicePassSearch && (!onlyAvailable || !voiceEntry.Locked);
+                var voicePassSex = sexCheckData == null ||
+                    _tts.IsPassVoiceRequirements(voiceEntry.Voice, sexCheckData.Value);
+
+                var voicePassSponsorTier = _selectedSponsorTiers.Count == 0 ||
+                    HasSelectedSponsorTier(voiceEntry.Voice.Requirement);
+
+                var voiceVisible = categoryPassFilter &&
+                    voicePassSearch &&
+                    (!onlyAvailable || !voiceEntry.Locked) &&
+                    voicePassSex &&
+                    voicePassSponsorTier;
                 voiceEntry.Visible = voiceVisible;
 
                 if (voiceVisible)
@@ -176,5 +215,33 @@ public sealed partial class TtsProviderVoiceSelectorWindow : DefaultWindow
 
         CountLabel.Text = Loc.GetString("ui-tts-provider-voice-selector-window-count", ("count", totalVisible));
         EmptyLabel.Visible = totalVisible == 0;
+    }
+
+    private bool HasSelectedSponsorTier(TtsVoiceRequirement? requirement)
+    {
+        switch (requirement)
+        {
+            case SharedTtsSponsorRequirement sponsorReq:
+                return _selectedSponsorTiers.Contains(sponsorReq.SponsorTier);
+
+            case TtsAllRequirement allReq:
+                foreach (var req in allReq.Requirements)
+                {
+                    if (HasSelectedSponsorTier(req))
+                        return true;
+                }
+                return false;
+
+            case TtsAnyRequirement anyReq:
+                foreach (var req in anyReq.Requirements)
+                {
+                    if (HasSelectedSponsorTier(req))
+                        return true;
+                }
+                return false;
+
+            default:
+                return false;
+        }
     }
 }
