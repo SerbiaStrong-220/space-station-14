@@ -28,7 +28,7 @@
   experienceDefinition: RedWingsOfficerRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
-    back: ClothingBackpackSecurity
+    back: ClothingBackpackRedWings
     shoes: ClothingShoesBootsMagRW
     eyes: ClothingEyesGlassesBallistic
     mask: ClothingMaskNeckGaiter
@@ -59,7 +59,7 @@
   experienceDefinition: RedWingsMedicRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
-    back: ClothingBackpackSatchelBrigmedic
+    back: ClothingBackpackRedWingsSatchel
     shoes: ClothingShoesBootsMagRW
     eyes: ClothingEyesHudSyndChem
     mask: ClothingMaskNeckGaiterRed
@@ -97,7 +97,7 @@
   experienceDefinition: RedWingsPilotRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
-    back: ClothingBackpackSecurity
+    back: ClothingBackpackRedWings
     shoes: ClothingShoesBootsMagRW
     eyes: ClothingEyesGlassesBallistic
     mask: ClothingMaskNeckGaiter

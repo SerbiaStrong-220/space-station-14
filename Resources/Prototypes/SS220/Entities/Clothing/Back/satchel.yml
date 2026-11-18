@@ -48,3 +48,22 @@
         - id: BoxFolderBlue
         - id: RubberStampApproved
         - id: RubberStampDenied
+
+# Redwings
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackRedWingsSatchel
+  name: RedWing's operator satchel
+  description: A satchel made of reinforced fiber, featuring additional pockets. It smells of alcohol.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,2,4
+    - 4,0,8,4
+    - 10,0,12,4
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Satchels/redwings.rsi
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-red

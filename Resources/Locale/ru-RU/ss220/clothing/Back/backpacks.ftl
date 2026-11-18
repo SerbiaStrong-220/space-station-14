@@ -34,3 +34,6 @@ ent-ClothingBackpackERTSecurityGammaFilled = { ent-ClothingBackpackERTSecurity }
 ent-ClothingBackpackERTMedicalGammaFilled = { ent-ClothingBackpackERTMedical }
     .suffix = Гамма ОБР, заполненный
     .desc = { ent-ClothingBackpackERTMedical.desc }
+
+ent-ClothingBackpackRedWings = рюкзак оперативника "Красных Крыльев"
+    .desc = Рюкзак из армированного волокна, оснащённый дополнительными карманами. Пахнет спиртом.
