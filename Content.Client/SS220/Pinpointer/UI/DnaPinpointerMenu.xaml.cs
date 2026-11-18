@@ -36,15 +36,13 @@ public sealed partial class DnaPinpointerMenu : FancyWindow
     {
         SavedDnasList.RemoveAllChildren();
 
-        if (state.SavedDnas != null)
+        if (state.SavedDnas == null)
+            return;
+
+        foreach (var dna in state.SavedDnas)
         {
-            foreach (var dna in state.SavedDnas)
-            {
-                var isActive = state.ActiveDna == dna;
-                var button = CreateDnaButton(dna, isActive);
-                if (button != null)
-                    SavedDnasList.AddChild(button);
-            }
+            var isActive = state.ActiveDna == dna;
+            SavedDnasList.AddChild(CreateDnaButton(dna, isActive));
         }
     }
 
