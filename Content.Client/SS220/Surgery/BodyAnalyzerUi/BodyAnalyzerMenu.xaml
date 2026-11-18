@@ -20,7 +20,8 @@
         <BoxContainer Name="ContentBoxContainer" Orientation="Horizontal" Margin="10" HorizontalExpand="False" VerticalExpand="True">
             <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 0 10 0" HorizontalExpand="False" MinSize="420 420">
                 <BoxContainer Name="PatientInfo" Orientation="Vertical">
-                    <surgeryUiParts:PatientStatus Name="PatientStatus" HorizontalExpand="True" VerticalExpand="True"/>
+                    <surgeryUiParts:PatientStatus Name="PatientStatus" HorizontalExpand="True"/>
+                    <PanelContainer StyleClasses="LowDivider" Margin="0 6 0 6"/>
                     <surgeryUiParts:TreatmentSuggestion Name="TreatmentSuggestion" HorizontalExpand="True"  VerticalExpand="True"/>
                 </BoxContainer>
             </ScrollContainer>

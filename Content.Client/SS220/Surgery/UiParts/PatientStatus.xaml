@@ -14,6 +14,7 @@
         </PanelContainer>
         <BoxContainer Orientation="Vertical" VerticalExpand="True">
             <RichTextLabel Name="HeaderText" Text="{Loc 'patient-status-header'}"/>
+            <PanelContainer StyleClasses="LowDivider" Margin="0 2 0 2"/>
             <BoxContainer Name="TextDataContainer"  Orientation="Vertical" VerticalAlignment="Top"
                 VerticalExpand="True" HorizontalAlignment="Left" Margin="10 5 0 5">
                 <RichTextLabel Name="MobStatus" Text="mob-status" HorizontalExpand="True" />

@@ -144,6 +144,7 @@ public abstract partial class SharedSurgerySystem
             return;
 
         entity.Comp.OngoingSurgeries[surgeryGraph.ID] = foundNode.Name;
+        Dirty(entity);
 
         if (SurgeryGraph.Popup(foundNode) is null)
             return;
@@ -166,6 +167,7 @@ public abstract partial class SharedSurgerySystem
 
         _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):user} ended surgery {surgeryGraphId} on {ToPrettyString(entity):target}");
 
-        entity.Comp.OngoingSurgeries.Remove(surgeryGraphId);
+        if (entity.Comp.OngoingSurgeries.Remove(surgeryGraphId))
+            Dirty(entity);
     }
 }

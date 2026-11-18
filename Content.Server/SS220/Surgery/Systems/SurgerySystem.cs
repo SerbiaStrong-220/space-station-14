@@ -77,8 +77,6 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
 
         // base comes after actions because it changes surgery node
         base.ProceedToNextStep(entity, user, used, surgeryGraph, chosenEdge, predicted);
-
-        Dirty(entity);
     }
 
     protected override void OnPatientPain(EntityUid patient)
