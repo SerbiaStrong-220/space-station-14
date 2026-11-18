@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace UserInfoImitator.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class UserInfoController : Controller
 {
     [HttpGet("{userId}")]
