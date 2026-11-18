@@ -44,7 +44,7 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
                 _crewMenu.PopulateList();
                 break;
 
-            case PinpointerDnaUIState dnaState: // <-- ДОБАВИТЬ
+            case PinpointerDnaUIState dnaState:
                 if (_dnaMenu == null) return;
                 _dnaMenu.UpdateState(dnaState);
                 break;
