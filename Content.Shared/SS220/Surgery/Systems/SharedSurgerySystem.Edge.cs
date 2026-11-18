@@ -29,6 +29,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
             foreach (var edge in currentNode.Edges)
             {
+                // hidden edges (e.g. syndicate-only steps) must not be offered at all
+                if (!IsEdgeVisible(entity, edge, used, user))
+                    continue;
+
                 var requirementPriority = RequirementPriorityFailureMessageEdgeSelectorDrop;
                 string? failureReason = null;
                 var meetRequirement = true;
@@ -179,15 +183,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     public PerformSurgeryEdgeInfo GetPerformSurgeryEdgeInfo(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
     {
-        foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
-        {
-            var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
-
-            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
-                continue;
-
+        if (!IsEdgeVisible(entity, edge, used, user))
             return new PerformSurgeryEdgeInfo(edge.Target, false, null);
-        }
 
         foreach (var requirement in SurgeryGraph.GetRequirements(edge))
         {
@@ -202,6 +199,19 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         }
 
         return new PerformSurgeryEdgeInfo(edge.Target, true, null);
+    }
+
+    private bool IsEdgeVisible(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
+    {
+        foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
+        {
+            var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+
+            if (!requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+                return false;
+        }
+
+        return true;
     }
 }
 

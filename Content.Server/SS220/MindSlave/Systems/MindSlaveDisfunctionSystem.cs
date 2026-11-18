@@ -46,7 +46,7 @@ public sealed partial class MindSlaveDisfunctionSystem : EntitySystem
         while (query.MoveNext(out var uid, out var comp))
         {
             if (!comp.Active)
-                return;
+                continue;
 
             if (comp.DisfunctionStage == MindSlaveDisfunctionType.Deadly
                 && _gameTiming.CurTime > comp.NextDeadlyDamageTime
@@ -130,6 +130,7 @@ public sealed partial class MindSlaveDisfunctionSystem : EntitySystem
         foreach (var disfunctionComponent in _random.GetItems(comp.DisfunctionComponents, removeAmount, false))
         {
             RemComp(uid, disfunctionComponent);
+            comp.DisfunctionComponents.Remove(disfunctionComponent);
         }
 
         if (comp.DisfunctionStage == MindSlaveDisfunctionType.Terminal)

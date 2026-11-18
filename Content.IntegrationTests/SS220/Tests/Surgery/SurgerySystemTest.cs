@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.SS220.MindSlave.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body.Systems;
@@ -11,11 +12,13 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Components;
 using Content.Shared.SS220.Experience.Systems.Experience;
+using Content.Shared.SS220.MindSlave;
 using Content.Shared.SS220.Pathology;
 using Content.Shared.SS220.Surgery;
 using Content.Shared.SS220.Surgery.Components;
@@ -39,6 +42,8 @@ public sealed class SurgerySystemTest
     private static readonly ProtoId<PathologyPrototype> MouthJawDislocationProto = "MouthJawDislocation";
     private static readonly ProtoId<SurgeryGraphPrototype> LeftArmGraphId = "LeftArmSurgery";
     private static readonly ProtoId<SurgeryGraphPrototype> TorsoSurgeryGraphId = "TorsoSurgery";
+    private static readonly ProtoId<SurgeryGraphPrototype> HeadSurgeryGraphId = "HeadSurgery";
+    private static readonly ProtoId<KnowledgePrototype> SyndicateAgentKnowledge = "SyndicateAgentKnowledge";
     private static readonly ProtoId<SkillTreePrototype> AnatomySkillTree = "Anatomy";
     private static readonly EntProtoId PainNumbnessEffectProto = "StatusEffectPainNumbness";
 
@@ -585,7 +590,7 @@ public sealed class SurgerySystemTest
         });
 
         await pair.RunTicksSync(2);
-        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "start-leftarm-surgery", "start-leftarm-dislocation", bonesetter, 4.5f);
+        await PerformStep(pair, LeftArmGraphId, patient, surgeon, patientComp, "start-leftarm-surgery", "start-leftarm-dislocation", bonesetter, 4.5f);
 
         await server.WaitAssertion(() =>
         {
@@ -603,10 +608,10 @@ public sealed class SurgerySystemTest
         });
 
         await pair.RunTicksSync(2);
-        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "start-leftarm-surgery", "leftarm-skin-incision", scalpel, 4.5f);
-        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "leftarm-skin-incision", "leftarm-skin-clamp-bleeders", hemostat, 4.5f);
-        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "leftarm-skin-clamp-bleeders", "retract-leftarm-skin", retractor, 4.5f);
-        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "retract-leftarm-skin", "leftarm-compound-reset", bonesetter, 6f);
+        await PerformStep(pair, LeftArmGraphId, patient, surgeon, patientComp, "start-leftarm-surgery", "leftarm-skin-incision", scalpel, 4.5f);
+        await PerformStep(pair, LeftArmGraphId, patient, surgeon, patientComp, "leftarm-skin-incision", "leftarm-skin-clamp-bleeders", hemostat, 4.5f);
+        await PerformStep(pair, LeftArmGraphId, patient, surgeon, patientComp, "leftarm-skin-clamp-bleeders", "retract-leftarm-skin", retractor, 4.5f);
+        await PerformStep(pair, LeftArmGraphId, patient, surgeon, patientComp, "retract-leftarm-skin", "leftarm-compound-reset", bonesetter, 6f);
 
         await server.WaitAssertion(() =>
         {
@@ -617,7 +622,7 @@ public sealed class SurgerySystemTest
             });
         });
 
-        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "leftarm-compound-reset", "leftarm-compound-repair", boneGel, 4.5f);
+        await PerformStep(pair, LeftArmGraphId, patient, surgeon, patientComp, "leftarm-compound-reset", "leftarm-compound-repair", boneGel, 4.5f);
 
         await server.WaitAssertion(() =>
         {
@@ -628,7 +633,7 @@ public sealed class SurgerySystemTest
             });
         });
 
-        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "retract-leftarm-skin", "seal-wound", cautery, 4.5f);
+        await PerformStep(pair, LeftArmGraphId, patient, surgeon, patientComp, "retract-leftarm-skin", "seal-wound", cautery, 4.5f);
 
         await server.WaitAssertion(() =>
         {
@@ -667,8 +672,126 @@ public sealed class SurgerySystemTest
         await pair.CleanReturnAsync();
     }
 
-    private static async Task PerformLeftArmStep(
+    [Test]
+    public async Task MindSlaveFixerSurgeryTest()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false
+        });
+
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var buckleSystem = entMng.System<SharedBuckleSystem>();
+        var deviceLink = entMng.System<SharedDeviceLinkSystem>();
+        var powerReceiver = entMng.System<SharedPowerReceiverSystem>();
+        var experienceSystem = entMng.System<ExperienceSystem>();
+        var statusEffects = entMng.System<StatusEffectsSystem>();
+        var atmosSystem = entMng.System<AtmosphereSystem>();
+        var handsSystem = entMng.System<SharedHandsSystem>();
+        var interactionSystem = entMng.System<SharedInteractionSystem>();
+
+        EntityUid patient = default!;
+        EntityUid surgeon = default!;
+        EntityUid table = default!;
+        EntityUid drapes = default!;
+        EntityUid scalpel = default!;
+        EntityUid hemostat = default!;
+        EntityUid retractor = default!;
+        EntityUid saw = default!;
+        EntityUid fixer = default!;
+        SurgeryPatientComponent patientComp = default!;
+        MindSlaveDisfunctionComponent disfunction = default!;
+
+        await server.WaitPost(() =>
+        {
+            var moles = new float[Atmospherics.AdjustedNumberOfGases];
+            moles[(int)Gas.Oxygen] = 21.824779f;
+            moles[(int)Gas.Nitrogen] = 82.10312f;
+            atmosSystem.SetMapAtmosphere(mapData.MapUid, false, new GasMixture(moles, Atmospherics.T20C));
+        });
+
+        await server.WaitAssertion(() =>
+        {
+            patient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            surgeon = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            table = entMng.SpawnEntity("OperatingTable", mapData.MapCoords);
+            var computer = entMng.SpawnEntity("computerBodyScanner", new MapCoordinates(1f, 0f, mapData.MapId));
+            drapes = entMng.SpawnEntity("SurgeryDrapes", mapData.MapCoords);
+            scalpel = entMng.SpawnEntity("Scalpel", mapData.MapCoords);
+            hemostat = entMng.SpawnEntity("Hemostat", mapData.MapCoords);
+            retractor = entMng.SpawnEntity("Retractor", mapData.MapCoords);
+            saw = entMng.SpawnEntity("SawElectric", mapData.MapCoords);
+            fixer = entMng.SpawnEntity("MindslaveFixerCerebralImplant", mapData.MapCoords);
+            patientComp = entMng.GetComponent<SurgeryPatientComponent>(patient);
+
+            entMng.EnsureComponent<MindSlaveComponent>(patient);
+            disfunction = entMng.EnsureComponent<MindSlaveDisfunctionComponent>(patient);
+            disfunction.NextProgressTime = TimeSpan.FromMinutes(10);
+
+            Assert.That(experienceSystem.TryAddKnowledge(surgeon, SyndicateAgentKnowledge), Is.True);
+            experienceSystem.TrySetOverrideSkill(surgeon, AnatomySkillTree, new SkillTreeInfo { Level = 4, Sublevel = 0 });
+            deviceLink.LinkDefaults(null, computer, table);
+            powerReceiver.SetNeedsPower(computer, false);
+        });
+
+        await pair.RunTicksSync(5);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(surgerySystem.HasLinkedOperatingComputer(table), Is.True);
+            Assert.That(buckleSystem.TryBuckle(patient, surgeon, table, popup: false), Is.True);
+            Assert.That(statusEffects.TryAddStatusEffectDuration(patient, PainNumbnessEffectProto, TimeSpan.FromSeconds(120)), Is.True);
+            Assert.That(surgerySystem.TryStartSurgery(new Entity<SurgeryPatientComponent>(patient, patientComp), HeadSurgeryGraphId, surgeon, drapes), Is.True);
+        });
+
+        await pair.RunTicksSync(2);
+        await PerformStep(pair, HeadSurgeryGraphId, patient, surgeon, patientComp, "surgery-head-start", "head-skin-incision", scalpel, 4.5f);
+        await PerformStep(pair, HeadSurgeryGraphId, patient, surgeon, patientComp, "head-skin-incision", "head-skin-clamp-bleeders", hemostat, 4.5f);
+        await PerformStep(pair, HeadSurgeryGraphId, patient, surgeon, patientComp, "head-skin-clamp-bleeders", "retract-head-skin", retractor, 4.5f);
+        await PerformStep(pair, HeadSurgeryGraphId, patient, surgeon, patientComp, "retract-head-skin", "saw-skull-bone", saw, 6f);
+        await PerformStep(pair, HeadSurgeryGraphId, patient, surgeon, patientComp, "saw-skull-bone", "brain-exposed", retractor, 4.5f);
+
+        var progressBefore = TimeSpan.Zero;
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(patientComp.OngoingSurgeries[HeadSurgeryGraphId], Is.EqualTo("brain-exposed"));
+            progressBefore = disfunction.NextProgressTime;
+
+            // the syndicate-only step must not be offered to someone without the knowledge
+            var bystander = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            var bystanderState = surgerySystem.MakeSelectorState(new Entity<SurgeryPatientComponent>(patient, patientComp), fixer, bystander);
+            Assert.That(bystanderState.Infos.Any(x => x.TargetEdgeId == "brain-exposed-fix-mindslave-disfunction"), Is.False);
+        });
+
+        // the fixer is used the way a player does it: clicking the patient, not calling the step directly
+        await server.WaitAssertion(() =>
+        {
+            handsSystem.TryDrop(surgeon, checkActionBlocker: false);
+            Assert.That(handsSystem.TryPickup(surgeon, fixer, checkActionBlocker: false, animate: false), Is.True);
+            Assert.That(interactionSystem.InteractUsing(surgeon, fixer, patient, entMng.GetComponent<TransformComponent>(patient).Coordinates), Is.True);
+        });
+
+        await pair.RunSeconds(8f);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(disfunction.Weakened, Is.True);
+                Assert.That(disfunction.NextProgressTime, Is.GreaterThan(progressBefore));
+            });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    private static async Task PerformStep(
         Pair.TestPair pair,
+        ProtoId<SurgeryGraphPrototype> graphId,
         EntityUid patient,
         EntityUid surgeon,
         SurgeryPatientComponent patientComp,
@@ -690,7 +813,7 @@ public sealed class SurgerySystemTest
                 handsSystem.TryDrop(surgeon, checkActionBlocker: false);
                 Assert.That(handsSystem.TryPickup(surgeon, tool, checkActionBlocker: false, animate: false), Is.True);
             }
-            Assert.That(protoManager.TryIndex<SurgeryGraphPrototype>(LeftArmGraphId, out var graphProto), Is.True);
+            Assert.That(protoManager.TryIndex<SurgeryGraphPrototype>(graphId, out var graphProto), Is.True);
             Assert.That(graphProto!.TryGetNode(nodeId, out var node), Is.True);
             var edge = node.Edges.FirstOrDefault(e => e.Id == edgeId);
             Assert.That(edge, Is.Not.Null, $"Missing edge {edgeId} on node {nodeId}");
@@ -700,7 +823,7 @@ public sealed class SurgerySystemTest
 
             var started = surgerySystem.TryPerformOperationStep(
                 new Entity<SurgeryPatientComponent>(patient, patientComp),
-                LeftArmGraphId,
+                graphId,
                 edge!,
                 tool,
                 surgeon);

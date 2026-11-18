@@ -21,7 +21,7 @@ public sealed partial class SurgeryPuppetBox : Control
 
     private const string TexturePath = "/Textures/SS220/Interface/Surgery/puppet";
 
-    private static readonly Color OngoingSurgeryTint = Color.FromHex("#FFA500");
+    private static readonly Color OngoingSurgeryTint = Color.FromHex("#4CD964");
     private static readonly Color ModerateTraumaTint = Color.FromHex("#FFCC44");
     private static readonly Color SevereTraumaTint = Color.FromHex("#FF5555");
     private static readonly Color HealthyZoneTint = Color.FromHex("#4AC4FF");
