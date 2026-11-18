@@ -189,7 +189,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
                 ? Loc.GetString(_prototypes.Index(humanoidComponent.Species).Name)
                 : Loc.GetString("health-analyzer-window-entity-unknown-species-text");
 
-        // Redwings DnaScan - start
+        // SS220 Redwings DnaScan - start
         if (!string.IsNullOrEmpty(state.Dna))
         {
             DnaLabel.Text = Loc.GetString("health-analyzer-window-dna-text", ("dna", state.Dna));
@@ -199,7 +199,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         {
             DnaLabel.Visible = false;
         }
-        // Redwings DnaScan - end
+        // SS220 Redwings DnaScan - end
 
         // Basic Diagnostic
 

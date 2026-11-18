@@ -219,6 +219,7 @@ public sealed partial class PinpointerSystem : EntitySystem
             case PinpointerMode.Component:
                 _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerComponentUIState(ent.Comp.Targets));
                 break;
+
             case PinpointerMode.Dna:
                 UpdateDnaUI(ent.Owner, ent.Comp);
                 break;
@@ -236,8 +237,11 @@ public sealed partial class PinpointerSystem : EntitySystem
         var query = EntityQueryEnumerator<DnaComponent>();
         while (query.MoveNext(out var target, out var dnaComponent))
         {
-            if (dnaComponent.DNA != args.Dna) continue;
-            if (Transform(target).MapUid != Transform(uid).MapUid) continue;
+            if (dnaComponent.DNA != args.Dna)
+                continue;
+
+            if (Transform(target).MapUid != Transform(uid).MapUid)
+                continue;
 
             _pinpointer.SetTarget(uid, target);
             _pinpointer.SetActive(uid, true);
