@@ -56,6 +56,9 @@
       id: retract-head-skin-implant-check
       delay: 15
       edgeTooltip: to-head-check-implant
+      edgeIcon:
+        sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+        state: implant-scanner
       actions:
       - !type:CheckImplantAction
       requirements:
@@ -74,15 +77,8 @@
       edgeTooltip: to-head-change-tts
       actions:
       - !type:ChangeTtsAction
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-head-skin
-    #  id: retract-head-skin-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-head-skin
-    #  id: retract-head-skin-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
+        surgery: HeadSurgery
+        node: retract-head-skin
     # cranial fissure repair
     - to: head-cranial-fissure-prepped
       id: head-cranial-fissure-prep
@@ -386,7 +382,7 @@
   - node: seal-wound
     baseNode: seal-wound
 
-# SS220-surgery-update Eyes & Mouth surgeries
+# Eyes & Mouth surgeries
 - type: surgeryGraph
   id: EyesSurgery
   name: surgery-eyes-complex-name
@@ -440,15 +436,6 @@
         pathology: EyeCornealTrauma
         description: surgery-pathology-requirement-description-eye-corneal
         failureMessage: surgery-pathology-requirement-failure-eye-corneal
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: eyes-retract-lids
-    #  id: eyes-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: eyes-retract-lids
-    #  id: eyes-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -574,15 +561,8 @@
       edgeTooltip: to-head-change-tts
       actions:
       - !type:ChangeTtsAction
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-mouth-skin
-    #  id: mouth-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-mouth-skin
-    #  id: mouth-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
+        surgery: MouthSurgery
+        node: retract-mouth-skin
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound

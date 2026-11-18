@@ -8,8 +8,8 @@
   requirements:
   - !type:EmptyInventorySlotRequirement
     subject: target
-    description: surgery-torso-complex-inventory-requirement-description
-    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    description: surgery-limb-complex-inventory-requirement-description
+    failureMessage: surgery-limb-complex-inventory-requirement-failure
     slotNames:
     - jumpsuit
     - outerClothing
@@ -177,15 +177,6 @@
         pathology: LeftArmBurnNecrosis
         description: surgery-pathology-requirement-description-necrosis
         failureMessage: surgery-pathology-requirement-failure-necrosis
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-leftarm-skin
-    #  id: retract-leftarm-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-leftarm-skin
-    #  id: retract-leftarm-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -273,8 +264,8 @@
   requirements:
   - !type:EmptyInventorySlotRequirement
     subject: target
-    description: surgery-torso-complex-inventory-requirement-description
-    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    description: surgery-limb-complex-inventory-requirement-description
+    failureMessage: surgery-limb-complex-inventory-requirement-failure
     slotNames:
     - jumpsuit
     - outerClothing
@@ -442,15 +433,6 @@
         pathology: RightArmBurnNecrosis
         description: surgery-pathology-requirement-description-necrosis
         failureMessage: surgery-pathology-requirement-failure-necrosis
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-rightarm-skin
-    #  id: retract-rightarm-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-rightarm-skin
-    #  id: retract-rightarm-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -650,15 +632,6 @@
         pathology: LeftHandCompoundFracture
         description: surgery-pathology-requirement-description-compound
         failureMessage: surgery-pathology-requirement-failure-compound
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-lefthand-skin
-    #  id: retract-lefthand-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-lefthand-skin
-    #  id: retract-lefthand-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -808,15 +781,6 @@
         pathology: RightHandCompoundFracture
         description: surgery-pathology-requirement-description-compound
         failureMessage: surgery-pathology-requirement-failure-compound
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-righthand-skin
-    #  id: retract-righthand-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-righthand-skin
-    #  id: retract-righthand-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -854,8 +818,8 @@
   requirements:
   - !type:EmptyInventorySlotRequirement
     subject: target
-    description: surgery-torso-complex-inventory-requirement-description
-    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    description: surgery-limb-complex-inventory-requirement-description
+    failureMessage: surgery-limb-complex-inventory-requirement-failure
     slotNames:
     - jumpsuit
     - outerClothing
@@ -1023,15 +987,6 @@
         pathology: LeftLegBurnNecrosis
         description: surgery-pathology-requirement-description-necrosis
         failureMessage: surgery-pathology-requirement-failure-necrosis
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-leftleg-skin
-    #  id: retract-leftleg-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-leftleg-skin
-    #  id: retract-leftleg-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -1119,8 +1074,8 @@
   requirements:
   - !type:EmptyInventorySlotRequirement
     subject: target
-    description: surgery-torso-complex-inventory-requirement-description
-    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    description: surgery-limb-complex-inventory-requirement-description
+    failureMessage: surgery-limb-complex-inventory-requirement-failure
     slotNames:
     - jumpsuit
     - outerClothing
@@ -1288,15 +1243,6 @@
         pathology: RightLegBurnNecrosis
         description: surgery-pathology-requirement-description-necrosis
         failureMessage: surgery-pathology-requirement-failure-necrosis
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-rightleg-skin
-    #  id: retract-rightleg-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-rightleg-skin
-    #  id: retract-rightleg-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -1496,15 +1442,6 @@
         pathology: LeftFootCompoundFracture
         description: surgery-pathology-requirement-description-compound
         failureMessage: surgery-pathology-requirement-failure-compound
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-leftfoot-skin
-    #  id: retract-leftfoot-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-leftfoot-skin
-    #  id: retract-leftfoot-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -1654,15 +1591,6 @@
         pathology: RightFootCompoundFracture
         description: surgery-pathology-requirement-description-compound
         failureMessage: surgery-pathology-requirement-failure-compound
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-rightfoot-skin
-    #  id: retract-rightfoot-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-rightfoot-skin
-    #  id: retract-rightfoot-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound

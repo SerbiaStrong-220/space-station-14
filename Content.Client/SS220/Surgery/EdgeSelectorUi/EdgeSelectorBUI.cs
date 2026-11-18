@@ -70,7 +70,7 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
             Used = _used
         };
 
-        SendMessage(msg);
+        SendPredictedMessage(msg);
     }
 
     public sealed class RadialMenuDoubleArgumentActionOption<T1, T2>(Action<T1, T2> onPressed, T1 data1, T2 data2) : RadialMenuActionOptionBase(onPressed: () => onPressed(data1, data2));

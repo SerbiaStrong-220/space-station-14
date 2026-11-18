@@ -13,9 +13,6 @@
     maxStackCount: 20
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: HeadProjectileFragment
@@ -28,9 +25,6 @@
     maxStackCount: 20
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
     addStackEffects:
     - !type:RandomPathologyAddEffect
       weightedId: BrainTraumaPathology
@@ -47,9 +41,6 @@
     maxStackCount: 20
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: LeftArmProjectileFragment
@@ -62,9 +53,6 @@
     maxStackCount: 10
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: RightArmProjectileFragment
@@ -77,9 +65,6 @@
     maxStackCount: 10
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: LeftLegProjectileFragment
@@ -92,9 +77,6 @@
     maxStackCount: 10
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: RightLegProjectileFragment
@@ -107,9 +89,6 @@
     maxStackCount: 10
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 # Dislocations
 
@@ -170,11 +149,6 @@
   - description: pathology-leftleg-dislocation-description
     statusEffects:
     - StatusEffectLegTraumaSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectLegTraumaSlowdown
-      walkSpeedModifier: 0.78
-      sprintSpeedModifier: 0.75
 
 - type: pathology
   id: RightLegDislocation
@@ -187,11 +161,6 @@
   - description: pathology-rightleg-dislocation-description
     statusEffects:
     - StatusEffectLegTraumaSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectLegTraumaSlowdown
-      walkSpeedModifier: 0.78
-      sprintSpeedModifier: 0.75
 
 - type: pathology
   id: LeftFootDislocation
@@ -204,11 +173,6 @@
   - description: pathology-leftfoot-dislocation-description
     statusEffects:
     - StatusEffectLegTraumaSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectLegTraumaSlowdown
-      walkSpeedModifier: 0.78
-      sprintSpeedModifier: 0.75
 
 - type: pathology
   id: RightFootDislocation
@@ -221,11 +185,6 @@
   - description: pathology-rightfoot-dislocation-description
     statusEffects:
     - StatusEffectLegTraumaSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectLegTraumaSlowdown
-      walkSpeedModifier: 0.78
-      sprintSpeedModifier: 0.75
 
 # Hairline Fractures
 
@@ -251,11 +210,6 @@
   - description: pathology-lowertorso-hairline-description
     statusEffects:
     - StatusEffectLegTraumaSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectLegTraumaSlowdown
-      walkSpeedModifier: 0.78
-      sprintSpeedModifier: 0.75
 
 - type: pathology
   id: LeftArmHairlineFracture
@@ -314,11 +268,6 @@
   - description: pathology-leftleg-hairline-description
     statusEffects:
     - StatusEffectLegTraumaSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectLegTraumaSlowdown
-      walkSpeedModifier: 0.78
-      sprintSpeedModifier: 0.75
 
 - type: pathology
   id: RightLegHairlineFracture
@@ -331,11 +280,6 @@
   - description: pathology-rightleg-hairline-description
     statusEffects:
     - StatusEffectLegTraumaSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectLegTraumaSlowdown
-      walkSpeedModifier: 0.78
-      sprintSpeedModifier: 0.75
 
 - type: pathology
   id: LeftFootHairlineFracture
@@ -348,11 +292,6 @@
   - description: pathology-leftfoot-hairline-description
     statusEffects:
     - StatusEffectLegTraumaSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectLegTraumaSlowdown
-      walkSpeedModifier: 0.78
-      sprintSpeedModifier: 0.75
 
 - type: pathology
   id: RightFootHairlineFracture
@@ -365,11 +304,6 @@
   - description: pathology-rightfoot-hairline-description
     statusEffects:
     - StatusEffectLegTraumaSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectLegTraumaSlowdown
-      walkSpeedModifier: 0.78
-      sprintSpeedModifier: 0.75
 
 # Compound Fractures & Cranial Fissure
 
@@ -386,9 +320,6 @@
     trait: PoorVision
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: TorsoCompoundFracture
@@ -403,9 +334,6 @@
     trait: ChronicCough
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: LowerTorsoCompoundFracture
@@ -420,13 +348,6 @@
     statusEffects:
     - StatusEffectCompoundLegSlowdown
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectCompoundLegSlowdown
-      walkSpeedModifier: 0.6
-      sprintSpeedModifier: 0.55
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: LeftArmCompoundFracture
@@ -441,9 +362,6 @@
     doAfterDelayModifier: 1.6
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: RightArmCompoundFracture
@@ -458,9 +376,6 @@
     doAfterDelayModifier: 1.6
     statusEffects:
     - StatusEffectInternalBloodLoss
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectInternalBloodLoss
 
 - type: pathology
   id: LeftHandCompoundFracture
@@ -500,11 +415,6 @@
   - description: pathology-leftleg-compound-description
     statusEffects:
     - StatusEffectCompoundLegSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectCompoundLegSlowdown
-      walkSpeedModifier: 0.6
-      sprintSpeedModifier: 0.55
 
 - type: pathology
   id: RightLegCompoundFracture
@@ -518,11 +428,6 @@
   - description: pathology-rightleg-compound-description
     statusEffects:
     - StatusEffectCompoundLegSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectCompoundLegSlowdown
-      walkSpeedModifier: 0.6
-      sprintSpeedModifier: 0.55
 
 - type: pathology
   id: LeftFootCompoundFracture
@@ -536,11 +441,6 @@
   - description: pathology-leftfoot-compound-description
     statusEffects:
     - StatusEffectCompoundLegSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectCompoundLegSlowdown
-      walkSpeedModifier: 0.6
-      sprintSpeedModifier: 0.55
 
 - type: pathology
   id: RightFootCompoundFracture
@@ -554,11 +454,6 @@
   - description: pathology-rightfoot-compound-description
     statusEffects:
     - StatusEffectCompoundLegSlowdown
-    effects:
-    - !type:PathologyMovementSpeedEffect
-      statusEffect: StatusEffectCompoundLegSlowdown
-      walkSpeedModifier: 0.6
-      sprintSpeedModifier: 0.55
 
 # Arterial Punctures
 
@@ -574,9 +469,6 @@
   - description: pathology-head-arterial-description
     statusEffects:
     - StatusEffectArterialBleeding
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectArterialBleeding
 
 - type: pathology
   id: TorsoArterialPuncture
@@ -590,9 +482,6 @@
   - description: pathology-torso-arterial-description
     statusEffects:
     - StatusEffectArterialBleeding
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectArterialBleeding
 
 - type: pathology
   id: LowerTorsoArterialPuncture
@@ -606,9 +495,6 @@
   - description: pathology-lowertorso-arterial-description
     statusEffects:
     - StatusEffectArterialBleeding
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectArterialBleeding
 
 - type: pathology
   id: LeftArmArterialPuncture
@@ -622,9 +508,6 @@
   - description: pathology-leftarm-arterial-description
     statusEffects:
     - StatusEffectArterialBleeding
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectArterialBleeding
 
 - type: pathology
   id: RightArmArterialPuncture
@@ -638,9 +521,6 @@
   - description: pathology-rightarm-arterial-description
     statusEffects:
     - StatusEffectArterialBleeding
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectArterialBleeding
 
 - type: pathology
   id: LeftLegArterialPuncture
@@ -654,9 +534,6 @@
   - description: pathology-leftleg-arterial-description
     statusEffects:
     - StatusEffectArterialBleeding
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectArterialBleeding
 
 - type: pathology
   id: RightLegArterialPuncture
@@ -670,9 +547,6 @@
   - description: pathology-rightleg-arterial-description
     statusEffects:
     - StatusEffectArterialBleeding
-    effects:
-    - !type:PathologyAddStatusEffect
-      statusEffect: StatusEffectArterialBleeding
 
 # Burn Necrosis
 

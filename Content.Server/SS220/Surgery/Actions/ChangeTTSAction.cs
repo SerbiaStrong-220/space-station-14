@@ -2,19 +2,31 @@
 
 using Content.Server.Administration;
 using Content.Server.SS220.TTS;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Interaction;
+using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Requirements;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.Surgery.Action;
+namespace Content.Server.SS220.Surgery.Actions;
 
 public sealed partial class ChangeTtsAction : ISurgeryGraphEdgeAction
 {
     private static readonly LocId QuiTitle = "tts-change-surgery-window-title";
     private static readonly LocId QuiDescription = "tts-change-surgery-window-description";
     private static readonly LocId QuiPrompt = "tts-change-surgery-window-prompt";
+
+    /// <summary>
+    /// Surgery and node the patient must still be at when the voice is chosen.
+    /// </summary>
+    [DataField(required: true)]
+    public ProtoId<SurgeryGraphPrototype> Surgery;
+
+    [DataField(required: true)]
+    public string Node = string.Empty;
 
     public void PerformAction(EntityUid uid, EntityUid userUid, EntityUid? used, IEntityManager entityManager)
     {
@@ -31,14 +43,25 @@ public sealed partial class ChangeTtsAction : ISurgeryGraphEdgeAction
             uid);
     }
 
-    // The answer may come long after the step: the surgeon must still be next to the patient.
-    private static void OnVoiceChosen(EntityUid patient, EntityUid surgeon, ICommonSession session, string newPreferencesStr, IEntityManager entityManager)
+    // The answer may come long after the step: the surgeon must still control the same body,
+    // be able to reach the patient, and the patient's head must still be open on this step.
+    private void OnVoiceChosen(EntityUid patient, EntityUid surgeon, ICommonSession session, string newPreferencesStr, IEntityManager entityManager)
     {
-        if (!entityManager.EntityExists(patient) || !entityManager.EntityExists(surgeon))
+        if (!entityManager.EntityExists(patient) || session.AttachedEntity != surgeon)
             return;
 
-        if (!entityManager.System<SharedInteractionSystem>().InRangeUnobstructed(surgeon, patient))
+        if (!entityManager.System<ActionBlockerSystem>().CanInteract(surgeon, patient) ||
+            !entityManager.System<SharedInteractionSystem>().InRangeUnobstructed(surgeon, patient))
+        {
             return;
+        }
+
+        if (!entityManager.TryGetComponent<SurgeryPatientComponent>(patient, out var patientComp) ||
+            !patientComp.OngoingSurgeries.TryGetValue(Surgery, out var currentNode) ||
+            currentNode != Node)
+        {
+            return;
+        }
 
         if (!TtsVoicePreferences.TryParse(newPreferencesStr, out var chosen))
             return;

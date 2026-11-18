@@ -203,7 +203,7 @@ public sealed partial class SurgeryPuppetBox : Control
             if (!_interactive)
                 return;
 
-            SelectedPart = part;
+            SelectedPart = GetClickedPart(part);
         };
 
         return button;
@@ -295,33 +295,23 @@ public sealed partial class SurgeryPuppetBox : Control
     }
 
     /// <summary>
-    /// I hope no one else will need to give a fck what happens here. God bless new med.
+    /// Eyes and mouth share the head button, so repeated clicks on it cycle Head -> Eyes -> Mouth.
     /// </summary>
-    private SurgeryPuppetPart? HighlightPuppetPart(SurgeryPuppetPart? puppetPartClicked)
+    private SurgeryPuppetPart GetClickedPart(SurgeryPuppetPart clicked)
     {
-        var newHighlightPart = puppetPartClicked;
-        switch (puppetPartClicked)
-        {
-            case SurgeryPuppetPart.Head:
-                switch (_selectedPart)
-                {
-                    case SurgeryPuppetPart.Head:
-                        newHighlightPart = SurgeryPuppetPart.Eyes;
-                        break;
-                    case SurgeryPuppetPart.Eyes:
-                        newHighlightPart = SurgeryPuppetPart.Mouth;
-                        break;
-                    case SurgeryPuppetPart.Mouth:
-                        newHighlightPart = SurgeryPuppetPart.Head;
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                break;
-        }
+        if (clicked != SurgeryPuppetPart.Head)
+            return clicked;
 
+        return _selectedPart switch
+        {
+            SurgeryPuppetPart.Head => SurgeryPuppetPart.Eyes,
+            SurgeryPuppetPart.Eyes => SurgeryPuppetPart.Mouth,
+            _ => SurgeryPuppetPart.Head,
+        };
+    }
+
+    private SurgeryPuppetPart? HighlightPuppetPart(SurgeryPuppetPart? newHighlightPart)
+    {
         if (newHighlightPart == _selectedPart)
             return _selectedPart;
 

@@ -24,6 +24,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
 
     private static readonly LocId HeaderText = "surgery-start-ui-target";
     private static readonly LocId FooterConfirm = "surgery-footer-confirm";
+    private static readonly LocId CancelButtonText = "surgery-drape-cancel-button";
 
     public event Action<ProtoId<SurgeryGraphPrototype>, EntityUid>? OnSurgeryConfirmClicked;
 
@@ -83,10 +84,15 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
 
         foreach (var info in graphInfos)
         {
-            var button = MakeOperationButton(info.Surgery, info.CanStart, info.UnavailabilityReason);
+            var button = info.CanCancel
+                ? MakeOperationButton(info.Surgery, true, null)
+                : MakeOperationButton(info.Surgery, info.CanStart, info.UnavailabilityReason);
 
             OperationContainer.AddChild(button);
-            SetFormattedText(button.RichTextLabel, info.Surgery.Name);
+            if (info.CanCancel)
+                button.RichTextLabel.Text = Loc.GetString(CancelButtonText, ("surgery", Loc.GetString(info.Surgery.Name)));
+            else
+                SetFormattedText(button.RichTextLabel, info.Surgery.Name);
 
             button.Visible = info.Surgery.TargetPart == Puppet.SelectedPart;
 
@@ -195,4 +201,5 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
     }
 }
 
-public readonly record struct SurgeryStartInfo(SurgeryGraphPrototype Surgery, bool CanStart, string? UnavailabilityReason);
+/// <param name="CanCancel">Surgery is ongoing and at a step where it can be ended, so its button cancels it.</param>
+public readonly record struct SurgeryStartInfo(SurgeryGraphPrototype Surgery, bool CanStart, bool CanCancel, string? UnavailabilityReason);

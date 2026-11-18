@@ -9,7 +9,7 @@ using Content.Shared.SS220.Experience.Systems.Experience;
 using Content.Shared.SS220.Surgery.Graph;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.Surgery.Action;
+namespace Content.Server.SS220.Surgery.Actions;
 
 [DataDefinition]
 public sealed partial class ApplyDamageAction : ISurgeryGraphEdgeAction

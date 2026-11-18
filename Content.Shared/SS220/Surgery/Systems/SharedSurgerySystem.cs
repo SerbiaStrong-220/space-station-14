@@ -1,9 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Numerics;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Damage;
+using System.Linq;
+using System.Numerics;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -12,7 +13,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Ui;
@@ -24,7 +24,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
@@ -103,13 +102,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (HasComp<SurgeryStarterComponent>(args.Used) && entity.Comp.OngoingSurgeries.Where(x => _prototype.Index(x.Key).Start == x.Value).ToArray() is { Length: > 0 } startSurgeries)
-        {
-            EndOperation(entity!, startSurgeries[0].Key, args.User);
-            args.Handled = true;
-            return;
-        }
-
         // TODO: maybe allow under heavy painkillers
         if (args.User == args.Target)
         {
@@ -141,7 +133,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 var info = edgeSelectorState.Infos[0];
 
                 if (!info.MetEdgeRequirement)
+                {
+                    if (!HasComp<SurgeryToolComponent>(args.Used))
+                        return;
+
+                    _popup.PopupPredictedCursor(info.FailureReason, args.User);
+                    args.Handled = true;
                     return;
+                }
 
                 if (GetEdgeTargeting(entity, info.SurgeryProtoId, info.TargetEdgeId) is not { } targetingEdge)
                     return;
@@ -203,7 +202,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         TryPerformOperationStep(entity, args.SurgeryId, chosenEdge, used, args.Actor);
     }
-
 
     private void OnDoAfterAttempt(Entity<SurgeryPatientComponent> entity, SurgeryDoAfterEvent args, CancellableEntityEventArgs ev)
     {
@@ -370,7 +368,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         DebugTools.Assert(surgeryPatientComp.OngoingSurgeries.ContainsKey(args.SurgeryGraphId));
 
-        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):user} started surgery {args.SurgeryGraphId}) on {ToPrettyString(target):target}!");
+        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):user} started surgery {args.SurgeryGraphId} on {ToPrettyString(target):target}!");
     }
 
     public bool TryStartSurgery(Entity<SurgeryPatientComponent?> target, ProtoId<SurgeryGraphPrototype> surgery, EntityUid performer, EntityUid used)

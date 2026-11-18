@@ -31,7 +31,7 @@ public abstract partial class SharedPathologySystem
         SubscribeLocalEvent<GunComponent, GotUnequippedHandEvent>(OnGunUnequippedHand);
         SubscribeLocalEvent<GunComponent, ItemWieldedEvent>(OnGunWielded);
         SubscribeLocalEvent<GunComponent, ItemUnwieldedEvent>(OnGunUnwielded);
-        SubscribeLocalEvent<GunComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
+        SubscribeLocalEvent<GunComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers, after: [typeof(BatteryWeaponFireModesSystem)]);
     }
 
     private void OnBeforeDoAfterStart(Entity<PathologyHolderComponent> ent, ref BeforeDoAfterStartEvent args)

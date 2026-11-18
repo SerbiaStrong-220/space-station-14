@@ -28,6 +28,8 @@ to-close-heart-incision = Зашить сердце
 
 surgery-torso-complex-inventory-requirement-description = У пациента должен быть открыт торс
 surgery-torso-complex-inventory-requirement-failure = Вы не можете добраться до торса { CAPITALIZE($target) }!
+surgery-lowertorso-complex-inventory-requirement-description = У пациента должна быть открыта паховая область
+surgery-lowertorso-complex-inventory-requirement-failure = Вы не можете добраться до паховой области { CAPITALIZE($target) }!
 
 surgery-torso-examine-start = Пациент готов к операции на торсе.
 surgery-torso-popup-start = Начинает операцию на торсе.

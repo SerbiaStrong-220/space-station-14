@@ -119,15 +119,6 @@
         failureMessage: surgery-pathology-requirement-failure-torso-fragments
         curePathologies:
         - TorsoProjectileFragment
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-torso-skin
-    #  id: retract-torso-skin-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-torso-skin
-    #  id: retract-torso-skin-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     # hairline fracture
     - to: retract-torso-skin
       id: retract-torso-skin-hairline
@@ -317,6 +308,9 @@
       id: open-heart-incision
       delay: 2
       edgeTooltip: to-direct-heart-defib
+      edgeIcon:
+        sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+        state: direct-defibrillator
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
       actions:
@@ -340,7 +334,7 @@
   - node: seal-wound
     baseNode: seal-wound
 
-# SS220-surgery-update LowerTorso surgery
+# LowerTorso surgery
 - type: surgeryGraph
   id: LowerTorsoSurgery
   name: surgery-lowertorso-complex-name
@@ -349,8 +343,8 @@
   requirements:
   - !type:EmptyInventorySlotRequirement
     subject: target
-    description: surgery-torso-complex-inventory-requirement-description
-    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    description: surgery-lowertorso-complex-inventory-requirement-description
+    failureMessage: surgery-lowertorso-complex-inventory-requirement-failure
     slotNames:
     - jumpsuit
     - outerClothing
@@ -419,15 +413,6 @@
         failureMessage: surgery-pathology-requirement-failure-lowertorso-fragments
         curePathologies:
         - LowerTorsoProjectileFragment
-    # tend brute & burn wounds (SS220: temporarily disabled)
-    #- to: retract-lowertorso-skin
-    #  id: retract-lowertorso-tend-brute
-    #  baseEdge: to-tend-brute-wounds
-    #  edgeTooltip: to-tend-brute-wounds
-    #- to: retract-lowertorso-skin
-    #  id: retract-lowertorso-tend-burn
-    #  baseEdge: to-tend-burn-wounds
-    #  edgeTooltip: to-tend-burn-wounds
     - to: retract-lowertorso-skin
       id: retract-lowertorso-repair-hairline
       baseEdge: to-repair-hairline-fracture

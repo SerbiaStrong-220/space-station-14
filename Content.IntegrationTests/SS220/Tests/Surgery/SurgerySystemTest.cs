@@ -542,35 +542,6 @@ public sealed class SurgerySystemTest
             atmosSystem.SetMapAtmosphere(mapData.MapUid, false, new GasMixture(moles, Atmospherics.T20C));
         });
 
-        async Task PerformStep(string nodeId, string edgeId, EntityUid tool, float waitSeconds = 6f)
-        {
-            await server.WaitAssertion(() =>
-            {
-                if (handsSystem.GetActiveItem(surgeon) != tool)
-                {
-                    handsSystem.TryDrop(surgeon, checkActionBlocker: false);
-                    Assert.That(handsSystem.TryPickup(surgeon, tool, checkActionBlocker: false, animate: false), Is.True);
-                }
-                Assert.That(protoManager.TryIndex<SurgeryGraphPrototype>(LeftArmGraphId, out var graphProto), Is.True);
-                Assert.That(graphProto!.TryGetNode(nodeId, out var node), Is.True);
-                var edge = node.Edges.FirstOrDefault(e => e.Id == edgeId);
-                Assert.That(edge, Is.Not.Null, $"Missing edge {edgeId} on node {nodeId}");
-
-                var failChance = surgerySystem.GetStepFailureChance(patient, surgeon, tool, edge!);
-                Assert.That(failChance, Is.EqualTo(0f), $"Expected 0 fail chance on linked table under anesthesia, got {failChance} for {edgeId}");
-
-                var started = surgerySystem.TryPerformOperationStep(
-                    new Entity<SurgeryPatientComponent>(patient, patientComp),
-                    LeftArmGraphId,
-                    edge!,
-                    tool,
-                    surgeon);
-                Assert.That(started, Is.True, $"Failed to start surgery step {edgeId}");
-            });
-
-            await pair.RunSeconds(waitSeconds);
-        }
-
         await server.WaitAssertion(() =>
         {
             patient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
@@ -614,7 +585,7 @@ public sealed class SurgerySystemTest
         });
 
         await pair.RunTicksSync(2);
-        await PerformStep("start-leftarm-surgery", "start-leftarm-dislocation", bonesetter, 4.5f);
+        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "start-leftarm-surgery", "start-leftarm-dislocation", bonesetter, 4.5f);
 
         await server.WaitAssertion(() =>
         {
@@ -632,10 +603,10 @@ public sealed class SurgerySystemTest
         });
 
         await pair.RunTicksSync(2);
-        await PerformStep("start-leftarm-surgery", "leftarm-skin-incision", scalpel, 4.5f);
-        await PerformStep("leftarm-skin-incision", "leftarm-skin-clamp-bleeders", hemostat, 4.5f);
-        await PerformStep("leftarm-skin-clamp-bleeders", "retract-leftarm-skin", retractor, 4.5f);
-        await PerformStep("retract-leftarm-skin", "leftarm-compound-reset", bonesetter, 6f);
+        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "start-leftarm-surgery", "leftarm-skin-incision", scalpel, 4.5f);
+        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "leftarm-skin-incision", "leftarm-skin-clamp-bleeders", hemostat, 4.5f);
+        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "leftarm-skin-clamp-bleeders", "retract-leftarm-skin", retractor, 4.5f);
+        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "retract-leftarm-skin", "leftarm-compound-reset", bonesetter, 6f);
 
         await server.WaitAssertion(() =>
         {
@@ -646,7 +617,7 @@ public sealed class SurgerySystemTest
             });
         });
 
-        await PerformStep("leftarm-compound-reset", "leftarm-compound-repair", boneGel, 4.5f);
+        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "leftarm-compound-reset", "leftarm-compound-repair", boneGel, 4.5f);
 
         await server.WaitAssertion(() =>
         {
@@ -657,7 +628,7 @@ public sealed class SurgerySystemTest
             });
         });
 
-        await PerformStep("retract-leftarm-skin", "seal-wound", cautery, 4.5f);
+        await PerformLeftArmStep(pair, patient, surgeon, patientComp, "retract-leftarm-skin", "seal-wound", cautery, 4.5f);
 
         await server.WaitAssertion(() =>
         {
@@ -694,5 +665,48 @@ public sealed class SurgerySystemTest
         });
 
         await pair.CleanReturnAsync();
+    }
+
+    private static async Task PerformLeftArmStep(
+        Pair.TestPair pair,
+        EntityUid patient,
+        EntityUid surgeon,
+        SurgeryPatientComponent patientComp,
+        string nodeId,
+        string edgeId,
+        EntityUid tool,
+        float waitSeconds = 6f)
+    {
+        var server = pair.Server;
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var handsSystem = entMng.System<SharedHandsSystem>();
+
+        await server.WaitAssertion(() =>
+        {
+            if (handsSystem.GetActiveItem(surgeon) != tool)
+            {
+                handsSystem.TryDrop(surgeon, checkActionBlocker: false);
+                Assert.That(handsSystem.TryPickup(surgeon, tool, checkActionBlocker: false, animate: false), Is.True);
+            }
+            Assert.That(protoManager.TryIndex<SurgeryGraphPrototype>(LeftArmGraphId, out var graphProto), Is.True);
+            Assert.That(graphProto!.TryGetNode(nodeId, out var node), Is.True);
+            var edge = node.Edges.FirstOrDefault(e => e.Id == edgeId);
+            Assert.That(edge, Is.Not.Null, $"Missing edge {edgeId} on node {nodeId}");
+
+            var failChance = surgerySystem.GetStepFailureChance(patient, surgeon, tool, edge!);
+            Assert.That(failChance, Is.EqualTo(0f), $"Expected 0 fail chance on linked table under anesthesia, got {failChance} for {edgeId}");
+
+            var started = surgerySystem.TryPerformOperationStep(
+                new Entity<SurgeryPatientComponent>(patient, patientComp),
+                LeftArmGraphId,
+                edge!,
+                tool,
+                surgeon);
+            Assert.That(started, Is.True, $"Failed to start surgery step {edgeId}");
+        });
+
+        await pair.RunSeconds(waitSeconds);
     }
 }

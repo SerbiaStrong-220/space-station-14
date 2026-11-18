@@ -109,6 +109,9 @@ public sealed partial class BodyAnalyzerSystem : EntitySystem
 
     private void OnOperatingComputerUiOpened(Entity<OperatingComputerComponent> entity, ref BoundUIOpenedEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         if (!TryComp<BodyAnalyzerComponent>(entity, out var analyzer))
             return;
 
@@ -137,7 +140,8 @@ public sealed partial class BodyAnalyzerSystem : EntitySystem
 
     private void OnBodyAnalyzerAfterInteract(Entity<BodyAnalyzerComponent> entity, ref AfterInteractEvent args)
     {
-        if (!args.CanReach)
+        // ScannedEntity and the UI state are server-side only
+        if (_net.IsClient || !args.CanReach)
             return;
 
         if (args.Target == null)

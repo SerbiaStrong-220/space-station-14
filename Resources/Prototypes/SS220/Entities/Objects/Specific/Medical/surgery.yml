@@ -417,9 +417,6 @@
     - id: Drill
     - id: BodyAnalyzer
 
-- type: Tag
-  id: SurgeryDisk
-
 - type: entity
   parent: BaseItem
   id: BaseSurgeryDisk

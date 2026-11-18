@@ -108,6 +108,9 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
             recommendation.Operations.Add(Loc.GetString(opLocId));
         }
 
+        if (recommendation.Problems.Count == 0 && recommendation.Operations.Count == 0)
+            return recommendation;
+
         if (!status.IsAnesthetized && status.PatientState == MobState.Alive)
         {
             recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-need-anesthesia"));

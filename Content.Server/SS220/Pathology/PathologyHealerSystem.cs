@@ -69,7 +69,7 @@ public sealed partial class PathologyHealerSystem : EntitySystem
 
                 curedAny = true;
                 var modifierEv = new GetPathologyHealerDamageModifier(id, target.Owner, args.User);
-                RaiseLocalEvent(target, ref modifierEv);
+                RaiseLocalEvent(args.User, ref modifierEv);
 
                 damageModifier += modifierEv.Modifier * Math.Abs(deltaStack);
                 break;

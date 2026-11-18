@@ -22,9 +22,7 @@ public sealed partial class AlertsUI
             !entMan.TryGetComponent<PathologyHolderComponent>(target.Value, out var holder) ||
             holder.LifeStage >= ComponentLifeStage.Stopping)
         {
-            if (_pathologyPuppet != null)
-                _pathologyPuppet.Visible = false;
-
+            ClearPathologyPuppet();
             return;
         }
 
@@ -59,7 +57,7 @@ public sealed partial class AlertsUI
 
     private void UpdatePathologyPuppetPosition()
     {
-        if (_pathologyPuppet == null)
+        if (_pathologyPuppet is not { Visible: true })
             return;
 
         var desiredIndex = 0;

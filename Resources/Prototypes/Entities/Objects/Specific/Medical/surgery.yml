@@ -419,6 +419,8 @@
   #SS220-surgery-update begin
   - type: SurgeryTool
     toolType: Saw
+    speedModifier: 1
+    failureModifier: 0
     sound:
       path: /Audio/SS220/Surgery/saw.ogg
       params:

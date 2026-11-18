@@ -24,6 +24,7 @@ seal-wound = Зашивание надреза
 surgery-footer-right = Uup
 surgery-footer-idle = Ожидание выбора операции.
 surgery-footer-confirm = Нажмите ещё раз на операцию, чтобы подтвердить.
+surgery-drape-cancel-button = Отменить: { $surgery }
 
 incision-examine-description = На теле заметен хирургический разрез.
 incision-popup = {THE($user)} делает надрез на теле {THE($target)}, используя {$used}
@@ -66,8 +67,6 @@ burn-necrosis-excised-popup = {THE($user)} иссекает некротизир
 cranial-fissure-prepped-examine-description = Края трещины черепа зачищены и готовы к фиксации.
 cranial-fissure-prepped-popup = {THE($user)} зачищает края трещины черепа {THE($target)}, используя {$used}
 
-to-tend-brute-wounds = Обработать механические раны
-to-tend-burn-wounds = Обработать ожоговые раны
 to-repair-dislocation = Вправить вывих
 to-repair-hairline-fracture = Восстановить трещину кости
 to-reset-compound-fracture = Вправить открытый перелом
@@ -77,11 +76,6 @@ to-seal-arterial-puncture = Закрыть разрыв артерии
 to-excise-burn-necrosis = Иссечь некротические ткани
 to-remove-burn-necrosis = Удалить некротические ткани
 to-drill-cranial-fissure = Зачистить трещину черепа
-
-surgery-requirement-tend-brute-description = У пациента есть значительные механические повреждения
-surgery-requirement-tend-brute-failure = Механические раны слишком незначительны для хирургической обработки!
-surgery-requirement-tend-burn-description = У пациента есть значительные термические или химические ожоги
-surgery-requirement-tend-burn-failure = Ожоги слишком незначительны для хирургической обработки!
 
 surgery-pathology-requirement-description-dislocation = Наличие вывиха в этой зоне
 surgery-pathology-requirement-failure-dislocation = Вывиха в этой зоне не обнаружено!

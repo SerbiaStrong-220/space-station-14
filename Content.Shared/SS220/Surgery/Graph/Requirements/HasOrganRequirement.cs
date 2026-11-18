@@ -18,7 +18,7 @@ public sealed partial class HasOrganRequirement : SurgeryGraphRequirement
     protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
     {
         if (uid is null)
-            return false;
+            return true;
 
         var bodySystem = entityManager.System<BodySystem>();
 

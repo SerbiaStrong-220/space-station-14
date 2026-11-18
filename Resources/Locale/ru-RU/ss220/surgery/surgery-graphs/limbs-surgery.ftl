@@ -16,6 +16,8 @@ surgery-hand-complex-description = Позволяет вправить выви�
 surgery-foot-complex-description = Позволяет вправить вывих (костоправом без разреза),
     лечить переломы и поверхностные раны стопы.
 
+surgery-limb-complex-inventory-requirement-description = Конечность пациента не должна быть закрыта одеждой
+surgery-limb-complex-inventory-requirement-failure = Вы не можете добраться до конечности { THE($target) }!
 surgery-hand-complex-inventory-requirement-description = На руках не должно быть перчаток
 surgery-hand-complex-inventory-requirement-failure = Снимите перчатки с { THE($target) }!
 surgery-foot-complex-inventory-requirement-description = На ногах не должно быть обуви

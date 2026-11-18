@@ -25,6 +25,8 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
     public static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1f);
 
+    private readonly List<ProtoId<PathologyPrototype>> _updateBuffer = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<PathologyHolderComponent, RejuvenateEvent>(OnRejuvenate);
@@ -57,8 +59,15 @@ public abstract partial class SharedPathologySystem : EntitySystem
             else
                 holder.NextUpdate += UpdateInterval;
 
-            foreach (var (protoId, data) in holder.ActivePathologies)
+            // effects can add or remove pathologies (damage triggers, death, zombification), so iterate over a snapshot
+            _updateBuffer.Clear();
+            _updateBuffer.AddRange(holder.ActivePathologies.Keys);
+
+            foreach (var protoId in _updateBuffer)
             {
+                if (!holder.ActivePathologies.TryGetValue(protoId, out var data))
+                    continue;
+
                 if (!_prototype.Resolve(protoId, out var pathologyProto))
                     continue;
 
