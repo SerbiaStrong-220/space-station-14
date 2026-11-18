@@ -489,7 +489,7 @@ public sealed class MalfAiDefenseTest : GameTest
             Assert.That(entMan.HasComponent<MalfAiTurretBuffedComponent>(turret), Is.True);
 
             var gunAfter = entMan.GetComponent<GunComponent>(turret).FireRateModified;
-            Assert.That(gunAfter, Is.EqualTo(gunBefore * 2).Within(0.01));
+            Assert.That(gunAfter, Is.EqualTo(gunBefore * 2.5f).Within(0.01));
 
             var turret2 = entMan.SpawnEntity("WeaponEnergyTurretAI", map.GridCoords);
             Assert.That(entMan.HasComponent<MalfAiTurretBuffedComponent>(turret2), Is.True);

@@ -1,0 +1,211 @@
+- type: ttsVoice
+  id: Bandit
+  name: Бандит
+  speaker: bandit
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Sidorovich
+  name: Сидорович
+  speaker: sidorovich
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Barman
+  name: Бармен
+  speaker: barman
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Dolg1
+  name: Долговец 1
+  speaker: dolg1
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Monolith2
+  name: Монолитовец 2
+  speaker: monolith2
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Legends
+  name: Легенды
+  speaker: legends
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Monolith1
+  name: Монолитовец 1
+  speaker: monolith1
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Dolg2
+  name: Долговец 2
+  speaker: dolg2
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Stories
+  name: Байки
+  speaker: stories
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Freedom
+  name: Свободовец
+  speaker: freedom
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+
+- type: ttsVoice
+  id: StalkerMetroBandit02
+  name: Бандит (Метро) 2
+  speaker: stalker_metro_bandit02
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroDegtyarev
+  name: Дегтярёв
+  speaker: stalker_metro_degtyarev
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroNovice02
+  name: Новичок (Метро) 2
+  speaker: stalker_metro_novice02
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroPavel
+  name: Павел
+  speaker: stalker_metro_pavel
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroSaharov
+  name: Сахаров
+  speaker: stalker_metro_saharov
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroSoldier
+  name: Солдат (Метро)
+  speaker: stalker_metro_soldier
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroStalker01
+  name: Сталкер (Метро) 1
+  speaker: stalker_metro_stalker01
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: StalkerMetroNewbie01
+  name: Новичок (Метро) 1
+  speaker: stalker_metro_newbie01
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Bandit1
+  name: Бандит 1
+  speaker: bandit1
+  provider: Silero
+  categories: [ Stalker ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]

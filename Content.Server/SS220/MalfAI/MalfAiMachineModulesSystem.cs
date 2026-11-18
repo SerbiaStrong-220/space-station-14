@@ -82,7 +82,6 @@ public sealed partial class MalfAiMachineModulesSystem : EntitySystem
 
     private static readonly LocId AbilityNoVision = "malfai-ability-no-vision";
     private static readonly LocId MachineOverrideAlready = "malfai-machine-override-already";
-    private static readonly LocId MachineOverrideLimit = "malfai-machine-override-limit";
     private static readonly LocId MachineOverrideDone = "malfai-machine-override-done";
     private static readonly LocId MachineOverloadAlready = "malfai-machine-overload-already";
     private static readonly LocId MachineOverloadPrimed = "malfai-machine-overload-primed";
@@ -172,23 +171,6 @@ public sealed partial class MalfAiMachineModulesSystem : EntitySystem
         if (HasConflictingMachineState(target))
         {
             _popup.PopupEntity(Loc.GetString(MachineOverrideAlready), performer, performer);
-            return;
-        }
-
-        var maxConstructs = _cfg.GetCVar(CCVars220.MalfAiMaxOverrides);
-        var constructs = 0;
-        var cq = EntityQueryEnumerator<MalfAiOverriddenMachineComponent>();
-        while (cq.MoveNext(out var cUid, out _))
-        {
-            if (TerminatingOrDeleted(cUid))
-                continue;
-
-            constructs++;
-        }
-
-        if (maxConstructs > 0 && constructs >= maxConstructs)
-        {
-            _popup.PopupEntity(Loc.GetString(MachineOverrideLimit, ("max", maxConstructs)), performer, performer);
             return;
         }
 

@@ -73,7 +73,7 @@
       delay: 15
       edgeTooltip: to-head-change-tts
       actions:
-      - !type:ChangeTTSAction
+      - !type:ChangeTtsAction
     # tend brute & burn wounds (SS220: temporarily disabled)
     #- to: retract-head-skin
     #  id: retract-head-skin-tend-brute
@@ -573,7 +573,7 @@
       delay: 15
       edgeTooltip: to-head-change-tts
       actions:
-      - !type:ChangeTTSAction
+      - !type:ChangeTtsAction
     # tend brute & burn wounds (SS220: temporarily disabled)
     #- to: retract-mouth-skin
     #  id: mouth-tend-brute
