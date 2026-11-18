@@ -21,17 +21,17 @@ public sealed partial class FlashSystem : SharedFlashSystem
     {
         if (args.User is not { } user)
         {
-            _adminLog.Add(LogType.Action, LogImpact.Medium, $"Flash {ToPrettyString(ent):flash} was activated");
+            _adminLog.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(ent):flash} was activated");
             return;
         }
 
         if (args.Target is { } target)
         {
-            _adminLog.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):user} activated flash {ToPrettyString(ent):flash} on {ToPrettyString(target):target}");
+            _adminLog.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):user} activated {ToPrettyString(ent):flash} on {ToPrettyString(target):target}");
             return;
         }
 
-        _adminLog.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):user} activated flash {ToPrettyString(ent):flash}");
+        _adminLog.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):user} activated {ToPrettyString(ent):flash}");
     }
 }
 //SS220-flash-logging end
