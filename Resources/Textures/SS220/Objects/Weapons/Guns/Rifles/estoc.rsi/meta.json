@@ -1,9 +1,9 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "by okroshka18",
+    "copyright": "resprite from okroshka18 for SS220",
     "size": {
-        "x": 48,
+        "x": 32,
         "y": 32
     },
     "states": [
