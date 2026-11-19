@@ -99,6 +99,13 @@
         amount: -2.0
     Respiration:
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: LungDamage
+        probability: 0.35
+        # same concentration as the high toxins alert
+        minScale: 1.5
+      #SS220-surgery-update end
       - !type:HealthChange
         ignoreResistances: true
         damage:
@@ -144,6 +151,13 @@
             Radiation: 1.5
     Respiration:
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: LungDamage
+        probability: 0.35
+        # same concentration as the high toxins alert
+        minScale: 1.5
+      #SS220-surgery-update end
       - !type:HealthChange
         ignoreResistances: true
         damage:
@@ -370,6 +384,12 @@
         minScale: 2
     Respiration:
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: LungDamage
+        probability: 0.35
+        minScale: 1.5
+      #SS220-surgery-update end
       - !type:HealthChange
         minScale: 0.5
         ignoreResistances: true

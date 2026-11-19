@@ -148,7 +148,7 @@ public abstract partial class SharedPathologySystem
         }
     }
 
-    private bool TryResolveDefinition(
+    protected bool TryResolveDefinition(
         ProtoId<PathologyPrototype> protoId,
         int level,
         out PathologyPrototype proto,

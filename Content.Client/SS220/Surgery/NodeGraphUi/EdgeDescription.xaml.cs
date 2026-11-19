@@ -63,20 +63,40 @@ public sealed partial class EdgeDescription : BoxContainer
 
     private void AddConditionInfo(SurgeryGraphEdge edge)
     {
+        var visibilityRequirements = _surgeryGraph.GetVisibilityRequirements(edge);
         var surgeryRequirements = _surgeryGraph.GetRequirements(edge);
-        if (surgeryRequirements.Count == 0)
+        if (surgeryRequirements.Count == 0 && visibilityRequirements.Count == 0)
             return;
+
+        // visibility requirements are conditions too (e.g. holding the organ to insert), repair steps repeat them in requirements
+        var descriptions = new List<string>();
+        foreach (var requirement in visibilityRequirements)
+        {
+            AddUniqueDescription(descriptions, requirement);
+        }
+
+        foreach (var requirement in surgeryRequirements)
+        {
+            AddUniqueDescription(descriptions, requirement);
+        }
 
         var builder = new StringBuilder();
         builder.Append(Loc.GetString(OperationDescriptionConditionSection));
-        foreach (var requirement in surgeryRequirements)
+        foreach (var description in descriptions)
         {
             builder.AppendLine();
-            builder.Append(requirement.RequirementDescription(_prototypeManager, _entityManager));
+            builder.Append(description);
         }
 
         this.TooltipSupplier = CreateRichTooltip;
         this.ToolTip = builder.ToString();
+    }
+
+    private void AddUniqueDescription(List<string> descriptions, SurgeryGraphRequirement requirement)
+    {
+        var description = requirement.RequirementDescription(_prototypeManager, _entityManager);
+        if (!descriptions.Contains(description))
+            descriptions.Add(description);
     }
 
     private Tooltip CreateRichTooltip(Control hovered)

@@ -15,6 +15,11 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.05
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -38,6 +43,11 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.05
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -92,6 +102,11 @@
   metabolisms:
     Bloodstream:
       effects:
+        #SS220-surgery-update begin
+        - !type:AddPathology
+          pathology: StomachDamage
+          probability: 0.05
+        #SS220-surgery-update end
         - !type:HealthChange
           damage:
             types:
@@ -115,6 +130,11 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.03
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -154,6 +174,11 @@
     Bloodstream:
       metabolismRate : 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.05
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -214,6 +239,11 @@
     Bloodstream:
       metabolismRate: 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.05
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -263,6 +293,11 @@
     Bloodstream:
       metabolismRate: 3.00 # Okay damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.05
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -323,6 +358,11 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: HeartDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -446,6 +486,11 @@
     Bloodstream:
       metabolismRate: 0.2
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.05
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -462,6 +507,11 @@
   metabolisms:
     Bloodstream:
       effects:
+        #SS220-surgery-update begin
+        - !type:AddPathology
+          pathology: StomachDamage
+          probability: 0.05
+        #SS220-surgery-update end
         - !type:HealthChange
           damage:
             types:

@@ -57,7 +57,7 @@ public abstract partial class SharedSurgerySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, performer, target, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, performer, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, performer, used, EntityManager))
                 continue;
 
             reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);

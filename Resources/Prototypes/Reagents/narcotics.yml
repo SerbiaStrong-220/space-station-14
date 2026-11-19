@@ -13,6 +13,15 @@
     Bloodstream:
       # Main effects
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: HeartDamage
+        probability: 0.03
+        conditions:
+        - !type:ReagentCondition
+          reagent: Desoxyephedrine
+          min: 16
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -85,6 +94,13 @@
     Bloodstream:
       effects:
       #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: HeartDamage
+        probability: 0.03
+        conditions:
+        - !type:ReagentCondition
+          reagent: Ephedrine
+          min: 20
       - !type:ModifyStatusEffect
         effectProto: StatusEffectPainNumbness
         type: Add
@@ -149,6 +165,13 @@
     Bloodstream:
       effects:
       #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: HeartDamage
+        probability: 0.03
+        conditions:
+        - !type:ReagentCondition
+          reagent: Stimulants
+          min: 45
       - !type:ModifyStatusEffect
         effectProto: StatusEffectPainNumbness
         type: Add

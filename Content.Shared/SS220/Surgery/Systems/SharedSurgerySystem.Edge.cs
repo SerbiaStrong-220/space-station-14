@@ -40,7 +40,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 {
                     var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-                    if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+                    if (requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
                         continue;
 
                     meetRequirement = false;
@@ -85,7 +85,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
@@ -128,7 +128,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
                 continue;
 
             return false;
@@ -153,8 +153,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
             var satisfied = applyEffects
-                ? requirement.MeetRequirement(requirementTarget, user, EntityManager)
-                : requirement.SatisfiesRequirements(requirementTarget, user, EntityManager);
+                ? requirement.MeetRequirement(requirementTarget, user, used, EntityManager)
+                : requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager);
 
             if (satisfied)
                 continue;
@@ -166,8 +166,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
             var satisfied = applyEffects
-                ? requirement.MeetRequirement(requirementTarget, user, EntityManager)
-                : requirement.SatisfiesRequirements(requirementTarget, user, EntityManager);
+                ? requirement.MeetRequirement(requirementTarget, user, used, EntityManager)
+                : requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager);
 
             if (satisfied)
                 continue;
@@ -190,7 +190,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
@@ -207,7 +207,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (!requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+            if (!requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
                 return false;
         }
 

@@ -10,3 +10,9 @@ reagent-effect-guidebook-ss220-cult-cleanse = пара глотков может
 reagent-effect-guidebook-ss220-brain-damage-slow = продлевает жизнь мозга на {$time} секунд
 
 reagent-effect-guidebook-ss220-chemical-adaptation = усваивание вызывает привыкание к реагенту
+
+reagent-effect-guidebook-ss220-add-pathology =
+    { $chance ->
+        [1] Вызывает
+       *[other] вызывают
+    } патологию «{ $pathology }»

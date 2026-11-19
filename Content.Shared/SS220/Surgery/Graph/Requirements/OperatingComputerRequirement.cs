@@ -11,7 +11,7 @@ public sealed partial class OperatingComputerRequirement : SurgeryGraphRequireme
     [DataField]
     public ProtoId<SurgeryGraphPrototype>? RequiredSurgery;
 
-    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
         if (uid is null)
             return true;

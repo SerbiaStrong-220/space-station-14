@@ -32,26 +32,26 @@ public abstract partial class SurgeryGraphRequirement
     protected LocId FailureMessage;
 
     /// <summary>
-    /// Called to check if requirement met
+    /// Called to check if requirement met. <paramref name="uid"/> is the resolved subject, <paramref name="used"/> is the item of the step
     /// </summary>
-    protected abstract bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager);
+    protected abstract bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager);
 
     /// <summary>
     /// Called when we want to met requirement and it satisfies to make something after like consuming reagents
     /// </summary>
     protected virtual void AfterRequirementMet(EntityUid? uid, IEntityManager entityManager) { }
 
-    public bool SatisfiesRequirements(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    public bool SatisfiesRequirements(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
         if (uid.HasValue && !uid.Value.IsValid())
             return false;
 
-        return Invert != Requirement(uid, user, entityManager);
+        return Invert != Requirement(uid, user, used, entityManager);
     }
 
-    public bool MeetRequirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    public bool MeetRequirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
-        if (!SatisfiesRequirements(uid, user, entityManager))
+        if (!SatisfiesRequirements(uid, user, used, entityManager))
             return false;
 
         AfterRequirementMet(uid, entityManager);

@@ -188,16 +188,276 @@
         pathology: TorsoBurnNecrosis
         description: surgery-pathology-requirement-description-necrosis
         failureMessage: surgery-pathology-requirement-failure-necrosis
+    # abdominal organs
+    - to: torso-abdomen-opened
+      id: torso-open-abdomen
+      baseEdge: incision
+      edgeTooltip: to-torso-open-abdomen
     # deeper
     - to: saw-rib-bone
       id: saw-rib-bone
       baseEdge: saw-bone
       edgeTooltip: to-saw-rib-bone
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-has-bones-description
+        failureMessage: surgery-requirement-has-bones-failure
+        whitelist:
+          components:
+          - Boneless
+    - to: saw-rib-bone
+      id: part-torso-jelly
+      baseEdge: retract-skin
+      edgeTooltip: to-part-torso-jelly
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        description: surgery-requirement-boneless-description
+        failureMessage: surgery-requirement-boneless-failure
+        whitelist:
+          components:
+          - Boneless
     # end surgery
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-torso-incision
+
+  - node: torso-abdomen-opened
+    nodeText:
+      examineDescription: torso-abdomen-opened-examine
+      popup: torso-abdomen-opened-popup
+    edges:
+    # liver
+    - to: torso-abdomen-opened
+      id: extract-liver
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-liver
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: liver
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Liver
+        organName: surgery-organ-name-liver
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Liver
+    - to: torso-abdomen-opened
+      id: insert-liver
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-liver
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: liver
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Liver
+        organName: surgery-organ-name-liver
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Liver
+        organName: surgery-organ-name-liver
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Liver
+    # stomach
+    - to: torso-abdomen-opened
+      id: extract-stomach
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-stomach
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: stomach
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Stomach
+        organName: surgery-organ-name-stomach
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Stomach
+    - to: torso-abdomen-opened
+      id: insert-stomach
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-stomach
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: stomach
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Stomach
+        organName: surgery-organ-name-stomach
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Stomach
+        organName: surgery-organ-name-stomach
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Stomach
+    # kidneys
+    - to: torso-abdomen-opened
+      id: extract-kidneys
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-kidneys
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: kidney-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Kidneys
+        organName: surgery-organ-name-kidneys
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Kidneys
+    - to: torso-abdomen-opened
+      id: insert-kidneys
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-kidneys
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: kidney-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Kidneys
+        organName: surgery-organ-name-kidneys
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Kidneys
+        organName: surgery-organ-name-kidneys
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Kidneys
+    # appendix, extraction only
+    - to: torso-abdomen-opened
+      id: extract-appendix
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-appendix
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: appendix
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Appendix
+        organName: surgery-organ-name-appendix
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Appendix
+    # repair liver
+    - to: torso-abdomen-opened
+      id: repair-liver
+      delay: 6
+      failureChance: 0.1
+      edgeTooltip: to-repair-liver
+      sound: /Audio/SS220/Surgery/organ.ogg
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      visibilityRequirements:
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LiverDamage
+        minLevel: 1
+        description: surgery-pathology-requirement-description-liver-failure
+        failureMessage: surgery-pathology-requirement-failure-liver-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        regressLevel: true
+        regressStackCount: 2
+        description: surgery-pathology-requirement-description-liver-failure
+        failureMessage: surgery-pathology-requirement-failure-liver-failure
+        curePathologies:
+        - LiverDamage
+    # repair stomach
+    - to: torso-abdomen-opened
+      id: repair-stomach
+      delay: 6
+      failureChance: 0.1
+      edgeTooltip: to-repair-stomach
+      sound: /Audio/SS220/Surgery/organ.ogg
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      visibilityRequirements:
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: StomachDamage
+        minLevel: 1
+        description: surgery-pathology-requirement-description-stomach-failure
+        failureMessage: surgery-pathology-requirement-failure-stomach-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        regressLevel: true
+        regressStackCount: 2
+        description: surgery-pathology-requirement-description-stomach-failure
+        failureMessage: surgery-pathology-requirement-failure-stomach-failure
+        curePathologies:
+        - StomachDamage
+    # return
+    - to: retract-torso-skin
+      id: torso-close-abdomen
+      baseEdge: seal-wound
+      edgeTooltip: to-torso-close-abdomen
 
   - node: torso-compound-reset
     baseNode: compound-fracture-reset
@@ -288,17 +548,174 @@
 
   - node: saw-rib-bone
     baseNode: saw-bone
+    nodeText:
+      examineDescription: saw-rib-bone-examine
+      popup: saw-rib-bone-popup
     edges:
     # deeper
     - to: open-heart-incision
       id: open-heart-incision
       baseEdge: incision
       edgeTooltip: to-open-heart-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Heart
+        organName: surgery-organ-name-heart
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+    # heart
+    - to: saw-rib-bone
+      id: extract-heart
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-heart
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: heart-on
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Heart
+        organName: surgery-organ-name-heart
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Heart
+    - to: saw-rib-bone
+      id: insert-heart
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-heart
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: heart-on
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Heart
+        organName: surgery-organ-name-heart
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Heart
+        organName: surgery-organ-name-heart
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Heart
+    # lungs
+    - to: saw-rib-bone
+      id: extract-lungs
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-lungs
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: lung-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Lungs
+        organName: surgery-organ-name-lungs
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Lungs
+    - to: saw-rib-bone
+      id: insert-lungs
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-lungs
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: lung-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Lungs
+        organName: surgery-organ-name-lungs
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Lungs
+        organName: surgery-organ-name-lungs
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Lungs
+    # repair lungs
+    - to: saw-rib-bone
+      id: repair-lungs
+      delay: 5
+      failureChance: 0.1
+      edgeTooltip: to-repair-lungs
+      sound: /Audio/SS220/Surgery/organ.ogg
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      visibilityRequirements:
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LungDamage
+        minLevel: 1
+        description: surgery-pathology-requirement-description-lungs-failure
+        failureMessage: surgery-pathology-requirement-failure-lungs-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        regressLevel: true
+        regressStackCount: 2
+        description: surgery-pathology-requirement-description-lungs-failure
+        failureMessage: surgery-pathology-requirement-failure-lungs-failure
+        curePathologies:
+        - LungDamage
     # return
     - to: saw-rib-bone-gelled
       id: saw-rib-bone-gelled
       baseEdge: bone-gel
       edgeTooltip: to-saw-rib-bone-gelled
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-has-bones-description
+        failureMessage: surgery-requirement-has-bones-failure
+        whitelist:
+          components:
+          - Boneless
+    - to: retract-torso-skin
+      id: close-torso-jelly
+      baseEdge: retract-skin
+      edgeTooltip: to-close-torso-jelly
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        description: surgery-requirement-boneless-description
+        failureMessage: surgery-requirement-boneless-failure
+        whitelist:
+          components:
+          - Boneless
 
   - node: open-heart-incision
     baseNode: incision
@@ -323,6 +740,38 @@
         whitelist:
           components:
           - DirectCompactDefibrillator
+    # repair heart
+    - to: open-heart-incision
+      id: repair-heart
+      delay: 9
+      failureChance: 0.12
+      edgeTooltip: to-repair-heart
+      sound: /Audio/SS220/Surgery/organ.ogg
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      visibilityRequirements:
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: HeartDamage
+        minLevel: 1
+        description: surgery-pathology-requirement-description-heart-failure
+        failureMessage: surgery-pathology-requirement-failure-heart-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        regressLevel: true
+        regressStackCount: 2
+        description: surgery-pathology-requirement-description-heart-failure
+        failureMessage: surgery-pathology-requirement-failure-heart-failure
+        curePathologies:
+        - HeartDamage
     # return
     # TOOD: better back
     - to: saw-rib-bone

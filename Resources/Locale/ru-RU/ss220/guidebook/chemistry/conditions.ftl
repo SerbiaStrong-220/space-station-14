@@ -6,3 +6,5 @@ reagent-effect-condition-guidebook-has-components =
     [true] все компоненты:
     *[false] хотя бы 1 из компонентов:
     } {$components}
+
+entity-condition-guidebook-ss220-status-effect-time = эффект «{ $effect }» длится ещё не менее { $seconds } с

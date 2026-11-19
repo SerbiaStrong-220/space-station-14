@@ -2,6 +2,7 @@
   id: Blindness
   name: pathology-blindness-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-start-blindness-description
@@ -16,6 +17,7 @@
   id: Muted
   name: pathology-muted-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-start-muted-description
@@ -30,6 +32,7 @@
   id: Narcolepsy
   name: pathology-narcolepsy-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-start-narcolepsy-description
@@ -44,6 +47,7 @@
   id: Slowness
   name: pathology-slowness-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-slowness-description
@@ -53,6 +57,7 @@
   id: Nervousness
   name: pathology-nervousness-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-nervousness-description
@@ -62,6 +67,7 @@
   id: PoorVision
   name: pathology-poor-vision-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-poor-vision-description
@@ -71,6 +77,7 @@
   id: LightweightDrunk
   name: pathology-lightweight-drunk-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-lightweight-drunk-description
@@ -80,6 +87,7 @@
   id: Paracusia
   name: pathology-paracusia-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-paracusia-description
@@ -89,15 +97,18 @@
   id: PainNumbness
   name: pathology-pain-numbness-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-pain-numbness-description
-    trait: PainNumbness
+    statusEffects:
+    - StatusEffectPathologyPainNumbness
 
 - type: pathology
   id: FrontalLisp
   name: pathology-frontal-lisp-name
   targetZone: Head
+  organ: Brain
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-frontal-lisp-description

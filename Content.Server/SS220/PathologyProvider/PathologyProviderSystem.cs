@@ -52,6 +52,8 @@ public sealed partial class PathologyProviderSystem : EntitySystem
 
         SubscribeLocalEvent<PathologyOnProjectileHitComponent, ProjectileHitEvent>(OnProjectileHit);
         SubscribeLocalEvent<PathologyHolderComponent, DamageChangedEvent>(OnDamageChanged);
+
+        InitializeOrganSources();
     }
 
     private void OnProjectileHit(Entity<PathologyOnProjectileHitComponent> entity, ref ProjectileHitEvent args)
@@ -76,7 +78,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
         _pathology.TryMakeEntityContext(entity.Owner, entity.Comp.WeightedRandomProviderEntity, out var context);
         TryAddArmoredRandom(args.Target, entity.Comp.WeightedRandomPathology, maxDamageType.Value, entity.Comp.ChanceToApply, context);
 
-        // one hit gives one trauma roll: the damage of this projectile is applied right after this event
+        // fragments are rolled here, the damage of this projectile comes right after this event and rolls only the arterial puncture
         holder.ProjectileTraumaTick = _timing.CurTick;
     }
 
@@ -91,6 +93,8 @@ public sealed partial class PathologyProviderSystem : EntitySystem
         if (entity.Comp.ProjectileTraumaTick == _timing.CurTick)
         {
             entity.Comp.ProjectileTraumaTick = GameTick.Zero;
+
+            TryRollArterialPuncture(entity, delta);
             return;
         }
 
@@ -102,13 +106,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
         else if (TryGetRollChance(DislocationRoll, blunt, out var dislocationChance))
             TryAddArmoredRandom(entity.Owner, DislocationTable, DamageBlunt, dislocationChance);
 
-        var slash = GetDamageAmount(delta, DamageSlash);
-        var piercing = GetDamageAmount(delta, DamagePiercing);
-        if (TryGetRollChance(ArterialPunctureRoll, slash + piercing, out var arterialChance))
-        {
-            var sharpType = piercing >= slash ? DamagePiercing : DamageSlash;
-            TryAddArmoredRandom(entity.Owner, ArterialPunctureTable, sharpType, arterialChance);
-        }
+        TryRollArterialPuncture(entity, delta);
 
         var heat = GetDamageAmount(delta, DamageHeat);
         var caustic = GetDamageAmount(delta, DamageCaustic);
@@ -118,6 +116,17 @@ public sealed partial class PathologyProviderSystem : EntitySystem
             var burnType = GetMaxDamageType(heat, DamageHeat, caustic, DamageCaustic, shock, DamageShock);
             TryAddArmoredRandom(entity.Owner, BurnNecrosisTable, burnType, burnChance);
         }
+    }
+
+    private void TryRollArterialPuncture(Entity<PathologyHolderComponent> entity, DamageSpecifier delta)
+    {
+        var slash = GetDamageAmount(delta, DamageSlash);
+        var piercing = GetDamageAmount(delta, DamagePiercing);
+        if (!TryGetRollChance(ArterialPunctureRoll, slash + piercing, out var arterialChance))
+            return;
+
+        var sharpType = piercing >= slash ? DamagePiercing : DamageSlash;
+        TryAddArmoredRandom(entity.Owner, ArterialPunctureTable, sharpType, arterialChance);
     }
 
     private static bool TryGetRollChance(TraumaRoll roll, FixedPoint2 damage, out float chance)

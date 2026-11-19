@@ -28,7 +28,7 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
     [DataField]
     public Dictionary<ProtoId<SkillPrototype>, float>? DamageMultipliers;
 
-    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
         var damageSystem = entityManager.System<DamageableSystem>();
         if (!entityManager.TryGetComponent<DamageableComponent>(uid, out _))

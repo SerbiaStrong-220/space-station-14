@@ -11,13 +11,13 @@ public sealed partial class SurgeryToolRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public SurgeryToolType SurgeryTool = SurgeryToolType.Invalid;
 
-    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
-        if (uid is not { } used)
+        if (uid is not { } tool)
             return false;
 
-        if (!entityManager.TryGetComponent<SurgeryToolComponent>(used, out var surgeryTool))
-            return entityManager.System<SharedSurgerySystem>().IsImprovisedTool(used, SurgeryTool);
+        if (!entityManager.TryGetComponent<SurgeryToolComponent>(tool, out var surgeryTool))
+            return entityManager.System<SharedSurgerySystem>().IsImprovisedTool(tool, SurgeryTool);
 
         return surgeryTool.ToolType == SurgeryTool || surgeryTool.AdditionalToolTypes.Contains(SurgeryTool);
     }

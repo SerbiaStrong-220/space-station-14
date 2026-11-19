@@ -1,11 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Body;
-using Content.Shared.Hands.EntitySystems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Surgery.Graph.Requirements;
 
+/// <summary>
+/// For a body checks that it has an organ of the category, for any other subject (e.g. used item) checks that it is such an organ.
+/// </summary>
 [DataDefinition]
 public sealed partial class HasOrganRequirement : SurgeryGraphRequirement
 {
@@ -15,24 +17,12 @@ public sealed partial class HasOrganRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public LocId OrganName;
 
-    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
         if (uid is null)
-            return true;
+            return false;
 
         var bodySystem = entityManager.System<BodySystem>();
-
-        if (Subject == SurgeryGraphRequirementSubject.Performer)
-        {
-            var handsSystem = entityManager.System<SharedHandsSystem>();
-            foreach (var held in handsSystem.EnumerateHeld(uid.Value))
-            {
-                if (bodySystem.IsOrganOfCategory(held, Category))
-                    return true;
-            }
-
-            return false;
-        }
 
         if (entityManager.HasComponent<BodyComponent>(uid.Value))
             return bodySystem.HasOrganCategory(uid.Value, Category);

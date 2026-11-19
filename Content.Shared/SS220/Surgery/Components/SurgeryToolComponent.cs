@@ -57,7 +57,6 @@ public enum SurgeryToolType
     Cautery,
     Bonesetter,
     Drill,
-    BloodFilter,
     AutopsyScanner,
     SurgicalTape,
     Shears

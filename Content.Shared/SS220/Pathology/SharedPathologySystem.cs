@@ -8,6 +8,7 @@ using Content.Shared.Traits;
 using Content.Shared.Zombies;
 using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -36,6 +37,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
         InitializeStatusEffectContainerEvents();
         InitializeExamineEvents();
         InitializeTraumaEffectsEvents();
+        InitializeOrganEvents();
     }
 
     public override void Update(float frameTime)
@@ -73,6 +75,14 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
                 TryProgressPathology((uid, holder), pathologyProto, data, null);
 
+                var decayChance = pathologyProto.Definition[data.Level].StackDecayChance;
+                if (decayChance > 0f && _random.Prob(decayChance)
+                    && TryChangePathologyStack((uid, holder), protoId, -1)
+                    && !holder.ActivePathologies.ContainsKey(protoId))
+                {
+                    continue;
+                }
+
                 foreach (var effect in pathologyProto.Definition[data.Level].Effects)
                 {
                     effect.ApplyEffect(uid, data, EntityManager);
@@ -88,15 +98,17 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
     private void OnZombified(Entity<PathologyHolderComponent> entity, ref EntityZombifiedEvent args)
     {
-        RemoveAllPathologies(entity);
+        // zombies can't have pathologies at all, missing organs included
+        RemoveAllPathologies(entity, force: true);
     }
 
     private void OnRejuvenate(Entity<PathologyHolderComponent> entity, ref RejuvenateEvent args)
     {
-        RemoveAllPathologies(entity);
+        RemoveAllPathologies(entity, force: false);
     }
 
-    private void RemoveAllPathologies(Entity<PathologyHolderComponent> entity)
+    /// <param name="force">If true, removal attempts are not raised and nothing can keep a pathology</param>
+    private void RemoveAllPathologies(Entity<PathologyHolderComponent> entity, bool force)
     {
         var pathologies = new ValueList<ProtoId<PathologyPrototype>>();
         foreach (var pathologyId in entity.Comp.ActivePathologies.Keys)
@@ -106,7 +118,14 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
         foreach (var pathologyId in pathologies)
         {
-            TryRemovePathology(entity!, pathologyId, checkStacks: false);
+            if (!force)
+            {
+                TryRemovePathology(entity!, pathologyId, checkStacks: false);
+                continue;
+            }
+
+            if (_prototype.Resolve(pathologyId, out var pathologyPrototype))
+                RemovePathology(entity, pathologyPrototype);
         }
     }
 
@@ -126,18 +145,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
         if (instanceData.Level + 1 >= pathologyPrototype.Definition.Length)
             return false;
 
-        var preservedContext = context;
-        if (preservedContext == null)
-        {
-            foreach (var existingContext in instanceData.PathologyContexts)
-            {
-                if (existingContext != null)
-                {
-                    preservedContext = existingContext;
-                    break;
-                }
-            }
-        }
+        var preservedContext = context ?? GetFirstContext(instanceData);
 
         instanceData.Level++;
         // we drop all previous
@@ -153,6 +161,17 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
         Dirty(entity);
         return true;
+    }
+
+    private static IPathologyContext? GetFirstContext(PathologyInstanceData instanceData)
+    {
+        foreach (var existingContext in instanceData.PathologyContexts)
+        {
+            if (existingContext != null)
+                return existingContext;
+        }
+
+        return null;
     }
 
     private void StartPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, IPathologyContext? context)
@@ -186,13 +205,38 @@ public abstract partial class SharedPathologySystem : EntitySystem
             _popup.PopupEntity(Loc.GetString(progressPopup), entity, entity, PopupType.MediumCaution);
     }
 
-    private void RemovePathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)
+    /// <param name="applyContexts">False when the pathology is moved somewhere else (e.g. into an extracted organ) and keeps its contexts</param>
+    private void RemovePathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, bool applyContexts = true)
     {
         var data = entity.Comp.ActivePathologies[pathologyPrototype.ID];
 
         entity.Comp.ActivePathologies.Remove(pathologyPrototype.ID);
 
-        for (var i = 0; i <= data.Level; i++)
+        RemoveDefinitionEffects(entity, pathologyPrototype, 0, data.Level);
+
+        if (applyContexts)
+        {
+            foreach (var context in data.PathologyContexts)
+            {
+                ApplyPathologyContext(entity, context);
+            }
+
+            data.PathologyContexts.Clear();
+        }
+
+        Dirty(entity);
+
+        var removedEv = new PathologyRemovedEvent(pathologyPrototype.ID);
+        RaiseLocalEvent(entity, ref removedEv);
+    }
+
+    /// <summary>
+    /// Removes status effects and traits of the given definition levels, unless another active pathology still uses them.
+    /// Holder data must already reflect the change, so these levels are not counted as in use.
+    /// </summary>
+    private void RemoveDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, int fromLevel, int toLevel)
+    {
+        for (var i = fromLevel; i <= toLevel; i++)
         {
             if (i >= pathologyPrototype.Definition.Length)
             {
@@ -211,18 +255,6 @@ public abstract partial class SharedPathologySystem : EntitySystem
             if (pathologyPrototype.Definition[i].Trait is { } traitId && !IsTraitInUse(entity.Comp, traitId))
                 RemoveTrait(entity, traitId);
         }
-
-        foreach (var context in data.PathologyContexts)
-        {
-            ApplyPathologyContext(entity, context);
-        }
-
-        data.PathologyContexts.Clear();
-
-        Dirty(entity);
-
-        var removedEv = new PathologyRemovedEvent(pathologyPrototype.ID);
-        RaiseLocalEvent(entity, ref removedEv);
     }
 
     private bool IsStatusEffectInUse(PathologyHolderComponent holder, EntProtoId effect)

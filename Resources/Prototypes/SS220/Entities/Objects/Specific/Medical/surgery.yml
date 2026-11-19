@@ -275,31 +275,6 @@
 
 - type: entity
   parent: BaseToolSurgery
-  id: BloodFilter
-  name: blood filter
-  description: A compact surgical pump used for filtering toxins and reagents from a patient's bloodstream during open-chest surgery.
-  components:
-  - type: Sprite
-    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
-    state: bloodfilter
-  - type: Item
-    size: Small
-  - type: Tag
-    tags:
-    - SurgeryTool
-    - SurgeryBloodFilter
-  - type: SurgeryTool
-    toolType: BloodFilter
-    failureDamage:
-      types:
-        Piercing: 5
-    sound:
-      path: /Audio/SS220/Surgery/organ.ogg
-      params:
-        variation: 0.125
-
-- type: entity
-  parent: BaseToolSurgery
   id: AutopsyScanner
   name: autopsy scanner
   description: A forensic medical scanner used to inspect internal tissue trauma and cause of death.
@@ -390,10 +365,6 @@
         whitelist:
           tags:
           - SurgeryBoneGel
-      filter:
-        whitelist:
-          tags:
-          - SurgeryBloodFilter
   - type: Appearance
   - type: GuideHelp
     guides:

@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Body;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.Surgery;
 using Content.Shared.Traits;
@@ -32,6 +33,30 @@ public sealed partial class PathologyPrototype : IPrototype
     [DataField]
     public bool IsSevere;
 
+    /// <summary>
+    /// Organ this pathology lives in. It can't exist without the organ and moves together with it on extraction and insertion.
+    /// </summary>
+    [DataField]
+    public ProtoId<OrganCategoryPrototype>? Organ;
+
+    /// <summary>
+    /// Organ whose absence this pathology represents. Added when the organ is removed and removed when it is inserted back.
+    /// </summary>
+    [DataField]
+    public ProtoId<OrganCategoryPrototype>? MissingOrgan;
+
+    /// <summary>
+    /// If set, an organ extracted from a rotten body stores this pathology at its last level.
+    /// </summary>
+    [DataField]
+    public bool FailsOnRot;
+
+    /// <summary>
+    /// A bone trauma, never added to boneless bodies (e.g. slime people).
+    /// </summary>
+    [DataField]
+    public bool AffectsBones;
+
     [DataField]
     public PathologyDefinition[] Definition = Array.Empty<PathologyDefinition>();
 }
@@ -42,11 +67,29 @@ public sealed partial class PathologyDefinition
     [DataField(required: true)]
     public LocId Description;
 
+    /// <summary>
+    /// Replaces the pathology name while this level is active, e.g. organ damage turned into organ failure.
+    /// </summary>
+    [DataField]
+    public LocId? Name;
+
+    /// <summary>
+    /// Replaces the pathology operation recommendation while this level is active, e.g. organ repair is possible only on failure.
+    /// </summary>
+    [DataField]
+    public LocId? OperationRecommendation;
+
     [DataField]
     public LocId? ProgressPopup;
 
     [DataField]
     public int MaxStackCount = SharedPathologySystem.OneStack;
+
+    /// <summary>
+    /// False for stacks that only lead to the next level (e.g. organ damage before failure), they don't make the pathology severe.
+    /// </summary>
+    [DataField]
+    public bool StacksAreSevere = true;
 
     [DataField]
     public HashSet<EntProtoId> StatusEffects = new();
@@ -68,6 +111,18 @@ public sealed partial class PathologyDefinition
 
     [DataField]
     public PathologyProgressCondition[] ProgressConditions = Array.Empty<PathologyProgressCondition>();
+
+    /// <summary>
+    /// Chance per update interval to lose one stack. Pathology is removed when the last stack is lost.
+    /// </summary>
+    [DataField]
+    public float StackDecayChance;
+
+    /// <summary>
+    /// Inhaled gas doesn't reach the lungs, so the holder suffocates as if not breathing at all (e.g. lung failure).
+    /// </summary>
+    [DataField]
+    public bool StopsBreathing;
 
     /// <summary>
     /// Called every update interval

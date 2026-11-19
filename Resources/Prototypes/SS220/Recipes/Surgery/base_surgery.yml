@@ -356,3 +356,31 @@
     edgeIcon:
       sprite: Objects/Specific/Medical/Surgery/drill.rsi
       state: drill
+
+- type: abstractSurgeryEdge
+  id: extract-organ
+  edge:
+    to: abstract
+    id: abstract
+    delay: 6
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: hemostat
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: hemostat
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-hemostat
+      failureMessage: surgery-requirement-tool-miss
+
+- type: abstractSurgeryEdge
+  id: insert-organ
+  edge:
+    to: abstract
+    id: abstract
+    delay: 6
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/organ.ogg

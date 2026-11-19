@@ -30,6 +30,8 @@ public sealed partial class LimitationReviveSystem : SharedLimitationReviveSyste
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
         SubscribeLocalEvent<LimitationReviveComponent, AddReviveDebuffsEvent>(OnAddReviveDebuffs);
         SubscribeLocalEvent<LimitationReviveComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
+
+        InitializeBrain();
     }
 
     public override void Update(float frameTime)

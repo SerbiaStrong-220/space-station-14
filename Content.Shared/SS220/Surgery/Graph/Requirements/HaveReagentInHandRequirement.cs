@@ -21,7 +21,7 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
     [DataField(required: true)]
     public FixedPoint2 ConsumedAmount;
 
-    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
         if (uid is null)
             return false;

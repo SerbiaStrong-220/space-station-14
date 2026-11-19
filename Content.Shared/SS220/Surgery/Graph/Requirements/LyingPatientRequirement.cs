@@ -12,7 +12,7 @@ public sealed partial class LyingPatientRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public EntityWhitelist StrapWhitelist;
 
-    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
         if (uid is not { } patient)
             return true;

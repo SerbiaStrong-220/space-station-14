@@ -14,7 +14,6 @@ surgery-requirement-tool-required-bone-gel = гель для [color=lightblue]в
 surgery-requirement-tool-required-cautery = Инструмент способного точечно [color=lightblue]прижечь[/color] рану ({ ent-Cautery })
 surgery-requirement-tool-required-bonesetter = Инструмент для [color=lightblue]вправления[/color] костей ({ ent-BoneSetter })
 surgery-requirement-tool-required-drill = Инструмент для [color=lightblue]сверления[/color] костной ткани ({ ent-Drill })
-surgery-requirement-tool-required-blood-filter = Инструмент для [color=lightblue]фильтрации[/color] крови ({ ent-BloodFilter })
 surgery-requirement-tool-required-autopsy-scanner = Инструмент для [color=lightblue]аутопсии[/color] тканей ({ ent-AutopsyScanner })
 surgery-requirement-tool-required-shears = Инструмент для [color=lightblue]ампутации[/color] ({ ent-AmputationShears })
 surgery-requirement-tool-required-specific = [color=gold]Особый[/color] инструмент
@@ -43,8 +42,54 @@ surgery-organ-name-stomach = желудок
 surgery-organ-name-liver = печень
 surgery-organ-name-kidneys = почки
 
-surgery-requirement-has-organ-description = Наличие органа категории [color=lightblue]{ $organ }[/color]
+surgery-requirement-has-organ-description = У пациента должен быть орган: [color=lightblue]{ $organ }[/color]
 surgery-requirement-has-organ-failure = Требуемый орган ({ $organ }) отсутствует!
 
 surgery-requirement-reagent-in-hand-description = Держать в руке ёмкость с [color=lightblue]реагентом[/color] { $reagent } в количестве как минимум { $amount }
 surgery-requirement-reagent-in-hand-failure-message = Для этого действия нужно держать в руке ёмкость с [color=lightblue]реагентом[/color] { $reagent } в количестве как минимум { $amount }
+
+surgery-requirement-hold-organ-description = Держать в руке орган: [color=lightblue]{ $organ }[/color]
+surgery-requirement-hold-organ-failure = Нужно держать в руке орган: { $organ }!
+surgery-requirement-no-organ-description = У пациента не должно быть органа: [color=lightblue]{ $organ }[/color]
+surgery-requirement-no-organ-failure = У пациента уже есть этот орган ({ $organ })!
+surgery-requirement-compatible-organ-description = Орган должен подходить [color=lightblue]организму пациента[/color]
+surgery-requirement-compatible-organ-failure = Этот орган несовместим с организмом пациента!
+surgery-requirement-has-bones-description = У пациента есть [color=lightblue]кости[/color]
+surgery-requirement-has-bones-failure = У пациента нет костей!
+surgery-requirement-boneless-description = У пациента [color=lightblue]нет костей[/color]
+surgery-requirement-boneless-failure = У пациента есть кости!
+
+to-extract-heart = Извлечь сердце
+to-insert-heart = Пересадить сердце
+to-extract-lungs = Извлечь лёгкие
+to-insert-lungs = Пересадить лёгкие
+to-extract-liver = Извлечь печень
+to-insert-liver = Пересадить печень
+to-extract-stomach = Извлечь желудок
+to-insert-stomach = Пересадить желудок
+to-extract-kidneys = Извлечь почки
+to-insert-kidneys = Пересадить почки
+to-extract-appendix = Удалить аппендикс
+to-extract-brain = Извлечь мозг
+to-insert-brain = Пересадить мозг
+to-extract-eyes = Извлечь глаза
+to-insert-eyes = Пересадить глаза
+to-extract-tongue = Извлечь язык
+to-insert-tongue = Пересадить язык
+
+to-repair-lungs = Лобэктомия: удалить повреждённую долю лёгкого
+to-repair-heart = Шунтирование сердца
+to-repair-liver = Гепатэктомия: удалить повреждённую часть печени
+to-repair-stomach = Гастрэктомия: удалить повреждённую часть желудка
+to-repair-eyes = Восстановить сетчатку
+
+surgery-pathology-requirement-description-lungs-failure = Отказ [color=lightblue]лёгких[/color]
+surgery-pathology-requirement-failure-lungs-failure = Лёгкие пациента не нуждаются в операции!
+surgery-pathology-requirement-description-heart-failure = Отказ [color=lightblue]сердца[/color]
+surgery-pathology-requirement-failure-heart-failure = Сердце пациента не нуждается в операции!
+surgery-pathology-requirement-description-liver-failure = Отказ [color=lightblue]печени[/color]
+surgery-pathology-requirement-failure-liver-failure = Печень пациента не нуждается в операции!
+surgery-pathology-requirement-description-stomach-failure = Отказ [color=lightblue]желудка[/color]
+surgery-pathology-requirement-failure-stomach-failure = Желудок пациента не нуждается в операции!
+surgery-pathology-requirement-description-eyes-failure = Разрушение [color=lightblue]сетчатки[/color]
+surgery-pathology-requirement-failure-eyes-failure = Сетчатка пациента не нуждается в операции!

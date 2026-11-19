@@ -67,7 +67,9 @@ public sealed partial class OperationNodeLabel : BoxContainer
 
         foreach (var edge in node.Edges)
         {
-            var edgeVisible = _surgeryGraph.GetVisibilityRequirements(edge).All(x => x.MeetRequirement(playerEntity, playerEntity, _entityManager));
+            // the guide has no patient or tool, so only performer requirements (e.g. syndicate knowledge) can hide a step
+            var edgeVisible = _surgeryGraph.GetVisibilityRequirements(edge)
+                .All(x => x.Subject != SurgeryGraphRequirementSubject.Performer || x.SatisfiesRequirements(playerEntity, playerEntity, null, _entityManager));
             if (!edgeVisible)
                 continue;
 

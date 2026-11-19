@@ -10,7 +10,7 @@ public sealed partial class WhitelistRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public EntityWhitelist Whitelist;
 
-    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
         if (uid is null)
             return true;

@@ -157,7 +157,7 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
 
             statusData.PathologiesDescription.Add(pathologyPrototype.Definition[instanceData.Level].Description);
 
-            if (pathologyPrototype.OperationRecommendation is { } operationLocId)
+            if (SharedPathologySystem.GetOperationRecommendation(pathologyPrototype, instanceData) is { } operationLocId)
                 statusData.PathologiesOperations.Add(operationLocId);
         }
     }

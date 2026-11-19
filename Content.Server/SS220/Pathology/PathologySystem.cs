@@ -7,6 +7,13 @@ namespace Content.Server.SS220.Pathology;
 
 public sealed partial class PathologySystem : SharedPathologySystem
 {
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        InitializeBreathing();
+    }
+
     protected override void ApplyPathologyContext(Entity<PathologyHolderComponent> entity, IPathologyContext? context)
     {
         base.ApplyPathologyContext(entity, context);

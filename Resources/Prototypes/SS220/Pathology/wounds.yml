@@ -98,6 +98,7 @@
   examineDescription: pathology-leftarm-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: LeftArm
+  affectsBones: true
   operationRecommendation: pathology-arm-dislocation-operation
   definition:
   - description: pathology-leftarm-dislocation-description
@@ -109,6 +110,7 @@
   examineDescription: pathology-rightarm-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: RightArm
+  affectsBones: true
   operationRecommendation: pathology-arm-dislocation-operation
   definition:
   - description: pathology-rightarm-dislocation-description
@@ -120,6 +122,7 @@
   examineDescription: pathology-lefthand-dislocation-examine
   armorSlotFlags: GLOVES
   targetZone: LeftHand
+  affectsBones: true
   operationRecommendation: pathology-hand-dislocation-operation
   definition:
   - description: pathology-lefthand-dislocation-description
@@ -132,6 +135,7 @@
   examineDescription: pathology-righthand-dislocation-examine
   armorSlotFlags: GLOVES
   targetZone: RightHand
+  affectsBones: true
   operationRecommendation: pathology-hand-dislocation-operation
   definition:
   - description: pathology-righthand-dislocation-description
@@ -144,6 +148,7 @@
   examineDescription: pathology-leftleg-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: LeftLeg
+  affectsBones: true
   operationRecommendation: pathology-leg-dislocation-operation
   definition:
   - description: pathology-leftleg-dislocation-description
@@ -156,6 +161,7 @@
   examineDescription: pathology-rightleg-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: RightLeg
+  affectsBones: true
   operationRecommendation: pathology-leg-dislocation-operation
   definition:
   - description: pathology-rightleg-dislocation-description
@@ -168,6 +174,7 @@
   examineDescription: pathology-leftfoot-dislocation-examine
   armorSlotFlags: FEET
   targetZone: LeftFoot
+  affectsBones: true
   operationRecommendation: pathology-foot-dislocation-operation
   definition:
   - description: pathology-leftfoot-dislocation-description
@@ -180,6 +187,7 @@
   examineDescription: pathology-rightfoot-dislocation-examine
   armorSlotFlags: FEET
   targetZone: RightFoot
+  affectsBones: true
   operationRecommendation: pathology-foot-dislocation-operation
   definition:
   - description: pathology-rightfoot-dislocation-description
@@ -194,6 +202,7 @@
   examineDescription: pathology-torso-hairline-examine
   armorSlotFlags: TORSO
   targetZone: Torso
+  affectsBones: true
   operationRecommendation: pathology-torso-fracture-operation
   definition:
   - description: pathology-torso-hairline-description
@@ -205,6 +214,7 @@
   examineDescription: pathology-lowertorso-hairline-examine
   armorSlotFlags: TORSO
   targetZone: LowerTorso
+  affectsBones: true
   operationRecommendation: pathology-lowertorso-fracture-operation
   definition:
   - description: pathology-lowertorso-hairline-description
@@ -217,6 +227,7 @@
   examineDescription: pathology-leftarm-hairline-examine
   armorSlotFlags: TORSO
   targetZone: LeftArm
+  affectsBones: true
   operationRecommendation: pathology-arm-fracture-operation
   definition:
   - description: pathology-leftarm-hairline-description
@@ -228,6 +239,7 @@
   examineDescription: pathology-rightarm-hairline-examine
   armorSlotFlags: TORSO
   targetZone: RightArm
+  affectsBones: true
   operationRecommendation: pathology-arm-fracture-operation
   definition:
   - description: pathology-rightarm-hairline-description
@@ -239,6 +251,7 @@
   examineDescription: pathology-lefthand-hairline-examine
   armorSlotFlags: GLOVES
   targetZone: LeftHand
+  affectsBones: true
   operationRecommendation: pathology-hand-fracture-operation
   definition:
   - description: pathology-lefthand-hairline-description
@@ -251,6 +264,7 @@
   examineDescription: pathology-righthand-hairline-examine
   armorSlotFlags: GLOVES
   targetZone: RightHand
+  affectsBones: true
   operationRecommendation: pathology-hand-fracture-operation
   definition:
   - description: pathology-righthand-hairline-description
@@ -263,6 +277,7 @@
   examineDescription: pathology-leftleg-hairline-examine
   armorSlotFlags: TORSO
   targetZone: LeftLeg
+  affectsBones: true
   operationRecommendation: pathology-leg-fracture-operation
   definition:
   - description: pathology-leftleg-hairline-description
@@ -275,6 +290,7 @@
   examineDescription: pathology-rightleg-hairline-examine
   armorSlotFlags: TORSO
   targetZone: RightLeg
+  affectsBones: true
   operationRecommendation: pathology-leg-fracture-operation
   definition:
   - description: pathology-rightleg-hairline-description
@@ -287,6 +303,7 @@
   examineDescription: pathology-leftfoot-hairline-examine
   armorSlotFlags: FEET
   targetZone: LeftFoot
+  affectsBones: true
   operationRecommendation: pathology-foot-fracture-operation
   definition:
   - description: pathology-leftfoot-hairline-description
@@ -299,6 +316,7 @@
   examineDescription: pathology-rightfoot-hairline-examine
   armorSlotFlags: FEET
   targetZone: RightFoot
+  affectsBones: true
   operationRecommendation: pathology-foot-fracture-operation
   definition:
   - description: pathology-rightfoot-hairline-description
@@ -314,6 +332,7 @@
   isSevere: true
   armorSlotFlags: HEAD
   targetZone: Head
+  affectsBones: true
   operationRecommendation: pathology-head-cranial-fissure-operation
   definition:
   - description: pathology-head-cranial-fissure-description
@@ -328,6 +347,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: Torso
+  affectsBones: true
   operationRecommendation: pathology-torso-fracture-operation
   definition:
   - description: pathology-torso-compound-description
@@ -342,6 +362,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: LowerTorso
+  affectsBones: true
   operationRecommendation: pathology-lowertorso-fracture-operation
   definition:
   - description: pathology-lowertorso-compound-description
@@ -356,6 +377,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftArm
+  affectsBones: true
   operationRecommendation: pathology-arm-fracture-operation
   definition:
   - description: pathology-leftarm-compound-description
@@ -370,6 +392,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightArm
+  affectsBones: true
   operationRecommendation: pathology-arm-fracture-operation
   definition:
   - description: pathology-rightarm-compound-description
@@ -384,6 +407,7 @@
   isSevere: true
   armorSlotFlags: GLOVES
   targetZone: LeftHand
+  affectsBones: true
   operationRecommendation: pathology-hand-fracture-operation
   definition:
   - description: pathology-lefthand-compound-description
@@ -397,6 +421,7 @@
   isSevere: true
   armorSlotFlags: GLOVES
   targetZone: RightHand
+  affectsBones: true
   operationRecommendation: pathology-hand-fracture-operation
   definition:
   - description: pathology-righthand-compound-description
@@ -410,6 +435,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftLeg
+  affectsBones: true
   operationRecommendation: pathology-leg-fracture-operation
   definition:
   - description: pathology-leftleg-compound-description
@@ -423,6 +449,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightLeg
+  affectsBones: true
   operationRecommendation: pathology-leg-fracture-operation
   definition:
   - description: pathology-rightleg-compound-description
@@ -436,6 +463,7 @@
   isSevere: true
   armorSlotFlags: FEET
   targetZone: LeftFoot
+  affectsBones: true
   operationRecommendation: pathology-foot-fracture-operation
   definition:
   - description: pathology-leftfoot-compound-description
@@ -449,6 +477,7 @@
   isSevere: true
   armorSlotFlags: FEET
   targetZone: RightFoot
+  affectsBones: true
   operationRecommendation: pathology-foot-fracture-operation
   definition:
   - description: pathology-rightfoot-compound-description
@@ -670,6 +699,7 @@
   examineDescription: pathology-eye-corneal-examine
   armorSlotFlags: EYES
   targetZone: Eyes
+  organ: Eyes
   operationRecommendation: pathology-eye-corneal-operation
   definition:
   - description: pathology-eye-corneal-description
@@ -681,6 +711,7 @@
   examineDescription: pathology-mouth-jaw-dislocation-examine
   armorSlotFlags: MASK
   targetZone: Mouth
+  affectsBones: true
   operationRecommendation: pathology-mouth-jaw-dislocation-operation
   definition:
   - description: pathology-mouth-jaw-dislocation-description

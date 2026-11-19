@@ -67,15 +67,6 @@
     Steel: 250
 
 - type: latheRecipe
-  id: BloodFilter
-  result: BloodFilter
-  completetime: 3
-  materials:
-    Steel: 200
-    Glass: 100
-    Plastic: 100
-
-- type: latheRecipe
   id: AutopsyScanner
   result: AutopsyScanner
   completetime: 3

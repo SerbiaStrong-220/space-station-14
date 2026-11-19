@@ -366,7 +366,7 @@ public sealed partial class SurgeryPuppetBox : Control
                 else
                     moderateZones.Add(zone);
 
-                var label = Loc.GetString(pathologyProto.Name);
+                var label = Loc.GetString(SharedPathologySystem.GetName(pathologyProto, instanceData));
                 if (instanceData.StackCount > SharedPathologySystem.OneStack)
                     label = Loc.GetString("pathology-hud-entry-with-stack", ("name", label), ("count", instanceData.StackCount));
 

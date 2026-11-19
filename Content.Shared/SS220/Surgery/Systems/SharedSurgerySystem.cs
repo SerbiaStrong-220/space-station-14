@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -135,7 +136,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
                 if (!info.MetEdgeRequirement)
                 {
-                    if (!HasComp<SurgeryToolComponent>(args.Used))
+                    if (!IsSurgeryItem(args.Used))
                         return;
 
                     _popup.PopupPredictedCursor(info.FailureReason, args.User);
@@ -171,7 +172,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 else
                 {
                     // skip showing ui for other interactions
-                    if (!HasComp<SurgeryToolComponent>(args.Used) && metedCount == 0)
+                    if (!IsSurgeryItem(args.Used) && metedCount == 0)
                         return;
 
                     var buiOwner = entity.Owner;
@@ -191,6 +192,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 }
                 break;
         }
+    }
+
+    /// <summary>
+    /// Tools and organs exist for surgery, so a failed step with them explains the reason instead of passing the interaction on.
+    /// </summary>
+    private bool IsSurgeryItem(EntityUid used)
+    {
+        return HasComp<SurgeryToolComponent>(used) || HasComp<OrganComponent>(used);
     }
 
     private void OnSurgeryEdgeSelectorEdgeSelectedMessage(Entity<SurgeryPatientComponent> entity, ref SurgeryEdgeSelectorEdgeSelectedMessage args)

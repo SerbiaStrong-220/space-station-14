@@ -17,7 +17,20 @@ public abstract partial class SharedPathologySystem
 
     public static bool IsSevere(PathologyPrototype prototype, PathologyInstanceData data)
     {
-        return prototype.IsSevere || data.Level > 0 || data.StackCount > OneStack;
+        if (prototype.IsSevere || data.Level > 0)
+            return true;
+
+        return prototype.Definition[data.Level].StacksAreSevere && data.StackCount > OneStack;
+    }
+
+    public static LocId GetName(PathologyPrototype prototype, PathologyInstanceData data)
+    {
+        return prototype.Definition[data.Level].Name ?? prototype.Name;
+    }
+
+    public static LocId? GetOperationRecommendation(PathologyPrototype prototype, PathologyInstanceData data)
+    {
+        return prototype.Definition[data.Level].OperationRecommendation ?? prototype.OperationRecommendation;
     }
 
     public bool TryAddRandom(Entity<PathologyHolderComponent?> entity, ProtoId<WeightedRandomPrototype> weightedPathology, float chance, IPathologyContext? context = null)
@@ -102,6 +115,92 @@ public abstract partial class SharedPathologySystem
             return false;
 
         RemovePathology(entity!, pathologyPrototype);
+        return true;
+    }
+
+    /// <summary>
+    /// Puts a pathology instance taken from another holder (e.g. from an inserted organ) on the entity, keeping its level, stacks and contexts.
+    /// Raises <see cref="PathologyAddedAttempt"/>. Returns false if it was cancelled or the pathology is already active.
+    /// </summary>
+    public bool TryRestorePathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, PathologyInstanceData data)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return false;
+
+        if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
+            return false;
+
+        if (entity.Comp.ActivePathologies.ContainsKey(pathologyId))
+            return false;
+
+        var attemptEv = new PathologyAddedAttempt(pathologyId);
+        RaiseLocalEvent(entity, ref attemptEv);
+
+        if (attemptEv.Cancelled)
+            return false;
+
+        var addedEv = new PathologyAddedEvent(pathologyId);
+        RaiseLocalEvent(entity, ref addedEv);
+
+        data.Level = Math.Min(data.Level, pathologyPrototype.Definition.Length - 1);
+        entity.Comp.ActivePathologies.Add(pathologyId, data);
+
+        // replay the progression, so every level applies its traits and status effects as if it was reached naturally
+        for (var level = 0; level <= data.Level; level++)
+        {
+            AddTrait(entity!, pathologyPrototype.Definition[level].Trait);
+
+            var severityEv = new PathologySeverityChanged(pathologyId, level - 1, level);
+            RaiseLocalEvent(entity, ref severityEv);
+        }
+
+        var stackEv = new PathologyStackCountChanged(pathologyId, data.Level, 0, data.StackCount);
+        RaiseLocalEvent(entity, ref stackEv);
+
+        Dirty(entity);
+        return true;
+    }
+
+    /// <summary>
+    /// Lowers the pathology by one level, e.g. when surgery repairs a failed organ back to damaged.
+    /// Effects of the dropped level are removed and the stack count is set to <paramref name="stackCount"/>.
+    /// Returns false if the pathology is absent or already at its first level.
+    /// </summary>
+    public bool TryRegressPathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, int stackCount = 1)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return false;
+
+        if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
+            return false;
+
+        if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData) || instanceData.Level == 0)
+            return false;
+
+        var previousLevel = instanceData.Level;
+        var previousStackCount = instanceData.StackCount;
+        var preservedContext = GetFirstContext(instanceData);
+
+        instanceData.Level--;
+        instanceData.StackCount = Math.Clamp(stackCount, OneStack, pathologyPrototype.Definition[instanceData.Level].MaxStackCount);
+
+        instanceData.PathologyContexts.Clear();
+        instanceData.PathologyContexts.Add(preservedContext);
+        for (var i = OneStack; i < instanceData.StackCount; i++)
+        {
+            instanceData.PathologyContexts.Add(null);
+        }
+
+        RemoveDefinitionEffects(entity!, pathologyPrototype, previousLevel, previousLevel);
+
+        var severityEv = new PathologySeverityChanged(pathologyId, previousLevel, instanceData.Level);
+        RaiseLocalEvent(entity, ref severityEv);
+
+        var stackEv = new PathologyStackCountChanged(pathologyId, instanceData.Level, previousStackCount, instanceData.StackCount);
+        RaiseLocalEvent(entity, ref stackEv);
+
+        DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
+        Dirty(entity);
         return true;
     }
 
