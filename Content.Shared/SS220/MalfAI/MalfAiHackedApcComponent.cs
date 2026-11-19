@@ -8,7 +8,4 @@ public sealed partial class MalfAiHackedApcComponent : Component
 {
     public EntityUid OwnerMind;
     public TimeSpan NextRewardAt;
-
-    [DataField]
-    public int RewardMultiplier = 1;
 }

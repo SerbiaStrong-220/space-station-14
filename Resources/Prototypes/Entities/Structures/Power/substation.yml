@@ -4,9 +4,6 @@
   id: CoreSubstation
   components:
   # SS220 randomlawset fix begin
-  - type: MalfAiHackable
-    hackCooldown: 15
-    rewardMultiplier: 3
   - type: Appearance
   - type: GenericVisualizer
     visuals:
