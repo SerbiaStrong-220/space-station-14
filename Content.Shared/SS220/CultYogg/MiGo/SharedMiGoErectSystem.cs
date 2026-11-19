@@ -305,7 +305,7 @@ public sealed partial class SharedMiGoErectSystem : EntitySystem
                     var ent = Spawn(proto.Id, coords);
 
                     if (proto.StackAmount is { } stackAmount)
-                        _stackSystem.SetCount(ent, stackAmount);
+                        _stackSystem.SetCount((ent, null), stackAmount);
                 }
             }
         }
@@ -668,10 +668,10 @@ public sealed partial class SharedMiGoErectSystem : EntitySystem
         {
             var stackTypeProto = _prototypeManager.Index(materialToBuild.StackType);
             materialEntityToInsert = Spawn(stackTypeProto.Spawn);
-            _stackSystem.SetCount(materialEntityToInsert, canAdd);
+            _stackSystem.SetCount((materialEntityToInsert, null), canAdd);
 
             var materialEntityToLeft = item;
-            _stackSystem.SetCount(materialEntityToLeft, leftCount);
+            _stackSystem.SetCount((materialEntityToLeft, null), leftCount);
         }
         _containerSystem.Insert(materialEntityToInsert, entity.Comp.Container);
         entity.Comp.AddedMaterialsAmount[materialIndex] = containedCount + canAdd;
