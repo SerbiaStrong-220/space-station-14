@@ -24,3 +24,4 @@ ent-TelecomServerFilledSciMedEng = { ent-TelecomServer }
 ent-TelecomServerFilledComSerCar = { ent-TelecomServer }
     .suffix = Тройной, Общий Сервисный Снабжение
     .desc = { ent-TelecomServer.desc }
+ 
