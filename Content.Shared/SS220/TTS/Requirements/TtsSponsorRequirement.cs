@@ -1,5 +1,6 @@
 using Content.Shared.Players;
 using Content.Shared.SS220.Discord;
+using Robust.Shared.Player;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
@@ -8,7 +9,7 @@ using System.Linq;
 namespace Content.Shared.SS220.TTS.Requirements;
 
 [Serializable, NetSerializable]
-public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
+public abstract partial class SharedTtsSponsorRequirement : TtsVoiceRequirement
 {
     [DataField(required: true)]
     public SponsorTier SponsorTier = SponsorTier.None;
@@ -30,10 +31,11 @@ public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
         if (data.Session is not { } session)
             return true;
 
-        var sponsorInfo = session.ContentData()?.SponsorInfo;
+        var sponsorTiers = GetSponsorTiers(session);
+
         if (!Inverted)
         {
-            if (sponsorInfo != null && IsPassRequirement(sponsorInfo.Tiers))
+            if (sponsorTiers != null && IsPassRequirement(sponsorTiers))
                 return true;
 
             reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-whitelist-not-pass",
@@ -43,7 +45,7 @@ public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
         }
         else
         {
-            if (sponsorInfo == null || !IsPassRequirement(sponsorInfo.Tiers))
+            if (sponsorTiers == null || !IsPassRequirement(sponsorTiers))
                 return true;
 
             reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("tts-sponsor-requirement-blacklist-not-pass",
@@ -68,4 +70,6 @@ public sealed partial class TtsSponsorRequirement : TtsVoiceRequirement
     {
         return tiers.Any(t => IsExact ? t == SponsorTier : t >= SponsorTier);
     }
+
+    public abstract SponsorTier[]? GetSponsorTiers(ICommonSession session);
 }
