@@ -684,11 +684,10 @@ public sealed class MoverController : SharedMoverController
                 var gyroPower = 1f;
                 if (TryComp<ShuttleGyroPowerComponent>(shuttleUid, out var gyroComp))
                 {
-
                     gyroPower = Math.Clamp(gyroComp.Power, ShuttleGyroPowerComponent.MinPower, ShuttleGyroPowerComponent.MaxPower);
-
                 }
 
+                //var torque = shuttle.AngularThrust * -angularInput;
                 var torque = shuttle.AngularThrust * -angularInput * gyroPower * gyroPower;
                 /*SS220 GyroPowerUpdate End*/
 
