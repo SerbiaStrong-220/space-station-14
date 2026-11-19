@@ -38,6 +38,8 @@ air-alarm-ui-mode-wide-filtering = Фильтрация (широкая)
 air-alarm-ui-mode-fill = Заполнение
 air-alarm-ui-mode-panic = Паника
 air-alarm-ui-mode-none = Нет
+# SS220 MalfAI
+air-alarm-ui-mode-flood = Потоп
 air-alarm-ui-pump-direction-siphoning = Откачка
 air-alarm-ui-pump-direction-scrubbing = Фильтрация
 air-alarm-ui-pump-direction-releasing = Выпуск

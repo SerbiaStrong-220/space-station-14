@@ -1,10 +1,15 @@
 using Content.Shared.Clothing;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Lock;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Verbs;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.StaminaConvertArmor;
@@ -20,6 +25,9 @@ public sealed partial class StaminaConvertArmorSystem : EntitySystem
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private ItemToggleSystem _itemToggle = default!;
+    [Dependency] private LockSystem _lock = default!;
+    [Dependency] private EntityQuery<StaminaResistanceComponent> _resistQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -35,6 +43,9 @@ public sealed partial class StaminaConvertArmorSystem : EntitySystem
         // clothing events
         SubscribeLocalEvent<StaminaConvertArmorComponent, ClothingGotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<StaminaConvertArmorComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
+
+        SubscribeLocalEvent<StaminaConvertArmorComponent, ItemToggledEvent>(OnToggled);
+        SubscribeLocalEvent<StaminaConvertArmorComponent, GetVerbsEvent<ActivationVerb>>(OnToggleVerb);
     }
 
     /// <summary>
@@ -42,6 +53,9 @@ public sealed partial class StaminaConvertArmorSystem : EntitySystem
     /// </summary>
     private void OnStaminaResist(Entity<StaminaConvertArmorComponent> ent, ref BeforeStaminaDamageEvent args)
     {
+        if (!ent.Comp.Enabled)
+            return;
+
         if (ent.Comp.User == null)
             return;
 
@@ -66,6 +80,9 @@ public sealed partial class StaminaConvertArmorSystem : EntitySystem
     /// </summary>
     private void OnBeforeAddStatus(Entity<StaminaConvertArmorComponent> ent, ref BeforeStatusEffectAddedRelayEvent args)
     {
+        if (!ent.Comp.Enabled)
+            return;
+
         if (ent.Comp.User == null)
             return;
 
@@ -105,5 +122,36 @@ public sealed partial class StaminaConvertArmorSystem : EntitySystem
     {
         ent.Comp.User = null;
         Dirty(ent);
+    }
+
+    /// <summary>
+    /// Adds a verb to toggle electrification effect on and off.
+    /// </summary>
+    private void OnToggleVerb(Entity<StaminaConvertArmorComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || _lock.IsLocked(ent.Owner) || !TryComp<ItemToggleComponent>(ent, out var toggle))
+            return;
+
+        var user = args.User;
+        args.Verbs.Add(new ActivationVerb
+        {
+            Text = !toggle.Activated ? Loc.GetString(toggle.VerbToggleOn) : Loc.GetString(toggle.VerbToggleOff),
+            Act = () => _itemToggle.Toggle((ent.Owner, toggle), user, predicted: toggle.Predictable),
+        });
+    }
+
+    /// <summary>
+    /// Enables or disables item effects: converting stamina damage into electrical damage.
+    /// </summary>
+    private void OnToggled(Entity<StaminaConvertArmorComponent> ent, ref ItemToggledEvent args)
+    {
+        ent.Comp.Enabled = args.Activated;
+        Dirty(ent, ent.Comp);
+
+        if (_resistQuery.TryGetComponent(ent, out var resist))
+        {
+            resist.Enabled = args.Activated;
+            Dirty(ent, resist);
+        }
     }
 }
