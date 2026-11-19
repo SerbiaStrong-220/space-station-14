@@ -196,6 +196,7 @@ public sealed partial class PinpointerSystem : EntitySystem
             {
                 ent.Comp.SavedDnas.Add(args.Dna);
                 Dirty(ent.Owner, ent.Comp);
+                UpdateDnaList(ent.Owner, ent.Comp);
             }
             break;
         }
@@ -218,10 +219,6 @@ public sealed partial class PinpointerSystem : EntitySystem
 
             case PinpointerMode.Component:
                 _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerComponentUIState(ent.Comp.Targets));
-                break;
-
-            case PinpointerMode.Dna:
-                UpdateDnaUI(ent.Owner, ent.Comp);
                 break;
         }
     }
@@ -248,7 +245,7 @@ public sealed partial class PinpointerSystem : EntitySystem
             comp.DnaToTrack = args.Dna;
             comp.TrackedByDnaEntity = target;
 
-            UpdateDnaUI(uid, comp);
+            UpdateDnaList(uid, comp);
             return;
         }
 
@@ -256,7 +253,7 @@ public sealed partial class PinpointerSystem : EntitySystem
         comp.TrackedByDnaEntity = null;
         _pinpointer.SetTarget(uid, null);
         _pinpointer.SetActive(uid, true);
-        UpdateDnaUI(uid, comp);
+        UpdateDnaList(uid, comp);
     }
 
     private void OnAddDna(Entity<PinpointerComponent> ent, ref PinpointerAddDnaMessage args)
@@ -274,7 +271,7 @@ public sealed partial class PinpointerSystem : EntitySystem
             Dirty(uid, comp);
         }
         TrySetDnaTarget(uid, comp, cleanDna);
-        UpdateDnaUI(uid, comp);
+        UpdateDnaList(uid, comp);
     }
 
     private void TrySetDnaTarget(EntityUid uid, PinpointerComponent comp, string dna)
@@ -297,22 +294,12 @@ public sealed partial class PinpointerSystem : EntitySystem
         _pinpointer.SetActive(uid, true);
     }
 
-    private void UpdateDnaUI(EntityUid uid, PinpointerComponent comp)
+    private void UpdateDnaList(EntityUid uid, PinpointerComponent comp)
     {
-        float? dir = null;
-        float? dist = null;
+        if (!_uiSystem.IsUiOpen(uid, PinpointerUIKey.Key))
+            return;
 
-        if (comp.TrackedByDnaEntity.HasValue && Exists(comp.TrackedByDnaEntity.Value))
-        {
-            var targetEnt = comp.TrackedByDnaEntity.Value;
-            var userPos = Transform(uid).WorldPosition;
-            var targetPos = Transform(targetEnt).WorldPosition;
-            var delta = targetPos - userPos;
-            dir = (float)Math.Atan2(delta.Y, delta.X);
-            dist = delta.Length();
-        }
-
-        var state = new PinpointerDnaUIState(comp.SavedDnas, comp.DnaToTrack, dir, dist);
+        var state = new PinpointerDnaListState(comp.SavedDnas, comp.DnaToTrack);
         _uiSystem.SetUiState(uid, PinpointerUIKey.Key, state);
     }
 }

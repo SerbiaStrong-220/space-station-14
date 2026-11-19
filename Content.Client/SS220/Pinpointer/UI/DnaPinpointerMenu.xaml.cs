@@ -32,7 +32,7 @@ public sealed partial class DnaPinpointerMenu : FancyWindow
             AddButton.Disabled = string.IsNullOrWhiteSpace(DnaInput.Text);
     }
 
-    public void UpdateState(PinpointerDnaUIState state)
+    public void UpdateState(PinpointerDnaListState state)
     {
         SavedDnasList.RemoveAllChildren();
 

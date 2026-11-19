@@ -83,10 +83,14 @@ public sealed partial class PinpointerSelectDnaMessage(string dna) : BoundUserIn
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerDnaUIState(List<string> savedDnas, string? activeDna, float? direction, float? distance) : BoundUserInterfaceState
+public sealed partial class PinpointerDnaListState : BoundUserInterfaceState
 {
-    public List<string> SavedDnas = savedDnas;
-    public string? ActiveDna = activeDna;
-    public float? Direction = direction;
-    public float? Distance = distance;
+    public List<string> SavedDnas;
+    public string? ActiveDna;
+
+    public PinpointerDnaListState(List<string> savedDnas, string? activeDna)
+    {
+        SavedDnas = savedDnas;
+        ActiveDna = activeDna;
+    }
 }
