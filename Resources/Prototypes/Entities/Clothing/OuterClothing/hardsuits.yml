@@ -391,8 +391,10 @@
   - type: Speech
     speechVerb: Robotic
     speechSounds: Beep
-  - type: TTS
-    voice: glados
+  - type: Tts
+    voicePreferences:
+      NTTS: glados
+      Silero: Glados
   #SS220-dna-lock end
 
 #Captain's Hardsuit
