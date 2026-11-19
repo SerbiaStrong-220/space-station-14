@@ -682,9 +682,11 @@ public sealed class MoverController : SharedMoverController
 
                 /*SS220 GyroPowerUpdate Start*/
                 var gyroPower = 1f;
-                if (EntityManager.TryGetComponent<ShuttleGyroPowerComponent>(shuttleUid, out var gyroComp))
+                if (TryComp<ShuttleGyroPowerComponent>(shuttleUid, out var gyroComp))
                 {
+
                     gyroPower = Math.Clamp(gyroComp.Power, ShuttleGyroPowerComponent.MinPower, ShuttleGyroPowerComponent.MaxPower);
+
                 }
 
                 var torque = shuttle.AngularThrust * -angularInput * gyroPower * gyroPower;
