@@ -21,7 +21,7 @@ namespace Content.Server.Database.Migrations.Postgres
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.0")
+                .HasAnnotation("ProductVersion", "10.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -1159,11 +1159,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("boolean")
                         .HasColumnName("teleport_afk_to_cryo_storage");
 
-                    b.Property<string>("Voice")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("voice");
-
                     b.HasKey("Id")
                         .HasName("PK_profile");
 
@@ -1397,6 +1392,48 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsUnique();
 
                     b.ToTable("trait", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.TtsVoicePreference", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("tts_voice_preference_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PositionIndex")
+                        .HasColumnType("integer")
+                        .HasColumnName("position_index");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.Property<string>("ProviderName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("provider_name");
+
+                    b.Property<string>("VoiceId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("voice_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_tts_voice_preference");
+
+                    b.HasIndex("ProfileId", "PositionIndex")
+                        .IsUnique();
+
+                    b.HasIndex("ProfileId", "ProviderName")
+                        .IsUnique();
+
+                    b.HasIndex("ProfileId", "VoiceId")
+                        .IsUnique();
+
+                    b.ToTable("tts_voice_preference", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.Unban", b =>
@@ -2069,6 +2106,18 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.TtsVoicePreference", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("TtsVoicePreferences")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_tts_voice_preference_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Unban", b =>
                 {
                     b.HasOne("Content.Server.Database.Ban", "Ban")
@@ -2186,6 +2235,8 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Loadouts");
 
                     b.Navigation("Traits");
+
+                    b.Navigation("TtsVoicePreferences");
                 });
 
             modelBuilder.Entity("Content.Server.Database.ProfileLoadoutGroup", b =>
