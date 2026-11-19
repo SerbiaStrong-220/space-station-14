@@ -50,7 +50,7 @@
     interfaces:
       enum.TapeRecorderUIKey.Key:
         type: TapeRecorderBoundUserInterface
-  - type: TTS # SS220 Tape recorder TTS
+  - type: Tts # SS220 Tape recorder TTS
   # SS220 languages begin
   - type: Language
     knowAllLanguages: true # Used as transponder
