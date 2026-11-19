@@ -1,0 +1,1 @@
+ss220-ghost-role-announce = [head=3]Появилась новая призрачная роль - {$role}![/head]

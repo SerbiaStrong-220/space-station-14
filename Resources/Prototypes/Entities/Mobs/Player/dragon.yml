@@ -18,6 +18,7 @@
       - ReagentId: Blood
         Quantity: 650
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment | Big lizard go chomp
     allowMovement: true
     allowSpeech: true
     makeSentient: true

@@ -46,6 +46,7 @@
   - type: NoSlip
   - type: GhostTakeoverAvailable
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-dark-reaper-name
     description: ghost-role-information-dark-reaper-description
     rules: ghost-role-information-dark-reaper-rules

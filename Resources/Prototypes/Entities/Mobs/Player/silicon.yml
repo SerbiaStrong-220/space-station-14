@@ -694,6 +694,7 @@
   suffix: Ghost role
   components:
     - type: GhostRole
+      announceToGhosts: true # SS220 ghost role announcment
       name: ghost-role-information-syndicate-cyborg-assault-name
       description: ghost-role-information-syndicate-cyborg-description
       rules: ghost-role-information-silicon-rules
@@ -728,6 +729,7 @@
   suffix: Ghost role
   components:
     - type: GhostRole
+      announceToGhosts: true # SS220 ghost role announcment
       name: ghost-role-information-syndicate-cyborg-saboteur-name
       description: ghost-role-information-syndicate-cyborg-description
       rules: ghost-role-information-silicon-rules
@@ -783,6 +785,7 @@
   suffix: Ghost role
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-engineering-cyborg-name
     description: ghost-role-information-derelict-engineering-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -819,6 +822,7 @@
   suffix: Ghost role
   components:
     - type: GhostRole
+      announceToGhosts: true # SS220 ghost role announcment
       name: ghost-role-information-derelict-cyborg-name
       description: ghost-role-information-derelict-cyborg-description
       rules: ghost-role-information-silicon-rules
@@ -857,6 +861,7 @@
   suffix: Ghost role
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-janitor-cyborg-name
     description: ghost-role-information-derelict-janitor-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -896,6 +901,7 @@
   suffix: Ghost role
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-medical-cyborg-name
     description: ghost-role-information-derelict-medical-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -934,6 +940,7 @@
   suffix: Ghost role
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-mining-cyborg-name
     description: ghost-role-information-derelict-mining-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -970,6 +977,7 @@
   suffix: Ghost role
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-syndicate-assault-cyborg-name
     description: ghost-role-information-derelict-syndicate-assault-cyborg-description
     rules: ghost-role-information-silicon-rules

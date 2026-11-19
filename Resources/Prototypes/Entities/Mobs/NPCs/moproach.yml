@@ -5,6 +5,7 @@
   description: This little mothroach has mopshoes on its feet! How adorable!
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment | МОЛЬКИ ЭТО ВАЖНО!!!!
     name: ghost-role-information-moproach-name
     description: ghost-role-information-moproach-description
   #SS220 languages tweaks begin

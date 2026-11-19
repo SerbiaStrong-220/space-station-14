@@ -5,6 +5,7 @@
   suffix: DragonBrood
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     allowMovement: true
     allowSpeech: true
     makeSentient: true

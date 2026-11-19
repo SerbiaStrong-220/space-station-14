@@ -9,6 +9,7 @@
   name: ghost role spawn point
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     raffle:
       settings: default
   - type: GhostRoleAntagSpawner
@@ -20,6 +21,7 @@
   parent: MarkerBase
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment | Okay no deadlock reference for this one
     name: ghost-role-information-rat-king-name
     description: ghost-role-information-rat-king-description
     rules: ghost-role-information-freeagent-rules
@@ -44,6 +46,7 @@
   parent: MarkerBase
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-remilia-name
     description: ghost-role-information-remilia-description
     rules: ghost-role-information-familiar-rules
@@ -67,6 +70,7 @@
   parent: MarkerBase
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-cerberus-name
     description: ghost-role-information-cerberus-description
     rules: ghost-role-information-familiar-rules
@@ -92,6 +96,7 @@
   parent: MarkerBase
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     rules: ghost-role-information-rules-default-team-antagonist
     mindRoles:
     - MindRoleNukeops
@@ -112,6 +117,7 @@
   id: SpawnPointLoneNukeOperative
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-loneop-name
     description: ghost-role-information-loneop-description
     rules: ghost-role-information-loneop-rules
@@ -130,6 +136,7 @@
   id: SpawnPointNukeopsCommander
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: roles-antag-nuclear-operative-commander-name
     description: roles-antag-nuclear-operative-commander-objective
     rules: ghost-role-information-rules-default-team-antagonist
@@ -142,6 +149,7 @@
   id: SpawnPointNukeopsMedic
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: roles-antag-nuclear-operative-agent-name
     description: roles-antag-nuclear-operative-agent-objective
     rules: ghost-role-information-rules-default-team-antagonist
@@ -154,6 +162,7 @@
   id: SpawnPointNukeopsOperative
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: roles-antag-nuclear-operative-name
     description: roles-antag-nuclear-operative-objective
     rules: ghost-role-information-rules-default-team-antagonist
@@ -166,6 +175,7 @@
   id: SpawnPointGhostDragon
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-space-dragon-name
     description: ghost-role-information-space-dragon-description
     rules: ghost-role-information-space-dragon-rules
@@ -184,6 +194,7 @@
   id: SpawnPointGhostSpaceNinja
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-space-ninja-name
     description: ghost-role-information-space-ninja-description
     rules: ghost-role-information-antagonist-rules
@@ -205,6 +216,7 @@
   id: SpawnPointGhostParadoxClone
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-paradox-clone-name
     description: ghost-role-information-paradox-clone-description
     rules: ghost-role-information-antagonist-rules
@@ -225,6 +237,7 @@
   id: SpawnPointGhostDerelictEngineeringCyborg
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-engineering-cyborg-name
     description: ghost-role-information-derelict-engineering-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -237,6 +250,7 @@
   id: SpawnPointGhostDerelictCyborg
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-cyborg-name
     description: ghost-role-information-derelict-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -262,6 +276,7 @@
     - ForceFixRotations
     - MothershipCoreGhostrole
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-mothership-core-name
     description: ghost-role-information-mothership-core-desc
     rules: ghost-role-information-silicon-rules
@@ -284,6 +299,7 @@
     - ForceFixRotations
     - XenoborgGhostrole
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-xenoborg-name
     description: ghost-role-information-xenoborg-desc
     rules: ghost-role-information-silicon-rules
@@ -302,6 +318,7 @@
   id: SpawnPointGhostDerelictJanitorCyborg
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-janitor-cyborg-name
     description: ghost-role-information-derelict-janitor-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -314,6 +331,7 @@
   id: SpawnPointGhostDerelictMedicalCyborg
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-medical-cyborg-name
     description: ghost-role-information-derelict-medical-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -326,6 +344,7 @@
   id: SpawnPointGhostDerelictMiningCyborg
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-mining-cyborg-name
     description: ghost-role-information-derelict-mining-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -338,6 +357,7 @@
   id: SpawnPointGhostDerelictSyndicateAssaultCyborg
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-derelict-syndicate-assault-cyborg-name
     description: ghost-role-information-derelict-syndicate-assault-cyborg-description
     rules: ghost-role-information-silicon-rules
@@ -352,6 +372,7 @@
   suffix: wizard
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment
     name: ghost-role-information-wizard-name
     description: ghost-role-information-wizard-desc
     rules: ghost-role-information-antagonist-rules

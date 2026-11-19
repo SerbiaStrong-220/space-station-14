@@ -102,6 +102,7 @@
       Dead:
         Base: dead
   - type: GhostRole
+    announceToGhosts: true # SS220 ghost role announcment | WE'RE TAKIN' THE STATION BY STORM
     makeSentient: true
     name: ghost-role-information-rat-king-name
     description: ghost-role-information-rat-king-description
