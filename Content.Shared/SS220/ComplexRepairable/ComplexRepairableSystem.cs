@@ -14,14 +14,14 @@ namespace Content.Shared.SS220.ComplexRepairable;
 
 public sealed partial class ComplexRepairableSystem : EntitySystem
 {
+    [Dependency] private SharedToolSystem _toolSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+
     private static readonly LocId MaterialRepair = "complex-repairable-material-repair";
     private static readonly LocId RepairDone = "comp-repairable-repair";
-
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
 
     public override void Initialize()
     {

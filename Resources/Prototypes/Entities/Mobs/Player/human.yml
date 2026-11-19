@@ -16,9 +16,12 @@
     factions:
     - Syndicate
   # SS220-experience-update-begin
-  - type: AntagAddKnowledge
-    knowledgesToAdd:
-    - SyndicateAgentKnowledge
+  - type: ExperienceAddition
+    sources:
+      Antag:
+        freeSublevelPoints: 0
+        knowledges:
+        - SyndicateAgentKnowledge
   # SS220-experience-update-end
 
 - type: entity
@@ -64,7 +67,7 @@
   suffix: Human, NukeOps
   components:
   # SS220-experience-update-begin
-  - type: RoleExperienceAdd
+  - type: ExperienceAddition
     definitionId: SyndicateOperativeRoleExperience
   # SS220-experience-update-end
   - type: NukeOperative

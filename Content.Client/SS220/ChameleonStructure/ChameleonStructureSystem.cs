@@ -9,11 +9,11 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.SS220.ChameleonStructure;
 
 // All valid items for chameleon are calculated on client startup and stored in dictionary.
-public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
+public sealed partial class ChameleonStructureSystem : SharedChameleonStructureSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IconSmoothSystem _smooth = default!;
-    [Dependency] private readonly OccluderSystem _occluder = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IconSmoothSystem _smooth = default!;
+    [Dependency] private OccluderSystem _occluder = default!;
 
     public override void Initialize()
     {

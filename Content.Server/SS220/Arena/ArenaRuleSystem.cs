@@ -11,6 +11,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.SS220.AdmemeEvents.EventRole;
+using Content.Shared.SS220.Arena;
 using Content.Shared.SS220.Arena.Lobby;
 using Content.Shared.Station;
 using Robust.Shared.Audio;
@@ -28,21 +29,21 @@ using System.Numerics;
 
 namespace Content.Server.SS220.Arena;
 
-public sealed class ArenaRuleSystem : GameRuleSystem<ArenaRuleComponent>
+public sealed partial class ArenaRuleSystem : GameRuleSystem<ArenaRuleComponent>
 {
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly SharedMapSystem _maps = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedStationSpawningSystem _stationSpawning = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPointLightSystem _light = default!;
-    [Dependency] private readonly ISharedPlayerManager _players = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedStationSpawningSystem _stationSpawning = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPointLightSystem _light = default!;
+    [Dependency] private ISharedPlayerManager _players = default!;
 
     private static readonly SoundSpecifier PingSound = new SoundPathSpecifier("/Audio/Effects/newplayerping.ogg");
     private static readonly EntProtoId EffectSparks = "EffectSparks";

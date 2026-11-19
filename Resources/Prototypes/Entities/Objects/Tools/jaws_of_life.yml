@@ -7,12 +7,6 @@
   - type: Tag
     tags:
     - JawsOfLife
-  # SS220-construction-skill-begin
-  - type: LearningOnDoAfterEndWith
-    progress:
-      Construction:
-        baseLearning: 0.02
-  # SS220-construction-skill-end
   - type: Sprite
     sprite: Objects/Tools/jaws_of_life.rsi
     state: jaws_pry
@@ -56,6 +50,14 @@
         Blunt: 10
     soundHit:
       collection: MetalThud
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Tools/crowbar_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Tools/crowbar_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: syndicate jaws of death

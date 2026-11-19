@@ -10,11 +10,11 @@ using Robust.Shared.Utility;
 namespace Content.Server.SS220.Objectives.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class AddCustomObjectiveCommand : LocalizedEntityCommands
+public sealed partial class AddCustomObjectiveCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private IChatManager _chatManager = default!;
 
     public override string Command => "addcustomobjective";
     public override string Help => Loc.GetString("add-custom-objective-command-help");

@@ -1,0 +1,265 @@
+- type: loadout
+  id: CaptainInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyStationMaster
+    - EncryptionKeyLaw
+
+- type: loadoutGroup
+  id: CaptainInnerEncryptionKeys
+  name: loadout-group-captain-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - CaptainInnerEncryptionKeys
+
+- type: loadout
+  id: CommandInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyStationMaster
+
+- type: loadoutGroup
+  id: CommandInnerEncryptionKeys
+  name: loadout-group-command-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - CommandInnerEncryptionKeys
+
+- type: loadout
+  id: ChiefEngineerInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyEngineering
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: ChiefEngineerInnerEncryptionKeys
+  name: loadout-group-chief-engineer-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - ChiefEngineerInnerEncryptionKeys
+
+- type: loadout
+  id: ChiefMedicalOfficerInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyMedical
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: ChiefMedicalOfficerInnerEncryptionKeys
+  name: loadout-group-chief-medical-officer-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - ChiefMedicalOfficerInnerEncryptionKeys
+
+- type: loadout
+  id: QuartermasterInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyCargo
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: QuartermasterInnerEncryptionKeys
+  name: loadout-group-quartermaster-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - QuartermasterInnerEncryptionKeys
+
+- type: loadout
+  id: ResearchDirectorInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyScience
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: ResearchDirectorInnerEncryptionKeys
+  name: loadout-group-research-director-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - ResearchDirectorInnerEncryptionKeys
+
+- type: loadout
+  id: HeadOfSecurityInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeySecurity
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: HeadOfSecurityInnerEncryptionKeys
+  name: loadout-group-head-of-security-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - HeadOfSecurityInnerEncryptionKeys
+
+- type: loadout
+  id: BrigmedicInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyMedical
+    - EncryptionKeySecurity
+
+- type: loadoutGroup
+  id: BrigmedicInnerEncryptionKeys
+  name: loadout-group-brigmedic-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - BrigmedicInnerEncryptionKeys
+
+- type: loadout
+  id: LawyerInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyLaw
+    - EncryptionKeySecurity
+
+- type: loadoutGroup
+  id: LawyerInnerEncryptionKeys
+  name: loadout-group-lawyer-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - LawyerInnerEncryptionKeys
+
+- type: loadout
+  id: NanoTrasenRepresentativeInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyLaw
+    - EncryptionKeySecurity
+    - EncryptionKeyCommand
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeInnerEncryptionKeys
+  name: loadout-group-nano-trasen-representative-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - NanoTrasenRepresentativeInnerEncryptionKeys
+
+- type: loadout
+  id: CargoInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyCargo
+
+- type: loadoutGroup
+  id: CargoInnerEncryptionKeys
+  name: loadout-group-cargo-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - CargoInnerEncryptionKeys
+
+- type: loadout
+  id: EngineeringInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyEngineering
+
+- type: loadoutGroup
+  id: EngineeringInnerEncryptionKeys
+  name: loadout-group-engineering-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - EngineeringInnerEncryptionKeys
+
+- type: loadout
+  id: MedicalInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyMedical
+
+- type: loadoutGroup
+  id: MedicalInnerEncryptionKeys
+  name: loadout-group-medical-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - MedicalInnerEncryptionKeys
+
+- type: loadout
+  id: ScienceInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyScience
+
+- type: loadoutGroup
+  id: ScienceInnerEncryptionKeys
+  name: loadout-group-science-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - ScienceInnerEncryptionKeys
+
+- type: loadout
+  id: SecurityInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeySecurity
+
+- type: loadoutGroup
+  id: SecurityInnerEncryptionKeys
+  name: loadout-group-security-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - SecurityInnerEncryptionKeys
+
+- type: loadout
+  id: ServiceInnerEncryptionKeys
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    key_slots:
+    - EncryptionKeyService
+
+- type: loadoutGroup
+  id: ServiceInnerEncryptionKeys
+  name: loadout-group-service-inner-encryption-keys
+  hidden: true
+  loadouts:
+  - ServiceInnerEncryptionKeys

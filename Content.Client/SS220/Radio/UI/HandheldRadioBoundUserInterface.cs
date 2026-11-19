@@ -9,9 +9,9 @@ using Content.Shared.Radio;
 namespace Content.Client.SS220.Radio.UI;
 
 [UsedImplicitly]
-public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
+public sealed partial class HandheldRadioBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     [ViewVariables]
     private HandheldRadioMenu? _menu;

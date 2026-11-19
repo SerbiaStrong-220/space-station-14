@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Collections.Immutable;
 using Content.Shared.Physics;
@@ -9,10 +9,10 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Server.SS220.ShapeCollisionTracker;
 
-public sealed class ShapeCollisionTrackerSystem : EntitySystem
+public sealed partial class ShapeCollisionTrackerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private SharedBroadphaseSystem _broadphase = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
 
     private readonly HashSet<(EntityUid, ShapeCollisionTrackerComponent)> _trackerDebounce = new();
 
@@ -42,7 +42,7 @@ public sealed class ShapeCollisionTrackerSystem : EntitySystem
         // Re-check for contacts as we cleared them.
         else if (TryComp<PhysicsComponent>(uid, out var body))
         {
-            _broadphase.RegenerateContacts(uid, body);
+            _broadphase.RegenerateContacts((uid, body, null, null));
         }
     }
 

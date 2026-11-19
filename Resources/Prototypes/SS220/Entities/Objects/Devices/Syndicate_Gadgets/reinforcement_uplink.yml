@@ -1,0 +1,14 @@
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband ]
+  id: NukeOpsReinforcementUplink
+  name: reinforcement uplink
+  description: A comms device made to send requests to your employers via an encrypted bluespace radiochannel.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Devices/reinforcement_uplink.rsi
+      layers:
+        - state: uplink
+    - type: Item
+    - type: UseDelay
+      delay: 0.5
+    - type: NuclearReinforcementRequest

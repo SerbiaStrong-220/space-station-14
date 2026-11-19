@@ -4,11 +4,13 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Preferences.Loadouts;
+using Content.Shared.Radio.Components; // SS220-ipc-builtin-radio
 using Content.Shared.Roles;
-using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Systems;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Collections;
+using Robust.Shared.Containers; // SS220-ipc-builtin-radio
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -23,6 +25,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private SharedContainerSystem _container = default!; // SS220-ipc-builtin-radio
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
 
     [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
@@ -113,8 +116,8 @@ public abstract class SharedStationSpawningSystem : EntitySystem
         // SS220-experience-update-begin
         if (startingGear is StartingGearPrototype startingGearProto)
         {
-            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
-            skillRoleAddComp.DefinitionId = startingGearProto.ExperienceDefinition ?? skillRoleAddComp.DefinitionId;
+            var changeDefEv = new TryChangeExperienceDefinitionEvent(startingGearProto.ExperienceDefinition, false);
+            RaiseLocalEvent(entity, ref changeDefEv);
         }
         // SS220-experience-update-end
 
@@ -171,6 +174,21 @@ public abstract class SharedStationSpawningSystem : EntitySystem
                     }
                 }
             }
+
+            // SS220-ipc-builtin-radio begin
+            // Pre-install encryption keys into the built-in radio's key_slots container.
+            // Bypasses EncryptionKeySystem.TryInsertKey's lock check (same as ContainerFill).
+            if (startingGear.Storage.TryGetValue(EncryptionKeyHolderComponent.KeyContainerName, out var keyProtos) &&
+                keyProtos is { Count: > 0 } &&
+                TryComp<EncryptionKeyHolderComponent>(entity, out var keyHolder))
+            {
+                foreach (var keyProto in keyProtos)
+                {
+                    var keyEntity = Spawn(keyProto, coords);
+                    _container.Insert(keyEntity, keyHolder.KeyContainer);
+                }
+            }
+            // SS220-ipc-builtin-radio end
         }
 
         if (raiseEvent)

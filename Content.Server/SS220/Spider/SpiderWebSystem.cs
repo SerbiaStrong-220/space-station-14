@@ -10,11 +10,11 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server.SS220.Spider;
 
-public sealed class SpiderWebSystem : EntitySystem
+public sealed partial class SpiderWebSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

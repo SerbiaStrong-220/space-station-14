@@ -1,0 +1,59 @@
+- type: entity
+  parent: [ BaseItem, PowerCellSlotSmallItem ]
+  id: BaseHealingPathologyItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/fragments_extractors.rsi
+  - type: Item
+    size: Small
+    sprite: SS220/Objects/Specific/Medical/fragments_extractors.rsi
+  - type: PowerCellDraw
+    drawRate: 0
+    useCharge: 70
+
+- type: entity
+  name: shrapnel extractor
+  description: A compact, military-grade magnetic tool for rapid projectile removal in the field.
+  parent: BaseHealingPathologyItem
+  id: SyndicateFragmentExtractor
+  components:
+  - type: Sprite
+    state: syndicate
+  - type: Item
+    heldPrefix: syndicate
+  - type: PathologyHealer
+    curePathologyStacksSelectors:
+    - TorsoProjectileFragment: -1
+      HeadProjectileFragment: -1
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellSmall
+
+- type: entity
+  name: improvised shrapnel extractor
+  description: Just some wire, duct tape, and a power source. Apply to the gunshot wound and run the current - electromagnetic induction will do the dirty work for you. It's going to hurt.
+  parent: BaseHealingPathologyItem
+  id: ImprovisedFragmentExtractor
+  components:
+  - type: Sprite
+    state: improvised
+  - type: Item
+    heldPrefix: improvised
+  - type: PathologyHealer
+    curePathologyStacksSelectors:
+    - TorsoProjectileFragment: -1
+      HeadProjectileFragment: -1
+    damagePerCure:
+      types:
+        Blunt: 8
+  - type: Construction
+    graph: ImprovisedFragmentExtractorCraft
+    node: ImprovisedFragmentExtractor
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: null

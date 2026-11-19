@@ -3,6 +3,10 @@ using System.Numerics;
 using System.Threading;
 using Content.Client.RichText;
 using Content.Client.Verbs;
+//SS220-LabelColors begin
+using Content.Client.SS220.Labels;
+using Content.Shared.Labels.Components;
+//SS220-LabelColors end
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
@@ -239,8 +243,11 @@ namespace Content.Client.Examine
 
             if (knowTarget)
             {
-                var itemName = FormattedMessage.EscapeText(Identity.Name(target, EntityManager, player));
-                var labelMessage = FormattedMessage.FromMarkupPermissive($"[bold]{itemName}[/bold]");
+                //SS220-LabelColors begin
+                TryComp<LabelComponent>(target, out var labelComp);
+                var entityName = Identity.Name(target, EntityManager, player);
+                var labelMessage = FormattedMessage.FromMarkupPermissive(LabelNameMarkup.BuildName(labelComp, entityName));
+                //SS220-LabelColors end
                 var label = new RichTextLabel();
                 label.SetMessage(labelMessage);
                 hBox.AddChild(label);

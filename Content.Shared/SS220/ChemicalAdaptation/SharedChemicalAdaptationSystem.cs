@@ -4,9 +4,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.ChemicalAdaptation;
 
-public sealed class ChemicalAdaptationSystem : EntitySystem
+public sealed partial class ChemicalAdaptationSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _time = default!;
+    [Dependency] private IGameTiming _time = default!;
 
     public override void Update(float frameTime)
     {

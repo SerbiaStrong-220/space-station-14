@@ -383,6 +383,7 @@
   name: chat-emote-name-growl
   category: Vocal
   available: false
+  icon: SS220/Interface/Emotes/growls.png #SS220 icons for emote
   whitelist:
     components:
     - Vocal
@@ -649,6 +650,7 @@
   name: chat-emote-name-hiss
   category: Vocal
   available: false
+  icon: SS220/Interface/Emotes/hisses.png #SS220 icons for emote
   whitelist:
     components:
     - Vocal

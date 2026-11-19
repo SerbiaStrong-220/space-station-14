@@ -57,6 +57,7 @@
     allowedStates:
     - Alive
     - Dead
+  - type: DefibReviveAlive #SS220-xeno-defib
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -366,6 +367,12 @@
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightBlue
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
   - type: Sprite
     drawdepth: SmallMobs #SS220-fauna-update
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi
@@ -505,6 +512,7 @@
   - type: Hands
   - type: ComplexInteraction
   - type: MobState
+  - type: DefibReviveAlive #SS220-xeno-defib
   - type: Stamina
     baseCritThreshold: 200
   - type: Bloodstream

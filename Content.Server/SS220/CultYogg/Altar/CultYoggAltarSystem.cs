@@ -22,13 +22,13 @@ namespace Content.Server.SS220.CultYogg.Altar;
 
 public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

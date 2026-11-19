@@ -90,7 +90,7 @@
 - type: randomHumanoidSettings
   id: ERTLeader
   parent: EventHumanoidCentcomm
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   components:
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
@@ -101,7 +101,7 @@
       job: ERTLeader
     - type: Loadout
       prototypes: [ ERTLeaderGear ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
     - type: RandomMetadata
       nameSegments:
       - NamesMilitaryLast
@@ -121,12 +121,12 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: Loadout
       prototypes: [ ERTLeaderGearEVA ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderArmed
@@ -138,12 +138,12 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderArmed
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTLeaderEVA
   components:
     - type: Loadout
       prototypes: [ ERTLeaderGearArmed ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 ## ERT Chaplain
 
@@ -161,7 +161,7 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplain
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: BibleUser
@@ -178,7 +178,7 @@
       nameFormat: name-format-ert-specialist
     - type: Loadout
       prototypes: [ ERTChaplainGear ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   id: RandomHumanoidSpawnerERTChaplainEVA
@@ -194,12 +194,12 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplainEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTChaplain
   components:
     - type: Loadout
       prototypes: [ ERTChaplainGearEVA ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 ## ERT Janitor
 
@@ -217,7 +217,7 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitor
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -233,7 +233,7 @@
       nameFormat: name-format-ert-specialist
     - type: Loadout
       prototypes: [ ERTJanitorGear ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   id: RandomHumanoidSpawnerERTJanitorEVA
@@ -248,12 +248,12 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitorEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTJanitor
   components:
     - type: Loadout
       prototypes: [ ERTJanitorGearEVA ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 ## ERT Engineer
 
@@ -271,7 +271,7 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineer
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -287,7 +287,7 @@
       nameFormat: name-format-ert-specialist
     - type: Loadout
       prototypes: [ ERTEngineerGear ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   id: RandomHumanoidSpawnerERTEngineerEVA
@@ -302,12 +302,12 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineerEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTEngineer
   components:
     - type: Loadout
       prototypes: [ ERTEngineerGearEVA ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   parent: RandomHumanoidSpawnerERTEngineerEVA
@@ -327,7 +327,7 @@
     nameFormat: name-format-ert-pointman
   - type: Loadout
     prototypes: [ ERTEngineerGearArmed ]
-    roleLoadout: [ RoleSurvivalMilitaryDouble ]
+    roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 ## ERT Security
 
@@ -345,7 +345,7 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurity
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -361,7 +361,7 @@
       nameFormat: name-format-ert-officer
     - type: Loadout
       prototypes: [ ERTSecurityGear ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityEVA
@@ -377,7 +377,7 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTSecurity
   components:
     - type: GhostRole
@@ -389,7 +389,7 @@
       job: ERTSecurity
     - type: Loadout
       prototypes: [ ERTSecurityGearEVA ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityArmedRifle
@@ -402,7 +402,7 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityArmedRifle
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTSecurityEVA
   components:
   - type: RandomMetadata
@@ -411,7 +411,7 @@
     nameFormat: name-format-ert-rifle
   - type: Loadout
     prototypes: [ ERTSecurityGearArmedRifle ]
-    roleLoadout: [ RoleSurvivalMilitaryDouble ]
+    roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   parent: RandomHumanoidSpawnerERTSecurityEVA
@@ -432,7 +432,7 @@
     nameFormat: name-format-ert-grenade
   - type: Loadout
     prototypes: [ ERTSecurityGearArmedGrenade ]
-    roleLoadout: [ RoleSurvivalMilitaryDouble ]
+    roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   parent: RandomHumanoidSpawnerERTSecurityEVA
@@ -453,7 +453,7 @@
     nameFormat: name-format-ert-vanguard
   - type: Loadout
     prototypes: [ ERTSecurityGearArmedVanguard ]
-    roleLoadout: [ RoleSurvivalMilitaryDouble ]
+    roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   parent: RandomHumanoidSpawnerERTSecurityEVA
@@ -474,7 +474,7 @@
     nameFormat: name-format-ert-pointman
   - type: Loadout
     prototypes: [ ERTSecurityGearArmedShotgun ]
-    roleLoadout: [ RoleSurvivalMilitaryDouble ]
+    roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 ## ERT Medic
 
@@ -492,7 +492,7 @@
 
 - type: randomHumanoidSettings
   id: ERTMedical
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -508,7 +508,7 @@
       nameFormat: name-format-ert-doctor
     - type: Loadout
       prototypes: [ ERTMedicalGear ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   id: RandomHumanoidSpawnerERTMedicalEVA
@@ -523,7 +523,7 @@
 
 - type: randomHumanoidSettings
   id: ERTMedicalEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: ERTMedical
   components:
     - type: GhostRole
@@ -535,7 +535,7 @@
       job: ERTMedical
     - type: Loadout
       prototypes: [ ERTMedicalGearEVA ]
-      roleLoadout: [ RoleSurvivalMilitaryDouble ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 - type: entity
   parent: RandomHumanoidSpawnerERTMedicalEVA
@@ -555,7 +555,7 @@
     nameFormat: name-format-ert-corpsman
   - type: Loadout
     prototypes: [ ERTMedicalGearArmed ]
-    roleLoadout: [ RoleSurvivalMilitaryDouble ]
+    roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
 
 ## CBURN
 
@@ -569,15 +569,17 @@
       state: cburn
     - type: RandomHumanoidSpawner
       settings: CBURNAgent
+    - type: ZombieImmune #SS220 ERTchangingthings
 
 - type: randomHumanoidSettings
   id: CBURNAgent
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran, Ipc] #SS220-centcom-human-ERT-update
   parent: EventHumanoidCentcomm
+        #roleLoadout: [ RoleSurvivalEVA ] #SS220 ERTchangingthings
   components:
     - type: Loadout
       prototypes: [CBURNGear]
-      roleLoadout: [ RoleSurvivalEVA ]
+      roleLoadout: [ RoleSurvivalCentcom ] #SS220 ERTchangingthings
     - type: GhostRole
       name: ghost-role-information-cburn-agent-name
       description: ghost-role-information-cburn-agent-description
@@ -590,6 +592,7 @@
       - NamesMilitaryFirst
       - NamesMilitaryLast
       nameFormat: name-format-ert
+    - type: ZombieImmune #SS220 ERTchangingthings
 
 ## Central Command
 

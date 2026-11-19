@@ -23,13 +23,13 @@ namespace Content.Server.SS220.CultYogg.Nyarlathotep;
 /// The entity system primarily responsible for managing <see cref="NyarlathotepHorizonComponent"/>s.
 /// Handles their consumption of entities.
 /// </summary>
-public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
+public sealed partial class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
 {
     #region Dependencies
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
     #endregion Dependencies
 
     private readonly ProtoId<TagPrototype> _highRiskItemTag = "HighRiskItem";

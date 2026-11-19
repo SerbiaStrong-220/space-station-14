@@ -12,8 +12,8 @@ namespace Content.Server.SS220.Objectives.Systems;
 
 public sealed partial class CreateCocoonsConditionSystem : EntitySystem
 {
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private RoleSystem _role = default!;
 
     public override void Initialize()
     {

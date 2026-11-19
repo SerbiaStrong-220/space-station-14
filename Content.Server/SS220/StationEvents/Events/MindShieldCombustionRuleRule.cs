@@ -10,9 +10,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.StationEvents.Events;
 
-public sealed class MindShieldCombustionRule : StationEventSystem<MindShieldCombustionRuleComponent>
+public sealed partial class MindShieldCombustionRule : StationEventSystem<MindShieldCombustionRuleComponent>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override void Started(EntityUid uid, MindShieldCombustionRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

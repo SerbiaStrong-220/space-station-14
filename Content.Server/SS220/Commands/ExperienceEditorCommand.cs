@@ -7,9 +7,9 @@ using Content.Shared.SS220.Experience;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class ExperienceEditorCommand : LocalizedCommands
+public sealed partial class ExperienceEditorCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityNetworkManager _entityNetwork = default!;
+    [Dependency] private IEntityNetworkManager _entityNetwork = default!;
 
     public override string Command => "expeditor";
 

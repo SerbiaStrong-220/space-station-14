@@ -13,12 +13,12 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.Pod;
 
-public abstract class SharedCultYoggPodSystem : EntitySystem
+public abstract partial class SharedCultYoggPodSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {

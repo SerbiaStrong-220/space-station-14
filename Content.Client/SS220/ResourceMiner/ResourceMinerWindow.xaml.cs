@@ -15,7 +15,7 @@ namespace Content.Client.SS220.ResourceMiner;
 [GenerateTypedNameReferences]
 public sealed partial class ResourceMinerWindow : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly MaterialStorageSystem _materialStorage = default!;
 

@@ -12,7 +12,7 @@ namespace Content.Server.SS220.Administration.Commands;
 [AdminCommand(AdminFlags.Admin)]
 public sealed partial class GarbageClearUpCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public string Command => "clearupgarbage";
     public string Description => Loc.GetString("command-garbage-clear-up-desc");

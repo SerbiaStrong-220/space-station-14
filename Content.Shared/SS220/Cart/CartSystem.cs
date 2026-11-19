@@ -15,12 +15,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Cart;
 
-public sealed class CartSystem : EntitySystem
+public sealed partial class CartSystem : EntitySystem
 {
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly TileFrictionController _tileFriction = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private TileFrictionController _tileFriction = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -173,13 +173,13 @@ public sealed class CartSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    public bool TryAttachCart(EntityUid target, CartComponent cartComp, EntityUid user)
+    public bool TryAttachCart(EntityUid target, Entity<CartComponent> cart, EntityUid user)
     {
-        if (!IsAttachable(target, cartComp.Owner))
+        if (!IsAttachable(target, cart))
             return false;
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, user, cartComp.AttachToggleTime, new CartAttachDoAfterEvent(target),
-            cartComp.Owner, target: cartComp.Owner)
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, user, cart.Comp.AttachToggleTime, new CartAttachDoAfterEvent(target),
+            cart, target: cart)
         {
             BreakOnMove = true,
             BreakOnDamage = true,

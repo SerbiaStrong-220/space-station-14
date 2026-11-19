@@ -4,10 +4,10 @@ using Content.Shared.SS220.AltArmor;
 
 namespace Content.Shared.SS220.ArmorBlock;
 
-public sealed class ArmorBlockSystem : EntitySystem
+public sealed partial class ArmorBlockSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly AltArmorSystem _altArmor = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private AltArmorSystem _altArmor = default!;
 
     public override void Initialize()
     {

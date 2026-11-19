@@ -23,6 +23,11 @@
   equipment:
     id: ParamedicPDA
     ears: ClothingHeadsetMedical
+#    belt: ClothingBeltMedicalEMTFilled #ss220 paramedicinterdyne
+  storage:
+    back:
+    - EmergencyRollerBedSpawnFolded
+    - FilledSurgeryMedkit # ss220-surgery-update
 
 - type: chameleonOutfit
   id: ParamedicChameleonOutfit

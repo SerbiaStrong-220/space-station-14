@@ -10,11 +10,11 @@ using Content.Shared.SS220.Signature;
 
 namespace Content.Server.SS220.Signature;
 
-public sealed class SignatureSystem : SharedSignatureSystem
+public sealed partial class SignatureSystem : SharedSignatureSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

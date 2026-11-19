@@ -7,12 +7,12 @@ using Robust.Shared.Random;
 
 namespace Content.Client.SS220.Experience;
 
-public sealed class RandomShuffle<T> where T : ShuffleChanceGetterEvent, new()
+public sealed partial class RandomShuffle<T> where T : ShuffleChanceGetterEvent, new()
 {
-    [Dependency] private readonly IDynamicTypeFactory _dynamicTypeFactory = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IDynamicTypeFactory _dynamicTypeFactory = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private float _shuffleChance = 0f;
 

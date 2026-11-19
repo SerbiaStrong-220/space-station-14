@@ -6,10 +6,10 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared.SS220.Forcefield.Systems;
 
-public abstract class SharedForcefieldSystem : EntitySystem
+public abstract partial class SharedForcefieldSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {

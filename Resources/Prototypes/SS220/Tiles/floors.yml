@@ -68,7 +68,7 @@
   deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepHull
-  itemDrop: FloorTileItemTechmaint
+  itemDrop: FloorItemTechMainDrainMiddle
   heatCapacity: 10000
 
 - type: tile
@@ -172,7 +172,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWood
+  itemDrop: FloorTileItemWoodParquet
   heatCapacity: 10000
 
 - type: tile
@@ -212,7 +212,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodBlack
+  itemDrop: FloorTileItemWoodLargeBlack
   heatCapacity: 10000
 
 - type: tile
@@ -232,7 +232,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodBlack
+  itemDrop: FloorTileItemWoodParquetBlack
   heatCapacity: 10000
 
 - type: tile
@@ -252,7 +252,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodBlack
+  itemDrop: FloorTileItemWoodTileBlack
   heatCapacity: 10000
 
 - type: tile
@@ -292,7 +292,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodDark
+  itemDrop: FloorTileItemWoodLargeDark
   heatCapacity: 10000
 
 - type: tile
@@ -312,7 +312,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodDark
+  itemDrop: FloorTileItemWoodParquetDark
   heatCapacity: 10000
 
 - type: tile
@@ -332,7 +332,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodDark
+  itemDrop: FloorTileItemWoodTileDark
   heatCapacity: 10000
 
 - type: tile
@@ -372,7 +372,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodLight
+  itemDrop: FloorTileItemWoodLargeLight
   heatCapacity: 10000
 
 - type: tile
@@ -392,7 +392,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodLight
+  itemDrop: FloorTileItemWoodParquetLight
   heatCapacity: 10000
 
 - type: tile
@@ -412,7 +412,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodLight
+  itemDrop: FloorTileItemWoodTileLight
   heatCapacity: 10000
 
 - type: tile
@@ -452,7 +452,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodRed
+  itemDrop: FloorTileItemWoodLargeRed
   heatCapacity: 10000
 
 - type: tile
@@ -472,7 +472,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodRed
+  itemDrop: FloorTileItemWoodParquetRed
   heatCapacity: 10000
 
 - type: tile
@@ -492,7 +492,7 @@
     collection: FootstepWood
   barestepSounds:
     collection: BarestepWood
-  itemDrop: FloorTileItemWoodRed
+  itemDrop: FloorTileItemWoodTileRed
   heatCapacity: 10000
 
 - type: tile
@@ -605,7 +605,7 @@
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
-  friction: 0.25
+  friction: 1.25
   itemDrop: FloorTileItemCarpetWhite
   heatCapacity: 10000
 
@@ -620,7 +620,7 @@
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
-  friction: 0.25
+  friction: 1.25
   itemDrop: FloorTileItemCarpetBlack
   heatCapacity: 10000
 
@@ -635,7 +635,7 @@
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
-  friction: 0.25
+  friction: 1.25
   itemDrop: FloorTileItemCarpetRed
   heatCapacity: 10000
 
@@ -650,7 +650,7 @@
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
-  friction: 0.25
+  friction: 1.25
   itemDrop: FloorTileItemCarpetMagenta
   heatCapacity: 10000
 
@@ -665,7 +665,7 @@
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
-  friction: 0.25
+  friction: 1.25
   itemDrop: FloorTileItemCarpetPurple
   heatCapacity: 10000
 
@@ -680,7 +680,7 @@
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
-  friction: 0.25
+  friction: 1.25
   itemDrop: FloorTileItemCarpetBlue
   heatCapacity: 10000
 
@@ -695,7 +695,7 @@
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
-  friction: 0.25
+  friction: 1.25
   itemDrop: FloorTileItemCarpetCyan
   heatCapacity: 10000
 
@@ -710,7 +710,7 @@
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
-  friction: 0.25
+  friction: 1.25
   itemDrop: FloorTileItemCarpetGreen
   heatCapacity: 10000
 
@@ -725,7 +725,7 @@
     collection: FootstepCarpet
   barestepSounds:
     collection: BarestepCarpet
-  friction: 0.25
+  friction: 1.25
   itemDrop: FloorTileItemCarpetOrange
   heatCapacity: 10000
 
@@ -2367,3 +2367,34 @@
     collection: BarestepCarpet
   itemDrop: FloorTileItemWeb
   heatCapacity: 10000
+
+- type: tile
+  id: FloorLinoGray
+  parent: BaseStationTile
+  name: tiles-linoleum-gray-floor
+  tags: [ tile-tag-other ]
+  sprite: /Textures/SS220/Tiles/linogray.png
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorItemLinoGray
+
+- type: tile
+  id: FloorLinoLightBrown
+  parent: BaseStationTile
+  name: tiles-linoleum-lightbrown-floor
+  tags: [ tile-tag-other ]
+  sprite: /Textures/SS220/Tiles/linolightbrown.png
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorItemLinoLightBrown
+
+- type: tile
+  id: FloorLinoRedBrown
+  parent: BaseStationTile
+  name: tiles-linoleum-redbrown-floor
+  tags: [ tile-tag-other ]
+  sprite: /Textures/SS220/Tiles/linoredbrown.png
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorItemLinoRedBrown
+

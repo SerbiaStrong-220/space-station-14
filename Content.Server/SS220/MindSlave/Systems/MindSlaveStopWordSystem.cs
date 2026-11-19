@@ -16,11 +16,11 @@ namespace Content.Server.SS220.MindSlave.Systems;
 
 public sealed partial class MindSlaveStopWordSystem : EntitySystem
 {
-    [Dependency] private readonly MarkovTextGenerator _markovText = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly PhotocopierSystem _photocopier = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private MarkovTextGenerator _markovText = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private PhotocopierSystem _photocopier = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private FormManager? _specificFormManager;
 

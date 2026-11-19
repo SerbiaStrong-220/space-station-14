@@ -17,6 +17,7 @@ using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Systems;
 using Content.Shared.Station;
 using JetBrains.Annotations;
 using Robust.Shared.Configuration;
@@ -59,12 +60,12 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
     /// This only spawns the character, and does none of the mind-related setup you'd need for it to be playable.
     /// </remarks>
 
-    public EntityUid? SpawnPlayerCharacterOnStation(EntityUid? station, ProtoId<JobPrototype>? job, HumanoidCharacterProfile? profile, StationSpawningComponent? stationSpawning = null, bool lateJoin = false)
+    public EntityUid? SpawnPlayerCharacterOnStation(EntityUid? station, ProtoId<JobPrototype>? job, HumanoidCharacterProfile? profile, bool lateJoin, StationSpawningComponent? stationSpawning = null) // SS220-edit
     {
         if (station != null && !Resolve(station.Value, ref stationSpawning))
             throw new ArgumentException("Tried to use a non-station entity as a station!", nameof(station));
 
-        var ev = new PlayerSpawningEvent(job, profile, station, lateJoin);
+        var ev = new PlayerSpawningEvent(job, profile, station, lateJoin); // SS220-edit
 
         RaiseLocalEvent(ev);
         DebugTools.Assert(ev.SpawnResult is { Valid: true } or null);
@@ -181,8 +182,8 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
             return;
 
         // SS220-experience-update-begin
-        var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
-        skillRoleAddComp.DefinitionId = prototype.ExperienceDefinition;
+        var changeDefEv = new TryChangeExperienceDefinitionEvent(prototype.ExperienceDefinition, true);
+        RaiseLocalEvent(entity, ref changeDefEv);
         // SS220-experience-update-end
         // As a mark - DoJobSpecials should be later to give ability to change this with adding SkillRoleAddComponent
         // SS220-experience-update-end**2

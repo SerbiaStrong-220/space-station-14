@@ -18,13 +18,13 @@ namespace Content.Shared.SS220.AirDefense;
 
 public sealed partial class SharedAirDefenseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private INetManager _net = default!;
 
     private static readonly EntProtoId EffectEmpPulse = "EffectEmpPulse";
     private const string BulletFixture = "fly-by";

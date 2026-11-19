@@ -19,16 +19,16 @@ namespace Content.Server.SS220.EmergencyShuttleControl;
 /// <summary>
 ///     System that manages the cancellation of emergency shuttle call.
 /// </summary>
-public sealed class EmergencyShuttleLockdownSystem : EntitySystem
+public sealed partial class EmergencyShuttleLockdownSystem : EntitySystem
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
 
     private const string AnnounceLocationLoc = "shuttle-lockdown-announce-locate";
 

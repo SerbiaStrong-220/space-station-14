@@ -98,3 +98,9 @@
 - Flags: ADMINCHAT
   Commands:
     - achatwindow
+
+# SS220 fix ent-command perms begin
+- Flags: VAREDIT
+  Commands:
+    - ent
+# SS220 fix ent-command perms end

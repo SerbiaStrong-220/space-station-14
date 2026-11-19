@@ -21,6 +21,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using System.Linq;
 
 namespace Content.Server.Dragon;
 
@@ -357,5 +358,10 @@ public sealed partial class DragonSystem : EntitySystem
         comp.WeakenedAccumulator = comp.WeakenedDuration;
         _movement.RefreshMovementSpeedModifiers(uid);
         _popup.PopupEntity(Loc.GetString("carp-rift-destroyed"), uid, uid);
+
+        // SS220-fixdragonrifts start
+        var itx = comp.Rifts.FindIndex(x => Deleted(x) || Terminating(x));
+        comp.Rifts.RemoveAt(itx);
+        // SS220-fixdragonrifts end
     }
 }

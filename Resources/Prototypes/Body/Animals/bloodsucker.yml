@@ -4,7 +4,7 @@
   suffix: bloodsucker
   components:
   - type: Metabolizer
-    metabolizerTypes: [ Bloodsucker ]
+    metabolizerTypes: [ Bloodsucker, Animal ] #SS220-fauna-diet-fix
 
 - type: entity
   id: OrganBloodsuckerStomach

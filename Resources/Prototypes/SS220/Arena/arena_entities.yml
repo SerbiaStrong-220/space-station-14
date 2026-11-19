@@ -52,7 +52,7 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: RoleExperienceAdd
+  - type: ExperienceAddition
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
     team: a
@@ -65,7 +65,7 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: RoleExperienceAdd
+  - type: ExperienceAddition
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
     team: b

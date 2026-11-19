@@ -6,13 +6,11 @@
   suffix: Debug, Маппинг
   components:
   - type: Sprite
-    sprite: SS220/Debugging/debug_id_card.rsi
     layers:
-    - state: debug
+    - state: admin
   - type: Clothing
     slots:
     - idcard
-    sprite: SS220/Debugging/debug_id_card.rsi
   - type: Access
     tags:
       - Armory
@@ -38,6 +36,7 @@
       - Janitor
       - Kitchen
       - Lawyer
+      - Ipc #SS220-IPC
       - Librarian #SS220 New_accesses_and_some_tweaks
       - Maintenance
       - Medical

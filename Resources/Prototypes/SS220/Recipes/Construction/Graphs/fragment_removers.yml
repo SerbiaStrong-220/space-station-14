@@ -1,0 +1,19 @@
+
+- type: constructionGraph
+  id: ImprovisedFragmentExtractorCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+      - to: ImprovisedFragmentExtractor
+        completed:
+        - !type:AdminLog
+          message: "Construction"
+          impact: Medium
+        steps:
+        - material: MetalRod
+          amount: 1
+        - material: Cable
+          amount: 10
+    - node: ImprovisedFragmentExtractor
+      entity: ImprovisedFragmentExtractor

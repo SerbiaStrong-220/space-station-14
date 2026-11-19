@@ -1,0 +1,7 @@
+- type: entity
+  id: FragmentPellet
+  parent: BaseProjectileFragment
+  name: pellet fragments
+  components:
+  - type: Sprite
+    state: bullet-casing

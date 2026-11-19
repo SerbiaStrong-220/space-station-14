@@ -11,6 +11,8 @@
       level: 3
     Medicine:
       level: 3
+    Anatomy:
+      level: 3
     PhysicalTraining:
       level: 3
   addSublevelPoints: 5
@@ -28,6 +30,8 @@
       level: 4
     Medicine:
       level: 3
+    Anatomy:
+      level: 2
     PhysicalTraining:
       level: 4
   addSublevelPoints: 0
@@ -45,6 +49,8 @@
       level: 3
     Medicine:
       level: 4
+    Anatomy:
+      level: 3
     PhysicalTraining:
       level: 4
   addSublevelPoints: 0
@@ -62,6 +68,8 @@
       level: 3
     Medicine:
       level: 4
+    Anatomy:
+      level: 4
     PhysicalTraining:
       level: 4
   addSublevelPoints: 0
@@ -78,6 +86,8 @@
     Construction:
       level: 2
     Medicine:
+      level: 2
+    Anatomy:
       level: 2
     PhysicalTraining:
       level: 3

@@ -9,8 +9,8 @@ namespace Content.Shared.SS220.MartialArts.Effects;
 
 public sealed partial class WeaponRestrictionMartialArtEffectSystem : BaseMartialArtEffectSystem<WeaponRestrictionMartialArtEffect>
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

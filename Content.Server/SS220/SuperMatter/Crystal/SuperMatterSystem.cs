@@ -17,8 +17,8 @@ namespace Content.Server.SS220.SuperMatter.Crystal;
 
 public sealed partial class SuperMatterSystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly RadiationSystem _radiation = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private RadiationSystem _radiation = default!;
 
     private const float ZapPerEnergy = 165f;
     private const float ZapThreshold = 100f;

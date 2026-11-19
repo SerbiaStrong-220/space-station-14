@@ -15,14 +15,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
-public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<EmergencyShuttleAutoVoteRuleComponent>
+public sealed partial class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<EmergencyShuttleAutoVoteRuleComponent>
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly IVoteManager _voteManager = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private IVoteManager _voteManager = default!;
+    [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
 
     private TimeSpan RoundTime => _gameTiming.CurTime - _gameTicker.RoundStartTimeSpan;
 

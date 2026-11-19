@@ -9,9 +9,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.AltArmor;
 
-public sealed class AltArmorSystem : EntitySystem
+public sealed partial class AltArmorSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public void ModifyDamage(Entity<AltArmorComponent?> ent, DamageSpecifier? damage, out DamageSpecifier resultDamage, out DamageSpecifier resultArmorDamage)
     {
@@ -31,7 +31,7 @@ public sealed class AltArmorSystem : EntitySystem
         string? maximalDamageType = null;
 
         FixedPoint2 durabilityCoefficient = 1;
-        
+
         if (TryComp<DamageableComponent>(ent, out var damageableComp) && ent.Comp.DamageAffectsProtection)
         {
             durabilityCoefficient = 1 - (_damageable.GetTotalDamage(ent.Owner) / ent.Comp.ZeroProtectionThreshold);

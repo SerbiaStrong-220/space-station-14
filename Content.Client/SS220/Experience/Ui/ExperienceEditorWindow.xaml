@@ -17,16 +17,16 @@
                 <gfx:StyleBoxFlat BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseBackgroundColor}"/>
             </PanelContainer.PanelOverride>
         </PanelContainer>
-        <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="10 0">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" HorizontalAlignment="Stretch" Margin="10 0">
             <BoxContainer Name="CharacterInfoContainer" Orientation="Horizontal">
-                <OptionButton Name="ExperienceEntityOption"/>
+                <OptionButton Name="ExperienceEntityOption" StyleClasses="OpenRight"/>
                 <RichTextLabel Name="CharacterName" Text="Name place holder" Margin="5 0"/>
             </BoxContainer>
             <BoxContainer Name="CharacterAdditionalInfoContainer" Orientation="Horizontal">
                 <RichTextLabel Name="OccupationName" Text="occupation name holder" Margin="5 0"/>
                 <RichTextLabel Name="AntagName" Text="antag name holder" Margin="5 0"/>
             </BoxContainer>
-            <BoxContainer Name="ExperienceInfoContainer" HorizontalExpand="True" VerticalExpand="True" Orientation="Vertical">
+            <BoxContainer Name="ExperienceInfoContainer" HorizontalExpand="True" VerticalExpand="True" HorizontalAlignment="Stretch" Orientation="Vertical">
                 <BoxContainer Name="ExperienceVerification" Orientation="Horizontal">
                     <RichTextLabel Name="BypassSkillCheckStatus" Text="bypass skill check holder" Margin="5 0"/>
                     <RichTextLabel Name="BypassKnowledgeStatus" Text="bypass knowledge holder" Margin="5 0"/>
@@ -38,9 +38,9 @@
                 </ScrollContainer>
                 <PanelContainer StyleClasses="LowDivider" Margin="5"/>
                 <BoxContainer Name="KnowledgeInfoContainer" HorizontalAlignment="Left" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
-                    <BoxContainer Orientation="Horizontal">
-                        <Label Text="{Loc 'experience-editor-knowledge-name'}"/>
-                        <OptionButton Name="KnowledgeOption"/>
+                    <BoxContainer Orientation="Horizontal" >
+                        <Label Text="{Loc 'experience-editor-knowledge-name'}" Margin="0 0 10 0"/>
+                        <OptionButton Name="KnowledgeOption" StyleClasses="OpenLeft"/>
                     </BoxContainer>
                     <ScrollContainer HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" Margin="10 5">
                         <BoxContainer Name="KnowledgeEditor" VerticalExpand="True" HorizontalExpand="True"
@@ -50,8 +50,11 @@
                     </ScrollContainer>
                 </BoxContainer>
             </BoxContainer>
-            <BoxContainer Name="SubmitButtonContainer" Orientation="Horizontal">
-                <Button Name="SubmitButton" Text="{Loc 'experience-view-editor-submit-button-text'}"/>
+            <BoxContainer Name="SubmitButtonContainer" Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Stretch" Margin="0 5">
+                <Button Name="RemoveAdminChangesButton" Text="{Loc 'experience-view-editor-remove-admin-changes-button-text'}"
+                    HorizontalAlignment="Left" StyleClasses="OpenRight" HorizontalExpand="True"/>
+                <Button Name="SubmitButton" Text="{Loc 'experience-view-editor-submit-button-text'}"
+                    HorizontalAlignment="Right" StyleClasses="OpenLeft" HorizontalExpand="True"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

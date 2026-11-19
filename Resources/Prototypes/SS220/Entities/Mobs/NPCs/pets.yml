@@ -212,6 +212,7 @@
   - type: MobPrice
     price: 60
   - type: NonSpreaderZombie
+  - type: ProtectedFromStepTriggers
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning
@@ -231,3 +232,7 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/SS220/Animals/bnuuy_squeak_2.ogg
+  - type: Tag
+    tags:
+    - StunImmune
+

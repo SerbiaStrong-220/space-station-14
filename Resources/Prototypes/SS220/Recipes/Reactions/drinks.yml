@@ -89,6 +89,18 @@
     ReaperSauce: 4
 
 - type: reaction
+  id: YotunBreath
+  reactants:
+    FrostOil:
+      amount: 2
+    Nitrogen:
+      amount: 1
+    Ice:
+      amount: 1
+  products:
+    YotunBreath: 4
+
+- type: reaction
   id: Bacchus
   requiredMixerCategories:
   - Shake
@@ -127,7 +139,23 @@
     amount: 1
    BlackRussian:
     amount: 1
-   CatariaJuice:
-    amount: 1
-  products:
+   CatariaJuice: 
+    amount: 1 
+  products: 
     Skooma: 4
+    
+- type: reaction
+  id: OrionNebula
+  reactants:
+    Gin:
+      amount: 3
+    BlueCuracao:
+      amount: 1
+    JuiceBerry:
+      amount: 2
+    SodaWater:
+      amount: 3
+    Ice:
+      amount: 1
+  products:
+    OrionNebula: 10

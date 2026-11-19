@@ -1,0 +1,126 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: cult lantern
+  parent: BaseItem
+  id: CultYoggLantern
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/CorruptedItems/lantern_cult.rsi
+    layers:
+      - state: lantern
+      - state: lantern-on
+        shader: unshaded
+        visible: false
+        map: [ "light" ]
+  - type: Clothing
+    sprite: SS220/Objects/CultYogg/CorruptedItems/lantern_cult.rsi
+    equippedPrefix: off
+    quickEquip: false
+    slots:
+    - Belt
+  - type: Item
+    heldPrefix: off
+  - type: CultYoggLamp
+    addPrefix: true
+  - type: PointLight
+    enabled: false
+    radius: 3
+    energy: 2
+    netsync: false
+  - type: ToggleableVisuals
+    spriteLayer: light
+    inhandVisuals:
+      left:
+      - state: inhand-left-light
+        shader: unshaded
+      right:
+      - state: inhand-right-light
+        shader: unshaded
+  - type: ItemTogglePointLight
+  - type: Appearance
+  - type: Physics
+    canCollide: false
+  - type: StealthProvider
+    whitelist:
+      tags:
+      - CultYoggStealthProvidable
+
+- type: entity
+  name: cult bulb
+  parent: BaseItem
+  id: CultYoggLightBulb
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Objects/CultYogg/CorruptedItems/light_bulb.rsi
+    layers:
+    - state: bulb_off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Item
+    heldPrefix: off
+  - type: CultYoggLamp
+    addPrefix: true
+  - type: PointLight
+    enabled: false
+    radius: 4
+    energy: 3
+    netsync: false
+  - type: ToggleableVisuals
+    spriteLayer: enum.ToggleableVisuals.Layer
+    inhandVisuals:
+      left:
+      - state: on-inhand-left
+        shader: unshaded
+      right:
+      - state: on-inhand-right
+        shader: unshaded
+  - type: ItemTogglePointLight
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: bulb_on}
+          False: {state: bulb_off}
+
+- type: entity
+  name: cult tube
+  parent: BaseItem
+  id: CultYoggLightTube
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Objects/CultYogg/CorruptedItems/light_tube.rsi
+    layers:
+    - state: tube_off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Item
+    heldPrefix: off
+  - type: CultYoggLamp
+    addPrefix: true
+  - type: PointLight
+    enabled: false
+    radius: 4
+    energy: 3
+    netsync: false
+  - type: ToggleableVisuals
+    spriteLayer: enum.ToggleableVisuals.Layer
+    inhandVisuals:
+      left:
+      - state: on-inhand-left
+        shader: unshaded
+      right:
+      - state: on-inhand-right
+        shader: unshaded
+  - type: ItemTogglePointLight
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: tube_on}
+          False: {state: tube_off}
