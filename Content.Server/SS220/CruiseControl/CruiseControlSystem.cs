@@ -12,6 +12,7 @@ public sealed class CruiseControlSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ShuttleConsoleComponent, CruiseControlMessage>(OnCruiseControlMessage);
+        SubscribeLocalEvent<ShuttleConsoleComponent, ShuttleGyroPowerMessage>(OnGyroPowerMessage); //SS220 GyroPowerUpdate
     }
 
     public void DisableCruiseControlFromConsole(Entity<ShuttleConsoleComponent> console)
@@ -22,6 +23,19 @@ public sealed class CruiseControlSystem : EntitySystem
         RemComp<ShuttleCruiseControlComponent>(console.Comp.CruiseControlTarget.Value);
         console.Comp.CruiseControlTarget = null;
     }
+
+    /*SS220 GyroPowerUpdate Start*/
+    private void OnGyroPowerMessage(Entity<ShuttleConsoleComponent> console, ref ShuttleGyroPowerMessage args)
+    {
+        if (Transform(console).GridUid is not { } shuttleUid)
+            return;
+
+        var power = Math.Clamp(args.Power, ShuttleGyroPowerComponent.MinPower, ShuttleGyroPowerComponent.MaxPower);
+        var gyro = EnsureComp<ShuttleGyroPowerComponent>(shuttleUid);
+        gyro.Power = power;
+        Dirty(shuttleUid, gyro);
+    }
+    /*SS220 GyroPowerUpdate End*/
 
     private void OnCruiseControlMessage(Entity<ShuttleConsoleComponent> console, ref CruiseControlMessage args)
     {

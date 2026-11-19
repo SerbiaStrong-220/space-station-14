@@ -25,6 +25,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
     public event Action<NetEntity>? UndockRequest;
 
     public event Action<bool, float>? SetCruiseControl; // SS220 Cruise-control
+    public event Action<float>? SetGyroPower; //SS220 GyroPowerUpdate
 
     public ShuttleConsoleWindow()
     {
@@ -69,6 +70,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         // SS220 Cruise-control begin
         EnableCruiseButton.OnPressed += CruiseToggled;
         CruiseControlSlider.OnValueChanged += CruiseControlSliderChanged;
+        NavContainer.GyroPowerChanged += power => SetGyroPower?.Invoke(power); //SS220 GyroPowerUpdate
         // SS220 Cruise-control end
     }
 

@@ -415,7 +415,7 @@ public sealed class MoverController : SharedMoverController
 
         _shuttlePilots = newPilots;
 
-        
+
         // SS220 Cruise-Control begin
         var cruiseQuery = GetEntityQuery<ShuttleCruiseControlComponent>();
         var cruiseShuttleEnumerator = EntityQueryEnumerator<ShuttleComponent, ShuttleCruiseControlComponent>();
@@ -679,7 +679,16 @@ public sealed class MoverController : SharedMoverController
             else if (!cruiseQuery.HasComp(shuttleUid)) // SS220 Cruise-Control
             {
                 PhysicsSystem.SetSleepingAllowed(shuttleUid, body, false);
-                var torque = shuttle.AngularThrust * -angularInput;
+
+                /*SS220 GyroPowerUpdate Start*/
+                var gyroPower = 1f;
+                if (EntityManager.TryGetComponent<ShuttleGyroPowerComponent>(shuttleUid, out var gyroComp))
+                {
+                    gyroPower = Math.Clamp(gyroComp.Power, ShuttleGyroPowerComponent.MinPower, ShuttleGyroPowerComponent.MaxPower);
+                }
+
+                var torque = shuttle.AngularThrust * -angularInput * gyroPower * gyroPower;
+                /*SS220 GyroPowerUpdate End*/
 
                 // Need to cap the velocity if 1 tick of input brings us over cap so we don't continuously
                 // edge onto the cap over and over.
