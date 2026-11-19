@@ -106,7 +106,7 @@ public sealed partial class GhostRoleComponent : Component
     public ProtoId<JobPrototype>? JobProto = null;
 
     // SS220 role announcement start
-    [DataField("announceToGhosts")]
+    [DataField]
     public bool AnnounceToGhosts = false;
     //SS220 role announcement end
 }
