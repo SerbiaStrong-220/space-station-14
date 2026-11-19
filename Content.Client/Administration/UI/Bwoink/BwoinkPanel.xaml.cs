@@ -36,6 +36,7 @@ namespace Content.Client.Administration.UI.Bwoink
             };
             SenderLineEdit.OnTextEntered += Input_OnTextEntered;
             SenderLineEdit.OnTextChanged += Input_OnTextChanged;
+            InitializeEmojis(); //SS220-ahelp-emojis
             UpdateTypingIndicator();
         }
 
@@ -60,7 +61,7 @@ namespace Content.Client.Administration.UI.Bwoink
 
             var formatted = new FormattedMessage(1);
             formatted.AddMarkupOrThrow($"[color=gray]{message.SentAt.ToShortTimeString()}[/color] {message.Text}");
-            TextOutput.AddMessage(formatted);
+            TextOutput.AddMessage(formatted, AhelpMessageTags); //SS220-ahelp-emojis
             LastMessage = message.SentAt;
         }
 
@@ -108,6 +109,7 @@ namespace Content.Client.Administration.UI.Bwoink
 
         protected override void Dispose(bool disposing)
         {
+            DisposeEmojis(); //SS220-ahelp-emojis
             base.Dispose(disposing);
 
             InputTextChanged = null;

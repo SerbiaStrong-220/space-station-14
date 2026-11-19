@@ -1,0 +1,4 @@
+Source: the SS220 Discord emoji export supplied for this feature.
+The PNG files are preserved without modification. Original Discord names and
+snowflake IDs are recorded in Resources/Prototypes/SS220/Administration/ahelp_emojis.yml.
+The supplied export contains no individual author or image license metadata.

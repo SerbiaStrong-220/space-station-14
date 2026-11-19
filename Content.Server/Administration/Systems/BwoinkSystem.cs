@@ -26,6 +26,8 @@ using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.SS220.CCVars;
+using Content.Shared.SS220.Administration.Ahelp;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Administration.Systems
 {
@@ -44,6 +46,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IAfkManager _afkManager = default!;
         [Dependency] private readonly IServerDbManager _dbManager = default!;
         [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
+        [Dependency] private IPrototypeManager _ahelpEmojiPrototypes = default!; //SS220-ahelp-emojis
 
         [GeneratedRegex(@"^https://discord\.com/api/webhooks/(\d+)/((?!.*/).*)$")]
         private static partial Regex DiscordRegex();
@@ -486,7 +489,7 @@ namespace Content.Server.Administration.Systems
 
                 // In case someone thinks they're funny
                 if (message.Message.Length > MessageLengthCap)
-                    text = message.Message[..(MessageLengthCap - TooLongText.Length)] + TooLongText;
+                    text = AhelpEmojiText.TruncateDiscord(message.Message, MessageLengthCap, TooLongText); //SS220-ahelp-emojis
                 else
                     text = message.Message;
 
@@ -672,7 +675,7 @@ namespace Content.Server.Administration.Systems
                 return;
             // end 220 ahelp spam
 
-            var escapedText = FormattedMessage.EscapeText(message.Text);
+            var escapedText = AhelpEmojiText.ForGame(message.Text, _ahelpEmojiPrototypes); //SS220-ahelp-emojis
 
             string bwoinkText;
             string adminPrefix = "";
@@ -765,13 +768,12 @@ namespace Content.Server.Administration.Systems
                 if (!_messageQueues.ContainsKey(msg.UserId))
                     _messageQueues[msg.UserId] = new Queue<DiscordRelayedData>();
 
-                var str = message.Text;
                 var unameLength = senderSession.Name.Length;
-
-                if (unameLength + str.Length + _maxAdditionalChars > DescriptionMax)
-                {
-                    str = str[..(DescriptionMax - _maxAdditionalChars - unameLength)];
-                }
+                //SS220-ahelp-emojis begin
+                // Expand before applying Discord's per-message budget, preserving complete emoji tokens.
+                var messageLimit = Math.Max(0, Math.Min(DescriptionMax, MessageLengthCap) - _maxAdditionalChars - unameLength);
+                var str = AhelpEmojiText.ForDiscord(message.Text, _ahelpEmojiPrototypes, messageLimit);
+                //SS220-ahelp-emojis end
 
                 var nonAfkAdmins = GetNonAfkAdmins();
                 var messageParams = new AHelpMessageParams(
