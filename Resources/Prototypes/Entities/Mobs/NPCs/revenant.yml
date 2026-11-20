@@ -45,6 +45,7 @@
   - type: NameIdentifier
     group: GenericNumber
   - type: GhostRole
+    announceToGhosts: true # SS220 antag announce
     makeSentient: true
     name: ghost-role-information-revenant-name
     description: ghost-role-information-revenant-description

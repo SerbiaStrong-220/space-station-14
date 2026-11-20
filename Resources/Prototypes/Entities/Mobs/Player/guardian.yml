@@ -8,6 +8,7 @@
   components:
     - type: LagCompensation
     - type: GhostRole
+      announceToGhosts: true # SS220 antag announce
       allowMovement: true
       allowSpeech: true
       makeSentient: true

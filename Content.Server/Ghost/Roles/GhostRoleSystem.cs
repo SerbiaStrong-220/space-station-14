@@ -384,6 +384,12 @@ public sealed class GhostRoleSystem : EntitySystem
         if (_ghostRoles.ContainsValue(role))
             return;
 
+        // SS220 role announcement start
+        if (role.Comp.AnnounceToGhosts == true)
+            AnnounceTakeoverAvailable(role);
+        // SS220 role announcement end
+
+
         _ghostRoles[role.Comp.Identifier = GetNextRoleIdentifier()] = role;
         UpdateAllEui();
     }
@@ -1060,6 +1066,24 @@ public sealed class GhostRoleSystem : EntitySystem
         }
     }
     //SS220 Sentience event language fix end
+    //SS220 role announcement start
+    private void AnnounceTakeoverAvailable(Entity<GhostRoleComponent> role)
+    {
+        var(uid, comp) = role;
+        var msg = Loc.GetString("ss220-ghost-role-announce",("role", role.Comp.RoleName));
+        var filter = Filter.Empty();
+
+        var query = EntityQueryEnumerator<GhostComponent>();
+        while (query.MoveNext(out var ghost, out var ghostComp))
+        {
+            _playerManager.TryGetSessionByEntity(ghost, out var session);
+            if (session != null)
+                filter.AddPlayer(session); 
+        }
+
+        _chat.ChatMessageToManyFiltered(filter, ChatChannel.Dead, msg, msg, uid, false, false, colorOverride: Color.Red, audioPath: "/Audio/Misc/notice2.ogg", audioVolume: 1f);
+    }
+    //SS220 role announcement end
 }
 
 [AnyCommand]

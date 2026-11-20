@@ -207,6 +207,7 @@
   - type: Dragon
     spawnRiftAction: ActionSpawnRift
   - type: GhostRole
+    announceToGhosts: true # SS220 antag announce
     mindRoles:
     - MindRoleDragon
   - type: ActionGun

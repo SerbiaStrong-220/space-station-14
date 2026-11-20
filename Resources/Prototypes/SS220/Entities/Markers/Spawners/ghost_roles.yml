@@ -7,6 +7,7 @@
   suffix: spider-queen
   components:
   - type: GhostRole
+    announceToGhosts: true # SS220 antag announce
     name: spider-royQueen-name
     description: spider-royQueen-desc
     rules: spider-royQueen-desc
