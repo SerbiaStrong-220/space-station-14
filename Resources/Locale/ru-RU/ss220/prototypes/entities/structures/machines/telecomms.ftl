@@ -3,25 +3,24 @@ ent-TelecomServerFilledLaw = { ent-TelecomServer }
     .desc = { ent-TelecomServer.desc }
 
 ent-TelecomServerFilledCargIneering = { ent-TelecomServer }
-    .suffix = Двойной, Снабжение и Инженерный
+    .suffix = Двойной, Снабжение, Инженерный
     .desc = { ent-TelecomServer.desc }
 ent-TelecomServerFilledSciMed = { ent-TelecomServer }
-    .suffix = Двойной, Научный и Медицинский
+    .suffix = Двойной, Научный, Медицинский
     .desc = { ent-TelecomServer.desc }
 ent-TelecomServerFilledComVice = { ent-TelecomServer }
-    .suffix = Двойной, Командование и Сервисный
+    .suffix = Двойной, Командование, Сервисный
     .desc = { ent-TelecomServer.desc }
 ent-TelecomServerFilledLawCurity = { ent-TelecomServer }
-    .suffix = Двойной, Юридический и Служба безопасности
+    .suffix = Двойной, Юридический, Служба безопасности
     .desc = { ent-TelecomServer.desc }
 
 ent-TelecomServerFilledComSecLaw = { ent-TelecomServer }
-    .suffix = Тройной, Командование Служба безопасности Юридический
+    .suffix = Тройной, Командование, Служба безопасности, Юридический
     .desc = { ent-TelecomServer.desc }
 ent-TelecomServerFilledSciMedEng = { ent-TelecomServer }
-    .suffix = Тройной, Научный Медицинский Инженерный
+    .suffix = Тройной, Научный, Медицинский, Инженерный
     .desc = { ent-TelecomServer.desc }
 ent-TelecomServerFilledComSerCar = { ent-TelecomServer }
-    .suffix = Тройной, Общий Сервисный Снабжение
+    .suffix = Тройной, Общий, Сервисный, Снабжение
     .desc = { ent-TelecomServer.desc }
- 

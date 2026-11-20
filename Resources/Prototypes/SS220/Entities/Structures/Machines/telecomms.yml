@@ -10,7 +10,7 @@
 
 - type: entity
   parent: TelecomServer
-  id: TelecomServerFilledCargIneering
+  id: TelecomServerFilledCarIng
   suffix: Supply & Engineering
   components:
   - type: ContainerFill
@@ -23,7 +23,7 @@
   parent: TelecomServer
   id: TelecomServerFilledSciMed
   suffix: RnD & Med
-  components: 
+  components:
   - type: ContainerFill
     containers:
       key_slots:
@@ -32,7 +32,7 @@
 
 - type: entity
   parent: TelecomServer
-  id: TelecomServerFilledComVice
+  id: TelecomServerFilledComSer
   suffix: Command & Service
   components:
   - type: ContainerFill
@@ -43,7 +43,7 @@
 
 - type: entity
   parent: TelecomServer
-  id: TelecomServerFilledLawCurity
+  id: TelecomServerFilledSecLaw
   suffix: Security & Law
   components:
   - type: ContainerFill
@@ -87,4 +87,3 @@
       - EncryptionKeyCommon
       - EncryptionKeyService
       - EncryptionKeyCargo
- 
