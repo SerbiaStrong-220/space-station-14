@@ -6,3 +6,6 @@ ent-ClothingNeckProtectBundleBlue = защитный комплект
 ent-ClothingNeckMimeHarlequin = воротник готического арлекина
     .desc = Зубчатый воротник как символ надежды и упрямства.
     .suffix = За время в игре
+
+ent-ClothingBeltHolsterBlueshield = плечевая кобура синего щита
+    .desc = Кобура, сочетающая высокие технологии и безупречный стиль. Вырабатывает впечатляющие 40 Вт энергии.

@@ -1072,5 +1072,9 @@ FoodMikoTrapShroomCult: FoodMikoTrapShroom
 ShellClaw: ShellPincer
 ShellBeach: ShellScourge
 
+# 2026-08-10 - SS220 SetSelector
+LockedUnicaBox: LockedSecureRevolverSetSelectorCase
+WeaponBlasterKRV: WeaponBlasterKRSUpgraded
+
 # 2026-11-14 - SS220 messenger server
 BaseMessengerServer: PDANanotrasenMessengerServer

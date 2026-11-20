@@ -50,7 +50,7 @@
   parent: BaseWeaponBatterySmall
   id: WeaponEnergyGunRevolver
   name: energy revolver
-  description: A standard energy revolver manufactured by NT. It is rarely used due to its severely limited ammunition supply and is usually delivered to some remote areas.
+  description: A compact NanoTrasen energy revolver. Every shot hits hard, but its small cell holds only a few of them, so make each one count.
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Battery/laser_revolver.rsi
@@ -66,6 +66,10 @@
     fireRate: 1.2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: Tag
+    tags:
+    - Sidearm
+    - BSHolsterSupport
   - type: BatteryAmmoProvider
     proto: LaserEnhanced
     fireCost: 150
@@ -93,9 +97,16 @@
   id: WeaponEnergyGunRevolverSelfRecharger
   suffix: SelfRecharger
   components:
-  - type: BatterySelfRecharger
-    autoRechargeRate: 48
-    autoRechargePauseTime: 10
+  - type: UpgradeableGun
+    insertSound: /Audio/SS220/Weapons/Guns/Upgrades/attachment_add.ogg
+    whitelist:
+      tags:
+      - BatteryWeaponUpgrade
+  - type: EntityTableContainerFill
+    containers:
+      upgrades: !type:AllSelector
+        children:
+        - id: BatteryWeaponUpgradeMicroreactorIntegrated
 
 # Base KR
 - type: entity
@@ -104,7 +115,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Battery/ert_blaster.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/blaster.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
@@ -114,7 +125,7 @@
         map: ["enum.GunVisualLayers.MagUnshaded"]
         shader: unshaded
   - type: Clothing
-    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Battery/ert_blaster.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/blaster.rsi
     quickEquip: false
     slots:
       - Back
@@ -142,26 +153,31 @@
   parent: BaseWeaponBlaster
   id: WeaponBlasterKRS
   name: blaster KRS
-  description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
+  description: An old but reliable NanoTrasen blaster rifle. Fires single bolts and can switch to window-piercing or disabling shots. Runs on swappable blaster cells and has two slots for modkits.
   components:
+  - type: UpgradeableGun
+    insertSound: /Audio/SS220/Weapons/Guns/Upgrades/attachment_add.ogg
+    whitelist:
+      tags:
+      - BatteryWeaponUpgrade
   - type: Gun
-    selectedMode: Burst
+    selectedMode: SemiAuto
     availableModes:
-      - Burst
+      - SemiAuto
   - type: BatteryAmmoProvider
     proto: BulletBlasterBolt
-    fireCost: 62.5
+    fireCost: 33.33
   - type: BatteryWeaponFireModes
     fireModes:
       - proto: BulletBlasterBolt
         name: firemode-name-blaster
-        fireCost: 62.5
+        fireCost: 33.33
       - proto: BulletBlasterBoltPiercingWindow
         name: firemode-name-blaster-piercing-window
-        fireCost: 62.5
+        fireCost: 33.33
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
-        fireCost: 40
+        fireCost: 20
   - type: ItemSlots
     slots:
       cell_slot:
@@ -174,38 +190,16 @@
             - PowerCellBlaster
 
 - type: entity
-  parent: BaseWeaponBlaster
-  id: WeaponBlasterKRV
-  name: blaster KRV
-  description: An advanced blaster rifle. Used by special operatives.
+  parent: WeaponBlasterKRS
+  id: WeaponBlasterKRSUpgraded
+  suffix: Upgraded
   components:
-  - type: Gun
-    selectedMode: FullAuto
-    availableModes:
-      - SemiAuto
-      - Burst
-      - FullAuto
-  - type: BatteryAmmoProvider
-    proto: BulletBlasterPulse
-    fireCost: 87.5
-  - type: BatteryWeaponFireModes
-    fireModes:
-      - proto: BulletBlasterPulse
-        name: firemode-name-blaster
-        fireCost: 87.5
-      - proto: BulletDisablerSmg
-        name: firemode-name-disabler
-        fireCost: 40
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: Magazine
-        startingItem: PowerCellBlasterHighCapacity
-        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
-        whitelist:
-          tags:
-            - PowerCellBlaster
+  - type: EntityTableContainerFill
+    containers:
+      upgrades: !type:AllSelector
+        children:
+        - id: BatteryWeaponUpgradeEmpFuse
+        - id: BatteryWeaponUpgradeFireRate
 
 - type: entity
   name: ik 40 laser carbine
