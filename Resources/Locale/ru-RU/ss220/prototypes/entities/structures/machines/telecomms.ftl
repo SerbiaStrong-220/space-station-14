@@ -2,16 +2,16 @@ ent-TelecomServerFilledLaw = { ent-TelecomServer }
     .suffix = Юридический
     .desc = { ent-TelecomServer.desc }
 
-ent-TelecomServerFilledCargIneering = { ent-TelecomServer }
+ent-TelecomServerFilledCarIng = { ent-TelecomServer }
     .suffix = Двойной, Снабжение, Инженерный
     .desc = { ent-TelecomServer.desc }
 ent-TelecomServerFilledSciMed = { ent-TelecomServer }
     .suffix = Двойной, Научный, Медицинский
     .desc = { ent-TelecomServer.desc }
-ent-TelecomServerFilledComVice = { ent-TelecomServer }
+ent-TelecomServerFilledComSer = { ent-TelecomServer }
     .suffix = Двойной, Командование, Сервисный
     .desc = { ent-TelecomServer.desc }
-ent-TelecomServerFilledLawCurity = { ent-TelecomServer }
+ent-TelecomServerFilledSecLaw = { ent-TelecomServer }
     .suffix = Двойной, Юридический, Служба безопасности
     .desc = { ent-TelecomServer.desc }
 
