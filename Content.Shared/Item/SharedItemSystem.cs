@@ -3,6 +3,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Verbs;
 using Content.Shared.Examine;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.SS220.MouthContainer;
 using Content.Shared.Storage;
 using JetBrains.Annotations;
 using Robust.Shared.Collections;
@@ -18,11 +19,13 @@ public abstract class SharedItemSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private   readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
+    [Dependency] private readonly MouthContainerSystem _mouthSystem = default!; // SS220 mouth container
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<ItemComponent, GetVerbsEvent<InteractionVerb>>(AddPickupVerb);
+        SubscribeLocalEvent<ItemComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerb); // SS220 mouth container
         SubscribeLocalEvent<ItemComponent, InteractHandEvent>(OnHandInteract);
         SubscribeLocalEvent<ItemComponent, AfterAutoHandleStateEvent>(OnItemAutoState);
 
@@ -137,6 +140,32 @@ public abstract class SharedItemSystem : EntitySystem
 
         args.Verbs.Add(verb);
     }
+
+    // SS220 mouth container begin
+    /// <summary>
+    ///     Transmits item on get alternative verb to MouthContainerSystem.
+    /// </summary>
+    private void OnGetAltVerb(Entity<ItemComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        var user = args.User;
+
+        if (!args.CanAccess || !args.CanInteract || !TryComp<MouthContainerComponent>(user, out var mouthComp))
+            return;
+
+        var toInsert = ent.Owner;
+        if (!_mouthSystem.CanInsert((user, mouthComp), toInsert))
+            return;
+
+        var verb = new AlternativeVerb
+        {
+            Priority = 1,
+            Text = Loc.GetString(mouthComp.InsertVerbIn),
+            DoContactInteraction = true,
+            Act = () => _mouthSystem.TryStartInsert((user, mouthComp), user, toInsert),
+        };
+        args.Verbs.Add(verb);
+    }
+    // SS220 mouth container end
 
     private void OnExamine(EntityUid uid, ItemComponent component, ExaminedEvent args)
     {
