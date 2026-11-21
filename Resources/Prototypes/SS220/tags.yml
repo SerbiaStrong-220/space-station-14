@@ -413,3 +413,7 @@
 #Cult equipment: items with this tag forcibly removed from cultist on deconversion
 - type: Tag
   id: YoggEquipment
+
+- type: Tag
+  id: ArachnidFood
+

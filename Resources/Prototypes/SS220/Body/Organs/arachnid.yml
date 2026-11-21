@@ -1,0 +1,38 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: organCategory
+  id: SecondHandLeft
+
+- type: organCategory
+  id: SecondHandRight
+
+- type: entity
+  parent: OrganArachnid
+  id: OrganArachnidHandLeftSecondary
+  components:
+  - type: Organ
+    category: SecondHandLeft
+  - type: HandOrgan
+    handID: left-secondary
+    data:
+      location: Left
+      offset: -0.1, 0.1
+  - type: Sprite
+    sprite: Mobs/Species/Arachnid/parts.rsi
+    state: l_hand
+
+- type: entity
+  parent: OrganArachnid
+  id: OrganArachnidHandRightSecondary
+  components:
+  - type: Organ
+    category: SecondHandRight
+  - type: HandOrgan
+    handID: right-secondary
+    data:
+      location: Right
+      offset: 0.1, 0.1
+  - type: Sprite
+    sprite: Mobs/Species/Arachnid/parts.rsi
+    state: r_hand
+
