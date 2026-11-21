@@ -39,8 +39,9 @@ cmd-ban_exemption_update-help =
     Использование: ban_exemption_update <player> <flag> [<flag> [...]]
     Укажите несколько флагов, чтобы дать игроку исключение из нескольких типов банов.
     Чтобы удалить все исключения, выполните эту команду и укажите единственным флагом "None".
-# SS220-localization-fix
+# SS220-localization-fix begin
 cmd-ban_exemption_update-nargs = Ожидалось хотя бы 2 аргумента.
+# SS220-localization-fix end
 cmd-ban_exemption_update-locate = Не удалось найти игрока '{ $player }'.
 cmd-ban_exemption_update-invalid-flag = Недопустимый флаг '{ $flag }'.
 cmd-ban_exemption_update-success = Обновлены флаги исключений банов для '{ $player }' ({ $uid }).
