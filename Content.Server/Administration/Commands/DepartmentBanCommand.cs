@@ -31,7 +31,9 @@ public sealed class DepartmentBanCommand : IConsoleCommand
         string reason;
         uint minutes;
         var postBanInfo = true;
-        if (!Enum.TryParse(_cfg.GetCVar(CCVars.DepartmentBanDefaultSeverity), out NoteSeverity severity))
+        // SS220-localization-fix
+        if (!Enum.TryParse(_cfg.GetCVar(CCVars.DepartmentBanDefaultSeverity), ignoreCase: true,
+                out NoteSeverity severity))
         {
             _sawmill ??= _log.GetSawmill("admin.department_ban");
             _sawmill.Warning("Department ban severity could not be parsed from config! Defaulting to medium.");
