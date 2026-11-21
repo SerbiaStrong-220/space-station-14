@@ -278,10 +278,12 @@ public sealed partial class HookahSystem : EntitySystem
             return;
         }
 
-        if (!TryComp<HookahComponent>(ent.Comp.HookahUid, out var hookah))
+        var hookahUid = ent.Comp.HookahUid;
+
+        if (!TryComp<HookahComponent>(hookahUid, out var hookah))
             return;
 
-        if (!CheckSmoke((ent.Comp.HookahUid, hookah), ent, args.User))
+        if (!CheckSmoke((hookahUid, hookah), ent, args.User))
         {
             args.Handled = true;
             return;
@@ -314,22 +316,24 @@ public sealed partial class HookahSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
-        if (!TryComp<HookahComponent>(ent.Comp.HookahUid, out var hookah))
+        var hookahUid = ent.Comp.HookahUid;
+
+        if (!TryComp<HookahComponent>(hookahUid, out var hookah))
             return;
 
-        if (!CheckSmoke((ent.Comp.HookahUid, hookah), ent, args.User))
+        if (!CheckSmoke((hookahUid, hookah), ent, args.User))
         {
             args.Handled = true;
             return;
         }
 
-        if (!TakeTobacco((ent.Comp.HookahUid, hookah), ent, args.User))
+        if (!TakeTobacco((hookahUid, hookah), ent, args.User))
         {
             args.Handled = true;
             return;
         }
 
-        if (!_solutions.TryGetSolution(ent.Comp.HookahUid, hookah.SolutionName, out var solutionEnt, out _))
+        if (!_solutions.TryGetSolution(hookahUid, hookah.SolutionName, out var solutionEnt, out _))
         {
             args.Handled = true;
             return;
@@ -439,10 +443,12 @@ public sealed partial class HookahSystem : EntitySystem
 
     private void OnHoseShutdown(Entity<HookahHoseComponent> ent, ref ComponentShutdown args)
     {
-        if (!TryComp<HookahComponent>(ent.Comp.HookahUid, out var hookah))
+        var hookahUid = ent.Comp.HookahUid;
+
+        if (!TryComp<HookahComponent>(hookahUid, out var hookah))
             return;
 
-        if (TryComp<HookahElectricComponent>(hookah.Owner, out var electric))
+        if (TryComp<HookahElectricComponent>(hookahUid, out var electric))
         {
             var changed = false;
 
@@ -461,8 +467,8 @@ public sealed partial class HookahSystem : EntitySystem
             if (!changed)
                 return;
 
-            Dirty(hookah.Owner, electric);
-            UpdateElectricAppearance((hookah.Owner, hookah), electric);
+            Dirty(hookahUid, electric);
+            UpdateElectricAppearance((hookahUid, hookah), electric);
             return;
         }
 
@@ -470,8 +476,8 @@ public sealed partial class HookahSystem : EntitySystem
             return;
 
         hookah.ConnectedHose = null;
-        Dirty(ent.Comp.HookahUid, hookah);
-        UpdateAppearance((ent.Comp.HookahUid, hookah));
+        Dirty(hookahUid, hookah);
+        UpdateAppearance((hookahUid, hookah));
     }
 
     private void OnHoseDropped(Entity<HookahHoseComponent> ent, ref DroppedEvent args)

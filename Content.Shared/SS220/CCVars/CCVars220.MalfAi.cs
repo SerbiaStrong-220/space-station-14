@@ -19,10 +19,7 @@ public sealed partial class CCVars220
         CVarDef.Create("malfai.starting_cpu", 0, CVar.SERVERONLY);
 
     public static readonly CVarDef<int> MalfAiMaxTurrets =
-        CVarDef.Create("malfai.max_turrets", 4, CVar.SERVERONLY);
-
-    public static readonly CVarDef<int> MalfAiMaxOverrides =
-        CVarDef.Create("malfai.max_overrides", 5, CVar.SERVERONLY);
+        CVarDef.Create("malfai.max_turrets", 8, CVar.SERVERONLY);
 
     public static readonly CVarDef<int> MalfAiMaxFactories =
         CVarDef.Create("malfai.max_factories", 1, CVar.SERVERONLY);
@@ -40,7 +37,7 @@ public sealed partial class CCVars220
         CVarDef.Create("malfai.doomsday_enabled", true, CVar.SERVERONLY);
 
     public static readonly CVarDef<float> MalfAiDoomsdayDuration =
-        CVarDef.Create("malfai.doomsday_duration", 800f, CVar.SERVERONLY);
+        CVarDef.Create("malfai.doomsday_duration", 600f, CVar.SERVERONLY);
 
     public static readonly CVarDef<float> MalfAiDoomsdayWaveSpeed =
         CVarDef.Create("malfai.doomsday_wave_speed", 5f, CVar.SERVERONLY);
