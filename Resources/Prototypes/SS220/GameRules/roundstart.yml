@@ -29,7 +29,7 @@
       components:
       - type: TryAddExperienceAddition
         sources:
-          Antag:
+          AntagCult:
             freeSublevelPoints: 5
             knowledges:
             - CultYoggKnowledge
@@ -142,7 +142,7 @@
       components:
       - type: TryAddExperienceAddition
         sources:
-          Antag:
+          AntagTraitor:
             freeSublevelPoints: 10
             knowledges:
             - SyndicateAgentKnowledge

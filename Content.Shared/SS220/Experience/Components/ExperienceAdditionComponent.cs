@@ -15,7 +15,12 @@ public enum ExperienceAddSource
     RoundStart,
     Job,
     Role,
-    Antag
+    Antag,
+    AntagTraitor,
+    AntagThief,
+    AntagInitialInfected,
+    AntagHeadRevolutionary,
+    AntagCult
 }
 
 [RegisterComponent, NetworkedComponent]
@@ -35,7 +40,14 @@ public sealed partial class ExperienceAdditionComponent : Component
 
     // NOTE: If you need to more 'flags' like Forced
     // Its better to actually make this changeable field
-    public static readonly HashSet<ExperienceAddSource> AdminForceWhitelistSources = [ExperienceAddSource.Admin, ExperienceAddSource.Antag];
+    public static readonly HashSet<ExperienceAddSource> AdminForceWhitelistSources = [
+        ExperienceAddSource.Admin,
+        ExperienceAddSource.Antag,
+        ExperienceAddSource.AntagTraitor,
+        ExperienceAddSource.AntagThief,
+        ExperienceAddSource.AntagInitialInfected,
+        ExperienceAddSource.AntagHeadRevolutionary,
+        ExperienceAddSource.AntagCult];
 }
 
 [DataDefinition]

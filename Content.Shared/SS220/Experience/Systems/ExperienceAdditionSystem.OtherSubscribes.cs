@@ -20,12 +20,12 @@ public sealed partial class ExperienceAdditionSystem : EntitySystem
 
     private void OnCultified(Entity<ExperienceComponent> entity, ref GotCultifiedEvent args)
     {
-        UpsertSpecifier(entity, ExperienceAddSource.Antag, new ExperienceAddSpecifier(5, [CultYoggKnowledge], []));
+        UpsertSpecifier(entity, ExperienceAddSource.AntagCult, new ExperienceAddSpecifier(5, [CultYoggKnowledge], []));
     }
 
     private void OnLiberationFromCult(Entity<ExperienceComponent> entity, ref LiberationFromCultEvent args)
     {
-        UpsertSpecifier(entity, ExperienceAddSource.Antag, null);
+        UpsertSpecifier(entity, ExperienceAddSource.AntagCult, null);
     }
 }
 

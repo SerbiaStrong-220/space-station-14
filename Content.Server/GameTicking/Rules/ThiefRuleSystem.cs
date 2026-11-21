@@ -1,4 +1,5 @@
 using Content.Server.Antag;
+using Content.Server.SS220.AntagRemoval; // SS220-removeantag
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Roles;
 using Content.Shared.Humanoid;
@@ -23,6 +24,9 @@ public sealed class ThiefRuleSystem : GameRuleSystem<ThiefRuleComponent>
     private void AfterAntagSelected(Entity<ThiefRuleComponent> mindId, ref AfterAntagEntitySelectedEvent args)
     {
         var ent = args.EntityUid;
+
+        EntityManager.System<RemoveAntagSystem>().GrantAntagBonuses(ent, RemoveAntagRoles.Thief, 10, "ThiefKnowledge"); // SS220-removeantag
+
         _antag.SendBriefing(ent, MakeBriefing(ent), null, null);
     }
 

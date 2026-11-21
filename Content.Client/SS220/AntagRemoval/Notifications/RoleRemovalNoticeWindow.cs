@@ -6,15 +6,16 @@ using Robust.Client.UserInterface.CustomControls;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 using System.Numerics;
 
-namespace Content.Client.SS220.CultYogg.DeCultReminder;
+namespace Content.Client.SS220.AntagRemoval.Notifications;
 
-public sealed class DeCultReminderWindow : DefaultWindow
+public sealed class RoleRemovalNoticeWindow : DefaultWindow
 {
     public readonly Button AcceptButton;
+    private readonly Label _message;
 
-    public DeCultReminderWindow()
+    public RoleRemovalNoticeWindow()
     {
-        Title = Loc.GetString("decult-reminder-window-title");
+        Title = Loc.GetString("ss220-role-removal-notice-title");
 
         Contents.AddChild(new BoxContainer
         {
@@ -26,9 +27,9 @@ public sealed class DeCultReminderWindow : DefaultWindow
                     Orientation = LayoutOrientation.Vertical,
                     Children =
                     {
-                        (new Label
+                        (_message = new Label
                         {
-                            Text = Loc.GetString("decult-reminder-window-text")
+                            Text = Loc.GetString("ss220-role-removal-notice-text")
                         }),
                         new BoxContainer
                         {
@@ -38,7 +39,7 @@ public sealed class DeCultReminderWindow : DefaultWindow
                             {
                                 (AcceptButton = new Button
                                 {
-                                    Text = Loc.GetString("decult-reminder-window-accept-button"),
+                                    Text = Loc.GetString("ss220-role-removal-notice-accept-button"),
                                 }),
 
                                 (new Control
@@ -51,5 +52,12 @@ public sealed class DeCultReminderWindow : DefaultWindow
                 },
             }
         });
+    }
+
+    public void SetRemovedRole(string? role)
+    {
+        _message.Text = role is null
+            ? Loc.GetString("ss220-role-removal-notice-text")
+            : Loc.GetString("ss220-role-removal-notice-antag-text", ("role", role));
     }
 }

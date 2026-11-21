@@ -264,7 +264,7 @@
       components:
       - type: TryAddExperienceAddition
         sources:
-          Antag:
+          AntagTraitor: # SS220-removeantag
             freeSublevelPoints: 10
             knowledges:
             - SyndicateAgentKnowledge
@@ -372,7 +372,7 @@
       # SS220-experience-update-begin
       - type: TryAddExperienceAddition
         sources:
-          Antag:
+          AntagHeadRevolutionary: # SS220-removeantag
             freeSublevelPoints: 10
             knowledges: []
       # SS220-experience-update-end
