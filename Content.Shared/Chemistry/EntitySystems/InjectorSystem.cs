@@ -132,6 +132,14 @@ public sealed partial class InjectorSystem : EntitySystem
         var cur = injector.Comp.CurrentTransferAmount;
         var toggleAmount = cur == max ? min : max;
 
+        // SS220 injector-quick-transfer bgn
+        if (activeMode.QuickTransferAmounts is { Count: > 0 } quickAmounts)
+        {
+            var index = cur is { } currentAmount ? quickAmounts.IndexOf(currentAmount) : -1;
+            toggleAmount = quickAmounts[(index + 1) % quickAmounts.Count];
+        }
+        // SS220 injector-quick-transfer end
+
         var priority = 0;
 
         if (activeMode.TransferAmounts.Count > 1)
