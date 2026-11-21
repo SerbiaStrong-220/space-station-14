@@ -153,7 +153,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 16
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
@@ -167,29 +167,6 @@
         amount: 1
       offset: 0, 1
       snapToGrid: false
-
-- type: entity
-  id: ActionSpawnSpiderCrystalBloodPoints
-  name: create a crystal shard
-  description: A shard that serves as a backlight for spiders.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    useDelay: 3
-    itemIconStyle: BigAction
-    icon:
-      sprite: SS220/Interface/Actions/action_spider.rsi
-      state: crystal_spawn
-  - type: TargetAction
-    range: 1
-  - type: WorldTargetAction
-    event: !type:SpiderTargetSpawnEvent
-      prototypes:
-      - id: ShardCrystalBlueXeno
-        amount: 1
-      offset: 0, 1
-      snapToGrid: false
-      cost: 5
 
 #Wall
 - type: entity
@@ -219,7 +196,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 16
+    useDelay: 12
   - type: TargetAction
   - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
@@ -229,23 +206,6 @@
       offset: 0, 1
       snapToGrid: true
 
-- type: entity
-  parent: ActionSpawnSpiderWallWeb
-  id: ActionSpawnSpiderWallWebDurableBloodPoints
-  name: create a durable wall
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    useDelay: 6
-  - type: TargetAction
-  - type: WorldTargetAction
-    event: !type:SpiderTargetSpawnEvent
-      prototypes:
-      - id: WallWebDurableSpawn
-        amount: 1
-      offset: 0, 1
-      cost: 10
-
 #Passage
 - type: entity
   id: ActionSpawnSpiderWebPassage
@@ -253,7 +213,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 12
+    useDelay: 10
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
@@ -268,23 +228,6 @@
       snapToGrid: true
       offset: 0, 1
 
-- type: entity
-  parent: ActionSpawnSpiderWebPassage
-  id: ActionSpawnSpiderWebPassageBloodPoints
-  name: create a web passage
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    useDelay: 6
-  - type: TargetAction
-  - type: WorldTargetAction
-    event: !type:SpiderTargetSpawnEvent
-      prototypes:
-      - id: WebPassageSpawn
-        amount: 1
-      snapToGrid: true
-      cost: 6
-
 #Tile
 - type: entity
   id: ActionSpawnWebTile
@@ -292,7 +235,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 16
+    useDelay: 13
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
@@ -304,22 +247,6 @@
       prototype: FloorWebTile
       inSpacePrototype: FloorWebTileSpace
       doAfter: 6
-
-- type: entity
-  parent: ActionSpawnWebTile
-  id: ActionSpawnWebTileBloodPoints
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    useDelay: 6
-  - type: TargetAction
-    range: 1
-  - type: WorldTargetAction
-    event: !type:SpiderTileSpawnActionEvent
-      prototype: FloorWebTile
-      inSpacePrototype: FloorWebTileSpace
-      cost: 10
-      doAfter: 3
 
 #Web
 - type: entity
@@ -345,7 +272,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 6
+    useDelay: 5
   - type: TargetAction
   - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
@@ -353,23 +280,6 @@
       - id: SpiderWebDurable
         amount: 1
       offset: 0, 1
-
-- type: entity
-  parent: BaseActionSpawnSingleSpiderWebDurable
-  id: ActionSpawnSingleSpiderWebDurableBloodPoints
-  name: spin a durable web
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    useDelay: 2
-  - type: TargetAction
-  - type: WorldTargetAction
-    event: !type:SpiderTargetSpawnEvent
-      prototypes:
-      - id: SpiderWebDurable
-        amount: 1
-      offset: 0, 1
-      cost: 2
 
 #Clown web
 - type: entity
