@@ -3,3 +3,4 @@
   name: roles-antag-dragon-name
   antagonist: true
   objective: roles-antag-dragon-objective
+  guides: [ SpaceDragon ]

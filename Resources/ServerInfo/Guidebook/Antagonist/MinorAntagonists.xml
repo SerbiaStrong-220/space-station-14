@@ -1,18 +1,19 @@
 <Document>
-  # Малые антагонисты
+  # Минорные антагонисты
 
-Большинство, если не все, второстепенные антагонисты - это управляемые призраками роли, которые дают мертвецам новые способы устроить хаос на станции. Они возникают в результате случайных событий.
+  Большинство минорных антагонистов - это роли, управляемые призраками, которые дают мёртвым игрокам возможность вернуться на станцию за нового персонажа и посеять хаос. Их появление происходит случайно в ходе раунда.
 
- # Paradox Clone
+  # Парадоксальный клон
 
   <Box>
     <GuideEntityEmbed Entity="ParadoxCloneDummy"/>
   </Box>
 
-  A perfect copy of a random crewmember that was thrown into our universe by a space-time anomaly. To fix the paradox and survive they have to find and kill their original counterpart.
+  Идеальная копия случайного члена экипажа, попавшая в нашу вселенную из-за аномалии пространства-времени. Чтобы устранить парадокс и выжить, они должны найти и убить своего оригинального двойника. У них нет особых способностей, но они имеют идентичную внешность, ДНК, отпечатки пальцев, одежду, снаряжение и ID, что затрудняет определение, кто является оригиналом, а кто клоном, если вы не знаете своих коллег по экипажу достаточно хорошо.
 
-They have no special abilities, but are identical in appearance, DNA, fingerprints, clothing, equipment and IDs, making it hard to figure out who is the original and who is the clone... unless you know your fellow crewmembers well!
-
+  Клону нужно выполнить две задачи: [bold]убить оригинального члена экипажа и эвакуироваться живым и без наручников[/bold]. 
+  Если же оригинальный член экипажа пропустит эвакуацию - это не будет засчитано, как успешное выполнение цели на убийство. 
+  Помимо прочего, если у оригинального члена экипажа есть цели - клон может скопировать их. Проверьте меню своего персонажа.
 
   # Ревенант
 
@@ -20,82 +21,41 @@ They have no special abilities, but are identical in appearance, DNA, fingerprin
     <GuideEntityEmbed Entity="MobRevenant"/>
   </Box>
 
-  Ревенант наделён способностью преследовать членов экипажа и красть у них жизненную энергию.
-
-  ## Эссенция
-
-  - Ваша [color=#a4885c]эссенция[/color] - это ваша собственная жизненная сила и способ использовать способности за определенную плату, не позволяйте ей упасть до 0.
-  - Чтобы получить [color=#a4885c]эссенцию[/color], вы сначала проверяете различные души на предмет их ценности. Более достойные души дают больше эссенции.
-  Однако просто проверить их ценность недостаточно для сбора [color=#a4885c]эссенции[/color]. Вы должны поглотить её, когда жертва находится в критическом состоянии, мертва или спит.
-  - Хорошее начало - пойти в медпункт или жилые помещения, но будьте осторожны, вы уязвимы для атак, когда поглощаете душу. Получение урона уменьшает вашу [color=#a4885c]эссенцию[/color]! Поэтому планируйте свои атаки с умом.
-
-  ## Магазин и силы
-
-  - Используя [color=#a4885c]украденную эссенцию[/color], полученную при поглощении душ, вы можете получить в магазине навыки для таких злоключений, как разрушение окружающей среды, отключение электричества и поражение током.
-  - Использование способностей на некоторое время делает вас уязвимым для атак, поэтому планируйте всё заранее и готовьтесь перед атакой.
+  Ревенанты - это эфирные существа, состоящие из эктоплазмы, которые преследуют экипаж и крадут [color=#8f63e6]жизненную энергию[/color] у них.
+  - Ваша энергия - это ваша [bold]жизненная сила[/bold]. Получение урона уменьшает вашу энергию.
+  - Энергия также тратится на использование [bold]способностей[/bold].
+  - Чтобы получить энергию, сначала [bold]осмотрите[/bold] различные души на предмет их ценности. Более ценные души дают больше энергии. Затем вы должны [bold]высосать[/bold] её, когда жертва находится в критическом состоянии, мертва или спит. Всё это делается с помощью [color=yellow][bold][keybind="Use"][/bold][/color].
+  - [bold]Украденная энергия[/bold] используется для покупки новых способностей, чтобы легче выводить экипаж из строя.
+  - Вы [bold]уязвимы[/bold] к атакам, когда высасываете душу или используете способность. Вы можете понять, что уязвимы, когда у вас есть эффект статуса [color=#8f63e6][italic]Материальный[/italic][/color].
 
   # Крысиный король
 
   <Box>
-    <GuideEntityEmbed Entity="MobRatKing" Scale="2.4" Caption="Нормальный крысиный король"/>
-    <GuideEntityEmbed Entity="MobRatKingBuff" Caption="Прокачанный крысиный король"/>
+    <GuideEntityEmbed Entity="MobRatServant" Caption=""/>
+    <GuideEntityEmbed Entity="MobRatServant" Caption=""/>
+    <GuideEntityEmbed Entity="MobRatKing" Scale="2.4"/>
+    <GuideEntityEmbed Entity="MobRatServant" Caption=""/>
+    <GuideEntityEmbed Entity="MobRatServant" Caption=""/>
   </Box>
 
-  Крысиный король - это гигантская крыса, способная устроить гнездо и создать крыс, которые будут выполнять её приказы (обычно для получения пищи).
+  Крысиные короли - это аномально крупные грызуны, способные [color=yellow]создавать огромные армии крыс[/color], поедая огромное количество пищи.
+  - У вас есть несколько способностей, которые требуют затрат [bold]голода[/bold].
+  - Одна из таких способностей - [color=yellow][italic]Призвать армию[/italic][/color], которая вызывает [bold]Крысиного слугу[/bold]. Вы можете [bold]командовать[/bold] своими слугами, принуждая их оставаться на месте, следовать за вами или выполнять иные поручения.
+  - Вы можете создать облако [color=#77b58e]аммиака[/color], используя [color=purple][italic]Крысиное королевство[/italic][/color]. Этот фиолетовый газ слабо ядовит для людей, но лечит крыс.
+  - [color=#9daa98][italic]Рыться[/italic][/color] в мусорном баке можно через контекстное меню. Используйте это, чтобы найти [bold]остатки еды[/bold] для увеличения своей армии.
+  - Помимо ваших способностей, [bold]вы сильнее большинства других животных[/bold]. Вы и ваши слуги можете говорить, и вы оба достаточно малы, чтобы пролезать под шлюзами и столами.
+  - [bold]Ваши подчинённые всё ещё очень хрупкие![/bold] Остерегайтесь космоса, взрывов и острой стороны холодного оружия.
 
-  Rat kings are abnormally large rodents capable of [color=yellow]raising huge rat armies[/color] by eating equally huge amounts of food.
-  - You have several abilities that come at the cost of your [bold]hunger.[/bold]
-  - One such ability is [color=yellow][italic]Raise Army[/italic][/color], which summons a [bold]Rat Servant[/bold]. You can [bold]command[/bold] your servants to stay in place, follow you, attack a target of your choice or attack indiscriminately.
-  - You can conjure a cloud of [color=#77b58e]ammonia[/color] using [color=purple][italic]Rat King's Domain[/italic][/color]. This purple gas is mildly poisonous to humans but heals rats.
-  - [color=#9daa98][italic]Rummage[/italic][/color] through a disposal unit by using the context menu. Use this to find [bold]scraps of food[/bold] to grow your army.
-  - Besides your abilities, [bold]you are stronger than most other animals.[/bold] You and your servants are capable of speech and you're both small enough to fit under airlocks and tables.
-  - [bold]Your underlings are still very fragile![/bold] Beware of spacings, explosions and the business end of a melee weapon.
+  Космический дракон разобран в [textlink="отдельном руководстве" link="SpaceDragon"].
 
-  ## Способности
-
-  За способности приходится расплачиваться голодом Крысиного короля. Простой приём пищи восполняет его.
+  # Слаймы и Пауки
 
   <Box>
-   <GuideEntityEmbed Entity="MobMouse" Caption="Обычная мыша"/>
-   <GuideEntityEmbed Entity="MobRatServant" Caption="Крысиный слуга"/>
-  </Box>
-  - Вырастить армию [color=#a4885c]слуг-крыс[/color].
-  - Вызвать облако аммиака.
-
-  # Космический дракон
-
-  <Box>
-    <GuideEntityEmbed Entity="MobDragon" Caption=""/>
+    <GuideEntityEmbed Entity="MobAdultSlimesBlueAngry" Caption=""/>
+    <GuideEntityEmbed Entity="MobGiantSpiderAngry" Caption=""/>
   </Box>
 
-  Космический дракон - это гигантский дракон, который создаёт космические разломы и поедает экипаж.
-
-  ## Способности
-
-  - Пожирать мёртвых жертв, или в критическом состоянии.
-
-  - Breathe out a powerful flaming sphere which will explode periodically along a straight flight path and explode when it hits something, igniting things along the way. Be careful, your carps are not immune to the Dragon's Breath!
-
-  <Box>
-    <GuideEntityEmbed Entity="MobCarp" Caption=""/>
-    <GuideEntityEmbed Entity="CarpRift" Caption=""/>
-    <GuideEntityEmbed Entity="MobDragon"/>
-    <GuideEntityEmbed Entity="CarpRift" Caption=""/>
-    <GuideEntityEmbed Entity="MobCarp" Caption=""/>
-  </Box>
-
-  - Вызовите Карповый разлом, который периодически порождает [color=#a4885c]Космических карпов[/color].
-
-  # Slimes and Spiders
-
-  - Space Dragons may have up to three Carp Rifts active at any given time.
-  - Carp Rifts spawn a [color=#a4885c]Space Carp[/color] every thirty seconds while active.
-  - Rifts charge with extradimensional energy over a period of five minutes and are vulnerable during this time. Protect them! The space dragon will suffer a temporary debilitating feedback effect in the event that its rifts are destroyed before they are done charging.
-  - You may only charge one rift at any given time.
-  - After the rifts are done charging, they are invulnerable and will continue to spawn [color=#a4885c]Space Carp[/color] so long as the Dragon lives.
-  - If a period of five minutes passes since the appearance of the Space Dragon or the last time a Carp Rift was charging and unless the Space Dragon already controls the maximum of three Carp Rifts, the Space Dragon will disappear.
-
-  Slimes and spiders have no remarkable features, but will [color=cyan]infest the station[/color] from time to time regardless. Both will give chase and attack anything they see.
-  - Slimes may [bold]deal extra cellular or poison damage[/bold], based upon their color. Water hurts them just as it would hurt a slime person.
-  - Spiders have a venomous bite and can [bold]create webs[/bold] that are hard to move through, but are easily destroyed with a blade. They can also pry open doors, windoors, and airlocks.
+  У слаймов и пауков нет выдающихся особенностей, но они время от времени [color=cyan]заполоняют станцию[/color]. И те, и другие будут преследовать и атаковать всё, что увидят.
+  - Слаймы могут [bold]наносить дополнительный урон типов "Клеточные" или "Яды"[/bold], в зависимости от их цвета. Вода вредит им так же, как и слаймолюдям.
+  - Пауки имеют ядовитый укус и могут [bold]создавать паутину[/bold], через которую трудно пройти. Паутина легко уничтожается лезвием. Они также могут взламывать шлюзы.
 </Document>

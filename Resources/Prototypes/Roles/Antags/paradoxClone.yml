@@ -4,6 +4,7 @@
   antagonist: true
   objective: roles-antag-paradox-clone-objective
   setPreference: false
+  guides: [ MinorAntagonists ]
 
 # they need to be able to espace when spawning inside a locked room
 # TODO: remove this once we got a better spawning loacation selection
