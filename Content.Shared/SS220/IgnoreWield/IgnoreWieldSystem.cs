@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Fluids.Components;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
@@ -55,6 +55,12 @@ public sealed class IgnoreWieldSystem : EntitySystem
 
     private void OnEqupped(Entity<IgnoreWieldOnEquipComponent> ent, ref GotEquippedEvent args)
     {
+        if (!TryComp<ClothingComponent>(ent, out var clothingComp))
+            return;
+
+        if (args.SlotFlags != clothingComp.Slots)
+            return;
+
         EnsureComp<IgnoreWieldComponent>(args.EquipTarget, out var comp);
         comp.IgnoreWeaponStats = ent.Comp.IgnoreWeaponStats;
 
