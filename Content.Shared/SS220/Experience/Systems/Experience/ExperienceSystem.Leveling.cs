@@ -1,10 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Database;
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Shared.SS220.Experience.Systems;
+namespace Content.Shared.SS220.Experience.Systems.Experience;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
@@ -121,7 +122,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         // not logging cause all false in method logged
-        if (!TryAddSkillToSkillEntity(entity, ExperienceComponent.ContainerId, skillPrototype))
+        if (!TryAddSkillToSkillEntity(entity, skillPrototype))
             return;
 
         InternalProgressLevel(entity, info, skillPrototype, skillTree.ID);
@@ -133,7 +134,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         info.Sublevel = Math.Max(StartSublevel, info.Sublevel - skillPrototype.LevelInfo.MaximumSublevel + StartSublevel);
         info.Level++;
 
-        DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
+        DirtyField(entity!, nameof(ExperienceComponent.Skills));
 
         _popup.PopupClient(Loc.GetString(skillPrototype.LevelInfo.LevelUpPopup), entity, entity, Popups.PopupType.Medium);
 
@@ -172,8 +173,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!CanProgressLevel(info, skillTreePrototype))
             _popup.PopupPredicted(Loc.GetString(skillPrototype.LevelInfo.SublevelUpPopup), entity, entity);
 
-        TryComp<RoleExperienceAddComponent>(entity, out var roleExperienceAdd);
-        var definitionId = roleExperienceAdd?.DefinitionId?.Id ?? "no-definition";
+        TryComp<ExperienceAdditionComponent>(entity, out var experienceAddition);
+        var definitionId = experienceAddition?.DefinitionId?.Id ?? "no-definition";
 
         _adminLogManager.Add(LogType.Experience, LogImpact.Low, $"{ToPrettyString(entity):user} with experience definition {definitionId} advanced sublevel in skill tree {skillTree}");
 
