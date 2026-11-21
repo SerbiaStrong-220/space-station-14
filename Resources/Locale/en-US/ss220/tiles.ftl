@@ -2,7 +2,7 @@ cp14-tiles-grass = meadow grass
 cp14-tiles-grass-light = bright grass
 cp14-tiles-grass-tall = tall grass
 
-## SS220 floors
+## Floors
 tiles-steel-reinforced = { ent-FloorTileItemSteelReinforced }
 tiles-white-reinforced = { ent-FloorTileItemWhiteReinforced }
 tiles-dark-reinforced = { ent-FloorTileItemDarkReinforced }
