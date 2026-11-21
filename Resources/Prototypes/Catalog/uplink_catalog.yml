@@ -745,16 +745,25 @@
     Telecrystal: 9
   categories:
     - UplinkExplosives
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-      - DebugUplink #SS220-debug-uplink-fix
-    blacklist:
-      components:
-      - SurplusBundle
+#ss220 bomb return begin
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+#      - LoneOpsUplink
+#      - DebugUplink #SS220-debug-uplink-fix
+#    blacklist:
+#      components:
+#      - SurplusBundle
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 15
+    MediumDynamic:
+      Telecrystal: 12
+    HardDynamic:
+      Telecrystal: 8
+#ss220 bomb return end
 
 - type: listing
   id: UplinkGrenadeShrapnel
