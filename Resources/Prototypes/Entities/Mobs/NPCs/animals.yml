@@ -2464,6 +2464,7 @@
   - type: Tts
     voicePreferences:
       NTTS: ziggs
+      Silero: Ziggs #SS220-silero-voice-analogs
   # SS220 Tts begin
 
 - type: entity
