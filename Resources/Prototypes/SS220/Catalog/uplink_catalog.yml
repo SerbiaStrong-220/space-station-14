@@ -436,6 +436,23 @@
 #ss220 dynamic-price end
 
 - type: listing
+  id: Holocigar
+  name: uplink-holocigar
+  description: uplink-holocigar-desc
+  productEntity: Holocigar
+  cost:
+    Telecrystal: 5
+  categories:
+    - UplinkWearables
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 7
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 3
+
+- type: listing
   id: ClothingSilentShoes
   name: uplink-silent-shoes-name
   description: uplink-silent-shoes-desc

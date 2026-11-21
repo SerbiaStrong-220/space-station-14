@@ -1,0 +1,20 @@
+- type: entity
+  id: Holocigar
+  parent: BaseItem # SS220 Cigarettes questions
+  name: Holocigar
+  description: "It's high noon."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/holocigar.rsi
+    state: icon
+  - type: Tag
+    tags:
+      - Cigar
+  - type: Clothing
+    sprite: SS220/Objects/Misc/holocigar.rsi
+    slots: [ mask ]
+  - type: Item
+    size: Tiny
+    sprite: SS220/Objects/Misc/holocigar.rsi
+  - type: IgnoreWieldOnEquip
+    ignoreWeaponStats: true
