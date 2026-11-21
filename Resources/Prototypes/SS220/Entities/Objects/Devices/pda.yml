@@ -600,7 +600,6 @@
     - MedTekCartridge
   - type: Tag
     tags:
-    - WhitelistPdaIdPainter
     - DoorBumpOpener
     - WhitelistChameleon
     - WhitelistChameleonPDA
@@ -643,10 +642,8 @@
     - NewsReaderCartridge
     - AstroNavCartridge
     - MessengerCartridgeClient
-  #ss220 add pdaidpainter start
   - type: Tag
     tags:
-    - WhitelistPdaIdPainter
     - DoorBumpOpener
     - WhitelistChameleon
     - WhitelistChameleonPDA
@@ -659,6 +656,11 @@
   components:
   - type: Pda
     id: RedWingsOfficerIDCard
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
 
 - type: entity
   parent: JanitorPDA

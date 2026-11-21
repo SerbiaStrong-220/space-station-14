@@ -230,3 +230,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/jr_salvage_boots.rsi
 
+- type: entity
+  parent: ClothingShoesBootsMagSyndie
+  id: ClothingShoesBootsMagRW
+  name: Red Wings Magnetic Boots
+  description: Magnetic boots of the Red Wings squad, equipped with a built-in jetpack.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/rw_magboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/rw_magboots.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8

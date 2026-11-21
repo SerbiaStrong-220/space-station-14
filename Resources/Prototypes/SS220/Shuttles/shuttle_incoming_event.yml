@@ -5,5 +5,5 @@
 
 - type: preloadedGrid
   id: Redwings
-  path: /Maps/SS220/Shuttles/lostSoul/redwings.yml
+  path: /Maps/SS220/Shuttles/redwings.yml
   copies: 1 

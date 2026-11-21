@@ -9,3 +9,7 @@ pinpointer-ui-item-to-track = Предмет отслеживания
 pinpointer-ui-uplink-search-by-dna = Поиск по ДНК
 pinpointer-ui-uplink-enter-dna = Введите ДНК...
 pinpointer-ui-uplink-accept = Принять
+
+pinpointer-ui-dna-saved-dnas = Сохраненные ДНК:
+pinpointer-ui-dna-add-new = Добавить новую ДНК:
+pinpointer-ui-dna-add = Добавить

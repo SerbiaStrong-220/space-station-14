@@ -4,7 +4,7 @@
     Bureaucracy:
       level: 2
     ExtravehicularActivity:
-      level: 2
+      level: 3
     CombatTraining:
       level: 3
     Construction:
@@ -23,7 +23,7 @@
     Bureaucracy:
       level: 2
     ExtravehicularActivity:
-      level: 2
+      level: 3
     CombatTraining:
       level: 2
     Construction:

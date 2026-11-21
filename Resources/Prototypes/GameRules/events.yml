@@ -30,6 +30,7 @@
     #SS220-vespia-spawn-horde end
     - id: VentClog
     - id: RandomMindShieldCombustion #SS220 CombustedMindShieldEvent #3500
+    - id: ShuttleRedwings #SS220 Redwings
 
 - type: entityTable
   id: BasicAntagEventsTable

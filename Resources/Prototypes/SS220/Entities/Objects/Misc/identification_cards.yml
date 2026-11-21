@@ -266,7 +266,6 @@
     job: RedWingsPilot
   - type: Tag
     tags:
-    - WhitelistPdaIdPainter
     - DoorBumpOpener
     - WhitelistChameleon
     - WhitelistChameleonIdCard
@@ -284,7 +283,6 @@
     job: RedWingsOfficer
   - type: Tag
     tags:
-    - WhitelistPdaIdPainter
     - DoorBumpOpener
     - WhitelistChameleon
     - WhitelistChameleonIdCard
@@ -302,7 +300,6 @@
     job: RedWingsMedic
   - type: Tag
     tags:
-    - WhitelistPdaIdPainter
     - DoorBumpOpener
     - WhitelistChameleon
     - WhitelistChameleonIdCard

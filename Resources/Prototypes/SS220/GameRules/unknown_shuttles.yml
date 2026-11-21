@@ -15,8 +15,6 @@
       weight: 1
     - id: UnknownShuttleMimesLost # SS220-Mimes-Lost-Shuttle
       weight: 2
-    - id: UnknownShuttleRedwings # SS220-Redwings-Shuttle
-      weight: 5
 
 - type: entity
   parent: BaseUnknownShuttleRule
@@ -38,17 +36,6 @@
     weight: 4
   - type: LoadMapRule
     preloadedGrid: ShuttleMimesLost
-
-- type: entity
-  parent: BaseUnknownShuttleRule
-  id: UnknownShuttleRedwings
-  components:
-  - type: StationEvent
-    maxOccurrences: 1
-    weight: 1
-  - type: LoadMapRule
-    preloadedGrid: Redwings
-
 
 # --- ported from wizden ---
 
