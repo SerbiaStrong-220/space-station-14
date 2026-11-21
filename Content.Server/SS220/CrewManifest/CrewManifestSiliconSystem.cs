@@ -4,7 +4,6 @@ using Content.Server.Silicons.Borgs;
 using Content.Server.Station.Systems;
 using Content.Shared.SS220.CrewManifest;
 using Content.Shared.GameTicking;
-using Content.Shared.Gibbing;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.StationAi;
@@ -31,7 +30,7 @@ public sealed partial class CrewManifestSiliconSystem : EntitySystem
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawn);
         SubscribeLocalEvent<StationAiCoreComponent, SiliconManifestCoreChangedEvent>(OnAiCoreChanged);
         SubscribeLocalEvent<EntityRenamedEvent>(OnEntityRenamed);
-        SubscribeLocalEvent<SiliconManifestMemberComponent, GibbedBeforeDeletionEvent>(OnBorgGibbed);
+        SubscribeLocalEvent<SiliconManifestMemberComponent, EntityTerminatingEvent>(OnBorgTerminating);
     }
 
     public bool IsRegistered(EntityUid borg, EntityUid station)
@@ -100,7 +99,7 @@ public sealed partial class CrewManifestSiliconSystem : EntitySystem
         var borgQuery = EntityQueryEnumerator<SiliconManifestMemberComponent>();
         while (borgQuery.MoveNext(out var borgUid, out var member))
         {
-            if (member.Station != station)
+            if (member.Station != station || TerminatingOrDeleted(borgUid))
                 continue;
 
             borgs.Add(new SyntheticManifestEntry(
@@ -166,12 +165,12 @@ public sealed partial class CrewManifestSiliconSystem : EntitySystem
             RaiseManifestChanged(station);
     }
 
-    private void OnBorgGibbed(Entity<SiliconManifestMemberComponent> ent, ref GibbedBeforeDeletionEvent args)
+    private void OnBorgTerminating(Entity<SiliconManifestMemberComponent> ent, ref EntityTerminatingEvent args)
     {
-        var station = ent.Comp.Station;
-        RemComp<SiliconManifestMemberComponent>(ent.Owner);
-        if (station != EntityUid.Invalid)
-            RaiseManifestChanged(station);
+        if (ent.Comp.Station == EntityUid.Invalid || TerminatingOrDeleted(ent.Comp.Station))
+            return;
+
+        RaiseManifestChanged(ent.Comp.Station);
     }
 
     private void OnEntityRenamed(ref EntityRenamedEvent args)

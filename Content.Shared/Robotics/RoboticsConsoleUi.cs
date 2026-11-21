@@ -12,30 +12,31 @@ public enum RoboticsConsoleUiKey : byte
 }
 
 [Serializable, NetSerializable]
-// SS220 Silicon-Manifest begin
-public sealed class RoboticsConsoleState(
-    Dictionary<string, CyborgControlData> cyborgs,
-    bool allowBorgControl,
-    bool allowManifest) : BoundUserInterfaceState
-// SS220 Silicon-Manifest end
+public sealed class RoboticsConsoleState : BoundUserInterfaceState
 {
     /// <summary>
     /// Map of device network addresses to cyborg data.
     /// </summary>
-    public Dictionary<string, CyborgControlData> Cyborgs = cyborgs; // SS220 Silicon-Manifest
+    public Dictionary<string, CyborgControlData> Cyborgs;
 
     /// <summary>
     /// If the UI will have the buttons to disable and destroy.
     /// </summary>
-    // SS220 Silicon-Manifest begin
-    public bool AllowBorgControl = allowBorgControl;
+    public bool AllowBorgControl;
 
     // SS220 Silicon-Manifest begin
     /// <summary>
     /// If the UI will have the button to toggle manifest membership.
     /// </summary>
-    public bool AllowManifest = allowManifest;
+    public bool AllowManifest;
     // SS220 Silicon-Manifest end
+
+    public RoboticsConsoleState(Dictionary<string, CyborgControlData> cyborgs, bool allowBorgControl, bool allowManifest) // SS220 Silicon-Manifest
+    {
+        Cyborgs = cyborgs;
+        AllowBorgControl = allowBorgControl;
+        AllowManifest = allowManifest; // SS220 Silicon-Manifest
+    }
 }
 
 /// <summary>

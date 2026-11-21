@@ -1,5 +1,5 @@
 using Content.Shared.Eui;
-using Content.Shared.SS220.CrewManifest; // SS220 Silicon-Manifest
+using Content.Shared.SS220.CrewManifest;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.CrewManifest;

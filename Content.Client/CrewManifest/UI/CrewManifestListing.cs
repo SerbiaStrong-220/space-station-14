@@ -1,5 +1,5 @@
 ﻿using Content.Shared.CrewManifest;
-using Content.Client.SS220.CrewManifest.UI; // SS220 Silicon-Manifest
+using Content.Client.SS220.CrewManifest.UI;
 using Content.Shared.Roles;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
