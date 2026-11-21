@@ -1,0 +1,18 @@
+- type: additionalGoal
+  id: AdditionalGoalHeadOfPersonnelCommunion
+  job: HeadOfPersonnel
+  text: additional-goal-head-of-personnel-communion
+  chance: 0.5
+
+- type: additionalGoal
+  id: AdditionalGoalHeadOfPersonnelFavoriteMeals
+  job: HeadOfPersonnel
+  text: additional-goal-head-of-personnel-favorite-meals
+  chance: 0.5
+
+- type: additionalGoal
+  id: AdditionalGoalHeadOfPersonnelBirthday
+  job: HeadOfPersonnel
+  text: additional-goal-head-of-personnel-birthday
+  chance: 0.5
+  target: RandomStationEmployee
