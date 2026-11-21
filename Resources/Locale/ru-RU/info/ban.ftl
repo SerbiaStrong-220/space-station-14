@@ -48,8 +48,9 @@ cmd-ban_exemption_update-arg-player = <player>
 cmd-ban_exemption_update-arg-flag = <flag>
 cmd-ban_exemption_get-desc = Показать исключения банов для определённого игрока.
 cmd-ban_exemption_get-help = Использование: ban_exemption_get <player>
-# SS220-localization-fix
+# SS220-localization-fix begin
 cmd-ban_exemption_get-nargs = Ожидался ровно 1 аргумент.
+# SS220-localization-fix end
 cmd-ban_exemption_get-none = Пользователь не имеет исключений от банов.
 cmd-ban_exemption_get-show = Пользователь исключён из банов со следующими флагами: { $flags }.
 # Ban panel
