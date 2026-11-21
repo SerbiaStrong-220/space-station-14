@@ -1,0 +1,55 @@
+﻿<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:x="http://schemas.microsoft.com/winfx/2007/xaml"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls;assembly=Content.Client"
+                SetSize="512 350" Title="Мастерская Ратвара">
+
+    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+
+        <PanelContainer StyleClasses="Inset" Margin="8 8 8 8">
+
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#25252a80" />
+            </PanelContainer.PanelOverride>
+
+            <BoxContainer Orientation="Vertical">
+
+                <Label Text="Материалы" StyleClasses="LabelKeyText" />
+
+                <customControls:HSeparator StyleClasses="LowDivider" Margin="0 8 0 8" />
+
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="Латунь: " StyleClasses="LabelKeyText" />
+                    <Label Name="BrassCount" StyleClasses="LabelSubText" />
+                </BoxContainer>
+
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="Мощность: " StyleClasses="LabelKeyText" />
+                    <Label Name="PowerCount" StyleClasses="LabelSubText" />
+                </BoxContainer>
+
+
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="Статус: " StyleClasses="LabelKeyText" />
+                    <Label Name="ProgressState" StyleClasses="LabelSubText" />
+                </BoxContainer>
+
+                <customControls:HSeparator StyleClasses="LowDivider" Margin="0 8 0 8" />
+            </BoxContainer>
+        </PanelContainer>
+
+        <PanelContainer Margin="8 8 8 8" VerticalExpand="True">
+
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#1B1B1E" />
+            </PanelContainer.PanelOverride>
+
+            <ScrollContainer>
+                <BoxContainer Name="CraftList" Access="Public" Orientation="Vertical" />
+            </ScrollContainer>
+
+        </PanelContainer>
+
+    </BoxContainer>
+</ui:FancyWindow>

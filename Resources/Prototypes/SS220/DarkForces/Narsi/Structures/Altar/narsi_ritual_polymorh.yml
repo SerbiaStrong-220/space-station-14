@@ -1,0 +1,93 @@
+- type: narsiRitualCategory
+  id: NarsiPolymorphRituals
+  name: Превращения
+  rituals:
+  - NarsiGhostRitual
+  - NarsiCorgiRutual
+  - NarsiChangeMindRitual
+  - NarsiDarknessBlowoutRitual
+
+- type: narsiRitual
+  id: NarsiGhostRitual
+  name: Призрачное зрение
+  description: Культист, проводящий ритуал, на 4 минуты перейдет в мир призраков, используя призрачную оболочку одного из прислужников Нар'Си. Этим можно воспользоваться, для изучения обстановки, поиска требуемых жертв и других целей
+  requirementsDesc: Требуется 2 культиста,
+  duration: 30
+  requirements:
+    cultistsCount: 2
+  effect: !type:NarsiPolymorphRitualEffect
+    configuration:
+      entity: MobNarsiObserverEye
+      forced: true
+      inventory: None
+      allowRepeatedMorphs: false
+      transferDamage: false
+      transferName: true
+      revertOnCrit: true
+      revertOnDeath: true
+      duration: 240
+    returnToAltar: true
+
+- type: narsiRitual
+  id: NarsiCorgiRutual
+  name: Гончая
+  description: Превратитесь в опасное существо, проклятого Корги. И задайте жару вашим врагам! Ваша жертва исчезнет, а вы станете проклятым Корги... Время действия 10 минут.
+  requirementsDesc: Для проведения ритуала, требуется 2 культиста, а также любая собака, закрепленная на алтаре
+  duration: 45
+  requirements:
+    cultistsCount: 2
+    buckledEntityWhitelist:
+      tags:
+      - Dog
+  effect: !type:NarsiPolymorphRitualEffect
+    configuration:
+      entity: MobCorgiNarsiRitual
+      forced: true
+      inventory: None
+      allowRepeatedMorphs: false
+      transferDamage: false
+      transferName: true
+      revertOnCrit: true
+      revertOnDeath: true
+      duration: 600
+    deleteBuckled: true
+
+- type: narsiRitual
+  id: NarsiDarknessBlowoutRitual
+  name: Выброс Тьмы
+  description: Этот ритуал, ни что иное, как воскрешение мертвых. Все гуманоидные трупы на станции, которые уже начали гнить, превратятся в гнилую плоть.
+  requirementsDesc: Требуется 3 культиста. 4 лужи крови, а также 2 пилона
+  duration: 120
+  requirements:
+    cultistsCount: 3
+    bloodPuddleRequirements:
+      count: 4
+      reagentsWhitelist:
+      - Blood
+      - SpiderBlood
+    entitiesRequirements:
+    - name: NarsiCultPilon
+      count: 2
+      whitelist:
+        components:
+        - NarsiCultPilon
+  effect: !type:NarsiDarknessBlowoutRitualEffect
+    configuration:
+      entity: MobNarsiFlesh
+      forced: true
+      inventory: None
+      allowRepeatedMorphs: false
+      transferDamage: false
+      transferName: true
+      revertOnCrit: true
+      revertOnDeath: true
+
+- type: narsiRitual
+  id: NarsiChangeMindRitual
+  name: Обмен разумом
+  description: Поменяйтесь разумом со своей жертвой
+  requirementsDesc: Требуется 2 культиста и жертва на алтаре
+  duration: 120
+  requirements:
+    cultistsCount: 2
+  effect: !type:NarsiChangeMindRitualEffect

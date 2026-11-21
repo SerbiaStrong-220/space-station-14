@@ -1,0 +1,1 @@
+forge-verb-text = Ковка

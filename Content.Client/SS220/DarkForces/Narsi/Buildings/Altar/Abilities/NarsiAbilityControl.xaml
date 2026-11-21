@@ -1,0 +1,69 @@
+﻿<Control xmlns="https://spacestation14.io"
+         xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls;assembly=Content.Client"
+         MaxWidth="400"
+         MinWidth="400">
+    <BoxContainer Orientation="Horizontal" Margin="8 8 8 8">
+        <PanelContainer Name="Background"
+                        Access="Public"
+                        StyleClasses="PdaBackground"
+                        MinWidth="2"
+                        MaxWidth="4"
+                        VerticalExpand="True"
+                        HorizontalExpand="False"
+                        Margin="0 0 0 0" />
+
+        <PanelContainer Name="BasePanel" HorizontalExpand="True" StyleClasses="PanelBackgroundLight">
+            <BoxContainer Orientation="Vertical">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+
+                    <TextureRect Margin="8 8 8 8"
+                                 Name="Icon"
+                                 TextureScale="2 2"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center" />
+
+                    <BoxContainer Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  VerticalAlignment="Center">
+
+                        <Label Name="Name"
+                               HorizontalAlignment="Left"
+                               Margin="8 8 8 8" />
+
+                        <customControls:HSeparator StyleClasses="LowDivider" Margin="8 0 8 0" />
+
+                        <BoxContainer Orientation="Horizontal" Margin="8 0 8 0">
+
+                            <Label Name="LevelLabel"
+                                   Text="Уровень, "
+                                   StyleClasses="LabelKeyText" />
+
+                            <Label Name="Level" StyleClasses="LabelSubText" />
+                        </BoxContainer>
+
+                        <BoxContainer Orientation="Horizontal" Margin="8 0 8 4">
+
+                            <Label Name="RequiredBloodScoreLabel"
+                                   Text="Требует очков Крови, "
+                                   StyleClasses="LabelKeyText" />
+
+                            <Label Name="RequiredBloodScore" StyleClasses="LabelSubText" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </BoxContainer>
+
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="8 0 8 4">
+
+                    <Label Name="DescriptionLabel" Text="Описание" StyleClasses="LabelKeyText" />
+                    <RichTextLabel Name="Description" Margin="4 4 0 0" StyleClasses="LabelSubText" />
+
+                    <Label Name="LevelDescriptionLabel" Text="Уровень" Margin="0 8 0 0" StyleClasses="LabelKeyText" />
+                    <RichTextLabel Name="LevelDescription" Margin="4 4 0 0" StyleClasses="LabelSubText"
+                                   HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                </BoxContainer>
+
+                <Button Name="LearnButton" Margin="8 8 8 8" />
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</Control>

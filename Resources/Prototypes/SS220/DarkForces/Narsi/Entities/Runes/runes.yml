@@ -1,0 +1,78 @@
+- type: entity
+  parent: BaseRune
+  id: NarsiBaseRune
+  categories: [ HideSpawnMenu ]
+  suffix: Narsi
+  components:
+    - type: NarsiRune
+
+- type: entity
+  parent: NarsiBaseRune
+  id: NarsiOfferingRune
+  name: Руна предложения
+  components:
+    - type: NarsiOfferingRune
+    - type: Sprite
+      sprite: SS220/DarkForces/Cult/Entities/Runes/rune.rsi
+      layers:
+        - state: offering
+
+- type: entity
+  parent: NarsiBaseRune
+  id: NarsiTeleportRune
+  name: Руна телепорта
+  components:
+    - type: NarsiTeleportRune
+    - type: Sprite
+      sprite: SS220/DarkForces/Cult/Entities/Runes/rune.rsi
+      layers:
+        - state: teleport
+
+- type: entity
+  parent: NarsiBaseRune
+  id: NarsiReviveRune
+  name: Руна возрождения
+  components:
+    - type: NarsiReviveRune
+    - type: Sprite
+      sprite: SS220/DarkForces/Cult/Entities/Runes/revive_rune.rsi
+      layers:
+        - state: idle
+          map: ["enum.NarsiRuneVisualLayers.Idle"]
+        - state: active
+          map: ["enum.NarsiRuneVisualLayers.Active"]
+          visible: false
+    - type: Appearance
+    - type: NarsiRuneVisuals
+
+- type: entity
+  parent: NarsiBaseRune
+  id: NarsiSummoningRune
+  name: Руна призыва
+  components:
+    - type: NarsiSummonRune
+    - type: Sprite
+      sprite: SS220/DarkForces/Cult/Entities/Runes/summon_rune.rsi
+      layers:
+        - state: idle
+    - type: UserInterface
+      interfaces:
+        enum.SecretListingKey.Key:
+          type: SecretListingBUI
+
+- type: entity
+  parent: NarsiBaseRune
+  id: NarsiRitualRune
+  name: Руна ритуала разрыва измерений
+  components:
+    - type: NarsiSpawnRune
+    - type: Sprite
+      sprite: SS220/DarkForces/Cult/Entities/Runes/narsi_summon_rune.rsi
+      layers:
+        - state: idle
+          map: ["enum.NarsiRuneVisualLayers.Idle"]
+        - state: active
+          map: ["enum.NarsiRuneVisualLayers.Active"]
+          visible: false
+    - type: Appearance
+    - type: NarsiRuneVisuals
