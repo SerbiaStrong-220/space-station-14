@@ -339,16 +339,15 @@ public sealed partial class IpcSystem : SharedIpcSystem
             return false;
         }
 
-        var charge = _battery.GetCharge(battery.Value.AsNullable());
-        var chargeRatio = charge / battery.Value.Comp.MaxCharge;
+        var chargeLevel = _battery.GetChargeLevel(battery.Value.AsNullable())
 
-        if (chargeRatio <= ent.Comp.CritCharge)
+        if (chargeLevel > ent.Comp.CritCharge)
         {
-            reason = ent.Comp.NoPowerPopup;
-            return false;
+            reason = default;
+            return true;
         }
 
-        reason = default;
-        return true;
+        reason = ent.Comp.NoPowerPopup;
+        return false;
     }
 }
