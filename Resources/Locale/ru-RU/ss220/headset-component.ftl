@@ -16,3 +16,5 @@ nanotrasen-operatives-frequency-channel-name = NT-{NATURALFIXED($freq, 2)}
 syndicate-operatives-frequency-channel-name = SYND-{NATURALFIXED($freq, 2)}
 
 chat-radio-interdyne = Интердайн
+
+chat-radio-news = Новости Станции
