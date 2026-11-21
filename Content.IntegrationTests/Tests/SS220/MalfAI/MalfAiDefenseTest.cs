@@ -10,6 +10,7 @@ using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.SS220.MalfAI;
 using Content.Server.Station.Systems;
+using Content.Server.Station.Components;
 using Content.Server.Store.Systems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions;
@@ -233,9 +234,10 @@ public sealed class MalfAiDefenseTest : GameTest
         });
     }
 
-    [Test]
+    [TestCase(false)]
+    [TestCase(true)]
     [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfLockdownRepurchasable()
+    public async Task MalfLockdownRepurchasable(bool randomEvent)
     {
         var pair = Pair;
         var server = pair.Server;
@@ -268,7 +270,20 @@ public sealed class MalfAiDefenseTest : GameTest
             var store = FindStore(pair, mindId);
             TopUp(pair, store, 200);
 
-            Buy(pair, store, body, MalfAiConstants.LockdownListing);
+            if (randomEvent)
+            {
+                server.EntMan.EnsureComponent<StationEventEligibleComponent>(map.MapUid);
+                var ticker = server.EntMan.System<GameTicker>();
+                var rule = ticker.AddGameRule("StationLockdown");
+                Assert.That(ticker.StartGameRule(rule), Is.True);
+                Assert.That(server.EntMan.GetComponent<MalfAiLockdownComponent>(rule).Station,
+                    Is.EqualTo(map.MapUid), "Random lockdown must choose an eligible station without a Malf purchase.");
+            }
+            else
+            {
+                Buy(pair, store, body, MalfAiConstants.LockdownListing);
+            }
+
             var firstCount = CountLockdownRules(out var firstActive);
             Assert.That(firstCount, Is.EqualTo(1),
                 "First lockdown purchase did not start the rule.");
@@ -281,6 +296,17 @@ public sealed class MalfAiDefenseTest : GameTest
                 "Second purchase stacked a second lockdown instead of refunding.");
             Assert.That(secondActive, Is.EqualTo(firstActive),
                 "Second purchase replaced the active lockdown.");
+
+            var gameTicker = server.EntMan.System<GameTicker>();
+            var overlapping = gameTicker.AddGameRule("StationLockdown");
+            server.EntMan.GetComponent<MalfAiLockdownComponent>(overlapping).Station = map.MapUid;
+            gameTicker.StartGameRule(overlapping);
+            Assert.That(gameTicker.IsGameRuleActive(overlapping), Is.False,
+                "An overlapping lockdown must end without replacing the active rule.");
+            Buy(pair, store, body, MalfAiConstants.LockdownListing);
+            CountLockdownRules(out var stillActive);
+            Assert.That(stillActive, Is.EqualTo(firstActive),
+                "Ending a rejected lockdown must not unregister the station's active lockdown.");
         });
 
         await server.WaitRunTicks(5);

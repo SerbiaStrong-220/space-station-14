@@ -25,6 +25,7 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.MalfAI;
+using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.Tag;
 using Robust.Shared.Configuration;
@@ -305,7 +306,9 @@ public sealed partial class MalfAiMachineModulesSystem : EntitySystem
             return;
         }
 
-        var emagged = new GotEmaggedEvent(performer, EmagType.All);
+        // Access handlers make the event repeatable, but silicon law hacking must be permanent.
+        var type = HasComp<EmagSiliconLawComponent>(target) ? EmagType.Interaction : EmagType.All;
+        var emagged = new GotEmaggedEvent(performer, type);
         RaiseLocalEvent(target, ref emagged);
         if (!emagged.Handled)
         {
@@ -318,7 +321,7 @@ public sealed partial class MalfAiMachineModulesSystem : EntitySystem
         if (!emagged.Repeatable)
         {
             var emaggedComp = EnsureComp<EmaggedComponent>(target);
-            emaggedComp.EmagType |= EmagType.All;
+            emaggedComp.EmagType |= type;
             Dirty(target, emaggedComp);
         }
 

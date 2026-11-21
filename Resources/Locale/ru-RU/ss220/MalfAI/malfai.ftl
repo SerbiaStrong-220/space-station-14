@@ -16,7 +16,7 @@ store-category-malfai-modules = Модули неисправности
 store-preset-name-malfai = Консоль неисправности
 
 ent-ActionMalfAiHackApc = Взлом ЛКП
-    .desc = Взломайте работающее ЛКП своей станции — оно будет приносить 1 CPU в минуту.
+    .desc = Взломайте работающий ЛКП для получения CPU. Перезарядка — 5 секунд.
 ent-ActionMalfAiOpenStore = Консоль неисправности
     .desc = Просмотрите модули и купите нужные за CPU.
 ent-ActionMalfAiDeployTurret = Установка турели
@@ -155,3 +155,6 @@ cmd-malfai_make-failed = Не удалось выдать роль Неиспр�
 cmd-malfai_make-done = Роль Неисправного ИИ выдана '{$player}'.
 cmd-malfai_make-desc = Выдать привязанному станционному ИИ роль неисправного ИИ.
 cmd-malfai_make-help = Использование: {$command} <ник игрока>
+
+ent-StationLockdown = Блокировка станции
+    .desc = Вирусная блокировка шлюзов и противопожарных ставней станции.

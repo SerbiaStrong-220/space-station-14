@@ -10,7 +10,6 @@ using Content.Server.Store.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Administration;
-using Content.Shared.APC;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.Power.Components;
@@ -57,7 +56,6 @@ public sealed partial class MalfAiSystem : EntitySystem
     [Dependency] private SharedRoleSystem _roles = default!;
     [Dependency] private SharedStationSystem _station = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SiliconLawSystem _laws = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private MobStateSystem _mobState = default!;
@@ -325,7 +323,6 @@ public sealed partial class MalfAiSystem : EntitySystem
         hackedApc.OwnerMind = mindId;
         var hackedAt = _timing.CurTime;
         hackedApc.NextRewardAt = _nextApcPayout > hackedAt ? _nextApcPayout : hackedAt + rewardInterval;
-        _appearance.SetData(target, ApcVisuals.Hacked, true);
 
         args.Handled = true;
         _popup.PopupEntity(Loc.GetString(HackSuccess,
@@ -401,7 +398,6 @@ public sealed partial class MalfAiSystem : EntitySystem
             return;
 
         RemComp<MalfAiHackedApcComponent>(apc);
-        _appearance.SetData(apc, ApcVisuals.Hacked, false);
     }
 
     private TimeSpan GetApcRewardInterval()

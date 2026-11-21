@@ -9,6 +9,7 @@
   components:
   - type: StationAiWhitelist
   - type: MalfAiHackable # SS220 MalfAI
+  - type: PowerMalfunction # SS220 randomlawset fix
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -9

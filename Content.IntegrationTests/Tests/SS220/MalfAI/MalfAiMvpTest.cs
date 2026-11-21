@@ -10,6 +10,8 @@ using Content.Server.Silicons.Laws;
 using Content.Server.Station.Systems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
@@ -317,6 +319,17 @@ public sealed class MalfAiMvpTest : GameTest
 
             apc1 = entMan.SpawnEntity("APCBasic", map.GridCoords);
             apc2 = entMan.SpawnEntity("APCBasic", map.GridCoords);
+
+            foreach (var prototype in new[] { "SubstationBasic", "SubstationWallBasic" })
+            {
+                var substation = entMan.SpawnEntity(prototype, map.GridCoords);
+                var battery = entMan.GetComponent<BatteryComponent>(substation);
+                entMan.System<SharedBatterySystem>().SetCharge((substation, battery), battery.MaxCharge);
+                Assert.That(entMan.HasComponent<MalfAiHackableComponent>(substation), Is.False);
+                Assert.That(Hack(body, substation), Is.False, "Substations must not be capturable by Malf AI.");
+                Assert.That(entMan.HasComponent<MalfAiHackedApcComponent>(substation), Is.False);
+                Assert.That(StoreBalance(store), Is.EqualTo(startCpu));
+            }
 
             Assert.That(Hack(body, apc1), Is.True);
             Assert.That(StoreBalance(store), Is.EqualTo(startCpu));

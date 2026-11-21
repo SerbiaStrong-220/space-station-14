@@ -115,7 +115,19 @@ public sealed partial class MalfAiLockdownSystem : StationEventSystem<MalfAiLock
     {
         base.Started(uid, component, gameRule, args);
 
-        if (component.Station is not { } station)
+        if (component.Station == null)
+        {
+            if (!TryGetRandomStation(out var chosenStation, candidate => !_activeRules.ContainsKey(candidate)))
+            {
+                _ticker.EndGameRule(uid, gameRule);
+                return;
+            }
+
+            component.Station = chosenStation;
+        }
+
+        var station = component.Station.Value;
+        if (_activeRules.ContainsKey(station))
         {
             _ticker.EndGameRule(uid, gameRule);
             return;
@@ -280,7 +292,9 @@ public sealed partial class MalfAiLockdownSystem : StationEventSystem<MalfAiLock
     {
         base.Ended(uid, component, gameRule, args);
 
-        if (component.Station is { } station)
+        if (component.Station is { } station
+            && _activeRules.TryGetValue(station, out var activeRule)
+            && activeRule == uid)
         {
             _activeRules.Remove(station);
             AnnounceToStation(station, EndAnnouncement, playSound: false);
