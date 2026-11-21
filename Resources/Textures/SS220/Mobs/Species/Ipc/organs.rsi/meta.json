@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Made by Gabka for SS220",
+  "copyright": "brain, brain-inhand-left, brain-inhand-right, muscle made by Gabka for SS220, eyeball-l, eyeball-r, eyeballs-inhand-left, eyeballs-inhand-right, ears, ears-inhand-left, ears-inhand-right, tongue, stomach made by Theywod for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -17,6 +17,40 @@
     {
       "name": "brain-inhand-right",
       "directions": 4
+    },
+    {
+      "name": "ears"
+    },
+    {
+      "name": "ears-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "ears-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "eyeballs-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "eyeballs-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "eyeball-l"
+    },
+    {
+      "name": "eyeball-r"
+    },
+    {
+      "name": "muscle"
+    },
+    {
+      "name": "stomach"
+    },
+    {
+      "name": "tongue"
     }
   ]
 }
