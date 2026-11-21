@@ -54,10 +54,6 @@ public sealed partial class IpcSystem : SharedIpcSystem
 
     private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
     private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
-    private static readonly LocId IpcNoBattery = "ipc-no-battery";
-    private static readonly LocId IpcNoPower = "ipc-no-power";
-    private static readonly TimeSpan SoundMinInterval = TimeSpan.FromSeconds(15);
-    private static readonly TimeSpan SoundMaXInterval = TimeSpan.FromSeconds(30);
 
     public override void Initialize()
     {
@@ -154,7 +150,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
 
         if (!_powerCell.HasBattery(ent.Owner))
         {
-            _popup.PopupEntity(Loc.GetString(IpcNoBattery), ent, ent);
+            _popup.PopupEntity(Loc.GetString(ent.Comp.NoBatteryPopup), ent, ent);
             return;
         }
 
@@ -228,8 +224,8 @@ public sealed partial class IpcSystem : SharedIpcSystem
         {
             var sound = EnsureComp<SpamEmitSoundComponent>(ent);
             sound.Sound = ent.Comp.CritStateSound;
-            sound.MinInterval = SoundMinInterval;
-            sound.MaxInterval = SoundMaXInterval;
+            sound.MinInterval = ent.Comp.CritSoundMinInterval;
+            sound.MaxInterval = ent.Comp.CritSoundMaxInterval;
         }
         else
         {
@@ -322,7 +318,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
             return;
 
         args.Cancelled = true;
-        _popup.PopupEntity(Loc.GetString(IpcNoPower), ent, ent);
+        _popup.PopupEntity(Loc.GetString(ent.Comp.NoPowerPopup), ent, ent);
     }
 
     /// <summary>
