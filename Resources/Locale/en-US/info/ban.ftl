@@ -54,8 +54,9 @@ cmd-ban_exemption_update-arg-flag = <flag>
 cmd-ban_exemption_get-desc = Show ban exemptions for a certain player.
 cmd-ban_exemption_get-help = Usage: ban_exemption_get <player>
 
-# SS220-localization-fix
+# SS220-localization-fix begin
 cmd-ban_exemption_get-nargs = Expected exactly 1 argument.
+# SS220-localization-fix end
 cmd-ban_exemption_get-none = User is not exempt from any bans.
 cmd-ban_exemption_get-show = User is exempt from the following ban flags: {$flags}.
 cmd-ban_exemption_get-arg-player = <player>
