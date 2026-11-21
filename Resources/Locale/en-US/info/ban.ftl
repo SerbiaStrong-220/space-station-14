@@ -42,8 +42,9 @@ cmd-ban_exemption_update-help = Usage: ban_exemption_update <player> <flag> [<fl
     Specify multiple flags to give a player multiple ban exemption flags.
     To remove all exemptions, run this command and give "None" as only flag.
 
-# SS220-localization-fix
+# SS220-localization-fix begin
 cmd-ban_exemption_update-nargs = Expected at least 2 arguments.
+# SS220-localization-fix end
 cmd-ban_exemption_update-locate = Unable to locate player '{$player}'.
 cmd-ban_exemption_update-invalid-flag = Invalid flag '{$flag}'.
 cmd-ban_exemption_update-success = Updated ban exemption flags for '{$player}' ({$uid}).
