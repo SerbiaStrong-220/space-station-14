@@ -4,8 +4,9 @@ cmd-ban-help = Использование: ban <name or user ID> <reason> [пр�
 cmd-ban-player = Не удалось найти игрока с таким именем.
 cmd-ban-invalid-minutes = { $minutes } не является допустимым количеством минут!
 cmd-ban-invalid-severity = { $severity } не является допустимой тяжестью!
-# SS220-localization-fix
+# SS220-localization-fix begin
 cmd-ban-invalid-arguments = Недопустимое число аргументов.
+# SS220-localization-fix end
 cmd-ban-hint = <name/user ID>
 cmd-ban-hint-reason = <reason>
 cmd-ban-hint-duration = [продолжительность]
