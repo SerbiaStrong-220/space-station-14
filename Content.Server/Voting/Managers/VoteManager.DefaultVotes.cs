@@ -533,6 +533,7 @@ namespace Content.Server.Voting.Managers
                         // SS220-localization-fix begin
                         if (!Enum.TryParse(_cfg.GetCVar(CCVars.VotekickBanDefaultSeverity), ignoreCase: true,
                                 out NoteSeverity severity))
+                                // SS220-localization-fix end
                         {
                             _logManager.GetSawmill("admin.votekick")
                                 .Warning("Votekick ban severity could not be parsed from config! Defaulting to high.");
