@@ -1571,7 +1571,7 @@ entities:
           - 271
           - 272
     - type: Label
-      currentLabel: label-pill-hyronalin-10u # SS220-localization-fix
+      currentLabel: hyronalin 10u
 - proto: PillHyronalin
   entities:
   - uid: 249
