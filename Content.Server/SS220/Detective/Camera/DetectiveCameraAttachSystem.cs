@@ -2,11 +2,14 @@
 
 using Content.Server.Construction.Components;
 using Content.Server.Popups;
+using Content.Server.SS220.SurveillanceCamera;
 using Content.Server.SurveillanceCamera;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.SS220.Detective.Camera;
+using Content.Shared.StationAi;
 using Content.Shared.SurveillanceCamera.Components;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
@@ -19,6 +22,7 @@ public sealed partial class DetectiveCameraAttachSystem : SharedDetectiveCameraA
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private SurveillanceCameraSystem _camera = default!;
+    [Dependency] private SharedStationAiSystem _stationAi = default!;
 
     private static readonly ProtoId<TagPrototype> DetectiveCameraKey = "DetectiveCamera";
 
@@ -30,6 +34,7 @@ public sealed partial class DetectiveCameraAttachSystem : SharedDetectiveCameraA
         SubscribeLocalEvent<DetectiveCameraAttachComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, DetectiveCameraAttachDoAfterEvent>(OnAttachDoAfter);
         SubscribeLocalEvent<DetectiveCameraAttachComponent, DetectiveCameraDetachDoAfterEvent>(OnDetachDoAfter);
+        SubscribeLocalEvent<DetectiveCameraAttachComponent, SurveillanceCameraActiveChangedEvent>(OnActiveChanged);
     }
 
     private void OnComponentStartup(Entity<DetectiveCameraAttachComponent> entity, ref ComponentStartup args)
@@ -38,6 +43,12 @@ public sealed partial class DetectiveCameraAttachSystem : SharedDetectiveCameraA
             return;
 
         _camera.SetActive(entity, false, camera);
+    }
+
+    private void OnActiveChanged(Entity<DetectiveCameraAttachComponent> entity, ref SurveillanceCameraActiveChangedEvent args)
+    {
+        if (TryComp<StationAiVisionComponent>(entity, out var vision))
+            _stationAi.SetVisionEnabled((entity.Owner, vision), args.Active);
     }
 
     private void OnAfterInteract(Entity<DetectiveCameraAttachComponent> entity, ref AfterInteractEvent args)

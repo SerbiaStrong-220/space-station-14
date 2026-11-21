@@ -26,6 +26,11 @@
         whitelist:
           components:
           - FitsInTapeRecorder
+        # SS220-taperecorder-bodycam begin
+        blacklist:
+          tags:
+          - CassetteTapeLargeCapacity
+        # SS220-taperecorder-bodycam end
   - type: ContainerContainer
     containers:
       cassette_tape: !type:ContainerSlot
