@@ -1,0 +1,34 @@
+ent-ModularPartWoodenCabinetEmptyw1h1 = Деревянный ящик
+    .desc = Можно открывать ящики, можно ими стучать, а ещё и вещи положить!
+
+ent-ModularPartCabinetw1h1 = Ящик
+    .desc = Можно открывать ящики, можно ими стучать, а ещё и вещи положить!
+
+ent-ModularPartCabinetMaintenanceLootw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartCabinetScienceEquipFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartCabinetScienceClothFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartDoubleCabinetScienceEquipFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartDoubleCabinetScienceClothFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartCabinetEngineerEquipFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartCabinetEngineerClothFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartDoubleCabinetEngineerClothFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartDoubleCabinetEngineerEquipFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartCabinetMedicalEquipFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartCabinetMedicalClothFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartDoubleCabinetMedicalEquipFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartDoubleCabinetMedicalClothFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
+ent-ModularPartFillingCabinetLawyerEquipFilledw1h1 = { ent-ModularPartCabinetw1h1 }
+    .desc = { ent-ModularPartCabinetw1h1.desc }
