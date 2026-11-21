@@ -10,6 +10,7 @@ using Content.Server.Roles;
 using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Systems;
+using Content.Server.SS220.CrewManifest;
 using Content.Shared.Alert;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Containers.ItemSlots;
@@ -155,6 +156,14 @@ public sealed class StationAiSystem : SharedStationAiSystem
     {
         base.OnAiInsert(ent, ref args);
 
+        // SS220 Silicon-Manifest begin
+        if (args.Container.ID == StationAiCoreComponent.Container)
+        {
+            var manifestEv = new SiliconManifestCoreChangedEvent();
+            RaiseLocalEvent(ent.Owner, ref manifestEv);
+        }
+        // SS220 Silicon-Manifest end
+
         UpdateBatteryAlert(ent);
         UpdateCoreIntegrityAlert(ent);
         UpdateDamagedAccent(ent);
@@ -163,6 +172,14 @@ public sealed class StationAiSystem : SharedStationAiSystem
     protected override void OnAiRemove(Entity<StationAiCoreComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         base.OnAiRemove(ent, ref args);
+
+        // SS220 Silicon-Manifest begin
+        if (args.Container.ID == StationAiCoreComponent.Container)
+        {
+            var manifestEv = new SiliconManifestCoreChangedEvent();
+            RaiseLocalEvent(ent.Owner, ref manifestEv);
+        }
+        // SS220 Silicon-Manifest end
 
         _alerts.ClearAlert(args.Entity, _batteryAlert);
         _alerts.ClearAlert(args.Entity, _damageAlert);

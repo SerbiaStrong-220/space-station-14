@@ -22,6 +22,7 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
 
     public Action<string>? OnDisablePressed;
     public Action<string>? OnDestroyPressed;
+    public Action<string>? OnManifestPressed; // SS220 Silicon-Manifest
 
     private string? _selected;
     private Dictionary<string, CyborgControlData> _cyborgs = new();
@@ -29,6 +30,7 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
     public EntityUid Entity;
 
     private bool _allowBorgControl = true;
+    private bool _allowManifest; // SS220 Silicon-Manifest
 
     public RoboticsConsoleWindow()
     {
@@ -61,6 +63,12 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
         {
             OnDestroyPressed?.Invoke(_selected!);
         };
+        // SS220 Silicon-Manifest begin
+        ManifestButton.OnPressed += _ =>
+        {
+            OnManifestPressed?.Invoke(_selected!);
+        };
+        // SS220 Silicon-Manifest end
 
         // cant put multiple styles in xaml for some reason
         DestroyButton.StyleClasses.Add(StyleClass.Negative);
@@ -75,6 +83,7 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
     {
         _cyborgs = state.Cyborgs;
         _allowBorgControl = state.AllowBorgControl;
+        _allowManifest = state.AllowManifest; // SS220 Silicon-Manifest
 
         // clear invalid selection
         if (_selected is {} selected && !_cyborgs.ContainsKey(selected))
@@ -90,6 +99,10 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
         var locked = _lock.IsLocked(Entity);
         DangerZone.Visible = !locked && _allowBorgControl;
         LockedMessage.Visible = locked && _allowBorgControl; // Only show if locked AND control is allowed
+        // SS220 Silicon-Manifest begin
+        ManifestButton.Visible = _allowManifest;
+        ManifestButton.Disabled = locked;
+        // SS220 Silicon-Manifest end
     }
 
     private void PopulateCyborgs()
@@ -119,6 +132,11 @@ public sealed partial class RoboticsConsoleWindow : FancyWindow
 
         var data = _cyborgs[selected];
         var model = data.ChassisName;
+        // SS220 Silicon-Manifest begin
+        ManifestButton.Text = Loc.GetString(data.InManifest
+            ? "robotics-console-manifest-remove"
+            : "robotics-console-manifest-add");
+        // SS220 Silicon-Manifest end
 
         BorgSprite.Texture = _sprite.Frame0(data.ChassisSprite!);
 

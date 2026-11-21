@@ -4,6 +4,7 @@ using Content.Server.EUI;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
+using Content.Server.SS220.CrewManifest;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.CrewManifest;
@@ -26,6 +27,7 @@ public sealed class CrewManifestSystem : EntitySystem
     [Dependency] private readonly EuiManager _euiManager = default!;
     [Dependency] private readonly IConfigurationManager _configManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private CrewManifestSiliconSystem _siliconManifest = default!; // SS220 Silicon-Manifest
 
     /// <summary>
     ///     Cached crew manifest entries. The alternative is to outright
@@ -46,7 +48,20 @@ public sealed class CrewManifestSystem : EntitySystem
 
         SubscribeLocalEvent<CrewManifestViewerComponent, BoundUIClosedEvent>(OnBoundUiClose);
         SubscribeLocalEvent<CrewManifestViewerComponent, CrewManifestOpenUiMessage>(OpenEuiFromBui);
+
+        SubscribeLocalEvent<SiliconManifestChangedEvent>(OnSiliconManifestChanged); // SS220 Silicon-Manifest
     }
+
+    // SS220 Silicon-Manifest begin
+    private void OnSiliconManifestChanged(ref SiliconManifestChangedEvent ev)
+    {
+        if (!HasComp<StationRecordsComponent>(ev.Station))
+            return;
+
+        BuildCrewManifest(ev.Station);
+        UpdateEuis(ev.Station);
+    }
+    // SS220 Silicon-Manifest end
 
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
@@ -250,6 +265,7 @@ public sealed class CrewManifestSystem : EntitySystem
         });
 
         entries.Entries = entriesSort.Select(x => x.entry).ToArray();
+        entries.Synthetics = _siliconManifest.BuildSynthetics(station); // SS220 Silicon-Manifest
         _cachedEntries[station] = entries;
     }
 }

@@ -1,4 +1,5 @@
 using Content.Shared.Eui;
+using Content.Shared.SS220.CrewManifest; // SS220 Silicon-Manifest
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.CrewManifest;
@@ -40,6 +41,7 @@ public sealed class CrewManifestEntries
     /// </summary>
     // public Dictionary<string, List<CrewManifestEntry>> Entries = new();
     public CrewManifestEntry[] Entries = Array.Empty<CrewManifestEntry>();
+    public SyntheticManifestEntry[] Synthetics = Array.Empty<SyntheticManifestEntry>(); // SS220 Silicon-Manifest
 }
 
 [Serializable, NetSerializable]

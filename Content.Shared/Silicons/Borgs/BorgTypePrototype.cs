@@ -2,6 +2,7 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Radio;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.StatusIcon;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -156,4 +157,9 @@ public sealed partial class BorgTypePrototype : IPrototype
     [DataField]
     public string Name = string.Empty;
     // SS220 Borgs-Id-fix end
+
+    // SS220 Silicon-Manifest begin
+    [DataField]
+    public ProtoId<JobIconPrototype>? Icon;
+    // SS220 Silicon-Manifest end
 }

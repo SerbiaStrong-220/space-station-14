@@ -1600,6 +1600,7 @@
       state: generic_panel_open
   - type: RoboticsConsole
     allowBorgControl: false
+    allowManifest: true # SS220 Silicon-Manifest
   - type: ActiveRadio
     channels:
     - Science

@@ -2,6 +2,7 @@
 - type: borgType
   id: generic
   name: borg-type-prototype-scientist # SS220 generic borg rework
+  icon: JobIconBorgGeneric # SS220 Silicon-Manifest
 
   # Description
   dummyPrototype: BorgChassisGeneric
@@ -38,6 +39,7 @@
 - type: borgType
   id: engineering
   name: borg-type-prototype-engineering # SS220 Borgs-Id-fix
+  icon: JobIconBorgEngineering # SS220 Silicon-Manifest
 
   # Description
   dummyPrototype: BorgChassisEngineer
@@ -76,6 +78,7 @@
 - type: borgType
   id: mining
   name: borg-type-prototype-mining # SS220 Borgs-Id-fix
+  icon: JobIconBorgMining # SS220 Silicon-Manifest
 
   # Description
   dummyPrototype: BorgChassisMining
@@ -115,6 +118,7 @@
 - type: borgType
   id: janitor
   name: borg-type-prototype-janitor # SS220 Borgs-Id-fix
+  icon: JobIconBorgService # SS220 Silicon-Manifest
 
   # Description
   dummyPrototype: BorgChassisJanitor
@@ -152,6 +156,7 @@
 - type: borgType
   id: medical
   name: borg-type-prototype-medical # SS220 Borgs-Id-fix
+  icon: JobIconBorgMedical # SS220 Silicon-Manifest
 
   # Description
   dummyPrototype: BorgChassisMedical
@@ -203,6 +208,7 @@
 - type: borgType
   id: service
   name: borg-type-prototype-service # SS220 Borgs-Id-fix
+  icon: JobIconBorgService # SS220 Silicon-Manifest
 
   # Description
   dummyPrototype: BorgChassisService

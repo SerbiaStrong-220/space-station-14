@@ -1,8 +1,11 @@
 ﻿using Content.Server.Inventory;
+using Content.Server.SS220.CrewManifest;
+using Content.Shared.Access.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Radio.Components;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -15,6 +18,10 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
 {
     [Dependency] private readonly BorgSystem _borgSystem = default!;
     [Dependency] private readonly ServerInventorySystem _inventorySystem = default!;
+    // SS220 Silicon-Manifest begin
+    [Dependency] private SharedJobStatusSystem _jobStatus = default!;
+    [Dependency] private CrewManifestSiliconSystem _siliconManifest = default!;
+    // SS220 Silicon-Manifest end
 
     protected override void SelectBorgModule(Entity<BorgSwitchableTypeComponent> ent, ProtoId<BorgTypePrototype> borgType)
     {
@@ -78,5 +85,12 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
         }
 
         base.SelectBorgModule(ent, borgType);
+
+        // SS220 Silicon-Manifest begin
+        if (TryComp<JobStatusComponent>(ent.Owner, out var jobStatus))
+            _jobStatus.UpdateStatus((ent.Owner, jobStatus));
+
+        _siliconManifest.NotifyChanged(ent.Owner);
+        // SS220 Silicon-Manifest end
     }
 }
