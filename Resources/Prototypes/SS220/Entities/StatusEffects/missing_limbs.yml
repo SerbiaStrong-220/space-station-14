@@ -1,0 +1,21 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# One effect per limb kind, so losing the second leg doesn't slow down further: without legs the body only crawls.
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: StatusEffectMissingLegSlowdown
+  name: missing leg slowdown
+  components:
+  - type: MovementModStatusEffect
+    walkSpeedModifier: 0.6
+    sprintSpeedModifier: 0.6
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: StatusEffectMissingFootSlowdown
+  name: missing foot slowdown
+  components:
+  - type: MovementModStatusEffect
+    walkSpeedModifier: 0.85
+    sprintSpeedModifier: 0.85

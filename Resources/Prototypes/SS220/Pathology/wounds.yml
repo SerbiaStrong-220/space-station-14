@@ -19,6 +19,7 @@
   name: pathology-head-projectile-name
   armorSlotFlags: HEAD
   targetZone: Head
+  organ: Head
   operationRecommendation: pathology-head-projectile-operation
   definition:
   - description: pathology-head-projectile-description
@@ -47,6 +48,7 @@
   name: pathology-leftarm-projectile-name
   armorSlotFlags: TORSO
   targetZone: LeftArm
+  organ: ArmLeft
   operationRecommendation: pathology-leftarm-projectile-operation
   definition:
   - description: pathology-leftarm-projectile-description
@@ -59,6 +61,7 @@
   name: pathology-rightarm-projectile-name
   armorSlotFlags: TORSO
   targetZone: RightArm
+  organ: ArmRight
   operationRecommendation: pathology-rightarm-projectile-operation
   definition:
   - description: pathology-rightarm-projectile-description
@@ -71,6 +74,7 @@
   name: pathology-leftleg-projectile-name
   armorSlotFlags: TORSO
   targetZone: LeftLeg
+  organ: LegLeft
   operationRecommendation: pathology-leftleg-projectile-operation
   definition:
   - description: pathology-leftleg-projectile-description
@@ -83,6 +87,7 @@
   name: pathology-rightleg-projectile-name
   armorSlotFlags: TORSO
   targetZone: RightLeg
+  organ: LegRight
   operationRecommendation: pathology-rightleg-projectile-operation
   definition:
   - description: pathology-rightleg-projectile-description
@@ -98,6 +103,7 @@
   examineDescription: pathology-leftarm-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: LeftArm
+  organ: ArmLeft
   affectsBones: true
   operationRecommendation: pathology-arm-dislocation-operation
   definition:
@@ -110,6 +116,7 @@
   examineDescription: pathology-rightarm-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: RightArm
+  organ: ArmRight
   affectsBones: true
   operationRecommendation: pathology-arm-dislocation-operation
   definition:
@@ -122,6 +129,7 @@
   examineDescription: pathology-lefthand-dislocation-examine
   armorSlotFlags: GLOVES
   targetZone: LeftHand
+  organ: HandLeft
   affectsBones: true
   operationRecommendation: pathology-hand-dislocation-operation
   definition:
@@ -135,6 +143,7 @@
   examineDescription: pathology-righthand-dislocation-examine
   armorSlotFlags: GLOVES
   targetZone: RightHand
+  organ: HandRight
   affectsBones: true
   operationRecommendation: pathology-hand-dislocation-operation
   definition:
@@ -148,6 +157,7 @@
   examineDescription: pathology-leftleg-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: LeftLeg
+  organ: LegLeft
   affectsBones: true
   operationRecommendation: pathology-leg-dislocation-operation
   definition:
@@ -161,6 +171,7 @@
   examineDescription: pathology-rightleg-dislocation-examine
   armorSlotFlags: TORSO
   targetZone: RightLeg
+  organ: LegRight
   affectsBones: true
   operationRecommendation: pathology-leg-dislocation-operation
   definition:
@@ -174,6 +185,7 @@
   examineDescription: pathology-leftfoot-dislocation-examine
   armorSlotFlags: FEET
   targetZone: LeftFoot
+  organ: FootLeft
   affectsBones: true
   operationRecommendation: pathology-foot-dislocation-operation
   definition:
@@ -187,6 +199,7 @@
   examineDescription: pathology-rightfoot-dislocation-examine
   armorSlotFlags: FEET
   targetZone: RightFoot
+  organ: FootRight
   affectsBones: true
   operationRecommendation: pathology-foot-dislocation-operation
   definition:
@@ -227,6 +240,7 @@
   examineDescription: pathology-leftarm-hairline-examine
   armorSlotFlags: TORSO
   targetZone: LeftArm
+  organ: ArmLeft
   affectsBones: true
   operationRecommendation: pathology-arm-fracture-operation
   definition:
@@ -239,6 +253,7 @@
   examineDescription: pathology-rightarm-hairline-examine
   armorSlotFlags: TORSO
   targetZone: RightArm
+  organ: ArmRight
   affectsBones: true
   operationRecommendation: pathology-arm-fracture-operation
   definition:
@@ -251,6 +266,7 @@
   examineDescription: pathology-lefthand-hairline-examine
   armorSlotFlags: GLOVES
   targetZone: LeftHand
+  organ: HandLeft
   affectsBones: true
   operationRecommendation: pathology-hand-fracture-operation
   definition:
@@ -264,6 +280,7 @@
   examineDescription: pathology-righthand-hairline-examine
   armorSlotFlags: GLOVES
   targetZone: RightHand
+  organ: HandRight
   affectsBones: true
   operationRecommendation: pathology-hand-fracture-operation
   definition:
@@ -277,6 +294,7 @@
   examineDescription: pathology-leftleg-hairline-examine
   armorSlotFlags: TORSO
   targetZone: LeftLeg
+  organ: LegLeft
   affectsBones: true
   operationRecommendation: pathology-leg-fracture-operation
   definition:
@@ -290,6 +308,7 @@
   examineDescription: pathology-rightleg-hairline-examine
   armorSlotFlags: TORSO
   targetZone: RightLeg
+  organ: LegRight
   affectsBones: true
   operationRecommendation: pathology-leg-fracture-operation
   definition:
@@ -303,6 +322,7 @@
   examineDescription: pathology-leftfoot-hairline-examine
   armorSlotFlags: FEET
   targetZone: LeftFoot
+  organ: FootLeft
   affectsBones: true
   operationRecommendation: pathology-foot-fracture-operation
   definition:
@@ -316,6 +336,7 @@
   examineDescription: pathology-rightfoot-hairline-examine
   armorSlotFlags: FEET
   targetZone: RightFoot
+  organ: FootRight
   affectsBones: true
   operationRecommendation: pathology-foot-fracture-operation
   definition:
@@ -332,6 +353,7 @@
   isSevere: true
   armorSlotFlags: HEAD
   targetZone: Head
+  organ: Head
   affectsBones: true
   operationRecommendation: pathology-head-cranial-fissure-operation
   definition:
@@ -377,6 +399,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftArm
+  organ: ArmLeft
   affectsBones: true
   operationRecommendation: pathology-arm-fracture-operation
   definition:
@@ -392,6 +415,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightArm
+  organ: ArmRight
   affectsBones: true
   operationRecommendation: pathology-arm-fracture-operation
   definition:
@@ -407,6 +431,7 @@
   isSevere: true
   armorSlotFlags: GLOVES
   targetZone: LeftHand
+  organ: HandLeft
   affectsBones: true
   operationRecommendation: pathology-hand-fracture-operation
   definition:
@@ -421,6 +446,7 @@
   isSevere: true
   armorSlotFlags: GLOVES
   targetZone: RightHand
+  organ: HandRight
   affectsBones: true
   operationRecommendation: pathology-hand-fracture-operation
   definition:
@@ -435,6 +461,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftLeg
+  organ: LegLeft
   affectsBones: true
   operationRecommendation: pathology-leg-fracture-operation
   definition:
@@ -449,6 +476,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightLeg
+  organ: LegRight
   affectsBones: true
   operationRecommendation: pathology-leg-fracture-operation
   definition:
@@ -463,6 +491,7 @@
   isSevere: true
   armorSlotFlags: FEET
   targetZone: LeftFoot
+  organ: FootLeft
   affectsBones: true
   operationRecommendation: pathology-foot-fracture-operation
   definition:
@@ -477,6 +506,7 @@
   isSevere: true
   armorSlotFlags: FEET
   targetZone: RightFoot
+  organ: FootRight
   affectsBones: true
   operationRecommendation: pathology-foot-fracture-operation
   definition:
@@ -493,6 +523,7 @@
   isSevere: true
   armorSlotFlags: HEAD
   targetZone: Head
+  organ: Head
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-head-arterial-description
@@ -532,6 +563,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftArm
+  organ: ArmLeft
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-leftarm-arterial-description
@@ -545,6 +577,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightArm
+  organ: ArmRight
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-rightarm-arterial-description
@@ -558,6 +591,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftLeg
+  organ: LegLeft
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-leftleg-arterial-description
@@ -571,6 +605,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightLeg
+  organ: LegRight
   operationRecommendation: pathology-arterial-operation
   definition:
   - description: pathology-rightleg-arterial-description
@@ -586,6 +621,7 @@
   isSevere: true
   armorSlotFlags: HEAD
   targetZone: Head
+  organ: Head
   operationRecommendation: pathology-necrosis-operation
   definition:
   - description: pathology-head-necrosis-description
@@ -634,6 +670,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftArm
+  organ: ArmLeft
   operationRecommendation: pathology-necrosis-operation
   definition:
   - description: pathology-leftarm-necrosis-description
@@ -650,6 +687,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightArm
+  organ: ArmRight
   operationRecommendation: pathology-necrosis-operation
   definition:
   - description: pathology-rightarm-necrosis-description
@@ -666,6 +704,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftLeg
+  organ: LegLeft
   operationRecommendation: pathology-necrosis-operation
   definition:
   - description: pathology-leftleg-necrosis-description
@@ -682,6 +721,7 @@
   isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightLeg
+  organ: LegRight
   operationRecommendation: pathology-necrosis-operation
   definition:
   - description: pathology-rightleg-necrosis-description

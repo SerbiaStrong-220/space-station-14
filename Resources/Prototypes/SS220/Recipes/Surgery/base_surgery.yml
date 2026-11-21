@@ -90,6 +90,22 @@
       examineDescription: cranial-fissure-prepped-examine-description
       popup: cranial-fissure-prepped-popup
 
+- type: abstractSurgeryNode
+  id: limb-amputated
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: limb-amputated-examine-description
+      popup: limb-amputated-popup
+
+- type: abstractSurgeryNode
+  id: limb-attached
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: limb-attached-examine-description
+      popup: limb-attached-popup
+
 #Edges
 
 - type: abstractSurgeryEdge
@@ -378,6 +394,56 @@
 
 - type: abstractSurgeryEdge
   id: insert-organ
+  edge:
+    to: abstract
+    id: abstract
+    delay: 6
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/organ.ogg
+
+- type: abstractSurgeryEdge
+  id: amputate-limb
+  edge:
+    to: abstract
+    id: abstract
+    delay: 8
+    failureChance: 0.1
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/saw.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/saw.rsi
+      state: saw
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: saw
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-saw
+      failureMessage: surgery-requirement-tool-miss
+
+# fast amputation without opening the limb, the stump is left bleeding
+- type: abstractSurgeryEdge
+  id: amputate-limb-shears
+  edge:
+    to: abstract
+    id: abstract
+    delay: 15
+    failureChance: 0.1
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/saw.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: shears
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: shears
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-shears
+      failureMessage: surgery-requirement-tool-miss
+
+- type: abstractSurgeryEdge
+  id: attach-limb
   edge:
     to: abstract
     id: abstract

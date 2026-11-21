@@ -51,6 +51,22 @@
       id: leftarm-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+    - to: leftarm-amputated
+      id: leftarm-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-limb-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: ArmLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: 4
 
   - node: leftarm-skin-incision
     baseNode: incision
@@ -177,6 +193,52 @@
         pathology: LeftArmBurnNecrosis
         description: surgery-pathology-requirement-description-necrosis
         failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: leftarm-amputated
+      id: leftarm-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-limb
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: ArmLeft
+    - to: leftarm-attached
+      id: leftarm-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: l_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmLeft
+        rejectionDamage:
+          types:
+            Poison: 30
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -253,6 +315,54 @@
         curePathologies:
         - LeftArmBurnNecrosis
 
+  - node: leftarm-amputated
+    baseNode: limb-amputated
+    edges:
+    - to: leftarm-attached
+      id: leftarm-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: l_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmLeft
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: leftarm-attached
+    baseNode: limb-attached
+    edges:
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
   - node: seal-wound
     baseNode: seal-wound
 
@@ -307,6 +417,22 @@
       id: rightarm-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+    - to: rightarm-amputated
+      id: rightarm-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-limb-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: ArmRight
+      - !type:ApplyBleedingAction
+        bleedAmount: 4
 
   - node: rightarm-skin-incision
     baseNode: incision
@@ -433,6 +559,52 @@
         pathology: RightArmBurnNecrosis
         description: surgery-pathology-requirement-description-necrosis
         failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: rightarm-amputated
+      id: rightarm-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-limb
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: ArmRight
+    - to: rightarm-attached
+      id: rightarm-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: r_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmRight
+        rejectionDamage:
+          types:
+            Poison: 30
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -509,6 +681,54 @@
         curePathologies:
         - RightArmBurnNecrosis
 
+  - node: rightarm-amputated
+    baseNode: limb-amputated
+    edges:
+    - to: rightarm-attached
+      id: rightarm-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: r_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmRight
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: rightarm-attached
+    baseNode: limb-attached
+    edges:
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
   - node: seal-wound
     baseNode: seal-wound
 
@@ -524,6 +744,12 @@
     failureMessage: surgery-hand-complex-inventory-requirement-failure
     slotNames:
     - gloves
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-limb-complex-inventory-requirement-description
+    failureMessage: surgery-limb-complex-inventory-requirement-failure
+    slotNames:
+    - outerClothing
   - !type:LyingPatientRequirement
     subject: target
     description: surgery-strap-bed-requirement-description
@@ -534,6 +760,12 @@
       components:
       - StasisBed
       requireAll: false
+  - !type:HasOrganRequirement
+    subject: target
+    category: ArmLeft
+    organName: surgery-organ-name-arm-left
+    description: surgery-requirement-has-organ-description
+    failureMessage: surgery-requirement-has-organ-failure
   start: start-lefthand-surgery
   end: seal-wound
   graph:
@@ -562,6 +794,22 @@
       id: lefthand-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+    - to: lefthand-amputated
+      id: lefthand-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-limb-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: HandLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: 4
 
   - node: lefthand-skin-incision
     baseNode: incision
@@ -632,6 +880,52 @@
         pathology: LeftHandCompoundFracture
         description: surgery-pathology-requirement-description-compound
         failureMessage: surgery-pathology-requirement-failure-compound
+    - to: lefthand-amputated
+      id: lefthand-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-limb
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: HandLeft
+    - to: lefthand-attached
+      id: lefthand-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: l_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandLeft
+        rejectionDamage:
+          types:
+            Poison: 30
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -658,6 +952,54 @@
         curePathologies:
         - LeftHandCompoundFracture
 
+  - node: lefthand-amputated
+    baseNode: limb-amputated
+    edges:
+    - to: lefthand-attached
+      id: lefthand-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: l_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandLeft
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: lefthand-attached
+    baseNode: limb-attached
+    edges:
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
   - node: seal-wound
     baseNode: seal-wound
 
@@ -673,6 +1015,12 @@
     failureMessage: surgery-hand-complex-inventory-requirement-failure
     slotNames:
     - gloves
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-limb-complex-inventory-requirement-description
+    failureMessage: surgery-limb-complex-inventory-requirement-failure
+    slotNames:
+    - outerClothing
   - !type:LyingPatientRequirement
     subject: target
     description: surgery-strap-bed-requirement-description
@@ -683,6 +1031,12 @@
       components:
       - StasisBed
       requireAll: false
+  - !type:HasOrganRequirement
+    subject: target
+    category: ArmRight
+    organName: surgery-organ-name-arm-right
+    description: surgery-requirement-has-organ-description
+    failureMessage: surgery-requirement-has-organ-failure
   start: start-righthand-surgery
   end: seal-wound
   graph:
@@ -711,6 +1065,22 @@
       id: righthand-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+    - to: righthand-amputated
+      id: righthand-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-limb-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: HandRight
+      - !type:ApplyBleedingAction
+        bleedAmount: 4
 
   - node: righthand-skin-incision
     baseNode: incision
@@ -781,6 +1151,52 @@
         pathology: RightHandCompoundFracture
         description: surgery-pathology-requirement-description-compound
         failureMessage: surgery-pathology-requirement-failure-compound
+    - to: righthand-amputated
+      id: righthand-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-limb
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: HandRight
+    - to: righthand-attached
+      id: righthand-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: r_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandRight
+        rejectionDamage:
+          types:
+            Poison: 30
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -806,6 +1222,54 @@
         failureMessage: surgery-pathology-requirement-failure-compound
         curePathologies:
         - RightHandCompoundFracture
+
+  - node: righthand-amputated
+    baseNode: limb-amputated
+    edges:
+    - to: righthand-attached
+      id: righthand-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: r_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandRight
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: righthand-attached
+    baseNode: limb-attached
+    edges:
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
 
   - node: seal-wound
     baseNode: seal-wound
@@ -861,6 +1325,22 @@
       id: leftleg-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+    - to: leftleg-amputated
+      id: leftleg-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-limb-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: LegLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: 4
 
   - node: leftleg-skin-incision
     baseNode: incision
@@ -987,6 +1467,52 @@
         pathology: LeftLegBurnNecrosis
         description: surgery-pathology-requirement-description-necrosis
         failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: leftleg-amputated
+      id: leftleg-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-limb
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: LegLeft
+    - to: leftleg-attached
+      id: leftleg-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: l_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegLeft
+        rejectionDamage:
+          types:
+            Poison: 30
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -1063,6 +1589,54 @@
         curePathologies:
         - LeftLegBurnNecrosis
 
+  - node: leftleg-amputated
+    baseNode: limb-amputated
+    edges:
+    - to: leftleg-attached
+      id: leftleg-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: l_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegLeft
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: leftleg-attached
+    baseNode: limb-attached
+    edges:
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
   - node: seal-wound
     baseNode: seal-wound
 
@@ -1117,6 +1691,22 @@
       id: rightleg-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+    - to: rightleg-amputated
+      id: rightleg-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-limb-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: LegRight
+      - !type:ApplyBleedingAction
+        bleedAmount: 4
 
   - node: rightleg-skin-incision
     baseNode: incision
@@ -1243,6 +1833,52 @@
         pathology: RightLegBurnNecrosis
         description: surgery-pathology-requirement-description-necrosis
         failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: rightleg-amputated
+      id: rightleg-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-limb
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: LegRight
+    - to: rightleg-attached
+      id: rightleg-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: r_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegRight
+        rejectionDamage:
+          types:
+            Poison: 30
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -1319,6 +1955,54 @@
         curePathologies:
         - RightLegBurnNecrosis
 
+  - node: rightleg-amputated
+    baseNode: limb-amputated
+    edges:
+    - to: rightleg-attached
+      id: rightleg-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: r_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegRight
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: rightleg-attached
+    baseNode: limb-attached
+    edges:
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
   - node: seal-wound
     baseNode: seal-wound
 
@@ -1334,6 +2018,13 @@
     failureMessage: surgery-foot-complex-inventory-requirement-failure
     slotNames:
     - shoes
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-limb-complex-inventory-requirement-description
+    failureMessage: surgery-limb-complex-inventory-requirement-failure
+    slotNames:
+    - outerClothing
+    - jumpsuit
   - !type:LyingPatientRequirement
     subject: target
     description: surgery-strap-bed-requirement-description
@@ -1344,6 +2035,12 @@
       components:
       - StasisBed
       requireAll: false
+  - !type:HasOrganRequirement
+    subject: target
+    category: LegLeft
+    organName: surgery-organ-name-leg-left
+    description: surgery-requirement-has-organ-description
+    failureMessage: surgery-requirement-has-organ-failure
   start: start-leftfoot-surgery
   end: seal-wound
   graph:
@@ -1372,6 +2069,22 @@
       id: leftfoot-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+    - to: leftfoot-amputated
+      id: leftfoot-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-limb-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: FootLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: 4
 
   - node: leftfoot-skin-incision
     baseNode: incision
@@ -1442,6 +2155,52 @@
         pathology: LeftFootCompoundFracture
         description: surgery-pathology-requirement-description-compound
         failureMessage: surgery-pathology-requirement-failure-compound
+    - to: leftfoot-amputated
+      id: leftfoot-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-limb
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: FootLeft
+    - to: leftfoot-attached
+      id: leftfoot-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: l_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootLeft
+        rejectionDamage:
+          types:
+            Poison: 30
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -1468,6 +2227,54 @@
         curePathologies:
         - LeftFootCompoundFracture
 
+  - node: leftfoot-amputated
+    baseNode: limb-amputated
+    edges:
+    - to: leftfoot-attached
+      id: leftfoot-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: l_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootLeft
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: leftfoot-attached
+    baseNode: limb-attached
+    edges:
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
   - node: seal-wound
     baseNode: seal-wound
 
@@ -1483,6 +2290,13 @@
     failureMessage: surgery-foot-complex-inventory-requirement-failure
     slotNames:
     - shoes
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-limb-complex-inventory-requirement-description
+    failureMessage: surgery-limb-complex-inventory-requirement-failure
+    slotNames:
+    - outerClothing
+    - jumpsuit
   - !type:LyingPatientRequirement
     subject: target
     description: surgery-strap-bed-requirement-description
@@ -1493,6 +2307,12 @@
       components:
       - StasisBed
       requireAll: false
+  - !type:HasOrganRequirement
+    subject: target
+    category: LegRight
+    organName: surgery-organ-name-leg-right
+    description: surgery-requirement-has-organ-description
+    failureMessage: surgery-requirement-has-organ-failure
   start: start-rightfoot-surgery
   end: seal-wound
   graph:
@@ -1521,6 +2341,22 @@
       id: rightfoot-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+    - to: rightfoot-amputated
+      id: rightfoot-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-limb-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: FootRight
+      - !type:ApplyBleedingAction
+        bleedAmount: 4
 
   - node: rightfoot-skin-incision
     baseNode: incision
@@ -1591,6 +2427,52 @@
         pathology: RightFootCompoundFracture
         description: surgery-pathology-requirement-description-compound
         failureMessage: surgery-pathology-requirement-failure-compound
+    - to: rightfoot-amputated
+      id: rightfoot-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-limb
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: FootRight
+    - to: rightfoot-attached
+      id: rightfoot-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: r_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootRight
+        rejectionDamage:
+          types:
+            Poison: 30
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -1616,6 +2498,54 @@
         failureMessage: surgery-pathology-requirement-failure-compound
         curePathologies:
         - RightFootCompoundFracture
+
+  - node: rightfoot-amputated
+    baseNode: limb-amputated
+    edges:
+    - to: rightfoot-attached
+      id: rightfoot-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-limb
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: r_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootRight
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
+
+  - node: rightfoot-attached
+    baseNode: limb-attached
+    edges:
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-limb-incision
 
   - node: seal-wound
     baseNode: seal-wound

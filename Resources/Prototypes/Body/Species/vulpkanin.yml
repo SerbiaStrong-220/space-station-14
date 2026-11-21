@@ -146,6 +146,51 @@
   id: MobVulpkanin
   name: Urist McArfArf
   components:
+  #SS220-surgery-update begin
+  - type: OrganWornSlots
+    masks:
+      HandLeft:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: vulpkanin-gloves-left
+      HandRight:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: vulpkanin-gloves-right
+      FootLeft:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: vulpkanin-shoes-left
+      FootRight:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: vulpkanin-shoes-right
+    undisplacedMasks:
+      HandLeft:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: vulpkanin-gloves-left-undisplaced
+      HandRight:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: vulpkanin-gloves-right-undisplaced
+      FootLeft:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: vulpkanin-shoes-left-undisplaced
+      FootRight:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: vulpkanin-shoes-right-undisplaced
+  #SS220-surgery-update end
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:

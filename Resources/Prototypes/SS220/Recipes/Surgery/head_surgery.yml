@@ -31,6 +31,22 @@
       id: head-skin-incision
       baseEdge: incision
       edgeTooltip: to-head-skin-incision
+    - to: head-amputated
+      id: head-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-head-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Head
+      - !type:ApplyBleedingAction
+        bleedAmount: 4
 
   - node: head-skin-incision
     baseNode: incision
@@ -56,6 +72,13 @@
       id: retract-head-skin-implant-check
       delay: 15
       edgeTooltip: to-head-check-implant
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
       edgeIcon:
         sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
         state: implant-scanner
@@ -75,6 +98,13 @@
       baseEdge: retract-skin
       delay: 15
       edgeTooltip: to-head-change-tts
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
       actions:
       - !type:ChangeTtsAction
         surgery: HeadSurgery
@@ -136,6 +166,12 @@
       baseEdge: saw-bone
       edgeTooltip: to-saw-skull-bone
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
       - !type:WhitelistRequirement
         subject: target
         invert: true
@@ -149,6 +185,12 @@
       baseEdge: retract-skin
       edgeTooltip: to-part-head-jelly
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
       - !type:WhitelistRequirement
         subject: target
         description: surgery-requirement-boneless-description
@@ -156,7 +198,107 @@
         whitelist:
           components:
           - Boneless
+    - to: head-amputated
+      id: head-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-head
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Head
+    - to: head-attached
+      id: head-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-head
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: head_m
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Head
+        rejectionDamage:
+          types:
+            Poison: 30
     # return
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-head-incision
+
+  - node: head-amputated
+    baseNode: limb-amputated
+    nodeText:
+      examineDescription: head-amputated-examine-description
+      popup: head-amputated-popup
+    edges:
+    - to: head-attached
+      id: head-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-head
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: head_m
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Head
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-head-incision
+
+  - node: head-attached
+    baseNode: limb-attached
+    nodeText:
+      examineDescription: head-attached-examine-description
+      popup: head-attached-popup
+    edges:
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
@@ -502,6 +644,12 @@
     failureMessage: surgery-eyes-complex-inventory-requirement-failure
     slotNames:
     - eyes
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-head-complex-inventory-requirement-description
+    failureMessage: surgery-head-complex-inventory-requirement-failure
+    slotNames:
+    - head
   - !type:LyingPatientRequirement
     subject: target
     description: surgery-strap-bed-requirement-description
@@ -512,6 +660,12 @@
       components:
       - StasisBed
       requireAll: false
+  - !type:HasOrganRequirement
+    subject: target
+    category: Head
+    organName: surgery-organ-name-head
+    description: surgery-requirement-has-organ-description
+    failureMessage: surgery-requirement-has-organ-failure
   start: start-eyes-surgery
   end: seal-wound
   graph:
@@ -590,6 +744,9 @@
       actions:
       - !type:InsertOrganAction
         category: Eyes
+        rejectionDamage:
+          types:
+            Poison: 15
     # repair eyes
     - to: eyes-retract-lids
       id: repair-eyes
@@ -665,6 +822,12 @@
     failureMessage: surgery-mouth-complex-inventory-requirement-failure
     slotNames:
     - mask
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-head-complex-inventory-requirement-description
+    failureMessage: surgery-head-complex-inventory-requirement-failure
+    slotNames:
+    - head
   - !type:LyingPatientRequirement
     subject: target
     description: surgery-strap-bed-requirement-description
@@ -675,6 +838,12 @@
       components:
       - StasisBed
       requireAll: false
+  - !type:HasOrganRequirement
+    subject: target
+    category: Head
+    organName: surgery-organ-name-head
+    description: surgery-requirement-has-organ-description
+    failureMessage: surgery-requirement-has-organ-failure
   start: start-mouth-surgery
   end: seal-wound
   graph:
@@ -796,6 +965,9 @@
       actions:
       - !type:InsertOrganAction
         category: Tongue
+        rejectionDamage:
+          types:
+            Poison: 15
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound

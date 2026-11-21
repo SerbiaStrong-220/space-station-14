@@ -32,6 +32,16 @@ to-fix-skull-bone = Восстановить кость черепа
 to-fix-mindslave-disfunction = Исправить работу импланта подчинения
 to-close-brain-exposure = Закрыть твердую оболочку
 
+head-amputated = Обезглавливание
+head-attached = Пришивание головы
+to-amputate-head = Отделить голову
+to-amputate-head-shears = Отсечь голову ножницами
+to-attach-head = Пришить голову
+head-amputated-examine-description = На месте головы свежая культя шеи.
+head-amputated-popup = {THE($user)} отделяет голову {THE($target)}, используя {$used}
+head-attached-examine-description = Голова пришита, но разрез на шее ещё не закрыт.
+head-attached-popup = {THE($user)} пришивает голову к телу {THE($target)}
+
 surgery-head-complex-inventory-requirement-description = У пациента должна быть открыта голова
 surgery-head-complex-inventory-requirement-failure = Вы не можете добраться до головы { THE($target) }!
 

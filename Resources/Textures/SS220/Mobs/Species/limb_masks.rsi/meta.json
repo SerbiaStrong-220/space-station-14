@@ -1,0 +1,94 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by Zenius07 (Discord) for SS220 from Mobs/Species/Human/parts.rsi (https://github.com/tgstation/tgstation/blob/8024397cc81c5f47f74cf4279e35728487d0a1a7/icons/mob/human_parts_greyscale.dmi and modified by DrSmugleaf), Mobs/Species/Vox/parts.rsi (Taken from https://github.com/vgstation-coders/vgstation13 at 02ff588d59b3c560c685d9ca75e882d32a72d8cb, and modified by Bhijn, Errant and Flareguy, beak sprited by Estkemran (Github) for SS220), Mobs/Species/Vox/displacement.rsi (jumpsuit state made by PJB3005. back, hand, head, and eyes states made by Flareguy, ears, hand_l, hand_r, hair and shoes made by TheShuEd, neck and belt made by Dinazewwr (Discord) for SS220, eyes and hand resprited by Dinazewwr (Discord) for SS220, outer sprited by EstKemran (Github)), Mobs/Species/Vulpkanin/parts.rsi (Made by FairlySadPanda (Github/Discord); with help from ScarKy0 (Github/Discord)), Mobs/Species/Vulpkanin/displacement.rsi (FairlySadPanda (Discord/Github))",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "load": {
+        "srgb": false
+    },
+    "states": [
+        {
+            "name": "gloves-left",
+            "directions": 4
+        },
+        {
+            "name": "gloves-right",
+            "directions": 4
+        },
+        {
+            "name": "vox-gloves-left",
+            "directions": 4
+        },
+        {
+            "name": "vox-gloves-right",
+            "directions": 4
+        },
+        {
+            "name": "vox-gloves-left-undisplaced",
+            "directions": 4
+        },
+        {
+            "name": "vox-gloves-right-undisplaced",
+            "directions": 4
+        },
+        {
+            "name": "vulpkanin-gloves-left",
+            "directions": 4
+        },
+        {
+            "name": "vulpkanin-gloves-right",
+            "directions": 4
+        },
+        {
+            "name": "vulpkanin-gloves-left-undisplaced",
+            "directions": 4
+        },
+        {
+            "name": "vulpkanin-gloves-right-undisplaced",
+            "directions": 4
+        },
+        {
+            "name": "shoes-left",
+            "directions": 4
+        },
+        {
+            "name": "shoes-right",
+            "directions": 4
+        },
+        {
+            "name": "vox-shoes-left",
+            "directions": 4
+        },
+        {
+            "name": "vox-shoes-right",
+            "directions": 4
+        },
+        {
+            "name": "vox-shoes-left-undisplaced",
+            "directions": 4
+        },
+        {
+            "name": "vox-shoes-right-undisplaced",
+            "directions": 4
+        },
+        {
+            "name": "vulpkanin-shoes-left",
+            "directions": 4
+        },
+        {
+            "name": "vulpkanin-shoes-right",
+            "directions": 4
+        },
+        {
+            "name": "vulpkanin-shoes-left-undisplaced",
+            "directions": 4
+        },
+        {
+            "name": "vulpkanin-shoes-right-undisplaced",
+            "directions": 4
+        }
+    ]
+}

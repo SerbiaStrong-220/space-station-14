@@ -55,8 +55,21 @@
   components:
   - type: Organ
     category: Head
+  #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ Brain, Eyes, Tongue, Ears ]
+  #SS220-surgery-update end
   - type: Sprite
     state: head
+    #SS220-surgery-update begin
+    # the part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: 0, -0.3
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.Head
     data:
@@ -82,8 +95,21 @@
   components:
   - type: Organ
     category: ArmLeft
+  #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ HandLeft ]
+  #SS220-surgery-update end
   - type: Sprite
     state: l_arm
+    #SS220-surgery-update begin
+    # the part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: -0.19, 0.02
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LArm
     data:
@@ -101,8 +127,21 @@
   components:
   - type: Organ
     category: ArmRight
+  #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ HandRight ]
+  #SS220-surgery-update end
   - type: Sprite
     state: r_arm
+    #SS220-surgery-update begin
+    # the part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: 0.22, 0.02
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RArm
     data:
@@ -126,6 +165,15 @@
       location: Left
   - type: Sprite
     state: l_hand
+    #SS220-surgery-update begin
+    # the part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: -0.19, 0.12
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LHand
     data:
@@ -149,6 +197,15 @@
       location: Right
   - type: Sprite
     state: r_hand
+    #SS220-surgery-update begin
+    # the part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: 0.22, 0.12
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RHand
     data:
@@ -166,8 +223,22 @@
   components:
   - type: Organ
     category: LegLeft
+  #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ FootLeft ]
+    supporting: true
+  #SS220-surgery-update end
   - type: Sprite
     state: l_leg
+    #SS220-surgery-update begin
+    # the part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: -0.09, 0.36
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LLeg
     data:
@@ -185,8 +256,22 @@
   components:
   - type: Organ
     category: LegRight
+  #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ FootRight ]
+    supporting: true
+  #SS220-surgery-update end
   - type: Sprite
     state: r_leg
+    #SS220-surgery-update begin
+    # the part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: 0.12, 0.36
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RLeg
     data:
@@ -206,6 +291,15 @@
     category: FootLeft
   - type: Sprite
     state: l_foot
+    #SS220-surgery-update begin
+    # the part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: -0.09, 0.45
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LFoot
     data:
@@ -225,6 +319,15 @@
     category: FootRight
   - type: Sprite
     state: r_foot
+    #SS220-surgery-update begin
+    # the part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: 0.12, 0.45
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RFoot
     data:

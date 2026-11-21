@@ -3,6 +3,7 @@
 using System.Numerics;
 using Content.Shared.Metabolism;
 using Content.Shared.Rejuvenate;
+using Content.Shared.SS220.Body;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -16,6 +17,7 @@ public sealed partial class InitialBodySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private LimbSystem _limb = default!;
 
     private static readonly ProtoId<OrganCategoryPrototype> BrainCategory = "Brain";
 
@@ -30,6 +32,21 @@ public sealed partial class InitialBodySystem
     public bool IsSpeciesOrganCategory(EntityUid body, ProtoId<OrganCategoryPrototype> category)
     {
         return !TryComp<InitialBodyComponent>(body, out var initialBody) || initialBody.Organs.ContainsKey(category);
+    }
+
+    /// <summary>
+    /// Whether the organ is the species' own one rather than taken from another species, bodies without initial organs treat any organ as their own.
+    /// </summary>
+    public bool IsSpeciesOrgan(EntityUid body, Entity<OrganComponent?> organ)
+    {
+        if (!Resolve(organ, ref organ.Comp, logMissing: false) || organ.Comp.Category is not { } category)
+            return false;
+
+        if (!TryComp<InitialBodyComponent>(body, out var initialBody))
+            return true;
+
+        return initialBody.Organs.TryGetValue(category, out var speciesOrganId)
+            && MetaData(organ).EntityPrototype?.ID == speciesOrganId.Id;
     }
 
     /// <summary>
@@ -83,20 +100,30 @@ public sealed partial class InitialBodySystem
 
         foreach (var (category, organProto) in ent.Comp.Organs)
         {
+            EntityUid? replaced = null;
             if (_body.TryGetOrganByCategory((ent, body), category, out var organ))
             {
                 // a transplanted brain carries someone's mind, deleting it would kill that player
-                if (category == BrainCategory || MetaData(organ.Value).EntityPrototype?.ID == organProto.Id)
+                if (category == BrainCategory || IsSpeciesOrgan(ent, organ.Value.AsNullable()))
                     continue;
 
                 if (!_body.TryExtractOrgan((ent, body), category, out _))
                     continue;
 
-                Del(organ.Value);
+                replaced = organ.Value;
             }
 
             var spawned = Spawn(organProto, coords);
-            if (!_body.TryInsertOrgan((ent, body), spawned))
+            var inserted = _body.TryInsertOrgan((ent, body), spawned);
+
+            // a foreign head took the brain along, the organs go back before the head is deleted
+            if (replaced is { } replacedOrgan)
+            {
+                _limb.ReturnAttachedOrgans(replacedOrgan, ent);
+                Del(replacedOrgan);
+            }
+
+            if (!inserted)
             {
                 Del(spawned);
                 continue;

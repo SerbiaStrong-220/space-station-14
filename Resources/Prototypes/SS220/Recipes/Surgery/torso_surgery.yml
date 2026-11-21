@@ -277,6 +277,9 @@
       actions:
       - !type:InsertOrganAction
         category: Liver
+        rejectionDamage:
+          types:
+            Poison: 15
     # stomach
     - to: torso-abdomen-opened
       id: extract-stomach
@@ -324,6 +327,9 @@
       actions:
       - !type:InsertOrganAction
         category: Stomach
+        rejectionDamage:
+          types:
+            Poison: 15
     # kidneys
     - to: torso-abdomen-opened
       id: extract-kidneys
@@ -371,6 +377,9 @@
       actions:
       - !type:InsertOrganAction
         category: Kidneys
+        rejectionDamage:
+          types:
+            Poison: 15
     # appendix, extraction only
     - to: torso-abdomen-opened
       id: extract-appendix
@@ -611,6 +620,9 @@
       actions:
       - !type:InsertOrganAction
         category: Heart
+        rejectionDamage:
+          types:
+            Poison: 15
     # lungs
     - to: saw-rib-bone
       id: extract-lungs
@@ -658,6 +670,9 @@
       actions:
       - !type:InsertOrganAction
         category: Lungs
+        rejectionDamage:
+          types:
+            Poison: 15
     # repair lungs
     - to: saw-rib-bone
       id: repair-lungs
