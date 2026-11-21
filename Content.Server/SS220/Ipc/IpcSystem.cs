@@ -339,7 +339,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
             return false;
         }
 
-        var chargeLevel = _battery.GetChargeLevel(battery.Value.AsNullable())
+        var chargeLevel = _battery.GetChargeLevel(battery.Value.AsNullable());
 
         if (chargeLevel > ent.Comp.CritCharge)
         {
