@@ -1,0 +1,3 @@
+photo-loading-text-label = Загрузка...
+photo-failed-text-label = Не удалось загрузить фотографию.
+photo-component-seen-objects = На фото вы видите: {$seen}

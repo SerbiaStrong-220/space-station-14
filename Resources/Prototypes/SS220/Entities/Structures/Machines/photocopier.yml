@@ -60,6 +60,7 @@
           - FaxableObject
           - Paper
           - ButtScan
+          - Photo
         tags:
           - Folder
     tonerSlot:
