@@ -52,9 +52,6 @@ public sealed partial class IpcSystem : SharedIpcSystem
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedSuicideSystem _suicide = default!;
 
-    private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
-    private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
-
     public override void Initialize()
     {
         base.Initialize();
@@ -134,7 +131,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
         // show popup only if comp removed
         if (RemComp<BatteryDrainerComponent>(ent))
         {
-            _popup.PopupEntity(Loc.GetString(IpcDrainDisabled), ent, ent);
+            _popup.PopupEntity(Loc.GetString("ipc-drain-disabled"), ent, ent);
         }
 
         Dirty(ent);
@@ -166,7 +163,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
         else
             RemComp<BatteryDrainerComponent>(ent);
 
-        var message = ent.Comp.DrainActivated ? IpcDrainReady : IpcDrainDisabled;
+        var message = ent.Comp.DrainActivated ? "ipc-drain-enabled" : "ipc-drain-disabled";
         _popup.PopupEntity(Loc.GetString(message), ent, ent);
 
         Dirty(ent);
