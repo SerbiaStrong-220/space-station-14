@@ -314,9 +314,10 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         if (banInfo.Users.Count == 0 && banInfo.HWIds.Count == 0 && banInfo.AddressRanges.Count == 0)
             throw new ArgumentException("Must specify at least one user, HWID, or address range");
 
+        var now = DateTimeOffset.UtcNow; // SS220 pending bans: preserve the exact requested duration.
         DateTimeOffset? expires = null;
         if (banInfo.Duration is { } duration)
-            expires = DateTimeOffset.Now + duration;
+            expires = now + duration; // SS220 pending bans
 
         ImmutableArray<int> roundIds;
         if (banInfo.RoundIds.Count > 0)
@@ -338,7 +339,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             [..banInfo.Users.Select(u => u.UserId)],
             [..banInfo.AddressRanges],
             [..banInfo.HWIds],
-            DateTimeOffset.Now,
+            now, // SS220 pending bans
             expires,
             roundIds,
             await GetPlayTime(banInfo),

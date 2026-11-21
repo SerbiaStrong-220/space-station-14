@@ -106,7 +106,7 @@ internal static class ModelBan
 /// ("unbanned") by an admin, which is stored as an <see cref="Unban"/> entity existing for this ban.
 /// </para>
 /// </remarks>
-public sealed class Ban
+public sealed partial class Ban // SS220 pending bans
 {
     public int Id { get; set; }
 
