@@ -5,6 +5,7 @@ using Content.Server.NPC.Queries.Considerations;
 using Content.Server.NPC.Queries.Curves;
 using Content.Server.NPC.Queries.Queries;
 using Content.Server.Nutrition.Components;
+using Content.Server.SS220.NPC;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Examine;
 using Content.Shared.Fluids.Components;
@@ -24,6 +25,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Microsoft.Extensions.ObjectPool;
 using Robust.Server.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Atmos.Components;
@@ -505,6 +507,44 @@ public sealed class NPCUtilitySystem : EntitySystem
                 }
                 break;
             }
+            //SS220-dragon-orders begin
+            case BlackboardTargetQuery targetQuery:
+            {
+                if (!blackboard.TryGetValue<EntityUid>(targetQuery.Key, out var target, EntityManager) || !Exists(target))
+                    break;
+
+                if (targetQuery.LeashRangeKey is { } leashRangeKey &&
+                    blackboard.TryGetValue<float>(leashRangeKey, out var leashRange, EntityManager) &&
+                    (!blackboard.TryGetValue<EntityCoordinates>(NPCBlackboard.FollowTarget, out var leashCoords, EntityManager) ||
+                     !leashCoords.IsValid(EntityManager) ||
+                     !_transform.GetMapCoordinates(target).InRange(_transform.ToMapCoordinates(leashCoords), leashRange)))
+                {
+                    break;
+                }
+
+                entities.Add(target);
+                break;
+            }
+            case GuardedHostilesQuery guardQuery:
+            {
+                if (!blackboard.TryGetValue<EntityCoordinates>(NPCBlackboard.FollowTarget, out var guardedCoords, EntityManager) ||
+                    !guardedCoords.IsValid(EntityManager))
+                {
+                    break;
+                }
+
+                if (!blackboard.TryGetValue<float>(guardQuery.RangeKey, out var guardRange, EntityManager))
+                    guardRange = vision;
+
+                var guardedPos = _transform.ToMapCoordinates(guardedCoords);
+                foreach (var ent in _npcFaction.GetNearbyHostiles(owner, vision))
+                {
+                    if (ent != guardedCoords.EntityId && _transform.GetMapCoordinates(ent).InRange(guardedPos, guardRange))
+                        entities.Add(ent);
+                }
+                break;
+            }
+            //SS220-dragon-orders end
             default:
                 throw new NotImplementedException();
         }

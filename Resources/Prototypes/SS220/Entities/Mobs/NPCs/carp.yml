@@ -1,5 +1,29 @@
 - type: entity
-  parent: MobShark
+  id: BaseMobDragonBrood
+  abstract: true
+  components:
+  - type: HTN
+    rootTask:
+      task: DragonCarpCompound
+    blackboard:
+      NavSmash: !type:Bool
+        false
+      NavInteract: !type:Bool
+        true
+      IdleRange: !type:Single
+        3.5
+      FollowCloseRange: !type:Single
+        2
+      FollowRange: !type:Single
+        4
+      GuardRange: !type:Single
+        9
+      GuardAggressorRange: !type:Single
+        20
+  - type: DragonBrood
+
+- type: entity
+  parent: [ BaseMobDragonBrood, MobShark ]
   id: MobSharkDragon
   name: space shark
   suffix: DragonBrood
@@ -14,18 +38,24 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonistFlock
   - type: GhostTakeoverAvailable
-  - type: HTN
-    rootTask:
-      task: DragonCarpCompound
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelSpaceDragon
   - type: Insulated
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: Stamina
+    baseCritThreshold: 200
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 4
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SharkDragon
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 17 # SS220 DragonShark Buff, 10 -> 17
+        Slash: 20 # SS220 DragonShark Buff, 10 -> 20
         Bloodloss: 5

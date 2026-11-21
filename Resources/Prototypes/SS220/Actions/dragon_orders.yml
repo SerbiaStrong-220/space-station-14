@@ -1,0 +1,46 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseAction
+  id: ActionDragonOrderDestroy
+  name: Destroy
+  description: Order your brood to destroy the target. Once it is gone, the brood goes back to guarding.
+  components:
+  - type: Action
+    useDelay: 1
+    icon:
+      sprite: SS220/Interface/Actions/dragon.rsi
+      state: destroy
+    iconOn:
+      sprite: SS220/Interface/Actions/dragon.rsi
+      state: destroy-on
+    priority: 5
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: EntityTargetAction
+    canTargetSelf: false
+    event: !type:DragonOrderActionEvent
+      type: Destroy
+
+- type: entity
+  parent: BaseAction
+  id: ActionDragonOrderGuard
+  name: Guard
+  description: Order your brood to stay near the target and attack enemies around it. Target yourself to call the brood back.
+  components:
+  - type: Action
+    useDelay: 1
+    icon:
+      sprite: SS220/Interface/Actions/dragon.rsi
+      state: guard
+    iconOn:
+      sprite: SS220/Interface/Actions/dragon.rsi
+      state: guard-on
+    priority: 6
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: EntityTargetAction
+    event: !type:DragonOrderActionEvent
+      type: Guard

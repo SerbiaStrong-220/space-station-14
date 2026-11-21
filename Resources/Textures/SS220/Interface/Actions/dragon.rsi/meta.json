@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Created by EmoGarbage404 (github), modified by Estkemran (github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "destroy"
+    },
+    {
+      "name": "destroy-on"
+    },
+    {
+      "name": "guard"
+    },
+    {
+      "name": "guard-on"
+    }
+  ]
+}
