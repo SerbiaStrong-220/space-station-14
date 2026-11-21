@@ -193,6 +193,7 @@
     - id: FlippoEngravedLighter
     - id: FlashlightSeclite
     - id: ForensicScanner
+    - id: MicroFiberAnalyzerMachineCircuitboard # SS220 microfibers
     - id: LogProbeCartridge
     - id: BoxForensicPad
     - id: DrinkDetFlask

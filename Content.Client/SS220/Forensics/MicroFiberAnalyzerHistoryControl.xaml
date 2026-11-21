@@ -1,0 +1,55 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              xmlns:forensics="clr-namespace:Content.Client.SS220.Forensics"
+              Orientation="Vertical" SeparationOverride="8" SetWidth="200" VerticalExpand="True">
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.PanelBackground}"
+                              BorderColor="{x:Static forensics:MicroFiberAnalyzerColors.Border}"
+                              BorderThickness="1" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Name="HistoryPanel" Orientation="Vertical" SeparationOverride="8" Margin="8"
+                      HorizontalExpand="True" VerticalExpand="True">
+            <PanelContainer HorizontalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.HistoryHeaderBackground}" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="0">
+                    <PanelContainer SetWidth="3">
+                        <PanelContainer.PanelOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.Accent}" />
+                        </PanelContainer.PanelOverride>
+                    </PanelContainer>
+                    <Label Text="{Loc 'micro-fiber-analyzer-interface-history'}" StyleClasses="LabelHeading"
+                           FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.AccentText}" Margin="8 4" />
+                    <Control HorizontalExpand="True" />
+                    <Label Name="HistoryCount" Text="0" StyleClasses="ConsoleText"
+                           FontColorOverride="{x:Static forensics:MicroFiberAnalyzerColors.CodeText}"
+                           Margin="4 4 8 4"
+                           VerticalAlignment="Center" />
+                </BoxContainer>
+            </PanelContainer>
+            <Label Name="HistoryEmpty" Text="{Loc 'micro-fiber-analyzer-interface-history-empty'}" />
+            <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+                <BoxContainer Name="HistoryEntries" Orientation="Vertical" SeparationOverride="4"
+                              VerticalAlignment="Top" HorizontalExpand="True" />
+            </ScrollContainer>
+            <Button Name="CompareHistory" Access="Public" ToggleMode="True" Disabled="True"
+                    HorizontalExpand="True" Text="{Loc 'micro-fiber-analyzer-interface-compare-history'}" />
+        </BoxContainer>
+    </PanelContainer>
+    <PanelContainer Name="PendingSamplePanel" Visible="False" HorizontalExpand="True">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="{x:Static forensics:MicroFiberAnalyzerColors.PanelBackground}" />
+        </PanelContainer.PanelOverride>
+        <Button Name="CurrentSample" Access="Public" ToggleMode="True" Pressed="True" Margin="8"
+                MinHeight="44" HorizontalExpand="True"
+                ToolTip="{Loc 'micro-fiber-analyzer-interface-current-sample'}">
+            <RichTextLabel ModulateSelfOverride="{x:Static forensics:MicroFiberAnalyzerColors.ButtonText}"
+                           Text="{Loc 'micro-fiber-analyzer-interface-current-sample'}"
+                           HorizontalExpand="True" VerticalAlignment="Center" MouseFilter="Ignore" />
+        </Button>
+    </PanelContainer>
+</BoxContainer>

@@ -1,0 +1,28 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:local="clr-namespace:Content.Client.SS220.Forensics"
+              Orientation="Vertical" SeparationOverride="8"
+              Visible="False" HorizontalExpand="True" VerticalExpand="True">
+    <Label Text="{Loc 'micro-fiber-analyzer-interface-compare-first'}" />
+    <OptionButton Name="ComparisonFirst" Access="Public" HorizontalExpand="True" />
+    <Label Text="{Loc 'micro-fiber-analyzer-interface-compare-second'}" />
+    <OptionButton Name="ComparisonSecond" Access="Public" HorizontalExpand="True" />
+    <Button Name="ComparisonRun" Access="Public" Disabled="True" HorizontalExpand="True"
+            Text="{Loc 'micro-fiber-analyzer-interface-compare-run'}" />
+    <RichTextLabel Name="ComparisonStatus" HorizontalExpand="True" />
+    <ScrollContainer Name="ComparisonResults" Visible="False" VerticalExpand="True"
+                     HorizontalExpand="True" HScrollEnabled="False">
+        <BoxContainer Orientation="Vertical" SeparationOverride="8"
+                      VerticalAlignment="Top" HorizontalExpand="True">
+            <Label Name="ComparisonProfileCount" />
+            <local:MicroFiberAnalyzerSampleList Name="ComparisonProfilesContainer" Orientation="Vertical"
+                                                   SeparationOverride="4" HorizontalExpand="True" />
+            <Label Name="ComparisonStorageMicroFiberCount" />
+            <local:MicroFiberAnalyzerSampleList Name="ComparisonStorageMicroFibersContainer" Orientation="Vertical"
+                                                   SeparationOverride="8" HorizontalExpand="True" />
+            <RichTextLabel Text="{Loc 'micro-fiber-analyzer-interface-compare-note'}"
+                           HorizontalExpand="True" />
+        </BoxContainer>
+    </ScrollContainer>
+</BoxContainer>

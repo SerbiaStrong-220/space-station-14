@@ -28,10 +28,6 @@
       - [ScienceKnowledge, null]
       hiddenName: null
     # SS220-hidden-desc-end
-#SS220 Micro_fibers start
-    - type: MicroFiber
-      microFiberMaterial: micro-fibers-chameleon
-#SS220 Micro_fibers end
 
 - type: entity
   parent: [Clothing, ClothingSlotBase]

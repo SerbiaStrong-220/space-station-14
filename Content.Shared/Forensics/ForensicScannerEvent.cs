@@ -7,7 +7,6 @@ namespace Content.Shared.Forensics
     {
         public readonly List<string> Fingerprints = new();
         public readonly List<string> Fibers = new();
-        public readonly List<string> MicroFibers = new();//SS220 Micro_fibers
         public readonly List<string> TouchDNAs = new();
         public readonly List<string> SolutionDNAs = new();
         public readonly List<string> Residues = new();
@@ -18,7 +17,6 @@ namespace Content.Shared.Forensics
         public ForensicScannerBoundUserInterfaceState(
             List<string> fingerprints,
             List<string> fibers,
-            List<string> microFibers,//SS220 Micro_fibers
             List<string> touchDnas,
             List<string> solutionDnas,
             List<string> residues,
@@ -28,7 +26,6 @@ namespace Content.Shared.Forensics
         {
             Fingerprints = fingerprints;
             Fibers = fibers;
-            MicroFibers = microFibers;//SS220 Micro_fibers
             TouchDNAs = touchDnas;
             SolutionDNAs = solutionDnas;
             Residues = residues;
