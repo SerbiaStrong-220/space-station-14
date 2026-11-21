@@ -31,7 +31,7 @@ public sealed class DepartmentBanCommand : IConsoleCommand
         string reason;
         uint minutes;
         var postBanInfo = true;
-        // SS220-localization-fix
+        // SS220-localization-fix begin
         if (!Enum.TryParse(_cfg.GetCVar(CCVars.DepartmentBanDefaultSeverity), ignoreCase: true,
                 out NoteSeverity severity))
                // SS220-localization-fix end
