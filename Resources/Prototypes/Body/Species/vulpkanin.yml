@@ -155,6 +155,13 @@
         sprite: Mobs/Effects/burn_damage.rsi
   - type: MessyDrinker
     spillChance: 0.33
+  #SS220-species-meat begin
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatVulpkanin
+      amount: 5
+  #SS220-species-meat end
   - type: Speech
     speechSounds: Vulpkanin
     speechVerb: Vulpkanin
@@ -241,7 +248,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: SS220/Mobs/Species/Vulpkanin/parts.rsi # SS220 Vulplkanin sprites
+    sprite: SS220/Mobs/Species/Vulpkanin/organs.rsi #SS220-species-organs-resprite
 
 - type: entity
   id: OrganVulpkaninVisual
@@ -320,11 +327,11 @@
   id: OrganVulpkaninFootRight
 
 - type: entity
-  parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganVulpkaninInternal ]
+  parent: [ OrganBaseBrain, OrganVulpkaninInternal ] #SS220-species-organs-resprite
   id: OrganVulpkaninBrain
 
 - type: entity
-  parent: [ OrganVulpkaninVisual, OrganSpriteHumanInternal, OrganBaseEyes, OrganVulpkaninInternal ] # SS220 Vulplkanin sprites
+  parent: [ OrganVulpkaninVisual, OrganBaseEyes, OrganVulpkaninInternal ] #SS220-species-organs-resprite
   id: OrganVulpkaninEyes
   # SS220 Vulplkanin sprites start
   components:
@@ -334,7 +341,7 @@
   # SS220 Vulplkanin sprites end
 
 - type: entity
-  parent: [ OrganBaseTongue, OrganSpriteHumanInternal, OrganVulpkaninInternal ] # SS220 Vulplkanin sprites
+  parent: [ OrganBaseTongue, OrganVulpkaninInternal ] #SS220-species-organs-resprite
   id: OrganVulpkaninTongue
 
 - type: entity
@@ -346,21 +353,21 @@
   id: OrganVulpkaninEars
 
 - type: entity
-  parent: [ OrganBaseLungs, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
+  parent: [ OrganBaseLungs, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] #SS220-species-organs-resprite
   id: OrganVulpkaninLungs
 
 - type: entity
-  parent: [ OrganBaseHeart, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
+  parent: [ OrganBaseHeart, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] #SS220-species-organs-resprite
   id: OrganVulpkaninHeart
 
 - type: entity
-  parent: [ OrganBaseStomach, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
+  parent: [ OrganBaseStomach, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] #SS220-species-organs-resprite
   id: OrganVulpkaninStomach
 
 - type: entity
-  parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
+  parent: [ OrganBaseLiver, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] #SS220-species-organs-resprite
   id: OrganVulpkaninLiver
 
 - type: entity
-  parent: [ OrganBaseKidneys, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
+  parent: [ OrganBaseKidneys, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] #SS220-species-organs-resprite
   id: OrganVulpkaninKidneys

@@ -238,7 +238,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Slime/organs.rsi
+    sprite: SS220/Mobs/Species/Slime/organs.rsi #SS220-species-organs-resprite
 
 - type: entity
   parent: OrganSlimePerson
