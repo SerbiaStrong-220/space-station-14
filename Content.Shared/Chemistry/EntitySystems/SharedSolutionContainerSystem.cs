@@ -1,7 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.CompilerServices;
+using Content.Shared.Atmos;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reaction;
@@ -21,6 +18,10 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 using Dependency = Robust.Shared.IoC.DependencyAttribute;
 
 namespace Content.Shared.Chemistry.EntitySystems;
@@ -1029,7 +1030,12 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         }
 
         msg.PushNewline();
-        msg.AddMarkupOrThrow(Loc.GetString("scannable-solution-temperature", ("temperature", Math.Round(solution.Temperature))));
+        // ss220 - solution temp C add - bgn
+        var temperature = !float.IsNaN(solution.Temperature)
+            ? $"{solution.Temperature - Atmospherics.T0C:F1} °C ({solution.Temperature:F1} K)"
+            : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
+        msg.AddMarkupOrThrow(Loc.GetString("scannable-solution-temperature", ("temperature", temperature)));
+        // ss220 - solution temp C add - end
 
         return msg;
     }
