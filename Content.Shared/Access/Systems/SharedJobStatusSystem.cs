@@ -63,7 +63,7 @@ public abstract class SharedJobStatusSystem : EntitySystem
         }
 
         // SS220 Add borg icon for hud begin
-        if (HasComp<BorgChassisComponent>(ent))
+        if (HasComp<BorgChassisComponent>(ent) && iconId == JobIconForNoId)
         {
             iconId = JobIconForBorg;
 

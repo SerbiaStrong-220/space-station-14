@@ -4,6 +4,7 @@ using Content.Server.Silicons.Borgs;
 using Content.Server.Station.Systems;
 using Content.Shared.SS220.CrewManifest;
 using Content.Shared.GameTicking;
+using Content.Shared.Gibbing;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.StationAi;
@@ -30,6 +31,7 @@ public sealed partial class CrewManifestSiliconSystem : EntitySystem
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawn);
         SubscribeLocalEvent<StationAiCoreComponent, SiliconManifestCoreChangedEvent>(OnAiCoreChanged);
         SubscribeLocalEvent<EntityRenamedEvent>(OnEntityRenamed);
+        SubscribeLocalEvent<SiliconManifestMemberComponent, GibbedBeforeDeletionEvent>(OnBorgGibbed);
     }
 
     public bool IsRegistered(EntityUid borg, EntityUid station)
@@ -161,6 +163,14 @@ public sealed partial class CrewManifestSiliconSystem : EntitySystem
     private void OnAiCoreChanged(Entity<StationAiCoreComponent> ent, ref SiliconManifestCoreChangedEvent args)
     {
         if (_station.GetOwningStation(ent.Owner) is { } station)
+            RaiseManifestChanged(station);
+    }
+
+    private void OnBorgGibbed(Entity<SiliconManifestMemberComponent> ent, ref GibbedBeforeDeletionEvent args)
+    {
+        var station = ent.Comp.Station;
+        RemComp<SiliconManifestMemberComponent>(ent.Owner);
+        if (station != EntityUid.Invalid)
             RaiseManifestChanged(station);
     }
 
