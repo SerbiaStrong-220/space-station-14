@@ -11,6 +11,7 @@ using Content.Server.Database;
 using Content.Server.Discord;
 using Content.Server.GameTicking;
 using Content.Server.Players.RateLimiting;
+using Content.Server.SS220.Investigation; // SS220 investigation recorder
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -44,6 +45,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IAfkManager _afkManager = default!;
         [Dependency] private readonly IServerDbManager _dbManager = default!;
         [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
+        [Dependency] private readonly IInvestigationRecorder _investigation = default!; // SS220 investigation recorder
 
         [GeneratedRegex(@"^https://discord\.com/api/webhooks/(\d+)/((?!.*/).*)$")]
         private static partial Regex DiscordRegex();
@@ -705,6 +707,17 @@ namespace Content.Server.Administration.Systems
             var msg = new BwoinkTextMessage(message.UserId, senderSession.UserId, bwoinkText, playSound: playSound, adminOnly: message.AdminOnly, isSenderAdmin: senderAHelpAdmin /* SS220 */);
 
             LogBwoink(msg);
+
+            // SS220 investigation recorder begin
+            if (_investigation.IsRecording)
+                _investigation.OnAhelp(
+                    senderSession.AttachedEntity,
+                    message.UserId.UserId,
+                    senderSession.Name,
+                    message.Text,
+                    senderAHelpAdmin,
+                    message.AdminOnly);
+            // SS220 investigation recorder end
 
             var admins = GetTargetAdmins();
 
