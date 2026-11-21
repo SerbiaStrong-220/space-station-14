@@ -74,3 +74,14 @@
   - type: FoldableClothing
     foldedEquippedPrefix: other-shoulder
     foldedHeldPrefix: other-shoulder
+
+- type: entity
+  abstract: true
+  id: BaseClothingCloak
+  components:
+  - type: HideEquipmentLayersClothing
+    blacklist:
+      components:
+      - Gun
+      tags:
+      - Satchel

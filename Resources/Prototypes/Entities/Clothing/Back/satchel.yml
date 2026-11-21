@@ -11,6 +11,13 @@
     - 0,0,1,3
     - 3,0,6,3
     - 8,0,9,3
+#SS220-cloak-hide-equipment start
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - Backpack
+    - Satchel
+#SS220-cloak-hide-equipment end
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile

@@ -447,7 +447,7 @@
     - Hair
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: AshDrakeCloak
   name: плащ дрейка
   description: Этот плащ источает огромное количество тепла. Вы чувствуете, что под его покровом вы неуязвимы к огню.
