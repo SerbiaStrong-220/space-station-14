@@ -16,7 +16,13 @@ public sealed partial class SponsorTierRequirementLoadoutEffect : SharedSponsorT
     public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession? session, IDependencyCollection collection, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = new FormattedMessage();
-        if (session == null || session.ContentData()?.SponsorInfo?.Tiers is not { } playerTiers)
+        var contentData = session?.ContentData();
+
+        // Tiers are not known yet: don't strip what the player already has, it is re-checked once they arrive.
+        if (contentData is { SponsorInfo: null })
+            return true;
+
+        if (contentData?.SponsorInfo?.Tiers is not { } playerTiers)
         {
             reason = FormattedMessage.Empty;
             return false;
