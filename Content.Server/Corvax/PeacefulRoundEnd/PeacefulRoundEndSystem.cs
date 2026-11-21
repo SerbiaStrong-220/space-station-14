@@ -1,6 +1,7 @@
-﻿using Content.Server.GameTicking;
+using Content.Server.GameTicking;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Corvax.CCCVars;
+using Content.Shared.SS220.RoundEnd;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 
@@ -10,9 +11,9 @@ public sealed class PeacefulRoundEndSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    
+
     private bool _isEnabled = false;
-    
+
     public override void Initialize()
     {
         base.Initialize();
@@ -27,6 +28,9 @@ public sealed class PeacefulRoundEndSystem : EntitySystem
         {
             if (!session.AttachedEntity.HasValue) continue;
             EnsureComp<PacifiedComponent>(session.AttachedEntity.Value);
+            // SS220-centcomm-grief-start
+            EnsureComp<RoundEndPacifiedComponent>(session.AttachedEntity.Value);
+            // SS220-centcomm-grief-end
         }
     }
 }
