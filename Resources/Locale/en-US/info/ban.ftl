@@ -6,9 +6,8 @@ cmd-ban-invalid-minutes = {$minutes} is not a valid amount of minutes!
 cmd-ban-invalid-severity = {$severity} is not a valid severity!
 # SS220-localization-fix begin
 cmd-ban-invalid-stated-round = { $statedround } is not a valid round number!
-# SS220-localization-fix end
-# SS220-localization-fix
 cmd-ban-invalid-arguments = Invalid amount of arguments.
+# SS220-localization-fix end
 cmd-ban-hint = <name/user ID>
 cmd-ban-hint-reason = <reason>
 cmd-ban-hint-duration = [duration]
