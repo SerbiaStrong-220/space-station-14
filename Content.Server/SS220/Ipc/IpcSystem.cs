@@ -177,7 +177,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!HasEnoughPower(ent))
+        if (!HasEnoughPower(ent, out _))
             args.ModifySpeed(ent.Comp.LowChargeSpeed);
     }
 
@@ -314,11 +314,11 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioSendAttempt(Entity<IpcComponent> ent, ref RadioSendAttemptEvent args)
     {
-        if (HasEnoughPower(ent))
+        if (HasEnoughPower(ent, out var reason))
             return;
 
         args.Cancelled = true;
-        _popup.PopupEntity(Loc.GetString(ent.Comp.NoPowerPopup), ent, ent);
+        _popup.PopupEntity(Loc.GetString(reason), ent, ent);
     }
 
     /// <summary>
@@ -326,7 +326,7 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// </summary>
     private void OnRadioReceiveAttempt(Entity<IpcComponent> ent, ref RadioReceiveAttemptEvent args)
     {
-        if (!HasEnoughPower(ent))
+        if (!HasEnoughPower(ent, out _))
             args.Cancelled = true;
     }
 
@@ -334,9 +334,24 @@ public sealed partial class IpcSystem : SharedIpcSystem
     /// Whether the IPC has a battery with enough charge to keep its abilities working
     /// (movement speed, radio).
     /// </summary>
-    private bool HasEnoughPower(Entity<IpcComponent> ent)
+    private bool HasEnoughPower(Entity<IpcComponent> ent, out LocId reason)
     {
-        return _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery)
-            && _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge > ent.Comp.CritCharge;
+        if (!_powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery))
+        {
+            reason = ent.Comp.NoBatteryPopup;
+            return false;
+        }
+
+        var charge = _battery.GetCharge(battery.Value.AsNullable());
+        var chargeRatio = charge / battery.Value.Comp.MaxCharge;
+
+        if (chargeRatio <= ent.Comp.CritCharge)
+        {
+            reason = ent.Comp.NoPowerPopup;
+            return false;
+        }
+
+        reason = default;
+        return true;
     }
 }
