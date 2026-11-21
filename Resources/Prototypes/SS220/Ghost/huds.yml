@@ -21,3 +21,39 @@
   name: ghost-hud-job-icons
   components:
   - type: ShowJobIcons
+
+- type: ghostHud
+  id: Zombies
+  name: ghost-hud-zombies
+  components:
+  - type: ShowZombieIcons
+
+- type: ghostHud
+  id: Cult
+  name: ghost-hud-cult
+  components:
+  - type: ShowCultYoggIcons
+
+- type: ghostHud
+  id: EventRoles
+  name: ghost-hud-event-roles
+  components:
+  - type: ShowEventRoleIcons
+
+- type: ghostHud
+  id: Revolutionaries
+  name: ghost-hud-revolutionaries
+  components:
+  - type: ShowRevolutionaryIcons
+
+- type: ghostHud
+  id: Syndicate
+  name: ghost-hud-syndicate
+  components:
+  - type: ShowSyndicateIcons
+
+- type: ghostHud
+  id: MindSlaves
+  name: ghost-hud-mind-slaves
+  components:
+  - type: ShowMindSlaveIcons
