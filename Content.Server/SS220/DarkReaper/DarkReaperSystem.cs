@@ -101,7 +101,11 @@ public sealed partial class DarkReaperSystem : SharedDarkReaperSystem
 
         if (!isTransitioning || isMaterial)
             return;
-
+        // SS220 fix #3495 begin
+        // Astral entities cannot remain inside containers. This is especially
+        // important for storage that was closed while the reaper was corporeal.
+        _container.TryRemoveFromContainer(entity.Owner, force: true);
+        // SS220 fix #3495 end
         if (entity.Comp.ActivePortal != null)
         {
             QueueDel(entity.Comp.ActivePortal);
