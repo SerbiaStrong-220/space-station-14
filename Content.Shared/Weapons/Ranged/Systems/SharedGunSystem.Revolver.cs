@@ -1,17 +1,20 @@
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
+using Content.Shared.SS220.CCVars;
+using Content.Shared.SS220.Weapons.Ranged;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
+using JetBrains.Annotations;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 using System;
 using System.Linq;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Wieldable;
-using Content.Shared.Wieldable.Components;
-using JetBrains.Annotations;
+using System.Security.Cryptography;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -31,20 +34,29 @@ public partial class SharedGunSystem
         SubscribeLocalEvent<RevolverAmmoProviderComponent, UseInHandEvent>(OnRevolverUse);
     }
 
+    //SS220 weapon overhaul begin
     private void OnRevolverUse(Entity<RevolverAmmoProviderComponent> ent, ref UseInHandEvent args)
     {
-        if (args.Handled)
+        if (args.Handled ||
+            !Timing.IsFirstTimePredicted ||
+            _netManager.IsServer)
             return;
 
-        if (!_useDelay.TryResetDelay(ent))
+        if (!_cfg.GetCVar(CCVars220.ControlIgnoreGunInteraction))
             return;
 
         args.Handled = true;
 
-        Cycle(ent.Comp);
-        UpdateAmmoCount(ent, prediction: false);
-        Dirty(ent);
+        if (!TryGetNetEntity(args.User, out var netUser) ||
+            !TryGetNetEntity(ent.Owner, out var netGun) ||
+            netUser is not { Valid: true } netUserValid ||
+            netGun is not { Valid: true } netGunValid)
+            return;
+
+        var ev = new GunCycleRequestEvent(netUserValid, netGunValid);
+        RaisePredictiveEvent(ev);
     }
+    //SS220 weapon overhaul end
 
     private void OnRevolverGetAmmoCount(Entity<RevolverAmmoProviderComponent> ent, ref GetAmmoCountEvent args)
     {
