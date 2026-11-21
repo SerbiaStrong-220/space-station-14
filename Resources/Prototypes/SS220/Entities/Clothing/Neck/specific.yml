@@ -61,6 +61,19 @@
       sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
     - type: Clothing
       sprite: SS220/Clothing/Neck/Misc/golden_cross.rsi
+    - type: PointLight
+      enabled: false
+      radius: 1.5
+      color: "#ffd27f"
+    - type: HolyAmulet
+      range: 5
+      shakeAngle: 5
+      shakeSpeed: 20
+      detectWhitelist:
+        components:
+        - Revenant
+        - DarkReaper
+        - SkeletonAccent
 
 - type: entity
   parent: ClothingNeckBase
@@ -72,6 +85,19 @@
       sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
     - type: Clothing
       sprite: SS220/Clothing/Neck/Misc/silver_cross.rsi
+    - type: PointLight
+      enabled: false
+      radius: 1.5
+      color: "#bcd6ff"
+    - type: HolyAmulet
+      range: 5
+      shakeAngle: 5
+      shakeSpeed: 20
+      detectWhitelist:
+        components:
+        - Revenant
+        - DarkReaper
+        - SkeletonAccent
 
 - type: entity
   parent: ClothingNeckBase
