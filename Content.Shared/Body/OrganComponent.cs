@@ -1,3 +1,4 @@
+using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -22,4 +23,13 @@ public sealed partial class OrganComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<OrganCategoryPrototype>? Category;
+
+    //SS220 Recycler expansion start
+    /// <summary>
+    /// The reagent to be used for blood spills if this organ is gibbed.
+    /// If null, will attempt to use the body's blood, or a default blood reagent.
+    /// </summary>
+    [DataField]
+    public ProtoId<ReagentPrototype>? BloodReagent;
+    //SS220 Recycler expansion end
 }

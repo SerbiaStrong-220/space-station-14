@@ -202,6 +202,11 @@
   id: OrganReptilian
   abstract: true
   suffix: Reptilian
+  #SS220 Recycler expansion start
+  components:
+  - type: Organ
+    bloodReagent: Blood
+  #SS220 Recycler expansion end
 
 - type: entity
   id: OrganReptilianMetabolizer

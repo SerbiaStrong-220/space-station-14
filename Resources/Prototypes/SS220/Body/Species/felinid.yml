@@ -102,6 +102,11 @@
   id: OrganFelinid
   abstract: true
   suffix: Felinid
+  #SS220 Recycler expansion start
+  components:
+  - type: Organ
+    bloodReagent: Blood
+  #SS220 Recycler expansion end
 
 - type: entity
   id: OrganFelinidMetabolizer

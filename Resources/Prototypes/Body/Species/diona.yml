@@ -199,6 +199,11 @@
   id: OrganDiona
   abstract: true
   suffix: Diona
+  #SS220 Recycler expansion start
+  components:
+  - type: Organ
+    bloodReagent: Sap
+  #SS220 Recycler expansion end
 
 - type: entity
   id: OrganDionaMetabolizer

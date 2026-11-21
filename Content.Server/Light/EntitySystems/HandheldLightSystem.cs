@@ -97,8 +97,15 @@ namespace Content.Server.Light.EntitySystems
 
         private void OnShutdown(EntityUid uid, HandheldLightComponent component, ComponentShutdown args)
         {
-            _actions.RemoveAction(uid, component.ToggleActionEntity);
-            _actions.RemoveAction(uid, component.SelfToggleActionEntity);
+            //SS220 Recycler expansion start
+            //_actions.RemoveAction(uid, component.ToggleActionEntity);
+            //_actions.RemoveAction(uid, component.SelfToggleActionEntity);
+            if (component.ToggleActionEntity is { } action && _actions.GetAction(action)?.Comp.AttachedEntity == uid)
+                _actions.RemoveAction(uid, action);
+
+            if (component.SelfToggleActionEntity is { } selfAction && _actions.GetAction(selfAction)?.Comp.AttachedEntity == uid)
+                _actions.RemoveAction(uid, selfAction);
+            //SS220 Recycler expansion end
         }
 
         private byte? GetLevel(Entity<HandheldLightComponent> ent)
