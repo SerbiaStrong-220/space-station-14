@@ -1,3 +1,18 @@
+# Harlequin
+- type: loadoutEffectGroup
+  id: MimeHarlequin
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMime
+      time: 72000 #20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
 # Head
 - type: loadout
   id: MoryakHead
@@ -6,6 +21,14 @@
     proto: BigShlopaSponsorTier
   equipment:
     head: ClothingHeadHatMoryak
+
+- type: loadout
+  id: HarlequinHead
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MimeHarlequin
+  equipment:
+    head: ClothingHeadHatMimeHarlequin
 
 # Mask
 - type: loadout
@@ -16,6 +39,14 @@
   equipment:
     mask: ClothingMaskMoryak
 
+- type: loadout
+  id: HarlequinMask
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MimeHarlequin
+  equipment:
+    mask: ClothingMaskMimeHarlequin
+
 # Jumpsuit
 - type: loadout
   id: MoryakJumpsuit
@@ -24,6 +55,14 @@
     proto: BigShlopaSponsorTier
   equipment:
     jumpsuit: ClothingUniformJumpsuitMoryak
+
+- type: loadout
+  id: HarlequinUniform
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MimeHarlequin
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMimeHarlequin
 
 # Shoes
 - type: loadout
@@ -38,3 +77,12 @@
     proto: BigShlopaSponsorTier
   equipment:
     shoes: ClothingShoesMoryak
+
+# Neck
+- type: loadout
+  id: HarlequinNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MimeHarlequin
+  equipment:
+    neck: ClothingNeckMimeHarlequin

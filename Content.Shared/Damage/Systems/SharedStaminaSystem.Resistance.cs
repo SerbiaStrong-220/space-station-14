@@ -16,6 +16,11 @@ public partial class SharedStaminaSystem
 
     private void OnGetResistance(Entity<StaminaResistanceComponent> ent, ref BeforeStaminaDamageEvent args)
     {
+        //SS220-StaminaConvertToggle begin
+        if (!ent.Comp.Enabled)
+            return;
+        //SS220-StaminaConvertToggle end
+
         args.Value *= ent.Comp.DamageCoefficient;
     }
 

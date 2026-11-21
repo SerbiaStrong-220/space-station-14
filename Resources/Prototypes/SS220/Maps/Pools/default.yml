@@ -3,12 +3,12 @@
 - type: gameMapPool
   id: SS220MapPool
   maps:
-  - Frankenstein
-# - Nox # Removed until rework
-  - Axioma
-  - Eclipse
-  - Donuts
-  - Astro
-  - Nightshift
-  - Tox
+  - Noxus
   - Stargate
+  - Tox
+  - Nightshift
+  - Astro
+  - Donuts
+  - Eclipse
+  - Axioma
+  - Frankenstein

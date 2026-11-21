@@ -46,8 +46,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Content.Client.SS220.Discord;
 using Robust.Shared.Timing;
-using Content.Client.SS220.TTS;
 using Content.Client.SS220.Species;
+using Content.Client.SS220.TTS;
 
 namespace Content.Client.Entry
 {
@@ -79,6 +79,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly JobRequirementsManager _jobRequirements = default!;
         [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
         [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
+        [Dependency] private readonly TtsNetManager _ttsNetManager = default!; // SS220 TTS
         [Dependency] private readonly JoinQueueManager _queueManager = default!; // Corvax-Queue
         [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
         [Dependency] private readonly ContentReplayPlaybackManager _playbackMan = default!;
@@ -88,7 +89,6 @@ namespace Content.Client.Entry
         [Dependency] private readonly DiscordPlayerInfoManager _discordPlayerInfoManager = default!; // SS220 discord info manager
         [Dependency] private readonly DebugMonitorManager _debugMonitorManager = default!;
         [Dependency] private readonly TitleWindowManager _titleWindowManager = default!;
-        [Dependency] private readonly TTSManager _ttsManager = default!; // SS220 TTS
         [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
         [Dependency] private readonly SpeciesRequirementsManager _speciesRequirements = default!; // SS220 Species bans
@@ -188,13 +188,13 @@ namespace Content.Client.Entry
             _voteManager.Initialize();
             _userInterfaceManager.SetDefaultTheme("SS14DefaultTheme");
             _sponsorsManager.Initialize(); // Corvax-Sponsors
+            _ttsNetManager.Initialize(); // SS220 TTS
             _queueManager.Initialize(); // Corvax-Queue
             _discordAuthManager.Initialize(); // Corvax-DiscordAuth
             _userInterfaceManager.SetActiveTheme(_configManager.GetCVar(CVars.InterfaceTheme));
             _documentParsingManager.Initialize();
             _discordPlayerInfoManager.Initialize(); // SS220 tier info
             _titleWindowManager.Initialize();
-            _ttsManager.Initialize(); // SS220 TTS
             _feedbackManager.Initialize();
 
             _baseClient.RunLevelChanged += (_, args) =>
