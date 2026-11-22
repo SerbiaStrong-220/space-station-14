@@ -1,6 +1,6 @@
 ﻿- type: microwaveMealRecipe
   id: RecipePelmeni
-  name: pelmeni recipe
+  name: ent-FoodPelmeniBowl # SS220-localization-fix
   result: FoodPelmeniBowl
   time: 10
   reagents:

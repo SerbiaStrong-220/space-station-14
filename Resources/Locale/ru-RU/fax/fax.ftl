@@ -23,4 +23,10 @@ fax-machine-ui-paper-not-inserted = Нет бумаги
 fax-machine-chat-notify = Получено новое сообщение с "{ $fax }" факса
 fax-machine-printed-paper-name = распечатанная бумага
 
-fax-machine-sender-info = ─────────────────────────────────────\nФакс отправлен\nот: {$sender_name} [адрес: {$sender_addr}]\nкому: {$recipient_name} [адрес: {$recipient_addr}]\nвремя: {$time}
+# SS220-localization-fix begin
+fax-machine-sender-info = ─────────────────────────────────────
+    Факс отправлен
+    от: {$sender_name} [адрес: {$sender_addr}]
+    кому: {$recipient_name} [адрес: {$recipient_addr}]
+    время: {$time}
+# SS220-localization-fix end
