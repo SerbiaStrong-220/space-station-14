@@ -31,7 +31,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private StandingStateSystem _standing = default!; // SS220 Weapon overhaul
-    [Dependency] private readonly QuadHearingSystem _quadHearing = default!; // SS220 Quad hearing
+    [Dependency] private QuadHearingSystem _quadHearing = default!; // SS220 Quad hearing
 
     private const float DamagePitchVariation = 0.05f;
 

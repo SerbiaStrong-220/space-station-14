@@ -530,7 +530,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         var verb = Loc.GetString(_random.Pick(speech.SpeechVerbStrings));
 
         //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
-        SendInVoiceRangeWithLanguage(languageMessage, name, verb, speech, source, range);
+        SendInVoiceRangeWithLanguage(languageMessage, name, verb, speech, source, range, InGameICChatType.Speak);
 
         message = languageMessage.GetMessage(source, false);
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null, languageMessage);
