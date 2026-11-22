@@ -238,20 +238,14 @@ public sealed class MalfAiMachineModulesTest : GameTest
                 "Overload primed an overridden machine.");
 
             Assert.That(entMan.HasComponent<MalfAiOverriddenMachineComponent>(machine), Is.True,
-                "Overridden machine carries no cap marker.");
+                "Overridden machine has no tracking marker.");
 
-            for (var i = 0; i < 4; i++)
+            for (var i = 0; i < 6; i++)
             {
                 var extra = entMan.SpawnEntity("Autolathe", map.GridCoords);
                 Assert.That(Override(body, extra), Is.True,
-                    $"Override refused construct {i + 2} below the cap.");
+                    $"Override refused construct {i + 2} with no override cap.");
             }
-
-            var overCap = entMan.SpawnEntity("Autolathe", map.GridCoords);
-            Assert.That(Override(body, overCap), Is.False,
-                "Override animated past the station cap.");
-            Assert.That(entMan.HasComponent<MalfAiOverriddenMachineComponent>(overCap), Is.False,
-                "Over-cap machine was animated.");
         });
     }
 

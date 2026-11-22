@@ -142,8 +142,8 @@
   - type: ShowJobIcons
   - type: ShowCrewIcons
   # SS220 Holopad adapt begin
-  - type: TTS
-    randomVoicesList: Borg
+  - type: Tts
+    randomVoicePreferences: Borg
   # SS220 Holopad adapt end
   - type: SetRadioReceiverToStationAiEye # SS220 Silicon TTS fix
   - type: DamagedSiliconAccent
@@ -520,7 +520,7 @@
 #SS220 languages revive end
   # SS220-station-ai-experience begin
   - type: Experience
-  - type: RoleExperienceAdd
+  - type: ExperienceAddition
     definitionId: StationAiRoleExperience
   - type: ContainerContainer
     containers:
