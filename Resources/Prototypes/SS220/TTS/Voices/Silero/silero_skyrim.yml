@@ -1,0 +1,1003 @@
+- type: ttsVoice
+  id: MDarkelf
+  name: Тёмный эльф (м)
+  speaker: m_darkelf
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Esbern
+  name: Эсберн
+  speaker: esbern
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MArgo
+  name: Аргонианин
+  speaker: m_argo
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MKhajiit
+  name: Каджит
+  speaker: m_khajiit
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MCoward
+  name: Трус
+  speaker: m_coward
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Farkas
+  name: Фаркас
+  speaker: farkas
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MDrunk
+  name: Пьяница
+  speaker: m_drunk
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: FKhajiit
+  name: Каджитка
+  speaker: f_khajiit
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MCitizen
+  name: Горожанин
+  speaker: m_citizen
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MOrc
+  name: Орк
+  speaker: m_orc
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Odahviing
+  name: Одавинг
+  speaker: odahviing
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Kodlak
+  name: Кодлак
+  speaker: kodlak
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: MChild
+  name: Мальчик
+  speaker: m_child
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Emperor
+  name: Император
+  speaker: emperor
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: CriticalMassShlopa
+
+- type: ttsVoice
+  id: Hagraven
+  name: Хагрейвен
+  speaker: hagraven
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nazir
+  name: Назир
+  speaker: nazir
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Dremora
+  name: Дремора
+  speaker: dremora
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Alduin
+  name: Алдуин
+  speaker: alduin
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Malkoran
+  name: Малкоран
+  speaker: malkoran
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Barbas
+  name: Барбас
+  speaker: barbas
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Hermaeus
+  name: Хермеус Мора
+  speaker: hermaeus
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Hakon
+  name: Хакон
+  speaker: hakon
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: FShrill
+  name: Визгливая женщина
+  speaker: f_shrill
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MHaughty
+  name: Надменный мужчина
+  speaker: m_haughty
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MSoldier
+  name: Солдат
+  speaker: m_soldier
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Sven
+  name: Свен
+  speaker: sven
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: FSultry
+  name: Соблазнительная женщина
+  speaker: f_sultry
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Eorlund
+  name: Эорлунд
+  speaker: eorlund
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: MCommander
+  name: Командир
+  speaker: m_commander
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: FNord
+  name: Нордка
+  speaker: f_nord
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Lydia
+  name: Лидия
+  speaker: lydia
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Motierre
+  name: Мотьер
+  speaker: motierre
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: FHaughty
+  name: Надменная женщина
+  speaker: f_haughty
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Tullius
+  name: Туллий
+  speaker: tullius
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Festus
+  name: Фестус
+  speaker: festus
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MNord
+  name: Норд
+  speaker: m_nord
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Olava
+  name: Олава
+  speaker: olava
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: FCommander
+  name: Командирша
+  speaker: f_commander
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Hadvar
+  name: Хадвар
+  speaker: hadvar
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: FArgo
+  name: Аргонианка
+  speaker: f_argo
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Arngeir
+  name: Арнгейр
+  speaker: arngeir
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Nazeem
+  name: Назим
+  speaker: nazeem
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Falion
+  name: Фалион
+  speaker: falion
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: FCoward
+  name: Трусиха
+  speaker: f_coward
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MGuard
+  name: Стражник
+  speaker: m_guard
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MCommoner
+  name: Простолюдин
+  speaker: m_commoner
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Elisif
+  name: Элисиф
+  speaker: elisif
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Paarthurnax
+  name: Партурнакс
+  speaker: paarthurnax
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Grelka
+  name: Грелька
+  speaker: grelka
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: FCommoner
+  name: Простолюдинка
+  speaker: f_commoner
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Ebony
+  name: Эбонитовый воин
+  speaker: ebony
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Ulfric
+  name: Ульфрик
+  speaker: ulfric
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: CriticalMassShlopa
+
+- type: ttsVoice
+  id: Farengar
+  name: Фарингар
+  speaker: farengar
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Astrid
+  name: Астрид
+  speaker: astrid
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Brynjolf
+  name: Бринйольф
+  speaker: brynjolf
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Maven
+  name: Мавен
+  speaker: maven
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: FChild
+  name: Девочка
+  speaker: f_child
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: FOrc
+  name: Орчиха
+  speaker: f_orc
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Delphine
+  name: Дельфина
+  speaker: delphine
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: FDarkelf
+  name: Тёмная эльфийка
+  speaker: f_darkelf
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Grelod
+  name: Грелод
+  speaker: grelod
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Tolfdir
+  name: Толфдир
+  speaker: tolfdir
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: MBandit
+  name: Бандит
+  speaker: m_bandit
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MForsworn
+  name: Отреченный
+  speaker: m_forsworn
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Karliah
+  name: Карлия
+  speaker: karliah
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Felldir
+  name: Феллдир
+  speaker: felldir
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Ancano
+  name: Анкано
+  speaker: ancano
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Mercer
+  name: Мерсер Фрей
+  speaker: mercer
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Vex
+  name: Векс
+  speaker: vex
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Mirabelle
+  name: Мирабель
+  speaker: mirabelle
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Aventus
+  name: Авентус
+  speaker: aventus
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Tsun
+  name: Цун
+  speaker: tsun
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Elenwen
+  name: Эленвен
+  speaker: elenwen
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Gormlaith
+  name: Гормлейт
+  speaker: gormlaith
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Dragon
+  name: Дракон
+  speaker: dragon
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Delvin
+  name: Делвин
+  speaker: delvin
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Cicero
+  name: Цицерон
+  speaker: cicero
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Mephala
+  name: Мефала
+  speaker: mephala
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+
+- type: ttsVoice
+  id: Galmar
+  name: Галмар
+  speaker: galmar
+  provider: Silero
+  categories: [ SKYRIM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]

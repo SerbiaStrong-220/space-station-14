@@ -87,8 +87,9 @@
   - type: FlashImmunity
   - type: Speech
     speechVerb: LargeMob
-  - type: TTS
-    voice: forester
+  - type: Tts
+    voicePreferences:
+      NTTS: forester
   - type: Language
     availableLanguages:
     - id: Galactic
@@ -121,7 +122,7 @@
     layer: 1
   #other
   - type: Experience
-  - type: RoleExperienceAdd
+  - type: ExperienceAddition
     definitionId: MiGoRoleExperience
   - type: MovementSpeedModifier
     baseWalkSpeed : 6
