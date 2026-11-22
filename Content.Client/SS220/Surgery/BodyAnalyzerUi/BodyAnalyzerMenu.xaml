@@ -27,8 +27,9 @@
             </ScrollContainer>
             <BoxContainer Name="HandBook" Orientation="Vertical" MinSize="520 420" Margin="0 0 10 0"
                     HorizontalExpand="True" VerticalExpand="True">
-                <surgeryUiParts:OperationList Name="OperationList" HorizontalExpand="True" VerticalExpand="True"/>
-                <surgeryUiParts:OperationDescription Name="OperationDescription" MinHeight="270" Visible ="False" HorizontalExpand="True" VerticalExpand="True"/>
+                <!-- the operations take less height than their steps -->
+                <surgeryUiParts:OperationList Name="OperationList" HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="2"/>
+                <surgeryUiParts:OperationDescription Name="OperationDescription" Margin="0 8 0 0" HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="3"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

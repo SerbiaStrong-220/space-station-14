@@ -83,11 +83,26 @@ public sealed partial class OperationNodeLabel : BoxContainer
         UpdateVisible();
     }
 
-    public void SetActive(bool active)
+    /// <summary>
+    /// Marks the node the ongoing operation is at. Only its steps show whether they can be done now,
+    /// the patient will change before the operation reaches the other ones.
+    /// </summary>
+    public void SetActive(bool active, EntityUid patient, EntityUid performer)
     {
         CurrentNodeFoldedIcon.ModulateSelfOverride = active ? OperationDescriptionBullet : null;
         CurrentNodeOpenIcon.ModulateSelfOverride = active ? OperationDescriptionBullet : null;
         CurrentNodeNoEdgeIcon.ModulateSelfOverride = active ? OperationDescriptionBullet : null;
+
+        foreach (var child in EdgesDescriptionContainer.Children)
+        {
+            if (child is not EdgeDescription edge)
+                continue;
+
+            if (active)
+                edge.UpdateAvailability(patient, performer);
+            else
+                edge.SetAvailable(true);
+        }
     }
 
     private void UpdateVisible()
