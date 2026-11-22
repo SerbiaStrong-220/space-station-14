@@ -19,7 +19,6 @@ public sealed partial class ConnectionLogsWindow : DefaultWindow
     private const int StatusColumnWidth = 170;
     private const int ServerColumnWidth = 150;
     private const int TrustColumnWidth = 90;
-    private const string DarkRowStyleClass = "BackgroundDark";
     private const string TrustFormat = "0.###";
 
     private static readonly Thickness RowMargin = new(0, 1);
@@ -102,7 +101,8 @@ public sealed partial class ConnectionLogsWindow : DefaultWindow
                 HorizontalExpand = true,
                 Margin = RowMargin
             };
-            rowPanel.AddStyleClass(rowIndex % 2 == 0 ? StyleClass.BackgroundPanel : DarkRowStyleClass);
+            // Flat panels have identical content margins, so alternating backgrounds do not shift columns.
+            rowPanel.AddStyleClass(rowIndex % 2 == 0 ? StyleClass.PanelLight : StyleClass.PanelDark);
             rowPanel.AddChild(row);
             LogsContainer.AddChild(rowPanel);
             rowIndex++;
