@@ -45,13 +45,7 @@ public sealed partial class TtsVoiceSelectorEntry : PanelContainer
             OnVoiceSelected?.Invoke(Voice);
         };
 
-        PlayButton.OnPressed += _ =>
-        {
-            if (Locked)
-                return;
-
-            _tts.RequestVoiceTest(Voice);
-        };
+        PlayButton.OnPressed += _ => _tts.RequestVoiceTest(Voice);
 
         Refresh();
     }
@@ -109,7 +103,7 @@ public sealed partial class TtsVoiceSelectorEntry : PanelContainer
 
         Locked = true;
 
-        ContentPanel.Modulate = Color.White.WithAlpha(DimmedContentAlpha);
+        SelectButton.Modulate = Color.White.WithAlpha(DimmedContentAlpha);
     }
 
     public void Unlock()
@@ -117,7 +111,7 @@ public sealed partial class TtsVoiceSelectorEntry : PanelContainer
         LockedOverlay.Visible = false;
         Locked = false;
 
-        ContentPanel.Modulate = Color.White;
+        SelectButton.Modulate = Color.White;
     }
 
     private void RefreshPlayButton()

@@ -3,12 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace UserInfoImitator.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class UserInfoController : Controller
 {
     [HttpGet("{userId}")]
-    public DiscordSponsorInfo GetUserInfo(Guid userId)
+    public async Task<DiscordSponsorInfo> GetUserInfo(Guid userId)
     {
+
+        Thread.Sleep(300);
+
         return new()
         {
             Tiers = [SponsorTier.GoldenShlopa]

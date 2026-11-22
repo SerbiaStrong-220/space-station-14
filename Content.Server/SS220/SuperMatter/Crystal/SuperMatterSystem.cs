@@ -45,6 +45,7 @@ public sealed partial class SuperMatterSystem
         InitializeAnnouncement();
         InitializeEventHandler();
         InitializeDatabase();
+        InitializeExamine();
     }
 
     public override void Update(float frameTime)

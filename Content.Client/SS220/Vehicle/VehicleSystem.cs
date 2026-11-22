@@ -8,6 +8,7 @@ namespace Content.Client.SS220.Vehicle;
 public sealed partial class VehicleSystem : SharedVehicleSystem
 {
     [Dependency] private EyeSystem _eye = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -52,18 +53,19 @@ public sealed partial class VehicleSystem : SharedVehicleSystem
             return;
 
         if (component.HideRider
+            && component.LastRider is { } rider
             && Appearance.TryGetData<bool>(uid, VehicleVisuals.HideRider, out var hide, args.Component)
-            && TryComp<SpriteComponent>(component.LastRider, out var riderSprite))
-            riderSprite.Visible = !hide;
+            && HasComp<SpriteComponent>(rider))
+            _sprite.SetVisible(rider, !hide);
 
         // First check is for the sprite itself
         if (Appearance.TryGetData<int>(uid, VehicleVisuals.DrawDepth, out var drawDepth, args.Component))
-            args.Sprite.DrawDepth = drawDepth;
+            _sprite.SetDrawDepth(uid, drawDepth);
 
         // Set vehicle layer to animated or not (i.e. are the wheels turning or not)
         if (component.AutoAnimate
             && Appearance.TryGetData<bool>(uid, VehicleVisuals.AutoAnimate, out var autoAnimate, args.Component))
-            args.Sprite.LayerSetAutoAnimated(VehicleVisualLayers.AutoAnimate, autoAnimate);
+            _sprite.LayerSetAutoAnimated(uid, VehicleVisualLayers.AutoAnimate, autoAnimate);
     }
 }
 
