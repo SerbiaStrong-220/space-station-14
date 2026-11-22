@@ -127,3 +127,17 @@
       damage:
         types:
           Asphyxiation: 5
+
+# An organ of a zombie or an infected body, or a rotten body part, put into another body. One for all such organs, removed with the last of them.
+- type: pathology
+  id: TaintedFlesh
+  name: pathology-tainted-flesh-name
+  isSevere: true
+  operationRecommendation: pathology-tainted-flesh-operation
+  definition:
+  - description: pathology-tainted-flesh-description
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 1

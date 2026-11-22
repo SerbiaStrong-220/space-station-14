@@ -21,6 +21,9 @@
   parent: BaseItem
   components:
   - type: Organ
+  #SS220-surgery-update begin
+  - type: TaintableOrgan
+  #SS220-surgery-update end
 
 - type: entity
   parent: OrganBase
@@ -72,6 +75,8 @@
   - type: Dismemberable
     hitThreshold: 25
     hitChance: 0.35
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
   #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.Head
@@ -113,6 +118,8 @@
   - type: SeveredOrganVisuals
   - type: Dismemberable
     tornByBlast: true
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
   #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LArm
@@ -146,6 +153,8 @@
   - type: SeveredOrganVisuals
   - type: Dismemberable
     tornByBlast: true
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
   #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RArm
@@ -178,6 +187,8 @@
   #SS220-surgery-update begin
   - type: SeveredOrganVisuals
   - type: Dismemberable
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
   #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LHand
@@ -210,6 +221,8 @@
   #SS220-surgery-update begin
   - type: SeveredOrganVisuals
   - type: Dismemberable
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
   #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RHand
@@ -244,6 +257,8 @@
   - type: SeveredOrganVisuals
   - type: Dismemberable
     tornByBlast: true
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
   #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LLeg
@@ -278,6 +293,8 @@
   - type: SeveredOrganVisuals
   - type: Dismemberable
     tornByBlast: true
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
   #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RLeg
@@ -306,6 +323,8 @@
   #SS220-surgery-update begin
   - type: SeveredOrganVisuals
   - type: Dismemberable
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
   #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LFoot
@@ -334,6 +353,8 @@
   #SS220-surgery-update begin
   - type: SeveredOrganVisuals
   - type: Dismemberable
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
   #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RFoot

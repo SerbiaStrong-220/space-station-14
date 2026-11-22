@@ -9,12 +9,13 @@ using Robust.Shared.Utility;
 namespace Content.Shared.SS220.Body;
 
 /// <summary>
-/// Moves the attached organs together with their limb, makes a body that lost all supporting limbs crawl
-/// and keeps clothes off the missing organs they are worn on.
+/// Moves the attached organs together with their limb, makes a body that lost all supporting limbs crawl,
+/// hides the damage overlays of missing limbs and keeps clothes off the missing organs they are worn on.
 /// </summary>
 public sealed partial class LimbSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private INetManager _net = default!;
@@ -52,6 +53,8 @@ public sealed partial class LimbSystem : EntitySystem
 
         if (ent.Comp.Supporting && !HasSupportingLimb(args.Target))
             EnsureComp<WormComponent>(args.Target);
+
+        SetDamageOverlayDisabled(ent, args.Target, true);
     }
 
     private void OnInserted(Entity<LimbComponent> ent, ref OrganGotInsertedEvent args)
@@ -63,6 +66,17 @@ public sealed partial class LimbSystem : EntitySystem
 
         if (ent.Comp.Supporting)
             RemComp<WormComponent>(args.Target);
+
+        SetDamageOverlayDisabled(ent, args.Target, false);
+    }
+
+    /// <summary>
+    /// The damage visualizer hides the overlays of a target layer whose appearance data under the layer key is true.
+    /// </summary>
+    private void SetDamageOverlayDisabled(EntityUid limb, EntityUid body, bool disabled)
+    {
+        if (TryComp<VisualOrganComponent>(limb, out var visual))
+            _appearance.SetData(body, visual.Layer, disabled);
     }
 
     /// <summary>

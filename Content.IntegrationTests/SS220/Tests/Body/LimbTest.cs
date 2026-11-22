@@ -1,6 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Body;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
@@ -10,6 +13,7 @@ using Content.Shared.SS220.Pathology;
 using Content.Shared.SS220.Surgery.Graph.Requirements;
 using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
+using Robust.Client.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
@@ -20,6 +24,7 @@ namespace Content.IntegrationTests.SS220.Tests.Body;
 public sealed class LimbTest
 {
     private static readonly ProtoId<OrganCategoryPrototype> ArmLeftCategory = "ArmLeft";
+    private static readonly ProtoId<DamageTypePrototype> BluntDamage = "Blunt";
     private static readonly ProtoId<OrganCategoryPrototype> HandLeftCategory = "HandLeft";
     private static readonly ProtoId<OrganCategoryPrototype> LegLeftCategory = "LegLeft";
     private static readonly ProtoId<OrganCategoryPrototype> LegRightCategory = "LegRight";
@@ -243,6 +248,53 @@ public sealed class LimbTest
                 Assert.That(pathologySystem.HavePathology(human, MissingHeadProto), Is.False);
                 Assert.That(pathologySystem.HavePathology(human, CranialFissureProto), Is.True);
                 Assert.That(inventorySystem.TryEquip(dresser, human, hat, "head", silent: true), Is.True);
+            });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task MissingLimbHidesDamageOverlayTest()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false
+        });
+
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var clientEntMng = pair.Client.ResolveDependency<IEntityManager>();
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var bodySystem = entMng.System<BodySystem>();
+        var damageableSystem = entMng.System<DamageableSystem>();
+        var hit = new DamageSpecifier(protoManager.Index(BluntDamage), 30);
+
+        EntityUid human = default!;
+        await server.WaitAssertion(() =>
+        {
+            human = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            damageableSystem.TryChangeDamage(human, hit, ignoreResistances: true);
+            Assert.That(bodySystem.TryExtractOrgan(human, ArmLeftCategory, out _), Is.True);
+            // the damage after the loss must not bring the overlay back either
+            damageableSystem.TryChangeDamage(human, hit, ignoreResistances: true);
+        });
+
+        await pair.RunTicksSync(10);
+
+        await pair.Client.WaitAssertion(() =>
+        {
+            var clientHuman = clientEntMng.GetEntity(entMng.GetNetEntity(human));
+            var spriteSystem = clientEntMng.System<SpriteSystem>();
+            var sprite = clientEntMng.GetComponent<SpriteComponent>(clientHuman);
+            Assert.That(spriteSystem.LayerMapTryGet((clientHuman, sprite), "LArmBrute", out var arm, false), Is.True);
+            Assert.That(spriteSystem.LayerMapTryGet((clientHuman, sprite), "ChestBrute", out var chest, false), Is.True);
+            Assert.Multiple(() =>
+            {
+                Assert.That(sprite[arm].Visible, Is.False, "A missing arm shows no bruises");
+                Assert.That(sprite[chest].Visible, Is.True);
             });
         });
 
