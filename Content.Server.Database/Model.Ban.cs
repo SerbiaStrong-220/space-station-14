@@ -17,6 +17,7 @@ internal static class ModelBan
 {
     public static void OnModelCreating(ModelBuilder modelBuilder)
     {
+        Ban.ConfigurePendingBans(modelBuilder); // SS220 pending bans
         // SS220-add-abstract-bans-begin
         modelBuilder.Entity<IBanRole>()
             .HasDiscriminator<string>("discriminator")

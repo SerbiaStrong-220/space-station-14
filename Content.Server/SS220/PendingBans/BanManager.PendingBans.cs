@@ -21,6 +21,25 @@ public sealed partial class BanManager
 {
     public async Task ScheduleBanAsync(CreateBanInfo info, PendingBanData pending)
     {
+        // Preserve the stricter validation of scheduled requests before shared preparation
+        // filters unsupported entries for the existing immediate-ban commands.
+        if (info is CreateSpeciesBanInfo species && species.SpeciesPrototypes.Any(p => !_prototypeManager.HasIndex(p)))
+            throw new ArgumentException("Unknown species in pending ban.");
+        if (info is CreateChatsBanInfo chats && chats.Chats.Any(c => c == BannableChats.Invalid || !Enum.IsDefined(c)))
+            throw new ArgumentException("Unknown chat in pending ban.");
+
+        var (ban, _, adminName) = await CreateBanDef(info);
+        ban.Pending = pending;
+        var saved = await _db.AddBanAsync(ban);
+        _sawmill.Info($"Scheduled {ban.Type} ban #{saved.Id} by {adminName}; trigger: {pending.Trigger}");
+    }
+
+    /// <summary>
+    /// Shared preparation for immediate and pending bans. Keep target/role validation and
+    /// administrator lookup identical regardless of when the ban will take effect.
+    /// </summary>
+    private async Task<(BanDef Ban, DateTimeOffset? Expires, string AdminName)> CreateBanDef(CreateBanInfo info)
+    {
         ImmutableArray<IBanRoleDef>? roles = null;
         BanType type;
         switch (info)
@@ -34,25 +53,21 @@ public sealed partial class BanManager
                 break;
             case CreateSpeciesBanInfo species:
                 type = BanType.Species;
-                if (species.SpeciesPrototypes.Any(p => !_prototypeManager.HasIndex(p)))
-                    throw new ArgumentException("Unknown species in pending ban.");
-                roles = [.. species.SpeciesPrototypes.Select(p => new BanSpecieDef(p))];
+                roles = [.. species.SpeciesPrototypes.Where(p => _prototypeManager.HasIndex(p)).Select(p => new BanSpecieDef(p))];
                 break;
             case CreateChatsBanInfo chats:
                 type = BanType.Chat;
-                if (chats.Chats.Any(c => c == BannableChats.Invalid || !Enum.IsDefined(c)))
-                    throw new ArgumentException("Unknown chat in pending ban.");
-                roles = [.. chats.Chats.Select(c => new BanChatDef(c))];
+                roles = [.. chats.Chats.Where(c => c != BannableChats.Invalid).Select(c => new BanChatDef(c))];
                 break;
             default:
-                throw new ArgumentException("Unknown pending ban type.");
+                throw new ArgumentException("Unknown ban type.");
         }
 
-        var adminName = info.BanningAdminName ?? Loc.GetString("system-user");
-        var (ban, _) = await CreateBanDef(info, type, roles, adminName);
-        ban.Pending = pending;
-        var saved = await _db.AddBanAsync(ban);
-        _sawmill.Info($"Scheduled {type} ban #{saved.Id} by {adminName}; trigger: {pending.Trigger}, due: {pending.DueAt:O}");
+        var adminName = info.BanningAdmin == null
+            ? Loc.GetString("system-user")
+            : info.BanningAdminName ?? (await _db.GetPlayerRecordByUserId(info.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
+        var (ban, expires) = await CreateBanDef(info, type, roles, adminName);
+        return (ban, expires, adminName);
     }
 
     /// <summary>

@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Threading.Tasks;
+using Content.Server.Database.SS220.PendingBans;
 using Content.Shared.Database.SS220.PendingBans;
 
 namespace Content.Server.Database;
@@ -25,6 +26,6 @@ public abstract partial class ServerDbBase
         string serverId, DateTime now, PendingBanTrigger? roundTrigger, bool force)
     {
         await using var db = await GetDb();
-        return await PendingBanActivation.ActivateAsync(db.DbContext, serverId, now, roundTrigger, force);
+        return await PendingBanActivation.ActivatePendingBansAsync(db.DbContext, serverId, now, roundTrigger, force);
     }
 }

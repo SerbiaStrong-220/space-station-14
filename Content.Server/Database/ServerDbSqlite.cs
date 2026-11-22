@@ -147,7 +147,7 @@ namespace Content.Server.Database
             if (!includeUnbanned)
             {
                 query = query.Where(p =>
-                    p.PendingServer == null && // SS220 pending bans
+                    p.PendingData.ServerId == null && // SS220 pending bans
                     p.Unban == null && (p.ExpirationTime == null || p.ExpirationTime.Value > DateTime.UtcNow));
             }
 

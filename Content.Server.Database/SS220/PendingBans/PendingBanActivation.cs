@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 using Content.Shared.Database.SS220.PendingBans;
 using Microsoft.EntityFrameworkCore;
 
-namespace Content.Server.Database;
+namespace Content.Server.Database.SS220.PendingBans;
 
 public static class PendingBanActivation
 {
-    public static async Task<List<ActivatedPendingBan>> ActivateAsync(
-        ServerDbContext db, string serverId, DateTime now, PendingBanTrigger? roundTrigger = null, bool force = false)
+    public static async Task<List<ActivatedPendingBan>> ActivatePendingBansAsync(
+        ServerDbContext db, string serverId, DateTime time, PendingBanTrigger? roundTrigger = null, bool force = false)
     {
         var pending = await db.Ban
-            .Where(b => b.PendingServer == serverId && b.Unban == null)
+            .Where(b => b.PendingData.ServerId == serverId && b.Unban == null)
             .ToListAsync();
 
         List<ActivatedPendingBan> activated = [];
         foreach (var ban in pending)
         {
-            if (ban.Pending is not { } schedule || !schedule.IsDue(now, roundTrigger, force))
+            if (ban.Pending is not { } schedule || !force && !schedule.Trigger.IsDue(time, roundTrigger))
                 continue;
 
             activated.Add(new ActivatedPendingBan(ban.Id, schedule.Erase, schedule.PostBanInfo));
             // The duration begins at activation, not when the administrator scheduled the ban.
-            ban.ExpirationTime = ban.ExpirationTime is { } expires ? now + (expires - ban.BanTime) : null;
-            ban.BanTime = now;
+            ban.ExpirationTime = ban.ExpirationTime is { } expires ? time + (expires - ban.BanTime) : null;
+            ban.BanTime = time;
             ban.Pending = null;
         }
 

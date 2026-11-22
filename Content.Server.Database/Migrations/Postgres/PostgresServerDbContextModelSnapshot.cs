@@ -563,27 +563,7 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Property<Guid?>("LastEditedById")
                         .HasColumnType("uuid")
                         .HasColumnName("last_edited_by_id");
-                    // SS220 pending bans begin
-                    b.Property<bool>("PendingErase")
-                        .HasColumnType("boolean")
-                        .HasColumnName("pending_erase");
 
-                    b.Property<bool>("PendingPostBanInfo")
-                        .HasColumnType("boolean")
-                        .HasColumnName("pending_post_ban_info");
-
-                    b.Property<string>("PendingServer")
-                        .HasColumnType("text")
-                        .HasColumnName("pending_server");
-
-                    b.Property<byte>("PendingTrigger")
-                        .HasColumnType("smallint")
-                        .HasColumnName("pending_trigger");
-
-                    b.Property<DateTime?>("PendingUntil")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("pending_until");
-                    // SS220 pending bans end
                     b.Property<TimeSpan>("PlaytimeAtNote")
                         .HasColumnType("interval")
                         .HasColumnName("playtime_at_note");
@@ -612,7 +592,6 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     b.HasIndex("LastEditedById");
 
-                    b.HasIndex("PendingServer"); // SS220 pending bans
                     b.ToTable("ban", null, t =>
                         {
                             t.HasCheckConstraint("NoExemptOnRoleBan", "type = 0 OR exempt_flags = 0");
@@ -1816,9 +1795,50 @@ namespace Content.Server.Database.Migrations.Postgres
                         .OnDelete(DeleteBehavior.SetNull)
                         .HasConstraintName("FK_ban_player_last_edited_by_id");
 
+                    b.OwnsOne("Content.Shared.Database.SS220.PendingBans.PendingBanData", "PendingData", b1 =>
+                        {
+                            b1.Property<int>("BanId")
+                                .HasColumnType("integer")
+                                .HasColumnName("ban_id");
+
+                            b1.Property<bool>("Erase")
+                                .HasColumnType("boolean")
+                                .HasColumnName("pending_erase");
+
+                            b1.Property<bool>("PostBanInfo")
+                                .HasColumnType("boolean")
+                                .HasColumnName("pending_post_ban_info");
+
+                            b1.Property<string>("ServerId")
+                                .HasColumnType("text")
+                                .HasColumnName("pending_server");
+
+                            b1.Property<DateTime?>("DueAt")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("pending_until");
+
+                            b1.Property<byte>("TriggerType")
+                                .HasColumnType("smallint")
+                                .HasColumnName("pending_trigger");
+
+                            b1.HasKey("BanId");
+
+                            b1.HasIndex("ServerId")
+                                .HasDatabaseName("IX_ban_pending_server");
+
+                            b1.ToTable("ban");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BanId")
+                                .HasConstraintName("FK_ban_ban_ban_id");
+                        });
+
                     b.Navigation("CreatedBy");
 
                     b.Navigation("LastEditedBy");
+
+                    b.Navigation("PendingData")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Content.Server.Database.BanAddress", b =>

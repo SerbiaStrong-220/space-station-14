@@ -26,6 +26,7 @@ using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
+using Content.Server.SS220.PendingBans;
 using Content.Server.SS220.Discord;
 using Content.Server.Voting.Managers;
 using Content.Shared.CCVar;
@@ -214,7 +215,7 @@ namespace Content.Server.Entry
             _entSys.GetEntitySystem<GameTicker>().PostInitialize();
             _ban.Initialize();
             // SS220 pending bans: recover before connections are admitted.
-            _entSys.GetEntitySystem<Content.Server.SS220.PendingBans.PendingBanSystem>().Recover();
+            _entSys.GetEntitySystem<PendingBanSystem>().Recover();
             _connection.PostInit();
             _multiServerKick.Initialize();
             _cvarCtrl.Initialize();
@@ -236,7 +237,7 @@ namespace Content.Server.Entry
 
                 case ModUpdateLevel.FramePostEngine:
                     // SS220 pending bans: use real-time frames, including paused/empty servers.
-                    _entSys.GetEntitySystem<Content.Server.SS220.PendingBans.PendingBanSystem>().UpdatePendingBans();
+                    _entSys.GetEntitySystem<PendingBanSystem>().UpdatePendingBans();
                     _updateManager.Update();
                     _playTimeTracking.Update();
                     _watchlistWebhookManager.Update();
@@ -248,7 +249,7 @@ namespace Content.Server.Entry
         protected override void Dispose(bool disposing)
         {
             // SS220 pending bans: wait for database commits before shutting down services.
-            if (_entSys.TryGetEntitySystem<Content.Server.SS220.PendingBans.PendingBanSystem>(out var pendingBans))
+            if (_entSys.TryGetEntitySystem<PendingBanSystem>(out var pendingBans))
                 pendingBans.FlushBeforeShutdown();
 
             var dest = _cfg.GetCVar(CCVars.DestinationFile);

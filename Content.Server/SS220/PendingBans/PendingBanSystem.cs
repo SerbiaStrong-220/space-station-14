@@ -21,6 +21,8 @@ public sealed class PendingBanSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly ITaskManager _tasks = default!;
 
+    private static readonly TimeSpan CheckInterval = TimeSpan.FromSeconds(1);
+
     private Task _work = Task.CompletedTask;
     private string _serverId = string.Empty;
     private DateTime _nextCheck;
@@ -49,13 +51,15 @@ public sealed class PendingBanSystem : EntitySystem
         if (!_ready || _stopping)
             throw new InvalidOperationException("Server is starting or stopping.");
         if (trigger == PendingBanTrigger.Immediate || !Enum.IsDefined(trigger) ||
-            trigger == PendingBanTrigger.Delay && (delayMinutes == 0 || delayMinutes > 525600))
+            trigger == PendingBanTrigger.Delay && (delayMinutes == 0 || delayMinutes > PendingBanData.MaxDelayMinutes))
             throw new ArgumentException("Invalid pending ban schedule.");
 
+        IPendingBanTrigger condition = trigger == PendingBanTrigger.Delay
+            ? new DelayPendingBanTrigger(DateTime.UtcNow.AddMinutes(delayMinutes))
+            : new RoundStatusPendingBanTrigger(trigger);
         var data = new PendingBanData(
             _serverId,
-            trigger == PendingBanTrigger.Delay ? DateTime.UtcNow.AddMinutes(delayMinutes) : null,
-            trigger,
+            condition,
             erase,
             postBanInfo);
         return Queue(() => _bans.ScheduleBanAsync(info, data));
@@ -66,7 +70,7 @@ public sealed class PendingBanSystem : EntitySystem
         if (!_ready || _stopping || !_work.IsCompleted || DateTime.UtcNow < _nextCheck)
             return;
 
-        _nextCheck = DateTime.UtcNow.AddSeconds(1);
+        _nextCheck = DateTime.UtcNow + CheckInterval;
         _ = Queue(() => ActivateSafelyAsync());
     }
 
