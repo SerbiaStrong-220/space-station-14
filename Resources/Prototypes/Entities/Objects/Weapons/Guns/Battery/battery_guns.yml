@@ -32,6 +32,14 @@
     startingCharge: 1000
   - type: StaticPrice
     price: 500
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   parent: [BaseWeaponBattery, BaseGunWieldable]
@@ -114,6 +122,14 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   id: BaseWeaponBatterySmall
@@ -352,6 +368,7 @@
     tags:
     - Sidearm
     - LaserWeapon
+  - type: DnaLockable #SS220-dna-lock
 
 - type: entity
   name: pulse carbine
@@ -390,6 +407,7 @@
   - type: Battery
     maxCharge: 5000
     startingCharge: 5000
+  - type: DnaLockable #SS220-dna-lock
 
 - type: entity
   name: pulse rifle
@@ -426,6 +444,7 @@
   - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: DnaLockable #SS220-dna-lock
 
 - type: entity
   name: laser cannon
@@ -749,7 +768,9 @@
   - type: Item
     size: Normal
     shape:
-    - 0,0,1,1
+# SS220-sec-gear-size-fix-start
+    - 0,0,2,1
+# SS220-sec-gear-size-fix-end
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
     layers:
@@ -777,7 +798,9 @@
     price: 63
   - type: Tag
     tags:
-    - Sidearm
+# SS220-sec-gear-size-fix-start
+    - SecBeltEquip
+# SS220-sec-gear-size-fix-end
     - LaserWeapon
 
 - type: entity
@@ -967,6 +990,10 @@
   - type: Battery
     maxCharge: 1200 # SS220-shotgun-battery
     startingCharge: 1200 # SS220-shotgun-battery
+  #SS220-dna-lock begin
+  - type: DnaLockable
+    job: Warden
+  #SS220-dna-lock end
 
 - type: entity
   name: energy magnum
@@ -1016,6 +1043,7 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 48
     autoRechargePauseTime: 10
+  - type: DnaLockable #SS220-dna-lock
 
 - type: entity
   name: temperature gun

@@ -87,6 +87,12 @@
   - type: Internals
   - type: FloatingVisuals
   - type: Climbing
+  #SS220 eye offset begin
+  - type: EyeCursorOffset
+    maxOffset: 6
+    pvsIncrease: 0.6
+  - type: EyeOffsetInCombatMode
+  #SS220 eye offset end
   - type: Cuffable
   - type: Ensnareable
     sprite: Objects/Misc/ensnare.rsi
@@ -104,7 +110,7 @@
     damage:
       types:
         Blunt: 5
-  - type: TTS # Corvax-TTS
+  - type: Tts # SS220 Tts
   - type: SleepEmitSound
   - type: SSDIndicator
   - type: StandingState

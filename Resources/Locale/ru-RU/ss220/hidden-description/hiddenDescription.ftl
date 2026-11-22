@@ -5,9 +5,9 @@ hidden-desc-ThermalGoogles-research = [color=#D381C9]Неожиданно для
 hidden-desc-ThermalVisorImplanter-research = [color=#D381C9]Сверив номера на имплантере, вы замечаете знакомый шаблон. Когда-то НаноТрейзен исследовала возможность ксеноморфов видеть людей сквозь преграды, открытые испытания тех чипов имели такой же шаблон серийных номеров, видимо доработка была успешна, но должна ли была Вам в руки попасть уже засекреченная разработка?[/color]
 
 hidden-desc-MindShieldImplanter-security = [color=#009ae1]Внутри имплантера находится имплант защиты разума.[/color]
-#ss220 trackingimplanter-desc-fix begin
+hidden-desc-MindShieldImplanter-medical = [color=#52B4E9]Внутри имплантера находится имплант защиты разума.[/color]
+
 hidden-desc-TrackingImplanter-security = [color=#009ae1]Внутри имплантера находится имплант-трекер.[/color]
-#ss220 trackingimplanter-desc-fix end
 
 hidden-desc-MindSlaveImplant-medical =  [color=#52B4E9]Сверив номера импланта внутри, вы понимаете, что это несертифицированный имплант. При внимательном осмотре вы понимаете что этот имплант обладает ИИ, подавляющим разум имплантированного.[/color]
 hidden-desc-MindSlaveImplant-research = [color=#D381C9]Внимательно осмотрев имплант, вы понимаете, что это внутри имплант, губительно влияющий на нервную систему.[/color]
@@ -21,7 +21,6 @@ hidden-desc-AdrenalImplant-medical = [color=#52B4E9]Этот имплант со
 hidden-desc-AdrenalImplant-research = [color=#D381C9]Имплант с запасом лечебных растворов, предназначенных для поддержки жизненных функций.[/color]
 hidden-desc-AdrenalImplant-syndicate = [color=#E31735]Имплант с инъекционным механизмом, содержащий жидкости для ускоренного восстановления организма.[/color]
 
-corvax-hidden-desc-MindShieldImplanter-security = Вы узнаете имплант внутри, это имплант защиты разума.
 
 hidden-desc-DeathRattleImplanterInterdyne-medical = [color=#52B4E9]Сверив серийные номера, вы понимаете, что это легальный, сертифицированный имплант Interdyne Pharmaceutics внутри.[/color]
 hidden-desc-DeathRattleImplanterInterdyne-research = [color=#D381C9]Внутри имплантера находится имплант "Предсмертный хрип".[/color]

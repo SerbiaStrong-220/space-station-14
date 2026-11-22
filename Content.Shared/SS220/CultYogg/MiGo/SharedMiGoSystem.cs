@@ -12,7 +12,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Revolutionary.Components;
-using Content.Shared.Roles.Components;
+using Content.Shared.Roles.Jobs;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Buildings;
@@ -46,6 +46,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
     [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedJobSystem _job = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
@@ -64,7 +65,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
 
-        SubscribeLocalEvent<MiGoComponent, AfterTeleportedEvent>(OnAfterTeleported);
+        SubscribeLocalEvent<MiGoComponent, TeleportedEvent>(OnTeleported);
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
 
@@ -192,14 +193,14 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         if (ent.Comp.ConstructionGridsBlacklist != null && _whitelist.IsValid(ent.Comp.ConstructionGridsBlacklist, currentGrid))
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-cant-buid-on-grid"), ent, ent);
+            _popup.PopupClient(Loc.GetString("cult-yogg-cant-build-on-grid"), ent, ent);
             return;
         }
 
         _miGoErectSystem.OpenUI(ent, actor);
     }
 
-    private void OnAfterTeleported(Entity<MiGoComponent> ent, ref AfterTeleportedEvent args)
+    private void OnTeleported(Entity<MiGoComponent> ent, ref TeleportedEvent args)
     {
         _userInterfaceSystem.CloseUis(ent.Owner);
     }
@@ -282,7 +283,9 @@ public abstract partial class SharedMiGoSystem : EntitySystem
         var target = args.Target;
         if (!CanEnslaveTarget(ent, target, out var reason))
         {
-            _popup.PopupClient(reason, target, ent);
+            if (_net.IsServer)
+                _popup.PopupEntity(reason, target, ent);
+
             _adminLogger.Add(LogType.Action, $"MiGo {ToPrettyString(ent):user} failed to enslave {ToPrettyString(target):target} because \"{reason}\"");
             return;
         }
@@ -336,7 +339,7 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         if (HasComp<RevolutionaryComponent>(target) || HasComp<ZombieComponent>(target))
         {
-            reason = Loc.GetString("cult-yogg-enslave-another-fraction");
+            reason = Loc.GetString("cult-yogg-enslave-another-faction");
             return false;
         }
 
@@ -354,10 +357,9 @@ public abstract partial class SharedMiGoSystem : EntitySystem
 
         if (_mind.TryGetMind(target, out var mindId, out _))
         {
-            if (TryComp<MindRoleComponent>(mindId, out var role) &&
-                role.JobPrototype is { } job && job == "Chaplain")
+            if (_job.MindHasJobWithId(mindId, "Chaplain"))
             {
-                reason = "cult-yogg-enslave-cant-be-a-chaplain";
+                reason = Loc.GetString("cult-yogg-enslave-cant-be-a-chaplain");
                 return false;
             }
         }

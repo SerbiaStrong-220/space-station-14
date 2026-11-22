@@ -16,7 +16,6 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.EntityEffects.Events;
-using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -32,7 +31,7 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private HungerSystem _hungerSystem = default!;
-    [Dependency] private SharedStuckOnEquipSystem _stuckOnEquip = default!;
+    [Dependency] private CultYoggEquipmentSystem _cultEquipment = default!;
     [Dependency] private ThirstSystem _thirstSystem = default!;
     [Dependency] private CultYoggRuleSystem _cultRuleSystem = default!;
     [Dependency] private IChatManager _chatManager = default!;
@@ -90,7 +89,7 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
                 if (mobstate.CurrentState == MobState.Dead) //if cultists is dead we skip this one
                     return;
 
-                AcsendCultist(ent);
+                AscendCultist(ent);
                 break;
 
             default:
@@ -157,7 +156,7 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
         var currentHunger = _hungerSystem.GetHunger(hungerComp);
         if (currentHunger <= ent.Comp.HungerCost || hungerComp.CurrentThreshold == ent.Comp.MinHungerThreshold)
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-digest-no-nutritions"), ent, ent);
+            _popup.PopupClient(Loc.GetString("cult-yogg-digest-no-nutrition"), ent, ent);
             return;
         }
 
@@ -183,7 +182,7 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
     #endregion
 
     #region Ascending
-    public void AcsendCultist(Entity<CultYoggComponent> ent)
+    public void AscendCultist(Entity<CultYoggComponent> ent)
     {
         if (TerminatingOrDeleted(ent))
             return;
@@ -211,22 +210,22 @@ public sealed partial class CultYoggSystem : SharedCultYoggSystem
     public void StartAscension(EntityUid ent)
     {
         //idk if it is canser or no, will be like that for a time
-        if (HasComp<AcsendingComponent>(ent))
+        if (HasComp<AscendingComponent>(ent))
             return;
 
-        _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-started"), ent, ent);
-        EnsureComp<AcsendingComponent>(ent);
+        _popup.PopupEntity(Loc.GetString("cult-yogg-ascending-started"), ent, ent);
+        EnsureComp<AscendingComponent>(ent);
     }
 
     public void ResetCultist(Entity<CultYoggComponent> ent)//idk if it is canser or no, will be like that for a time
     {
-        if (RemComp<AcsendingComponent>(ent))
-            _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-stopped"), ent, ent);
+        if (RemComp<AscendingComponent>(ent))
+            _popup.PopupEntity(Loc.GetString("cult-yogg-ascending-stopped"), ent, ent);
 
         ent.Comp.ConsumedAscensionReagent = 0;
 
-        if (_stuckOnEquip.TryRemoveStuckItems(ent))//Idk how to deal with popup spamming
-            _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);//and now i dont see any :(
+        if (_cultEquipment.TryDropCultEquipment(ent))
+            _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);
 
         Dirty(ent, ent.Comp);
     }

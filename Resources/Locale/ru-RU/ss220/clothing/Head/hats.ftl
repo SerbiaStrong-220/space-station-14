@@ -141,6 +141,20 @@ ent-ClothingHeadNTRCap = фуражка представителя НаноТр�
 ent-ClothingHeadNTRTophat = цилиндр представителя НаноТрейзен
     .desc = Мало кто осмелится сказать вам это в лицо, но вы в этом выглядите забавно.
 
+ent-ClothingHeadBigCapCommissar = фуражка комиссара
+    .desc = Размышления порождают ересь. Ересь порождает возмездие.
+    .suffix = За время в игре
+
 ent-ClothingHeadHatFollower = шляпа последователя
     .desc = Настало время небес.
+    .suffix = За время в игре
+
+ent-ClothingHeadHatCone2 = { ent-ClothingHeadHatCone }
+    .desc = { ent-ClothingHeadHatCone.desc }
+
+ent-ClothingHeadHatCone3 = { ent-ClothingHeadHatCone }
+    .desc = { ent-ClothingHeadHatCone.desc }
+
+ent-ClothingHeadHatMimeHarlequin = колпак готического арлекина
+    .desc = Высокий колпак как символ успеха и признания.
     .suffix = За время в игре

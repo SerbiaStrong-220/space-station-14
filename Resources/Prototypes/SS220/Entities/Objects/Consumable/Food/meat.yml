@@ -7,8 +7,6 @@
   components:
   - type: InternalTemperature
     thickness: 0.06
-  - type: FoodProcessorIngredient
-    result: FoodMeatBacon
 
 # Raw
 

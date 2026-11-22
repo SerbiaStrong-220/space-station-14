@@ -1,4 +1,5 @@
 using Content.Client.Hands.Systems;
+using Content.Client.Weapons.Ranged.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.CombatMode;
 using Robust.Client.Graphics;
@@ -15,6 +16,7 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private GunSystem _gunSystem = default!;//SS220 weapon overhaul
 
     /// <summary>
     /// Raised whenever combat mode changes.
@@ -55,6 +57,7 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
     public override void SetInCombatMode(EntityUid entity, bool value, CombatModeComponent? component = null)
     {
         base.SetInCombatMode(entity, value, component);
+        _gunSystem.SpreadOverlayIngame = value;//SS220 aiming overlay
         UpdateHud(entity);
     }
 

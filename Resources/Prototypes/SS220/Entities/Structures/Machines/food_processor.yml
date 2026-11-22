@@ -49,3 +49,6 @@
   - type: EmptyOnMachineDeconstruct
     containers:
     - foodProcessorInput
+  - type: GuideHelp
+    guides:
+    - FoodProcessorRecipes
