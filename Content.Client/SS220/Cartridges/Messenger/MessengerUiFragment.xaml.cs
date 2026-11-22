@@ -24,6 +24,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
     public event Action? OnBackButtonPressed;
     public event Action? OnRefreshPressed;
     public event Action<bool>? OnNameLockToggled;
+    public event Action<bool>? OnHideUnregisteredToggled;
     public event Action<ChatUid, bool>? OnChatMuteToggled;
 
     public ChatUid CurrentChat;
@@ -47,6 +48,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         BackButton.OnPressed += _ => OnBackButtonPressed?.Invoke();
         RefreshButton.OnPressed += _ => OnRefreshPressed?.Invoke();
         NameLockBox.OnToggled += args => OnNameLockToggled?.Invoke(args.Pressed);
+        HideUnregisteredBox.OnToggled += args => OnHideUnregisteredToggled?.Invoke(args.Pressed);
         MuteButton.OnToggled += args => OnChatMuteToggled?.Invoke(CurrentChat, args.Pressed);
         CancelReplyButton.OnPressed += _ => ClearReply();
         EmojiButton.OnToggled += args => EmojiPanel.Visible = args.Pressed;
@@ -91,6 +93,9 @@ public sealed partial class MessengerUiFragment : BoxContainer
 
         foreach (var chat in messengerUiState.Chats.Values)
         {
+            if (IsHiddenUnregisteredChat(messengerUiState, chat))
+                continue;
+
             if (SearchString == null || ChatName(messengerUiState, chat).ToLower().Contains(SearchString))
                 chats.Add(chat);
         }
@@ -151,6 +156,19 @@ public sealed partial class MessengerUiFragment : BoxContainer
         return chat.Kind == MessengerChatKind.Contact
                && chat.Members.Count == 1
                && chat.Members.Contains(state.ClientContact.Id);
+    }
+
+    private bool IsHiddenUnregisteredChat(MessengerUiState state, MessengerChatUiState chat)
+    {
+        if (!HideUnregisteredBox.Pressed
+            || chat.Kind != MessengerChatKind.Contact
+            || IsFavorites(state, chat)
+            || chat.LastMessage != null
+            || chat.Messages.Count > 0)
+            return false;
+
+        var peer = GetPeer(state, chat);
+        return peer == null || string.IsNullOrWhiteSpace(peer.Name) || peer.Name == MessengerContact.UnknownName;
     }
 
     private static string LastMessagePreview(MessengerUiState state, MessengerChatUiState chat)
@@ -316,6 +334,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         SetChatView(false);
         ChatsSearch.Visible = false;
         NameLockBox.Visible = false;
+        HideUnregisteredBox.Visible = false;
         RefreshButton.Visible = true;
         ErrorLabel.Visible = true;
         ErrorLabel.Text = err;
@@ -328,6 +347,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
     {
         BackButton.Visible = inChat;
         ChatNameLabel.Visible = inChat;
+        HideUnregisteredBox.Visible = !inChat;
         HeaderSpacer.Visible = !inChat;
         InputRow.Visible = inChat;
         ReplyBar.Visible = inChat && _replyToId != null;

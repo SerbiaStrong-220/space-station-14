@@ -4,7 +4,7 @@ using Content.Server.Access.Components;
 using Content.Server.SS220.CartridgeLoader.Cartridges;
 using Content.Shared.Examine;
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Content.Shared.SS220.Messenger;
 using Content.Shared.Verbs;
 using Robust.Shared.Prototypes;

@@ -16,4 +16,7 @@
   maleLastNames: NamesArachnidLast # Corvax-LastnameGender
   femaleLastNames: NamesArachnidLast # Corvax-LastnameGender
   sexes:
-  - Unsexed
+  # SS220-arachnid-sexes begin
+  - Male
+  - Female
+  # SS220-arachnid-sexes end
