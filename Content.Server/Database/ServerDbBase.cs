@@ -8,7 +8,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
-using Content.Server.Administration.Managers;
 using Content.Server.SS220.Signature;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
@@ -16,8 +15,6 @@ using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.SS220.Signature;
-using Content.Shared.Traits;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -26,7 +23,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Database
 {
-    public abstract class ServerDbBase
+    public abstract partial class ServerDbBase // # SS220 connections by ckeys
     {
         private readonly ISawmill _opsLog;
         public event Action<DatabaseNotification>? OnNotificationReceived;
