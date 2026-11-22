@@ -23,6 +23,30 @@ public sealed partial class IpcComponent : Component
     public SoundSpecifier CritStateSound = new SoundPathSpecifier("/Audio/Machines/buzz-two.ogg");
 
     /// <summary>
+    /// Minimum time in seconds between playing the critical state sound.
+    /// </summary>
+    [DataField]
+    public TimeSpan CritSoundMinInterval = TimeSpan.FromSeconds(15);
+
+    /// <summary>
+    /// Maximum time in seconds between playing the critical state sound.
+    /// </summary>
+    [DataField]
+    public TimeSpan CritSoundMaxInterval = TimeSpan.FromSeconds(30);
+
+    /// <summary>
+    /// Popup shown when IPC has no battery.
+    /// </summary>
+    [DataField]
+    public LocId NoBatteryPopup = "ipc-no-battery";
+
+    /// <summary>
+    /// Popup shown when IPC battery is low.
+    /// </summary>
+    [DataField]
+    public LocId NoPowerPopup = "ipc-no-power";
+
+    /// <summary>
     /// The battery charge alert.
     /// </summary>
     [DataField]
@@ -105,6 +129,18 @@ public sealed partial class IpcComponent : Component
     /// </summary>
     [DataField]
     public float CritDrawRate = 5.0f;
+
+    /// <summary>
+    /// The charge level below which IPC loses its abilities.
+    /// </summary>
+    [DataField]
+    public float CritCharge = 0.01f;
+
+    /// <summary>
+    /// Hiding layers of clothing that are incorrectly displayed on IPC.
+    /// </summary>
+    [DataField]
+    public HashSet<string> HiddenClothingSlots = ["eyes"];
 }
 
 public sealed partial class ToggleDrainActionEvent : InstantActionEvent;

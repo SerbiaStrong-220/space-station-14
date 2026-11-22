@@ -1,6 +1,6 @@
 - type: randomHumanoidSettings
   id: VisitorTourist
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi]
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid , Resomi]
   parent: VisitorCivilian
   components:
     - type: GhostRole
@@ -12,7 +12,7 @@
 - type: randomHumanoidSettings
   id: RedWings
   parent: EventHumanoid
-  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf, Resomi]
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf, Ipc, Resomi]
   components:
     - type: GhostRole
       raffle:
@@ -36,7 +36,7 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-officer
-    - type: RoleExperienceAdd
+    - type: ExperienceAddition
       definitionId: RedWingsOfficerRoleExperience
 
 - type: randomHumanoidSettings
@@ -57,7 +57,7 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-medic
-    - type: RoleExperienceAdd
+    - type: ExperienceAddition
       definitionId: RedWingsMedicRoleExperience
 
 - type: randomHumanoidSettings
@@ -78,5 +78,5 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-pilot
-    - type: RoleExperienceAdd
+    - type: ExperienceAddition
       definitionId: RedWingsPilotRoleExperience

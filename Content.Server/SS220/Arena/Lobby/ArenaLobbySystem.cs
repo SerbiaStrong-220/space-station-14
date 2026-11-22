@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Antag.Components;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
 using Content.Server.Station.Systems;
@@ -7,11 +8,13 @@ using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.SS220.Arena;
 using Content.Shared.SS220.Arena.Lobby;
 using Content.Shared.SS220.CCVars;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
+using Robust.Shared.Localization;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -159,7 +162,7 @@ public sealed partial class ArenaLobbySystem : EntitySystem
             arenas.Add(new ArenaLobbyEntry
             {
                 ArenaId = id,
-                Name = rule.DisplayName,
+                Name = Loc.GetString(rule.DisplayName),
                 Players = CountOccupied(rule),
                 MaxPlayers = rule.MaxPlayers,
                 Phase = rule.Phase,
@@ -179,8 +182,8 @@ public sealed partial class ArenaLobbySystem : EntitySystem
             templates.Add(new ArenaLobbyTemplate
             {
                 Id = proto.ID,
-                Name = rule.DisplayName,
-                Description = rule.Description,
+                Name = Loc.GetString(rule.DisplayName),
+                Description = Loc.GetString(rule.Description),
                 Category = rule.DisplayCategory,
                 MaxPlayers = rule.MaxPlayers,
             });
@@ -346,6 +349,7 @@ public sealed partial class ArenaLobbySystem : EntitySystem
         var part = EnsureComp<ArenaParticipantComponent>(newBody);
         part.Team = oldPart?.Team ?? "a";
         part.Icon = oldPart?.Icon;
+        EnsureComp<AntagImmuneComponent>(newBody);
         return newBody;
     }
 

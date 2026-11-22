@@ -174,3 +174,25 @@
     stampState: "paper_stamp-syndicate"
   - type: Sprite
     state: stamp-warden # TODO: make a unique sprite
+
+- type: entity
+  parent: RubberStampSyndicate
+  id: RubberStampChameleon
+  name: chameleon rubber stamp
+  description: A syndicate stamp that can be switched to imitate the stamp of any station head.
+  components:
+  - type: ChameleonStamp
+    prototype: RubberStampSyndicate
+    variants:
+    - RubberStampHos
+    - RubberStampHop
+    - RubberStampQm
+    - RubberStampRd
+    - RubberStampCMO
+    - RubberStampCE
+    - RubberStampSyndicate
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonStampUiKey.Key:
+        type: ChameleonStampBoundUserInterface
+

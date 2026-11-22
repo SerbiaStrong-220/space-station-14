@@ -109,6 +109,14 @@ public sealed partial class IdCardConsoleComponent : Component
         "Salvage",
         "Service",
         "Theatre",
+        "Mime",
+        "Musician",
+        "Librarian",
+        "Psychologist",
+        "Clown",
+        "Reporter",
+        "GenpopEnter",
+        "GenpopLeave",
     };
     // SS220-ID console extended access button-End
 

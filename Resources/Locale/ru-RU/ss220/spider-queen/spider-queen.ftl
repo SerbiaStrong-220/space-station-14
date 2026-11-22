@@ -21,3 +21,4 @@ job-name-spider-queen = { roles-antag-spider-queen-name }
 job-description-spider-queen = { roles-antag-spider-queen-objective }
 job-name-spider-queen-servant = Паук роя
 job-description-spider-queen-servant = Не позволяйте причинить вред потомству. Экипаж - ваша пища.
+job-supervisors-spider-queen = королеве пауков

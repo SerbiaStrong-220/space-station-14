@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Collections.Immutable;
 using Content.Shared.Physics;
@@ -42,7 +42,7 @@ public sealed partial class ShapeCollisionTrackerSystem : EntitySystem
         // Re-check for contacts as we cleared them.
         else if (TryComp<PhysicsComponent>(uid, out var body))
         {
-            _broadphase.RegenerateContacts(uid, body);
+            _broadphase.RegenerateContacts((uid, body, null, null));
         }
     }
 

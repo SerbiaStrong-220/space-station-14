@@ -8,8 +8,9 @@
   parent: BaseTraitorStealObjective
   id: EngravedKnuckledusterStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ Quartermaster ]
+  - type: NotDepartmentRequirement
+    departments:
+    - Cargo
   - type: StealCondition
     stealGroup: EngravedKnuckleduster
     owner: job-name-qm
@@ -43,8 +44,9 @@
   parent: BaseTraitorStealObjective
   id: ClothingOuterReactiveArmorStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ ResearchDirector ]
+  - type: NotDepartmentRequirement
+    departments:
+    - Science
   - type: StealCondition
     stealGroup: ClothingOuterReactiveArmor
     owner: job-name-rd
@@ -53,8 +55,9 @@
   parent: BaseTraitorStealObjective
   id: RCDCEStealObjective
   components:
-  - type: NotJobRequirement
-    jobs: [ ChiefEngineer ]
+  - type: NotDepartmentRequirement
+    departments:
+    - Engineering
   - type: StealCondition
     stealGroup: RCDCE
     owner: job-name-ce
@@ -72,7 +75,7 @@
   - type: IntimidatePersonCondition
     startDescription: objective-condition-intimidate-target-brute-desc
     successDescription: objective-condition-intimidate-target-brute-desc-success
-    sSDDescription: objective-condition-intimidate-target-brute-desc-ssd
+    catatonicDescription: objective-condition-intimidate-target-brute-desc-catatonic
     damageTrackerSpecifier:
       damageGroup: Brute
       allowedState: [Alive]
@@ -91,7 +94,7 @@
   - type: IntimidatePersonCondition
     startDescription: objective-condition-intimidate-target-burn-desc
     successDescription: objective-condition-intimidate-target-burn-desc-success
-    sSDDescription: objective-condition-intimidate-target-burn-desc-ssd
+    catatonicDescription: objective-condition-intimidate-target-burn-desc-catatonic
     damageTrackerSpecifier:
       damageGroup: Burn
       allowedState: [Alive]
@@ -110,7 +113,11 @@
   - type: IntimidatePersonCondition
     startDescription: objective-condition-intimidate-target-toxin-desc
     successDescription: objective-condition-intimidate-target-toxin-desc-success
-    sSDDescription: objective-condition-intimidate-target-toxin-desc-ssd
+    catatonicDescription: objective-condition-intimidate-target-toxin-desc-catatonic
+    filter:
+    - !type:SpeciesMindFilter
+      species:
+      - Ipc
     damageTrackerSpecifier:
       damageGroup: Toxin
       allowedState: [Alive]

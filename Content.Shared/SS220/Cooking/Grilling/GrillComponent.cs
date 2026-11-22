@@ -28,6 +28,9 @@ public sealed partial class GrillComponent : Component
     [DataField, AutoNetworkedField]
     public float CookingSpeed = 0.5f;
 
+    [DataField, AutoNetworkedField]
+    public float CookingModifier = 1f;
+
     [ViewVariables, AutoNetworkedField]
     public EntityHeaterSetting GrillSettings = EntityHeaterSetting.Off;
 

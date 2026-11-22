@@ -135,6 +135,11 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField]
     public List<string> BlacklistJobsForStartingGear = new();
     //ss220 add species loadout end
+
+    //SS220-IPCnaming begin
+    [DataField]
+    public bool LatinNamesAllowed { get; private set; }
+    //SS220-IPCnaming end
 }
 
 public enum SpeciesNaming : byte

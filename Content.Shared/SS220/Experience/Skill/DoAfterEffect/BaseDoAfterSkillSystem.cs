@@ -37,11 +37,6 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 
         if (args.ShouldCancel || args.Args.Used == null)
             return;
-
-        if (!TryGetLearningProgressInfo<LearningOnDoAfterStartWithComponent>(args.Args.Used.Value, entity.Comp.SkillTreeGroup, out var learningInformation))
-            return;
-
-        TryChangeStudyingProgress(entity, entity.Comp.SkillTreeGroup, learningInformation.Value);
     }
 
     private void OnDoAfterEndInternal(Entity<TComp> entity, ref BeforeDoAfterCompleteEvent args)
@@ -57,19 +52,14 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
         if (args.Args.Used is null)
             return;
 
-        if (!LearnedAfterComplete(in args))
-            return;
-
         AfterDoAfterComplete(entity, in args);
-
-        if (!TryGetLearningProgressInfo<LearningOnDoAfterEndWithComponent>(args.Args.Used.Value, entity.Comp.SkillTreeGroup, out var learningInformation))
-            return;
-
-        TryChangeStudyingProgress(entity, entity.Comp.SkillTreeGroup, learningInformation.Value);
     }
 
     protected virtual void OnDoAfterStart(Entity<TComp> entity, ref BeforeDoAfterStartEvent args)
     {
+        if (args.Args.ArgFlags.HasFlag(DoAfterArgFlags.IgnoreExperienceModification))
+            return;
+
         if (!entity.Comp.FullBlock)
         {
             args.Args.DelayModifier *= entity.Comp.DurationScale;
@@ -87,15 +77,13 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
         return true;
     }
 
-    protected virtual bool LearnedAfterComplete(in BeforeDoAfterCompleteEvent args)
-    {
-        return true;
-    }
-
     protected virtual void AfterDoAfterComplete(Entity<TComp> entity, in BeforeDoAfterCompleteEvent args) { }
 
     protected virtual void OnDoAfterEnd(Entity<TComp> entity, ref BeforeDoAfterCompleteEvent args)
     {
+        if (args.Args.ArgFlags.HasFlag(DoAfterArgFlags.IgnoreExperienceModification))
+            return;
+
         if (!GetPredictedRandomOnCurTick(GetNetEntity(entity), GetNetEntity(args.Args.User)).Prob(entity.Comp.FailureChance))
             return;
 
@@ -103,22 +91,5 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 
         if (entity.Comp.FailurePopup is not null)
             _popup.PopupPredicted(Loc.GetString(entity.Comp.FailurePopup), args.Args.Target ?? args.Args.User, args.Args.User, PopupType.MediumCaution);
-    }
-
-    private bool TryGetLearningProgressInfo<T>(Entity<T?> entity, ProtoId<SkillTreePrototype>? treeId, [NotNullWhen(true)] out LearningInformation? learningInformation) where T : BaseLearningOnDoAfterWithComponent
-    {
-        learningInformation = null;
-
-        if (treeId is null)
-            return false;
-
-        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
-            return false;
-
-        if (!entity.Comp.Progress.TryGetValue(treeId.Value, out var learningInformationTemp))
-            return false;
-
-        learningInformation = learningInformationTemp;
-        return true;
     }
 }

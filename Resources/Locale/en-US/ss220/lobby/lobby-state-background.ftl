@@ -12,8 +12,8 @@ lobby-state-background-defaultrndshift-artist = Gabka
 lobby-state-background-spacefather-title = SpaceFather
 lobby-state-background-spacefather-artist = Wycc220
 
-lobby-state-background-destruction-title = Destruction
-lobby-state-background-destruction-artist = NORKA
+lobby-state-background-dysphornats-title = Дисфорнатс
+lobby-state-background-dysphornats-artist = MemedronEnjoyer
 
 lobby-state-background-ratking-title =  Rat King
 lobby-state-background-ratking-artist = TTTomaTTT
@@ -124,3 +124,6 @@ lobby-state-background-spacemudaki-artist = Ivan_Gochin
 
 lobby-state-background-traitor-title = Traitor
 lobby-state-background-traitor-artist = НезьныйКусь
+
+lobby-state-background-hogband-title = Hog Band
+lobby-state-background-hogband-artist = Ellichirr

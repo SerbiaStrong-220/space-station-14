@@ -10,7 +10,8 @@
   id: Ipc
   supportedGroups:
   - Brute
-  - Burn
   supportedTypes:
   - Heat
   - Shock
+  - Caustic
+

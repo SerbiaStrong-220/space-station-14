@@ -10,6 +10,15 @@
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/captain_white.rsi
 
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackJanitorJR
+  name: JR backpack
+  description: A convenient, water resistant backpack designed for cleaners JR.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/janitor_jr.rsi
+
 # Офицер "Синий Щит"
 - type: entity
   parent: ClothingBackpackSatchel
@@ -17,6 +26,9 @@
   name: blueshield backpack
   description: A backpack specially designed for the Blue Shield, with a unique pocket hardsuit technology.
   components:
+  - type: DnaLockable
+    job: BlueShield
+    blockedActions: ToggleableClothing
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/blueshield.rsi
   - type: Storage
@@ -38,6 +50,8 @@
   name: blueshield backpack
   description: A backpack specially designed for the Blue Shield, with a unique pocket hardsuit technology.
   components:
+  - type: DnaLockable
+    job: null
   - type: ToggleableClothing
     clothingPrototype: ClothingOuterHardsuitHightBlueshield
 

@@ -49,6 +49,8 @@ using Content.Shared.SS220.Body.Events;
 using Content.Server.SS220.QuadHearing;
 using Content.Shared.SS220.QuadHearing;
 using Content.Shared.GameTicking;
+using Content.Shared.SS220.TTS.Prototypes;
+using Content.Shared.SS220.TTS.Systems;
 
 namespace Content.Server.Chat.Systems;
 
@@ -370,7 +372,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         Color? colorOverride = null,
         bool playTTS = true, // SS220-fix-double-event-announce
         bool playPrerecordedSound = true, // SS220-fix-double-event-announce
-        ProtoId<TTSVoicePrototype>? voiceId = null) // SS2220-tts
+        ProtoId<TtsVoicePrototype>? voiceId = null) // SS220 tts
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
@@ -410,7 +412,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         Color? colorOverride = null,
         bool playTTS = true, // SS220-fix-double-event-announce
         bool playPrerecordedSound = true, // SS220-fix-double-event-announce
-        ProtoId<TTSVoicePrototype>? voiceId = null) // SS2220-tts
+        ProtoId<TtsVoicePrototype>? voiceId = null) // SS220 tts
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
@@ -445,7 +447,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         Color? colorOverride = null,
         bool playTTS = true, // SS220-fix-double-event-announce
         bool playPrerecordedSound = true, // SS220-fix-double-event-announce
-        ProtoId<TTSVoicePrototype>? voiceId = null) // SS2220-tts
+        ProtoId<TtsVoicePrototype>? voiceId = null) // SS220 tts
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
@@ -525,29 +527,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         name = FormattedMessage.EscapeText(name);
         // SS220-Add-Languages begin
         var languageMessage = _languageSystem.SanitizeMessage(source, message);
-        foreach (var (session, data) in GetRecipients(source, VoiceRange, InGameICChatType.Speak /* SS220 Hearing range multiplier */))
-        {
-            if (session.AttachedEntity is not { Valid: true } playerEntity)
-                continue;
-
-            var listener = session.AttachedEntity.Value;
-            var scrambledMessage = languageMessage.GetMessage(listener, true);
-        // SS220-Add-Languages end
-
-            var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
-                ("entityName", name),
-                ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-                ("fontType", speech.FontId),
-                ("fontSize", speech.FontSize),
-                ("message", scrambledMessage /*SS220-Add-Languages*/));
-
-            //SS220-Add-Languages begin
-            _chatManager.ChatMessageToOne(ChatChannel.Local, scrambledMessage, wrappedMessage, source, false, session.Channel);
-        }
-        //SS220-Add-Languages begin
-        message = languageMessage.GetMessage(source, false);
+        var verb = Loc.GetString(_random.Pick(speech.SpeechVerbStrings));
 
         //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
+        SendInVoiceRangeWithLanguage(languageMessage, name, verb, speech, source, range);
+
+        message = languageMessage.GetMessage(source, false);
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null, languageMessage);
         RaiseLocalEvent(source, ev, true);
         //SS220-Add-Languages end
@@ -1209,10 +1194,10 @@ public sealed class AnnouncementSpokeEvent : EntityEventArgs
     public readonly Filter Source;
     public readonly SoundSpecifier AnnouncementSound;
     public readonly string Message;
-    public readonly ProtoId<TTSVoicePrototype>? SpokeVoiceId;
+    public readonly ProtoId<TtsVoicePrototype>? SpokeVoiceId;
     public readonly AudioWithTTSPlayOperation PlayAudioMask = AudioWithTTSPlayOperation.PlayAll;
 
-    public AnnouncementSpokeEvent(Filter source, SoundSpecifier announcementSound, AudioWithTTSPlayOperation playAudioMask, string message, ProtoId<TTSVoicePrototype>? spokeVoiceId)
+    public AnnouncementSpokeEvent(Filter source, SoundSpecifier announcementSound, AudioWithTTSPlayOperation playAudioMask, string message, ProtoId<TtsVoicePrototype>? spokeVoiceId)
     {
         Source = source;
         Message = message;

@@ -305,7 +305,7 @@ public sealed partial class SharedMiGoErectSystem : EntitySystem
                     var ent = Spawn(proto.Id, coords);
 
                     if (proto.StackAmount is { } stackAmount)
-                        _stackSystem.SetCount(ent, stackAmount);
+                        _stackSystem.SetCount((ent, null), stackAmount);
                 }
             }
         }
@@ -347,7 +347,7 @@ public sealed partial class SharedMiGoErectSystem : EntitySystem
 
         if (ent.Comp.CaptureCooldowns.TryGetValue(recipe.ReplacementProto.Id, out var cooldownTime) && cooldownTime > _gameTiming.CurTime)
         {
-            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-caprure-cooldown", ("time", Math.Round((cooldownTime - _gameTiming.CurTime).TotalSeconds))), ent);
+            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-capture-cooldown", ("time", Math.Round((cooldownTime - _gameTiming.CurTime).TotalSeconds))), ent);
             return;
         }
 
@@ -668,10 +668,10 @@ public sealed partial class SharedMiGoErectSystem : EntitySystem
         {
             var stackTypeProto = _prototypeManager.Index(materialToBuild.StackType);
             materialEntityToInsert = Spawn(stackTypeProto.Spawn);
-            _stackSystem.SetCount(materialEntityToInsert, canAdd);
+            _stackSystem.SetCount((materialEntityToInsert, null), canAdd);
 
             var materialEntityToLeft = item;
-            _stackSystem.SetCount(materialEntityToLeft, leftCount);
+            _stackSystem.SetCount((materialEntityToLeft, null), leftCount);
         }
         _containerSystem.Insert(materialEntityToInsert, entity.Comp.Container);
         entity.Comp.AddedMaterialsAmount[materialIndex] = containedCount + canAdd;

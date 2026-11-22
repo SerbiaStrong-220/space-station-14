@@ -15,3 +15,12 @@
   targetNode: HDpistol
   category: construction-category-weapons
   objectType: Item
+
+- type: construction
+  id: BeerCap
+  graph: BeerCapGraph
+  startNode: start
+  targetNode: beer_cap
+  category: construction-category-misc
+  objectType: Item
+

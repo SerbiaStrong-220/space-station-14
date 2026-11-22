@@ -1,0 +1,16 @@
+loadout-group-captain-inner-encryption-keys = Капитан, ключи шифрования
+loadout-group-command-inner-encryption-keys = Командование, ключи шифрования
+loadout-group-chief-engineer-inner-encryption-keys = Старший инженер, ключи шифрования
+loadout-group-chief-medical-officer-inner-encryption-keys = Главный врач, ключи шифрования
+loadout-group-quartermaster-inner-encryption-keys = Квартирмейстер, ключи шифрования
+loadout-group-research-director-inner-encryption-keys = Директор исследований, ключи шифрования
+loadout-group-head-of-security-inner-encryption-keys = Глава службы безопасности, ключи шифрования
+loadout-group-brigmedic-inner-encryption-keys = Бригмедик, ключи шифрования
+loadout-group-lawyer-inner-encryption-keys = Адвокат, ключи шифрования
+loadout-group-nano-trasen-representative-inner-encryption-keys = Представитель НаноТрейзен, ключи шифрования
+loadout-group-cargo-inner-encryption-keys = Карго, ключи шифрования
+loadout-group-engineering-inner-encryption-keys = Инженерный, ключи шифрования
+loadout-group-medical-inner-encryption-keys = Медицинский, ключи шифрования
+loadout-group-science-inner-encryption-keys = Наука, ключи шифрования
+loadout-group-security-inner-encryption-keys = Служба безопасности, ключи шифрования
+loadout-group-service-inner-encryption-keys = Сервис, ключи шифрования

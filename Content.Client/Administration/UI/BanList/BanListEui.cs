@@ -90,7 +90,7 @@ public sealed class BanListEui : BaseEui
 
     public static void SetData<T>(IBanListLine<T> line, SharedBan ban) where T : SharedBan
     {
-        line.Reason.Text = ban.Reason;
+        line.Reason.SetMessage(ban.Reason, defaultColor: Color.White); //SS220-BanListChange
         line.BanTime.Text = FormatDate(ban.BanTime);
         line.Expires.Text = ban.ExpirationTime == null
             ? Loc.GetString("ban-list-permanent")

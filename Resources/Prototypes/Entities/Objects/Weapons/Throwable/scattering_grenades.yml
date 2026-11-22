@@ -61,6 +61,10 @@
     sound:
       path: "/Audio/Machines/door_lock_off.ogg"
     positional: true
+# SS220-sec-gear-size-fix-start
+  - type: Item
+    size: Normal
+# SS220-sec-gear-size-fix-end
 
 - type: entity
   parent: [VolatileGrenadeBase, ScatteringGrenadeBase, TimerGrenadeBase, BaseSyndicateContraband]
@@ -91,6 +95,10 @@
     positional: true
   - type: StaticPrice
     price: 2500
+# SS220-sec-gear-size-fix-start
+  - type: Item
+    size: Normal
+# SS220-sec-gear-size-fix-end
 
 - type: entity
   parent: [FragileGrenadeBase, ScatteringGrenadeBase, ImpactGrenadeBase, BaseSyndicateContraband]

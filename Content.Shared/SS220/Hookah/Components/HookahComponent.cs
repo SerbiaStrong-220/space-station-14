@@ -1,5 +1,4 @@
 using Content.Shared.Atmos;
-using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -10,11 +9,6 @@ namespace Content.Shared.SS220.Hookah.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HookahComponent : Component
 {
-    public const string CoalSlotId = "coal_slot";
-
-    [DataField("coal_slot")]
-    public ItemSlot CoalSlot = new();
-
     [DataField]
     public string SolutionName = "hookah";
 
@@ -44,15 +38,7 @@ public sealed partial class HookahComponent : Component
         new SpriteSpecifier.Rsi(
             new ResPath("Objects/Specific/Hookah/hookah_rope.rsi"), "rope");
 
-    [DataField]
-    public SoundSpecifier LightSound =
-        new SoundPathSpecifier("/Audio/Items/Lighters/lighter1.ogg");
-
     [DataField("useSound")]
     public SoundSpecifier UseSound =
         new SoundPathSpecifier("/Audio/Effects/custom_hookah.ogg");
-
-    [DataField]
-    public SoundSpecifier ExtinguishSound =
-        new SoundPathSpecifier("/Audio/Effects/extinguish.ogg");
 }

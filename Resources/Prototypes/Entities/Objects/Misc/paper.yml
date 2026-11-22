@@ -62,6 +62,14 @@
   - type: Item
     size: Tiny
   - type: PhysicalComposition
+  # SS220-place-and-pickup-sounds begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/paper_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/paper_drop.ogg
+  # SS220-place-and-pickup-sounds end
 
 - type: entity
   name: paper

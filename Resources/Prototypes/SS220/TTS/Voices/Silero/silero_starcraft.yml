@@ -1,0 +1,101 @@
+- type: ttsVoice
+  id: Raynor
+  name: Рейнор
+  speaker: raynor
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Kerrigan
+  name: Керриган
+  speaker: kerrigan
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Tychus
+  name: Тайкус
+  speaker: tychus
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Tosh
+  name: Тош
+  speaker: tosh
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Stetmann
+  name: Штеттманн
+  speaker: stetmann
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Hanson
+  name: Хэнсон
+  speaker: hanson
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Swann
+  name: Сван
+  speaker: swann
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Hill
+  name: Хилл
+  speaker: hill
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Valerian
+  name: Валериан
+  speaker: valerian
+  provider: Silero
+  categories: [ StartCraft ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+

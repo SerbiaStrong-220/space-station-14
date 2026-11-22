@@ -23,10 +23,19 @@ using Content.Shared.Temperature;
 using Content.Shared.MagicMirror;
 using Content.Shared.Power;
 using Content.Server.Body.Components;
+using Content.Server.EUI;
+using Content.Server.Ghost;
+using Content.Shared.Mind;
+using Content.Shared.Chat;
+using Content.Shared.Interaction.Events;
+using Content.Shared.IdentityManagement;
+using Content.Server.Chat;
+using Robust.Shared.Player;
+using Content.Server.Radio;
 
 namespace Content.Server.SS220.Ipc;
 
-public sealed partial class IpcSystem : EntitySystem
+public sealed partial class IpcSystem : SharedIpcSystem
 {
     [Dependency] private SharedActionsSystem _action = default!;
     [Dependency] private SharedBatteryDrainerSystem _batteryDrainer = default!;
@@ -38,12 +47,10 @@ public sealed partial class IpcSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
-
-    private static readonly LocId IpcDrainReady = "ipc-drain-enabled";
-    private static readonly LocId IpcDrainDisabled = "ipc-drain-disabled";
-    private static readonly LocId IpcNoBattery = "ipc-no-battery";
-    private static readonly TimeSpan SoundMinInterval = TimeSpan.FromSeconds(15);
-    private static readonly TimeSpan SoundMaXInterval = TimeSpan.FromSeconds(30);
+    [Dependency] private EuiManager _eui = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedSuicideSystem _suicide = default!;
 
     public override void Initialize()
     {
@@ -59,7 +66,11 @@ public sealed partial class IpcSystem : EntitySystem
         SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenIpcFaceAction);
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<IpcComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
+        SubscribeLocalEvent<IpcComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
         SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
+        SubscribeLocalEvent<IpcComponent, SuicideEvent>(IpcSuicide, before: [typeof(SuicideSystem)]);
+        SubscribeLocalEvent<IpcComponent, RadioSendAttemptEvent>(OnRadioSendAttempt);
+        SubscribeLocalEvent<IpcComponent, RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
     }
 
     private void OnMapInit(Entity<IpcComponent> ent, ref MapInitEvent args)
@@ -78,6 +89,18 @@ public sealed partial class IpcSystem : EntitySystem
 
     /// <summary>
     /// If the battery is present but discharged, the movement speed is reduced.
+    /// </summary>
+    private void OnRefreshChargeRate(Entity<IpcComponent> ent, ref RefreshChargeRateEvent args)
+    {
+        if (Terminating(ent))
+            return;
+
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
+    }
+
+    /// <summary>
+    /// Slotted battery became empty or fully charged.
+    /// So movement speed has to be reviewed.
     /// </summary>
     private void OnBatteryStateChanged(Entity<IpcComponent> ent, ref BatteryStateChangedEvent args)
     {
@@ -108,7 +131,7 @@ public sealed partial class IpcSystem : EntitySystem
         // show popup only if comp removed
         if (RemComp<BatteryDrainerComponent>(ent))
         {
-            _popup.PopupEntity(Loc.GetString(IpcDrainDisabled), ent, ent);
+            _popup.PopupEntity(Loc.GetString("ipc-drain-disabled"), ent, ent);
         }
 
         Dirty(ent);
@@ -124,7 +147,7 @@ public sealed partial class IpcSystem : EntitySystem
 
         if (!_powerCell.HasBattery(ent.Owner))
         {
-            _popup.PopupEntity(Loc.GetString(IpcNoBattery), ent, ent);
+            _popup.PopupEntity(Loc.GetString(ent.Comp.NoBatteryPopup), ent, ent);
             return;
         }
 
@@ -140,21 +163,19 @@ public sealed partial class IpcSystem : EntitySystem
         else
             RemComp<BatteryDrainerComponent>(ent);
 
-        var message = ent.Comp.DrainActivated ? IpcDrainReady : IpcDrainDisabled;
+        var message = ent.Comp.DrainActivated ? "ipc-drain-enabled" : "ipc-drain-disabled";
         _popup.PopupEntity(Loc.GetString(message), ent, ent);
 
         Dirty(ent);
     }
 
     /// <summary>
-    /// The movement speed of the IPS is reduced if they are out of charge.
+    /// The movement speed of the IPC is reduced if they are out of charge.
     /// </summary>
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!_powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery) || _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge < 0.01f)
-        {
+        if (!HasEnoughPower(ent, out _))
             args.ModifySpeed(ent.Comp.LowChargeSpeed);
-        }
     }
 
     /// <summary>
@@ -179,7 +200,7 @@ public sealed partial class IpcSystem : EntitySystem
     }
 
     /// <summary>
-    /// IPS take damage from EMP.
+    /// IPC take damage from EMP.
     /// </summary>
     private void OnEmpPulse(Entity<IpcComponent> ent, ref EmpPulseEvent args)
     {
@@ -192,7 +213,7 @@ public sealed partial class IpcSystem : EntitySystem
     }
 
     /// <summary>
-    /// Organic beings in critical condition make sounds of labored breathing. IPS - beeps.
+    /// Organic beings in critical condition make sounds of labored breathing. IPC - beeps.
     /// </summary>
     private void OnMobStateChanged(Entity<IpcComponent> ent, ref MobStateChangedEvent args)
     {
@@ -200,8 +221,8 @@ public sealed partial class IpcSystem : EntitySystem
         {
             var sound = EnsureComp<SpamEmitSoundComponent>(ent);
             sound.Sound = ent.Comp.CritStateSound;
-            sound.MinInterval = SoundMinInterval;
-            sound.MaxInterval = SoundMaXInterval;
+            sound.MinInterval = ent.Comp.CritSoundMinInterval;
+            sound.MaxInterval = ent.Comp.CritSoundMaxInterval;
         }
         else
         {
@@ -211,7 +232,8 @@ public sealed partial class IpcSystem : EntitySystem
     }
 
     /// <summary>
-    /// IPS easily return from a dead state to a critical state if they are repaired.
+    /// IPC easily return from a dead state to a critical state if they are repaired.
+    /// Notify a disconnected ghost that their IPC body is repaired and can be returned to.
     /// </summary>
     private void OnDamageChanged(Entity<IpcComponent> ent, ref DamageChangedEvent args)
     {
@@ -231,6 +253,13 @@ public sealed partial class IpcSystem : EntitySystem
             return;
 
         _mobState.ChangeMobState(ent, MobState.Critical);
+
+        if (_mind.TryGetMind(ent.Owner, out _, out var mindComp) &&
+            _player.TryGetSessionById(mindComp.UserId, out var playerSession) &&
+            mindComp.CurrentEntity != ent.Owner)
+        {
+            _eui.OpenEui(new ReturnToBodyEui(mindComp, _mind, _player), playerSession);
+        }
     }
 
     /// <summary>
@@ -247,7 +276,7 @@ public sealed partial class IpcSystem : EntitySystem
 
         var delta = Math.Abs(args.CurrentTemperature - regulator.NormalBodyTemperature);
 
-        float newDrawRate = ent.Comp.BaseDrawRate;
+        var newDrawRate = ent.Comp.BaseDrawRate;
 
         if (delta > ent.Comp.CritDelta)
             newDrawRate = ent.Comp.CritDrawRate;
@@ -255,5 +284,70 @@ public sealed partial class IpcSystem : EntitySystem
             newDrawRate = ent.Comp.OverDrawRate;
 
         _powerCell.SetDrawRate((ent.Owner, draw), newDrawRate);
+    }
+
+    private void IpcSuicide(Entity<IpcComponent> ent, ref SuicideEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp<DamageableComponent>(ent, out var damageable))
+            return;
+            
+        args.DamageType = "Shock";
+        _suicide.ApplyLethalDamage((ent.Owner, damageable), args.DamageType);
+
+        var othersMessage = Loc.GetString("suicide-command-ipc-text-others", ("name", Identity.Entity(ent, EntityManager)));
+        _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true);
+
+        var selfMessage = Loc.GetString("suicide-command-ipc-text-self");
+        _popup.PopupEntity(selfMessage, ent, ent);
+
+        args.Handled = true;
+    }
+        
+    /// <summary>
+    /// IPC radio stops working when the battery is low.
+    /// </summary>
+    private void OnRadioSendAttempt(Entity<IpcComponent> ent, ref RadioSendAttemptEvent args)
+    {
+        if (HasEnoughPower(ent, out var reason))
+            return;
+
+        args.Cancelled = true;
+        _popup.PopupEntity(Loc.GetString(reason), ent, ent);
+    }
+
+    /// <summary>
+    /// IPC does not receive radio messages if the battery is low.
+    /// </summary>
+    private void OnRadioReceiveAttempt(Entity<IpcComponent> ent, ref RadioReceiveAttemptEvent args)
+    {
+        if (!HasEnoughPower(ent, out _))
+            args.Cancelled = true;
+    }
+
+    /// <summary>
+    /// Whether the IPC has a battery with enough charge to keep its abilities working
+    /// (movement speed, radio).
+    /// </summary>
+    private bool HasEnoughPower(Entity<IpcComponent> ent, out LocId reason)
+    {
+        if (!_powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery))
+        {
+            reason = ent.Comp.NoBatteryPopup;
+            return false;
+        }
+
+        var chargeLevel = _battery.GetChargeLevel(battery.Value.AsNullable());
+
+        if (chargeLevel > ent.Comp.CritCharge)
+        {
+            reason = default;
+            return true;
+        }
+
+        reason = ent.Comp.NoPowerPopup;
+        return false;
     }
 }

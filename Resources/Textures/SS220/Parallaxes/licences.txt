@@ -2,3 +2,5 @@ AxiomaBackground_space.png, AxiomaBackground_stars.png, AxiomaDust.png, AxiomaSt
 
 sParallax_background.png, sParallax_dust1.png, sParallax_stars1.png, sParallax_dust2.png and sParallax_stars2.png generated from https://itch.io/game-assets/tag-parallax/tag-space
 
+Star.png, Meteors.png. littlemeteors.png, Nebula1.png, Exoplanet.png, copyright: Created by [Nobodies] (Discord: n0bodies)
+
