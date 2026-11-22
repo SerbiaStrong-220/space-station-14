@@ -59,6 +59,7 @@
             Scientist: [ 1, 1 ]
             ResearchAssistant: [ 1, 1 ]
             Borg: [ 2, 2 ]
+            StationAi: [ 1, 1 ]
             #Service
             SeniorService: [ 1, 1 ]
             Bartender: [ 1, 1 ]

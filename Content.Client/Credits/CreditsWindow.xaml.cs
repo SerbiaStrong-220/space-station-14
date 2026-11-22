@@ -361,7 +361,7 @@ public sealed partial class CreditsWindow : DefaultWindow
 
         AddSection(Loc.GetString("credits-window-contributors-section-title"), "GitHub.txt");
         AddSection(Loc.GetString("credits-window-codebases-section-title"), "SpaceStation13.txt");
-        AddSection(Loc.GetString("credits-window-tts-title"), "TTS.txt"); // Corvax-TTS
+        AddSection(Loc.GetString("credits-window-tts-title"), "TTS.txt"); // SS220 tts
         AddSection(Loc.GetString("credits-window-original-remake-team-section-title"), "OriginalRemake.txt");
         AddSection(Loc.GetString("credits-window-immortals-title"), "Immortals.txt", true);
         AddSection(Loc.GetString("credits-window-special-thanks-section-title"), "SpecialThanks.txt", true);

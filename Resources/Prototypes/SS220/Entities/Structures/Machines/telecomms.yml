@@ -7,3 +7,83 @@
     containers:
       key_slots:
       - EncryptionKeyLaw
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerFilledCarIng
+  suffix: Supply & Engineering
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCargo
+      - EncryptionKeyEngineering
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerFilledSciMed
+  suffix: RnD & Med
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyScience
+      - EncryptionKeyMedical
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerFilledComSer
+  suffix: Command & Service
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommand
+      - EncryptionKeyService
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerFilledSecLaw
+  suffix: Security & Law
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeySecurity
+      - EncryptionKeyLaw
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerFilledComSecLaw
+  suffix: Command & Security & Law
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommand
+      - EncryptionKeySecurity
+      - EncryptionKeyLaw
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerFilledSciMedEng
+  suffix: Science & Medical & Engineering
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyScience
+      - EncryptionKeyMedical
+      - EncryptionKeyEngineering
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerFilledComSerCar
+  suffix: Common & Service & Cargo
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyService
+      - EncryptionKeyCargo

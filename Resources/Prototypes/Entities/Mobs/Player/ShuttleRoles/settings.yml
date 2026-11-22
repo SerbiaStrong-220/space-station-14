@@ -10,7 +10,7 @@
   parent: EventHumanoidMindShielded
   speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-command-name
@@ -23,7 +23,7 @@
   id: VisitorCaptain
   parent: VisitorHead
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: CaptainRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-captain
@@ -36,7 +36,7 @@
   id: VisitorCE
   parent: VisitorHead
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ChiefEngineerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-ce
@@ -49,7 +49,7 @@
   id: VisitorCMO
   parent: VisitorHead
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ChiefMedicalOfficerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-cmo
@@ -62,7 +62,7 @@
   id: VisitorHOP
   parent: VisitorHead
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: HeadOfPersonnelRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-hop
@@ -75,7 +75,7 @@
   id: VisitorHOS
   parent: VisitorHead
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: HeadOfSecurityRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-hos
@@ -88,7 +88,7 @@
   id: VisitorResearchDirector
   parent: VisitorHead
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ResearchDirectorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-rd
@@ -101,7 +101,7 @@
   id: VisitorQM
   parent: VisitorHead
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: QuartermasterRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-qm
@@ -118,7 +118,7 @@
   parent: EventHumanoidMindShielded
   speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-security-name
@@ -131,7 +131,7 @@
   id: VisitorSecurityCadet
   parent: VisitorSecurity
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: SecurityCadetRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-cadet
@@ -143,7 +143,7 @@
   id: VisitorSecurityOfficer
   parent: VisitorSecurity
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: SecurityOfficerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-security
@@ -155,7 +155,7 @@
   id: VisitorDetective
   parent: VisitorSecurity
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: DetectiveRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-detective
@@ -167,7 +167,7 @@
   id: VisitorWarden
   parent: VisitorSecurity
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: WardenRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-warden
@@ -182,7 +182,7 @@
   parent: EventHumanoid
   speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-cargo-name
@@ -195,7 +195,7 @@
   id: VisitorCargoTechnician
   parent: VisitorCargonian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: CargoTechnicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-cargotech
@@ -207,7 +207,7 @@
   id: VisitorSalvageSpecialist
   parent: VisitorCargonian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: SalvageSpecialistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-salvagespec
@@ -222,7 +222,7 @@
   parent: EventHumanoid
   speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-engineering-name
@@ -235,7 +235,7 @@
   id: VisitorAtmosTech
   parent: VisitorEngineering
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: AtmosphericTechnicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-atmostech
@@ -247,7 +247,7 @@
   id: VisitorTechnicalAssistant
   parent: VisitorEngineering
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: TechnicalAssistantRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-technical-assistant
@@ -259,7 +259,7 @@
   id: VisitorEngineer
   parent: VisitorEngineering
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: StationEngineerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-engineer
@@ -274,7 +274,7 @@
   parent: EventHumanoid
   speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-medical-name
@@ -287,7 +287,7 @@
   id: VisitorMedicalIntern
   parent: VisitorMedical
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: MedicalInternRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-intern
@@ -299,7 +299,7 @@
   id: VisitorMedicalDoctor
   parent: VisitorMedical
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: MedicalDoctorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-doctor
@@ -311,7 +311,7 @@
   id: VisitorParamedic
   parent: VisitorMedical
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ParamedicRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-paramedic
@@ -323,7 +323,7 @@
   id: VisitorVirologist
   parent: VisitorMedical
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: MedicalDoctorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-medical-virologist-name
@@ -335,7 +335,7 @@
   id: VisitorGeneticist
   parent: VisitorMedical
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: MedicalDoctorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-medical-geneticist-name
@@ -347,7 +347,7 @@
   id: VisitorPsychologist
   parent: VisitorMedical
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: PsychologistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-psychologist
@@ -359,7 +359,7 @@
   id: VisitorChemist
   parent: VisitorMedical
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ChemistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-chemist
@@ -384,7 +384,7 @@
   parent: EventHumanoid
   speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-science-name
@@ -397,7 +397,7 @@
   id: VisitorResearchAssistant
   parent: VisitorScience
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ResearchAssistantRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-research-assistant
@@ -409,7 +409,7 @@
   id: VisitorScientist
   parent: VisitorScience
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ScientistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-scientist
@@ -424,7 +424,7 @@
   parent: EventHumanoid
   speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-civilian-name
@@ -437,7 +437,7 @@
   id: VisitorBartender
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: BartenderRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-bartender
@@ -449,7 +449,7 @@
   id: VisitorBotanist
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: BotanistRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-botanist
@@ -461,7 +461,7 @@
   id: VisitorBoxer
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: NoSpecialRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-boxer
@@ -473,7 +473,7 @@
   id: VisitorChaplain
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ChaplainRoleExperience #SS220-visitor-experience
     - type: BibleUser
     - type: GhostRole
@@ -486,7 +486,7 @@
   id: VisitorChef
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ChefRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-chef
@@ -499,7 +499,7 @@
   parent: VisitorCivilian
   randomizeName: false
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ClownRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-clown
@@ -529,7 +529,7 @@
   id: VisitorJanitor
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: JanitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-janitor
@@ -541,7 +541,7 @@
   id: VisitorLawyer
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: LawyerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-lawyer
@@ -553,7 +553,7 @@
   id: VisitorLawyerCentcom
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: LawyerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-civilian-centcom-lawyer-name
@@ -566,7 +566,7 @@
   id: VisitorLibrarian
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: LibrarianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-librarian
@@ -578,7 +578,7 @@
   id: VisitorMusician
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: MusicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-musician
@@ -590,7 +590,7 @@
   id: VisitorMusicianFancy
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: MusicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-musician
@@ -602,7 +602,7 @@
   id: VisitorMusicianRelaxed
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: MusicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-musician
@@ -614,7 +614,7 @@
   id: VisitorMime
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: MimeRoleExperience #SS220-visitor-experience
     - type: MimePowers
     - type: GhostRole
@@ -627,7 +627,7 @@
   id: VisitorReporter
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: NoSpecialRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-reporter
@@ -639,7 +639,7 @@
   id: VisitorServiceWorker
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ServiceWorkerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-serviceworker
@@ -651,7 +651,7 @@
   id: VisitorZookeeper
   parent: VisitorCivilian
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: NoSpecialRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: job-name-zookeeper
@@ -683,7 +683,7 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: CaptainRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
@@ -706,7 +706,7 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ChiefEngineerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
@@ -729,7 +729,7 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ChiefMedicalOfficerRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
@@ -752,7 +752,7 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: HeadOfPersonnelRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
@@ -775,7 +775,7 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: HeadOfSecurityRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
@@ -798,7 +798,7 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: ResearchDirectorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
@@ -821,7 +821,7 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: QuartermasterRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-commander-name
@@ -848,7 +848,7 @@
   id: ChallengeCargoTechnician
   randomizeName: false
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: CargoTechnicianRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-lost-challenge-cargo-technican-name
@@ -981,7 +981,7 @@
   id: VisitorBlackmarketeer
   parent: EventHumanoid
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: GhostRole
       name: ghost-role-information-blackmarketeer-name
@@ -999,7 +999,7 @@
   id: Cossack
   parent: EventHumanoid
   components:
-    - type: RoleExperienceAdd #SS220-visitor-experience
+    - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
     - type: RussianAccent
     - type: ScrambledAccent

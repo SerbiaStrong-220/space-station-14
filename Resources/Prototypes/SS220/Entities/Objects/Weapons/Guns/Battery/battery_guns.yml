@@ -96,6 +96,7 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 48
     autoRechargePauseTime: 10
+  - type: DnaLockable
 
 # Base KR
 - type: entity
@@ -144,6 +145,10 @@
   name: blaster KRS
   description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
   components:
+  - type: DnaLockable
+    job: BlueShield
+    unauthorizedUseEffects:
+    - !type:Electrocute
   - type: Gun
     selectedMode: Burst
     availableModes:
@@ -206,6 +211,7 @@
         whitelist:
           tags:
             - PowerCellBlaster
+  - type: DnaLockable
 
 - type: entity
   name: ik 40 laser carbine
@@ -261,6 +267,7 @@
         whitelist:
           tags:
             - LaserSMGPowerCell
+  - type: DnaLockable
 
 - type: entity
   name: IK 60 Laser Carbine
@@ -321,6 +328,7 @@
         whitelist:
           tags:
             - LaserCarabinePowerCell
+  - type: DnaLockable
 
 # Новые прототипы пишите выше
 # Death Squad
@@ -361,6 +369,7 @@
       fireCost: 5
       gunModifiers:
         soundGunshot:  /Audio/SS220/Weapons/Guns/Gunshots/rifle.ogg
+  - type: DnaLockable
 
 - type: entity
   name: pulse shotgun
@@ -403,3 +412,4 @@
       gunModifiers:
         soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
       magState: heal-mag
+  - type: DnaLockable
