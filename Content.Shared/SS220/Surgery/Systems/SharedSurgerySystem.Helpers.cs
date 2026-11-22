@@ -57,6 +57,10 @@ public abstract partial class SharedSurgerySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, performer, target, used);
 
+            // without a patient (e.g. the surgeon's handbook) there is nothing to check on it
+            if (target is null && requirement.Subject is SurgeryGraphRequirementSubject.Target or SurgeryGraphRequirementSubject.Strap)
+                continue;
+
             if (requirement.SatisfiesRequirements(requirementTarget, performer, used, EntityManager))
                 continue;
 
@@ -106,7 +110,7 @@ public abstract partial class SharedSurgerySystem
 
     protected virtual void ProceedToNextStep(Entity<SurgeryPatientComponent> entity, EntityUid user, EntityUid? used, ProtoId<SurgeryGraphPrototype> surgeryGraph, SurgeryGraphEdge chosenEdge, bool predicted)
     {
-        ChangeSurgeryNode(entity, surgeryGraph, chosenEdge.Target, user, used, predicted);
+        ChangeSurgeryNode(entity, surgeryGraph, chosenEdge.Target, user, used, predicted, SurgeryGraph.Popup(chosenEdge));
 
         var sound = SurgeryGraph.GetSoundSpecifier(chosenEdge);
         if (predicted)
@@ -118,10 +122,10 @@ public abstract partial class SharedSurgerySystem
             EndOperation(entity!, surgeryGraph, user);
     }
 
-    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, string targetNode, EntityUid performer, EntityUid? used, bool predicted = true)
+    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, string targetNode, EntityUid performer, EntityUid? used, bool predicted = true, LocId? edgePopup = null)
     {
         var surgeryProto = _prototype.Index(surgeryGraph);
-        ChangeSurgeryNode(entity, performer, used, surgeryProto, targetNode, predicted);
+        ChangeSurgeryNode(entity, performer, used, surgeryProto, targetNode, predicted, edgePopup);
     }
 
     protected void StartSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, EntityUid performer, EntityUid? used)
@@ -132,7 +136,7 @@ public abstract partial class SharedSurgerySystem
         ChangeSurgeryNode(entity, performer, used, surgeryProto, surgeryProto.Start);
     }
 
-    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, EntityUid performer, EntityUid? used, SurgeryGraphPrototype surgeryGraph, string targetNode, bool predicted = true)
+    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, EntityUid performer, EntityUid? used, SurgeryGraphPrototype surgeryGraph, string targetNode, bool predicted = true, LocId? edgePopup = null)
     {
         if (!surgeryGraph.TryGetNode(targetNode, out var foundNode))
         {
@@ -146,7 +150,7 @@ public abstract partial class SharedSurgerySystem
         entity.Comp.OngoingSurgeries[surgeryGraph.ID] = foundNode.Name;
         Dirty(entity);
 
-        if (SurgeryGraph.Popup(foundNode) is not { } popup)
+        if ((edgePopup ?? SurgeryGraph.Popup(foundNode)) is not { } popup)
             return;
 
         var message = Loc.GetString(popup,

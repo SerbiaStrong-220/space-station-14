@@ -257,8 +257,11 @@
   - type: Sprite
     sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
     state: shears
+  # own sprite instead of the saw's, it has no in-hand states yet
   - type: Item
     size: Normal
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    heldPrefix: null
   - type: SurgeryTool
     toolType: Shears
     additionalToolTypes:

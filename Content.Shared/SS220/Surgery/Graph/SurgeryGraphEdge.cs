@@ -58,6 +58,20 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     public float? FailureChance { get; private set; }
 
     /// <summary>
+    /// The step doesn't hurt whatever is used, e.g. taking off a prosthesis.
+    /// </summary>
+    [DataField]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public bool? Painless { get; private set; }
+
+    /// <summary>
+    /// Shown instead of the target node's popup, e.g. a prosthesis installed straight into the end node doesn't seal a wound.
+    /// </summary>
+    [DataField]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public LocId? Popup { get; private set; }
+
+    /// <summary>
     /// This sound will be played when graph gets to target node
     /// </summary>
     [DataField("sound")]

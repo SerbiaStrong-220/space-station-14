@@ -1,0 +1,275 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Artificial limbs. Each arm and leg comes with its hand or foot attached.
+
+- type: entity
+  abstract: true
+  id: BaseProsthesis
+  components:
+  - type: Prosthesis
+  # no skin, so no markings either
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
+
+- type: entity
+  abstract: true
+  parent: BaseProsthesis
+  id: BaseProsthesisWooden
+  components:
+  # wood breaks apart in a blast easier than flesh
+  - type: Prosthesis
+    explosionDismemberModifier: 1.5
+  - type: Sprite
+    sprite: SS220/Mobs/Prosthetics/wooden.rsi
+  - type: VisualOrgan
+    data:
+      sprite: SS220/Mobs/Prosthetics/wooden.rsi
+      # without a color the body layer keeps the skin color of the limb it replaces
+      color: "#FFFFFF"
+
+- type: entity
+  parent: [ OrganBaseArmLeft, BaseProsthesisWooden ]
+  id: ProsthesisWoodenArmLeft
+  name: wooden left arm
+  components:
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisWoodenHandLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, BaseProsthesisWooden ]
+  id: ProsthesisWoodenArmRight
+  name: wooden right arm
+  components:
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisWoodenHandRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, BaseProsthesisWooden ]
+  id: ProsthesisWoodenHandLeft
+  name: wooden left hand
+  components:
+  # a hook can't hold a gun
+  - type: HandOrgan
+    handID: left
+    data:
+      location: Left
+      blacklist:
+        components:
+        - Gun
+
+- type: entity
+  parent: [ OrganBaseHandRight, BaseProsthesisWooden ]
+  id: ProsthesisWoodenHandRight
+  name: wooden right hand
+  components:
+  # a hook can't hold a gun
+  - type: HandOrgan
+    handID: right
+    data:
+      location: Right
+      blacklist:
+        components:
+        - Gun
+
+- type: entity
+  parent: [ OrganBaseLegLeft, BaseProsthesisWooden ]
+  id: ProsthesisWoodenLegLeft
+  name: wooden left leg
+  components:
+  - type: Prosthesis
+    speedModifier: 0.9
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisWoodenFootLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, BaseProsthesisWooden ]
+  id: ProsthesisWoodenLegRight
+  name: wooden right leg
+  components:
+  - type: Prosthesis
+    speedModifier: 0.9
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisWoodenFootRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, BaseProsthesisWooden ]
+  id: ProsthesisWoodenFootLeft
+  name: wooden left foot
+
+- type: entity
+  parent: [ OrganBaseFootRight, BaseProsthesisWooden ]
+  id: ProsthesisWoodenFootRight
+  name: wooden right foot
+
+- type: entity
+  abstract: true
+  parent: BaseProsthesis
+  id: BaseProsthesisCyber
+  components:
+  - type: Sprite
+    sprite: SS220/Mobs/Species/Ipc/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: SS220/Mobs/Species/Ipc/parts.rsi
+      # without a color the body layer keeps the skin color of the limb it replaces
+      color: "#FFFFFF"
+
+- type: entity
+  parent: [ OrganBaseArmLeft, BaseProsthesisCyber ]
+  id: ProsthesisCyberArmLeft
+  name: cybernetic left arm
+  components:
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisCyberHandLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, BaseProsthesisCyber ]
+  id: ProsthesisCyberArmRight
+  name: cybernetic right arm
+  components:
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisCyberHandRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, BaseProsthesisCyber ]
+  id: ProsthesisCyberHandLeft
+  name: cybernetic left hand
+  components:
+  - type: Prosthesis
+    empHandJamTime: 10
+
+- type: entity
+  parent: [ OrganBaseHandRight, BaseProsthesisCyber ]
+  id: ProsthesisCyberHandRight
+  name: cybernetic right hand
+  components:
+  - type: Prosthesis
+    empHandJamTime: 10
+
+- type: entity
+  parent: [ OrganBaseLegLeft, BaseProsthesisCyber ]
+  id: ProsthesisCyberLegLeft
+  name: cybernetic left leg
+  components:
+  - type: Prosthesis
+    empKnockdownTime: 4
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisCyberFootLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, BaseProsthesisCyber ]
+  id: ProsthesisCyberLegRight
+  name: cybernetic right leg
+  components:
+  - type: Prosthesis
+    empKnockdownTime: 4
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisCyberFootRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, BaseProsthesisCyber ]
+  id: ProsthesisCyberFootLeft
+  name: cybernetic left foot
+  components:
+  # a foot alone only trips the body, a whole leg keeps it down
+  - type: Prosthesis
+    empKnockdownTime: 0.5
+
+- type: entity
+  parent: [ OrganBaseFootRight, BaseProsthesisCyber ]
+  id: ProsthesisCyberFootRight
+  name: cybernetic right foot
+  components:
+  # a foot alone only trips the body, a whole leg keeps it down
+  - type: Prosthesis
+    empKnockdownTime: 0.5
+
+- type: entity
+  abstract: true
+  parent: BaseProsthesis
+  id: BaseProsthesisAdvancedCyber
+  components:
+  - type: Sprite
+    sprite: SS220/Mobs/Prosthetics/advanced_cyber.rsi
+  - type: VisualOrgan
+    data:
+      sprite: SS220/Mobs/Prosthetics/advanced_cyber.rsi
+      # without a color the body layer keeps the skin color of the limb it replaces
+      color: "#FFFFFF"
+
+- type: entity
+  parent: [ OrganBaseArmLeft, BaseProsthesisAdvancedCyber ]
+  id: ProsthesisAdvancedCyberArmLeft
+  name: advanced cybernetic left arm
+  components:
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisAdvancedCyberHandLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, BaseProsthesisAdvancedCyber ]
+  id: ProsthesisAdvancedCyberArmRight
+  name: advanced cybernetic right arm
+  components:
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisAdvancedCyberHandRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, BaseProsthesisAdvancedCyber ]
+  id: ProsthesisAdvancedCyberHandLeft
+  name: advanced cybernetic left hand
+
+- type: entity
+  parent: [ OrganBaseHandRight, BaseProsthesisAdvancedCyber ]
+  id: ProsthesisAdvancedCyberHandRight
+  name: advanced cybernetic right hand
+
+- type: entity
+  parent: [ OrganBaseLegLeft, BaseProsthesisAdvancedCyber ]
+  id: ProsthesisAdvancedCyberLegLeft
+  name: advanced cybernetic left leg
+  components:
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisAdvancedCyberFootLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, BaseProsthesisAdvancedCyber ]
+  id: ProsthesisAdvancedCyberLegRight
+  name: advanced cybernetic right leg
+  components:
+  - type: ContainerFill
+    containers:
+      limb_attached_organs:
+      - ProsthesisAdvancedCyberFootRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, BaseProsthesisAdvancedCyber ]
+  id: ProsthesisAdvancedCyberFootLeft
+  name: advanced cybernetic left foot
+
+- type: entity
+  parent: [ OrganBaseFootRight, BaseProsthesisAdvancedCyber ]
+  id: ProsthesisAdvancedCyberFootRight
+  name: advanced cybernetic right foot

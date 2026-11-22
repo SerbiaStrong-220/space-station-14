@@ -357,7 +357,7 @@ public abstract partial class SharedSurgerySystem
         if (IsImprovisedForEdge(tool, edge))
             failEv.FlatModifier += ImprovisedToolFailurePenalty;
 
-        if (!IsPatientAnesthetized(patient) && !IsPainlessTool(tool))
+        if (!IsPatientAnesthetized(patient) && !IsPainlessTool(tool) && !SurgeryGraph.IsPainless(edge))
             failEv.FlatModifier += UnanesthetizedFailurePenalty;
 
         var total = failEv.FlatModifier * failEv.Multiplier;

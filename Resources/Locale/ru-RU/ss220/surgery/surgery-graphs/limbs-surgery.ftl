@@ -32,6 +32,10 @@ to-seal-limb-incision = Зашить разрез на конечности
 to-amputate-limb = Ампутировать конечность
 to-amputate-limb-shears = Отсечь конечность ножницами
 to-attach-limb = Пришить конечность
+to-install-prosthesis = Установить протез
+to-remove-prosthesis = Снять протез
+install-prosthesis-popup = {THE($user)} устанавливает протез {THE($target)}
+remove-prosthesis-popup = {THE($user)} снимает протез с {THE($target)}, используя {$used}
 
 limb-amputated-examine-description = На месте конечности свежая культя.
 limb-amputated-popup = {THE($user)} отсекает конечность {THE($target)}, используя {$used}

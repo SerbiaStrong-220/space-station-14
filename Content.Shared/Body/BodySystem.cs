@@ -83,6 +83,8 @@ public sealed partial class BodySystem : EntitySystem
         var ev = new OrganGotRemovedEvent(ent);
         RaiseLocalEvent(args.Entity, ref ev);
 
+        LeaveDnaOnOrgan(ent, args.Entity); //SS220-surgery-update
+
         if (organ.Body == null)
             return;
 

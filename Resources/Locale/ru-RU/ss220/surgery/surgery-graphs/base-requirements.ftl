@@ -52,6 +52,14 @@ surgery-requirement-hold-organ-description = Держать в руке орга
 surgery-requirement-hold-organ-failure = Нужно держать в руке орган: { $organ }!
 surgery-requirement-no-organ-description = У пациента не должно быть органа: [color=lightblue]{ $organ }[/color]
 surgery-requirement-no-organ-failure = У пациента уже есть этот орган ({ $organ })!
+surgery-requirement-no-prosthesis-description = Вместо органа не должен стоять протез: [color=lightblue]{ $organ }[/color]
+surgery-requirement-no-prosthesis-failure = Здесь стоит протез ({ $organ }), его нужно снять!
+surgery-requirement-has-prosthesis-description = У пациента должен стоять протез: [color=lightblue]{ $organ }[/color]
+surgery-requirement-has-prosthesis-failure = Протеза ({ $organ }) здесь нет!
+surgery-requirement-hold-prosthesis-description = Держать в руке протез: [color=lightblue]{ $organ }[/color]
+surgery-requirement-hold-prosthesis-failure = Нужно держать в руке протез: { $organ }!
+surgery-requirement-hold-not-prosthesis-description = Пришить можно только живую часть тела: [color=lightblue]{ $organ }[/color]
+surgery-requirement-hold-not-prosthesis-failure = Протез не пришивают, его устанавливают!
 surgery-requirement-compatible-organ-description = Орган должен подходить [color=lightblue]организму пациента[/color]
 surgery-requirement-compatible-organ-failure = Этот орган несовместим с организмом пациента!
 surgery-requirement-has-bones-description = У пациента есть [color=lightblue]кости[/color]

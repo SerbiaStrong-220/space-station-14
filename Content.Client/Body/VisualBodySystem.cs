@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Client.DisplacementMap;
-using Content.Client.SS220.Body; //SS220-surgery-update
+using Content.Client.SS220.Body;
 using Content.Shared.Body;
 using Content.Shared.CCVar;
 using Content.Shared.Humanoid.Markings;

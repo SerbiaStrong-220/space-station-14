@@ -19,8 +19,8 @@ to-retract-head-skin = Расширить надрез на голове
 to-head-check-implant = Проверить наличие имплантов
 to-head-change-tts = Изменить структуру связок
 to-saw-skull-bone = Распилить череп
-to-part-head-jelly = Раздвинуть желе головы
-to-close-head-jelly = Сомкнуть желе головы
+to-part-head-soft-tissue = Раздвинуть мягкие ткани головы
+to-close-head-soft-tissue = Сомкнуть мягкие ткани головы
 saw-skull-bone-examine = Голова вскрыта до оболочек мозга.
 saw-skull-bone-popup = {THE($user)} вскрывает голову {THE($target)}, используя {$used}
 to-retract-head-skin-after-gel = Завершить сращивание черепа
@@ -56,22 +56,22 @@ remove-head-bullet-fragments = Убрать инородные тела в го�
 surgery-pathology-requirement-description-head-fragments = Инородные тела в голове пациента
 surgery-pathology-requirement-failure-head-fragments = Для этого действия требуется наличие инородных тел в голове пациента, но при внимательном осмотре вы их не нашли!
 
-surgery-syndicate-agent-knowledge-requirement-description = Для этого действия требуется особая подготовка.
+surgery-syndicate-agent-knowledge-requirement-description = Особая подготовка
 surgery-syndicate-agent-knowledge-requirement-failure = Вы не понимаете что хотите делать!
 
 surgery-requirement-scanner-required = Сканер имплантов
 surgery-requirement-fixer-required = [color=red]{ CAPITALIZE(ent-MindslaveFixerCerebralImplant) }[/color]
 
-surgery-requirement-slave-target = В мозгу пациента должен быть имплант [color=red]"{ent-MindSlaveImplant}"[/color]
+surgery-requirement-slave-target = В мозгу пациента должен быть [color=red]имплант подчинения разума[/color]
 
-to-brain-exposed-heal-brain-damage = Этот шаг позволит убрать поврежденные ткани в мозгу пациента
+to-brain-exposed-heal-brain-damage = Удалить отмершие ткани мозга (снижает урон мозгу)
 
-surgery-requirement-total-damage-requirement-brain-damage-heal-description = Отсекает поврежденные ткани в мозгу пациента, позволяя организму быстрее регенерировать!
+surgery-requirement-total-damage-requirement-brain-damage-heal-description = Мозг пациента должен быть повреждён
 surgery-requirement-total-damage-requirement-brain-damage-no-damage = Для этого действия требуется наличие повреждённого мозга, но мозг пациента не имеет поврежденных областей
 
-remove-brain-pathology = Иссечь поврежденные нервные ткани
+remove-brain-pathology = Устранить неврологическое расстройство (немота, слепота, нарколепсия и т. п.)
 
-surgery-pathology-requirement-description-remove-brain-pathology = Присутствие неврологических отклонений
+surgery-pathology-requirement-description-remove-brain-pathology = У пациента должно быть неврологическое расстройство
 surgery-pathology-requirement-failure-remove-brain-pathology = Для этого действия требуется наличие повреждённых участков в мозгу, но Вы их не находите.
 
 to-prep-cranial-fissure = Зачистить края трещины черепа

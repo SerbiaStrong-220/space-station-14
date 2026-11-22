@@ -46,6 +46,19 @@ public sealed partial class PathologyPrototype : IPrototype
     public ProtoId<OrganCategoryPrototype>? MissingOrgan;
 
     /// <summary>
+    /// While this pathology is active, the status effects of these ones don't apply,
+    /// e.g. the slowdown of a missing leg replaces the one of the missing foot it took along.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<PathologyPrototype>> OverridesStatusEffects = new();
+
+    /// <summary>
+    /// The missing organ is the whole body part of <see cref="TargetZone"/>, e.g. a severed arm, so body dolls show the zone as gone.
+    /// </summary>
+    [DataField]
+    public bool MissingPart;
+
+    /// <summary>
     /// If set, an organ extracted from a rotten body stores this pathology at its last level.
     /// </summary>
     [DataField]

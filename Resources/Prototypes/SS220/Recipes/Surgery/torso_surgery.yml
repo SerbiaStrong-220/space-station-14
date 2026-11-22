@@ -208,9 +208,9 @@
           components:
           - Boneless
     - to: saw-rib-bone
-      id: part-torso-jelly
+      id: part-torso-soft-tissue
       baseEdge: retract-skin
-      edgeTooltip: to-part-torso-jelly
+      edgeTooltip: to-part-torso-soft-tissue
       visibilityRequirements:
       - !type:WhitelistRequirement
         subject: target
@@ -720,9 +720,9 @@
           components:
           - Boneless
     - to: retract-torso-skin
-      id: close-torso-jelly
+      id: close-torso-soft-tissue
       baseEdge: retract-skin
-      edgeTooltip: to-close-torso-jelly
+      edgeTooltip: to-close-torso-soft-tissue
       visibilityRequirements:
       - !type:WhitelistRequirement
         subject: target

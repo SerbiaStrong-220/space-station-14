@@ -52,7 +52,40 @@ public abstract partial class SharedPathologySystem : EntitySystem
             UpdateStackableStatusEffect(entity, effectId);
         }
 
+        RefreshOverriddenStatusEffects(entity, pathologyPrototype);
         HandleTraumaSeverityChanged(entity, ref args);
+    }
+
+    /// <summary>
+    /// Takes off or puts back the status effects of the pathologies this one overrides, after it was added or removed.
+    /// </summary>
+    private void RefreshOverriddenStatusEffects(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)
+    {
+        foreach (var overriddenId in pathologyPrototype.OverridesStatusEffects)
+        {
+            if (!entity.Comp.ActivePathologies.TryGetValue(overriddenId, out var data) || !_prototype.Resolve(overriddenId, out var overridden))
+                continue;
+
+            var maxLevel = Math.Min(data.Level, overridden.Definition.Length - 1);
+            for (var i = 0; i <= maxLevel; i++)
+            {
+                foreach (var effectId in overridden.Definition[i].StatusEffects)
+                {
+                    UpdateStackableStatusEffect(entity, effectId);
+                }
+            }
+        }
+    }
+
+    private bool IsStatusEffectOverridden(PathologyHolderComponent holder, ProtoId<PathologyPrototype> pathologyId)
+    {
+        foreach (var otherId in holder.ActivePathologies.Keys)
+        {
+            if (_prototype.Resolve(otherId, out var otherProto) && otherProto.OverridesStatusEffects.Contains(pathologyId))
+                return true;
+        }
+
+        return false;
     }
 
     public void UpdateStackableStatusEffect(Entity<PathologyHolderComponent> entity, EntProtoId effectId)
@@ -67,12 +100,16 @@ public abstract partial class SharedPathologySystem : EntitySystem
             if (level < 0)
                 continue;
 
-            if (otherProto.Definition[level].StatusEffects.Contains(effectId))
+            if (otherProto.Definition[level].StatusEffects.Contains(effectId) && !IsStatusEffectOverridden(entity.Comp, otherId))
                 totalStacks += otherData.StackCount;
         }
 
         if (totalStacks <= 0)
+        {
+            // every pathology still using the effect is overridden
+            _statusEffects.TryRemoveStatusEffect(entity.Owner, effectId);
             return;
+        }
 
         var alreadyApplied = _statusEffects.HasStatusEffect(entity.Owner, effectId);
         if (!_statusEffects.TryUpdateStatusEffectDuration(entity.Owner, effectId, out var effect, null, null))

@@ -44,6 +44,16 @@ public sealed partial class SurgeryGraphSystem : EntitySystem
         return Get(node, (x) => x.NodeText.Popup);
     }
 
+    public LocId? Popup(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.Popup);
+    }
+
+    public bool IsPainless(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.Painless) ?? false;
+    }
+
     public float? Delay(SurgeryGraphEdge edge)
     {
         return Get(edge, (x) => x.Delay);

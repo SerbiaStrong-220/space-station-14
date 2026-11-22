@@ -1,0 +1,33 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: construction
+  id: ProsthesisWoodenArmLeft
+  graph: ProsthesisWoodenArmLeft
+  startNode: start
+  targetNode: prosthesis
+  category: construction-category-utilities
+  objectType: Item
+
+- type: construction
+  id: ProsthesisWoodenArmRight
+  graph: ProsthesisWoodenArmRight
+  startNode: start
+  targetNode: prosthesis
+  category: construction-category-utilities
+  objectType: Item
+
+- type: construction
+  id: ProsthesisWoodenLegLeft
+  graph: ProsthesisWoodenLegLeft
+  startNode: start
+  targetNode: prosthesis
+  category: construction-category-utilities
+  objectType: Item
+
+- type: construction
+  id: ProsthesisWoodenLegRight
+  graph: ProsthesisWoodenLegRight
+  startNode: start
+  targetNode: prosthesis
+  category: construction-category-utilities
+  objectType: Item

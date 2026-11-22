@@ -51,11 +51,81 @@
       id: leftarm-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
+    - to: seal-wound
+      id: leftarm-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmLeft
+    - to: seal-wound
+      id: leftarm-remove-prosthesis
+      baseEdge: remove-prosthesis
+      edgeTooltip: to-remove-prosthesis
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-has-prosthesis-description
+        failureMessage: surgery-requirement-has-prosthesis-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: ArmLeft
     - to: leftarm-amputated
       id: leftarm-amputate-shears
       baseEdge: amputate-limb-shears
       edgeTooltip: to-amputate-limb-shears
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
       - !type:HasOrganRequirement
         subject: target
         category: ArmLeft
@@ -66,7 +136,12 @@
       - !type:ExtractOrganAction
         category: ArmLeft
       - !type:ApplyBleedingAction
-        bleedAmount: 4
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 20
 
   - node: leftarm-skin-incision
     baseNode: incision
@@ -207,6 +282,40 @@
       actions:
       - !type:ExtractOrganAction
         category: ArmLeft
+    - to: seal-wound
+      id: leftarm-retract-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: leftarm-attached
       id: leftarm-attach
       baseEdge: attach-limb
@@ -215,6 +324,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: l_arm
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: ArmLeft
@@ -318,6 +437,40 @@
   - node: leftarm-amputated
     baseNode: limb-amputated
     edges:
+    - to: seal-wound
+      id: leftarm-amputated-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: leftarm-attached
       id: leftarm-amputated-attach
       baseEdge: attach-limb
@@ -326,6 +479,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: l_arm
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: ArmLeft
+        organName: surgery-organ-name-arm-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: ArmLeft
@@ -354,6 +517,10 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-limb-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
 
   - node: leftarm-attached
     baseNode: limb-attached
@@ -417,11 +584,81 @@
       id: rightarm-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
+    - to: seal-wound
+      id: rightarm-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmRight
+    - to: seal-wound
+      id: rightarm-remove-prosthesis
+      baseEdge: remove-prosthesis
+      edgeTooltip: to-remove-prosthesis
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-has-prosthesis-description
+        failureMessage: surgery-requirement-has-prosthesis-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: ArmRight
     - to: rightarm-amputated
       id: rightarm-amputate-shears
       baseEdge: amputate-limb-shears
       edgeTooltip: to-amputate-limb-shears
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
       - !type:HasOrganRequirement
         subject: target
         category: ArmRight
@@ -432,7 +669,12 @@
       - !type:ExtractOrganAction
         category: ArmRight
       - !type:ApplyBleedingAction
-        bleedAmount: 4
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 20
 
   - node: rightarm-skin-incision
     baseNode: incision
@@ -573,6 +815,40 @@
       actions:
       - !type:ExtractOrganAction
         category: ArmRight
+    - to: seal-wound
+      id: rightarm-retract-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmRight
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: rightarm-attached
       id: rightarm-attach
       baseEdge: attach-limb
@@ -581,6 +857,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: r_arm
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: ArmRight
@@ -684,6 +970,40 @@
   - node: rightarm-amputated
     baseNode: limb-amputated
     edges:
+    - to: seal-wound
+      id: rightarm-amputated-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_arm
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: ArmRight
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: rightarm-attached
       id: rightarm-amputated-attach
       baseEdge: attach-limb
@@ -692,6 +1012,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: r_arm
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: ArmRight
+        organName: surgery-organ-name-arm-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: ArmRight
@@ -720,6 +1050,10 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-limb-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
 
   - node: rightarm-attached
     baseNode: limb-attached
@@ -766,6 +1100,16 @@
     organName: surgery-organ-name-arm-left
     description: surgery-requirement-has-organ-description
     failureMessage: surgery-requirement-has-organ-failure
+  - !type:HasOrganRequirement
+    subject: target
+    invert: true
+    category: ArmLeft
+    organName: surgery-organ-name-arm-left
+    whitelist:
+      components:
+      - Prosthesis
+    description: surgery-requirement-no-prosthesis-description
+    failureMessage: surgery-requirement-no-prosthesis-failure
   start: start-lefthand-surgery
   end: seal-wound
   graph:
@@ -794,11 +1138,81 @@
       id: lefthand-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
+    - to: seal-wound
+      id: lefthand-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandLeft
+    - to: seal-wound
+      id: lefthand-remove-prosthesis
+      baseEdge: remove-prosthesis
+      edgeTooltip: to-remove-prosthesis
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-has-prosthesis-description
+        failureMessage: surgery-requirement-has-prosthesis-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: HandLeft
     - to: lefthand-amputated
       id: lefthand-amputate-shears
       baseEdge: amputate-limb-shears
       edgeTooltip: to-amputate-limb-shears
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
       - !type:HasOrganRequirement
         subject: target
         category: HandLeft
@@ -809,7 +1223,12 @@
       - !type:ExtractOrganAction
         category: HandLeft
       - !type:ApplyBleedingAction
-        bleedAmount: 4
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 20
 
   - node: lefthand-skin-incision
     baseNode: incision
@@ -894,6 +1313,40 @@
       actions:
       - !type:ExtractOrganAction
         category: HandLeft
+    - to: seal-wound
+      id: lefthand-retract-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: lefthand-attached
       id: lefthand-attach
       baseEdge: attach-limb
@@ -902,6 +1355,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: l_hand
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: HandLeft
@@ -955,6 +1418,40 @@
   - node: lefthand-amputated
     baseNode: limb-amputated
     edges:
+    - to: seal-wound
+      id: lefthand-amputated-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: lefthand-attached
       id: lefthand-amputated-attach
       baseEdge: attach-limb
@@ -963,6 +1460,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: l_hand
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: HandLeft
+        organName: surgery-organ-name-hand-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: HandLeft
@@ -991,6 +1498,10 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-limb-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
 
   - node: lefthand-attached
     baseNode: limb-attached
@@ -1037,6 +1548,16 @@
     organName: surgery-organ-name-arm-right
     description: surgery-requirement-has-organ-description
     failureMessage: surgery-requirement-has-organ-failure
+  - !type:HasOrganRequirement
+    subject: target
+    invert: true
+    category: ArmRight
+    organName: surgery-organ-name-arm-right
+    whitelist:
+      components:
+      - Prosthesis
+    description: surgery-requirement-no-prosthesis-description
+    failureMessage: surgery-requirement-no-prosthesis-failure
   start: start-righthand-surgery
   end: seal-wound
   graph:
@@ -1065,11 +1586,81 @@
       id: righthand-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
+    - to: seal-wound
+      id: righthand-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandRight
+    - to: seal-wound
+      id: righthand-remove-prosthesis
+      baseEdge: remove-prosthesis
+      edgeTooltip: to-remove-prosthesis
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-has-prosthesis-description
+        failureMessage: surgery-requirement-has-prosthesis-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: HandRight
     - to: righthand-amputated
       id: righthand-amputate-shears
       baseEdge: amputate-limb-shears
       edgeTooltip: to-amputate-limb-shears
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
       - !type:HasOrganRequirement
         subject: target
         category: HandRight
@@ -1080,7 +1671,12 @@
       - !type:ExtractOrganAction
         category: HandRight
       - !type:ApplyBleedingAction
-        bleedAmount: 4
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 20
 
   - node: righthand-skin-incision
     baseNode: incision
@@ -1165,6 +1761,40 @@
       actions:
       - !type:ExtractOrganAction
         category: HandRight
+    - to: seal-wound
+      id: righthand-retract-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandRight
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: righthand-attached
       id: righthand-attach
       baseEdge: attach-limb
@@ -1173,6 +1803,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: r_hand
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: HandRight
@@ -1226,6 +1866,40 @@
   - node: righthand-amputated
     baseNode: limb-amputated
     edges:
+    - to: seal-wound
+      id: righthand-amputated-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_hand
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: HandRight
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: righthand-attached
       id: righthand-amputated-attach
       baseEdge: attach-limb
@@ -1234,6 +1908,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: r_hand
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: HandRight
+        organName: surgery-organ-name-hand-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: HandRight
@@ -1262,6 +1946,10 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-limb-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
 
   - node: righthand-attached
     baseNode: limb-attached
@@ -1325,11 +2013,81 @@
       id: leftleg-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
+    - to: seal-wound
+      id: leftleg-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegLeft
+    - to: seal-wound
+      id: leftleg-remove-prosthesis
+      baseEdge: remove-prosthesis
+      edgeTooltip: to-remove-prosthesis
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-has-prosthesis-description
+        failureMessage: surgery-requirement-has-prosthesis-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: LegLeft
     - to: leftleg-amputated
       id: leftleg-amputate-shears
       baseEdge: amputate-limb-shears
       edgeTooltip: to-amputate-limb-shears
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
       - !type:HasOrganRequirement
         subject: target
         category: LegLeft
@@ -1340,7 +2098,12 @@
       - !type:ExtractOrganAction
         category: LegLeft
       - !type:ApplyBleedingAction
-        bleedAmount: 4
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 20
 
   - node: leftleg-skin-incision
     baseNode: incision
@@ -1481,6 +2244,40 @@
       actions:
       - !type:ExtractOrganAction
         category: LegLeft
+    - to: seal-wound
+      id: leftleg-retract-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: leftleg-attached
       id: leftleg-attach
       baseEdge: attach-limb
@@ -1489,6 +2286,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: l_leg
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: LegLeft
@@ -1592,6 +2399,40 @@
   - node: leftleg-amputated
     baseNode: limb-amputated
     edges:
+    - to: seal-wound
+      id: leftleg-amputated-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: leftleg-attached
       id: leftleg-amputated-attach
       baseEdge: attach-limb
@@ -1600,6 +2441,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: l_leg
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: LegLeft
+        organName: surgery-organ-name-leg-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: LegLeft
@@ -1628,6 +2479,10 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-limb-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
 
   - node: leftleg-attached
     baseNode: limb-attached
@@ -1691,11 +2546,81 @@
       id: rightleg-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
+    - to: seal-wound
+      id: rightleg-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegRight
+    - to: seal-wound
+      id: rightleg-remove-prosthesis
+      baseEdge: remove-prosthesis
+      edgeTooltip: to-remove-prosthesis
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-has-prosthesis-description
+        failureMessage: surgery-requirement-has-prosthesis-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: LegRight
     - to: rightleg-amputated
       id: rightleg-amputate-shears
       baseEdge: amputate-limb-shears
       edgeTooltip: to-amputate-limb-shears
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
       - !type:HasOrganRequirement
         subject: target
         category: LegRight
@@ -1706,7 +2631,12 @@
       - !type:ExtractOrganAction
         category: LegRight
       - !type:ApplyBleedingAction
-        bleedAmount: 4
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 20
 
   - node: rightleg-skin-incision
     baseNode: incision
@@ -1847,6 +2777,40 @@
       actions:
       - !type:ExtractOrganAction
         category: LegRight
+    - to: seal-wound
+      id: rightleg-retract-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegRight
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: rightleg-attached
       id: rightleg-attach
       baseEdge: attach-limb
@@ -1855,6 +2819,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: r_leg
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: LegRight
@@ -1958,6 +2932,40 @@
   - node: rightleg-amputated
     baseNode: limb-amputated
     edges:
+    - to: seal-wound
+      id: rightleg-amputated-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_leg
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: LegRight
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: rightleg-attached
       id: rightleg-amputated-attach
       baseEdge: attach-limb
@@ -1966,6 +2974,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: r_leg
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: LegRight
+        organName: surgery-organ-name-leg-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: LegRight
@@ -1994,6 +3012,10 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-limb-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
 
   - node: rightleg-attached
     baseNode: limb-attached
@@ -2041,6 +3063,16 @@
     organName: surgery-organ-name-leg-left
     description: surgery-requirement-has-organ-description
     failureMessage: surgery-requirement-has-organ-failure
+  - !type:HasOrganRequirement
+    subject: target
+    invert: true
+    category: LegLeft
+    organName: surgery-organ-name-leg-left
+    whitelist:
+      components:
+      - Prosthesis
+    description: surgery-requirement-no-prosthesis-description
+    failureMessage: surgery-requirement-no-prosthesis-failure
   start: start-leftfoot-surgery
   end: seal-wound
   graph:
@@ -2069,11 +3101,81 @@
       id: leftfoot-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
+    - to: seal-wound
+      id: leftfoot-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootLeft
+    - to: seal-wound
+      id: leftfoot-remove-prosthesis
+      baseEdge: remove-prosthesis
+      edgeTooltip: to-remove-prosthesis
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-has-prosthesis-description
+        failureMessage: surgery-requirement-has-prosthesis-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: FootLeft
     - to: leftfoot-amputated
       id: leftfoot-amputate-shears
       baseEdge: amputate-limb-shears
       edgeTooltip: to-amputate-limb-shears
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
       - !type:HasOrganRequirement
         subject: target
         category: FootLeft
@@ -2084,7 +3186,12 @@
       - !type:ExtractOrganAction
         category: FootLeft
       - !type:ApplyBleedingAction
-        bleedAmount: 4
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 20
 
   - node: leftfoot-skin-incision
     baseNode: incision
@@ -2169,6 +3276,40 @@
       actions:
       - !type:ExtractOrganAction
         category: FootLeft
+    - to: seal-wound
+      id: leftfoot-retract-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: leftfoot-attached
       id: leftfoot-attach
       baseEdge: attach-limb
@@ -2177,6 +3318,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: l_foot
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: FootLeft
@@ -2230,6 +3381,40 @@
   - node: leftfoot-amputated
     baseNode: limb-amputated
     edges:
+    - to: seal-wound
+      id: leftfoot-amputated-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: l_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootLeft
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: leftfoot-attached
       id: leftfoot-amputated-attach
       baseEdge: attach-limb
@@ -2238,6 +3423,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: l_foot
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: FootLeft
+        organName: surgery-organ-name-foot-left
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: FootLeft
@@ -2266,6 +3461,10 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-limb-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
 
   - node: leftfoot-attached
     baseNode: limb-attached
@@ -2313,6 +3512,16 @@
     organName: surgery-organ-name-leg-right
     description: surgery-requirement-has-organ-description
     failureMessage: surgery-requirement-has-organ-failure
+  - !type:HasOrganRequirement
+    subject: target
+    invert: true
+    category: LegRight
+    organName: surgery-organ-name-leg-right
+    whitelist:
+      components:
+      - Prosthesis
+    description: surgery-requirement-no-prosthesis-description
+    failureMessage: surgery-requirement-no-prosthesis-failure
   start: start-rightfoot-surgery
   end: seal-wound
   graph:
@@ -2341,11 +3550,81 @@
       id: rightfoot-skin-incision
       baseEdge: incision
       edgeTooltip: to-limb-skin-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
+    - to: seal-wound
+      id: rightfoot-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootRight
+    - to: seal-wound
+      id: rightfoot-remove-prosthesis
+      baseEdge: remove-prosthesis
+      edgeTooltip: to-remove-prosthesis
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-has-prosthesis-description
+        failureMessage: surgery-requirement-has-prosthesis-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: FootRight
     - to: rightfoot-amputated
       id: rightfoot-amputate-shears
       baseEdge: amputate-limb-shears
       edgeTooltip: to-amputate-limb-shears
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-no-prosthesis-description
+        failureMessage: surgery-requirement-no-prosthesis-failure
       - !type:HasOrganRequirement
         subject: target
         category: FootRight
@@ -2356,7 +3635,12 @@
       - !type:ExtractOrganAction
         category: FootRight
       - !type:ApplyBleedingAction
-        bleedAmount: 4
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 20
 
   - node: rightfoot-skin-incision
     baseNode: incision
@@ -2441,6 +3725,40 @@
       actions:
       - !type:ExtractOrganAction
         category: FootRight
+    - to: seal-wound
+      id: rightfoot-retract-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootRight
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: rightfoot-attached
       id: rightfoot-attach
       baseEdge: attach-limb
@@ -2449,6 +3767,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: r_foot
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: FootRight
@@ -2502,6 +3830,40 @@
   - node: rightfoot-amputated
     baseNode: limb-amputated
     edges:
+    - to: seal-wound
+      id: rightfoot-amputated-install-prosthesis
+      baseEdge: install-prosthesis
+      edgeTooltip: to-install-prosthesis
+      edgeIcon:
+        sprite: SS220/Mobs/Species/Ipc/parts.rsi
+        state: r_foot
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-prosthesis-description
+        failureMessage: surgery-requirement-hold-prosthesis-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: FootRight
+      - !type:ApplyBleedingAction
+        bleedAmount: -2
     - to: rightfoot-attached
       id: rightfoot-amputated-attach
       baseEdge: attach-limb
@@ -2510,6 +3872,16 @@
         sprite: Mobs/Species/Human/parts.rsi
         state: r_foot
       visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        invert: true
+        category: FootRight
+        organName: surgery-organ-name-foot-right
+        whitelist:
+          components:
+          - Prosthesis
+        description: surgery-requirement-hold-not-prosthesis-description
+        failureMessage: surgery-requirement-hold-not-prosthesis-failure
       - !type:HasOrganRequirement
         subject: used
         category: FootRight
@@ -2538,6 +3910,10 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-limb-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
 
   - node: rightfoot-attached
     baseNode: limb-attached

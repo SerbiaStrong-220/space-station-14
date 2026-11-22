@@ -3,6 +3,7 @@
 using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
+using Content.Shared.SS220.Body;
 using Content.Shared.SS220.Surgery.Graph;
 using Robust.Shared.Prototypes;
 
@@ -10,6 +11,7 @@ namespace Content.Server.SS220.Surgery.Actions;
 
 /// <summary>
 /// Inserts the used organ into the patient. Edge requirements must ensure that the used item is an organ of the category.
+/// A living organ of another species is rejected, a prosthesis never is.
 /// </summary>
 [DataDefinition]
 public sealed partial class InsertOrganAction : ISurgeryGraphEdgeAction
@@ -32,7 +34,9 @@ public sealed partial class InsertOrganAction : ISurgeryGraphEdgeAction
         if (!bodySystem.TryInsertOrgan(targetUid, organ))
             return;
 
-        if (RejectionDamage is null || entityManager.System<InitialBodySystem>().IsSpeciesOrgan(targetUid, organ))
+        if (RejectionDamage is null
+            || entityManager.HasComponent<ProsthesisComponent>(organ)
+            || entityManager.System<InitialBodySystem>().IsSpeciesOrgan(targetUid, organ))
             return;
 
         entityManager.System<DamageableSystem>().TryChangeDamage(targetUid, RejectionDamage, ignoreResistances: true, origin: userUid);

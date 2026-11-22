@@ -1,12 +1,25 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Forensics;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Body;
 
 public sealed partial class BodySystem
 {
+    /// <summary>
+    /// A part that left the body in any way (surgery, dismemberment, gibbing) carries the owner's DNA, like blood on it would.
+    /// </summary>
+    private void LeaveDnaOnOrgan(EntityUid body, EntityUid organ)
+    {
+        if (TerminatingOrDeleted(organ) || TerminatingOrDeleted(body))
+            return;
+
+        var ev = new TransferDnaEvent { Donor = body, Recipient = organ, CanDnaBeCleaned = false };
+        RaiseLocalEvent(body, ref ev);
+    }
+
     public bool TryGetOrganByCategory(
         Entity<BodyComponent?> ent,
         ProtoId<OrganCategoryPrototype> category,

@@ -442,6 +442,39 @@
       description: surgery-requirement-tool-required-shears
       failureMessage: surgery-requirement-tool-miss
 
+# a prosthesis is put on its mount and ends the operation, there is nothing to seal
+- type: abstractSurgeryEdge
+  id: install-prosthesis
+  edge:
+    to: abstract
+    id: abstract
+    delay: 6
+    edgeTooltip: abstract
+    popup: install-prosthesis-popup
+    sound: /Audio/SS220/Surgery/organ.ogg
+
+# a prosthesis is pried off its mount, the stump isn't opened and doesn't hurt
+- type: abstractSurgeryEdge
+  id: remove-prosthesis
+  edge:
+    to: abstract
+    id: abstract
+    delay: 5
+    edgeTooltip: abstract
+    popup: remove-prosthesis-popup
+    painless: true
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: retractor
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: retractor
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-retractor
+      failureMessage: surgery-requirement-tool-miss
+
 - type: abstractSurgeryEdge
   id: attach-limb
   edge:

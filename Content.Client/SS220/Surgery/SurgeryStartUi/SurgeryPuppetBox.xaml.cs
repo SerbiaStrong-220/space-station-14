@@ -25,6 +25,8 @@ public sealed partial class SurgeryPuppetBox : Control
     private static readonly Color ModerateTraumaTint = Color.FromHex("#FFCC44");
     private static readonly Color SevereTraumaTint = Color.FromHex("#FF5555");
     private static readonly Color HealthyZoneTint = Color.FromHex("#4AC4FF");
+    // multiplied with the grey part texture: dark grey inside, darker outline
+    private static readonly Color MissingPartTint = Color.FromHex("#707070");
     private static readonly Vector2 CompactCropOffset = new(11f, 5f);
     private static readonly Vector2 CompactBaseSize = new(19f, 31f);
     private static readonly IReadOnlySet<SurgeryPuppetPart> EmptyZones = new HashSet<SurgeryPuppetPart>();
@@ -102,7 +104,7 @@ public sealed partial class SurgeryPuppetBox : Control
             _showBackground = value;
             ResizeAll();
             if (!_showBackground)
-                UpdateZoneStates(EmptyZones, EmptyZones, EmptyZones);
+                UpdateZoneStates(EmptyZones, EmptyZones, EmptyZones, EmptyZones);
         }
     }
 
@@ -157,7 +159,7 @@ public sealed partial class SurgeryPuppetBox : Control
 
         ResizeAll();
         if (!_showBackground)
-            UpdateZoneStates(EmptyZones, EmptyZones, EmptyZones);
+            UpdateZoneStates(EmptyZones, EmptyZones, EmptyZones, EmptyZones);
     }
 
     private Control? MakePuppetPartButton(SurgeryPuppetPart part, SortedDictionary<SurgeryPuppetPart, TextureRect> bodyPartTexture, Func<SurgeryPuppetPart, string?> pathSpecifier)
@@ -346,6 +348,7 @@ public sealed partial class SurgeryPuppetBox : Control
     {
         var moderateZones = new HashSet<SurgeryPuppetPart>();
         var severeZones = new HashSet<SurgeryPuppetPart>();
+        var missingZones = new HashSet<SurgeryPuppetPart>();
         var ongoingZones = new HashSet<SurgeryPuppetPart>();
         var zoneEntries = new Dictionary<SurgeryPuppetPart, List<string>>();
 
@@ -361,7 +364,9 @@ public sealed partial class SurgeryPuppetBox : Control
                 if (pathologyProto.TargetZone is not { } zone)
                     continue;
 
-                if (SharedPathologySystem.IsSevere(pathologyProto, instanceData))
+                if (pathologyProto.MissingPart)
+                    missingZones.Add(zone);
+                else if (SharedPathologySystem.IsSevere(pathologyProto, instanceData))
                     severeZones.Add(zone);
                 else
                     moderateZones.Add(zone);
@@ -396,20 +401,23 @@ public sealed partial class SurgeryPuppetBox : Control
             }
         }
 
-        UpdateZoneStates(moderateZones, severeZones, ongoingZones);
+        UpdateZoneStates(missingZones, moderateZones, severeZones, ongoingZones);
         UpdateTooltips(zoneEntries);
 
         var allTraumaZones = new HashSet<SurgeryPuppetPart>(moderateZones);
         allTraumaZones.UnionWith(severeZones);
+        allTraumaZones.UnionWith(missingZones);
         return (allTraumaZones, ongoingZones);
     }
 
     public void UpdateZoneStates(IReadOnlySet<SurgeryPuppetPart> traumaZones, IReadOnlySet<SurgeryPuppetPart> ongoingSurgeryZones)
     {
-        UpdateZoneStates(EmptyZones, traumaZones, ongoingSurgeryZones);
+        UpdateZoneStates(EmptyZones, EmptyZones, traumaZones, ongoingSurgeryZones);
     }
 
+    /// <param name="missingZones">Zones whose body part is gone.</param>
     public void UpdateZoneStates(
+        IReadOnlySet<SurgeryPuppetPart> missingZones,
         IReadOnlySet<SurgeryPuppetPart> moderateTraumaZones,
         IReadOnlySet<SurgeryPuppetPart> severeTraumaZones,
         IReadOnlySet<SurgeryPuppetPart> ongoingSurgeryZones)
@@ -421,6 +429,7 @@ public sealed partial class SurgeryPuppetBox : Control
         {
             texture.ModulateSelfOverride = ResolveZoneTint(
                 part,
+                missingZones,
                 moderateTraumaZones,
                 severeTraumaZones,
                 ongoingSurgeryZones,
@@ -430,13 +439,14 @@ public sealed partial class SurgeryPuppetBox : Control
 
         if (!Interactive)
         {
-            UpdateHeadSubOverlay(SurgeryPuppetPart.Eyes, moderateTraumaZones, severeTraumaZones, ongoingSurgeryZones);
-            UpdateHeadSubOverlay(SurgeryPuppetPart.Mouth, moderateTraumaZones, severeTraumaZones, ongoingSurgeryZones);
+            UpdateHeadSubOverlay(SurgeryPuppetPart.Eyes, missingZones, moderateTraumaZones, severeTraumaZones, ongoingSurgeryZones);
+            UpdateHeadSubOverlay(SurgeryPuppetPart.Mouth, missingZones, moderateTraumaZones, severeTraumaZones, ongoingSurgeryZones);
         }
     }
 
     private void UpdateHeadSubOverlay(
         SurgeryPuppetPart subPart,
+        IReadOnlySet<SurgeryPuppetPart> missingZones,
         IReadOnlySet<SurgeryPuppetPart> moderateTraumaZones,
         IReadOnlySet<SurgeryPuppetPart> severeTraumaZones,
         IReadOnlySet<SurgeryPuppetPart> ongoingSurgeryZones)
@@ -444,7 +454,7 @@ public sealed partial class SurgeryPuppetBox : Control
         if (!_highlightedPart.TryGetValue(subPart, out var overlay))
             return;
 
-        var tint = ResolveZoneTint(subPart, moderateTraumaZones, severeTraumaZones, ongoingSurgeryZones, false, null);
+        var tint = ResolveZoneTint(subPart, missingZones, moderateTraumaZones, severeTraumaZones, ongoingSurgeryZones, false, null);
         overlay.Visible = tint != null;
         overlay.ModulateSelfOverride = tint;
     }
@@ -520,6 +530,7 @@ public sealed partial class SurgeryPuppetBox : Control
 
     private static Color? ResolveZoneTint(
         SurgeryPuppetPart part,
+        IReadOnlySet<SurgeryPuppetPart> missingZones,
         IReadOnlySet<SurgeryPuppetPart> moderateTraumaZones,
         IReadOnlySet<SurgeryPuppetPart> severeTraumaZones,
         IReadOnlySet<SurgeryPuppetPart> ongoingSurgeryZones,
@@ -532,6 +543,10 @@ public sealed partial class SurgeryPuppetBox : Control
             (checkHeadSub && (ongoingSurgeryZones.Contains(SurgeryPuppetPart.Eyes) ||
                               ongoingSurgeryZones.Contains(SurgeryPuppetPart.Mouth))))
             return OngoingSurgeryTint;
+
+        // a severed head takes its eyes and mouth along
+        if (missingZones.Contains(part) || (part is SurgeryPuppetPart.Eyes or SurgeryPuppetPart.Mouth && missingZones.Contains(SurgeryPuppetPart.Head)))
+            return MissingPartTint;
 
         if (severeTraumaZones.Contains(part) ||
             (checkHeadSub && (severeTraumaZones.Contains(SurgeryPuppetPart.Eyes) ||

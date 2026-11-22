@@ -46,7 +46,12 @@
       - !type:ExtractOrganAction
         category: Head
       - !type:ApplyBleedingAction
-        bleedAmount: 4
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 100
 
   - node: head-skin-incision
     baseNode: incision
@@ -181,9 +186,9 @@
           components:
           - Boneless
     - to: saw-skull-bone
-      id: part-head-jelly
+      id: part-head-soft-tissue
       baseEdge: retract-skin
-      edgeTooltip: to-part-head-jelly
+      edgeTooltip: to-part-head-soft-tissue
       visibilityRequirements:
       - !type:HasOrganRequirement
         subject: target
@@ -212,6 +217,10 @@
       actions:
       - !type:ExtractOrganAction
         category: Head
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 50
     - to: head-attached
       id: head-attach
       baseEdge: attach-limb
@@ -292,6 +301,10 @@
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-head-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
 
   - node: head-attached
     baseNode: limb-attached
@@ -442,9 +455,9 @@
           components:
           - Boneless
     - to: retract-head-skin
-      id: close-head-jelly
+      id: close-head-soft-tissue
       baseEdge: retract-skin
-      edgeTooltip: to-close-head-jelly
+      edgeTooltip: to-close-head-soft-tissue
       visibilityRequirements:
       - !type:WhitelistRequirement
         subject: target

@@ -144,6 +144,7 @@
           32:
             sprite: SS220/Mobs/Species/limb_masks.rsi
             state: shoes-right
+  - type: Dismemberment
   #SS220-surgery-update end
   - type: Dna
   - type: MindContainer

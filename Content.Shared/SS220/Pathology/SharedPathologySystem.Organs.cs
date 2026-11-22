@@ -107,7 +107,9 @@ public abstract partial class SharedPathologySystem
 
         if (pathologyPrototype.AffectsBones && HasComp<BonelessComponent>(entity))
             args.Cancelled = true;
-        else if (pathologyPrototype.Organ is { } organ && !_body.HasOrganCategory((entity, body), organ))
+        // a prosthesis gets no wounds of the organ it replaces
+        else if (pathologyPrototype.Organ is { } organ
+                 && (!_body.TryGetOrganByCategory((entity, body), organ, out var installed) || HasComp<ProsthesisComponent>(installed)))
             args.Cancelled = true;
         else if (pathologyPrototype.MissingOrgan is { } missingOrgan && _body.HasOrganCategory((entity, body), missingOrgan))
             args.Cancelled = true;

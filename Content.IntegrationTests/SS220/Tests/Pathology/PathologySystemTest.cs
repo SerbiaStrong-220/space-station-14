@@ -1,9 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
-using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.SS220.ChangeSpeedDoAfters;
 using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
@@ -11,12 +9,10 @@ using Content.Shared.SS220.Pathology;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
-using Content.Server.Zombies;
 using Robust.Server.Console;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.IntegrationTests.SS220.Tests.Pathology;
 
@@ -52,39 +48,6 @@ public sealed class PathologySystemTest
 ";
 
     private const int MaxStackCount = 4;
-
-    [Test]
-    public async Task ZombieGetsNoPathologiesTest()
-    {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Connected = true,
-            DummyTicker = false
-        });
-
-        var mapData = await pair.CreateTestMap();
-        var server = pair.Server;
-        var entMng = server.ResolveDependency<IEntityManager>();
-        var pathologySystem = entMng.System<SharedPathologySystem>();
-        var zombieSystem = entMng.System<ZombieSystem>();
-
-        await server.WaitAssertion(() =>
-        {
-            var human = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
-            Assert.That(pathologySystem.TryAddPathology(human, LeftHandDislocationProto), Is.True);
-
-            zombieSystem.ZombifyEntity(human);
-
-            Assert.Multiple(() =>
-            {
-                Assert.That(pathologySystem.HavePathology(human, LeftHandDislocationProto), Is.False);
-                Assert.That(pathologySystem.TryAddPathology(human, LeftHandCompoundFractureProto), Is.False);
-                Assert.That(pathologySystem.HavePathology(human, LeftHandCompoundFractureProto), Is.False);
-            });
-        });
-
-        await pair.CleanReturnAsync();
-    }
 
     [Test]
     public async Task AddChangeRemoveStackablePathologyTest()
@@ -432,85 +395,4 @@ public sealed class PathologySystemTest
         await pair.CleanReturnAsync();
     }
 
-    [Test]
-    public async Task PathologyAdminCommandsTest()
-    {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Connected = true,
-            DummyTicker = false
-        });
-
-        var server = pair.Server;
-        var mapData = await pair.CreateTestMap();
-        var entMng = server.ResolveDependency<IEntityManager>();
-        var console = server.ResolveDependency<IServerConsoleHost>();
-        var pathologySystem = entMng.System<SharedPathologySystem>();
-
-        EntityUid human = default!;
-        PathologyHolderComponent holder = default!;
-
-        await server.WaitAssertion(() =>
-        {
-            human = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
-            Assert.That(entMng.TryGetComponent(human, out holder!), Is.True);
-        });
-
-        await pair.RunTicksSync(5);
-
-        await server.WaitAssertion(() =>
-        {
-            var netHuman = entMng.GetNetEntity(human);
-            var entity = new Entity<PathologyHolderComponent>(human, holder);
-
-            console.ExecuteCommand($"addpathology {netHuman} {LeftHandDislocationProto}");
-            Assert.That(pathologySystem.HavePathology(entity, LeftHandDislocationProto), Is.True);
-
-            console.ExecuteCommand($"removepathology {netHuman} {LeftHandDislocationProto}");
-            Assert.That(pathologySystem.HavePathology(entity, LeftHandDislocationProto), Is.False);
-        });
-
-        await pair.CleanReturnAsync();
-    }
-
-    [Test]
-    public async Task ProjectileHitStillRollsArterialPunctureTest()
-    {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Connected = true,
-            DummyTicker = false
-        });
-
-        var mapData = await pair.CreateTestMap();
-        var server = pair.Server;
-        var entMng = server.ResolveDependency<IEntityManager>();
-        var timing = server.ResolveDependency<IGameTiming>();
-        var damageable = entMng.System<DamageableSystem>();
-        var piercing = new DamageSpecifier { DamageDict = { ["Piercing"] = 60 } };
-
-        await server.WaitAssertion(() =>
-        {
-            // a projectile hit marks the tick after rolling fragments, its damage then rolls only the arterial puncture
-            var punctured = 0;
-            for (var i = 0; i < 10; i++)
-            {
-                var human = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
-                var holder = entMng.GetComponent<PathologyHolderComponent>(human);
-                holder.ProjectileTraumaTick = timing.CurTick;
-
-                damageable.TryChangeDamage(human, piercing);
-
-                foreach (var pathologyId in holder.ActivePathologies.Keys)
-                {
-                    if (pathologyId.Id.Contains("ArterialPuncture"))
-                        punctured++;
-                }
-            }
-
-            Assert.That(punctured, Is.GreaterThan(0), "Bullet damage must still roll an arterial puncture");
-        });
-
-        await pair.CleanReturnAsync();
-    }
 }

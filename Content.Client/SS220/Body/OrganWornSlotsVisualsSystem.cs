@@ -21,6 +21,8 @@ public sealed partial class OrganWornSlotsVisualsSystem : EntitySystem
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SpriteSystem _sprite = default!;
 
+    private readonly List<(string Key, bool Displaced)> _clothingLayers = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -40,7 +42,7 @@ public sealed partial class OrganWornSlotsVisualsSystem : EntitySystem
         var equipee = new Entity<SpriteComponent>(args.Equipee, sprite);
 
         // the revealed layers also hold the displacement layers of the clothes, they are replaced, not masked
-        var clothingLayers = new List<(string Key, bool Displaced)>();
+        _clothingLayers.Clear();
         foreach (var key in args.RevealedLayers)
         {
             if (!_sprite.LayerMapTryGet(equipee.AsNullable(), key, out var index, false)
@@ -49,10 +51,10 @@ public sealed partial class OrganWornSlotsVisualsSystem : EntitySystem
 
             var displaced = layer.ShaderPrototype is { } shader
                 && (shader.Id == mask.ShaderOverride || shader.Id == mask.ShaderOverrideUnshaded);
-            clothingLayers.Add((key, displaced));
+            _clothingLayers.Add((key, displaced));
         }
 
-        foreach (var (key, displaced) in clothingLayers)
+        foreach (var (key, displaced) in _clothingLayers)
         {
             var layerMask = !displaced && worn.UndisplacedMasks.TryGetValue(category, out var undisplacedMask)
                 ? undisplacedMask

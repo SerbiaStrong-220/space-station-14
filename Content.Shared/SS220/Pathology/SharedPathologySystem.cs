@@ -213,6 +213,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
         entity.Comp.ActivePathologies.Remove(pathologyPrototype.ID);
 
         RemoveDefinitionEffects(entity, pathologyPrototype, 0, data.Level);
+        RefreshOverriddenStatusEffects(entity, pathologyPrototype);
 
         if (applyContexts)
         {
@@ -261,7 +262,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
     {
         foreach (var (otherId, otherData) in holder.ActivePathologies)
         {
-            if (!_prototype.Resolve(otherId, out var otherProto))
+            if (!_prototype.Resolve(otherId, out var otherProto) || IsStatusEffectOverridden(holder, otherId))
                 continue;
 
             var maxLevel = Math.Min(otherData.Level, otherProto.Definition.Length - 1);
