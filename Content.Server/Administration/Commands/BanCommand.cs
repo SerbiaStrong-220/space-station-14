@@ -28,7 +28,7 @@ public sealed class BanCommand : LocalizedCommands
         string reason;
         uint minutes;
         var postBanInfo = true;
-        if (!Enum.TryParse(_cfg.GetCVar(CCVars.ServerBanDefaultSeverity), out NoteSeverity severity))
+        if (!Enum.TryParse(_cfg.GetCVar(CCVars.ServerBanDefaultSeverity), ignoreCase: true, out NoteSeverity severity)) // SS220-localization-fix
         {
             _logManager.GetSawmill("admin.server_ban")
                 .Warning("Server ban severity could not be parsed from config! Defaulting to high.");
