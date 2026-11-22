@@ -140,13 +140,9 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
     #region Server Bans
     public async void CreateServerBan(CreateServerBanInfo banInfo)
     {
-        // SS220-save-admin-name-begin
-        var adminName = banInfo.BanningAdmin == null
-            ? Loc.GetString("system-user")
-            : banInfo.BanningAdminName ?? (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
-        // SS220-save-admin-name-end
-
-        var (banDef, expires) = await CreateBanDef(banInfo, BanType.Server, null, adminName); // SS220-save-admin-name
+        // SS220 pending bans begin
+        var (banDef, expires, adminName) = await CreateBanDef(banInfo);
+        // SS220 pending bans end
 
         var createdBan = await _db.AddBanAsync(banDef); // SS220-fix-ban-post-info
 
@@ -257,22 +253,10 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
     public async void CreateRoleBan(CreateRoleBanInfo banInfo)
     {
-        // SS220-save-admin-name-begin
-        var adminName = banInfo.BanningAdmin == null
-            ? Loc.GetString("system-user")
-            : (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
-        // SS220-save-admin-name-end
-
-        ImmutableArray<IBanRoleDef> roleDefs = // SS220-role-bans-abstract
-        [
-            .. ToBanRoleDef(banInfo.JobPrototypes),
-            .. ToBanRoleDef(banInfo.AntagPrototypes),
-        ];
-
-        if (roleDefs.Length == 0)
-            throw new ArgumentException("Must specify at least one role to ban!");
-
-        var (banDef, expires) = await CreateBanDef(banInfo, BanType.Role, roleDefs, adminName); // SS220-save-admin-anme
+        // SS220 pending bans begin
+        var (banDef, expires, _) = await CreateBanDef(banInfo);
+        var roleDefs = banDef.Roles!.Value;
+        // SS220 pending bans end
 
         var createdBan = await AddRoleBan(banDef); // SS220-fix-ban-post-info
 
@@ -314,9 +298,10 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         if (banInfo.Users.Count == 0 && banInfo.HWIds.Count == 0 && banInfo.AddressRanges.Count == 0)
             throw new ArgumentException("Must specify at least one user, HWID, or address range");
 
+        var now = DateTimeOffset.UtcNow; // SS220 pending bans: preserve the exact requested duration.
         DateTimeOffset? expires = null;
         if (banInfo.Duration is { } duration)
-            expires = DateTimeOffset.Now + duration;
+            expires = now + duration; // SS220 pending bans
 
         ImmutableArray<int> roundIds;
         if (banInfo.RoundIds.Count > 0)
@@ -338,7 +323,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             [..banInfo.Users.Select(u => u.UserId)],
             [..banInfo.AddressRanges],
             [..banInfo.HWIds],
-            DateTimeOffset.Now,
+            now, // SS220 pending bans
             expires,
             roundIds,
             await GetPlayTime(banInfo),

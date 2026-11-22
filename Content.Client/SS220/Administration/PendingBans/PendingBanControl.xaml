@@ -1,0 +1,12 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<BoxContainer xmlns="https://spacestation14.io" Orientation="Vertical">
+    <CheckBox Name="Enabled" Text="{Loc pending-ban-enable}" />
+    <BoxContainer Name="Options" Orientation="Vertical" Visible="False">
+        <OptionButton Name="Trigger" />
+        <BoxContainer Name="DelayRow">
+            <LineEdit Name="Delay" Text="5" MinWidth="80" />
+            <Label Text="{Loc pending-ban-minutes}" />
+        </BoxContainer>
+        <Label Text="{Loc pending-ban-duration-hint}" ToolTip="{Loc pending-ban-shutdown-hint}" />
+    </BoxContainer>
+</BoxContainer>

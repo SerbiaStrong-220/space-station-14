@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
+using Content.Shared.Database.SS220.PendingBans;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -12,6 +13,9 @@ namespace Content.Server.Database
 {
     public sealed class BanDef
     {
+        // SS220 pending bans
+        public PendingBanData? Pending { get; set; } // SS220 pending bans
+
         public int? Id { get; }
         public BanType Type { get; }
         public ImmutableArray<NetUserId> UserIds { get; }
