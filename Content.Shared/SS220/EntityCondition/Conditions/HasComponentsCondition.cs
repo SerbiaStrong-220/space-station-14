@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.EntityEffects.EffectConditions;
 [UsedImplicitly]
 public sealed partial class HasComponentsConditionSystem : EntityConditionSystem<MetaDataComponent, ComponentCondition>
 {
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
 
     protected override void Condition(Entity<MetaDataComponent> entity, ref EntityConditionEvent<ComponentCondition> args)
     {

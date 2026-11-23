@@ -42,7 +42,7 @@ public sealed class AdminLogLabel : RichTextLabel
         OnVisibilityChanged += VisibilityChanged;
     }
 
-    public SharedAdminLog Log { get; }
+    public new SharedAdminLog Log { get; }
 
     public HSeparator Separator { get; }
 

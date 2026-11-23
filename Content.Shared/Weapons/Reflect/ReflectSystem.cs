@@ -34,7 +34,6 @@ public sealed class ReflectSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly SharedProjectileSystem _projectileSystem = default!; // SS220 add barricade
 
     public override void Initialize()
@@ -106,11 +105,16 @@ public sealed class ReflectSystem : EntitySystem
         if (!TryComp<ReflectiveComponent>(projectile, out var reflective) ||
             (reflector.Comp.Reflects & reflective.Reflective) == 0x0 ||
             !_toggle.IsActivated(reflector.Owner) ||
-            !_random.Prob(reflector.Comp.ReflectProbProjectile) ||
             !TryComp<PhysicsComponent>(projectile, out var physics))
         {
             return false;
         }
+
+        // ss220 reflect in back add start
+        var probability = GetReflectProbability(reflector, projectile);
+        if (!_random.Prob(probability))
+            return false;
+        // ss220 reflect in back add end
 
         var rotation = _random.NextAngle(-reflector.Comp.SpreadProjectile / 2, reflector.Comp.SpreadProjectile / 2).Opposite();
         var existingVelocity = _physics.GetMapLinearVelocity(projectile, component: physics);
@@ -154,12 +158,20 @@ public sealed class ReflectSystem : EntitySystem
         [NotNullWhen(true)] out Vector2? newDirection)
     {
         if ((reflector.Comp.Reflects & hitscanReflectType) == 0x0 ||
-            !_toggle.IsActivated(reflector.Owner) ||
-            !_random.Prob(reflector.Comp.ReflectProb))
+            !_toggle.IsActivated(reflector.Owner))
         {
             newDirection = null;
             return false;
         }
+
+        // ss220 reflect in back add start
+        var probability = GetReflectProbability(reflector, shotSource);
+        if (!_random.Prob(probability))
+        {
+            newDirection = null;
+            return false;
+        }
+        // ss220 reflect in back add end
 
         PlayAudioAndPopup(reflector.Comp, user);
 
@@ -173,6 +185,25 @@ public sealed class ReflectSystem : EntitySystem
 
         return true;
     }
+
+    // ss220 add reflect in back start
+    private float GetReflectProbability(Entity<ReflectComponent> reflector, EntityUid source)
+    {
+        var baseProb = HasComp<ProjectileComponent>(source)
+            ? reflector.Comp.ReflectProbProjectile
+            : reflector.Comp.ReflectProb;
+
+        if (reflector.Comp.ReflectProbBehind == null)
+            return baseProb;
+
+        var user = Transform(reflector).ParentUid;
+        var reflectorDirection = _transform.GetWorldRotation(user).GetDir();
+        var sourceDirection = _transform.GetWorldRotation(source).GetDir();
+
+        var isBehind = sourceDirection == reflectorDirection;
+        return isBehind ? reflector.Comp.ReflectProbBehind.Value : reflector.Comp.ReflectProb;
+    }
+    // ss220 add reflect in back end
 
     private void PlayAudioAndPopup(ReflectComponent reflect, EntityUid user)
     {

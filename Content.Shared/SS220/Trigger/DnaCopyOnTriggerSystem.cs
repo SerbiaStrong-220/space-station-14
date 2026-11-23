@@ -1,6 +1,6 @@
+using Content.Shared.Body;
 using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
-using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.SS220.PenScrambler;
@@ -8,12 +8,12 @@ using Content.Shared.Trigger;
 
 namespace Content.Shared.SS220.Trigger;
 
-public sealed class DnaCopyOnTriggerSystem : EntitySystem
+public sealed partial class DnaCopyOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidAppearance = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -42,13 +42,13 @@ public sealed class DnaCopyOnTriggerSystem : EntitySystem
             return;
         }
 
-        if (TryComp<HumanoidAppearanceComponent>(target, out var userAppearanceComp))
+        if (TryComp<BodyComponent>(target, out var userBodyComp))
         {
 
-            if (!TryComp<HumanoidAppearanceComponent>(clone, out var cloneAppearanceComp))
+            if (!TryComp<BodyComponent>(clone, out var cloneBodyComp))
                 return;
 
-            _humanoidAppearance.CloneAppearance(clone.Value, target.Value, cloneAppearanceComp, userAppearanceComp);
+            _visualBody.CopyAppearanceFrom((clone.Value, cloneBodyComp), (target.Value, userBodyComp));
 
             _metaData.SetEntityName(target.Value, MetaData(clone.Value).EntityName, raiseEvents: false);
 

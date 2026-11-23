@@ -14,3 +14,7 @@ store-not-account-owner = This {$store} is not bound to you!
 
 store-preset-name-uplink = Uplink
 store-preset-name-spellbook = Spellbook
+store-preset-name-nukie-delivery = NukeOps Bluespace Delivery
+store-preset-name-changeling = DNA Store
+# SS220 pirate market
+store-ui-stock-remaining = Remaining: {$remaining}

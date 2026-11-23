@@ -3,9 +3,9 @@ using Content.Shared.SS220.GhostRoleCast;
 
 namespace Content.Server.SS220.GhostRoleComponent;
 
-public sealed class GhostRoleCastSystem : EntitySystem
+public sealed partial class GhostRoleCastSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private ActionsSystem _actions = default!;
 
     public override void Initialize()
     {

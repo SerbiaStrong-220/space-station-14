@@ -28,6 +28,9 @@ public sealed class VentCrittersRule : StationEventSystem<VentCrittersRuleCompon
         var validLocations = new List<EntityCoordinates>();
         while (locations.MoveNext(out _, out _, out var transform))
         {
+            if (!transform.Anchored)
+                continue;
+
             if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station &&
                 HasComp<BecomesStationComponent>(transform.GridUid)) //SS220 Vent critters spawn fix
             {

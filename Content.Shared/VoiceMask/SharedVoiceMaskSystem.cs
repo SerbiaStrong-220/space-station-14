@@ -1,3 +1,4 @@
+using Content.Shared.SS220.TTS;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.VoiceMask;
@@ -13,13 +14,17 @@ public sealed class VoiceMaskBuiState : BoundUserInterfaceState
 {
     public readonly string Name;
     public readonly string? Verb;
-    public string Voice { get; } // Corvax-TTS
+    public readonly bool Active;
+    public readonly bool AccentHide;
+    public readonly TtsVoicePreferences VoicePreferences; // SS220 tts
 
-    public VoiceMaskBuiState(string name, string? verb, string voice)
+    public VoiceMaskBuiState(string name, string? verb, bool active, bool accentHide, TtsVoicePreferences voicePreferences /* SS220 tts */)
     {
         Name = name;
         Verb = verb;
-        Voice = voice;  // Corvax-TTS
+        Active = active;
+        AccentHide = accentHide;
+        VoicePreferences = voicePreferences; // SS220 tts
     }
 }
 
@@ -47,3 +52,15 @@ public sealed class VoiceMaskChangeVerbMessage : BoundUserInterfaceMessage
         Verb = verb;
     }
 }
+
+/// <summary>
+///     Toggle the effects of the voice mask.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class VoiceMaskToggleMessage : BoundUserInterfaceMessage;
+
+/// <summary>
+///     Toggle the effects of accent negation.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class VoiceMaskAccentToggleMessage : BoundUserInterfaceMessage;

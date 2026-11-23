@@ -1,0 +1,645 @@
+- type: ttsVoice
+  id: Mira
+  name: Мира
+  speaker: mira
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Valeera
+  name: Валира
+  speaker: valeera
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Rehgar
+  name: Регар
+  speaker: rehgar
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Yrel
+  name: Ирель
+  speaker: yrel
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Volskaya
+  name: Вольская
+  speaker: volskaya
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Necromancer
+  name: Некромант
+  speaker: necromancer
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Zuljin
+  name: "Зул'джин"
+  speaker: zuljin
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Samuro
+  name: Самуро
+  speaker: samuro
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Tyrael
+  name: Тираэль
+  speaker: tyrael
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Athena
+  name: Афина
+  speaker: athena
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Default
+  name: Стандартный голос
+  speaker: default
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Chromie
+  name: Хроми
+  speaker: chromie
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Orphea
+  name: Орфея
+  speaker: orphea
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Adjutant
+  name: Адъютант
+  speaker: adjutant
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Vanndara
+  name: Ванндара
+  speaker: vanndara
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Mechatassadar
+  name: Механо-Тассадар
+  speaker: mechatassadar
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Blackheart
+  name: Чёрное Сердце
+  speaker: blackheart
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Olaf
+  name: Олаф
+  speaker: olaf
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Alarak
+  name: Аларак
+  speaker: alarak
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Dva
+  name: Д.Ва
+  speaker: dva
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Toy18
+  name: Игрушка 18
+  speaker: toy18
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: WitchdoctorH
+  name: Знахарь (Диабло)
+  speaker: witchdoctor_h
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Lucio
+  name: Лусио
+  speaker: lucio
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Angel
+  name: Ангел
+  speaker: angel
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Abathur
+  name: Абатур
+  speaker: abathur
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Erik
+  name: Эрик
+  speaker: erik
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Varian
+  name: Вариан
+  speaker: varian
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Anduin
+  name: Андуин
+  speaker: anduin
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Deckard
+  name: Декард Каин
+  speaker: deckard
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: MalfurionH
+  name: Малфурион
+  speaker: malfurion_h
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Demonhunter
+  name: Охотник на демонов
+  speaker: demonhunter
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Demon
+  name: Демон
+  speaker: demon
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: KerriganH
+  name: Керриган
+  speaker: kerrigan_h
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: CriticalMassShlopa
+
+- type: ttsVoice
+  id: Ladyofthorns
+  name: Леди Шипов
+  speaker: ladyofthorns
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Barbarian
+  name: Варвар
+  speaker: barbarian
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Crusader
+  name: Крестоносец
+  speaker: crusader
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Whitemane
+  name: Уайтмейн
+  speaker: whitemane
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Nexushunter
+  name: Охотник Нексуса
+  speaker: nexushunter
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: GreymaneH
+  name: Седогрив
+  speaker: greymane_h
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Gardensdayannouncer
+  name: Диктор Дня садов
+  speaker: gardensdayannouncer
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Drekthar
+  name: "Дрек'Тар"
+  speaker: drekthar
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Amazon
+  name: Амазонка
+  speaker: amazon
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Azmodan
+  name: Азмодан
+  speaker: azmodan
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Baleog
+  name: Балеог
+  speaker: baleog
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Cho
+  name: Чо
+  speaker: cho
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Diablo
+  name: Диабло
+  speaker: diablo
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Falstad
+  name: Фалстад
+  speaker: falstad
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Gazlowe
+  name: Газлоу
+  speaker: gazlowe
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Imperius
+  name: Империй
+  speaker: imperius
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Leoric
+  name: Леорик
+  speaker: leoric
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Lili
+  name: Лили
+  speaker: lili
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Stitches
+  name: Мясник Стежок
+  speaker: stitches
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Wizard
+  name: Волшебник
+  speaker: wizard
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Zagara
+  name: Загара
+  speaker: zagara
+  provider: Silero
+  categories: [ HEROESOFTHESTORM ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]

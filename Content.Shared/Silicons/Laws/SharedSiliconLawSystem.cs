@@ -1,5 +1,6 @@
 using Content.Shared.Emag.Systems;
 using Content.Shared.Mind;
+using Content.Shared.Overlays;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Stunnable;
@@ -50,6 +51,8 @@ public abstract partial class SharedSiliconLawSystem : EntitySystem
 
         var ev = new SiliconEmaggedEvent(args.UserUid);
         RaiseLocalEvent(uid, ref ev);
+        if (ev.Cancelled)
+            return;
 
         component.OwnerName = Name(args.UserUid);
 
@@ -69,14 +72,37 @@ public abstract partial class SharedSiliconLawSystem : EntitySystem
 
     protected virtual void EnsureSubvertedSiliconRole(EntityUid mindId)
     {
-
+        if (TryComp<MindComponent>(mindId, out var mind))
+        {
+            var owner = mind.OwnedEntity;
+            if (TryComp<ShowCrewIconsComponent>(owner, out var crewIconComp))
+            {
+                crewIconComp.UncertainCrewBorder = true;
+                Dirty(owner.Value, crewIconComp);
+            }
+        }
     }
 
     protected virtual void RemoveSubvertedSiliconRole(EntityUid mindId)
     {
-
+        if (TryComp<MindComponent>(mindId, out var mind))
+        {
+            var owner = mind.OwnedEntity;
+            // SS220 MalfAI begin
+            if (owner is { } owned
+                && !TerminatingOrDeleted(owned)
+                && TryComp<ShowCrewIconsComponent>(owned, out var crewIconComp))
+            {
+                crewIconComp.UncertainCrewBorder = false;
+                Dirty(owner.Value, crewIconComp);
+            }
+            // SS220 MalfAI end
+        }
     }
 }
 
 [ByRefEvent]
-public record struct SiliconEmaggedEvent(EntityUid user);
+public record struct SiliconEmaggedEvent(EntityUid user)
+{
+    public bool Cancelled;
+}

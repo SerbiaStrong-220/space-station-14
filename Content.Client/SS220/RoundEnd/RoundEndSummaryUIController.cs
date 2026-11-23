@@ -23,17 +23,19 @@ namespace Content.Client.SS220.RoundEnd;
 /// you may refer to it if something breaks here.
 /// </remarks>
 [UsedImplicitly]
-public sealed class RoundEndSummaryUIController : UIController,
+public sealed partial class RoundEndSummaryUIController : UIController,
     IOnSystemLoaded<ClientGameTicker>
 {
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
 
     private const bool IS_DEBUG_MODE = false; // ALWAYS turn this off when pushing to repo
 
     private RoundEndSummaryWindow? _window;
     private RoundEndTitlesWindow? _titles;
-    private RoundEndMessageEvent? _message; // DEBUG 
+#if DEBUG
+    private RoundEndMessageEvent? _message; // DEBUG
+#endif
 
     public void OnSystemLoaded(ClientGameTicker system)
     {

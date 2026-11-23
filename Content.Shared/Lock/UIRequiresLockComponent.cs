@@ -1,3 +1,4 @@
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
@@ -31,4 +32,9 @@ public sealed partial class UIRequiresLockComponent : Component
 
     [DataField]
     public LocId? Popup = "entity-storage-component-locked-message";
+
+    // ss220 prevent sound spam from ghost on borg start
+    [DataField]
+    public EntityWhitelist? Blacklist;
+    // ss220 prevent sound spam from ghost on borg end
 }

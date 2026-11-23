@@ -3,9 +3,9 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
-using Content.Shared.Gibbing.Events;
+using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -22,16 +22,16 @@ namespace Content.Shared.SS220.LyingDownOnBuckledEntity.Systems;
 
 public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private const string StandUpAction = "ActionStandUp";
 
@@ -51,7 +51,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
 
         SubscribeLocalEvent<UnderLyingPetComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
         SubscribeLocalEvent<UnderLyingPetComponent, UnstrapAttemptEvent>(OnUnstrapAttempt);
-        SubscribeLocalEvent<UnderLyingPetComponent, EntityGibbedEvent>(OnEntityGibbed);
+        SubscribeLocalEvent<UnderLyingPetComponent, BeingGibbedEvent>(OnEntityGibbed);
 
         SubscribeLocalEvent<GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
     }
@@ -156,7 +156,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         }
 
         if (TryComp<LyingDownOnBuckledEntityComponent>(user, out var userLyingDownComp) &&
-            HasComp<HumanoidAppearanceComponent>(target) &&
+            HasComp<HumanoidProfileComponent>(target) &&
             !userLyingDownComp.IsLying &&
             CheckBuckledEntity(user, target) &&
             CheckOtherLyingPets(user, target))
@@ -224,7 +224,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnEntityGibbed(Entity<UnderLyingPetComponent> entity, ref EntityGibbedEvent args)
+    private void OnEntityGibbed(Entity<UnderLyingPetComponent> entity, ref BeingGibbedEvent args)
     {
         if (entity.Comp.PetUid is { } pet)
             StandUp(pet);

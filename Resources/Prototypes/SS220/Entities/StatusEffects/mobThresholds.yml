@@ -28,3 +28,6 @@
     modifiers:
       Critical:
         flat: 50
+        dependsOnAdaptation: true
+        decayFlat: -0.16
+        reagent: Frontier

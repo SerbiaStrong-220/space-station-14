@@ -6,9 +6,9 @@ using Content.Shared.Wieldable;
 
 namespace Content.Server.SS220.MindSlave.DisfunctionSystems;
 
-public sealed class WieldUnabilitySystem : EntitySystem
+public sealed partial class WieldUnabilitySystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

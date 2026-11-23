@@ -5,8 +5,10 @@
   name: wood crate
   description: Bunch of wood planks.
   components:
-  - type: StorageFill
-    contents:
-      - id: MaterialWoodPlank
-        amount: 3
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MaterialWoodPlank
+          amount: 3
 # SS220-wood-and-plants-in-cargo-end

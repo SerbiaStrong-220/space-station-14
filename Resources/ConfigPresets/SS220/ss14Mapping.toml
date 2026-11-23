@@ -1,0 +1,16 @@
+[game]
+hostname = "[RU][TTS] SS220 Mapping 🗺️"
+desc = "🛠️ Сервер для разработчиков проекта SS220 🛠️"
+map = "Dev"
+
+[events]
+enabled = false
+
+[replay]
+auto_record = false
+
+[physics]
+grid_splitting = false
+
+[shuttle]
+preload_grids = false

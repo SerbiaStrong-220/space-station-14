@@ -1,4 +1,4 @@
-teleport-use-verb = [italic]Войти в портал[/italic]
-teleport-user-started = Вы начинаете входить в портал
-linked-teleport-no-exit = Данный телепорт не связан
-linked-teleport-has-link = Телепорт имеет связь
+teleport-enter-verb = [italic]Войти в портал[/italic]
+teleport-interaction-started = Вы начинаете входить в портал
+auto-linking-teleport-no-destination = Этот телепорт не связан с точкой назначения
+auto-linking-teleport-has-destination = Телепорт связан с точкой назначения

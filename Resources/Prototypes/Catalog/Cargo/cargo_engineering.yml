@@ -141,7 +141,7 @@
 - type: cargoProduct
   id: EngineeringSpaceHeater
   icon:
-    sprite: Structures/Piping/Atmospherics/Portable/portable_sheater.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/Portable/portable_sheater.rsi # SS220 atmospherics-sprite-update
     state: sheaterOff
   product: CrateEngineeringSpaceHeater
   cost: 350

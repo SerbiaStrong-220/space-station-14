@@ -205,13 +205,15 @@
   id: ShardCrystalRandom
   name: random crystal shard
   components:
-  - type: RandomSpawner
-    prototypes:
-      - ShardCrystalGreen
-      - ShardCrystalPink
-      - ShardCrystalOrange
-      - ShardCrystalBlue
-      - ShardCrystalCyan
-      - ShardCrystalRed
-      - ShardCrystalWhite #ss220 random white crystal fix
-    chance: 1
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: ShardCrystalGreen
+      - id: ShardCrystalPink
+      - id: ShardCrystalYellow
+      - id: ShardCrystalBlack
+      - id: ShardCrystalOrange
+      - id: ShardCrystalBlue
+      - id: ShardCrystalCyan
+      - id: ShardCrystalRed
+      - id: ShardCrystalWhite #ss220 random white crystal fix

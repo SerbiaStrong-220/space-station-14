@@ -5,7 +5,6 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -134,7 +133,7 @@ public sealed class DoAfterOverlay : Overlay
                     yOffset / scale + offset / EyeManager.PixelsPerMeter * scale);
 
                 // Draw the underlying bar texture
-                handle.DrawTexture(_barTexture, position);
+                handle.DrawTexture(_barTexture, position, doAfter.BarColorOverride); // SS220-changeable-doafter-bar-color
 
                 Color color;
                 float elapsedRatio;

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Content.Server.Acz;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -8,10 +9,10 @@ using Content.Server.Connection;
 using Content.Server.Corvax.DiscordAuth;
 using Content.Server.Corvax.JoinQueue;
 using Content.Server.Corvax.Sponsors;
-using Content.Server.SS220.TTS;
 using Content.Server.Database;
 using Content.Server.Discord.DiscordLink;
 using Content.Server.EUI;
+using Content.Server.FeedbackSystem;
 using Content.Server.GameTicking;
 using Content.Server.GhostKick;
 using Content.Server.GuideGenerator;
@@ -28,6 +29,7 @@ using Content.Server.ServerUpdates;
 using Content.Server.SS220.Discord;
 using Content.Server.Voting.Managers;
 using Content.Shared.CCVar;
+using Content.Shared.FeedbackSystem;
 using Content.Shared.Kitchen;
 using Content.Shared.Localizations;
 using Robust.Server;
@@ -35,9 +37,11 @@ using Robust.Server.ServerStatus;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.SS220.BackEndApi;
+using Content.Server.SS220.TTS;
 using Content.Shared.SS220.CCVars;
 using Content.Server.SS220.Wiki.Generators;
 
@@ -84,14 +88,15 @@ namespace Content.Server.Entry
         [Dependency] private readonly ServerApi _serverApi = default!;
         [Dependency] private readonly ServerInfoManager _serverInfo = default!;
         [Dependency] private readonly ServerUpdateManager _updateManager = default!;
+        [Dependency] private readonly ServerFeedbackManager _feedbackManager = null!;
         // SS220-entry-point-edit-begin
-        [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
-        [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
-        [Dependency] private readonly JoinQueueManager _joinQueueManager = default!; // Corvax-Queue
-        [Dependency] private readonly TTSManager _ttsManager = default!; // Corvax-TTS
-        [Dependency] private readonly DiscordPlayerManager _discordPlayerManager = default!; // SS220 discord player manager
-        [Dependency] private readonly DiscordBanPostManager _discordBanPostManager = default!; // SS220 discord ban post manager
-        [Dependency] private readonly ServerControlController _serverControlController = default!; // SS220 Backend-Api
+        [Dependency] private DiscordAuthManager _discordAuthManager = default!; // Corvax-DiscordAuth
+        [Dependency] private SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
+        [Dependency] private TtsNetManager _ttsNetManager = default!; // SS220 TTS
+        [Dependency] private JoinQueueManager _joinQueueManager = default!; // Corvax-Queue
+        [Dependency] private DiscordPlayerManager _discordPlayerManager = default!; // SS220 discord player manager
+        [Dependency] private DiscordBanPostManager _discordBanPostManager = default!; // SS220 discord ban post manager
+        [Dependency] private ServerControlController _serverControlController = default!; // SS220 Backend-Api
         // SS220-entry-point-edit-begin
 
         public override void PreInit()
@@ -102,6 +107,8 @@ namespace Content.Server.Entry
                 var cast = (ServerModuleTestingCallbacks)callback;
                 cast.ServerBeforeIoC?.Invoke();
             }
+
+            Dependencies.Resolve<IRobustSerializer>().FloatFlags = SerializerFloatFlags.RemoveReadNan;
         }
 
         /// <inheritdoc />
@@ -137,8 +144,8 @@ namespace Content.Server.Entry
 
             _discordAuthManager.Initialize(); // Corvax-DiscordAuth
             _sponsorsManager.Initialize(); // Corvax-Sponsors
+            _ttsNetManager.Initialize(); // SS220 TTS
             _joinQueueManager.Initialize(); // Corvax-Queue
-            _ttsManager.Initialize(); // Corvax-TTS
             _discordPlayerManager.Initialize(); // SS220 discord player manager
             _discordBanPostManager.Initialize(); // SS220 discord ban post manager
             _serverControlController.Initialize(); // SS220 Backend-Api
@@ -209,6 +216,7 @@ namespace Content.Server.Entry
             _connection.PostInit();
             _multiServerKick.Initialize();
             _cvarCtrl.Initialize();
+            _feedbackManager.Initialize();
         }
 
         public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)
@@ -244,8 +252,8 @@ namespace Content.Server.Entry
 
             _serverApi.Shutdown();
 
-            // TODO Should this be awaited?
-            _discordLink.Shutdown();
+            // We don't care when or how this finishes, just spin the task off into the void.
+            _ = _discordLink.Shutdown();
             _discordChatLink.Shutdown();
         }
 

@@ -42,7 +42,7 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
         // ss220 add custom antag goals start
         if (args.Length < 2)
         {
-            shell.WriteError(Loc.GetString(Loc.GetString("cmd-addobjective-invalid-args")));
+            shell.WriteError(Loc.GetString("cmd-addobjective-invalid-args"));
             return;
         }
         // ss220 add custom antag goals end
@@ -101,7 +101,7 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
                 _targetObjective.SetTarget(objective.Value, targetEnt.Value, targetObj);
                 _targetObjective.ResetEntityName(objective.Value, log: true);
             }
-            else
+            else if (!EntityManager.HasComponent<PickRandomPersonComponent>(objective.Value) || targetObj.Target == null)
             {
                 _mind.TryRemoveObjective(mindId, mind, objective.Value);
                 return;
@@ -138,6 +138,6 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
 
         return CompletionResult.FromHintOptions(
             _objectives.Objectives(),
-            Loc.GetString(Loc.GetString("cmd-add-objective-obj-completion")));
+            Loc.GetString("cmd-add-objective-obj-completion"));
     }
 }

@@ -26,6 +26,18 @@
     - state: "printing_paper"
       map: ["enum.PhotocopierVisualLayers.PrintAnim"]
   - type: Appearance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3, -0.3, 0.3, 0.3"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
   - type: Climbable
   - type: ApcPowerReceiver
     powerLoad: 200
@@ -48,7 +60,7 @@
           - FaxableObject
           - Paper
           - ButtScan
-        tags: 
+        tags:
           - Folder
     tonerSlot:
       insertSound: /Audio/Machines/screwdriveropen.ogg

@@ -1,5 +1,6 @@
 using Content.Server.Chat.Systems;
 using Content.Shared.SS220.TTS;
+using Content.Shared.Chat;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
@@ -10,7 +11,8 @@ using Content.Server.SS220.Language;
 using Content.Shared.SS220.Radio.Components;
 using Content.Shared.SS220.Headset;
 using System.Linq;
-using Robust.Shared.Prototypes; // SS220-Add-Languages
+using Robust.Shared.Prototypes;
+using Content.Shared.SS220.TTS.Components; // SS220-Add-Languages
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -162,7 +164,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         base.OnGotEquipped(uid, component, args);
         if (component.IsEquipped && component.Enabled)
         {
-            EnsureComp<WearingHeadsetComponent>(args.Equipee).Headset = uid;
+            EnsureComp<WearingHeadsetComponent>(args.EquipTarget).Headset = uid;
             UpdateRadioChannels(uid, component);
         }
     }
@@ -171,7 +173,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     {
         base.OnGotUnequipped(uid, component, args);
         RemComp<ActiveRadioComponent>(uid);
-        RemComp<WearingHeadsetComponent>(args.Equipee);
+        RemComp<WearingHeadsetComponent>(args.EquipTarget);
     }
 
     public void SetEnabled(EntityUid uid, bool value, HeadsetComponent? component = null)
@@ -214,7 +216,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         {
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
 
-            if (parent != args.MessageSource && TryComp(args.MessageSource, out TTSComponent? _))
+            if (TryComp(args.MessageSource, out TtsComponent? _))
             {
                 args.Receivers.Add(new(parent));
             }

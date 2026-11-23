@@ -28,7 +28,10 @@
 
 - type: npcFaction
   id: SpiderQueen
+  friendly:
+  - SpiderHostile
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - DeathSquad #SS220 dq update
   - Syndicate
@@ -60,6 +63,7 @@
 - type: npcFaction
   id: DeathSquad
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - NanoTrasen
   - Syndicate
   - Xeno
@@ -77,6 +81,7 @@
 - type: npcFaction
   id: CultYogg
   hostile:
+  - PlantsFract #SS220 PlatFraction
   - SimpleHostile
   - Syndicate
   - Xeno
@@ -88,3 +93,30 @@
   - BloodCult
   - SpiderQueen
   - AllHostile
+
+# SS220 MalfAI: faction for deployable turrets and converted borgs.
+- type: npcFaction
+  id: MalfAi
+  hostile:
+  - NanoTrasen
+  - DeathSquad
+  - Syndicate
+  - Revolutionary
+  - Zombie
+
+- type: npcFaction
+  id: PlantsFract
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Passive
+  - PetsNT
+  - Zombie
+  - Revolutionary
+  - Dragon
+  - Xeno
+  - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
+  - AllHostile
+  - Wizard
+  - Xenoborg

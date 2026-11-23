@@ -8,12 +8,12 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.ToggleableItemSlot;
 
-public sealed class ToggleableItemSlotSystem : EntitySystem
+public sealed partial class ToggleableItemSlotSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

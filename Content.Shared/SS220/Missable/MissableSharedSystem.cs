@@ -8,11 +8,11 @@ using Content.Shared.SS220.Damage;
 
 namespace Content.Shared.SS220.Missable;
 
-public sealed class MissableSharedSystem : EntitySystem
+public sealed partial class MissableSharedSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

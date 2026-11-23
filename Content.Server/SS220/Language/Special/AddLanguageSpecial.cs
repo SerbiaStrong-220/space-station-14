@@ -21,7 +21,7 @@ public sealed partial class AddLanguageSpecial : JobSpecial
         var entMan = IoCManager.Resolve<IEntityManager>();
         var languageSystem = entMan.System<LanguageSystem>();
         var languageComp = entMan.EnsureComponent<LanguageComponent>(uid);
-        var languages = Languages.Select(l => l.Id).ToList();
-        languageSystem.AddLanguages((uid, languageComp), languages, true);
+
+        languageSystem.AddLanguages((uid, languageComp), Languages, true);
     }
 }

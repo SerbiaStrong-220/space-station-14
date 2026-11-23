@@ -8,7 +8,6 @@ using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
-using Content.Server.Popups;
 
 namespace Content.Server.Teleportation;
 

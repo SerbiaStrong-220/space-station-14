@@ -77,17 +77,17 @@ public sealed partial class MaterialDisplay : PanelContainer
         {
             var sheetsToEject = sheetsToEjectArray[i];
 
-            var styleClass = StyleBase.ButtonOpenBoth;
+            var styleClass = StyleClass.ButtonOpenBoth;
             if (i == 0)
-                styleClass = StyleBase.ButtonOpenRight;
+                styleClass = StyleClass.ButtonOpenRight;
             else if (i == sheetsToEjectArray.Length - 1)
-                styleClass = StyleBase.ButtonOpenLeft;
+                styleClass = StyleClass.ButtonOpenLeft;
 
             var button = new Button
             {
                 Name = $"{sheetsToEject}",
                 Access = AccessLevel.Public,
-                Text = Loc.GetString($"{sheetsToEject}"),
+                Text = sheetsToEject.ToString(), // SS220-localization-fix
                 MinWidth = 45,
                 StyleClasses = { styleClass }
             };

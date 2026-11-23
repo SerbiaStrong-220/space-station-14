@@ -65,7 +65,8 @@
         startValue: 0.1
         endValue: 2.0
         isLooped: true
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
+    spriteLayer: light
   - type: PowerCellSlot
     cellSlotId: cell_slot
   - type: ItemSlots
@@ -80,14 +81,11 @@
       cell_slot: !type:ContainerSlot
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-toy-armour-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-toy-armour-clown
-      jobRequired:
-        - Clown
-        - Mime
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
 
 #syndie hardsuits helmets
 - type: entity
@@ -160,6 +158,11 @@
   name: space ninja helmet
   description: The helmet from the Samurai Vamplu costume, an essential part of cosplay.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
   - type: BreathMask
   - type: Item
     size: Normal
@@ -167,8 +170,16 @@
   - type: Clothing
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Mecha/mechmove03.ogg
-    sprite: Clothing/Head/Helmets/spaceninja.rsi
+    quickEquip: false
+    sprite: SS220/Clothing/Head/Helmets/spaceninja.rsi
   - type: IdentityBlocker
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
   - type: HideLayerClothing
     slots:
     - Hair
@@ -176,4 +187,4 @@
     - HeadTop
     - HeadSide
   - type: Sprite
-    sprite: Clothing/Head/Helmets/spaceninja.rsi
+    sprite: SS220/Clothing/Head/Helmets/spaceninja.rsi

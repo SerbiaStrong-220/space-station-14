@@ -184,6 +184,9 @@ tiles-red-arcade-floor = аркадный красный пол
 
 tiles-mono-floor = обрамлённая плитка
 tiles-linoleum-floor = линолеумный пол
+tiles-linoleum-gray-floor = линолеумный пол серый
+tiles-linoleum-lightbrown-floor = линолеумный пол светло-коричневый
+tiles-linoleum-redbrown-floor = линолеумный пол красно-коричневый
 tiles-elevator-shaft = пол шахты лифта
 tiles-diamond-plate-floor = пол из алмазных плит
 tiles-blue-tile = голубая плитка
@@ -262,6 +265,7 @@ floor-tile-item-wood-large-light = крупный светлый деревян�
 floor-tile-item-wood-large-red = крупный красный деревянный пол
 
 ## ПАРКЕТНАЯ ПЛИТКА
+floor-tile-item-wood-parquet = паркетный деревянный пол
 floor-tile-item-wood-parquet-black = паркетный чёрный деревянный пол
 floor-tile-item-wood-parquet-dark = паркетный тёмный деревянный пол
 floor-tile-item-wood-parquet-light = паркетный светлый деревянный пол
@@ -424,3 +428,19 @@ floor-grayconcrete-pavement-horizontal = бетонное серое гориз�
 floor-grayconcrete-pavement-vertical = бетонное серое вертикальное покрытие
 floor-oldconcrete-pavement-horizontal = бетонное старое горизонтальное покрытие
 floor-oldconcrete-pavement-vertical = бетонное старое вертикальное покрытие
+
+## ЛИНОЛЕУМ
+floor-lino-gray = { ent-FloorItemLinoGray }
+floor-lino-light-brown = { ent-FloorItemLinoLightBrown }
+floor-lino-red-brown = { ent-FloorItemLinoRedBrown } 
+
+## SS220 floors
+tiles-steel-reinforced = { ent-FloorTileItemSteelReinforced }
+tiles-white-reinforced = { ent-FloorTileItemWhiteReinforced }
+tiles-dark-reinforced = { ent-FloorTileItemDarkReinforced }
+tiles-techmaint-drain-vertical = технический пол с вертикальной решёткой
+tiles-techmaint-drain-horizontal = технический пол с горизонтальной решёткой
+tiles-techmaint-drain-middle = { ent-FloorItemTechMainDrainMiddle }
+tiles-kitchen-red = { ent-FloorTileItemKitchenRed }
+tiles-astro-sand = { ent-FloorTileItemSand }
+tiles-220-curse = проклятье 220

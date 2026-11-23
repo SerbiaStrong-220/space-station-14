@@ -1,5 +1,6 @@
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.GameWindow;
 using Content.Shared.Players;
@@ -9,6 +10,11 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
+// ss220 add debug session start
+#if DEBUG
+using Robust.Shared.SS220.Player;
+#endif
+// ss220 add debug session end
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -42,7 +48,12 @@ namespace Content.Server.GameTicking
             {
                 case SessionStatus.Connected:
                 {
+// ss220 add debug player session start
+#if DEBUG
+                    if (args.Session.Channel is not DebugNetChannel)
+#endif
                     AddPlayerToDb(args.Session.UserId.UserId);
+// ss220 add debug player session end
 
                     // Always make sure the client has player data.
                     if (session.Data.ContentDataUncast == null)
@@ -92,6 +103,7 @@ namespace Content.Server.GameTicking
                         else
                             SpawnWaitDb();
 
+                        _adminLogger.Add(LogType.Connection, LogImpact.Low, $"User {args.Session:Player} attached to {(args.Session.AttachedEntity != null ? ToPrettyString(args.Session.AttachedEntity) : "nothing"):entity} connected to the game.");
                         break;
                     }
 
@@ -118,6 +130,8 @@ namespace Content.Server.GameTicking
                         }
                     }
 
+                    _adminLogger.Add(LogType.Connection, LogImpact.Low, $"User {args.Session:Player} attached to {(args.Session.AttachedEntity != null ? ToPrettyString(args.Session.AttachedEntity) : "nothing"):entity} connected to the game.");
+
                     break;
                 }
 
@@ -129,8 +143,13 @@ namespace Content.Server.GameTicking
                         _pvsOverride.RemoveSessionOverride(mindId.Value, session);
                     }
 
-                    if (_playerGameStatuses.ContainsKey(args.Session.UserId)) // Corvax-Queue: Delete data only if player was in game
+                    //SS220 Corvax-Queue: Delete data only if player was in game begin
+                    if (_playerGameStatuses.ContainsKey(args.Session.UserId))
+                    {
                         _userDb.ClientDisconnected(session);
+                        _adminLogger.Add(LogType.Connection, LogImpact.Low, $"User {args.Session:Player} attached to {(args.Session.AttachedEntity != null ? ToPrettyString(args.Session.AttachedEntity) : "nothing"):entity} disconnected from the game.");
+                    }
+                    //SS220 Corvax-Queue: Delete data only if player was in game end
                     break;
                 }
             }
@@ -189,7 +208,12 @@ namespace Content.Server.GameTicking
                 _chatManager.DispatchServerMessage(session, Loc.GetString("game-ticker-player-join-game-message"));
 
             _playerGameStatuses[session.UserId] = PlayerGameStatus.JoinedGame;
+// ss220 add debug player session start
+#if DEBUG
+            if (session.Channel is not DebugNetChannel)
+#endif
             _db.AddRoundPlayers(RoundId, session.UserId);
+// ss220 add debug player session end
 
             if (_adminManager.HasAdminFlag(session, AdminFlags.Admin))
             {
@@ -206,7 +230,12 @@ namespace Content.Server.GameTicking
         private void PlayerJoinLobby(ICommonSession session)
         {
             _playerGameStatuses[session.UserId] = LobbyEnabled ? PlayerGameStatus.NotReadyToPlay : PlayerGameStatus.ReadyToPlay;
+// ss220 add debug player session start
+#if DEBUG
+            if (session.Channel is not DebugNetChannel)
+#endif
             _db.AddRoundPlayers(RoundId, session.UserId);
+// ss220 add debug player session end
 
             var client = session.Channel;
             RaiseNetworkEvent(new TickerJoinLobbyEvent(), client);

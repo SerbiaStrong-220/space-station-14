@@ -65,3 +65,8 @@ ent-RadioImplanter = { ent-Implanter }
 ent-FakeMindShieldImplanter = { ent-Implanter }
     .suffix = Фальшивая защита разума
     .desc = { ent-Implanter.desc }
+
+ent-ChameleonControllerImplanter = имплантер "Контроллер хамелеона"
+    .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
+ent-VoiceMaskImplanter = имплантер "Голосовая маска"
+    .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }

@@ -42,14 +42,15 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
     private int _inputSeed;
     private bool _capitalize = false;
 
+    private static readonly Regex NonWhitespaceRegex = new Regex(@"\S+", RegexOptions.Compiled);
+
     public override string ScrambleMessage(string message, int? seed = null)
     {
         if (message == string.Empty ||
             Syllables.Count == 0)
             return message;
 
-        var wordRegex = @"\S+";
-        var matches = Regex.Matches(message, wordRegex);
+        var matches = NonWhitespaceRegex.Matches(message);
         if (matches.Count <= 0)
             return message;
 
@@ -75,7 +76,9 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
 
     private string ScrambleWord(string word, int seed)
     {
-        var random = new System.Random(seed);
+        var random = new RobustRandom();
+        random.SetSeed(seed);
+
         var scrambledMessage = new StringBuilder();
         var scrambledLength = word.Length * ScrambledLengthCoefficient;
         while (scrambledMessage.Length < scrambledLength)
@@ -123,13 +126,13 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         return punctuationBuilder.ToString();
     }
 
-    private SyllablesSpecialCharacter? GetSpecialCharacter(System.Random random)
+    private SyllablesSpecialCharacter? GetSpecialCharacter(IRobustRandom random)
     {
         var weights = SpecialCharacters.ToDictionary(s => s, s => s.Weight);
         if (weights == null || weights.Count <= 0)
             return null;
 
-        return SharedRandomExtensions.Pick(weights, random);
+        return SharedRandomExtensions.Pick(random, weights);
     }
 }
 

@@ -1,9 +1,5 @@
 ent-ShardCrystalBase = осколок кристалла
     .desc = Небольшой кусочек кристалла.
-#ss220 white crystal loc start
-ent-ShardCrystalWhite = белый осколок кристалла
-    .desc = { ent-ShardCrystalBase.desc }
-#ss220 white crystal loc end
 ent-ShardCrystalCyan = голубой осколок кристалла
     .desc = Небольшой кусочек кристалла.
 ent-ShardCrystalBlue = синий осколок кристалла

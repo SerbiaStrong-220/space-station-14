@@ -10,7 +10,7 @@
   - type: Sprite
     sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Grenades/usspnade.rsi
   - type: TimerTrigger
-    delay: 5
+    delay: 5 # SS220 If changes, then UseDelay should also be changed
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Minibomb
@@ -23,3 +23,5 @@
       path: /Audio/Effects/minibombcountdown.ogg
       params:
         volume: 12
+  - type: UseDelay
+    delay: 5 # SS220 Should be equal to the TimerTrigger delay

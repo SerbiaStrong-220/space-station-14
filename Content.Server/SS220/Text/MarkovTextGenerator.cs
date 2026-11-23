@@ -6,9 +6,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Text;
 
-public sealed class MarkovTextGenerator : EntitySystem
+public sealed partial class MarkovTextGenerator : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly Dictionary<string, List<string>> _transitionMatrix = new();
 

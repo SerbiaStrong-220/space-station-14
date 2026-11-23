@@ -7,13 +7,15 @@
   name: армейская РПС
   description: "Идеально подходит для хранения всего: от патронов до оружия и предметов боевой необходимости."
   components:
-  - type: StorageFill
-    contents:
-    - id: BlasterPowerCell
-      amount: 2
-    - id: CombatMedipen
-    - id: DnaScramblerImplanter
-    - id: ExGrenade
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BlasterPowerCell
+          amount: 2
+        - id: CombatMedipen
+        - id: DnaScramblerImplanter
+        - id: ExGrenade
   - type: ExplosionResistance
     damageCoefficient: 0.0
 
@@ -27,8 +29,8 @@
   - type: RevolverAmmoProvider
     whitelist:
       tags:
-        - CartridgeMagnum
-        - SpeedLoaderMagnum
+      - CartridgeMagnum
+      - SpeedLoaderMagnum
     proto: CartridgeMagnumAP
 
 - type: entity
@@ -38,22 +40,24 @@
   name: рюкзак офицера безопасности ОБР
   description: Вместительный рюкзак с множеством карманов, который носят офицеры безопасности отряда быстрого реагирования.
   components:
-    - type: StorageFill
-      contents:
-      - id: Crowbar
-      - id: CigPackBlack
-      - id: Lighter
-      - id: FlashlightSeclite
-      - id: PowerCellHyper
-      - id: WeaponBlaster
-      - id: WeaponPulsePistol
-      - id: Stimpack
-      - id: Tourniquet
-      - id: PortableRecharger
-      - id: Flare
-        amount: 2
-    - type: ExplosionResistance
-      damageCoefficient: 0.0
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Crowbar
+        - id: CigPackBlack
+        - id: Lighter
+        - id: FlashlightSeclite
+        - id: PowerCellHyper
+        - id: WeaponBlaster
+        - id: WeaponPulsePistol
+        - id: Stimpack
+        - id: Tourniquet
+        - id: PortableRecharger
+        - id: Flare
+          amount: 2
+  - type: ExplosionResistance
+    damageCoefficient: 0.0
 
 - type: entity
   parent: ERTLeaderIDCard

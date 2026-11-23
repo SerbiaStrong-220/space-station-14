@@ -28,7 +28,7 @@ public sealed class ActionGunSystem : EntitySystem
 
     private void OnShutdown(Entity<ActionGunComponent> ent, ref ComponentShutdown args)
     {
-        if (ent.Comp.Gun is {} gun)
+        if (ent.Comp.Gun is { } gun)
             QueueDel(gun);
     }
 
@@ -41,7 +41,7 @@ public sealed class ActionGunSystem : EntitySystem
         if (!TryComp<RechargeBasicEntityAmmoComponent>(ent.Comp.Gun, out var recharge))
             return;
 
-        if (!_gun.AttemptShoot(ent, ent.Comp.Gun.Value, gun, args.Target))
+        if (!_gun.AttemptShoot(ent, (ent.Comp.Gun.Value, gun), args.Target))
             return;
 
         _actions.SetCooldown(args.Action.Owner, TimeSpan.FromSeconds(recharge.RechargeCooldown));

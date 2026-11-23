@@ -112,6 +112,11 @@ public sealed class SmokeSystem : EntitySystem
             if (!_smokeQuery.HasComponent(ent))
                 continue;
 
+            // SS220-fix-smoke-test-fail-begin
+            if (TerminatingOrDeleted(args.OtherEntity) || !args.OtherEntity.Valid)
+                continue;
+            // SS220-fix-smoke-test-fail-end
+
             smokeAffectedComponent ??= EnsureComp<SmokeAffectedComponent>(args.OtherEntity);
             smokeAffectedComponent.SmokeEntity = ent;
             return; // exit the function so we don't remove the component.
@@ -264,14 +269,14 @@ public sealed class SmokeSystem : EntitySystem
         if (!TryComp<BloodstreamComponent>(entity, out var bloodstream))
             return;
 
-        if (!_solutionContainerSystem.ResolveSolution(entity, bloodstream.ChemicalSolutionName, ref bloodstream.ChemicalSolution, out var chemSolution) || chemSolution.AvailableVolume <= 0)
+        if (!_solutionContainerSystem.ResolveSolution(entity, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution) || bloodSolution.AvailableVolume <= 0)
             return;
 
         var blockIngestion = _internals.AreInternalsWorking(entity);
 
         var cloneSolution = solution.Clone();
         var availableTransfer = FixedPoint2.Min(cloneSolution.Volume, component.TransferRate);
-        var transferAmount = FixedPoint2.Min(availableTransfer, chemSolution.AvailableVolume);
+        var transferAmount = FixedPoint2.Min(availableTransfer, bloodSolution.AvailableVolume);
         var transferSolution = cloneSolution.SplitSolution(transferAmount);
 
         foreach (var reagentQuantity in transferSolution.Contents.ToArray())
@@ -287,7 +292,7 @@ public sealed class SmokeSystem : EntitySystem
         if (blockIngestion)
             return;
 
-        if (_blood.TryAddToChemicals((entity, bloodstream), transferSolution))
+        if (_blood.TryAddToBloodstream((entity, bloodstream), transferSolution))
         {
             // Log solution addition by smoke
             _logger.Add(LogType.ForceFeed, LogImpact.Medium, $"{ToPrettyString(entity):target} ingested smoke {SharedSolutionContainerSystem.ToPrettyString(transferSolution)}");

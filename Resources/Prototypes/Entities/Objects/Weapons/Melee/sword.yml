@@ -15,6 +15,29 @@
     state: icon
   - type: Item
     size: Normal
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.5 # Well, it should depend on the user's melee weapon skill but unfortunately there is none as for now
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 melee weapon block added end
   - type: Utensil
     types:
       - Knife
@@ -29,9 +52,6 @@
   id: Cutlass
   description: A wickedly curved blade, often seen in the hands of space pirates.
   components:
-  - type: Tag
-    tags:
-    - Machete
   - type: Sprite
     sprite: Objects/Weapons/Melee/cutlass.rsi
   - type: MeleeWeapon
@@ -71,9 +91,6 @@
   id: Machete
   description: A large, vicious looking blade.
   components:
-  - type: Tag
-    tags:
-    - Machete
   - type: Sprite
     sprite: Objects/Weapons/Melee/machete.rsi
   - type: MeleeWeapon
@@ -128,9 +145,6 @@
         Slash: 17 #cmon, it has to be at least BETTER than the rest.
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
-  - type: Reflect
-    reflectProb: .1
-    spread: 90
   - type: Item
     storedSprite:
       state: storage
@@ -167,14 +181,13 @@
   id: Katana
   description: Ancient craftwork made with not so ancient plasteel.
   components:
+  # SS220 new sound_drop effect begin
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/sword.ogg ##new sound_drop effect, add MIXnikita
+      path: /Audio/SS220/Effects/Drop/sword.ogg
       params:
         volume: 2
-  - type: Tag
-    tags:
-    - Katana
+  # SS220 new sound_drop effect end
   - type: Sprite
     sprite: Objects/Weapons/Melee/katana.rsi
   - type: Clothing
@@ -217,7 +230,7 @@
   - type: Contraband
     severity: HighlyIllegal
   - type: Sprite
-    sprite: Objects/Weapons/Melee/energykatana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi # SS220 Ninja Resprite
   - type: MeleeWeapon
     wideAnimationRotation: -60
     damage:
@@ -236,13 +249,10 @@
   - type: AutoRecharge
     rechargeDuration: 20
   - type: Clothing
-    sprite: Objects/Weapons/Melee/energykatana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi # SS220 Ninja Resprite
     slots:
     - Back
     - Belt
-  - type: Reflect
-    slotFlags:
-    - NONE
   # SS220-fix katana throw angle-begin
   - type: ThrowingAngle
     angle: 305 # handly found value
@@ -315,9 +325,6 @@
           Radiation: 10
       soundHit:
         path: /Audio/Effects/explosion_small1.ogg
-    - type: Reflect
-      reflectProb: .25
-      spread: 90
     - type: Item
       size: Ginormous
       sprite: Objects/Weapons/Melee/Throngler-in-hand.rsi

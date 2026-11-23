@@ -1,5 +1,6 @@
 - type: job
   id: DeathSquadLeader
+  experienceDefinition: DeathSquadRoleExperience
   name: job-name-death-squad-leader
   description: job-description-death-squad-leader
   setPreference: false
@@ -14,6 +15,7 @@
 
 - type: job
   id: DeathSquadHealer
+  experienceDefinition: DeathSquadRoleExperience
   name: job-name-death-squad-healer
   description: job-description-death-squad-healer
   setPreference: false
@@ -28,6 +30,7 @@
 
 - type: job
   id: DeathSquadOperative
+  experienceDefinition: DeathSquadRoleExperience
   name: job-name-death-squad-operative
   description: job-description-death-squad-operative
   setPreference: false

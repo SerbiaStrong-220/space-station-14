@@ -14,7 +14,7 @@ namespace Content.Server.SS220.SuperMatter.Crystal;
 // TODO: added: Fun!
 public sealed partial class SuperMatterSystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     private float _broadcastDelay;
 
@@ -22,6 +22,19 @@ public sealed partial class SuperMatterSystem
     private void InitializeDatabase()
     {
         Subs.CVar(_config, CCVars220.SuperMatterUpdateNetworkDelay, (x) => _broadcastDelay = x, true);
+
+        SubscribeLocalEvent<SuperMatterObserverReceiverComponent, MapInitEvent>(OnObserverReceiverMapInit);
+        SubscribeLocalEvent<SuperMatterObserverReceiverComponent, MetaFlagRemoveAttemptEvent>(OnFlagObserverReceiverRemoveAttempt);
+    }
+
+    private void OnObserverReceiverMapInit(Entity<SuperMatterObserverReceiverComponent> observer, ref MapInitEvent _)
+    {
+        _metaData.SetFlag(observer.Owner, MetaDataFlags.PvsPriority, true);
+    }
+
+    private void OnFlagObserverReceiverRemoveAttempt(Entity<SuperMatterObserverReceiverComponent> observer, ref MetaFlagRemoveAttemptEvent args)
+    {
+        args.ToRemove &= ~MetaDataFlags.PvsPriority;
     }
 
     public void BroadcastData(Entity<SuperMatterComponent> crystal)
@@ -42,11 +55,11 @@ public sealed partial class SuperMatterSystem
         // just in case...
         if (!HasComp<TransformComponent>(uid))
         {
-            Log.Error($" Tried to get TransformComp of {EntityManager.ToPrettyString(crystal)}, but it hasnt it");
+            Log.Error($" Tried to get TransformComp of {ToPrettyString(crystal)}, but it hasnt it");
             return;
         }
 
-        var ev = new SuperMatterStateUpdate(uid.Id, EntityManager.GetNetEntity(Transform(uid).GridUid), comp.Activated,
+        var ev = new SuperMatterStateUpdate(uid.Id, GetNetEntity(Transform(uid).GridUid), comp.Activated,
                                             comp.Name, GetIntegrity(comp), pressure, comp.Temperature,
                                             (comp.Matter, matterDerv),
                                             (comp.InternalEnergy, internalEnergyDerv),

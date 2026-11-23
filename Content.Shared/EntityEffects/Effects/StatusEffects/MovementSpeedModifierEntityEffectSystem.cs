@@ -1,5 +1,7 @@
-﻿using Content.Shared.Movement.Components;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.SS220.ChemicalAdaptation;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Prototypes;
 
@@ -14,12 +16,24 @@ public sealed partial class MovementSpeedModifierEntityEffectSystem : EntityEffe
 {
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly MovementModStatusSystem _movementModStatus = default!;
+    [Dependency] private readonly ChemicalAdaptationSystem _chemicalAdaptation = default!;// SS220 add movement speed modification depending on the adaptation
 
     protected override void Effect(Entity<MovementSpeedModifierComponent> entity, ref EntityEffectEvent<MovementSpeedModifier> args)
     {
         var proto = args.Effect.EffectProto;
         var sprintMod = args.Effect.SprintSpeedModifier;
         var walkMod = args.Effect.WalkSpeedModifier;
+
+        // SS220 add movement speed modification depending on the adaptation begin
+        if (args.Effect.DependsOnAdaptation
+            && args.Effect.Reagent != null
+            && _chemicalAdaptation.TryGetMetabolized(entity, args.Effect.Reagent, out var metabolized)
+            )
+        {
+            sprintMod += metabolized * args.Effect.MetabolizedModifier;
+            walkMod += metabolized * args.Effect.MetabolizedModifier;
+        }
+        // SS220 add movement speed modification depending on the adaptation end
 
         switch (args.Effect.Type)
         {
@@ -75,6 +89,20 @@ public sealed partial class MovementSpeedModifier : BaseStatusEntityEffect<Movem
     /// </summary>
     [DataField]
     public float SprintSpeedModifier = 1f;
+
+    // SS220 add movement speed modification depending on the adaptation begin
+    [DataField]
+    public bool DependsOnAdaptation = false;
+
+    [DataField]
+    public float MetabolizedModifier = 1f;
+
+    /// <summary>
+    ///     Prototype of the reagent we're adding.
+    /// </summary>
+    [DataField]
+    public ProtoId<ReagentPrototype>? Reagent = null;
+    // SS220 add movement speed modification depending on the adaptation end
 
     /// <summary>
     /// Movement speed modifier prototype we're adding. Adding in case we ever want more than one prototype that boosts speed.

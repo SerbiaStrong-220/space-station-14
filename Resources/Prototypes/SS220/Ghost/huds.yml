@@ -1,0 +1,23 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: ghostHud
+  id: Medical
+  name: ghost-hud-medical
+  components:
+  - type: ShowHealthBars
+    damageContainers: [Biological, Ipc]
+  - type: ShowHealthIcons
+    damageContainers: [Biological, Ipc]
+
+- type: ghostHud
+  id: CriminalRecords
+  name: ghost-hud-criminal-records
+  components:
+  - type: ShowMindShieldIcons
+  - type: ShowCriminalRecordIcons
+
+- type: ghostHud
+  id: JobIcons
+  name: ghost-hud-job-icons
+  components:
+  - type: ShowJobIcons

@@ -41,6 +41,20 @@
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
 
+- type: loadoutEffectGroup
+  id: BlackBeret
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Security
+      time: 250h
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
 # Glasses
 - type: loadout
   id: GlassesSecurity
@@ -115,6 +129,14 @@
   equipment:
     head: ClothingHeadHelmetTactical
 
+- type: loadout
+  id: SecBeretBlack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlackBeret
+  equipment:
+    head: ClothingHeadHatBeretSecurityBlack
+
 # Mask
 - type: loadout
   id: MaskTacSec
@@ -130,7 +152,7 @@
   - !type:GroupLoadoutEffect
     proto: TacSec
   equipment:
-    mask: SecurityTacticalGasMask
+    mask: ClothingMaskGasSecurityTactical
 
 - type: loadout
   id: MaskSecBalaclava
@@ -179,3 +201,9 @@
     proto: TacSec
   equipment:
     gloves: ClothingHandsGlovesSecTactical
+
+# Belts
+- type: loadout
+  id: SecurityCorporateJudo
+  equipment:
+    belt: ClothingBeltCorporateJudoFilled

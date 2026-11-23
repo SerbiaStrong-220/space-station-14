@@ -1,0 +1,103 @@
+- type: entity
+  id: EqualHighTierMiner
+  parent: BaseResourceMiner
+  suffix: equal high tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Uranium: 15
+      Plasma: 15
+
+- type: entity
+  id: PlasmaHighTierMiner
+  parent: BaseResourceMiner
+  suffix: more plasma high tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Uranium: 10
+      Plasma: 20
+
+- type: entity
+  id: UraniumHighTierMiner
+  parent: BaseResourceMiner
+  suffix: more uranium high tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Uranium: 20
+      Plasma: 10
+
+- type: entity
+  id: LowAndHighEqualTierMiner
+  parent: BaseResourceMiner
+  suffix: equal low and high tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Uranium: 10
+      Plasma: 10
+      Steel: 20
+      Glass: 20
+
+- type: entity
+  id: MediumAndHighEqualTierMiner
+  parent: BaseResourceMiner
+  suffix: equal medium and high tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Uranium: 10
+      Plasma: 10
+      Gold: 20
+      Silver: 20
+
+- type: entity
+  id: DiamondHighTierMiner
+  parent: BaseResourceMiner
+  suffix: diamond high tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Uranium: 10
+      Plasma: 10
+      Diamond: 10
+
+- type: entity
+  id: BananiumHighTierMiner
+  parent: BaseResourceMiner
+  suffix: bananium high tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Uranium: 10
+      Plasma: 10
+      Bananium: 10
+
+- type: entity
+  id: PlasticHighTierMiner
+  parent: BaseResourceMiner
+  suffix: plastic high tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Uranium: 10
+      Plasma: 10
+      Plastic: 10
+
+- type: entity
+  id: AllHighTierMiner
+  parent: BaseResourceMiner
+  suffix: all high tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Steel: 10
+      Gold: 10
+      Silver: 10
+      Plasma: 10
+      Plastic: 10
+      Uranium: 10
+      Bananium: 10
+      Diamond: 10
+      Glass: 10

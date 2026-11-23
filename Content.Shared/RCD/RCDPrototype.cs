@@ -45,6 +45,12 @@ public sealed partial class RCDPrototype : IPrototype
     public string? Prototype { get; private set; }
 
     /// <summary>
+    /// If true, allows placing the entity once per direction (North, West, South and East)
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    public bool AllowMultiDirection { get; private set; }
+
+    /// <summary>
     /// Number of charges consumed when the operation is completed
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadOnly)]
@@ -131,6 +137,10 @@ public enum RcdConstructionRule : byte
     MustBuildOnSubfloor,        // Can only be built on exposed subfloor (e.g. catwalks on lattice or hull plating)
     IsWindow,                   // The entity is a window and can be built on grilles
     IsCatwalk,                  // The entity is a catwalk
+    //SS220-rcd-firelock-stacking begin
+    IsFirelock,                 // The entity is a firelock and can be built on airlocks, windows and grilles
+    CanBuildOnFirelock,         // The entity can be built on firelocks (e.g. airlocks, windows)
+    //SS220-rcd-firelock-stacking end
 }
 
 public enum RcdRotation : byte

@@ -1,0 +1,10 @@
+experience-view-panel-title = Опыт персонажа
+experience-view-knowledge-title = [head=3] Знания [/head]
+experience-view-tree-groups-title = [head=3] Умения [/head]
+
+experience-view-free-sublevel-points-text = Всего свободных очков: { $FreeSublevel }
+
+experience-view-tree-submit-button-text = Подтвердить
+experience-view-tree-clear-spent-points-button-text = Сбросить очки
+
+experience-tree-container-spend-points = [{$pointCost}]

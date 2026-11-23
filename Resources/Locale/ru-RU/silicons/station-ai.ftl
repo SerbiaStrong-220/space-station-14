@@ -1,4 +1,4 @@
-# General
+﻿# General
 ai-wire-snipped = Один из ваших системных проводов был перерезан в { $source }.
 wire-name-ai-vision-light = ИИЗ
 wire-name-ai-act-light = ИИД
@@ -19,6 +19,7 @@ electrify-door-on = Включить перегрузку
 electrify-door-off = Отключить перегрузку
 toggle-light = Переключить свет
 ai-device-not-responding = Устройство не отвечает
+ai-device-no-access = У вас нет доступа к этому устройству
 ai-consciousness-download-warning = Ваше сознание начали загружать.
 # UI
 station-ai-customization-menu = Настройка ИИ
@@ -39,3 +40,9 @@ station-ai-hologram-male = Мужской образ
 station-ai-hologram-face = Бестелесная голова
 station-ai-hologram-cat = Форма кота
 station-ai-hologram-dog = Форма корги
+
+station-ai-core-taking-damage = Ваше ядро ИИ получает физический урон.
+
+station-ai-ghost-role-name = ИИ станции
+
+station-ai-ghost-role-description = Служите экипажу станции в качестве его бдительного ИИ.

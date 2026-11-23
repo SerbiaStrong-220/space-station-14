@@ -1,0 +1,9 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: construction
+  id: PaperAirplane
+  graph: PaperAirplane
+  startNode: start
+  targetNode: paperairplane
+  category: construction-category-weapons
+  objectType: Item

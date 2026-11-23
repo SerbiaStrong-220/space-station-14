@@ -1,5 +1,6 @@
 ### for technical and/or system messages
 
+
 ## General
 
 shell-command-success = Команда выполнена.
@@ -31,10 +32,12 @@ shell-wrong-arguments-number = Неправильное количество а�
 shell-need-between-arguments = Нужно от { $lower } до { $upper } аргументов!
 shell-need-minimum-arguments = Нужно не менее { $minimum } аргументов!
 shell-need-minimum-one-argument = Нужен хотя бы один аргумент!
+shell-need-exactly-zero-arguments = Эта команда принимает ноль аргументов.
 shell-argument-uid = EntityUid
 
 ## Guards
 
+shell-missing-required-permission = Вам нужен { $perm } для этой команды!
 shell-entity-is-not-mob = Целевая сущность не является мобом!
 shell-invalid-entity-id = Недопустимый ID сущности.
 shell-invalid-grid-id = Недопустимый ID сетки.
@@ -45,16 +48,18 @@ shell-entity-uid-must-be-number = EntityUid должен быть числом.
 shell-could-not-find-entity = Не удалось найти сущность { $entity }.
 shell-could-not-find-entity-with-uid = Не удалось найти сущность с uid { $uid }.
 shell-entity-with-uid-lacks-component = Сущность с uid { $uid } не имеет компонента { $componentName }.
-shell-entity-target-lacks-component = Указанная сущность не имеет { INDEFINITE($componentName) } { $componentName } компонента
+shell-entity-target-lacks-component = Целевая сущность не имеет компонента { $componentName }
 shell-invalid-color-hex = Недопустимый HEX-цвет!
 shell-target-player-does-not-exist = Целевой игрок не существует!
 shell-target-entity-does-not-have-message = Целевая сущность не имеет { $missing }!
 shell-timespan-minutes-must-be-correct = { $span } не является допустимым промежутком времени в минутах.
-shell-argument-must-be-prototype = Аргумент { $index } должен быть ${ prototypeName }!
+# SS220-localization-fix begin
+shell-argument-must-be-prototype = Аргумент { $index } должен быть { $prototype }!
+# SS220-localization-fix end
 shell-argument-number-must-be-between = Аргумент { $index } должен быть числом от { $lower } до { $upper }!
 shell-argument-station-id-invalid = Аргумент { $index } должен быть валидным station id!
 shell-argument-map-id-invalid = Аргумент { $index } должен быть валидным map id!
 shell-argument-number-invalid = Аргумент { $index } должен быть валидным числом!
 # Hints
 shell-argument-username-hint = <username>
-shell-argument-username-optional-hint =  [username]
+shell-argument-username-optional-hint = [username]

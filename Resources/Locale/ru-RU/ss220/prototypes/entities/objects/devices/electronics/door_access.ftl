@@ -21,3 +21,7 @@ ent-DoorElectronicsMagistrate = { ent-DoorElectronics }
 ent-DoorElectronicsBlueshield = { ent-DoorElectronics }
     .suffix = ОСЩ, Закрыт
     .desc = { ent-DoorElectronics.desc }
+
+ent-DoorElectronicsNanoTrasenRepresentative = { ent-DoorElectronics }
+    .suffix = Представитель НТ, Закрыт
+    .desc = { ent-DoorElectronics.desc }

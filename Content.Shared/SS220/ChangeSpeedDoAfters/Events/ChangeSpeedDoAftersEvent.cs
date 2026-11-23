@@ -3,6 +3,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 
+[ByRefEvent]
+public record struct BeforeDoAfterCompleteEvent(DoAfterArgs Args, bool Cancel = false);
+
 /// <summary>
 /// This event raised every frameTime on user
 /// </summary>
@@ -27,6 +30,7 @@ public sealed partial class BeforeDoAfterStartEvent : EntityEventArgs
 {
     public DoAfterArgs Args;
     public ushort Id;
+    public bool ShouldCancel = false;
 
     public BeforeDoAfterStartEvent(DoAfterArgs args, ushort id)
     {

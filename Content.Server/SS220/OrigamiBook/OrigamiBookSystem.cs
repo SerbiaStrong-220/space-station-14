@@ -5,10 +5,10 @@ using Content.Shared.SS220.OrigamiBook;
 
 namespace Content.Server.SS220.OrigamiBook;
 
-public sealed class OrigamiBookSystem : SharedOrigamiSystem
+public sealed partial class OrigamiBookSystem : SharedOrigamiSystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

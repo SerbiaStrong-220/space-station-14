@@ -96,15 +96,16 @@
     interfaces:
       enum.ChameleonStructureUiKey.Key:
         type: ChameleonStructureBoundUserInterface
+  - type: CultYoggChamelenBlocker
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
-      - CultYoggRole
-  - type: CultYoggChamelenBlocker
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-BaseWall
 
 - type: entity
-  parent: BaseMaterialDoor
+  parent: BaseSecretDoor
   id: CultYoggDoor
   suffix: CultYogg, secret door
   name: cursed secreddoor
@@ -157,9 +158,10 @@
         type: ChameleonStructureBoundUserInterface
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
-      - CultYoggRole
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-CultYoggDoor
   - type: Tag
     tags:
       - Structure
@@ -204,17 +206,22 @@
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
     - state: closed_unlit
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
       shader: unshaded
       map: ["enum.DoorVisualLayers.BaseUnlit"]
     - state: welded
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
       map: ["enum.WeldableLayers.BaseWelded"]
     - state: bolted_unlit
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
       shader: unshaded
       map: ["enum.DoorVisualLayers.BaseBolted"]
     - state: emergency_unlit
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
       map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
       shader: unshaded
     - state: panel_open
+      sprite: SS220/Structures/Doors/Airlocks/common.rsi
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
     - state: electrified
       sprite: Effects/electricity.rsi
@@ -359,10 +366,11 @@
      - AirlockCargoGlass
   - type: CultYoggBuilding
     eraseTime: 3
-  - type: HiddenDescription
-    entries:
-    - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
-      - CultYoggRole
   - type: WeldCorruptInteraction
   - type: CultYoggChamelenBlocker
+  - type: HiddenDescription
+    entries:
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
+    nameEntries:
+    - [CultYoggKnowledge, null]
+    hiddenName: ent-CultYoggAirlock

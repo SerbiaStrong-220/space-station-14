@@ -1,0 +1,31 @@
+ <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<ExperienceUiElements:ExperienceTreeContainer
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
+    xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements" VerticalExpand="False">
+    <BoxContainer Name="ContentContainer" Orientation="Vertical" Margin="0 2" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Stretch">
+                <BoxContainer Name ="InfoContainer" Orientation="Horizontal" HorizontalAlignment="Left" HorizontalExpand="True" MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5">
+                    <TextureRect Name="TreeIconRect"/>
+                    <RichTextLabel Name="TreeName" Text="place-holder"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" VerticalAlignment="Stretch" VerticalExpand="True" HorizontalExpand="True" HorizontalAlignment="Right">
+                    <BoxContainer Name ="TreeLevelsContainer" Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 2 0" MaxHeight="16">
+                        <!-- Added here by code -->
+                    </BoxContainer>
+                    <BoxContainer Name="AddLevelBox" Orientation="Horizontal">
+                        <TextureButton Name="AddLevelButton" TexturePath="/Textures/SS220/Interface/ExperienceView/add-button.png"
+                        VerticalExpand="True" VerticalAlignment="Center" HorizontalAlignment="Left" MaxHeight="16"/>
+                        <Label Name="SpendPointsPerLevelShower" Text="123456" Margin="0 0 20 0"
+                            VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</ExperienceUiElements:ExperienceTreeContainer>

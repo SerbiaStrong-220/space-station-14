@@ -57,6 +57,7 @@
     allowedStates:
     - Alive
     - Dead
+  - type: DefibReviveAlive #SS220-xeno-defib
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -65,10 +66,12 @@
     speedModifierThresholds:
       25: 0.5
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: Bloodstream
-    bloodReagent: FluorosulfuricAcid
-    bloodMaxVolume: 650
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 650
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
@@ -76,8 +79,8 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 6
+      types:
+        Piercing: 6
   - type: DamageStateVisuals
     states:
       Alive:
@@ -105,9 +108,10 @@
   - type: TypingIndicator
     proto: alien
   - type: Temperature
+    currentTemperature: 310.15
+  - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
-    currentTemperature: 310.15
   - type: Tag
     tags:
       - CannotSuicide
@@ -136,7 +140,7 @@
       0: Alive
       100: Dead
   - type: Stamina
-    critThreshold: 300
+    baseCritThreshold: 300
   - type: SlowOnDamage
     speedModifierThresholds:
       50: 0.7
@@ -173,8 +177,8 @@
       40: 0.7
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 6
+      types:
+        Slash: 6
   - type: MovementSpeedModifier
     baseSprintSpeed: 4
   - type: Fixtures
@@ -211,8 +215,8 @@
   - type: MovementSpeedModifier
   - type: MeleeWeapon
     damage:
-     groups:
-       Brute: 12
+      types:
+        Slash: 12
   - type: Fixtures
     fixtures:
       fix1:
@@ -248,8 +252,8 @@
     baseSprintSpeed: 4
   - type: MeleeWeapon
     damage:
-     groups:
-       Brute: 10
+      types:
+        Slash: 10
   - type: SlowOnDamage
     speedModifierThresholds:
       50: 0.7
@@ -281,8 +285,8 @@
     baseSprintSpeed: 6.0
   - type: MeleeWeapon
     damage:
-     groups:
-       Brute: 5
+      types:
+        Slash: 5
   - type: Fixtures
     fixtures:
       fix1:
@@ -363,6 +367,12 @@
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
+  # SS220 ADD NIGHT VISION START
+  - type: NightVision
+    profile: NightVisionLightBlue
+    enabled: false
+    action: ActionToggleNightVisionInnate
+  # SS220 ADD NIGHT VISION END
   - type: Sprite
     drawdepth: SmallMobs #SS220-fauna-update
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi
@@ -502,11 +512,14 @@
   - type: Hands
   - type: ComplexInteraction
   - type: MobState
+  - type: DefibReviveAlive #SS220-xeno-defib
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: Bloodstream
-    bloodReagent: FluorosulfuricAcid
-    bloodMaxVolume: 300
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 300
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
@@ -514,8 +527,8 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
-     groups:
-       Brute: 5
+      types:
+        Slash: 5
   - type: DamageStateVisuals
     states:
       Alive:
@@ -533,9 +546,10 @@
   - type: TypingIndicator
     proto: alien
   - type: Temperature
+    currentTemperature: 310.15
+  - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
-    currentTemperature: 310.15
   - type: NoSlip
   - type: Perishable #Ummmm the acid kills a lot of the bacteria or something
     molsPerSecondPerUnitMass: 0.0005

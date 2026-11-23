@@ -7,6 +7,7 @@ using Content.Server.Popups;
 using Content.Server.RoundEnd;
 using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Systems;
+using Content.Server.SS220.TTS;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
@@ -18,9 +19,10 @@ using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
-using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Communications
 {
@@ -37,7 +39,8 @@ namespace Content.Server.Communications
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly IChatManager _chatManager = default!; // SS220 delete prohibited characters
+        [Dependency] private IChatManager _chatManager = default!; // SS220 delete prohibited characters
+        [Dependency] private TtsSystem _tts = default!; // SS220 Tts 
 
         private const float UIUpdateInterval = 5.0f;
 
@@ -234,7 +237,7 @@ namespace Content.Server.Communications
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(message.Message, maxLength);
             var author = Loc.GetString("comms-console-announcement-unknown-sender");
-            var voiceId = string.Empty;
+            ProtoId<TtsVoicePrototype>? voiceId = string.Empty; // SS220 Tts
             if (message.Actor is { Valid: true } mob)
             {
                 if (!CanAnnounce(comp))
@@ -252,10 +255,7 @@ namespace Content.Server.Communications
                 RaiseLocalEvent(tryGetIdentityShortInfoEvent);
                 author = tryGetIdentityShortInfoEvent.Title;
 
-                if (TryComp<TTSComponent>(mob, out var tts))
-                {
-                    voiceId = tts.VoicePrototypeId;
-                }
+                _tts.TryGetAvailableVoiceId(mob, out voiceId); // SS220 Tts
             }
 
             comp.AnnouncementCooldownRemaining = comp.Delay;
@@ -281,7 +281,7 @@ namespace Content.Server.Communications
                 return;
             }
 
-            _chatSystem.DispatchStationAnnouncement(uid, msg, title, colorOverride: comp.Color, voiceId: voiceId);
+            _chatSystem.DispatchStationAnnouncement(uid, msg, title, colorOverride: comp.Color, voiceId: voiceId /* SS220 Tts */);
 
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following station announcement: {msg}");
 
@@ -304,6 +304,14 @@ namespace Content.Server.Communications
 
         private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
         {
+            // SS220-add-recall-only-console-begin
+            if (comp.CanShuttle && comp.OnlyRecallShuttle)
+            {
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-can-only-recall"), uid, message.Actor);
+                return;
+            }
+            // SS220-add-recall-only-console-end
+
             if (!CanCallOrRecall(comp))
                 return;
 
@@ -323,7 +331,7 @@ namespace Content.Server.Communications
                 return;
             }
 
-            _roundEndSystem.RequestRoundEnd(uid);
+            _roundEndSystem.RequestRoundEnd(mob, uid);
             _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(mob):player} has called the shuttle.");
         }
 
@@ -332,13 +340,15 @@ namespace Content.Server.Communications
             if (!CanCallOrRecall(comp))
                 return;
 
-            if (!CanUse(message.Actor, uid))
+            var mob = message.Actor;
+
+            if (!CanUse(mob, uid))
             {
                 _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
                 return;
             }
 
-            _roundEndSystem.CancelRoundEndCountdown(uid);
+            _roundEndSystem.CancelRoundEndCountdown(mob, uid);
             _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(message.Actor):player} has recalled the shuttle.");
         }
     }

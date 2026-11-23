@@ -1,3 +1,23 @@
 health-analyzer-window-entity-death-counter-text = Биологических смертей:
 health-analyzer-window-entity-reagent-text = {CAPITALIZE($reagentName)}: {$reagentValue}
 health-analyzer-window-reagents-title = Растворы в крови:
+
+health-analyzer-window-print-text = Распечатать отчёт
+health-analyzer-printer-not-ready = Принтер ещё не готов. Подождите немного.
+health-analyzer-printer-no-data = Нет данных сканирования для печати.
+health-analyzer-report-title = отчёт анализатора здоровья: { $entity }
+health-analyzer-report-section-patient = Информация о пациенте
+health-analyzer-report-section-alerts = Предупреждения
+health-analyzer-report-section-damage = Детализация повреждений
+health-analyzer-report-section-reagents = Растворы в крови
+health-analyzer-report-name = Имя: { $name }
+health-analyzer-report-species = Вид: { $species }
+health-analyzer-report-status = Статус: { $value }
+health-analyzer-report-temperature = Температура: { $value }
+health-analyzer-report-blood-level = Уровень крови: { $value }
+health-analyzer-report-death-counter = Биологических смертей: { $value }
+health-analyzer-report-total-damage = Общие повреждения: { $value }
+health-analyzer-report-entity-unrevivable-text = Обнаружено уникальное строение тела! Пациент не может быть реанимирован стандартными средствами!
+health-analyzer-report-entity-bleeding-text = У пациента открытые раны!
+health-analyzer-report-none = Нет
+health-analyzer-report-date-time = Дата и время: { $dateTime }

@@ -2,8 +2,8 @@
 
 - type: entity
   id: RandomCloakSingle
-  name: рандомный спавнер плаща
-  suffix: Спавнер
+  name: random cloak spawner
+  suffix: Spawner
   parent: MarkerBase
   placement:
     mode: AlignTileAny

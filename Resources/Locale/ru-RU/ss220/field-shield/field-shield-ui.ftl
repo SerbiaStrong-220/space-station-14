@@ -11,3 +11,9 @@ field-shield-other-examine = Полевой щит защищает владел
 
 field-shield-provider-cant-equip-when-you-already-have-one = Вы не можете иметь более одного снаряжения с щитом!
 field-shield-provider-cant-unequip-when-emped = Электроника снаряжения не реагирует, оно не может быть снято!
+
+ent-ActionTogglePersonalShield = Переключить персональный щит
+    .desc = Перенаправляет питание на эммитор.
+
+field-shield-provider-on = Щит наполняются энергией
+field-shield-provider-off = Щит отключается...

@@ -381,16 +381,16 @@
 
 - type: entity
   parent: LargeBeaker
-  suffix: Necrosol
-  id: LargeBeakerNecrosol
+  suffix: Arcryox
+  id: LargeBeakerArcryox
   components:
   - type: Label
-    currentLabel: reagent-name-necrosol
+    currentLabel: reagent-name-arcryox
   - type: SolutionContainerManager
     solutions:
       beaker:
         reagents:
-        - ReagentId: Necrosol
+        - ReagentId: Arcryox
           Quantity: 100
 
 - type: entity
@@ -479,16 +479,16 @@
 
 - type: entity
   parent: Jug
-  suffix: Necrosol
-  id: JugNecrosol
+  suffix: Arcryox
+  id: JugArcryox
   components:
   - type: Label
-    currentLabel: reagent-name-necrosol
+    currentLabel: reagent-name-arcryox
   - type: SolutionContainerManager
     solutions:
       beaker:
         reagents:
-        - ReagentId: Necrosol
+        - ReagentId: Arcryox
           Quantity: 200
 
 - type: entity

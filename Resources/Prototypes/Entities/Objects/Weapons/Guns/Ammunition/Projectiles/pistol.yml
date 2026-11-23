@@ -1,19 +1,23 @@
 - type: entity
-  id: BulletPistol
-  name: bullet (.35 auto)
   parent: BaseBullet
+  id: BulletPistol
   categories: [ HideSpawnMenu ]
+  name: bullet (.35 auto)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: PistolCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
         Piercing: 20 #ss220lowTTKUpdate
 
 - type: entity
-  id: BulletPistolPractice
-  name: bullet (.35 auto practice)
   parent: BaseBulletPractice
+  id: BulletPistolPractice
   categories: [ HideSpawnMenu ]
+  name: bullet (.35 auto practice)
   components:
   - type: Projectile
     damage:
@@ -21,11 +25,16 @@
         Blunt: 2
 
 - type: entity
-  id: BulletPistolIncendiary
   parent: BaseBulletIncendiary
-  name: bullet (.35 auto incendiary)
+  id: BulletPistolIncendiary
   categories: [ HideSpawnMenu ]
+  name: bullet (.35 auto incendiary)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.15
+    weightedRandomProviderEntity: PistolCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -33,11 +42,16 @@
         Heat: 2 #ss220weaponBalance
 
 - type: entity
-  id: BulletPistolUranium
   parent: BaseBulletUranium
-  name: bullet (.35 auto uranium)
+  id: BulletPistolUranium
   categories: [ HideSpawnMenu ]
+  name: bullet (.35 auto uranium)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.15
+    weightedRandomProviderEntity: PistolCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:

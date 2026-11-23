@@ -1,0 +1,40 @@
+// Original code by Corvax dev team, no specific for SS220 license
+
+using Content.Shared.Examine;
+using Content.Shared.SS220.Experience.Systems.Experience;
+
+namespace Content.Shared.SS220.HiddenDescription;
+
+public abstract partial class SharedHiddenDescriptionSystem : EntitySystem
+{
+    [Dependency] private ExperienceSystem _experience = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<HiddenDescriptionComponent, ExaminedEvent>(OnExamine);
+    }
+
+    private void OnExamine(Entity<HiddenDescriptionComponent> entity, ref ExaminedEvent args)
+    {
+        PushExamineInformation(entity.Comp, ref args);
+
+        Dirty(entity);
+    }
+
+    public void PushExamineInformation(HiddenDescriptionComponent component, ref ExaminedEvent args)
+    {
+        foreach (var (knowledge, locIds) in component.Entries)
+        {
+            if (!_experience.HaveKnowledge(args.Examiner, knowledge))
+                continue;
+
+            foreach (var locId in locIds)
+            {
+                args.PushMarkup(Loc.GetString(locId), component.PushPriority);
+            }
+        }
+    }
+
+}

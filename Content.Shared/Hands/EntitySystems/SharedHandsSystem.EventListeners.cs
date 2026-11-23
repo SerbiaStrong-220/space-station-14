@@ -8,9 +8,13 @@ namespace Content.Shared.Hands.EntitySystems;
 /// </summary>
 public abstract partial class SharedHandsSystem
 {
+    private const float SpeedWithZeroFreeHands = 0.85f;
+    private const float SpeedWithAllFreeHands = 1.15f;
+
     private void InitializeEventListeners()
     {
         SubscribeLocalEvent<HandsComponent, GetStandUpTimeEvent>(OnStandupArgs);
+        SubscribeLocalEvent<HandsComponent, KnockedDownRefreshEvent>(OnKnockedDownRefresh);
     }
 
     /// <summary>
@@ -27,5 +31,16 @@ public abstract partial class SharedHandsSystem
             return;
 
         time.DoAfterTime *= (float)ent.Comp.Count / (hands + ent.Comp.Count);
+    }
+
+    private void OnKnockedDownRefresh(Entity<HandsComponent> ent, ref KnockedDownRefreshEvent args)
+    {
+        float freeHands = CountFreeHands(ent.AsNullable()); // SS220-legs-add
+        float totalHands = GetHandCount(ent.AsNullable()); // SS220-legs-add
+
+        // SS220-legs-add-begin
+        var freeHandsModifiers = totalHands == 0 ? 0f : freeHands / totalHands;
+        args.SpeedModifier *= SpeedWithZeroFreeHands + (SpeedWithAllFreeHands - SpeedWithZeroFreeHands) * freeHandsModifiers;
+        // SS220-legs-add-end
     }
 }

@@ -10,6 +10,7 @@
     - !type:OverallPlaytimeRequirement
        time: 20h # SS220-RoleTime 2
   startingGear: MimeGear
+  experienceDefinition: MimeRoleExperience # SS220-experience
   icon: "JobIconMime"
   supervisors: job-supervisors-hop
   access:

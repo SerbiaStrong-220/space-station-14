@@ -1,0 +1,87 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using Content.Shared.Database;
+using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.Experience.Components;
+using Robust.Shared.Random;
+using Robust.Shared.Utility;
+
+namespace Content.Shared.SS220.Experience.Skill;
+
+public partial class SkillEntitySystem : EntitySystem
+{
+    /// <summary>
+    /// Subscribes Experience component and its handlers to specified TComp TEvent handler
+    /// </summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void SubscribeEventToSkillEntity<TComp, TEvent>(EntityEventRefHandler<TComp, TEvent> handler,
+                                                        Type[]? before = null, Type[]? after = null)
+                                                        where TEvent : notnull where TComp : Component
+    {
+        Experience.RelayEventToSkillEntity<TComp, TEvent>();
+
+        SubscribeLocalEvent<TComp, TEvent>(handler, before, after);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool ResolveExperienceEntityFromSkillEntity(EntityUid skillUid, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
+    {
+        experienceEntity = null;
+
+        DebugTools.AssertEqual(HasComp<SkillComponent>(skillUid), true);
+        DebugTools.AssertEqual(_container.IsEntityInContainer(skillUid), true, $"Got entity {ToPrettyString(skillUid)} with {nameof(SkillComponent)} but not in container");
+
+        var experienceUid = Transform(skillUid).ParentUid;
+
+        if (!TryComp<ExperienceComponent>(experienceUid, out var experienceComponent))
+        {
+            Log.Error($"Got entity {ToPrettyString(skillUid)} in container which entity owner don't have {nameof(ExperienceComponent)}! Queued that entity to be deleted");
+            QueueDel(skillUid);
+            return false;
+        }
+
+        experienceEntity = (experienceUid, experienceComponent);
+        return true;
+    }
+
+    /// <summary>
+    /// Resolves owner entity of skill and writes log with adding parent entity
+    /// </summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool TryAddToAdminLogs<T>(Entity<T> entity, string message, LogImpact logImpact = LogImpact.Low) where T : IComponent
+    {
+        if (!ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
+            return false;
+
+        _adminLog.Add(LogType.Experience, logImpact, $"Skill of {ToPrettyString(experienceEntity):user} caused {message}");
+        return true;
+    }
+
+    /// <summary>
+    /// Random that gives same result on client and on server
+    /// </summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public IRobustRandom GetPredictedRandom(in List<int> valuesForSeed)
+    {
+        var seed = SharedRandomExtensions.HashCodeCombine(valuesForSeed);
+        var random = new RobustRandom();
+        random.SetSeed(seed);
+
+        return random;
+    }
+
+    /// <summary>
+    /// Random that gives same result on client and on server
+    /// </summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public IRobustRandom GetPredictedRandomOnCurTick(NetEntity netEnt, NetEntity? netEnt2 = null)
+    {
+        var seed = SharedRandomExtensions.HashCodeCombine((int)GameTiming.CurTick.Value, netEnt.Id, netEnt2?.Id ?? 0);
+        var rand = new RobustRandom();
+        rand.SetSeed(seed);
+
+        return rand;
+    }
+}

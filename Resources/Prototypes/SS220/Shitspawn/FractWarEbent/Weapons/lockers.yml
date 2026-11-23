@@ -9,10 +9,12 @@
   components:
   - type: AccessReader
     access: [["Ussp"]]
-  - type: StorageFill
-    contents:
-    - id: WeaponXrayCannon
-      amount: 4
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponXrayCannon
+          amount: 4
 
 - type: entity
   parent: GunSafe
@@ -22,12 +24,14 @@
   components:
   - type: AccessReader
     access: [["Ussp"]]
-  - type: StorageFill
-    contents:
-    - id: WeaponRifleAk
-      amount: 5
-    - id: BoxMagazineLightRifle
-      amount: 5
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponRifleAk
+          amount: 5
+        - id: BoxMagazineLightRifle
+          amount: 5
 
 #ERT
 - type: entity
@@ -36,10 +40,12 @@
   name: оружейный сейф импульсных карабинов
   suffix: Shitspawn, Ebent, FractWar
   components:
-  - type: StorageFill
-    contents:
-    - id: WeaponPulseCarbineFractWar
-      amount: 5
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponPulseCarbineFractWar
+          amount: 5
 
 #Iron squad
 - type: entity
@@ -50,9 +56,11 @@
   components:
   - type: AccessReader
     access: [["SyndicateAgent"]]
-  - type: StorageFill
-    contents:
-    - id: WeaponShotgunBulldog
-      amount: 6
-    - id: MagazineShotgun
-      amount: 12
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponShotgunBulldog
+          amount: 6
+        - id: MagazineShotgun
+          amount: 12

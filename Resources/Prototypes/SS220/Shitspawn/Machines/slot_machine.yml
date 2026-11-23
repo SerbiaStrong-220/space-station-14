@@ -1,0 +1,25 @@
+- type: entity
+  id: SlotMachine
+  parent: BaseMachine
+  name: Игровой автомат
+  description: Рискни зарплатой ради мечты.
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+    state: machine
+    noRot: false
+  - type: Transform
+    noRot: false
+  - type: SlotMachine
+    insertSound: /Audio/Machines/id_insert.ogg
+    spinSound: /Audio/SS220/Shitspawn/SlotMachine/slot_spin.ogg
+    winSound: /Audio/SS220/Shitspawn/SlotMachine/slot_win.ogg
+  - type: ActivatableUI
+    key: enum.Content.Shared.SS220.Shitspawn.SlotMachine.SlotMachineUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.Content.Shared.SS220.Shitspawn.SlotMachine.SlotMachineUiKey.Key:
+        type: SlotMachineBoundUserInterface
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics

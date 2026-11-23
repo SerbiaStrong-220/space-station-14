@@ -34,7 +34,7 @@ public sealed class ImplanterSystem : SharedImplanterSystem
                 {
                     var locData = Loc.GetEntityData(proto.ID);
                     var name = locData.Attributes.FirstOrNull(x => x.Key == "true-name")?.Value ??
-                                string.Join(" ", proto.Name, locData.Suffix);
+                                $"{proto.Name} {locData.Suffix}";
                     implants.Add(proto.ID, name);
                 }
                 // SS220-implant-name-fix-end

@@ -12909,7 +12909,6 @@ entities:
       maxCharge: 1
     - type: BatterySelfRecharger
       autoRechargeRate: 0
-      autoRecharge: False
     - type: GroupExamine
       group:
       - hoverMessage: ""
@@ -29057,7 +29056,6 @@ entities:
     - type: StealthOnMove
     - type: BatterySelfRecharger
       autoRechargeRate: 20000
-      autoRecharge: True
   - uid: 9737
     components:
     - type: Transform
@@ -29072,7 +29070,6 @@ entities:
     - type: Stealth
     - type: BatterySelfRecharger
       autoRechargeRate: 20000
-      autoRecharge: True
 - proto: Fork
   entities:
   - uid: 1071
@@ -33920,7 +33917,7 @@ entities:
 
 
 
-                        [head=1]УХОДЯ НЕ ЗАБУДЬ 
+                        [head=1]УХОДЯ НЕ ЗАБУДЬ
                      ВЫКЛЮЧИТЬ СВЕТ[/head]
 
 
@@ -35806,7 +35803,7 @@ entities:
 
         Здесь покоится Дарлин Макро.
 
-        Любимая Сестра 
+        Любимая Сестра
 
         Великолепный врач и психолог
 
@@ -35870,7 +35867,7 @@ entities:
 
         Здесь покоится Эй-Ун'Хасали.
 
-        Жрица Хисош 
+        Жрица Хисош
 
         Которая предала империю и богиню ради любви
 
@@ -35902,7 +35899,7 @@ entities:
 
         Здесь покоится Мох Третьего Принятия
 
-        Соблазнитель всех девушек с ушками и хвостиками 
+        Соблазнитель всех девушек с ушками и хвостиками
 
         Возлюбленный и желанный
 

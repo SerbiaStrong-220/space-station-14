@@ -1,0 +1,110 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               Title="{Loc 'slot-machine-ui-title'}"
+               MinWidth="420"
+               MinHeight="620">
+
+    <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="8">
+
+        <Label Text="{Loc 'slot-machine-ui-heading'}" HorizontalAlignment="Center"
+               FontColorOverride="Gold" StyleClasses="LabelHeadingBigger"/>
+        <Label Text="{Loc 'slot-machine-ui-subheading'}" HorizontalAlignment="Center"
+               FontColorOverride="#aaaaaa"/>
+
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center"
+                      SeparationOverride="8" Margin="0 6">
+            <TextureRect Name="Reel0Rect" MinSize="72 72" Stretch="KeepAspectCentered"/>
+            <Label Text="|" VerticalAlignment="Center" FontColorOverride="#444444"/>
+            <TextureRect Name="Reel1Rect" MinSize="72 72" Stretch="KeepAspectCentered"/>
+            <Label Text="|" VerticalAlignment="Center" FontColorOverride="#444444"/>
+            <TextureRect Name="Reel2Rect" MinSize="72 72" Stretch="KeepAspectCentered"/>
+        </BoxContainer>
+
+        <Label Name="CreditsLabel" HorizontalAlignment="Center"
+               FontColorOverride="Gold" StyleClasses="LabelBig"/>
+        <Label Name="PayoutLabel" Text="{Loc 'slot-machine-ui-luck'}" HorizontalAlignment="Center"
+               FontColorOverride="#cccccc"/>
+
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" SeparationOverride="4">
+            <Button Name="Insert10Button"   MinWidth="80"/>
+            <Button Name="Insert100Button"  MinWidth="90"/>
+            <Button Name="Insert1000Button" MinWidth="100"/>
+            <Button Name="Insert5000Button" MinWidth="100"/>
+        </BoxContainer>
+
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" SeparationOverride="4">
+            <Label Text="{Loc 'slot-machine-ui-bet'}" VerticalAlignment="Center" FontColorOverride="#aaaaaa"/>
+            <Button Name="BetMinus1000Button" Text="-1000" MinWidth="54"/>
+            <Button Name="BetMinus100Button"  Text="-100"  MinWidth="54"/>
+            <Label  Name="BetLabel" Text="100" MinWidth="60" Align="Center"
+                    VerticalAlignment="Center" FontColorOverride="Gold"/>
+            <Button Name="BetPlus100Button"   Text="+100"  MinWidth="54"/>
+            <Button Name="BetPlus1000Button"  Text="+1000" MinWidth="54"/>
+            <Button Name="BetPlus5000Button"  Text="+5000" MinWidth="54"/>
+        </BoxContainer>
+
+        <Button Name="SpinButton"    Text="{Loc 'slot-machine-ui-spin'}"         MinHeight="52" StyleClasses="ButtonCaution"/>
+        <Button Name="CollectButton" Text="{Loc 'slot-machine-ui-collect'}" MinHeight="36"/>
+
+        <Label Text="{Loc 'slot-machine-ui-payout-table'}" HorizontalAlignment="Center"
+               FontColorOverride="#888888" Margin="0 4 0 0"/>
+        <GridContainer Columns="2" HorizontalAlignment="Center">
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <TextureRect Name="PayDiamond1" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayDiamond2" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayDiamond3" MinSize="24 24" Stretch="KeepAspectCentered"/>
+            </BoxContainer>
+            <Label Text="x100" FontColorOverride="Gold" VerticalAlignment="Center"/>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <TextureRect Name="PaySeven1" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PaySeven2" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PaySeven3" MinSize="24 24" Stretch="KeepAspectCentered"/>
+            </BoxContainer>
+            <Label Text="x50" FontColorOverride="Red" VerticalAlignment="Center"/>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <TextureRect Name="PayBell1" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayBell2" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayBell3" MinSize="24 24" Stretch="KeepAspectCentered"/>
+            </BoxContainer>
+            <Label Text="x30" FontColorOverride="Orange" VerticalAlignment="Center"/>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <TextureRect Name="PayCherry1" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayCherry2" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayCherry3" MinSize="24 24" Stretch="KeepAspectCentered"/>
+            </BoxContainer>
+            <Label Text="x20" FontColorOverride="Green" VerticalAlignment="Center"/>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <TextureRect Name="PayApple1" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayApple2" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayApple3" MinSize="24 24" Stretch="KeepAspectCentered"/>
+            </BoxContainer>
+            <Label Text="x15" FontColorOverride="Yellow" VerticalAlignment="Center"/>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <TextureRect Name="PayBlue1" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayBlue2" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayBlue3" MinSize="24 24" Stretch="KeepAspectCentered"/>
+            </BoxContainer>
+            <Label Text="x10" FontColorOverride="Cyan" VerticalAlignment="Center"/>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <TextureRect Name="PayApplePairL1" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayApplePairL2" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <Label Text="?" MinSize="24 24" Align="Center" VerticalAlignment="Center" FontColorOverride="#555555"/>
+            </BoxContainer>
+            <Label Text="x2" VerticalAlignment="Center"/>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <Label Text="?" MinSize="24 24" Align="Center" VerticalAlignment="Center" FontColorOverride="#555555"/>
+                <TextureRect Name="PayCherryPairR1" MinSize="24 24" Stretch="KeepAspectCentered"/>
+                <TextureRect Name="PayCherryPairR2" MinSize="24 24" Stretch="KeepAspectCentered"/>
+            </BoxContainer>
+            <Label Text="x2" VerticalAlignment="Center"/>
+
+        </GridContainer>
+    </BoxContainer>
+</DefaultWindow>

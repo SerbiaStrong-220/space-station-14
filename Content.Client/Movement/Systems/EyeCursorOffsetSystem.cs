@@ -1,10 +1,11 @@
-using System.Numerics;
 using Content.Client.Movement.Components;
 using Content.Client.Viewport;
 using Content.Shared.Camera;
+using Content.Shared.SS220.Movement.Events;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.Map;
+using System.Numerics;
 
 namespace Content.Client.Movement.Systems;
 
@@ -26,6 +27,15 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
 
     private void OnGetEyeOffsetEvent(EntityUid uid, EyeCursorOffsetComponent component, ref GetEyeOffsetEvent args)
     {
+        //SS220 weapon overhaul begin
+        var ev = new CanApplyEyeCursorOffsetEvent();
+        ev.Cancelled = false;
+
+        RaiseLocalEvent(uid, ref ev);
+
+        if (ev.Cancelled)
+            return;
+        //SS220 weapon overhaul end
         var offset = OffsetAfterMouse(uid, component);
         if (offset == null)
             return;

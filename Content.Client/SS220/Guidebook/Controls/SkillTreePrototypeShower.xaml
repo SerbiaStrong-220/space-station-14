@@ -1,0 +1,13 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              Orientation="Vertical"
+              HorizontalAlignment="Stretch"
+              HorizontalExpand="True"
+              Margin="0 0 0 5">
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 0 0 5">
+        <RichTextLabel Name="TreeNameLabel" StyleClasses="LabelHeading" HorizontalExpand="True" HorizontalAlignment="Center"/>
+    </BoxContainer>
+    <BoxContainer Name="SkillsContainer" Orientation="Vertical" HorizontalExpand="True" Margin="10 0 0 0">
+        <!-- Added by code -->
+    </BoxContainer>
+    <PanelContainer StyleClasses="LowDivider" Margin="0 10 0 5" />
+</BoxContainer>

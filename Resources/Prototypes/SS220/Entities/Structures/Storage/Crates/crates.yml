@@ -97,3 +97,37 @@
     selector: !type:EntSelector
       id: Crowbar
 
+- type: entity
+  parent: CrateBaseSecure
+  id: CrateInterdyneSecure
+  name: secure Interdyne crate
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Storage/Crates/interdyne_crate_secure.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Storage/Crates/interdyne_crate_secure.rsi
+  - type: AccessReader
+    access: [["Interdyne"]]
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateInterdyne
+  name: Interdyne crate
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Storage/Crates/interdyne_crate.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Storage/Crates/interdyne_crate.rsi
+
+
+- type: entity
+  parent: [ CrateBaseSecure, CrateFreezer ]
+  id: CrateFrezzerInterdyneSecure
+  name: secure Interdyne freezer
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Storage/Crates/interdyne_freezer_secure.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Storage/Crates/interdyne_freezer_secure.rsi
+  - type: AccessReader
+    access: [["Interdyne"]]

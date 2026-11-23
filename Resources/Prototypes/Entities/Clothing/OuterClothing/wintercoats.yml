@@ -457,11 +457,17 @@
     sprite: Clothing/OuterClothing/WinterCoats/coathosarmored.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWinterHOS
-#SS220 Micro_fibers start
+  #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-synthetic-fur
     microFiberColor: micro-fibers-gray
-#SS220 Micro_fibers end
+  #SS220 Micro_fibers end
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot { }
+      item_radio: !type:ContainerSlot { } # ss220 add radio slot
+      storagebase: !type:Container
+        ents: [ ]
 ##########################################################
 
 - type: entity
@@ -884,11 +890,17 @@
     sprite: Clothing/OuterClothing/WinterCoats/coatwardenarmored.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWinterWarden
-#SS220 Micro_fibers start
+  #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-synthetic-fur
     microFiberColor: micro-fibers-red
-#SS220 Micro_fibers end
+  #SS220 Micro_fibers end
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot { }
+      item_radio: !type:ContainerSlot { } # ss220 add radio slot
+      storagebase: !type:Container
+        ents: [ ]
 ################################################################
 
 - type: entity

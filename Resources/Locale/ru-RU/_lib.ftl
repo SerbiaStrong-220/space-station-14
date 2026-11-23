@@ -32,8 +32,7 @@ zzzz-fmt-power-joules =
         [4] ТДж
        *[5] ???
     }
-
-#ss220 particle smes loc start
+# Used internally by the ENERGYWATTHOURS() function.
 zzzz-fmt-energy-watt-hours =
     { TOSTRING($divided, "F1") } { $places ->
         [0] Вт·ч
@@ -41,9 +40,7 @@ zzzz-fmt-energy-watt-hours =
         [2] МВт·ч
         [3] ГВт·ч
         [4] ТВт·ч
-        *[5] ???
-        }
-#ss220 particle smes loc end
-
+       *[5] ???
+    }
 # Used internally by the PLAYTIME() function.
 zzzz-fmt-playtime = { $hours }ч { $minutes }м

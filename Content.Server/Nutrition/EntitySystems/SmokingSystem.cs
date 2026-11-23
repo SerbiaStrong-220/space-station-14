@@ -49,6 +49,7 @@ namespace Content.Server.Nutrition.EntitySystems
             InitializeCigars();
             InitializePipes();
             InitializeVapes();
+            InitializeSmokablePuff(); // SS220-SmokablePuff
         }
 
         private void OnExtinguishEvent(Entity<SmokableComponent> ent, ref ExtinguishEvent args)
@@ -106,7 +107,7 @@ namespace Content.Server.Nutrition.EntitySystems
         {
             if (args.Slot == "mask")
             {
-                _forensics.TransferDna(entity.Owner, args.Equipee, false);
+                _forensics.TransferDna(entity.Owner, args.EquipTarget, false);
             }
         }
 
@@ -157,7 +158,7 @@ namespace Content.Server.Nutrition.EntitySystems
                 }
 
                 _reactiveSystem.DoEntityReaction(containerManager.Owner, inhaledSolution, ReactionMethod.Ingestion);
-                _bloodstreamSystem.TryAddToChemicals((containerManager.Owner, bloodstream), inhaledSolution);
+                _bloodstreamSystem.TryAddToBloodstream((containerManager.Owner, bloodstream), inhaledSolution);
             }
 
             _timer -= UpdateTimer;

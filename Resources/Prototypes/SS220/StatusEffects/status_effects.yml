@@ -1,4 +1,23 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 # UPD. SS220 Temporary remove
 #- type: statusEffect
   #id: TemporaryWaddle
 # UPD. SS220 Temporary remove
+
+- type: statusEffect
+  id: VoidBlocker
+  alert: VoidBlocker
+
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectVoidBlocker
+  name: void blocker
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - MobState
+  - type: StatusEffectAlert
+    alert: VoidBlocker
+  - type: VoidBlockerStatusEffect

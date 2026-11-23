@@ -258,7 +258,7 @@ public sealed partial class CreditsWindow : DefaultWindow
         foreach (var entry in CreditsManager.GetLicenses(_resourceManager).OrderBy(p => p.Name))
         {
             licensesContainer.AddChild(new Label
-                { StyleClasses = { StyleBase.StyleClassLabelHeading }, Text = entry.Name });
+                { StyleClasses = { StyleClass.LabelHeading }, Text = entry.Name });
 
             // We split these line by line because otherwise
             // the LGPL causes Clyde to go out of bounds in the rendering code.
@@ -299,7 +299,7 @@ public sealed partial class CreditsWindow : DefaultWindow
 
             first = false;
             patronsContainer.AddChild(new Label
-                { StyleClasses = { StyleBase.StyleClassLabelHeading }, Text = $"{tier.Key}" });
+                { StyleClasses = { StyleClass.LabelHeading }, Text = $"{tier.Key}" });
 
             var msg = string.Join(", ", tier.OrderBy(p => p.Name).Select(p => p.Name));
 
@@ -347,7 +347,7 @@ public sealed partial class CreditsWindow : DefaultWindow
 
             first = false;
             ss14ContributorsContainer.AddChild(new Label
-                { StyleClasses = { StyleBase.StyleClassLabelHeading }, Text = title });
+                { StyleClasses = { StyleClass.LabelHeading }, Text = title });
 
             var label = new RichTextLabel();
             var text = _resourceManager.ContentFileReadAllText($"/Credits/{path}");
@@ -361,7 +361,7 @@ public sealed partial class CreditsWindow : DefaultWindow
 
         AddSection(Loc.GetString("credits-window-contributors-section-title"), "GitHub.txt");
         AddSection(Loc.GetString("credits-window-codebases-section-title"), "SpaceStation13.txt");
-        AddSection(Loc.GetString("credits-window-tts-title"), "TTS.txt"); // Corvax-TTS
+        AddSection(Loc.GetString("credits-window-tts-title"), "TTS.txt"); // SS220 tts
         AddSection(Loc.GetString("credits-window-original-remake-team-section-title"), "OriginalRemake.txt");
         AddSection(Loc.GetString("credits-window-immortals-title"), "Immortals.txt", true);
         AddSection(Loc.GetString("credits-window-special-thanks-section-title"), "SpecialThanks.txt", true);

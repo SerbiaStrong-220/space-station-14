@@ -1,1 +1,1 @@
-loadout-group-gloves = перчатки
+loadout-group-gloves = Перчатки

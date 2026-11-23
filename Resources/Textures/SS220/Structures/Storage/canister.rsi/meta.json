@@ -121,6 +121,18 @@
     },
     {
       "name": "scrubber-open"
+    },
+    {
+      "name": "invoice"
+    },
+    {
+      "name": "captains_paper"
+    },
+    {
+      "name": "paper"
+    },
+    {
+      "name": "bounty"
     }
   ]
 }

@@ -1,16 +1,14 @@
-using System.Collections.Generic;
-using System.Linq;
+using Content.IntegrationTests.Fixtures;
+using Content.IntegrationTests.Utility;
 using Content.Server.DeviceLinking.Systems;
 using Content.Shared.DeviceLinking;
-using Content.Shared.Prototypes;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
-using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.DeviceLinking;
 
-public sealed class DeviceLinkingTest
+public sealed class DeviceLinkingTest : GameTest
 {
     private const string PortTesterProtoId = "DeviceLinkingSinkPortTester";
 
@@ -24,35 +22,33 @@ public sealed class DeviceLinkingTest
     - Output
 ";
 
-    /// <summary>
-    /// Spawns every entity that has a <see cref="DeviceLinkSinkComponent"/>
-    /// and sends a signal to every port to make sure nothing causes an error.
-    /// </summary>
+    private static string[] _entitiesWithDeviceLinkSink = GameDataScrounger.EntitiesWithComponent("DeviceLinkSink");
+
     [Test]
-    public async Task AllDeviceLinkSinksWorkTest()
+    [TestOf(typeof(DeviceLinkSinkComponent))]
+    // [TestCaseSource(nameof(_entitiesWithDeviceLinkSink))] // SS220-i-just-hate-it-accept-it
+    [Description("Ensures all devices that can sink signals will not cause exceptions when signaled.")]
+    public async Task DeviceLinkSinkAllPortsTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
+        var protoMan = server.ProtoMan;
         var compFact = server.ResolveDependency<IComponentFactory>();
         var mapMan = server.ResolveDependency<IMapManager>();
         var mapSys = server.System<SharedMapSystem>();
         var deviceLinkSys = server.System<DeviceLinkSystem>();
 
-        var prototypes = server.ProtoMan.EnumeratePrototypes<EntityPrototype>();
-
         await server.WaitAssertion(() =>
         {
-            Assert.Multiple(() =>
+            // SS220-move-to-test-loop-begin
+            foreach (var protoKey in _entitiesWithDeviceLinkSink)
             {
-                foreach (var proto in prototypes)
+                using (Assert.EnterMultipleScope())
                 {
-                    if (proto.Abstract || pair.IsTestPrototype(proto))
-                        continue;
+                    var proto = protoMan.Index(protoKey);
+                    Assert.That(proto.TryGetComponent<DeviceLinkSinkComponent>(out var protoSinkComp, compFact));
 
-                    if (!proto.TryGetComponent<DeviceLinkSinkComponent>(out var protoSinkComp, compFact))
-                        continue;
-
-                    foreach (var port in protoSinkComp.Ports)
+                    foreach (var port in protoSinkComp!.Ports)
                     {
                         // Create a map for each entity/port combo so they can't interfere
                         mapSys.CreateMap(out var mapId);
@@ -62,14 +58,12 @@ public sealed class DeviceLinkingTest
 
                         // Spawn the sink entity
                         var sinkEnt = server.EntMan.SpawnEntity(proto.ID, coord);
-                        // Get the actual sink component, since the one we got from the prototype doesn't have its owner set up
-                        Assert.That(server.EntMan.TryGetComponent<DeviceLinkSinkComponent>(sinkEnt, out var sinkComp),
-                            $"{proto.ID} does not have a DeviceLinkSinkComponent!");
+                        // Get the actual sink component, since the one we got from the prototype isn't initialized.
+                        var sinkComp = server.EntMan.GetComponent<DeviceLinkSinkComponent>(sinkEnt);
 
                         // Spawn the tester
                         var sourceEnt = server.EntMan.SpawnEntity(PortTesterProtoId, coord);
-                        Assert.That(server.EntMan.TryGetComponent<DeviceLinkSourceComponent>(sourceEnt, out var sourceComp),
-                            $"Tester prototype does not have a DeviceLinkSourceComponent!");
+                        var sourceComp = server.EntMan.GetComponent<DeviceLinkSourceComponent>(sourceEnt);
 
                         // Create a link from the tester's output to the target port on the sink
                         deviceLinkSys.SaveLinks(null,
@@ -81,14 +75,13 @@ public sealed class DeviceLinkingTest
 
                         // Send a signal to the port
                         Assert.DoesNotThrow(() => { deviceLinkSys.InvokePort(sourceEnt, "Output", null, sourceComp); },
-                            $"Exception thrown while triggering port {port.Id} of sink device {proto.ID}");
+                            $"Exception thrown while triggering port {port.Id} of the sink device.");
 
                         mapSys.DeleteMap(mapId);
                     }
                 }
-            });
+                // SS220-move-to-test-loop-end
+            }
         });
-
-        await pair.CleanReturnAsync();
     }
 }

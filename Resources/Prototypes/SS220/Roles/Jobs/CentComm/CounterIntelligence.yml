@@ -8,6 +8,7 @@
   id: CIOffcier
   name: job-name-cc-ci-officer
   description: job-description-centcomoff
+  experienceDefinition: CentralCommandOfficialExperience
   setPreference: false
   startingGear: CentCommOfficerGear
   playTimeTracker: JobCIOfficer
@@ -20,12 +21,8 @@
   access:
   - CentralCommand
   - CentralCommandERT
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommandCBURN
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
 
 #CIAgent
 - type: playTimeTracker
@@ -37,6 +34,7 @@
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentCommOfficerGear
+  experienceDefinition: CentralCommandOfficialExperience
   playTimeTracker: JobCIAgent
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
@@ -47,9 +45,5 @@
   access:
   - CentralCommand
   - CentralCommandERT
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommandCBURN
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill

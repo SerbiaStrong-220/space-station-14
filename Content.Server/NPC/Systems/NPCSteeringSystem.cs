@@ -170,11 +170,6 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
     /// </summary>
     public NPCSteeringComponent Register(EntityUid uid, EntityCoordinates coordinates, NPCSteeringComponent? component = null)
     {
-        if(uid == null)
-        {
-            Logger.DebugS("ASS","SHITFUCK!");
-        }
-
         if (Resolve(uid, ref component, false))
         {
             if (component.Coordinates.Equals(coordinates))

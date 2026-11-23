@@ -7,17 +7,22 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Gibbing.Components;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Mind;
+using Content.Shared.Objectives.Systems;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
+using Content.Server.SS220.Messenger;
 
 namespace Content.Server.GameTicking.Rules;
 
 public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComponent>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly CloningSystem _cloning = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SuitSensorSystem _sensor = default!;
+    [Dependency] private readonly TargetSystem _target = default!;
+    [Dependency] private MessengerServerSystem _messengerServer = default!; //SS220-messenger-paradox-clone
 
     public override void Initialize()
     {
@@ -32,7 +37,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
         base.Started(uid, component, gameRule, args);
 
         // check if we got enough potential cloning targets, otherwise cancel the gamerule so that the ghost role does not show up
-        var allHumans = _mind.GetAliveHumans();
+        var allHumans = _target.GetAliveHumans();
 
         if (allHumans.Count == 0)
         {
@@ -59,7 +64,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
         else
         {
             // get possible targets
-            var allAliveHumanoids = _mind.GetAliveHumans();
+            var allAliveHumanoids = _target.GetAliveHumans();
 
             // we already checked when starting the gamerule, but someone might have died since then.
             if (allAliveHumanoids.Count == 0)
@@ -80,6 +85,8 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
             Log.Error($"Unable to make a paradox clone of entity {ToPrettyString(ent.Comp.OriginalBody)}");
             return;
         }
+
+        _messengerServer.TryLinkClone(ent.Comp.OriginalBody.Value, clone.Value); //SS220-messenger-paradox-clone
 
         var targetComp = EnsureComp<TargetOverrideComponent>(clone.Value);
         targetComp.Target = ent.Comp.OriginalMind; // set the kill target

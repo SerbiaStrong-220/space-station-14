@@ -14,12 +14,12 @@ namespace Content.Server.SS220.Hallucination;
 /// <summary>
 /// System which make it easier to work with Hallucinations
 /// </summary>
-public sealed class HallucinationSystem : SharedHallucinationSystem
+public sealed partial class HallucinationSystem : SharedHallucinationSystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
 
     public const float DelayBetweenHallucinateAttempt = 2f;
 
@@ -215,7 +215,7 @@ public sealed class HallucinationSystem : SharedHallucinationSystem
     /// <param name="args"></param>
     private void OnEquip(GotEquippedEvent args)
     {
-        if (TryComp<HallucinationComponent>(args.Equipee, out var hallucinationComponent))
+        if (TryComp<HallucinationComponent>(args.EquipTarget, out var hallucinationComponent))
         {
             foreach (var hallucination in new List<HallucinationSetting>(hallucinationComponent.Hallucinations))
             {
@@ -226,7 +226,7 @@ public sealed class HallucinationSystem : SharedHallucinationSystem
                     continue;
 
                 if (ItemProtects(args.Equipment, args.SlotFlags, protectionComponentType, hallucination.Protection.CheckPockets))
-                    Remove(args.Equipee, hallucination);
+                    Remove(args.EquipTarget, hallucination);
             }
         }
     }

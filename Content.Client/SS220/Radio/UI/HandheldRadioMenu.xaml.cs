@@ -13,7 +13,7 @@ public sealed partial class HandheldRadioMenu : FancyWindow
     public event Action<bool>? OnMicPressed;
     public event Action<bool>? OnSpeakerPressed;
     public event Action<string>? OnChannelSelected;
-    public bool Opened = false;
+    public bool MenuOpened = false;
 
     public HandheldRadioMenu()
     {
@@ -34,11 +34,11 @@ public sealed partial class HandheldRadioMenu : FancyWindow
 
     public void SetChannel(int msg)
     {
-        if (msg == Channel.Value || Opened)
+        if (msg == Channel.Value || MenuOpened)
             return;
 
         Channel.Value = msg;
-        Opened = true;
+        MenuOpened = true;
     }
 
     public void SetChannelDesc(int lower, int upper)

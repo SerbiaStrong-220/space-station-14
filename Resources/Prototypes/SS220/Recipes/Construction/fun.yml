@@ -1,14 +1,4 @@
-- type: construction
-  id: BonFireCraft
-  graph: BonFire
-  startNode: start
-  targetNode: BonfireNode
-  category: construction-category-structures
-  placementMode: SnapgridCenter
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: construction
   id: SingingFishCraft

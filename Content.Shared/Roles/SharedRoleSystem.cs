@@ -609,7 +609,8 @@ public abstract class SharedRoleSystem : EntitySystem
                 roleInfo.Add(new RoleInfo(name, comp.Antag, playTimeTracker, prototype));
 
             // SS220-add-ghost-role-tracker-begin
-            if (TryComp<GhostRoleMarkerRoleComponent>(role, out var _))
+            // ss220 add arena: also check ShowInSummary
+            if (TryComp<GhostRoleMarkerRoleComponent>(role, out var marker) && marker.ShowInSummary)
             {
                 roleInfo.Add(new RoleInfo(MetaData(role).EntityName, false, _ghostRoleTracker, _ghostRolePrototype));
             }
@@ -697,7 +698,7 @@ public abstract class SharedRoleSystem : EntitySystem
     /// <inheritdoc cref="GetRoleRequirements(JobPrototype)"/>
     public HashSet<JobRequirement>? GetRoleRequirements(AntagPrototype antag)
     {
-        if (_requirementOverride != null && _requirementOverride.Jobs.TryGetValue(antag.ID, out var req))
+        if (_requirementOverride != null && _requirementOverride.Antags.TryGetValue(antag.ID, out var req))
             return req;
 
         return antag.Requirements;

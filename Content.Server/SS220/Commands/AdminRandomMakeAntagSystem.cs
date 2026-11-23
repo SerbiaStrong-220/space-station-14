@@ -21,14 +21,16 @@ using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Random;
 using System.Linq;
+using Content.Shared.Database;
 
 namespace Content.Server.SS220.Commands;
 
 [AdminCommand(AdminFlags.VarEdit)] // Only for admins
-public sealed class MakeAntagCommand : IConsoleCommand
+public sealed partial class MakeAntagCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IServerPreferencesManager _pref = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IServerPreferencesManager _pref = default!;
+
     public string Command => "makerandomantag";
     public string Description => Loc.GetString("command-makerandomantag-description");
     public string Help => $"Usage: {Command}";
@@ -78,19 +80,19 @@ public sealed class MakeAntagCommand : IConsoleCommand
 
         foreach (var player in players)
         {
-            var pref = (HumanoidCharacterProfile)_pref.GetPreferences(player.UserId).SelectedCharacter;
+            var pref = _pref.GetPreferences(player.UserId).SelectedCharacter;
 
             if (!mindSystem.TryGetMind(player.UserId, out var mindId)) // Is it player or a cow?
                 continue;
 
             if (banManager.GetRoleBans(player.UserId) is { } roleBans &&
-                roleBans.Contains("Job:" + defaultRule)) // Do he have a roleban on THIS antag?
+                roleBans.Contains(new BanRoleDef(BanManager.DbTypeAntag, defaultRule))) // Do he have a roleban on THIS antag?
                 continue;
 
             if (role.MindIsAntagonist(mindId))//no double antaging
                 continue;
 
-            if (!_entityManager.HasComponent<HumanoidAppearanceComponent>(player.AttachedEntity))//shouldn't be borg or cow
+            if (!_entityManager.HasComponent<HumanoidProfileComponent>(player.AttachedEntity))//shouldn't be borg or cow
                 continue;
 
             if (_entityManager.HasComponent<GhostComponent>(player.AttachedEntity))//ghost cant be antag

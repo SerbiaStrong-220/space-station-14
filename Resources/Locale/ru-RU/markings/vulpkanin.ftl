@@ -197,3 +197,7 @@ marking-VulpFacialHairElder = Старец
 marking-VulpFacialHairElderChin = Старец (Подбородок)
 marking-VulpFacialHairKita = Кита
 marking-VulpFacialHairGoatee = Борода (Козлиная на морде)
+
+marking-VulpTailCoyote-coyote = Хвост Койота (База)
+
+marking-VulpTailCoyote = Вульпканин Койот

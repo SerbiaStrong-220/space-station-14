@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Managers;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
@@ -13,16 +13,15 @@ using Robust.Shared.Network;
 
 namespace Content.Shared.SS220.RestrictedItem;
 
-public abstract class SharedRestrictedItemSystem : EntitySystem
+public abstract partial class SharedRestrictedItemSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ISharedAdminManager _adminManager = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ISharedAdminManager _adminManager = default!;
 
     public override void Initialize()
     {
@@ -62,7 +61,7 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         if (!_whitelistSystem.IsWhitelistFail(item.Comp.Whitelist, user))
             return true;
 
- 
+
         _popup.PopupPredicted(Loc.GetString(item.Comp.LocalizedPopup), item, user);
 
         if (!item.Comp.DamageOnFail.Empty)

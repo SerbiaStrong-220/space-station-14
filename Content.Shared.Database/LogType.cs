@@ -485,6 +485,11 @@ public enum LogType
     /// </summary>
     Instrument = 107,
 
+    /// <summary>
+    /// Events related to players connecting/disconnecting.
+    /// </summary>
+    Connection = 108,
+
     //SS220 log types start
 
     /// <summary>
@@ -497,5 +502,9 @@ public enum LogType
     /// </summary>
     RoundFlow = 10001,
 
+    /// <summary>
+    /// All related to experience system
+    /// </summary>
+    Experience = 10002,
     //SS220 log types end
 }

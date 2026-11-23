@@ -1,0 +1,13 @@
+# Utility
+- type: listing
+  id: SpellbookPolymorphSpiderGhost
+  name: spellbook-polymorph-wizardspiderghost-name
+  description: spellbook-polymorph-wizardspiderghost-desc
+  productAction: ActionPolymorphWizardSpiderGhost
+  cost:
+    WizCoin: 2
+  categories:
+  - SpellbookUtility
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1

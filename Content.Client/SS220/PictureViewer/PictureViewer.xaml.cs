@@ -13,7 +13,7 @@ namespace Content.Client.SS220.PictureViewer;
 [GenerateTypedNameReferences, Virtual]
 public partial class PictureViewer : Control
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private ResPath _viewedPicture;
 

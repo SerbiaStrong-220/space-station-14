@@ -1,8 +1,10 @@
+using Content.Shared.Emp; // SS220 MalfAI
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.StationAi;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Threading;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Silicons.StationAi;
 
@@ -19,6 +21,9 @@ public sealed class StationAiVisionSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
+    [Dependency] private IGameTiming _timing = default!;
+
+    [Dependency] private readonly EntityQuery<OccluderComponent> _occluderQuery = default!;
 
     private SeedJob _seedJob;
     private ViewJob _job;
@@ -27,10 +32,10 @@ public sealed class StationAiVisionSystem : EntitySystem
     private readonly HashSet<Entity<StationAiVisionComponent>> _seeds = new();
     private readonly HashSet<Vector2i> _viewportTiles = new();
 
-    private EntityQuery<OccluderComponent> _occluderQuery;
-
     // Dummy set
     private readonly HashSet<Vector2i> _singleTiles = new();
+    private readonly Dictionary<EntityUid, float> _expansionByGrid = new();
+    private TimeSpan _expansionCachedAt = TimeSpan.MinValue;
 
     // Occupied tiles per-run.
     // For now it's only 1-grid supported but updating to TileRefs if required shouldn't be too hard.
@@ -45,8 +50,6 @@ public sealed class StationAiVisionSystem : EntitySystem
     {
         base.Initialize();
 
-        _occluderQuery = GetEntityQuery<OccluderComponent>();
-
         _seedJob = new()
         {
             System = this,
@@ -59,6 +62,37 @@ public sealed class StationAiVisionSystem : EntitySystem
             System = this,
             VisibleTiles = _singleTiles,
         };
+    }
+
+    /// <summary>
+    /// Returns the search margin needed to include active vision sources on this grid.
+    /// </summary>
+    public float GetExpansionSize(EntityUid gridUid)
+    {
+        if (_expansionCachedAt != _timing.CurTime)
+        {
+            _expansionByGrid.Clear();
+            var query = EntityQueryEnumerator<StationAiVisionComponent, TransformComponent>();
+            while (query.MoveNext(out var uid, out var vision, out var xform))
+            {
+                if (!vision.Enabled
+                    || xform.GridUid is not { } seedGrid
+                    || HasComp<EmpDisabledComponent>(uid)
+                    || vision.NeedsPower && !_power.IsPowered(uid)
+                    || vision.NeedsAnchoring && !xform.Anchored)
+                    continue;
+
+                var size = vision.Range + 1f;
+                if (!_expansionByGrid.TryGetValue(seedGrid, out var current) || size > current)
+                    _expansionByGrid[seedGrid] = size;
+            }
+
+            _expansionCachedAt = _timing.CurTime;
+        }
+
+        return _expansionByGrid.TryGetValue(gridUid, out var expansion)
+            ? MathF.Max(8.5f, expansion)
+            : 8.5f;
     }
 
     /// <summary>
@@ -84,6 +118,10 @@ public sealed class StationAiVisionSystem : EntitySystem
             if (!seed.Comp.Enabled)
                 continue;
 
+            // SS220 MalfAI: EMP-disabled seeds provide no AI vision, even without a power requirement.
+            if (HasComp<EmpDisabledComponent>(seed.Owner))
+                continue;
+
             if (seed.Comp.NeedsPower && !_power.IsPowered(seed.Owner))
                 continue;
 
@@ -93,7 +131,7 @@ public sealed class StationAiVisionSystem : EntitySystem
             _job.Data.Add(seed);
         }
 
-        if (_seeds.Count == 0)
+        if (_job.Data.Count == 0)
             return false;
 
         // Skip occluders step if we're just doing range checks.
@@ -171,6 +209,10 @@ public sealed class StationAiVisionSystem : EntitySystem
             if (!seed.Comp.Enabled)
                 continue;
 
+            // SS220 MalfAI: keep client vision consistent with server access checks.
+            if (HasComp<EmpDisabledComponent>(seed.Owner))
+                continue;
+
             if (seed.Comp.NeedsPower && !_power.IsPowered(seed.Owner))
                 continue;
 
@@ -180,7 +222,7 @@ public sealed class StationAiVisionSystem : EntitySystem
             _job.Data.Add(seed);
         }
 
-        if (_seeds.Count == 0)
+        if (_job.Data.Count == 0)
             return;
 
         // Get viewport tiles
@@ -331,9 +373,8 @@ public sealed class StationAiVisionSystem : EntitySystem
             // Either xray-vision or system is doing a quick-and-dirty check.
             if (!seed.Comp.Occluded || System.FastPath)
             {
-                var squircles = Maps.GetLocalTilesIntersecting(Grid.Owner,
-                    Grid.Comp,
-                    new Circle(System._xforms.GetWorldPosition(seedXform), seed.Comp.Range), ignoreEmpty: false);
+                // SS220 MalfAI: seed position is in world coordinates.
+                var squircles = Maps.GetTilesIntersecting(Grid.Owner, Grid.Comp, new Circle(System._xforms.GetWorldPosition(seedXform), seed.Comp.Range), ignoreEmpty: false);
 
                 lock (VisibleTiles)
                 {

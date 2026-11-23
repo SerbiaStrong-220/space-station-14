@@ -1,3 +1,4 @@
+using Content.Shared.SS220.VoiceMask;
 using Content.Shared.VoiceMask;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -25,13 +26,25 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
         _window.AddVerbs();
 
         _window.OnNameChange += OnNameSelected;
-        _window.OnVoiceChange += (value) => SendMessage(new VoiceMaskChangeVoiceMessage(value)); // Corvax-TTS
+        _window.OnVoicePreferencesChanged += pref => SendMessage(new VoiceMaskChangeTtsVoicePreferencesMessage(pref)); // SS220 tts
         _window.OnVerbChange += verb => SendMessage(new VoiceMaskChangeVerbMessage(verb));
+        _window.OnToggle += OnToggle;
+        _window.OnAccentToggle += OnAccentToggle;
     }
 
     private void OnNameSelected(string name)
     {
         SendMessage(new VoiceMaskChangeNameMessage(name));
+    }
+
+    private void OnToggle()
+    {
+        SendMessage(new VoiceMaskToggleMessage());
+    }
+
+    private void OnAccentToggle()
+    {
+        SendMessage(new VoiceMaskAccentToggleMessage());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -41,7 +54,7 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
             return;
         }
 
-        _window.UpdateState(cast.Name, cast.Verb, cast.Voice); // Corvax-TTS
+        _window.UpdateState(cast.Name, cast.Verb, cast.Active, cast.AccentHide, cast.VoicePreferences /* SS220 tts */);
     }
 
     protected override void Dispose(bool disposing)

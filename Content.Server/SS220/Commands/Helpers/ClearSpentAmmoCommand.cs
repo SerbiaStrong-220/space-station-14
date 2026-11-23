@@ -8,9 +8,9 @@ using Robust.Shared.Console;
 namespace Content.Server.SS220.Commands.Helpers;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class ClearSpentAmmoCommand : IConsoleCommand
+public sealed partial class ClearSpentAmmoCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     // ReSharper disable once StringLiteralTypo
     public string Command => "clearspentammo";

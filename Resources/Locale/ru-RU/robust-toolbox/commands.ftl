@@ -22,7 +22,7 @@ cmd-help-help =
     Если имя команды не будет указано, будет выведена общая справка. Если имя команды будет указано, будет выведена справка по этой команде.
 cmd-help-no-args = Чтобы получить справку по определённой команде, используйте 'help <command>'. Для получения списка всех доступных команд используйте 'list'. Для поиска по командам используйте 'list <filter>'.
 cmd-help-unknown = Неизвестная команда: { $command }
-cmd-help-top = { $command } - { $description }
+cmd-help-top = { $command } — { $description }
 cmd-help-invalid-args = Недопустимое количество аргументов.
 cmd-help-arg-cmdname = [имя команды]
 
@@ -352,7 +352,10 @@ cmd-fuck-help = Вызывает исключение
 cmd-showpos-desc = Включает отрисовку для всех позиций сущностей в игре.
 cmd-showpos-help = Использование: showpos
 cmd-sggcell-desc = Перечисляет сущности в ячейке сетки привязки.
-cmd-sggcell-help = Использование: sggcell <gridID> <vector2i>\nЭтот vector2i параметр в форме x<int>,y<int>.
+# SS220-localization-fix begin
+cmd-sggcell-help = Использование: sggcell <gridID> <vector2i>
+    Этот vector2i параметр в форме x<int>,y<int>.
+# SS220-localization-fix end
 cmd-overrideplayername-desc = Изменяет имя, используемое при попытке подключения к серверу.
 cmd-overrideplayername-help = Использование: overrideplayername <name>
 cmd-showanchored-desc = Показывает закреплённые объекты на определённой плитке.

@@ -10,7 +10,6 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
-using Content.Shared.SS220.TTS;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
 using Robust.Shared.Timing;
@@ -27,26 +26,29 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.Station.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
+using Content.Server.SS220.TTS;
+using Content.Shared.SS220.TTS.Prototypes;
 
 namespace Content.Server.SS220.CluwneComms;
 
-public sealed class CluwneCommsConsoleSystem : EntitySystem
+public sealed partial class CluwneCommsConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TtsSystem _tts = default!;
 
     public override void Initialize()
     {
@@ -137,7 +139,7 @@ public sealed class CluwneCommsConsoleSystem : EntitySystem
         var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
         var msg = SharedChatSystem.SanitizeAnnouncement(args.Message, maxLength);
         var author = Loc.GetString("cluwne-comms-console-announcement-unknown-sender");
-        var voiceId = string.Empty;
+        ProtoId<TtsVoicePrototype>? voiceId = null;
 
         if (args.Actor is { Valid: true } mob)
         {
@@ -149,10 +151,10 @@ public sealed class CluwneCommsConsoleSystem : EntitySystem
 
             var tryGetIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(ent, mob);
             RaiseLocalEvent(tryGetIdentityShortInfoEvent);
-            author = tryGetIdentityShortInfoEvent.Title;
+            if (tryGetIdentityShortInfoEvent.Title is not null)
+                author = tryGetIdentityShortInfoEvent.Title;
 
-            if (TryComp<TTSComponent>(mob, out var tts))
-                voiceId = tts.VoicePrototypeId;
+            _tts.TryGetAvailableVoiceId(mob, out voiceId);
         }
 
         // allow admemes with vv
@@ -160,7 +162,7 @@ public sealed class CluwneCommsConsoleSystem : EntitySystem
         title ??= ent.Comp.Title;
 
         msg = _chatManager.DeleteProhibitedCharacters(msg, args.Actor);
-        msg += "\n" + Loc.GetString("cluwne-comms-console-announcement-sent-by") + author;
+        msg += "\n" + Loc.GetString("cluwne-comms-console-announcement-sent-by", ("author", author));
 
         _chatSystem.DispatchStationAnnouncement(ent,
             msg,

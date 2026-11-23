@@ -10,11 +10,11 @@ using Robust.Shared.Enums;
 
 namespace Content.Client.SS220.PlacerItem;
 
-public sealed class PlacerItemConstructionGhostSystem : EntitySystem
+public sealed partial class PlacerItemConstructionGhostSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPlacementManager _placementManager = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPlacementManager _placementManager = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     private string _placementMode = typeof(AlignPlacerItemConstruction).Name;
     private Direction _placementDirection = default;

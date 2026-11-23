@@ -32,7 +32,9 @@ namespace Content.Client.Labels.UI
             }
 
             _window.OnLabelChanged += OnLabelChanged;
+            _window.OnColorChanged += OnColorChanged; //SS220-LabelColors
             Reload();
+            _window.SetInitialLabelState(); // Must be after Reload() has set the label text
         }
 
         private void OnLabelChanged(string newLabel)
@@ -45,12 +47,24 @@ namespace Content.Client.Labels.UI
             SendPredictedMessage(new HandLabelerLabelChangedMessage(newLabel));
         }
 
+        //SS220-LabelColors begin
+        private void OnColorChanged(Color color)
+        {
+            if (_entManager.TryGetComponent(Owner, out HandLabelerComponent? labeler) &&
+                labeler.AssignedLabelColor == color)
+                return;
+
+            SendPredictedMessage(new HandLabelerLabelColorChangedMessage(color));
+        }
+        //SS220-LabelColors end
+
         public void Reload()
         {
             if (_window == null || !_entManager.TryGetComponent(Owner, out HandLabelerComponent? component))
                 return;
 
             _window.SetCurrentLabel(component.AssignedLabel);
+            _window.SetCurrentColor(component.AssignedLabelColor); //SS220-LabelColors
         }
     }
 }

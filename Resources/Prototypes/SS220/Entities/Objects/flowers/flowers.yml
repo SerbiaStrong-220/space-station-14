@@ -6,7 +6,7 @@
   - type: FlavorProfile
     flavors:
       - bitter
-  - type: Food
+  - type: Edible
     transferAmount: 3
   - type: SolutionContainerManager
     solutions:
@@ -34,6 +34,7 @@
   - type: Tag
     tags:
     - wtulip
+    - Flower
 
 - type: entity
   parent: FoodFlowerBase
@@ -49,6 +50,7 @@
   - type: Tag
     tags:
     - ytulip
+    - Flower
 
 - type: entity
   parent: FoodFlowerBase
@@ -64,6 +66,7 @@
   - type: Tag
     tags:
     - ptulip
+    - Flower
 
 - type: entity
   parent: FoodFlowerBase
@@ -79,6 +82,7 @@
   - type: Tag
     tags:
     - rclove
+    - Flower
 
 - type: entity
   parent: FoodFlowerBase
@@ -94,6 +98,7 @@
   - type: Tag
     tags:
     - wclove
+    - Flower
 
 - type: entity
   parent: FoodFlowerBase
@@ -109,6 +114,7 @@
   - type: Tag
     tags:
     - schamomile
+    - Flower
 
 - type: entity
   parent: FoodFlowerBase
@@ -124,6 +130,7 @@
   - type: Tag
     tags:
     - wschamomile
+    - Flower
 
 - type: entity
   parent: FoodFlowerBase
@@ -139,6 +146,7 @@
   - type: Tag
     tags:
     - sflower
+    - Flower
 
 - type: entity
   parent: FoodFlowerBase
@@ -154,9 +162,10 @@
   - type: Tag
     tags:
     - lflower
+    - Flower
 
 - type: entity
-  parent: FoodFlowerBase
+  parent: [FoodFlowerBase, ClothingMaskBase]
   id: rrose
   name: red rose
   description: This is a real love.
@@ -166,12 +175,15 @@
     state: icon
   - type: Item
     sprite: SS220/Objects/Consumable/Flowers/rrose.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Consumable/Flowers/rrose.rsi
   - type: Tag
     tags:
     - rrose
+    - Flower
 
 - type: entity
-  parent: FoodFlowerBase
+  parent: [FoodFlowerBase, ClothingMaskBase]
   id: wrose
   name: white rose
   description: This is a real love.
@@ -181,6 +193,9 @@
     state: icon
   - type: Item
     sprite: SS220/Objects/Consumable/Flowers/wrose.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Consumable/Flowers/wrose.rsi
   - type: Tag
     tags:
     - wrose
+    - Flower
