@@ -25,6 +25,8 @@ public sealed partial class PlayerPanel : FancyWindow
     public event Action? OnFreezeAndMuteToggle;
     public event Action? OnFreeze;
     public event Action? OnLogs;
+    // # SS220 connections by ckeys
+    public event Action? OnConnectionLogs;
     public event Action? OnDelete;
     public event Action? OnRejuvenate;
 
@@ -53,6 +55,8 @@ public sealed partial class PlayerPanel : FancyWindow
         FreezeButton.OnPressed += _ => OnFreeze?.Invoke();
         FreezeAndMuteToggleButton.OnPressed += _ => OnFreezeAndMuteToggle?.Invoke();
         LogsButton.OnPressed += _ => OnLogs?.Invoke();
+        // # SS220 connections by ckeys
+        ConnectionLogsButton.OnPressed += _ => OnConnectionLogs?.Invoke();
         DeleteButton.OnPressed += _ => OnDelete?.Invoke();
         RejuvenateButton.OnPressed += _ => OnRejuvenate?.Invoke();
     }
@@ -130,6 +134,8 @@ public sealed partial class PlayerPanel : FancyWindow
         WhitelistToggle.Disabled =
             !(_adminManager.CanCommand("whitelistadd") && _adminManager.CanCommand("whitelistremove"));
         LogsButton.Disabled = !_adminManager.CanCommand("adminlogs");
+        // # SS220 connections by ckeys
+        ConnectionLogsButton.Disabled = !_adminManager.HasFlag(AdminFlags.Logs);
         RejuvenateButton.Disabled = !_adminManager.HasFlag(AdminFlags.Debug);
         DeleteButton.Disabled = !_adminManager.HasFlag(AdminFlags.Debug);
     }
