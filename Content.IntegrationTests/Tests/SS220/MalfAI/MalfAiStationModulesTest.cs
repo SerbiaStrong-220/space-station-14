@@ -625,9 +625,10 @@ public sealed class MalfAiStationModulesTest : GameTest
         });
     }
 
-    [Test]
+    [TestCase("BreakerFlip", true)]
+    [TestCase("SpiderClownSpawnHorde", false)]
     [PairConfig(nameof(PsMalfAi))]
-    public async Task MalfChaosPulseStartsEvent()
+    public async Task MalfChaosPulseStartsEvent(string eventId, bool expectedSuccess)
     {
         var pair = Pair;
         var server = pair.Server;
@@ -667,6 +668,11 @@ public sealed class MalfAiStationModulesTest : GameTest
                     "Chaos pool contains a lethal event by default.");
             }
 
+            // A one-tile station has no vents, so a randomly selected horde may legitimately fail.
+            // Exercise both a startable event and that rejection path deterministically.
+            pool.Events.Clear();
+            pool.Events.Add(new MalfAiChaosEventEntry { Event = eventId, Weight = 1f });
+
             var before = 0;
             var existing = entMan.AllEntityQueryEnumerator<GameRuleComponent>();
             while (existing.MoveNext(out _, out _))
@@ -674,8 +680,16 @@ public sealed class MalfAiStationModulesTest : GameTest
 
             var actionsSys = entMan.System<SharedActionsSystem>();
             var actionComp = entMan.GetComponent<ActionComponent>(chaosAction.Value);
+            var actionEvent = new MalfAiChaosPulseEvent { Performer = body };
             actionsSys.PerformAction((body, actionsComp), (chaosAction.Value, actionComp),
-                new MalfAiChaosPulseEvent { Performer = body }, predicted: false);
+                actionEvent, predicted: false);
+
+            Assert.That(actionEvent.Handled, Is.EqualTo(expectedSuccess));
+            if (!expectedSuccess)
+            {
+                Assert.That(actionComp.Cooldown, Is.Null, "An event that cannot start must not consume the cooldown.");
+                return;
+            }
 
             var after = 0;
             var query = entMan.AllEntityQueryEnumerator<GameRuleComponent>();
