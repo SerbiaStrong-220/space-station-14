@@ -5,6 +5,8 @@
   antagonist: true
   setPreference: true
   objective: "Призовите Нар'Си в этот мир"
+  guides:
+  - NarsiCultGuide
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 72000 # 20h
@@ -23,6 +25,8 @@
   antagonist: true
   setPreference: true
   objective: "Освободите Ратвара из заточения"
+  guides:
+  - RatvarCultGuide
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 72000 # 20h (need good RolePlay)

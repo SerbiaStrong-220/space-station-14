@@ -17,3 +17,16 @@ cult-construction-narsicultaltarconstruction-description = Алтарь необ
 cult-construction-narsicultwallconstruction-name = Стена культа
 cult-material-brass = Латунь
 cult-material-runic-plasteel = Рунический металл
+
+construction-category-narsi-cult = Культ Нар'Си
+construction-category-ratvar-cult = Культ Ратвара
+narsi-offering-objective-title = Нар'Си требует жертву: { $target } ({ $job })
+narsi-offering-no-targets = Не найдено ни одного человека, который мог бы быть новой целью культа.
+narsi-ritual-objective-title = Проведите ритуал: { $ritual }
+narsi-ritual-no-targets = Все доступные ритуалы уже назначены культу.
+narsi-creature-objective-title = Вырастите сущность: { $creature }
+narsi-dagger-runes-verb = Руны
+narsi-cuff-free-hand = Для создания культовых наручников нужна свободная рука.
+ratvar-workshop-recipe-cost = Латунь: { $brass }, мощность: { $power }
+guide-entry-narsi-cult = Культ Нар'Си
+guide-entry-ratvar-cult = Праведники Ратвара

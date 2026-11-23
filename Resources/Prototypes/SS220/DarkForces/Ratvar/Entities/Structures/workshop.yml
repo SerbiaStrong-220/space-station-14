@@ -56,7 +56,7 @@
   graph: RatvarWorkshopGraph
   startNode: start
   targetNode: workshop
-  category: "Культ Ратвара"
+  category: construction-category-ratvar-cult
   objectType: Structure
   entityWhitelist:
     components:

@@ -17,7 +17,7 @@
     range: 6
   - type: EntityTargetAction
     canTargetSelf: false
-    event: !type:MidasTouchEvent
+    event: !type:RatvarMidasTouchEvent
 
 - type: entity
   id: RatvarClockMagic

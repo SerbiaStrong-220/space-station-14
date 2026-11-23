@@ -28,7 +28,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.IntegrationTests.SS220.Tests.DarkForces;
 
-public sealed class CultPortTest : GameTest
+public sealed partial class CultPortTest : GameTest
 {
     private static readonly EntProtoId NarsiPrototype = "Narsie";
     private static readonly ProtoId<SecretListingCategoryPrototype> RuneCategory = "NarsiRuneListing";

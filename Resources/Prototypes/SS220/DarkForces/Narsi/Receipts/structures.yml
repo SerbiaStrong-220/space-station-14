@@ -4,7 +4,7 @@
   graph: NarsiCultPilonGraph
   startNode: start
   targetNode: pilon
-  category: "Культ Нар'Си"
+  category: construction-category-narsi-cult
   objectType: Structure
   entityWhitelist:
     components:
@@ -22,7 +22,7 @@
   graph: NarsiCultAirlockGraph
   startNode: start
   targetNode: airlock
-  category: "Культ Нар'Си"
+  category: construction-category-narsi-cult
   objectType: Structure
   entityWhitelist:
     components:
@@ -40,7 +40,7 @@
   graph: NarsiCultDarkForgeGraph
   startNode: start
   targetNode: forge
-  category: "Культ Нар'Си"
+  category: construction-category-narsi-cult
   objectType: Structure
   entityWhitelist:
     components:
@@ -58,7 +58,7 @@
   graph: NarsiCreatureEggGraph
   startNode: start
   targetNode: egg
-  category: "Культ Нар'Си"
+  category: construction-category-narsi-cult
   objectType: Structure
   entityWhitelist:
     components:
@@ -76,7 +76,7 @@
   graph: NarsiCultAltarGraph
   startNode: start
   targetNode: altar
-  category: "Культ Нар'Си"
+  category: construction-category-narsi-cult
   objectType: Structure
   entityWhitelist:
     components:
@@ -94,7 +94,7 @@
   graph: NarsiCultWallGraph
   startNode: start
   targetNode: wall
-  category: "Культ Нар'Си"
+  category: construction-category-narsi-cult
   objectType: Structure
   entityWhitelist:
     components:

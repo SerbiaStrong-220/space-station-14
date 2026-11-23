@@ -44,6 +44,6 @@ public sealed class NarsiCultCreatureEggSystem : EntitySystem
         }
 
         component.CreatureId = targetCreature;
-        _metaData.SetEntityName(uid, $"Вырастите сущность: {targetCreaturePrototype.Name}");
+        _metaData.SetEntityName(uid, Loc.GetString("narsi-creature-objective-title", ("creature", targetCreaturePrototype.Name)));
     }
 }

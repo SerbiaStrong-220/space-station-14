@@ -41,6 +41,11 @@
   name: steel
   suffix: Full
   components:
+  # SS220 Cult Ratvar and Narsie port begin
+  - type: MidasMaterial
+    targets:
+    - MidasTouchSteel
+  # SS220 Cult Ratvar and Narsie port end
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -182,6 +187,11 @@
   name: plasteel
   suffix: Full
   components:
+  # SS220 Cult Ratvar and Narsie port begin
+  - type: MidasMaterial
+    targets:
+    - MidasTouchPlasteel
+  # SS220 Cult Ratvar and Narsie port end
   - type: Material
   - type: PhysicalComposition
     materialComposition:

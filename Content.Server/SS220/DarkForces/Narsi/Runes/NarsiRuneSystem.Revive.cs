@@ -1,7 +1,5 @@
 using System.Linq;
-using Content.Server.SS220.DarkForces.Narsi.Progress.Objectives.Offering;
 using Content.Shared.DoAfter;
-using Content.Shared.Humanoid;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.Player;
 using NarsiReviveRuneComponent = Content.Server.SS220.DarkForces.Narsi.Runes.Components.NarsiReviveRuneComponent;
@@ -16,12 +14,6 @@ public sealed partial class NarsiRuneSystem
     private void InitReviveRune()
     {
         SubscribeLocalEvent<NarsiReviveRuneComponent, ReviveNarsiRuneDoAfterEvent>(OnNarsiRuneDoAfter);
-        SubscribeLocalEvent<HumanoidProfileComponent, NarsiCultOfferingTargetEvent>(OnOfferingEvent);
-    }
-
-    private void OnOfferingEvent(EntityUid uid, HumanoidProfileComponent component, NarsiCultOfferingTargetEvent args)
-    {
-        _runesCharge = 0;
     }
 
     private void OnRoundEndedReviveRune()

@@ -85,6 +85,9 @@ public sealed class RatvarGearSystem : EntitySystem
 
     private void OnInsertGear(EntityUid uid, RatvarGearTargetComponent component, ContainerIsInsertingAttemptEvent args)
     {
+        if (args.Container.ID != component.GearSlotId)
+            return;
+
         if (!TryComp<RatvarGearComponent>(args.EntityUid, out var ratvarGearComponent) ||
             !TryComp<WiresPanelComponent>(uid, out var wirePanel) || !wirePanel.Open)
         {

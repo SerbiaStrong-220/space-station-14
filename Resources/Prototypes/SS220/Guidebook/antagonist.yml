@@ -71,3 +71,13 @@
   id: PirateExpansion
   name: guide-entry-pirates
   text: "/ServerInfo/SS220/Guidebook/Antagonist/Pirates.xml"
+
+- type: guideEntry
+  id: NarsiCultGuide
+  name: guide-entry-narsi-cult
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/NarsiCult.xml"
+
+- type: guideEntry
+  id: RatvarCultGuide
+  name: guide-entry-ratvar-cult
+  text: "/ServerInfo/SS220/Guidebook/Antagonist/RatvarCult.xml"

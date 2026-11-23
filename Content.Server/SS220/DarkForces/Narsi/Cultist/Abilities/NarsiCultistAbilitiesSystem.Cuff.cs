@@ -25,7 +25,18 @@ public sealed partial class NarsiCultistAbilitiesSystem
         var coords = Transform(args.Performer).Coordinates;
         var handcuffs = Spawn("HandcuffsCult", coords);
 
-        _cuffableSystem.TryCuffing(args.Performer, args.Target, handcuffs);
+        if (!_handsSystem.TryPickupAnyHand(args.Performer, handcuffs))
+        {
+            QueueDel(handcuffs);
+            _popupSystem.PopupEntity(Loc.GetString("narsi-cuff-free-hand"), uid, uid);
+            return;
+        }
+
+        if (!_cuffableSystem.TryCuffing(args.Performer, args.Target, handcuffs))
+        {
+            QueueDel(handcuffs);
+            return;
+        }
         OnCultistAbility(uid, args);
         args.Handled = true;
     }

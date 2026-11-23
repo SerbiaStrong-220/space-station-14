@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Server.SS220.DarkForces.Narsi.Buildings.Altar.Rituals.Prototypes;
 using Content.Shared.Objectives.Components;
 using Content.Shared.SS220.DarkForces.Narsi.Progress.Objectives;
 using Robust.Shared.Prototypes;
@@ -29,7 +30,7 @@ public sealed class NarsiCultRitualObjectiveSystem : EntitySystem
         if (title == null)
             return;
 
-        _metaData.SetEntityName(uid, $"Проведите ритуал: {title}", args.Meta);
+        _metaData.SetEntityName(uid, Loc.GetString("narsi-ritual-objective-title", ("ritual", title)), args.Meta);
     }
 
     private void OnRitualCompleted(ref NarsiRitualCompletedEvent args)
@@ -47,7 +48,22 @@ public sealed class NarsiCultRitualObjectiveSystem : EntitySystem
     private void OnAssigned(EntityUid uid, NarsiCultRitualObjectiveComponent component,
         ref GroupObjectiveAssignedEvent args)
     {
-        var ritualProto = _robustRandom.Pick(component.Rituals);
+        var rituals = new List<ProtoId<NarsiRitualPrototype>>(component.Rituals);
+        var objectives = EntityQueryEnumerator<NarsiCultRitualObjectiveComponent>();
+        while (objectives.MoveNext(out _, out var objective))
+        {
+            if (objective.RequiredRitual is { } assigned)
+                rituals.Remove(assigned.ID);
+        }
+
+        if (rituals.Count == 0)
+        {
+            args.Cancelled = true;
+            args.Reason = Loc.GetString("narsi-ritual-no-targets");
+            return;
+        }
+
+        var ritualProto = _robustRandom.Pick(rituals);
         if (!_prototypeManager.TryIndex(ritualProto, out var ritual))
         {
             args.Cancelled = true;

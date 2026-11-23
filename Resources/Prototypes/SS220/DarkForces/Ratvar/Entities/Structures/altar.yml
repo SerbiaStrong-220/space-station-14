@@ -64,7 +64,7 @@
   graph: RatvarAltarGraph
   startNode: start
   targetNode: altar
-  category: "Культ Ратвара"
+  category: construction-category-ratvar-cult
   objectType: Structure
   entityWhitelist:
     components:

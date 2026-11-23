@@ -50,7 +50,7 @@
   graph: RatvarBeaconGraph
   startNode: start
   targetNode: beacon
-  category: "Культ Ратвара"
+  category: construction-category-ratvar-cult
   objectType: Structure
   entityWhitelist:
     components:

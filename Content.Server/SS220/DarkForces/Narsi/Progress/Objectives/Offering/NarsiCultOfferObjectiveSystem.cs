@@ -1,8 +1,9 @@
-﻿using System.Linq;
-using Content.Server.SS220.DarkForces.Narsi.Progress.Components;
+﻿using Content.Server.SS220.DarkForces.Narsi.Progress.Components;
 using Content.Server.SS220.DarkForces.Saint.Chaplain.Components;
 using Content.Server.Mind;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Mind;
+using Content.Shared.IdentityManagement;
 using Content.Shared.SS220.DarkForces.Narsi.Progress.Objectives;
 using Content.Shared.SS220.DarkForces.Narsi.Roles;
 using Robust.Shared.Random;
@@ -35,14 +36,22 @@ public sealed class NarsiCultOfferObjectiveSystem : EntitySystem
 
     private void OnAssigned(EntityUid uid, NarsiCultOfferObjectiveComponent component, ref GroupObjectiveAssignedEvent args)
     {
-        var allHumans = _mind.GetAliveHumans()
-            .Where(entity => !HasComp<NarsiCultistComponent>(entity) && !HasComp<ChaplainComponent>(entity))
-            .ToList();
+        var allHumans = new List<EntityUid>();
+        foreach (var mindId in _mind.GetAliveHumans())
+        {
+            var mind = Comp<MindComponent>(mindId);
+            if (mind.OwnedEntity is not { } body ||
+                HasComp<NarsiCultistComponent>(body) || HasComp<ChaplainComponent>(body) ||
+                HasComp<NarsiCultOfferingTargetComponent>(body))
+                continue;
+
+            allHumans.Add(body);
+        }
 
         if (allHumans.Count == 0)
         {
             args.Cancelled = true;
-            args.Reason = "Не найдено ни одного человека, кто мог бы быть корректной целью культа";
+            args.Reason = Loc.GetString("narsi-offering-no-targets");
             return;
         }
 
@@ -51,7 +60,7 @@ public sealed class NarsiCultOfferObjectiveSystem : EntitySystem
 
         SetupOfferingTarget(objective, target);
 
-        var title = GetObjectiveTitle(objective, target);
+        var title = GetObjectiveTitle(target);
         _metaData.SetEntityName(uid, title);
     }
 
@@ -63,17 +72,11 @@ public sealed class NarsiCultOfferObjectiveSystem : EntitySystem
         objective.Comp.Target = target;
     }
 
-    private string GetObjectiveTitle(Entity<NarsiCultOfferObjectiveComponent> objective, EntityUid target)
+    private string GetObjectiveTitle(EntityUid target)
     {
-        var objectiveMeta = MetaData(objective);
-        var targetName = "Неизвестно";
-
-        if (_mind.TryGetMind(target, out var mindId, out var mind) && mind.CharacterName != null)
-        {
-            targetName = mind.CharacterName;
-        }
-
+        _mind.TryGetMind(target, out var mindId, out _);
         var jobName = _job.MindTryGetJobName(mindId);
-        return $"{objectiveMeta.EntityName}: {targetName} ({jobName})";
+        return Loc.GetString("narsi-offering-objective-title",
+            ("target", Identity.Name(target, EntityManager)), ("job", jobName));
     }
 }

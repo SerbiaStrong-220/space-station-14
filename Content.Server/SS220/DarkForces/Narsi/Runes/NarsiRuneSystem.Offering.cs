@@ -24,6 +24,7 @@ public sealed partial class NarsiRuneSystem
             RaiseLocalEvent(target, ref ev);
         }
 
+        _runesCharge++;
         QueueDel(target);
     }
 }

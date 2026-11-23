@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using System.Numerics;
-using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.SS220.DarkForces.Ratvar.Prototypes;
 using Content.Shared.SS220.DarkForces.Ratvar.UI;
@@ -82,41 +80,12 @@ public sealed partial class RatvarWorkshopWindow : FancyWindow
             foreach (var receiptProtId in category.Receipts)
             {
                 var receipt = _prototype.Index(receiptProtId);
-                var receiptContainer = new BoxContainer
-                {
-                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                };
-                var textureRect = new TextureRect
-                {
-                    Texture = _spriteSystem.Frame0(receipt.Icon),
-                    TextureScale = new Vector2(1.5f, 1.5f),
-                    Stretch = TextureRect.StretchMode.KeepCentered,
-                };
-                var button = new Button
-                {
-                    Text = receipt.Name,
-                    MaxHeight = 28f,
-                    Margin = _defaultMargin,
-                };
-                var requirementsLabel = new Label
-                {
-                    Text = $"Латунь: {receipt.BrassCost}, Мощность: {receipt.PowerCost}",
-                    StyleClasses = {StyleNano.StyleClassLabelSubText},
-                    Align = Label.AlignMode.Right,
-                    Margin = _defaultMargin,
-                    HorizontalExpand = true
-                };
-
-                button.Disabled = inProgress || receipt.BrassCost > brass || receipt.PowerCost > power;
-                button.OnPressed += _ =>
+                var disabled = inProgress || receipt.BrassCost > brass || receipt.PowerCost > power;
+                var control = new RatvarWorkshopRecipeControl(receipt, _spriteSystem, disabled);
+                control.OnCraftPressed += () =>
                     OnCraftPressed?.Invoke(receipt.EntityProduce, receipt.BrassCost, receipt.PowerCost,
                         receipt.CraftingTime);
-
-                receiptContainer.AddChild(textureRect);
-                receiptContainer.AddChild(button);
-                receiptContainer.AddChild(requirementsLabel);
-
-                container.AddChild(receiptContainer);
+                container.AddChild(control);
             }
 
             CraftList.AddChild(panelContainer);

@@ -18,7 +18,7 @@
     - type: InteractionOutline
     - type: Sprite
     - type: Physics
-      bodyType: Dynamic
+      bodyType: KinematicController
     - type: Fixtures
       fixtures:
         fix1:

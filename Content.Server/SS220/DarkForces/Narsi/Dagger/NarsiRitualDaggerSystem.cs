@@ -48,6 +48,10 @@ public sealed class NarsiRitualDaggerSystem : EntitySystem
     private void OnCreateRuneEvent(EntityUid uid, NarsiRitualDaggerComponent component,
         CreateNarsiRuneDoAfterEvent args)
     {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        args.Handled = true;
         var transform = Transform(args.User).Coordinates;
         Spawn(args.Prototype, transform.SnapToGrid(EntityManager, _mapManager));
     }
@@ -64,9 +68,10 @@ public sealed class NarsiRitualDaggerSystem : EntitySystem
 
     private void OnUseInHand(EntityUid uid, NarsiRitualDaggerComponent component, UseInHandEvent args)
     {
-        if (!HasComp<NarsiCultistComponent>(uid))
+        if (args.Handled || !HasComp<NarsiCultistComponent>(args.User))
             return;
 
+        args.Handled = true;
         DrawRune(args.User, uid);
     }
 
@@ -115,7 +120,7 @@ public sealed class NarsiRitualDaggerSystem : EntitySystem
         {
             Act = () => DrawRune(args.User, uid),
             DoContactInteraction = true,
-            Text = "Руны",
+            Text = Loc.GetString("narsi-dagger-runes-verb"),
             Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/SS220/DarkForces/Cult/Entities/Runes/rune.rsi"),
                 "offering")
         };

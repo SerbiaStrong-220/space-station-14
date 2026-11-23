@@ -34,5 +34,6 @@
         - AntagImmune
       components:
       - type: RatvarRighteous
+      - type: RatvarAbilities
       mindRoles:
       - MindRoleRatvar

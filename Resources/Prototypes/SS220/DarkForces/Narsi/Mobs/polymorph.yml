@@ -25,9 +25,9 @@
   - type: NarsiCultCreature
 
 - type: entity
-  name: РќР°Р±Р»СЋРґР°С‚РµР»СЊ
+  name: Наблюдатель
   id: MobNarsiObserverEye
-  description: РљСѓР»СЊС‚РёСЃС‚С‹ РёСЃРїРѕР»СЊР·СѓСЋС‚ СЌС‚Сѓ РѕР±РѕР»РѕС‡РєСѓ, РґР»СЏ РїСЂРѕРІРµРґРµРЅРёСЏ СЂР°Р·РІРµРґРєРё
+  description: Культисты используют эту оболочку, для проведения разведки
   suffix: "Ghost"
   parent: BaseNarsiMob
   components:
@@ -140,8 +140,8 @@
   - BaseSimpleMob
   - MobCombat
   - MobFlammable
-  name: РЎРєРµР»РµС‚
-  description: РњРµС‡С‚Р° СЃРѕР±Р°Рє
+  name: Скелет
+  description: Мечта собак
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -186,8 +186,8 @@
     allowMovement: true
     allowSpeech: true
     makeSentient: true
-    name: РЎРєРµР»РµС‚
-    description: Р’Р°СЃ РІС‹СЂР°СЃС‚РёР» РєСѓР»СЊС‚ РќР°СЂ'CРё, СЃР»СѓС€Р°Р№С‚Рµ СѓРєР°Р·Р°РЅРёСЏ РєСѓР»СЊС‚РёСЃС‚РѕРІ
+    name: Скелет
+    description: Вас вырастил культ Нар'Си, слушайте указания культистов
     rules: РЎР»СѓС€Р°Р№С‚РµСЃСЊ РєСѓР»СЊС‚РёСЃС‚РѕРІ!
   - type: GhostTakeoverAvailable
 
@@ -196,8 +196,8 @@
   parent:
   - BaseNarsiMob
   - SimpleMobBase
-  name: Р“РЅРёСЋС‰Р°СЏ РїР»РѕС‚СЊ
-  description: РљР°Рє Р¶Рµ РѕРЅР° РІРѕРЅСЏРµС‚!
+  name: Гниющая плоть
+  description: Как же она воняет!
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -253,8 +253,8 @@
     allowMovement: true
     allowSpeech: true
     makeSentient: true
-    name: Р“РЅРёСЋС‰Р°СЏ РїР»РѕС‚СЊ
-    description: Р’Р°СЃ РІС‹СЂР°СЃС‚РёР» РєСѓР»СЊС‚ РќР°СЂ'CРё, СЃР»СѓС€Р°Р№С‚Рµ СѓРєР°Р·Р°РЅРёСЏ РєСѓР»СЊС‚РёСЃС‚РѕРІ
+    name: Гниющая плоть
+    description: Вас вырастил культ Нар'Си, слушайте указания культистов
     rules: РЎР»СѓС€Р°Р№С‚РµСЃСЊ РєСѓР»СЊС‚РёСЃС‚РѕРІ!
   - type: GhostTakeoverAvailable
 
@@ -263,8 +263,8 @@
   parent:
   - BaseNarsiMob
   - SimpleMobBase
-  name: РњСЏСЃРЅРѕР№ РіСЂРѕРјРёР»Р°
-  description: РљР°Р¶РµС‚СЃСЏ РјРЅРµ РЅСѓР¶РЅРѕ Р±РµР¶Р°С‚СЊ...
+  name: Мясной громила
+  description: Кажется мне нужно бежать...
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -321,7 +321,7 @@
     allowMovement: true
     allowSpeech: true
     makeSentient: true
-    name: РњСЏСЃРЅРѕР№ РіСЂРѕРјРёР»Р°
-    description: Р’Р°СЃ РІС‹СЂР°СЃС‚РёР» РєСѓР»СЊС‚ РќР°СЂ'CРё, СЃР»СѓС€Р°Р№С‚Рµ СѓРєР°Р·Р°РЅРёСЏ РєСѓР»СЊС‚РёСЃС‚РѕРІ
+    name: Мясной громила
+    description: Вас вырастил культ Нар'Си, слушайте указания культистов
     rules: РЎР»СѓС€Р°Р№С‚РµСЃСЊ РєСѓР»СЊС‚РёСЃС‚РѕРІ!
   - type: GhostTakeoverAvailable
