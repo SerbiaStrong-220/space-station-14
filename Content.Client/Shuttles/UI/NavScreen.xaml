@@ -69,8 +69,8 @@
                             ToggleMode="True"/>
                     <!-- SS220 GyroPowerUpdate Start -->
                     <controls:BoxContainer Orientation="Vertical" Margin="0 8 0 0">
-                        <controls:Label Text="Мощность гироскопа" HorizontalAlignment="Center"/>
-                        <controls:Slider Name="GyroPowerSlider" HorizontalExpand="True" MinValue="0.1" MaxValue="5" Value="1"/>
+                        <controls:Label Text="{controls:Loc 'ss220-shuttle-console-gyro-power'}" HorizontalAlignment="Center"/>
+                        <controls:Slider Name="GyroPowerSlider" HorizontalExpand="True" Value="1"/>
                     </controls:BoxContainer>
                     <!-- SS220 GyroPowerUpdate End-->
                     <!-- SS220 add additional control for shuttle start -->

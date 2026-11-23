@@ -27,7 +27,11 @@ public sealed partial class NavScreen : BoxContainer
         IoCManager.InjectDependencies(this);
         _xformSystem = _entManager.System<SharedTransformSystem>();
 
-        GyroPowerSlider.OnValueChanged += args => GyroPowerChanged?.Invoke(GyroPowerSlider.Value); //SS220 GyroPowerUpdate Start
+        /*SS220 GyroPowerUpdate Start*/
+        GyroPowerSlider.MinValue = ShuttleGyroPowerComponent.MinPower;
+        GyroPowerSlider.MaxValue = ShuttleGyroPowerComponent.MaxPower;
+        GyroPowerSlider.OnValueChanged += args => GyroPowerChanged?.Invoke(GyroPowerSlider.Value);
+        /*SS220 GyroPowerUpdate End*/
         IFFToggle.OnToggled += OnIFFTogglePressed;
         IFFToggle.Pressed = NavRadar.ShowIFF;
 

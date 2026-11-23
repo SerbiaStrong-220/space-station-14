@@ -1,12 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Shuttles.Components;
+using Content.Server.Shuttles.Systems;
 using Content.Shared.SS220.CruiseControl;
 
 namespace Content.Server.SS220.CruiseControl;
 
 public sealed class CruiseControlSystem : EntitySystem
 {
+    [Dependency] private readonly ShuttleConsoleSystem _shuttleConsole = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -27,7 +29,14 @@ public sealed class CruiseControlSystem : EntitySystem
     /*SS220 GyroPowerUpdate Start*/
     private void OnGyroPowerMessage(Entity<ShuttleConsoleComponent> console, ref ShuttleGyroPowerMessage args)
     {
-        if (Transform(console).GridUid is not { } shuttleUid)
+        if (float.IsNaN(args.Power))
+            return;
+
+        var shuttleConsole = _shuttleConsole.GetDroneConsole(console.Owner);
+        if (shuttleConsole == null ||
+            !TryComp<ShuttleConsoleComponent>(shuttleConsole.Value, out var targetConsole) ||
+            !targetConsole.CanControlShuttle ||
+            Transform(shuttleConsole.Value).GridUid is not { } shuttleUid)
             return;
 
         var power = Math.Clamp(args.Power, ShuttleGyroPowerComponent.MinPower, ShuttleGyroPowerComponent.MaxPower);
