@@ -6,11 +6,14 @@
     children:
     - id: SheetSteel10
     - id: SheetGlass10
-    - id: CableApcStack10
+    - !type:GroupSelector
+      children:
+      - id: CableApcStack10
+      - id: CableMVStack10
+      - id: CableHVStack10
     - !type:NestedSelector
       tableId: PackageDeliveryBasicTools
-    - id: WelderIndustrial
-      weight: 0.3
+      weight: 1.3
 
 - type: entityTable
   id: PackageDeliveryAtmospherics
@@ -30,9 +33,10 @@
     children:
     - id: SheetPlastic10
     - id: MicroManipulatorStockPart
-    - id: PowerCellMedium
+    - id: NodeScanner
     - id: AnomalyLocator
-    - id: Multitool
+    - !type:NestedSelector
+      tableId: PackageDeliveryBasicTools
     - id: AnomalyScanner
       weight: 0.3
 
@@ -41,10 +45,9 @@
   table: !type:GroupSelector
     children:
     - id: MaterialCardboard10
-    - id: PowerCellMedium
     - id: SpaceCash100
     - id: HandLabeler
-    - id: HandHeldMassScanner
+    - id: AppraisalTool
       weight: 0.3
 
 - type: entityTable
@@ -52,7 +55,6 @@
   table: !type:GroupSelector
     children:
     - id: FireExtinguisherMini
-    - id: PowerCellMedium
     - id: OreBag
     - id: MineralScanner
       weight: 0.3
@@ -176,8 +178,15 @@
         value: 2
     - !type:NestedSelector
       tableId: PackageDeliveryPilotSupplies
-    - id: HandHeldMassScanner
+    - !type:AllSelector
       weight: 0.3
+      children:
+      - id: SheetPlasma10
+      - !type:SpeciesSelector
+        species:
+          Ipc: !type:NoneSelector {}
+        fallback: !type:NestedSelector
+          tableId: PackageDeliveryOxygenTank
     - id: MagazinePistol
       weight: 0.15
     - id: Flash
@@ -213,8 +222,27 @@
   table: !type:GroupSelector
     children:
     - id: ChemistryBottleEZNutrient
-    - id: AloeSeeds
-    - id: PoppySeeds
+    - !type:AllSelector
+      weight: 2
+      children:
+      - !type:GroupSelector
+        children:
+        - id: TomatoSeeds
+        - id: CarrotSeeds
+        - id: PotatoSeeds
+        - id: CabbageSeeds
+        - id: OnionSeeds
+      - !type:GroupSelector
+        children:
+        - id: WheatSeeds
+        - id: CornSeeds
+        - id: RiceSeeds
+      - !type:GroupSelector
+        children:
+        - id: AppleSeeds
+        - id: OrangeSeeds
+        - id: LemonSeeds
+        - id: BerrySeeds
     - id: ChemistryBottleRobustHarvest
     - id: ChemistryBottleLeft4Zed
       weight: 0.3
@@ -334,16 +362,12 @@
   table: !type:GroupSelector
     children:
     - id: LuxuryPen
+      weight: 1.3
     - id: BoxFolderBlueThreePapers
     - id: BalloonNT
     - !type:NestedSelector
       tableId: PackageDeliveryCommandDrink
       weight: 0.3
-
-- type: entityTable
-  id: PackageDeliveryLegal
-  table: !type:GroupSelector
-    children:
     - !type:AllSelector
       children:
       - id: PaperNtFormLaw
@@ -352,8 +376,6 @@
       - id: Pen
     - id: BookSpaceLaws
     - id: BoxFolderBlackThreePapers
-    - id: LuxuryPen
-      weight: 0.3
 
 - type: entityTable
   id: PackageDeliveryBasicTools
@@ -365,6 +387,8 @@
     - id: Wirecutter
     - id: Welder
     - id: Multitool
+    - id: WelderIndustrial
+      weight: 0.3
 
 - type: entityTable
   id: PackageDeliveryMedicalPills
