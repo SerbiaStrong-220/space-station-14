@@ -14,7 +14,7 @@ public sealed partial class NarsiReceiptControl : Control
         RobustXamlLoader.Load(this);
 
         Texture.TexturePath = prototype.Icon;
-        Name.Text = prototype.Name;
+        NameLabel.Text = prototype.Name;
         Description.Text = prototype.Description;
 
         CreateButton.Text = prototype.ButtonText;

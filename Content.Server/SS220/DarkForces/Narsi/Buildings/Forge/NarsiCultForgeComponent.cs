@@ -25,10 +25,10 @@ public sealed partial class NarsiCultForgeComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan DelayTick;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [DataField]
     public TimeSpan DelayThreshold = TimeSpan.FromSeconds(45);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [DataField]
     public TimeSpan DoAfterDelay = TimeSpan.FromSeconds(7);
 
     [DataField]

@@ -27,6 +27,8 @@ public sealed class NarsiRitualDaggerSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
 
+    private static readonly ProtoId<SecretListingCategoryPrototype> RuneListing = "NarsiRuneListing";
+
     private static readonly SoundSpecifier BloodSound =
         new SoundPathSpecifier("/Audio/SS220/DarkForces/Cult/enter_blood.ogg");
 
@@ -129,8 +131,8 @@ public sealed class NarsiRitualDaggerSystem : EntitySystem
         if (!_ui.TryOpenUi(dagger, SecretListingKey.Key, user))
             return;
 
-        var runes = _prototypeManager.Index<SecretListingCategoryPrototype>("NarsiRuneListing");
-        var state = new SecretListingInitState(runes, GetNetEntity(user));
+        var runes = _prototypeManager.Index(RuneListing);
+        var state = new SecretListingInitState(runes.ID, GetNetEntity(user));
         _ui.SetUiState(dagger, SecretListingKey.Key, state);
     }
 

@@ -99,7 +99,7 @@ public sealed partial class NarsiAbilityControl : Control
 
     private void BindTexts(string name, string description, string levelDescription, int level, int requiredBloodScore)
     {
-        Name.Text = name;
+        NameLabel.Text = name;
         Level.Text = $"{level}";
         Description.SetMessage(description);
         LevelDescription.SetMessage(levelDescription);

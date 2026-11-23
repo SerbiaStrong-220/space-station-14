@@ -10,7 +10,6 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.DarkForces.Ratvar.Structures;
 
@@ -18,7 +17,6 @@ namespace Content.Client.SS220.DarkForces.Ratvar.Structures;
 public sealed partial class RatvarWorkshopWindow : FancyWindow
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
 
     public Action<EntProtoId, int, int, int>? OnCraftPressed;

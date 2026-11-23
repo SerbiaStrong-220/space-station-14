@@ -28,6 +28,8 @@ public sealed partial class RatvarAbilitiesSystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly RatvarProgressSystem _progressSystem = default!;
 
+    private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+
     [ValidatePrototypeId<EntityPrototype>]
     private const string TileConvertEffect = "RatvarTileSpawnEffect";
 
@@ -140,7 +142,7 @@ public sealed partial class RatvarAbilitiesSystem
 
         foreach (var entity in entitiesInRange)
         {
-            if (!_tag.HasTag(entity.Owner, "Wall"))
+            if (!_tag.HasTag(entity.Owner, WallTag))
                 continue;
 
             var transform = Transform(entity);

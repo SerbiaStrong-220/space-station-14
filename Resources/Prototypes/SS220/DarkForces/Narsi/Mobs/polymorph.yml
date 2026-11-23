@@ -67,6 +67,7 @@
   - type: Visibility
     layer: 2 #ghost vis
   - type: MovementIgnoreGravity
+  - type: GravityAffected
   - type: MovementSpeedModifier
     baseWalkSpeed: 6
     baseSprintSpeed: 6

@@ -13,7 +13,7 @@
                 MaxSize="48 48"
                 Stretch="KeepAspectCentered" />
 
-            <Label Name="Name" Align="Center" Margin="4 4 4 4" />
+            <Label Name="NameLabel" Align="Center" Margin="4 4 4 4" />
             <Label Name="Description" Align="Center" Margin="0 0 0 0" StyleClasses="LabelSubText" />
             <Label Name="Cost" Align="Center" Margin="0 0 0 0" StyleClasses="LabelSubText" />
 

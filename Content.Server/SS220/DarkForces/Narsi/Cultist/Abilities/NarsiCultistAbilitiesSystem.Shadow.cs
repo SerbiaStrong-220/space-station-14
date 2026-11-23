@@ -56,11 +56,10 @@ public sealed partial class NarsiCultistAbilitiesSystem
     {
         var shadowComponent = new NarsiCultistShadowVisualizeComponent
         {
-            Owner = shadow,
             EntityToCopy = GetNetEntity(cultist)
         };
 
-        EntityManager.AddComponent(shadow, shadowComponent);
+        AddComp(shadow, shadowComponent);
     }
 
     private void CopyData(EntityUid cultist, EntityUid shadow)

@@ -39,13 +39,13 @@ public sealed partial class RatvarProgressSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
-        SubscribeLocalEvent<RatvarProgressComponent, ComponentInit>(OnProgressInit);
+        SubscribeLocalEvent<RatvarProgressComponent, MapInitEvent>(OnProgressInit);
         SubscribeLocalEvent<RatvarProgressComponent, ComponentRemove>(OnProgressRemove);
 
         InitializeStructuresAndItems();
     }
 
-    private void OnProgressInit(EntityUid uid, RatvarProgressComponent component, ComponentInit args)
+    private void OnProgressInit(EntityUid uid, RatvarProgressComponent component, MapInitEvent args)
     {
         CreateObjective(BeaconsObjectivePrototype, ref component.RatvarBeaconsObjective);
         CreateObjective(ConvertObjectivePrototype, ref component.RatvarConvertObjective);

@@ -1,3 +1,4 @@
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.FastUI;
@@ -29,11 +30,11 @@ public sealed class SecretListingInitDataState : BoundUserInterfaceState
 [Serializable, NetSerializable]
 public sealed class SecretListingInitState : BoundUserInterfaceState
 {
-    public SecretListingCategoryPrototype Prototype;
+    public ProtoId<SecretListingCategoryPrototype> Category;
     public NetEntity UserEntity;
-    public SecretListingInitState(SecretListingCategoryPrototype prototype, NetEntity userEntity)
+    public SecretListingInitState(ProtoId<SecretListingCategoryPrototype> category, NetEntity userEntity)
     {
-        Prototype = prototype;
+        Category = category;
         UserEntity = userEntity;
     }
 }

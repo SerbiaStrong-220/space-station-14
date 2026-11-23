@@ -1,3 +1,4 @@
+using Robust.Shared.Prototypes;
 using Content.Shared.Eui;
 using Content.Shared.SS220.FastUI;
 using Robust.Shared.Serialization;
@@ -11,10 +12,10 @@ public static class SecretListingEUIState
     public sealed class SecretListingEUIInitState : EuiMessageBase
     {
         public NetEntity NetEntity;
-        public SecretListingCategoryPrototype Prototype;
-        public SecretListingEUIInitState(SecretListingCategoryPrototype prototype, NetEntity netEntity)
+        public ProtoId<SecretListingCategoryPrototype> Category;
+        public SecretListingEUIInitState(ProtoId<SecretListingCategoryPrototype> category, NetEntity netEntity)
         {
-            Prototype = prototype;
+            Category = category;
             NetEntity = netEntity;
         }
     }

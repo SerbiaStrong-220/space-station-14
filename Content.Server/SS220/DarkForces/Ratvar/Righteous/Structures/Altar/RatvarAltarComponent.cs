@@ -10,12 +10,12 @@ public sealed partial class RatvarAltarComponent : Component
     public TimeSpan ActivateTime = TimeSpan.Zero;
 
     [DataField]
-    public EntityUid BuckledEntity = EntityUid.Invalid;
+    public EntityUid? BuckledEntity;
 
     [DataField]
     public EntProtoId SoulVessel = "RatvarSoulVessel";
 
-    [DataField]
+    [DataField("state")]
     public AltarActiveType Type = AltarActiveType.Idle;
 }
 

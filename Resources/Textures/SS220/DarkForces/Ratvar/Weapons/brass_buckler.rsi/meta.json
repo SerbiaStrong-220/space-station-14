@@ -1,7 +1,7 @@
 {
     "version": 1,
-    "license": "Собственная лицензия. Полный запрет на копирование и использование вне проекта Dark Station или одобрения текущего владельца проекта",
-    "copyright": "DarkStation",
+    "license": "Custom",
+    "copyright": "DarkStation; Original license: Собственная лицензия. Полный запрет на копирование и использование вне проекта Dark Station или одобрения текущего владельца проекта",
     "size": {
         "x": 32,
         "y": 32
@@ -17,6 +17,15 @@
         {
             "name": "brass-inhand-left",
             "directions": 4
+        },
+        {
+            "name": "brass_buckler_overlay_1"
+        },
+        {
+            "name": "Illustration10_10"
+        },
+        {
+            "name": "Illustration13_9"
         }
     ]
 }

@@ -5,7 +5,6 @@ namespace Content.Server.SS220.DarkForces.Narsi.Progress.Objectives.Summon;
 
 public sealed class NarsiCultSummonObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     public override void Initialize()
     {
         base.Initialize();

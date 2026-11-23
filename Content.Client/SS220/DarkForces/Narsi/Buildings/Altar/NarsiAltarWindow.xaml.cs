@@ -10,8 +10,6 @@ namespace Content.Client.SS220.DarkForces.Narsi.Buildings.Altar;
 [GenerateTypedNameReferences]
 public sealed partial class NarsiAltarWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-
     private readonly NarsiAltarBoundInterface _bui;
 
     public NarsiAltarWindow(NarsiAltarBoundInterface bui)

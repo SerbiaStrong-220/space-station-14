@@ -3,7 +3,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.DarkForces.Ratvar.Prototypes;
 
-[Serializable, Prototype("ratvarMidasTouch")]
+[Prototype("ratvarMidasTouch")]
 public sealed partial class RatvarMidasTouchablePrototype : IPrototype
 {
     [ViewVariables]

@@ -1,11 +1,9 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.FastUI;
 
-[Prototype("secretListing")]
-[Serializable, NetSerializable]
+[Prototype]
 [DataDefinition]
 public sealed partial class SecretListingPrototype : IPrototype
 {

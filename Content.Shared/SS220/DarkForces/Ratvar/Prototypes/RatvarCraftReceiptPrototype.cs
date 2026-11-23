@@ -3,7 +3,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.DarkForces.Ratvar.Prototypes;
 
-[Serializable, Prototype("ratvarCraft")]
+[Prototype("ratvarCraft")]
 public sealed partial class RatvarCraftReceiptPrototype : IPrototype
 {
     [ViewVariables]
@@ -29,7 +29,7 @@ public sealed partial class RatvarCraftReceiptPrototype : IPrototype
     public EntProtoId EntityProduce;
 }
 
-[Serializable, Prototype("ratvarCraftCategory")]
+[Prototype]
 public sealed partial class RatvarCraftCategoryPrototype : IPrototype
 {
     [ViewVariables]

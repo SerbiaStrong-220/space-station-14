@@ -21,6 +21,18 @@
     {
       "name": "inhand-right",
       "directions": 4
+    },
+    {
+        "name": "clockwork_cuirass_overlay_1"
+    },
+    {
+        "name": "clockwork_cuirass_overlay_2"
+    },
+    {
+        "name": "clockwork_cuirass_overlay_3"
+    },
+    {
+        "name": "clockwork_cuirass_overlay_4"
     }
-  ]
+    ]
 }

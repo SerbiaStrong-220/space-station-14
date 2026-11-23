@@ -11,7 +11,7 @@ public sealed class RatvarPortalSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RatvarPortalComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<RatvarPortalComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RatvarPortalComponent, DestructionEventArgs>(OnDestroy);
     }
 
@@ -32,7 +32,7 @@ public sealed class RatvarPortalSystem : EntitySystem
         }
     }
 
-    private void OnComponentInit(EntityUid uid, RatvarPortalComponent component, ComponentInit args)
+    private void OnMapInit(EntityUid uid, RatvarPortalComponent component, MapInitEvent args)
     {
         component.RatvarSpawnTick = _gameTiming.CurTime + TimeSpan.FromMinutes(3);
         var ev = new RatvarSpawnStartedEvent(uid);

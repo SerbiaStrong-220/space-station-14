@@ -5,7 +5,6 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.DarkForces.Narsi.Craft;
 
 [Prototype("narsiCultReceiptCategory")]
-[Serializable, NetSerializable]
 [DataDefinition]
 public sealed partial class NarsiCultCraftReceiptCategoryPrototype : IPrototype
 {

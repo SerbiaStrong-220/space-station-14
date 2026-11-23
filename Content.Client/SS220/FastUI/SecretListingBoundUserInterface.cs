@@ -1,12 +1,15 @@
 using Content.Shared.SS220.FastUI;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.FastUI;
 
 [UsedImplicitly]
-public sealed class SecretListingBoundUserInterface : BoundUserInterface
+public sealed partial class SecretListingBoundUserInterface : BoundUserInterface
 {
+    [Dependency] private IPrototypeManager _prototypes = default!;
+
     private SecretListingWindow? _listingWindow;
     private string? _key;
     private NetEntity? _user;
@@ -43,12 +46,13 @@ public sealed class SecretListingBoundUserInterface : BoundUserInterface
         }
         else if (state is SecretListingInitState initState)
         {
-            _listingWindow.WindowDescription.Text = initState.Prototype.WindowDescription;
-            _listingWindow.Title = initState.Prototype.WindowName;
+            var category = _prototypes.Index(initState.Category);
+            _listingWindow.WindowDescription.Text = category.WindowDescription;
+            _listingWindow.Title = category.WindowName;
             _user = initState.UserEntity;
-            _key = initState.Prototype.ID;
+            _key = category.ID;
 
-            _listingWindow.Populate(initState.Prototype.Listings);
+            _listingWindow.Populate(category.Listings);
         }
     }
 

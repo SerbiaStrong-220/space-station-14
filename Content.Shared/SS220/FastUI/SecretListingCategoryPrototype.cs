@@ -1,13 +1,10 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 
 namespace Content.Shared.SS220.FastUI;
 
-[Prototype("secretListingCategory")]
+[Prototype]
 [DataDefinition]
-[Serializable, NetSerializable]
-public sealed partial class SecretListingCategoryPrototype : IPrototype, ICloneable
+public sealed partial class SecretListingCategoryPrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
@@ -21,14 +18,4 @@ public sealed partial class SecretListingCategoryPrototype : IPrototype, IClonea
 
     [DataField]
     public HashSet<ProtoId<SecretListingPrototype>> Listings { get; set; } = new();
-
-    public object Clone()
-    {
-        return new SecretListingCategoryPrototype
-        {
-            WindowName = WindowName,
-            WindowDescription = WindowDescription,
-            Listings = Listings
-        };
-    }
 }

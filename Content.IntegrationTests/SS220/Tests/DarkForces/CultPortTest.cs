@@ -1,7 +1,16 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using System.IO;
 using System.Linq;
 using Content.IntegrationTests.Fixtures;
 using Content.Server.Chat;
 using Content.Server.Cuffs;
+using Content.Server.Hands.Systems;
+using Content.Server.SS220.DarkForces.Narsi.Cultist.Abilities.Silence;
+using Content.Server.SS220.DarkForces.Saint.Reagent;
+using Content.Shared.EntityEffects;
+using Content.Shared.Speech.Muting;
+using Content.Shared.SS220.DarkForces.Narsi.Cultist.Muzzle;
+using Content.Shared.SS220.FastUI;
 using Content.Server.SS220.DarkForces.Narsi.Progress;
 using Content.Server.SS220.DarkForces.Saint.Chaplain.Components;
 using Content.Shared.Mobs;
@@ -15,12 +24,15 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.IntegrationTests.SS220.Tests.DarkForces;
 
 public sealed class CultPortTest : GameTest
 {
     private static readonly EntProtoId NarsiPrototype = "Narsie";
+    private static readonly ProtoId<SecretListingCategoryPrototype> RuneCategory = "NarsiRuneListing";
+
     [Test]
     public async Task LeaderIsReplacedAfterDeathRemovalAndConversion()
     {
@@ -83,18 +95,29 @@ public sealed class CultPortTest : GameTest
     public async Task CultCuffsDisappearWithoutBrokenPrototype()
     {
         var map = await Pair.CreateTestMap();
+        var system = SEntMan.System<CuffableSystem>();
         EntityUid cuffs = default;
         EntityUid target = default;
+        EntityUid user = default;
+        var cuffTime = 0f;
         await Server.WaitAssertion(() =>
         {
             target = SEntMan.SpawnEntity("MobHuman", map.GridCoords);
-            var user = SEntMan.SpawnEntity("MobHuman", map.GridCoords);
+            user = SEntMan.SpawnEntity("MobHuman", map.GridCoords);
             cuffs = SEntMan.SpawnEntity("HandcuffsCult", map.GridCoords);
             var component = SEntMan.GetComponent<HandcuffComponent>(cuffs);
             Assert.That(component.BreakOnRemove, Is.True);
             Assert.That(component.BrokenPrototype, Is.Null);
-            var system = SEntMan.System<CuffableSystem>();
-            Assert.That(system.TryAddNewCuffs(target, user, cuffs), Is.True);
+            cuffTime = component.CuffTime;
+
+            Assert.That(SEntMan.System<HandsSystem>().TryPickupAnyHand(user, cuffs), Is.True);
+            Assert.That(system.TryCuffing(user, target, cuffs), Is.True);
+        });
+        await Pair.RunSeconds(cuffTime + 1f);
+        await Server.WaitAssertion(() =>
+        {
+            Assert.That(SEntMan.GetComponent<HandcuffComponent>(cuffs).Used, Is.True);
+            Assert.That(SEntMan.GetComponent<CuffableComponent>(target).CuffedHandCount, Is.EqualTo(2));
             system.Uncuff(target, user, cuffs);
         });
         await Server.WaitRunTicks(2);
@@ -102,6 +125,44 @@ public sealed class CultPortTest : GameTest
         {
             Assert.That(SEntMan.Deleted(cuffs), Is.True);
             Assert.That(SEntMan.GetComponent<CuffableComponent>(target).CuffedHandCount, Is.Zero);
+        });
+    }
+
+    [Test]
+    public async Task RuneMenuStateRoundTripsUsingCategoryId()
+    {
+        byte[] payload = null;
+        await Server.WaitAssertion(() =>
+        {
+            var state = new SecretListingInitState(RuneCategory, default);
+            using var stream = new MemoryStream();
+            Server.ResolveDependency<IRobustSerializer>().Serialize(stream, state);
+            payload = stream.ToArray();
+        });
+        await Client.WaitAssertion(() =>
+        {
+            using var stream = new MemoryStream(payload);
+            var state = Client.ResolveDependency<IRobustSerializer>().Deserialize<SecretListingInitState>(stream);
+            Assert.That(state.Category, Is.EqualTo(RuneCategory));
+            Assert.That(Client.ProtoMan.Index(state.Category).Listings, Is.Not.Empty);
+        });
+    }
+
+    [Test]
+    public async Task SharedHolyWaterEffectRemovesCultSilence()
+    {
+        var map = await Pair.CreateTestMap();
+        await Server.WaitAssertion(() =>
+        {
+            var target = SEntMan.SpawnEntity("MobHuman", map.GridCoords);
+            SEntMan.AddComponent<NarsiSilenceComponent>(target);
+            SEntMan.AddComponent<MutedComponent>(target);
+            SEntMan.AddComponent<NarsiCultistMuzzleVisualizerComponent>(target);
+
+            Assert.That(SEntMan.System<SharedEntityEffectsSystem>().TryApplyEffect(target, new SaintWaterDrinkEffect()), Is.True);
+            Assert.That(SEntMan.HasComponent<NarsiSilenceComponent>(target), Is.False);
+            Assert.That(SEntMan.HasComponent<MutedComponent>(target), Is.False);
+            Assert.That(SEntMan.HasComponent<NarsiCultistMuzzleVisualizerComponent>(target), Is.False);
         });
     }
 

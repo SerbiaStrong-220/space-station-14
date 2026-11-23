@@ -1,12 +1,19 @@
-using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
+using Content.Server.SS220.DarkForces.Saint.Reagent.Events;
+using SharedSaintWaterDrinkEvent = Content.Shared.SS220.EntityEffects.Events.OnSaintWaterDrinkEvent;
 
 namespace Content.Server.SS220.DarkForces.Saint.Reagent;
 
-public sealed partial class SaintWaterDrinkEffect : EntityEffectBase<SaintWaterDrinkEffect>
+public sealed partial class SaintWaterEffectSystem
 {
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    // The drink effect itself is shared; retain the port's server-side cleanup callbacks.
+    private void InitializeDrink()
     {
-        return "Помогает бороться с нечистью";
+        SubscribeLocalEvent<MetaDataComponent, SharedSaintWaterDrinkEvent>(OnDrink);
+    }
+
+    private void OnDrink(EntityUid uid, MetaDataComponent component, SharedSaintWaterDrinkEvent args)
+    {
+        if (!args.Cancelled)
+            RaiseLocalEvent(uid, new OnSaintWaterDrinkEvent(uid, args.SaintWaterAmount));
     }
 }

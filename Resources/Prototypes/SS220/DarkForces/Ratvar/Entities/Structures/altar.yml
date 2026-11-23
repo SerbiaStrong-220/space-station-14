@@ -29,6 +29,7 @@
     position: Down
     rotation: -90
   - type: PointLight
+    enabled: false
     radius: 4
     energy: 4
     color: "#dfc477"

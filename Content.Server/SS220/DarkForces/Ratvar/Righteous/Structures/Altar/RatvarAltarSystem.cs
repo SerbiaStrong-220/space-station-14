@@ -92,8 +92,7 @@ public sealed class RatvarAltarSystem : EntitySystem
         var query = EntityQueryEnumerator<RatvarAltarComponent>();
         while (query.MoveNext(out var uid, out var component))
         {
-            var target = component.BuckledEntity;
-            if (target == EntityUid.Invalid || component.Type == AltarActiveType.Idle)
+            if (component.BuckledEntity is not { } target || component.Type == AltarActiveType.Idle)
                 continue;
 
             if (component.ActivateTime > curTime)
@@ -148,14 +147,13 @@ public sealed class RatvarAltarSystem : EntitySystem
 
     private void OnUnStrapped(Entity<RatvarAltarComponent> ent, ref UnstrappedEvent args)
     {
-        ent.Comp.BuckledEntity = EntityUid.Invalid;
+        ent.Comp.BuckledEntity = null;
         UpdateBuckle(ent);
     }
 
     private void UpdateBuckle(Entity<RatvarAltarComponent> ent)
     {
-        var target = ent.Comp.BuckledEntity;
-        if (target == EntityUid.Invalid || HasComp<RatvarRighteousComponent>(target))
+        if (ent.Comp.BuckledEntity is not { } target || HasComp<RatvarRighteousComponent>(target))
         {
             ToIdleState(ent);
             return;

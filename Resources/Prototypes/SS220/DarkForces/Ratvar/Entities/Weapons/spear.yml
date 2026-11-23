@@ -43,6 +43,7 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 0
     inHandsMaxFillLevels: 0
+    equippedMaxFillLevels: 0
 
 - type: entity
   id: RatvarSpearElectricalTouch

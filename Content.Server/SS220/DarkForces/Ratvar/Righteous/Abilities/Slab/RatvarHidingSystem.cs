@@ -104,7 +104,7 @@ public sealed class RatvarHidingSystem : EntitySystem
         if (PausedMap == null || !Exists(PausedMap))
             return;
 
-        EntityManager.DeleteEntity(PausedMap.Value);
+        Del(PausedMap.Value);
     }
 
     private void EnsurePausedMap()

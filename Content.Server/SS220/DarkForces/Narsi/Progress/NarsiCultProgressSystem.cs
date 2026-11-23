@@ -20,13 +20,15 @@ public sealed partial class NarsiCultProgressSystem : EntitySystem
     [ValidatePrototypeId<EntityPrototype>]
     private const string NarsiCultProgressHolder = "NarsiCultProgressHolder";
 
+    private static readonly ProtoId<RadioChannelPrototype> CultChannel = "NarsiCult";
+
     private Entity<NarsiCultProgressComponent>? _activeProgress;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<NarsiCultProgressComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<NarsiCultProgressComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<NarsiCultProgressComponent, ComponentRemove>(OnComponentRemove);
 
         InitializeObjectives();
@@ -50,7 +52,7 @@ public sealed partial class NarsiCultProgressSystem : EntitySystem
         _leaderSelectionPending = true;
     }
 
-    private void OnComponentInit(EntityUid uid, NarsiCultProgressComponent component, ComponentInit args)
+    private void OnMapInit(EntityUid uid, NarsiCultProgressComponent component, MapInitEvent args)
     {
         OnObjectivesInit((uid, component));
     }
@@ -76,6 +78,6 @@ public sealed partial class NarsiCultProgressSystem : EntitySystem
 
     private void SendMessageFromNarsi(Entity<NarsiCultProgressComponent> progress, string message)
     {
-        _radio.SendRadioMessage(progress, message, _prototypeManager.Index<RadioChannelPrototype>("NarsiCult"), progress);
+        _radio.SendRadioMessage(progress, message, _prototypeManager.Index(CultChannel), progress);
     }
 }

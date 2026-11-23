@@ -25,7 +25,7 @@ public sealed partial class NarsiAltarSystem
     private void OnPolymorpgReverted(EntityUid uid, NarsiPolymorphComponent component, PolymorphRevertedEvent args)
     {
         var altar = component.AltarEntityUid;
-        if (!component.ReturnToAltar || !EntityManager.EntityExists(altar))
+        if (!component.ReturnToAltar || !Exists(altar))
             return;
 
         var transform = Transform(altar);

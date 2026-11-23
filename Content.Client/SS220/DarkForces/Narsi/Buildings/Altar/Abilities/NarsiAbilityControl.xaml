@@ -26,7 +26,7 @@
                                   HorizontalExpand="True"
                                   VerticalAlignment="Center">
 
-                        <Label Name="Name"
+                        <Label Name="NameLabel"
                                HorizontalAlignment="Left"
                                Margin="8 8 8 8" />
 

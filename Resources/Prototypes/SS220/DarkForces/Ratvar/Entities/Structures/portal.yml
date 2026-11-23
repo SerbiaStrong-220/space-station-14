@@ -13,7 +13,7 @@
     layers:
     - state: spatial_gateway
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:

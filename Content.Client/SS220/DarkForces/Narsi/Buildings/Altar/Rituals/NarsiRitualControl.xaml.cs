@@ -12,7 +12,7 @@ public sealed partial class NarsiRitualControl : Control
     {
         RobustXamlLoader.Load(this);
 
-        Name.Text = name;
+        NameLabel.Text = name;
         Description.SetMessage(description);
 
         if (isAvailable)

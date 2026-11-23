@@ -6,7 +6,7 @@
         </PanelContainer.PanelOverride>
 
         <BoxContainer Orientation="Vertical" Margin="8 8 8 8">
-            <Label Name="Name" Align="Center" Margin="4 4 4 4" />
+            <Label Name="NameLabel" Align="Center" Margin="4 4 4 4" />
 
             <RichTextLabel Name="Description" Margin="4 4 4 4" StyleClasses="LabelSubText" />
             <RichTextLabel Name="Requirements" Margin="4 4 4 4" StyleClasses="LabelSubText" />
