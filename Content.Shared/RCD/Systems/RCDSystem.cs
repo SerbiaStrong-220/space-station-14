@@ -3,6 +3,7 @@ using Content.Shared.Charges.Systems;
 using Content.Shared.Construction;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -50,6 +51,7 @@ public sealed class RCDSystem : EntitySystem
     private readonly ProtoId<RCDPrototype> _deconstructTileProto = "DeconstructTile";
     private readonly ProtoId<RCDPrototype> _deconstructLatticeProto = "DeconstructLattice";
     private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
+    private static readonly ProtoId<TagPrototype> WindowTag = "Window"; //SS220-rcd-firelock-stacking
 
     private HashSet<EntityUid> _intersectingEntities = new();
 
@@ -465,6 +467,10 @@ public sealed class RCDSystem : EntitySystem
         // Check rule: The tile is unoccupied
         var isWindow = prototype.ConstructionRules.Contains(RcdConstructionRule.IsWindow);
         var isCatwalk = prototype.ConstructionRules.Contains(RcdConstructionRule.IsCatwalk);
+        //SS220-rcd-firelock-stacking begin
+        var isFirelock = prototype.ConstructionRules.Contains(RcdConstructionRule.IsFirelock);
+        var canBuildOnFirelock = prototype.ConstructionRules.Contains(RcdConstructionRule.CanBuildOnFirelock);
+        //SS220-rcd-firelock-stacking end
 
         _intersectingEntities.Clear();
         _lookup.GetLocalEntitiesIntersecting(gridUid, position, _intersectingEntities, -0.05f, LookupFlags.Uncontained);
@@ -495,6 +501,14 @@ public sealed class RCDSystem : EntitySystem
 
             if (isWindow && HasComp<SharedCanBuildWindowOnTopComponent>(ent))
                 continue;
+
+            //SS220-rcd-firelock-stacking begin
+            if (isFirelock && (HasComp<AirlockComponent>(ent) || HasComp<SharedCanBuildWindowOnTopComponent>(ent) || _tags.HasTag(ent, WindowTag)))
+                continue;
+
+            if (canBuildOnFirelock && HasComp<FirelockComponent>(ent))
+                continue;
+            //SS220-rcd-firelock-stacking end
 
             if (isCatwalk && _tags.HasTag(ent, CatwalkTag))
             {

@@ -9,7 +9,7 @@ using Content.Shared.Medical;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.Medical;

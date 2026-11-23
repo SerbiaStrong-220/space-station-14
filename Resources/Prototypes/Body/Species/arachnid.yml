@@ -110,6 +110,7 @@
     - DoorBumpOpener
     - SpiderCraft
     - AnomalyHost
+    - ZombifyableByMelee # SS220-add-animal-not-zombiefying
   - type: Butcherable
     spawned:
     - id: FoodMeatSpider

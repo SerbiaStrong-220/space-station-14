@@ -45,22 +45,28 @@
         - state: closed
           map: ["enum.DoorVisualLayers.Base"]
         - state: closed_unlit
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           shader: unshaded
           map: ["enum.DoorVisualLayers.BaseUnlit"]
           visible: false
         - state: welded
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           map: ["enum.WeldableLayers.BaseWelded"]
         - state: bolted_unlit
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           shader: unshaded
           map: ["enum.DoorVisualLayers.BaseBolted"]
           visible: false
         - state: panel_open
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           map: ["enum.WiresVisualLayers.MaintenancePanel"]
         - state: pressure_unlit
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           visible: false
           shader: unshaded
           map: ["enum.FirelockVisualLayersPressure.Base"]
         - state: temperature_unlit
+          sprite: SS220/Structures/Doors/Airlocks/firelock_common.rsi #SS220-airlock-common-states
           visible: false
           shader: unshaded
           map: ["enum.FirelockVisualLayersTemperature.Base"]
@@ -202,6 +208,31 @@
     - type: Sprite
       sprite: Structures/Doors/edge_door_hazard.rsi
       snapCardinals: false
+      # SS220-airlock-common-states begin
+      layers:
+        - state: closed
+          map: ["enum.DoorVisualLayers.Base"]
+        - state: closed_unlit
+          shader: unshaded
+          map: ["enum.DoorVisualLayers.BaseUnlit"]
+          visible: false
+        - state: welded
+          map: ["enum.WeldableLayers.BaseWelded"]
+        - state: bolted_unlit
+          shader: unshaded
+          map: ["enum.DoorVisualLayers.BaseBolted"]
+          visible: false
+        - state: panel_open
+          map: ["enum.WiresVisualLayers.MaintenancePanel"]
+        - state: pressure_unlit
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersPressure.Base"]
+        - state: temperature_unlit
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersTemperature.Base"]
+      # SS220-airlock-common-states end
     - type: Airtight
       airBlocked: false
       noAirWhenFullyAirBlocked: false
