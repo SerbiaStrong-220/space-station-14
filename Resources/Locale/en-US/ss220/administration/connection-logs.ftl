@@ -1,0 +1,24 @@
+# SS220 connections by ckeys
+connection-logs-title = Connection logs
+connection-logs-target = Connection logs · regex: {$ckey}
+connection-logs-next = Older connections
+connection-logs-loading = Loading...
+connection-logs-empty = No connection attempts found.
+connection-logs-allowed = allowed
+connection-logs-denied = denied ({$reason})
+connection-logs-unknown-server = unknown server
+connection-logs-regex-label = Ckey regex:
+connection-logs-regex-placeholder = For example: ^admin_.*$
+connection-logs-search = Search / refresh
+connection-logs-column-time = Time (MSK)
+connection-logs-column-ckey = Ckey
+connection-logs-column-address = Address
+connection-logs-column-status = Result
+connection-logs-column-server = Server
+connection-logs-column-trust = Trust
+connection-logs-prompt = Enter a ckey regex to view connection history.
+connection-logs-invalid-ckey = Enter a ckey regex (up to 128 characters).
+connection-logs-invalid-regex = Invalid regular expression.
+connection-logs-error = Could not load connection logs. Try again.
+cmd-connectionlogs-desc = Opens connection history search by ckey.
+cmd-connectionlogs-help = Usage: connectionlogs
