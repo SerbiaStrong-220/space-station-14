@@ -273,11 +273,13 @@ public sealed class LimbTest
         var hit = new DamageSpecifier(protoManager.Index(BluntDamage), 30);
 
         EntityUid human = default!;
+        EntityUid arm = default!;
         await server.WaitAssertion(() =>
         {
             human = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
             damageableSystem.TryChangeDamage(human, hit, ignoreResistances: true);
-            Assert.That(bodySystem.TryExtractOrgan(human, ArmLeftCategory, out _), Is.True);
+            Assert.That(bodySystem.TryExtractOrgan(human, ArmLeftCategory, out var extracted), Is.True);
+            arm = extracted!.Value;
             // the damage after the loss must not bring the overlay back either
             damageableSystem.TryChangeDamage(human, hit, ignoreResistances: true);
         });
@@ -289,13 +291,48 @@ public sealed class LimbTest
             var clientHuman = clientEntMng.GetEntity(entMng.GetNetEntity(human));
             var spriteSystem = clientEntMng.System<SpriteSystem>();
             var sprite = clientEntMng.GetComponent<SpriteComponent>(clientHuman);
-            Assert.That(spriteSystem.LayerMapTryGet((clientHuman, sprite), "LArmBrute", out var arm, false), Is.True);
+            Assert.That(spriteSystem.LayerMapTryGet((clientHuman, sprite), "LArmBrute", out var armLayer, false), Is.True);
             Assert.That(spriteSystem.LayerMapTryGet((clientHuman, sprite), "ChestBrute", out var chest, false), Is.True);
             Assert.Multiple(() =>
             {
-                Assert.That(sprite[arm].Visible, Is.False, "A missing arm shows no bruises");
+                Assert.That(sprite[armLayer].Visible, Is.False, "A missing arm shows no bruises");
                 Assert.That(sprite[chest].Visible, Is.True);
             });
+        });
+
+        // healed while the arm was missing: the returned arm must not show the bruises of before
+        await server.WaitAssertion(() => damageableSystem.ClearAllDamage(human));
+        await pair.RunTicksSync(10);
+        await server.WaitAssertion(() => Assert.That(bodySystem.TryInsertOrgan(human, arm), Is.True));
+
+        await pair.RunTicksSync(10);
+
+        await pair.Client.WaitAssertion(() =>
+        {
+            var clientHuman = clientEntMng.GetEntity(entMng.GetNetEntity(human));
+            var spriteSystem = clientEntMng.System<SpriteSystem>();
+            var sprite = clientEntMng.GetComponent<SpriteComponent>(clientHuman);
+            spriteSystem.LayerMapTryGet((clientHuman, sprite), "LArmBrute", out var armLayer, false);
+            spriteSystem.LayerMapTryGet((clientHuman, sprite), "ChestBrute", out var chest, false);
+            Assert.Multiple(() =>
+            {
+                Assert.That(sprite[armLayer].Visible, Is.False, "A returned arm of a healed body shows no bruises");
+                Assert.That(sprite[chest].Visible, Is.False);
+            });
+        });
+
+        // the returned arm gets damage updates again
+        await server.WaitAssertion(() => damageableSystem.TryChangeDamage(human, hit, ignoreResistances: true));
+
+        await pair.RunTicksSync(10);
+
+        await pair.Client.WaitAssertion(() =>
+        {
+            var clientHuman = clientEntMng.GetEntity(entMng.GetNetEntity(human));
+            var spriteSystem = clientEntMng.System<SpriteSystem>();
+            var sprite = clientEntMng.GetComponent<SpriteComponent>(clientHuman);
+            spriteSystem.LayerMapTryGet((clientHuman, sprite), "LArmBrute", out var armLayer, false);
+            Assert.That(sprite[armLayer].Visible, Is.True, "A returned arm shows new bruises");
         });
 
         await pair.CleanReturnAsync();
