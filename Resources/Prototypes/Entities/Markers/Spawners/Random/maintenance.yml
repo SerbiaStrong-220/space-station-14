@@ -211,8 +211,10 @@
       weight: 75
       children:
       - id: FlashlightLantern
-      - !type:NestedSelector # SS220-species-mail
+      # SS220-species-mail begin
+      - !type:NestedSelector
         tableId: PackageDeliveryEmergencyToolbox
+      # SS220-species-mail end
       - !type:GroupSelector
         children:
         # SS220-species-mail begin
@@ -229,9 +231,11 @@
         - !type:NestedSelector
           tableId: PackageDeliveryEmergencyNitrogenTank
         # SS220-species-mail end
-      - !type:NestedSelector # SS220-species-mail
+      # SS220-species-mail begin
+      - !type:NestedSelector
         tableId: PackageDeliveryFunnyOxygenTank
         weight: 0.5
+      # SS220-species-mail end
       - !type:GroupSelector
         weight: 3
         children:
@@ -324,18 +328,22 @@
       #SS220 Maint-Drinks Begin
       - !type:GroupSelector
         children:
-        - !type:NestedSelector # SS220-species-mail
+        # SS220-species-mail begin
+        - !type:NestedSelector
           tableId: PackageDeliveryMopwata
           prob: 0.20
-        - !type:NestedSelector # SS220-species-mail
+        - !type:NestedSelector
           tableId: PackageDeliveryVodkaKazaki
           prob: 0.05
-        - !type:NestedSelector # SS220-species-mail
+        - !type:NestedSelector
           tableId: PackageDeliveryBankate
           prob: 0.20
+        # SS220-species-mail end
       #SS220 Maint-Drinks End
-      - !type:NestedSelector # SS220-species-mail
+      # SS220-species-mail begin
+      - !type:NestedSelector
         tableId: PackageDeliveryMopwata
+      # SS220-species-mail end
       - id: SpectralLocator
       - id: LidSalami
         weight: 0.05
