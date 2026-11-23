@@ -34,7 +34,7 @@ public sealed partial class TtsSexRequirement : TtsVoiceRequirement
         reason = null;
         if (!Inverted)
         {
-            if (!Sexes.Contains(sex))
+            if (sex != Sex.Unsexed && !Sexes.Contains(sex))
             {
                 var sexesList = EnumerateSexesForMessage().ToList();
 
