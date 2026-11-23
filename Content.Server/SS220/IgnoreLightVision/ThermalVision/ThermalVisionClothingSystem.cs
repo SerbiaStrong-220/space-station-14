@@ -1,6 +1,7 @@
 // EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.SS220.Thermals;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.SS220.IgnoreLightVision.Components;
 
@@ -21,7 +22,7 @@ public sealed class ThermalVisionClothingSystem : EntitySystem
 
     private void OnCompEquip(Entity<ThermalVisionClothingComponent> ent, ref GotEquippedEvent args)
     {
-        if (args.Slot != "eyes")
+        if ((args.SlotFlags & SlotFlags.EYES) == 0)
             return;
 
         if (!HasComp<ThermalVisionComponent>(args.EquipTarget))
@@ -30,6 +31,9 @@ public sealed class ThermalVisionClothingSystem : EntitySystem
 
     private void OnCompUnequip(Entity<ThermalVisionClothingComponent> ent, ref GotUnequippedEvent args)
     {
+        if ((args.SlotFlags & SlotFlags.EYES) == 0)
+            return;
+
         if (HasComp<ThermalVisionComponent>(args.EquipTarget))
             RemComp<ThermalVisionComponent>(args.EquipTarget);
     }

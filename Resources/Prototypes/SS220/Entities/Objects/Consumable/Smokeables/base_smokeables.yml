@@ -11,6 +11,14 @@
   - type: Tag
     tags:
     - Trash
+  - type: SmokablePuff
+  - type: ActionGrant
+    actions:
+    - ActionSmokablePuff
+  - type: ItemActionGrant
+    actions:
+    - ActionSmokablePuff
+    activeIfWorn: true
   - type: SolutionContainerManager
     solutions:
       smokable:
@@ -31,6 +39,16 @@
   - type: Tag
     tags:
     - Trash
+  - type: SmokablePuff
+    puffCost: 6
+    moles: 3
+  - type: ActionGrant
+    actions:
+    - ActionSmokablePuff
+  - type: ItemActionGrant
+    actions:
+    - ActionSmokablePuff
+    activeIfWorn: true
   - type: SolutionContainerManager
     solutions:
       smokable:

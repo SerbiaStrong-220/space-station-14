@@ -22,12 +22,7 @@
   - TemperatureSpeed
   # SS220-experience-start-begin
   - Experience
-  - AntagFreeSublevelPointsAdd
-  - RoleExperienceAdd
-  - AdminForcedExperienceAdd
-  - JobBackgroundSublevelAdd
-  - MentorRole
-  - AntagAddKnowledge
+  - ExperienceAddition
   # SS220-experience-start-end
   # traits
   - BlackAndWhiteOverlay
@@ -42,7 +37,7 @@
   - PermanentBlindness
   - Snoring
   - Unrevivable
-  - TTS # SS220-cloning-tts-fix
+  - Tts # SS220-cloning-tts-fix
   # accents
   - Accentless
   - BackwardsAccent

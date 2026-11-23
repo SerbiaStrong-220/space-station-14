@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "maded by D1nazewwr for SS220",
+  "copyright": "maded by D1nazewwr for SS220; Forehead states: maded by D1nazewwr for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -20,6 +20,10 @@
     },
     {
       "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET",
       "directions": 4
     }
   ]

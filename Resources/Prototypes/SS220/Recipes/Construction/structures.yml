@@ -1200,3 +1200,29 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  id: GarlandYellowCraft
+  graph: Garland
+  startNode: start
+  targetNode: garlandYellow
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: GarlandRainbowCraft
+  graph: Garland
+  startNode: start
+  targetNode: garlandRainbow
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
