@@ -242,31 +242,19 @@
       id: EmergencyMedipen
 
 - type: entityTable
-  id: PackageDeliveryBrutepack
+  id: PackageDeliveryFirstAid
   table: !type:SpeciesSelector
     species:
-      Ipc:
-        id: Wrench
-    fallback:
-      id: Brutepack1
-
-- type: entityTable
-  id: PackageDeliveryOintment
-  table: !type:SpeciesSelector
-    species:
-      Ipc:
-        id: Wirecutter
-    fallback:
-      id: Ointment1
-
-- type: entityTable
-  id: PackageDeliveryGauze
-  table: !type:SpeciesSelector
-    species:
-      Ipc:
-        id: Screwdriver
-    fallback:
-      id: Gauze1
+      Ipc: !type:GroupSelector
+        children:
+        - id: Wrench
+        - id: Wirecutter
+        - id: Screwdriver
+    fallback: !type:GroupSelector
+      children:
+      - id: Brutepack1
+      - id: Ointment1
+      - id: Gauze1
 
 - type: entityTable
   id: PackageDeliverySecuritySupplies

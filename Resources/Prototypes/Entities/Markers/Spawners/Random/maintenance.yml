@@ -211,31 +211,17 @@
       weight: 75
       children:
       - id: FlashlightLantern
-      # SS220-species-mail begin
-      - !type:NestedSelector
-        tableId: PackageDeliveryEmergencyToolbox
-      # SS220-species-mail end
+      - id: ToolboxEmergencyFilled
       - !type:GroupSelector
         children:
-        # SS220-species-mail begin
-        - !type:NestedSelector
-          tableId: PackageDeliveryOxygenTank
-        - !type:NestedSelector
-          tableId: PackageDeliveryEmergencyOxygenTank
-        # SS220-species-mail end
+        - id: OxygenTankFilled
+        - id: DoubleEmergencyOxygenTankFilled
       - !type:GroupSelector
         children:
-        # SS220-species-mail begin
-        - !type:NestedSelector
-          tableId: PackageDeliveryNitrogenTank
-        - !type:NestedSelector
-          tableId: PackageDeliveryEmergencyNitrogenTank
-        # SS220-species-mail end
-      # SS220-species-mail begin
-      - !type:NestedSelector
-        tableId: PackageDeliveryFunnyOxygenTank
+        - id: NitrogenTankFilled
+        - id: DoubleEmergencyNitrogenTankFilled
+      - id: EmergencyFunnyOxygenTankFilled
         weight: 0.5
-      # SS220-species-mail end
       - !type:GroupSelector
         weight: 3
         children:
@@ -328,22 +314,14 @@
       #SS220 Maint-Drinks Begin
       - !type:GroupSelector
         children:
-        # SS220-species-mail begin
-        - !type:NestedSelector
-          tableId: PackageDeliveryMopwata
+        - id: DrinkMopwataBottleRandom
           prob: 0.20
-        - !type:NestedSelector
-          tableId: PackageDeliveryVodkaKazaki
+        - id: DrinkVodkaKazakiBottleFull
           prob: 0.05
-        - !type:NestedSelector
-          tableId: PackageDeliveryBankate
+        - id: DrinkBankateJarFull
           prob: 0.20
-        # SS220-species-mail end
       #SS220 Maint-Drinks End
-      # SS220-species-mail begin
-      - !type:NestedSelector
-        tableId: PackageDeliveryMopwata
-      # SS220-species-mail end
+      - id: DrinkMopwataBottleRandom
       - id: SpectralLocator
       - id: LidSalami
         weight: 0.05
@@ -396,14 +374,9 @@
       - !type:GroupSelector
         weight: 2
         children:
-        # SS220-species-mail begin
-        - !type:NestedSelector
-          tableId: PackageDeliveryBrutepack
-        - !type:NestedSelector
-          tableId: PackageDeliveryOintment
-        - !type:NestedSelector
-          tableId: PackageDeliveryGauze
-        # SS220-species-mail end
+        - id: Brutepack1
+        - id: Ointment1
+        - id: Gauze1
       - id: Bola
       - id: SurvivalKnife
       - id: ScalpelShiv

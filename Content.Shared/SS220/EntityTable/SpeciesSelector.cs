@@ -24,10 +24,16 @@ public sealed partial class SpeciesSelector : EntityTableSelector
     public Dictionary<ProtoId<SpeciesPrototype>, EntityTableSelector> Species = [];
 
     /// <summary>
-    /// Selector used when the context has no species or the species has no dedicated selector.
+    /// Selector used when there is no dedicated selector for the species.
     /// </summary>
     [DataField(required: true)]
     public EntityTableSelector Fallback = default!;
+
+    /// <summary>
+    /// Optional selector used when the context provides no recipient species.
+    /// </summary>
+    [DataField]
+    public EntityTableSelector? WithoutSpecies;
 
     protected override IEnumerable<EntProtoId> GetSpawnsImplementation(System.Random rand,
         IEntityManager entMan,
@@ -56,7 +62,7 @@ public sealed partial class SpeciesSelector : EntityTableSelector
     private EntityTableSelector GetSelector(EntityTableContext ctx)
     {
         if (!ctx.TryGetData<ProtoId<SpeciesPrototype>>(SpeciesContextKey, out var species))
-            return Fallback;
+            return WithoutSpecies ?? Fallback;
 
         if (!Species.TryGetValue(species, out var selector))
             return Fallback;

@@ -182,11 +182,8 @@
       weight: 0.3
       children:
       - id: SheetPlasma10
-      - !type:SpeciesSelector
-        species:
-          Ipc: !type:NoneSelector {}
-        fallback: !type:NestedSelector
-          tableId: PackageDeliveryOxygenTank
+      - !type:NestedSelector
+        tableId: PackageDeliveryTank
     - id: MagazinePistol
       weight: 0.15
     - id: Flash

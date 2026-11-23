@@ -115,7 +115,7 @@
   table: !type:GroupSelector
     children:
     - !type:NestedSelector
-      tableId: MaintToolsTable
+      tableId: PackageDeliveryMaintTools # SS220-species-mail
       rolls: !type:RangeNumberSelector
         range: 1, 2
     - !type:NestedSelector
@@ -163,7 +163,7 @@
     - !type:NestedSelector
       tableId: AnimalMaskTable
     - !type:NestedSelector
-      tableId: MaintWeaponTable
+      tableId: PackageDeliveryMaintWeapons # SS220-species-mail
       weight: 0.5
     - !type:NestedSelector
       tableId: SyndieMaintLoot
