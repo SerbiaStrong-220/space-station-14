@@ -3,10 +3,10 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Experience;
+namespace Content.Shared.SS220.Experience.Components;
 
 /// <summary>
-/// Base component for adding sublevels which handles only add without any reset
+/// Base component for user defined adding sublevels
 /// </summary>
 public abstract partial class BaseSublevelAddComponent : Component
 {

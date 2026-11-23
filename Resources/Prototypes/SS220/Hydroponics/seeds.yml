@@ -1,8 +1,8 @@
 - type: seed
   id: beet
-  name: пакет семян (свёкла)
+  name: seeds-ss220-beet-name
   noun: seeds-noun-seeds
-  displayName: свёкла
+  displayName: seeds-ss220-beet-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/beet.rsi
   packetPrototype: BeetSeeds
   productPrototypes:
@@ -26,9 +26,9 @@
 
 - type: seed
   id: wtulip
-  name: пакет семян (белый тюльпан)
+  name: seeds-ss220-wtulip-name
   noun: seeds-noun-seeds
-  displayName: белый тюльпан
+  displayName: seeds-ss220-wtulip-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/wtulip.rsi
   packetPrototype: WtulipSeeds
   productPrototypes:
@@ -52,9 +52,9 @@
 
 - type: seed
   id: ytulip
-  name: пакет семян (желтый тюльпан)
+  name: seeds-ss220-ytulip-name
   noun: seeds-noun-seeds
-  displayName: желтый тюльпан
+  displayName: seeds-ss220-ytulip-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/ytulip.rsi
   packetPrototype: YtulipSeeds
   productPrototypes:
@@ -78,9 +78,9 @@
 
 - type: seed
   id: ptulip
-  name: пакет семян (розовый тюльпан)
+  name: seeds-ss220-ptulip-name
   noun: seeds-noun-seeds
-  displayName: розовый тюльпан
+  displayName: seeds-ss220-ptulip-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/ptulip.rsi
   packetPrototype: PtulipSeeds
   productPrototypes:
@@ -104,9 +104,9 @@
 
 - type: seed
   id: rclove
-  name: пакет семян (красная гвоздика)
+  name: seeds-ss220-rclove-name
   noun: seeds-noun-seeds
-  displayName: красная гвоздика
+  displayName: seeds-ss220-rclove-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/rclove.rsi
   packetPrototype: RcloveSeeds
   productPrototypes:
@@ -130,9 +130,9 @@
 
 - type: seed
   id: wclove
-  name: пакет семян (белая гвоздика)
+  name: seeds-ss220-wclove-name
   noun: seeds-noun-seeds
-  displayName: белая гвоздика
+  displayName: seeds-ss220-wclove-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/wclove.rsi
   packetPrototype: WcloveSeeds
   productPrototypes:
@@ -156,9 +156,9 @@
 
 - type: seed
   id: schamomile
-  name: пакет семян (космическая ромашка)
+  name: seeds-ss220-schamomile-name
   noun: seeds-noun-seeds
-  displayName: космическая ромашка
+  displayName: seeds-ss220-schamomile-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/schamomile.rsi
   packetPrototype: SchamomileSeeds
   productPrototypes:
@@ -182,9 +182,9 @@
 
 - type: seed
   id: wschamomile
-  name: пакет семян (белая космическая ромашка)
+  name: seeds-ss220-wschamomile-name
   noun: seeds-noun-seeds
-  displayName: белая космическая ромашка
+  displayName: seeds-ss220-wschamomile-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/wschamomile.rsi
   packetPrototype: WschamomileSeeds
   productPrototypes:
@@ -208,9 +208,9 @@
 
 - type: seed
   id: sflower
-  name: пакет семян (Алоцвет)
+  name: seeds-ss220-sflower-name
   noun: seeds-noun-seeds
-  displayName: Алоцвет
+  displayName: seeds-ss220-sflower-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/sflower.rsi
   packetPrototype: SflowerSeeds
   productPrototypes:
@@ -234,9 +234,9 @@
 
 - type: seed
   id: lflower
-  name: пакет семян (Лампоцвет)
+  name: seeds-ss220-lflower-name
   noun: seeds-noun-seeds
-  displayName: Лампоцвет
+  displayName: seeds-ss220-lflower-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/lflower.rsi
   packetPrototype: LflowerSeeds
   productPrototypes:
@@ -260,9 +260,9 @@
 
 - type: seed
   id: rrose
-  name: пакет семян (Красная роза)
+  name: seeds-ss220-rrose-name
   noun: seeds-noun-seeds
-  displayName: Красная роза
+  displayName: seeds-ss220-rrose-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/rrose.rsi
   packetPrototype: RroseSeeds
   productPrototypes:
@@ -286,9 +286,9 @@
 
 - type: seed
   id: wrose
-  name: пакет семян (Белая роза)
+  name: seeds-ss220-wrose-name
   noun: seeds-noun-seeds
-  displayName: Белая роза
+  displayName: seeds-ss220-wrose-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/wrose.rsi
   packetPrototype: WroseSeeds
   productPrototypes:
@@ -312,9 +312,9 @@
 
 - type: seed
   id: meatwheat
-  name: пакет семян (мясопшеница)
+  name: seeds-ss220-meatwheat-name
   noun: seeds-noun-seeds
-  displayName: стебли мясопшеницы
+  displayName: seeds-ss220-meatwheat-display-name
   plantRsi: SS220/Objects/Specific/Hydroponics/meatwheat.rsi
   packetPrototype: MeatwheatSeeds
   productPrototypes:

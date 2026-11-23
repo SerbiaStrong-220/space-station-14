@@ -59,7 +59,7 @@
 
   # Квартирмейстер (Начало)
 - type: loadoutGroup
-  id: QuartermasterHeadset 
+  id: QuartermasterHeadset
   name: loadout-group-quartermaster-headset
   minLimit: 1
   loadouts:
@@ -438,6 +438,7 @@
   - PilotCapCap
   - PilotBeret
   - HelmetTacSec
+  - SecBeretBlack
 
 - type: loadoutGroup
   id: SecurityPilotOuterClothing
@@ -915,6 +916,13 @@
   loadouts:
   - MimeWhiteShoes
   - MoryakShoes
+
+- type: loadoutGroup
+  id: MimeNeck
+  name: loadout-group-mime-neck
+  minLimit: 0
+  loadouts:
+  - HarlequinNeck
   # Мим (Конец)
 
  # Уборщик (Начало)

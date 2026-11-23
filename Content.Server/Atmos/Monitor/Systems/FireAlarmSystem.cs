@@ -65,6 +65,10 @@ public sealed class FireAlarmSystem : EntitySystem
             }
             else
             {
+                // SS220 MalfAI: reset a jammed fire alarm locally.
+                if (_atmosAlarmable.IsThermalJammed(uid))
+                    _atmosAlarmable.ResetLocal(uid);
+                else
                 _atmosAlarmable.ResetAllOnNetwork(uid);
             }
         }
