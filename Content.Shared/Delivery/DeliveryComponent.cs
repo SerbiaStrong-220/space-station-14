@@ -1,5 +1,5 @@
 using Content.Shared.Cargo.Prototypes;
-using Content.Shared.EntityTable.EntitySelectors; // SS220-job-mail
+using Content.Shared.EntityTable.EntitySelectors;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;

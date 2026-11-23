@@ -13,7 +13,7 @@ namespace Content.Shared.SS220.EntityTable;
 public sealed partial class SpeciesSelector : EntityTableSelector
 {
     /// <summary>
-    /// Context key for the recipient's species prototype ID, supplied as a string.
+    /// Context key for the recipient's typed species prototype ID.
     /// </summary>
     public const string SpeciesContextKey = "RecipientSpecies";
 
@@ -55,7 +55,7 @@ public sealed partial class SpeciesSelector : EntityTableSelector
 
     private EntityTableSelector GetSelector(EntityTableContext ctx)
     {
-        if (!ctx.TryGetData<string>(SpeciesContextKey, out var species))
+        if (!ctx.TryGetData<ProtoId<SpeciesPrototype>>(SpeciesContextKey, out var species))
             return Fallback;
 
         if (!Species.TryGetValue(species, out var selector))

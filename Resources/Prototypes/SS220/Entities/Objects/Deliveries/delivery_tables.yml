@@ -60,6 +60,4 @@
       Captain: PackageDeliveryCommand
       HeadOfPersonnel: PackageDeliveryCommand
       Lawyer: PackageDeliveryLegal
-      IAA: PackageDeliveryLegal
-      Magistrate: PackageDeliveryLegal
       NanoTrasenRepresentative: PackageDeliveryLegal

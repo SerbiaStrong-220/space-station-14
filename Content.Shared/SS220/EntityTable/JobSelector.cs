@@ -13,7 +13,7 @@ namespace Content.Shared.SS220.EntityTable;
 public sealed partial class JobSelector : EntityTableSelector
 {
     /// <summary>
-    /// Context key for the recipient's job prototype ID, supplied as a string.
+    /// Context key for the recipient's typed job prototype ID.
     /// </summary>
     public const string JobContextKey = "RecipientJob";
 
@@ -55,7 +55,7 @@ public sealed partial class JobSelector : EntityTableSelector
 
     private EntityTableSelector GetTable(IPrototypeManager proto, EntityTableContext ctx)
     {
-        if (!ctx.TryGetData<string>(JobContextKey, out var job))
+        if (!ctx.TryGetData<ProtoId<JobPrototype>>(JobContextKey, out var job))
             return proto.Index(Fallback).Table;
 
         if (!Jobs.TryGetValue(job, out var table))
