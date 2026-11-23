@@ -145,8 +145,12 @@
   speaker: briman
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: father_grigori
@@ -155,8 +159,12 @@
   speaker: father_grigori
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: kleiner
@@ -205,8 +213,12 @@
   speaker: gman
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: barni
@@ -255,8 +267,12 @@
   speaker: squidward
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: sentrybot
@@ -395,8 +411,12 @@
   speaker: polina
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: romka
@@ -405,6 +425,8 @@
   speaker: romka
   provider: NTTS
   categories: [ Misc ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: Shlopa
 
 - type: ttsVoice
   id: boris_petrov_father_tb
@@ -413,8 +435,12 @@
   speaker: boris_petrov_father_tb
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: karina_petrova_tb
@@ -423,8 +449,12 @@
   speaker: karina_petrova_tb
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: kate_smirnova_tb
@@ -433,8 +463,12 @@
   speaker: kate_smirnova_tb
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: semen_baburin_tb
@@ -443,8 +477,12 @@
   speaker: semen_baburin_tb
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: tihonov_tb
@@ -463,8 +501,12 @@
   speaker: cicero
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: sheogorath
@@ -483,8 +525,12 @@
   speaker: kodlakwhitemane
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: khajiit
@@ -493,8 +539,12 @@
   speaker: khajiit
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: elenwen
@@ -503,8 +553,12 @@
   speaker: elenwen
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: emperor
@@ -513,8 +567,12 @@
   speaker: emperor
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: CriticalMassShlopa
 
 - type: ttsVoice
   id: guard
@@ -523,8 +581,12 @@
   speaker: guard
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: hagraven
@@ -533,8 +595,12 @@
   speaker: hagraven
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: hermaeus_mora
@@ -543,8 +609,12 @@
   speaker: hermaeus_mora
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: nord
@@ -553,8 +623,12 @@
   speaker: nord
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: ulfric
@@ -563,8 +637,12 @@
   speaker: ulfric
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: CriticalMassShlopa
 
 - type: ttsVoice
   id: astrid
@@ -573,8 +651,12 @@
   speaker: astrid
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: maven
@@ -583,8 +665,12 @@
   speaker: maven
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: nazir
@@ -593,8 +679,12 @@
   speaker: nazir
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: female_commander
@@ -603,8 +693,12 @@
   speaker: female_commander
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: lord_harkon
@@ -683,8 +777,12 @@
   speaker: geralt
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: cirilla
@@ -693,8 +791,12 @@
   speaker: cirilla
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: cerys
@@ -703,8 +805,12 @@
   speaker: cerys
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: lambert
@@ -713,8 +819,12 @@
   speaker: lambert
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: triss
@@ -723,8 +833,12 @@
   speaker: triss
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: kovir_nobleman
@@ -733,8 +847,12 @@
   speaker: kovir_nobleman
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: zoltan_chivay
@@ -753,8 +871,12 @@
   speaker: vesemir
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: guillaume_de_launfal
@@ -763,8 +885,12 @@
   speaker: guillaume_de_launfal
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: philippa_eilhart
@@ -773,8 +899,12 @@
   speaker: philippa_eilhart
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: ewald_borsodi
@@ -783,8 +913,12 @@
   speaker: ewald_borsodi
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: dandelion
@@ -793,8 +927,12 @@
   speaker: dandelion
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: shani
@@ -803,8 +941,12 @@
   speaker: shani
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: azir
@@ -813,8 +955,12 @@
   speaker: azir
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: ekko
@@ -823,8 +969,12 @@
   speaker: ekko
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: twitch
@@ -833,8 +983,12 @@
   speaker: twitch
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: ziggs
@@ -863,8 +1017,12 @@
   speaker: arthas
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: illidan
@@ -873,8 +1031,12 @@
   speaker: illidan
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: rexxar
@@ -883,8 +1045,12 @@
   speaker: rexxar
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: voljin
@@ -893,8 +1059,12 @@
   speaker: voljin
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: bandit
@@ -903,8 +1073,12 @@
   speaker: bandit
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: forester
@@ -923,8 +1097,12 @@
   speaker: sidorovich
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: strelok
@@ -943,8 +1121,12 @@
   speaker: tracer
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: soldier
@@ -953,8 +1135,12 @@
   speaker: soldier
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: engineer
@@ -983,8 +1169,12 @@
   speaker: medic
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: demoman
@@ -993,8 +1183,12 @@
   speaker: demoman
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: sniper
@@ -1003,8 +1197,12 @@
   speaker: sniper
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: spy
@@ -1153,8 +1351,12 @@
   speaker: dornan
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: officer_enclave
@@ -1173,8 +1375,12 @@
   speaker: richardson
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: butch
@@ -1193,8 +1399,12 @@
   speaker: marcus
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: sulik
@@ -1203,8 +1413,12 @@
   speaker: sulik
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: myron
@@ -1213,8 +1427,12 @@
   speaker: myron
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: good_thalya
@@ -1253,8 +1471,12 @@
   speaker: dude
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: anduin
@@ -1263,8 +1485,12 @@
   speaker: anduin
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: brukan
@@ -1273,8 +1499,12 @@
   speaker: brukan
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: garrosh
@@ -1303,8 +1533,12 @@
   speaker: uther_hs
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: adjutant
@@ -1313,8 +1547,12 @@
   speaker: adjutant
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: hanson
@@ -1353,8 +1591,12 @@
   speaker: tosh
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: tychus
@@ -1363,8 +1605,12 @@
   speaker: tychus
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: amitkakkar
@@ -1573,8 +1819,12 @@
   speaker: sophronia_franklin
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: everett_clopton
@@ -1613,8 +1863,12 @@
   speaker: abaddon_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: alchemist_dota_2
@@ -1633,8 +1887,12 @@
   speaker: anti-mage_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: arc_warden_dota_2
@@ -1653,8 +1911,12 @@
   speaker: batrider_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: bloodseeker_dota_2
@@ -1663,8 +1925,12 @@
   speaker: bloodseeker_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: bounty_hunter_dota_2
@@ -1673,8 +1939,12 @@
   speaker: bounty_hunter_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: bristleback_dota_2
@@ -1683,8 +1953,12 @@
   speaker: bristleback_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: broodmother_dota_2
@@ -1723,8 +1997,12 @@
   speaker: clockwerk_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: crystal_maiden_dota_2
@@ -1733,8 +2011,12 @@
   speaker: crystal_maiden_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: dazzle_dota_2
@@ -1743,8 +2025,12 @@
   speaker: dazzle_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: disruptor_dota_2
@@ -1763,8 +2049,12 @@
   speaker: doom_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: dragon_knight_dota_2
@@ -1793,8 +2083,12 @@
   speaker: drow_ranger_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: earthshaker_dota_2
@@ -1803,8 +2097,12 @@
   speaker: earthshaker_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: ember_spirit_dota_2
@@ -1813,8 +2111,12 @@
   speaker: ember_spirit_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: enigma_dota_2
@@ -1833,8 +2135,12 @@
   speaker: gyrocopter_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: huskar_dota_2
@@ -1843,8 +2149,12 @@
   speaker: huskar_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: invoker_dota_2
@@ -1853,8 +2163,12 @@
   speaker: invoker_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: juggernaut_dota_2
@@ -1863,8 +2177,12 @@
   speaker: juggernaut_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: keeper_of_the_light_dota_2
@@ -1873,8 +2191,12 @@
   speaker: keeper_of_the_light_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: kunkka_dota_2
@@ -1943,8 +2265,12 @@
   speaker: lycan_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: lycan_wolf_dota_2
@@ -1963,8 +2289,12 @@
   speaker: meepo_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: mirana_dota_2
@@ -1973,8 +2303,12 @@
   speaker: mirana_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: monkey_king_crown_dota_2
@@ -1993,8 +2327,12 @@
   speaker: monkey_king_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: necrophos_dota_2
@@ -2023,8 +2361,12 @@
   speaker: omniknight_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: outworld_destroyer_dota_2
@@ -2063,8 +2405,12 @@
   speaker: phantom_lancer_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: pudge_dota_2
@@ -2073,8 +2419,12 @@
   speaker: pudge_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: queen_of_pain_dota_2
@@ -2103,8 +2453,12 @@
   speaker: riki_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: rubick_dota_2
@@ -2153,8 +2507,12 @@
   speaker: skywrath_mage_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: slardar_dota_2
@@ -2183,8 +2541,12 @@
   speaker: spirit_breaker_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: storm_spirit_dota_2
@@ -2193,8 +2555,12 @@
   speaker: storm_spirit_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: sven_dota_2
@@ -2203,8 +2569,12 @@
   speaker: sven_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
 
 - type: ttsVoice
   id: templar_assassin_dota_2
@@ -2223,8 +2593,12 @@
   speaker: tidehunter_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: treant_protector_dota_2
@@ -2233,8 +2607,12 @@
   speaker: treant_protector_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: underlord_dota_2
@@ -2273,8 +2651,12 @@
   speaker: winter_wyvern_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Female ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: witch_doctor_dota_2
@@ -2283,8 +2665,12 @@
   speaker: witch_doctor_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: wraith_king_dota_2
@@ -2293,8 +2679,12 @@
   speaker: wraith_king_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
 
 - type: ttsVoice
   id: zeus_dota_2
@@ -2303,8 +2693,12 @@
   speaker: zeus_dota_2
   provider: NTTS
   categories: [ Misc ]
-  requirement: !type:TtsSexRequirement
-    sexes: [ Male ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
 
 - type: ttsVoice
   id: mita
