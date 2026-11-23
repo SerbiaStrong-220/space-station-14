@@ -2465,7 +2465,7 @@
     voicePreferences:
       NTTS: ziggs
       Silero: Ziggs
-  # SS220 Tts begin
+  # SS220 Tts end
 
 - type: entity
   parent: MobParrotBase
