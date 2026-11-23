@@ -10,11 +10,11 @@ using Content.Shared.Kitchen.Components;
 
 namespace Content.Shared.SS220.TransferMaterialsInStorage;
 
-public sealed class TransferMaterialsInStorageSystem : EntitySystem
+public sealed partial class TransferMaterialsInStorageSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMaterialStorageSystem _material = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedMaterialStorageSystem _material = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> ReagentGrinderTag = "ReagentGrinder";
 

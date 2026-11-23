@@ -1,17 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Components;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Experience;
 
-public sealed class ExperienceInfoSystem : EntitySystem
+public sealed partial class ExperienceInfoSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly ExperienceSystem _experience = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private ExperienceSystem _experience = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public Action<ExperienceData, int>? OnExperienceUpdated;
 
@@ -33,7 +34,7 @@ public sealed class ExperienceInfoSystem : EntitySystem
 
     public void SendChangeEntityExperiencePlayerRequest(PlayerChangeSkill changeSkill)
     {
-        var ev = new ChangeEntityExperiencePlayerRequest(changeSkill);
+        var ev = new ChangeEntityExperiencePlayerRequestEvent(changeSkill);
 
         RaiseNetworkEvent(ev);
     }

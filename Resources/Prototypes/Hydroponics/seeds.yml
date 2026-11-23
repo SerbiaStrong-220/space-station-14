@@ -1805,6 +1805,8 @@
   packetPrototype: PeaSeeds
   productPrototypes:
     - FoodWorldPeas
+  mutationPrototypes:
+    - peashooter #SS220 Peashooter update
   lifespan: 25
   growthStages: 3
   maturation: 20

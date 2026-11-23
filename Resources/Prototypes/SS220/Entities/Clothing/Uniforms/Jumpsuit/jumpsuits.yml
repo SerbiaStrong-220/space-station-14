@@ -424,6 +424,19 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/musician_bard.rsi
 
+  #  Мим
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitMimeHarlequin
+  name: gothic harlequin costume
+  description: The circus left, but the harlequin stayed behind. Even the carnival forgot about him.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/mime_harlequin.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/mime_harlequin.rsi
+
+
 # Medical
 
   # Интерн
@@ -541,6 +554,18 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_experditor.rsi
+
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpsuitJRSalvage
+  name: jr salvage uniform
+  description: Provides enhanced comfort during cleanup.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/jr_uniform_salvage.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/jr_uniform_salvage.rsi
 
 # Инженерия
 
@@ -661,6 +686,19 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/rd_alt.rsi
 
 # Служба Безопасности
+
+  # Смотритель
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCommissar
+  name: commissar's tunic
+  description: A commissar does not demand respect. He embodies it.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/commissar.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/commissar.rsi
 
   # Офицер СБ
 - type: entity
@@ -872,6 +910,14 @@
   name: black jumpsuit
   description: A generic black jumpsuit with no rank markings.
   components:
+  - type: ItemToggle
+    activated: true
+    onUse: false
+    onActivate: false
+    verbToggleOn: stamina-convert-toggle-verb-on
+    verbToggleOff: stamina-convert-toggle-verb-off
+    popupActivate: stamina-convert-toggle-popup-on
+    popupDeactivate: stamina-convert-toggle-popup-off
   - type: StaminaResistance
     damageCoefficient: 0.1
   - type: StaminaConvertArmor

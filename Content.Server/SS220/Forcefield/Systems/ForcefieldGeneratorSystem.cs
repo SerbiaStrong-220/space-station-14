@@ -13,14 +13,14 @@ namespace Content.Server.SS220.Forcefield.Systems;
 
 public sealed partial class ForcefieldGeneratorSystem : EntitySystem
 {
-    [Dependency] private readonly PointLightSystem _pointLight = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly ForcefieldSystem _forcefield = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly AmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private PointLightSystem _pointLight = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private ForcefieldSystem _forcefield = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private AmbientSoundSystem _ambientSound = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private BatterySystem _battery = default!;
 
     public override void Initialize()
     {

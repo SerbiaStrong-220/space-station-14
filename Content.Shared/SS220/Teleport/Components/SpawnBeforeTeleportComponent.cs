@@ -5,14 +5,14 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Teleport.Components;
 
 /// <summary>
-///     Spawn something when using a teleport at the location of the teleported object, usually the effect
+///     Spawns an entity at the target's departure location before teleportation.
 /// </summary>
 [RegisterComponent]
 public sealed partial class SpawnBeforeTeleportComponent : Component
 {
     /// <summary>
-    ///     The entity we spawn
+    ///     The entity to spawn.
     /// </summary>
     [DataField(required: true)]
-    public EntProtoId SpawnedEnt;
+    public EntProtoId SpawnPrototype;
 }

@@ -8,7 +8,7 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 
 public sealed partial class MobThresholdsModifierEffectSystem : EntityEffectSystem<MobThresholdsComponent, MobThresholdsModifier>
 {
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
 
     protected override void Effect(Entity<MobThresholdsComponent> entity, ref EntityEffectEvent<MobThresholdsModifier> args)
     {

@@ -96,6 +96,12 @@
   maxCount: 30
 
 - type: stack
+  id: FloorTileItemWoodParquet
+  name: floor-tile-item-wood-parquet
+  spawn: FloorTileItemWoodParquet
+  maxCount: 30
+
+- type: stack
   id: FloorTileItemWoodParquetBlack
   name: floor-tile-item-wood-parquet-black
   spawn: FloorTileItemWoodParquetBlack
@@ -927,3 +933,22 @@
   name: floor-tech-maint-drain-middle
   spawn: FloorItemTechMainDrainMiddle
   maxCount: 30
+
+- type: stack
+  id: FloorItemStacksLinoGray
+  name: floor-lino-gray
+  spawn: FloorItemLinoGray
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksLinoLightBrown
+  name: floor-lino-light-brown
+  spawn: FloorItemLinoLightBrown
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksLinoRedBrown
+  name: floor-lino-red-brown
+  spawn: FloorItemLinoRedBrown
+  maxCount: 30
+

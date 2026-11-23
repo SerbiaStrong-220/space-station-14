@@ -10,11 +10,11 @@ namespace Content.Client.SS220.FieldShield;
 /// <summary>
 /// This handles the display of fire effects on flammable entities.
 /// </summary>
-public sealed class FieldShieldVisualizerSystem : EntitySystem
+public sealed partial class FieldShieldVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly PointLightSystem _lights = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private PointLightSystem _lights = default!;
 
     /// <summary> Afaik minimum radius to at least show light. prototypes qol field </summary>
     private const float MinimalLightRadius = 1.5f;

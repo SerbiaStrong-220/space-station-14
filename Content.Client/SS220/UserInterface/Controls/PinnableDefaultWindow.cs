@@ -4,7 +4,6 @@ using Robust.Client.UserInterface.CustomControls;
 
 namespace Content.Client.SS220.UserInterface.Controls;
 
-[Virtual]
 public sealed partial class PinnableDefaultWindow : DefaultWindow, IPinnableWindow
 {
     public PinnableDefaultWindow()

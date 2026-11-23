@@ -10,10 +10,10 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Experience.DoAfterEffect.Systems;
 
-public sealed class InjectorUseOnDoAfterSkillSystem : BaseDoAfterSkillSystem<InjectorUseOnDoAfterSkillComponent, InjectorDoAfterEvent>
+public sealed partial class InjectorUseOnDoAfterSkillSystem : BaseDoAfterSkillSystem<InjectorUseOnDoAfterSkillComponent, InjectorDoAfterEvent>
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     protected override void OnDoAfterEnd(Entity<InjectorUseOnDoAfterSkillComponent> entity, ref BeforeDoAfterCompleteEvent args)
     {

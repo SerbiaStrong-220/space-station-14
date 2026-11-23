@@ -7,9 +7,9 @@ using Content.Shared.Trigger;
 
 namespace Content.Shared.SS220.Trigger;
 
-public sealed class AddReagentsOnTriggerSystem : EntitySystem
+public sealed partial class AddReagentsOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     public override void Initialize()
     {

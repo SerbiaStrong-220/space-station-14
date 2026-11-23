@@ -1,12 +1,7 @@
 - type: weightedRandom
-  id: TraitAfterDeathList
+  id: PathologyAfterDeathList
   weights:
     LightweightDrunk: 0.5
-    Accentless: 0.6
-    CowboyAccent: 0.25
-    ItalianAccent: 0.25
-    Liar: 0.25
-    SocialAnxiety: 0.4
     FrontalLisp: 0.4
     # PoorVision: 0.4
     Paracusia: 0.4

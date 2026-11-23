@@ -8,6 +8,7 @@ public enum BannableChats : byte
     Invalid,
     LOOC,
     OOC,
+    Dead,
 }
 
 [Serializable]

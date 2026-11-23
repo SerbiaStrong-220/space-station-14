@@ -16,7 +16,10 @@
         type: Update
       - !type:ModifyStatusEffect
         effectProto: StatusEffectWoozy
-        time: 20.0
+        #SS220-cryptobiolin-woozy-fix bgn
+        type: Add
+        time: 5
+        #SS220-cryptobiolin-woozy-fix end
 
 - type: reagent
   id: Dylovene
@@ -111,7 +114,7 @@
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrunk
-        time: 6.0
+        time: 18.0 #SS220 ethylredoxrazine buff
         type: Remove
       - !type:HealthChange
         damage:
@@ -568,9 +571,10 @@
       - !type:GenericStatusEffect
         key: PressureImmunity
         component: PressureImmunity
-      - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
+      #ss220 stutter effect fix start
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStutter
+      #ss220 stutter effect fix end
       - !type:Jitter
       - !type:Emote
         emote: Scream

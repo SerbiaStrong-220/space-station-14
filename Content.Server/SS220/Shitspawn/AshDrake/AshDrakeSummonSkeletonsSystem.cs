@@ -9,11 +9,11 @@ using System.Numerics;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
 
-public sealed class AshDrakeSummonSkeletonsSystem : EntitySystem
+public sealed partial class AshDrakeSummonSkeletonsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private const string SkeletonProto = "MobAshDrakeSkeleton";
     private const string BoneSound = "/Audio/Effects/bone_rattle.ogg";

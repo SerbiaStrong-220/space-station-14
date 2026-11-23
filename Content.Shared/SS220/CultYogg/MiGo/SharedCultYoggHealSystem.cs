@@ -1,27 +1,27 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Body.Systems;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Lidgren.Network;
+using Content.Shared.SS220.Pathology;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-public abstract class SharedCultYoggHealSystem : EntitySystem
+public abstract partial class SharedCultYoggHealSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstreamSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedPathologySystem _pathology = default!;
 
     public override void Initialize()
     {
@@ -88,13 +88,22 @@ public abstract class SharedCultYoggHealSystem : EntitySystem
 
         _stamina.TryTakeStamina(ent, ent.Comp.ModifyStamina);
 
+        if (TryComp<PathologyHolderComponent>(ent, out var pathologyHolder))
+        {
+            foreach (var (key, _) in pathologyHolder.ActivePathologies)
+            {
+                if (!_pathology.TryRemovePathology(ent.Owner, key))
+                    _pathology.TryChangePathologyStack(ent.Owner, key, ent.Comp.PathologiesChangeAmount);
+            }
+        }
+
         if (!_mobState.IsDead(ent, mobComp))
             return;
 
         if (!_mobThreshold.TryGetDeadThreshold(ent, out var threshold))
             return;
 
-        if (_damageable.GetTotalDamage((ent.Owner, damageableComp)) > threshold)
+        if (_damageable.GetTotalDamage((ent.Owner, damageableComp)) > threshold)//ToDo_SS220 see when wiz give smth instead
             return;
 
         _mobState.ChangeMobState(ent, MobState.Critical);

@@ -28,5 +28,10 @@ public enum SlotFlags
     SUITSTORAGE = 1 << 15,
     All = ~NONE,
 
+    // SS220-add-more-flags-begin
+    TORSO = OUTERCLOTHING | INNERCLOTHING,
+    FULLHEAD = HEAD | EYES | MASK | TORSO, // At the moment we give armor without thinking that we have separate parts
+    // SS220-add-more-flags-end
+
     WITHOUT_POCKET = All & ~POCKET
 }

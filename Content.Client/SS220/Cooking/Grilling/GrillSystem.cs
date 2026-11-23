@@ -9,9 +9,9 @@ namespace Content.Client.SS220.Cooking.Grilling;
 /// <summary>
 /// This handles all grill related visuals
 /// </summary>
-public sealed class GrillSystem : SharedGrillSystem
+public sealed partial class GrillSystem : SharedGrillSystem
 {
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
 
     private const string GrillingLayer = "grilling-layer";
 

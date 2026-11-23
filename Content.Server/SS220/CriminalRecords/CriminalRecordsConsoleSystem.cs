@@ -18,21 +18,26 @@ using Robust.Shared.Prototypes;
 using Content.Server.StationRecords.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.CrewManifest;
+using Content.Shared.Mind;
+using Content.Shared.Roles;
+using Content.Shared.SS220.MalfAI; // SS220 MalfAI
 
 namespace Content.Server.SS220.CriminalRecords;
 
-public sealed class GeneralStationRecordConsoleSystem : EntitySystem
+public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly CriminalRecordSystem _criminalRecord = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private CriminalRecordSystem _criminalRecord = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedMindSystem _mind = default!; // SS220 MalfAI
+    [Dependency] private SharedRoleSystem _roles = default!; // SS220 MalfAI
 
     private static readonly TimeSpan CooldownLagTolerance = TimeSpan.FromSeconds(0.5);
 
@@ -150,7 +155,8 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
             {
                 if (_prototype.TryIndex(args.StatusTypeId.Value, out var status))
                 {
-                    if (!string.IsNullOrWhiteSpace(status.RadioReportMessage))
+                    if (!string.IsNullOrWhiteSpace(status.RadioReportMessage)
+                        && !IsMalfSilentRecords(args.Actor)) // SS220 MalfAI
                     {
                         SendRadioMessage(
                             ent.Owner,
@@ -164,6 +170,15 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         ent.Comp.LastEditTime = currentTime;
         _audio.PlayPvs(ent.Comp.DatabaseActionSound, ent.Owner);
     }
+
+    // SS220 MalfAI begin
+    private bool IsMalfSilentRecords(EntityUid actor)
+    {
+        return _mind.TryGetMind(actor, out var mindId, out _)
+            && _roles.MindHasRole<MalfAiRoleComponent>(mindId, out var role)
+            && role.Value.Comp2.SilentCriminalRecords;
+    }
+    // SS220 MalfAI end
 
     private void OnCriminalStatusDelete(Entity<CriminalRecordsConsole220Component> entity, ref DeleteCriminalRecordStatus args)
     {

@@ -48,7 +48,7 @@ namespace Content.Server.Zombies
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedRoleSystem _role = default!;
 
-        private const string ZombifyableTag = "ZombifyableByMelee"; // SS220-add-animal-not-zombiefying
+        private static readonly ProtoId<TagPrototype> ZombifyableTag = "ZombifyableByMelee"; // SS220-add-animal-not-zombiefying
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
 
         public const SlotFlags ProtectiveSlots =
@@ -262,6 +262,11 @@ namespace Content.Server.Zombies
                     continue;
                 }
 
+                // SS220-add-animal-not-zombiefying begin
+                if (!_tag.HasTag(uid, ZombifyableTag))
+                    continue;
+                // SS220-add-animal-not-zombiefying end
+
                 if (_mobState.IsAlive(uid, mobState))
                 {
                     _damageable.TryChangeDamage(args.User, entity.Comp.HealingOnBite, true, false);
@@ -275,11 +280,6 @@ namespace Content.Server.Zombies
                 }
                 else
                 {
-                    //SS220 no_heal_from_zombies start
-                    if (HasComp<ZombieComponent>(entity))
-                        continue;
-                    //SS220 no_heal_from_zombies end
-
                     if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread)
                         continue;
 

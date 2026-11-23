@@ -7,9 +7,13 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 180000 # 50h
+    - !type:AgeRequirement
+      requiredAge: 31
+      ignoreSpecies: [ Ipc ]
     - !type:SpeciesRequirement
       species:
       - Human
+      - Ipc
   weight: 20
   startingGear: NanoTrasenRepresentativeGear
   experienceDefinition: IAARoleExperience

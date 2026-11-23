@@ -6,9 +6,9 @@ using Content.Shared.SS220.Experience.Skill.Components;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class DisarmBlockSkillSystem : SkillEntitySystem
+public sealed partial class DisarmBlockSkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {

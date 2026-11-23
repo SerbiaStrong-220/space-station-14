@@ -8,10 +8,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Experience;
 
-public sealed class ExperienceEditorSystem : EntitySystem
+public sealed partial class ExperienceEditorSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IUserInterfaceManager _userInterface = default!;
 
     public Dictionary<int, KnowledgePrototype> CachedIndexedKnowledge { private set; get; } = new();
 
@@ -47,9 +47,9 @@ public sealed class ExperienceEditorSystem : EntitySystem
         _window?.SelectEntity(GetEntity(args.Target.Value));
     }
 
-    public void SendChange(EntityUid target, ExperienceData data)
+    public void SendChange(EntityUid target, ExperienceData? data)
     {
-        RaiseNetworkEvent(new ChangeEntityExperienceAdminRequest(GetNetEntity(target), data));
+        RaiseNetworkEvent(new ChangeEntityExperienceAdminRequestEvent(GetNetEntity(target), data));
     }
 
     private void ReloadCachedIndexedKnowledge()

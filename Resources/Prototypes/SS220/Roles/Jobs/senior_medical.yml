@@ -21,20 +21,16 @@
   - Medical
   - Maintenance
   - Chemistry
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: MentorRole
-      teachInfo:
-        Medicine:
-          multiplier: 1.5
-          maxBuffSkillLevel: 3
+  - Paramedic
 
 - type: startingGear
   id: SeniorPhysicianGear
   equipment:
     id: SeniorPhysicianPDA
     ears: ClothingHeadsetMedical
+  storage:
+    back:
+    - FilledSurgeryMedkit
 
 - type: chameleonOutfit
   id: SeniorPhysicianChameleonOutfit

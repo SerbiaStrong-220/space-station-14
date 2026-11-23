@@ -32,6 +32,14 @@
     startingCharge: 1000
   - type: StaticPrice
     price: 500
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   parent: [BaseWeaponBattery, BaseGunWieldable]
@@ -114,6 +122,14 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_pick_up.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/gun_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   id: BaseWeaponBatterySmall
@@ -749,7 +765,9 @@
   - type: Item
     size: Normal
     shape:
-    - 0,0,1,1
+# SS220-sec-gear-size-fix-start
+    - 0,0,2,1
+# SS220-sec-gear-size-fix-end
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
     layers:
@@ -777,7 +795,9 @@
     price: 63
   - type: Tag
     tags:
-    - Sidearm
+# SS220-sec-gear-size-fix-start
+    - SecBeltEquip
+# SS220-sec-gear-size-fix-end
     - LaserWeapon
 
 - type: entity

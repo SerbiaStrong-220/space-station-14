@@ -8,17 +8,11 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
-public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
+public sealed partial class CultYoggHealSystem : SharedCultYoggHealSystem
 {
-
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     protected override void SendReturnToBodyEui(EntityUid ent)
     {

@@ -75,6 +75,12 @@ public sealed partial class StoreSystem
     /// </summary>
     private void OnBuyRequest(EntityUid uid, StoreComponent component, StoreBuyListingMessage msg)
     {
+        // SS220 MalfAI begin: remote store messages must still respect account ownership.
+        if (component.OwnerOnly
+            && (component.AccountOwner is not { } accountOwner || GetBuyerMind(msg.Actor) != accountOwner))
+            return;
+        // SS220 MalfAI end
+
         var listing = component.FullListingsCatalog.FirstOrDefault(x => x.ID.Equals(msg.Listing.Id));
 
         if (listing == null) //make sure this listing actually exists
@@ -88,6 +94,11 @@ public sealed partial class StoreSystem
         //verify that we can actually buy this listing and it wasn't added
         if (!ListingHasCategory(listing, component.Categories))
             return;
+
+        // SS220 pirate market begin
+        if (listing.PurchaseLimit is { } purchaseLimit && listing.PurchaseAmount >= purchaseLimit)
+            return;
+        // SS220 pirate market end
 
         //condition checking because why not
         if (listing.Conditions != null)

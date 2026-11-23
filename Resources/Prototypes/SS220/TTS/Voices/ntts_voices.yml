@@ -1,0 +1,2737 @@
+- type: ttsVoice
+  id: papich
+  name: Папич
+  description: Голос популярного стримера Папича
+  speaker: papich
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: bebey
+  name: Бэбэй
+  description: Голос популярного стримера Бэбэя
+  speaker: bebey
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: puchkow
+  name: Дмитрий Пучков
+  description: ""
+  speaker: puchkow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: moriarti
+  name: Мориарти
+  description: ""
+  speaker: moriarti
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: charlotte
+  name: Шарлотта
+  description: Голос виртуального ютубера Charlotte Ch
+  speaker: charlotte
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: planya
+  name: Планя
+  description: Голос виртуального ютубера Planya Ch
+  speaker: planya
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: mana
+  name: Мана
+  description: Голос виртуального ютубера Mana Renewal
+  speaker: mana
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: amina
+  name: Амина
+  description: Голос виртуального ютубера St. Amina Renewal
+  speaker: amina
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: biden
+  name: Джо Байден
+  description: Голос американского президента Джо Байдена
+  speaker: biden
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: obama
+  name: Барак Обама
+  description: Голос американского президента Барака Обамы
+  speaker: obama
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: trump
+  name: Дональд Трамп
+  description: Голос американского президента Дональда Трампа
+  speaker: trump
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dbkn
+  name: Добакин
+  description: Голос начинающего диктора Добакина
+  speaker: dbkn
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: xrenoid
+  name: Хреноид
+  description: Голос начинающего диктора Хреноида
+  speaker: xrenoid
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: playboyztv
+  name: PlayBoyzTV
+  description: Голос канала PlayBoyzTV
+  speaker: playboyztv
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: briman
+  name: Уоллес Брин
+  description: Голос персонажа Уоллес Брин из игры Half-Life 2
+  speaker: briman
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: father_grigori
+  name: Отец Григорий
+  description: Голос персонажа Отец Григорий из игры Half-Life 2
+  speaker: father_grigori
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: kleiner
+  name: Доктор Кляйнер
+  description: Голос персонажа Доктор Кляйнер из игры Half-Life 2
+  speaker: kleiner
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: mossman
+  name: Джудит Моссман
+  description: Голос персонажа Джудит Моссман из игры Half-Life 2
+  speaker: mossman
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: vance
+  name: Илай Вэнс
+  description: Голос персонажа Илай Вэнс из игры Half-Life 2
+  speaker: vance
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: alyx
+  name: Аликс Вэнс
+  description: Голос персонажа Аликс Вэнс из игры Half-Life 2
+  speaker: alyx
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: gman
+  name: G-Man
+  description: Голос персонажа G-Man из игры Half-Life 2
+  speaker: gman
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: barni
+  name: Барни Калхун
+  description: Голос персонажа Барни Калхун из игры Half-Life 2
+  speaker: barni
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: neco
+  name: Неко-Арк
+  description: Голос персонажа Неко-Арк из Fate
+  speaker: neco
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: neco_arc_2
+  name: Неко-Арк 2
+  description: Голос персонажа Неко-Арк из Fate
+  speaker: neco_arc_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: angry_neco_arc
+  name: Злая Неко-Арк
+  description: Злой голос персонажа Неко-Арк из Fate
+  speaker: angry_neco_arc
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: squidward
+  name: Сквидвард
+  description: Голос персонажа Сквидвард из мультфильма Губка Боб
+  speaker: squidward
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sentrybot
+  name: SentryBot
+  description: Голос персонажа SentryBot из Fallout 3
+  speaker: sentrybot
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: moira_brown
+  name: Мойра Браун
+  description: Голос персонажа Мойра Браун из Fallout 3
+  speaker: moira_brown
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: robert_maccready
+  name: Робер МакКриди
+  description: Голос персонажа Робер МакКриди из Fallout 3
+  speaker: robert_maccready
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: threedog
+  name: Тридогнайт
+  description: Голос персонажа Тридогнайт из Fallout 3
+  speaker: threedog
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: threedog_radio
+  name: Тридогнайт Радио
+  description: Голос персонажа Тридогнайт версия по радио из Fallout 3
+  speaker: threedog_radio
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: mister_handy_fl3
+  name: Мистер Помощник
+  description: Голос персонажа Мистер Помощник из Fallout 3
+  speaker: mister_handy_fl3
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: mister_gutsy_fl3
+  name: Мистер Храбрец
+  description: Голос персонажа Мистер Храбрец из Fallout 3
+  speaker: mister_gutsy_fl3
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: jericho_fl3
+  name: Джерико
+  description: Голос персонажа Джерико из Fallout 3
+  speaker: jericho_fl3
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: elder_lyons_fl3
+  name: Старейшина Лайонс
+  description: Голос персонажа Старейшина Лайонс из Fallout 3
+  speaker: elder_lyons_fl3
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sarah_lyons_fl3
+  name: Сара Лайонс
+  description: Голос персонажа Сара Лайонс из Fallout 3
+  speaker: sarah_lyons_fl3
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: colin_moriarty_fl3
+  name: Колин Мориарти
+  description: Голос персонажа Колин Мориарти из Fallout 3
+  speaker: colin_moriarty_fl3
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: john_henry_eden_fl3
+  name: Джон Генри Эдем
+  description: Голос персонажа Джон Генри Эдем из Fallout 3
+  speaker: john_henry_eden_fl3
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: super_mutant_fl3
+  name: Супер-Мутант
+  description: Голос персонажа Супер-Мутант из Fallout 3
+  speaker: super_mutant_fl3
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: polina
+  name: Полина Морозова
+  description: Голос персонажа Полина Морозова из игры Tiny Bunny
+  speaker: polina
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: romka
+  name: Рома Пятифанов
+  description: Голос персонажа Рома Пятифанов из игры Tiny Bunny
+  speaker: romka
+  provider: NTTS
+  categories: [ Misc ]
+
+- type: ttsVoice
+  id: boris_petrov_father_tb
+  name: Борис Петров
+  description: Голос персонажа Борис Петров из игры Tiny Bunny
+  speaker: boris_petrov_father_tb
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: karina_petrova_tb
+  name: Карина Петрова
+  description: Голос персонажа Карина Петрова из игры Tiny Bunny
+  speaker: karina_petrova_tb
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: kate_smirnova_tb
+  name: Катя Смирнова
+  description: Голос персонажа Катя Смирнова из игры Tiny Bunny
+  speaker: kate_smirnova_tb
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: semen_baburin_tb
+  name: Семён Бабурин
+  description: Голос персонажа Семён Бабурин из игры Tiny Bunny
+  speaker: semen_baburin_tb
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: tihonov_tb
+  name: Лейтенант Тихонов
+  description: Голос персонажа Лейтенант Тихонов из игры Tiny Bunny
+  speaker: tihonov_tb
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: cicero
+  name: Цицерон
+  description: Голос персонажа Цицерон из игры TES 5 Skyrim
+  speaker: cicero
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sheogorath
+  name: Шеогорат
+  description: Голос персонажа Шеогорат из игры TES 5 Skyrim
+  speaker: sheogorath
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: kodlakwhitemane
+  name: Кодлак Белая Грива
+  description: Голос персонажа Кодлак Белая Грива из игры TES 5 Skyrim
+  speaker: kodlakwhitemane
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: khajiit
+  name: Каджит
+  description: Голос персонажа Каджит из игры TES 5 Skyrim
+  speaker: khajiit
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: elenwen
+  name: Эленвен
+  description: Голос персонажа Эленвен из игры TES 5 Skyrim
+  speaker: elenwen
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: emperor
+  name: Тит Мид II
+  description: Голос персонажа Тит Мид II из игры TES 5 Skyrim
+  speaker: emperor
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard
+  name: Стражник
+  description: Голос Стражников из игры TES 5 Skyrim
+  speaker: guard
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: hagraven
+  name: Ворожея
+  description: Голос Ворожей из игры TES 5 Skyrim
+  speaker: hagraven
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: hermaeus_mora
+  name: Хермеус Мора
+  description: Голос персонажа Хермеус Мора из игры TES 5 Skyrim
+  speaker: hermaeus_mora
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: nord
+  name: Норд
+  description: Голос Нордов из игры TES 5 Skyrim
+  speaker: nord
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: ulfric
+  name: Ульфрик Буревестник
+  description: Голос персонажа Ульфрик Буревестник из игры TES 5 Skyrim
+  speaker: ulfric
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: astrid
+  name: Астрид
+  description: Голос персонажа Астрид из игры TES 5 Skyrim
+  speaker: astrid
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: maven
+  name: Мавен Чёрный Вереск
+  description: Голос персонажа Мавен Чёрный Вереск из игры TES 5 Skyrim
+  speaker: maven
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: nazir
+  name: Назир
+  description: Голос персонажа Назир из игры TES 5 Skyrim
+  speaker: nazir
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: female_commander
+  name: Женщина командир
+  description: Голос женских персонажей командиров из игры TES 5 Skyrim
+  speaker: female_commander
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: lord_harkon
+  name: Лорд Харкон
+  description: Голос персонажа Лорд Харкон из игры TES 5 Skyrim
+  speaker: lord_harkon
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: serana
+  name: Серана
+  description: Голос персонажа Серана из игры TES 5 Skyrim
+  speaker: serana
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: glados
+  name: GLaDOS
+  description: Голос персонажа GLaDOS из игры Portal 2
+  speaker: glados
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: adventure_core
+  name: Модуль Приключений
+  description: Голос персонажа Модуль Приключений из игры Portal 2
+  speaker: adventure_core
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: fact_core
+  name: Модуль Фактов
+  description: Голос персонажа Модуль Фактов из игры Portal 2
+  speaker: fact_core
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: space_core
+  name: Модуль Космоса
+  description: Голос персонажа Модуль Космоса из игры Portal 2
+  speaker: space_core
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: turret_floor
+  name: Турель
+  description: Голос персонажа Турель из игры Portal 2
+  speaker: turret_floor
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: geralt
+  name: Геральт из Ривии
+  description: Голос персонажа Геральт из Ривии из игры The Witcher 3
+  speaker: geralt
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: cirilla
+  name: Цирилла
+  description: Голос персонажа Цирилла из игры The Witcher 3
+  speaker: cirilla
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: cerys
+  name: Керис ан Крайт
+  description: Голос персонажа Керис ан Крайт из игры The Witcher 3
+  speaker: cerys
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: lambert
+  name: Ламберт
+  description: Голос персонажа Ламберт из игры The Witcher 3
+  speaker: lambert
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: triss
+  name: Трисс
+  description: Голос персонажа Трисс из игры The Witcher 3
+  speaker: triss
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: kovir_nobleman
+  name: Ковир Ноблеман
+  description: Голос персонажа Ковир Ноблеман из игры The Witcher 3
+  speaker: kovir_nobleman
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: zoltan_chivay
+  name: Золтан Хивай
+  description: Голос персонажа Золтан Хивай из игры The Witcher 3
+  speaker: zoltan_chivay
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: vesemir
+  name: Весемир
+  description: Голос персонажа Весемир из игры The Witcher 3
+  speaker: vesemir
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guillaume_de_launfal
+  name: Гильом де Лонфаль
+  description: Голос персонажа Гильом де Лонфаль из игры The Witcher 3
+  speaker: guillaume_de_launfal
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: philippa_eilhart
+  name: Филиппа Эйльхарт
+  description: Голос персонажа Филиппа Эйльхарт из игры The Witcher 3
+  speaker: philippa_eilhart
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: ewald_borsodi
+  name: Эвальд Борсоди
+  description: Голос персонажа Эвальд Борсоди из игры The Witcher 3
+  speaker: ewald_borsodi
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dandelion
+  name: Лютик
+  description: Голос персонажа Лютик из игры The Witcher 3
+  speaker: dandelion
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: shani
+  name: Шани
+  description: Голос персонажа Шани из игры The Witcher 3
+  speaker: shani
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: azir
+  name: Азир
+  description: Голос персонажа Азир из игры League of Legends
+  speaker: azir
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: ekko
+  name: Экко
+  description: Голос персонажа Экко из игры League of Legends
+  speaker: ekko
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: twitch
+  name: Твич
+  description: Голос персонажа Твич из игры League of Legends
+  speaker: twitch
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: ziggs
+  name: Зиггс
+  description: Голос персонажа Зиггс из игры League of Legends
+  speaker: ziggs
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: caitlyn
+  name: Кэйтлин
+  description: Голос персонажа Кэйтлин из игры League of Legends
+  speaker: caitlyn
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: arthas
+  name: Артас Менетил
+  description: Голос персонажа Артас Менетил из игры Warcraft 3
+  speaker: arthas
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: illidan
+  name: Иллидан Ярость Бури
+  description: Голос персонажа Иллидан Ярость Бури из игры Warcraft 3
+  speaker: illidan
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: rexxar
+  name: Рексар
+  description: Голос персонажа Рексар из игры Warcraft 3
+  speaker: rexxar
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: voljin
+  name: Вол'джин
+  description: Голос персонажа Вол'джин из игры Warcraft 3
+  speaker: voljin
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: bandit
+  name: Бандит
+  description: Голос персонажа Бандита из игры S.T.A.L.K.E.R.
+  speaker: bandit
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: forester
+  name: Лесник
+  description: Голос персонажа Лесник из игры S.T.A.L.K.E.R.
+  speaker: forester
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sidorovich
+  name: Сидорович
+  description: Голос персонажа Сидорович из игры S.T.A.L.K.E.R.
+  speaker: sidorovich
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: strelok
+  name: Стрелок
+  description: Голос персонажа Стрелок из игры S.T.A.L.K.E.R.
+  speaker: strelok
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: tracer
+  name: Трэйсер
+  description: Голос персонажа Трэйсер из игры Overwatch
+  speaker: tracer
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: soldier
+  name: Солдат
+  description: Голос персонажа Солдат из Team Fortress 2 из английской озвучки
+  speaker: soldier
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: engineer
+  name: Инженер
+  description: Голос персонажа Инженер из игры Team Fortress 2
+  speaker: engineer
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: heavy
+  name: Хэви
+  description: Голос персонажа Хэви из игры Team Fortress 2
+  speaker: heavy
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: medic
+  name: Медик
+  description: Голос персонажа Медик из игры Team Fortress 2
+  speaker: medic
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: demoman
+  name: Подрывник
+  description: Голос персонажа Подрывник из игры Team Fortress 2
+  speaker: demoman
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sniper
+  name: Снайпер
+  description: Голос персонажа Снайпер из игры Team Fortress 2
+  speaker: sniper
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: spy
+  name: Шпион
+  description: Голос персонажа Шпион из игры Team Fortress 2
+  speaker: spy
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: punisher
+  name: Каратель
+  description: Голос персонажа Каратель из игры The Punisher
+  speaker: punisher
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: johnny
+  name: Джонни Сильверхенд
+  description: Голос персонажа Джонни Сильверхенд из игры Cyberpunk 2077
+  speaker: johnny
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: panam
+  name: Панам Палмер
+  description: Голос персонажа Панам Палмер из игры Cyberpunk 2077
+  speaker: panam
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: v_female
+  name: Ви
+  description: Голос персонажа Ви из игры Cyberpunk 2077
+  speaker: v_female
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: judy
+  name: Джуди Альварес
+  description: Голос персонажа Джуди Альварес из игры Cyberpunk 2077
+  speaker: judy
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: mitch
+  name: Митч Андерсон
+  description: Голос персонажа Митч Андерсон из игры Cyberpunk 2077
+  speaker: mitch
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: skippy
+  name: Скиппи
+  description: Голос персонажа Скиппи из игры Cyberpunk 2077
+  speaker: skippy
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: jackie
+  name: Джеки Уэллс
+  description: Голос персонажа Джеки Уэллс из игры Cyberpunk 2077
+  speaker: jackie
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: maiko
+  name: Майко Маэда
+  description: Голос персонажа Майко Маэда из игры Cyberpunk 2077
+  speaker: maiko
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: brendan
+  name: Брендан
+  description: Голос персонажа Брендан из игры Cyberpunk 2077
+  speaker: brendan
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: nancy_hartley
+  name: Нэнси Хартли
+  description: Голос персонажа Нэнси Хартли из игры Cyberpunk 2077
+  speaker: nancy_hartley
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: oswald_forrest
+  name: Освальд Форрест
+  description: Голос персонажа Освальд Форрест из игры Cyberpunk 2077
+  speaker: oswald_forrest
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: steve
+  name: Стив Санчес
+  description: Голос персонажа Стив Санчес из игры Cyberpunk 2077
+  speaker: steve
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dornan
+  name: Сержант Дорнан
+  description: Голос персонажа Сержант Дорнан из игры Fallout 2
+  speaker: dornan
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: officer_enclave
+  name: Офицер Анклава
+  description: Голос персонажа Офицер Анклава из игры Fallout 2
+  speaker: officer_enclave
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: richardson
+  name: Дик Ричардсон
+  description: Голос персонажа Ричард «Дик» Ричардсон из игры Fallout 2
+  speaker: richardson
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: butch
+  name: Бутч Харрис
+  description: Голос персонажа Бутч Харрис из игры Fallout 2
+  speaker: butch
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: marcus
+  name: Маркус
+  description: Голос персонажа Маркус из игры Fallout 2
+  speaker: marcus
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sulik
+  name: Сулик
+  description: Голос персонажа Сулик из игры Fallout 2
+  speaker: sulik
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: myron
+  name: Майрон
+  description: Голос персонажа Майрон из игры Fallout 2
+  speaker: myron
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: good_thalya
+  name: Добрая Талия
+  description: Голос персонажа Добрая Талия из игры Dungeons 3
+  speaker: good_thalya
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: evil_thalya
+  name: Злая Талия
+  description: Голос персонажа Злая Талия из игры Dungeons 3
+  speaker: evil_thalya
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: narrator_d3
+  name: Рассказчик
+  description: Голос персонажа Рассказчик из игры Dungeons 3
+  speaker: narrator_d3
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dude
+  name: Чувак
+  description: Голос персонажа Чувак из игры Postal 2
+  speaker: dude
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: anduin
+  name: Андуин Ринн
+  description: Голос персонажа Андуин Ринн из игры Hearthstone
+  speaker: anduin
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: brukan
+  name: Бру'кан
+  description: Голос персонажа Бру'кан из игры Hearthstone
+  speaker: brukan
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: garrosh
+  name: Гаррош Адский Крик
+  description: Голос персонажа Гаррош Адский Крик из игры Hearthstone
+  speaker: garrosh
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: jaina
+  name: Джайна Праудмур
+  description: Голос персонажа Джайна Праудмур из игры Hearthstone
+  speaker: jaina
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: uther_hs
+  name: Утер Светоносный
+  description: Голос персонажа Утер Светоносный из игры Hearthstone
+  speaker: uther_hs
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: adjutant
+  name: Адъютант
+  description: Голос персонажа Адъютант из игры StarCraft 2
+  speaker: adjutant
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: hanson
+  name: Ариэль Хэнсон
+  description: Голос персонажа Ариэль Хэнсон из игры StarCraft 2
+  speaker: hanson
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: bralik
+  name: Бралик
+  description: Голос персонажа Бралик из игры StarCraft 2
+  speaker: bralik
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: horner
+  name: Мэтт Хорнер
+  description: Голос персонажа Мэтт Хорнер из игры StarCraft 2
+  speaker: horner
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: tosh
+  name: Габриэль Тош
+  description: Голос персонажа Габриэль Тош из игры StarCraft 2
+  speaker: tosh
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: tychus
+  name: Тайкус Финдли
+  description: Голос персонажа Тайкус Финдли из игры StarCraft 2
+  speaker: tychus
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: amitkakkar
+  name: Амит Таккар
+  description: Голос персонажа Амит Таккар из игры Hogwarts Legacy
+  speaker: amitkakkar
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: eleazarfig
+  name: Элеазар Фиг
+  description: Голос персонажа Элеазар Фиг из игры Hogwarts Legacy
+  speaker: eleazarfig
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: ernielark
+  name: Эрни Ларк
+  description: Голос персонажа Эрни Ларк из игры Hogwarts Legacy
+  speaker: ernielark
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: ignatiaflootravel
+  name: Игнатия Уайлдсмит
+  description: Голос персонажа Игнатия Уайлдсмит из игры Hogwarts Legacy
+  speaker: ignatiaflootravel
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: lodgok
+  name: Лодгок
+  description: Голос персонажа Лодгок из игры Hogwarts Legacy
+  speaker: lodgok
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: phineasblack
+  name: Финеас Найджелус Блэк
+  description: Голос персонажа Финеас Найджелус Блэк из игры Hogwarts Legacy
+  speaker: phineasblack
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: ranrak
+  name: Ранрок
+  description: Голос персонажа Ранрок из игры Hogwarts Legacy
+  speaker: ranrak
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: victorrookwood
+  name: Виктор Руквуд
+  description: Голос персонажа Виктор Руквуд из игры Hogwarts Legacy
+  speaker: victorrookwood
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: zenobianoke
+  name: Зенобия Ноук
+  description: Голос персонажа Зенобия Ноук из игры Hogwarts Legacy
+  speaker: zenobianoke
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: gladwinmoon
+  name: Глэдвин Мун
+  description: Голос персонажа Глэдвин Мун из игры Hogwarts Legacy
+  speaker: gladwinmoon
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: matildaweasley
+  name: Матильда Уизли
+  description: Голос персонажа Матильда Уизли из игры Hogwarts Legacy
+  speaker: matildaweasley
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: natsaionai
+  name: Натсай Онай
+  description: Голос персонажа Натсай Онай из игры Hogwarts Legacy
+  speaker: natsaionai
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: ominisgaunt
+  name: Оминис Мракс
+  description: Голос персонажа Оминис Мракс из игры Hogwarts Legacy
+  speaker: ominisgaunt
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: poppysweeting
+  name: Поппи Добринг
+  description: Голос персонажа Поппи Добринг из игры Hogwarts Legacy
+  speaker: poppysweeting
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: generic_goblin_c
+  name: Гоблин В
+  description: Голос персонажа Гоблин В из игры Hogwarts Legacy
+  speaker: generic_goblin_c
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dinah_hecat
+  name: Дина Гекат
+  description: Голос персонажа Дина Гекат из игры Hogwarts Legacy
+  speaker: dinah_hecat
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: aesop_sharp
+  name: Эзоп Шарп
+  description: Голос персонажа Эзоп Шарп из игры Hogwarts Legacy
+  speaker: aesop_sharp
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: abraham_ronen
+  name: Абрахам Ронен
+  description: Голос персонажа Абрахам Ронен из игры Hogwarts Legacy
+  speaker: abraham_ronen
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: samantha_dale
+  name: Саманта Дейл
+  description: Голос персонажа Саманта Дейл из игры Hogwarts Legacy
+  speaker: samantha_dale
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: sirona_ryan
+  name: Сирона Райан
+  description: Голос персонажа Сирона Райан из игры Hogwarts Legacy
+  speaker: sirona_ryan
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: sophronia_franklin
+  name: Софрония Франклин
+  description: Голос персонажа Софрония Франклин из игры Hogwarts Legacy
+  speaker: sophronia_franklin
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: everett_clopton
+  name: Эверетт Клоптон
+  description: Голос персонажа Эверетт Клоптон из игры Hogwarts Legacy
+  speaker: everett_clopton
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: generic_goblin_b
+  name: Гоблин Б
+  description: Голос персонажа Гоблин Б из игры Hogwarts Legacy
+  speaker: generic_goblin_b
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sanctuary_house_elf
+  name: Домовой эльф из святилища
+  description: Голос персонажа Домовой эльф из святилища из игры Hogwarts Legacy
+  speaker: sanctuary_house_elf
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: abaddon_dota_2
+  name: Abaddon
+  description: Голос персонажа Abaddon из игры Dota 2
+  speaker: abaddon_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: alchemist_dota_2
+  name: Achemist
+  description: Голос персонажа Achemist из игры Dota 2
+  speaker: alchemist_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: anti-mage_dota_2
+  name: Anti-Mage
+  description: Голос персонажа Anti-Mage из игры Dota 2
+  speaker: anti-mage_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: arc_warden_dota_2
+  name: Arc Warden
+  description: Голос персонажа Arc Warden из игры Dota 2
+  speaker: arc_warden_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: batrider_dota_2
+  name: Batrider
+  description: Голос персонажа Batrider из игры Dota 2
+  speaker: batrider_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: bloodseeker_dota_2
+  name: Bloodseeker
+  description: Голос персонажа Bloodseeker из игры Dota 2
+  speaker: bloodseeker_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: bounty_hunter_dota_2
+  name: Bounty Hunter
+  description: Голос персонажа Bounty Hunter из игры Dota 2
+  speaker: bounty_hunter_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: bristleback_dota_2
+  name: Bristleback
+  description: Голос персонажа Bristleback из игры Dota 2
+  speaker: bristleback_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: broodmother_dota_2
+  name: Broodmother
+  description: Голос персонажа Broodmother из игры Dota 2
+  speaker: broodmother_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: centaur_warrunner_dota_2
+  name: Centaur Warrunner
+  description: Голос персонажа Centaur Warrunner из игры Dota 2
+  speaker: centaur_warrunner_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: clinkz_dota_2
+  name: Clinkz
+  description: Голос персонажа Clinkz из игры Dota 2
+  speaker: clinkz_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: clockwerk_dota_2
+  name: Clockwerk
+  description: Голос персонажа Clockwerk из игры Dota 2
+  speaker: clockwerk_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: crystal_maiden_dota_2
+  name: Crystal Maiden
+  description: Голос персонажа Crystal Maiden из игры Dota 2
+  speaker: crystal_maiden_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: dazzle_dota_2
+  name: Dazzle
+  description: Голос персонажа Dazzle из игры Dota 2
+  speaker: dazzle_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: disruptor_dota_2
+  name: Disruptor
+  description: Голос персонажа Disruptor из игры Dota 2
+  speaker: disruptor_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: doom_dota_2
+  name: Doom
+  description: Голос персонажа Doom из игры Dota 2
+  speaker: doom_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dragon_knight_dota_2
+  name: Dragon Knight
+  description: Голос персонажа Dragon Knight из игры Dota 2
+  speaker: dragon_knight_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dragon_knight_dragon_dota_2
+  name: Dragon Knight Dragon
+  description: Голос персонажа Dragon Knight Dragon из игры Dota 2
+  speaker: dragon_knight_dragon_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: drow_ranger_dota_2
+  name: Drow Ranger
+  description: Голос персонажа Drow Ranger из игры Dota 2
+  speaker: drow_ranger_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: earthshaker_dota_2
+  name: Earthshaker
+  description: Голос персонажа Earthshaker из игры Dota 2
+  speaker: earthshaker_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: ember_spirit_dota_2
+  name: Ember Spirit
+  description: Голос персонажа Ember Spirit из игры Dota 2
+  speaker: ember_spirit_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: enigma_dota_2
+  name: Enigma
+  description: Голос персонажа Enigma из игры Dota 2
+  speaker: enigma_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: gyrocopter_dota_2
+  name: Gyrocopter
+  description: Голос персонажа Gyrocopter из игры Dota 2
+  speaker: gyrocopter_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: huskar_dota_2
+  name: Huskar
+  description: Голос персонажа Huskar из игры Dota 2
+  speaker: huskar_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: invoker_dota_2
+  name: Invoker
+  description: Голос персонажа Invoker из игры Dota 2
+  speaker: invoker_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: juggernaut_dota_2
+  name: Juggernaut
+  description: Голос персонажа Juggernaut из игры Dota 2
+  speaker: juggernaut_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: keeper_of_the_light_dota_2
+  name: Keeper Of The Light
+  description: Голос персонажа Keeper Of The Light из игры Dota 2
+  speaker: keeper_of_the_light_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: kunkka_dota_2
+  name: Kunkka
+  description: Голос персонажа Kunkka из игры Dota 2
+  speaker: kunkka_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: legion_commander_demon_dota_2
+  name: Legion Commander Demon
+  description: Голос персонажа Legion Commander Demon из игры Dota 2
+  speaker: legion_commander_demon_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: legion_commander_dota_2
+  name: Legion Commander
+  description: Голос персонажа Legion Commander из игры Dota 2
+  speaker: legion_commander_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: lich_dota_2
+  name: Lich
+  description: Голос персонажа Lich из игры Dota 2
+  speaker: lich_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: lina_dota_2
+  name: Lina
+  description: Голос персонажа Lina из игры Dota 2
+  speaker: lina_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: luna_dota_2
+  name: Luna
+  description: Голос персонажа Luna из игры Dota 2
+  speaker: luna_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: lycan_dota_2
+  name: Lycan
+  description: Голос персонажа Lycan из игры Dota 2
+  speaker: lycan_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: lycan_wolf_dota_2
+  name: Lycan Wolf
+  description: Голос персонажа Lycan Wolf из игры Dota 2
+  speaker: lycan_wolf_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: meepo_dota_2
+  name: Meepo
+  description: Голос персонажа Meepo из игры Dota 2
+  speaker: meepo_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: mirana_dota_2
+  name: Mirana
+  description: Голос персонажа Mirana из игры Dota 2
+  speaker: mirana_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: monkey_king_crown_dota_2
+  name: Monkey King Crown
+  description: Голос персонажа Monkey King Crown из игры Dota 2
+  speaker: monkey_king_crown_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: monkey_king_dota_2
+  name: Monkey King
+  description: Голос персонажа Monkey King из игры Dota 2
+  speaker: monkey_king_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: necrophos_dota_2
+  name: Necrophos
+  description: Голос персонажа Necrophos из игры Dota 2
+  speaker: necrophos_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: nyx_assassin_dota_2
+  name: Nyx Assassin
+  description: Голос персонажа Nyx Assassin из игры Dota 2
+  speaker: nyx_assassin_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: omniknight_dota_2
+  name: Omniknight
+  description: Голос персонажа Omniknight из игры Dota 2
+  speaker: omniknight_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: outworld_destroyer_dota_2
+  name: Outworld Destroyer
+  description: Голос персонажа Outworld Destroyer из игры Dota 2
+  speaker: outworld_destroyer_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: phantom_assassin_arcana_dota_2
+  name: Phantom Assassin Arcana
+  description: Голос персонажа Phantom Assassin Arcana из игры Dota 2
+  speaker: phantom_assassin_arcana_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: phantom_assassin_dota_2
+  name: Phantom Assassin
+  description: Голос персонажа Phantom Assassin из игры Dota 2
+  speaker: phantom_assassin_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: phantom_lancer_dota_2
+  name: Phantom Lancer
+  description: Голос персонажа Phantom Lancer из игры Dota 2
+  speaker: phantom_lancer_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: pudge_dota_2
+  name: Pudge
+  description: Голос персонажа Pudge из игры Dota 2
+  speaker: pudge_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: queen_of_pain_dota_2
+  name: Queen Of Pain
+  description: Голос персонажа Queen Of Pain из игры Dota 2
+  speaker: queen_of_pain_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: razor_dota_2
+  name: Razor
+  description: Голос персонажа Razor из игры Dota 2
+  speaker: razor_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: riki_dota_2
+  name: Riki
+  description: Голос персонажа Riki из игры Dota 2
+  speaker: riki_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: rubick_dota_2
+  name: Rubick
+  description: Голос персонажа Rubick из игры Dota 2
+  speaker: rubick_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sand_king_dota_2
+  name: Sand King
+  description: Голос персонажа Sand King из игры Dota 2
+  speaker: sand_king_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: shadow_fiend_dota_2
+  name: Shadow Fiend
+  description: Голос персонажа Shadow Fiend из игры Dota 2
+  speaker: shadow_fiend_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: shadow_shaman_dota_2
+  name: Shadow Shaman
+  description: Голос персонажа Shadow Shaman из игры Dota 2
+  speaker: shadow_shaman_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: skywrath_mage_dota_2
+  name: Skywrath Mage
+  description: Голос персонажа Skywrath Mage из игры Dota 2
+  speaker: skywrath_mage_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: slardar_dota_2
+  name: Slardar
+  description: Голос персонажа Slardar из игры Dota 2
+  speaker: slardar_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: slark_dota_2
+  name: Slark
+  description: Голос персонажа Slark из игры Dota 2
+  speaker: slark_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: spirit_breaker_dota_2
+  name: Spirit Breaker
+  description: Голос персонажа Spirit Breaker из игры Dota 2
+  speaker: spirit_breaker_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: storm_spirit_dota_2
+  name: Storm Spirit
+  description: Голос персонажа Storm Spirit из игры Dota 2
+  speaker: storm_spirit_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sven_dota_2
+  name: Sven
+  description: Голос персонажа Sven из игры Dota 2
+  speaker: sven_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: templar_assassin_dota_2
+  name: Templar Assassin
+  description: Голос персонажа Templar Assassin из игры Dota 2
+  speaker: templar_assassin_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: tidehunter_dota_2
+  name: Tidehunter
+  description: Голос персонажа Tidehunter из игры Dota 2
+  speaker: tidehunter_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: treant_protector_dota_2
+  name: Treant Protector
+  description: Голос персонажа Treant Protector из игры Dota 2
+  speaker: treant_protector_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: underlord_dota_2
+  name: Underlord
+  description: Голос персонажа Underlord из игры Dota 2
+  speaker: underlord_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: ursa_dota_2
+  name: Ursa
+  description: Голос персонажа Ursa из игры Dota 2
+  speaker: ursa_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: windranger_dota_2
+  name: Windranger
+  description: Голос персонажа Windranger из игры Dota 2
+  speaker: windranger_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: winter_wyvern_dota_2
+  name: Winter Wyvern
+  description: Голос персонажа Winter Wyvern из игры Dota 2
+  speaker: winter_wyvern_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: witch_doctor_dota_2
+  name: Witch Doctor
+  description: Голос персонажа Witch Doctor из игры Dota 2
+  speaker: witch_doctor_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: wraith_king_dota_2
+  name: Wraith King
+  description: Голос персонажа Wraith King из игры Dota 2
+  speaker: wraith_king_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: zeus_dota_2
+  name: Zeus
+  description: Голос персонажа Zeus из игры Dota 2
+  speaker: zeus_dota_2
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: mita
+  name: Мита
+  description: Голос персонажа Мита из игры MiSide
+  speaker: mita
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: mitadream
+  name: Сонная Мита
+  description: Голос персонажа Сонная Мита из игры MiSide
+  speaker: mitadream
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: mitaghost
+  name: Мита Призрак
+  description: Голос персонажа Мита Призрак из игры MiSide
+  speaker: mitaghost
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: mitakind
+  name: Добрая Мита
+  description: Голос персонажа Добрая Мита из игры MiSide
+  speaker: mitakind
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: mitashorthairs
+  name: Коротковолосая Мита
+  description: Голос персонажа Коротковолосая Мита из игры MiSide
+  speaker: mitashorthairs
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: chaos_marines_cultists_dow
+  name: Культисты Хаоса
+  description: "Голос юнита Культисты Хаоса из игры Warhammer 40,000 Dawn of War"
+  speaker: chaos_marines_cultists_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: chaos_marines_dow
+  name: Космодесантники Хаоса
+  description: "Голос юнита Космодесантники Хаоса из игры Warhammer 40,000 Dawn of War"
+  speaker: chaos_marines_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: chaos_marines_lord_dow
+  name: Лорд Хаоса
+  description: "Голос юнита Лорд Хаоса из игры Warhammer 40,000 Dawn of War"
+  speaker: chaos_marines_lord_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: chaos_marines_sorceror_dow
+  name: Колдун Хаоса
+  description: "Голос юнита Колдун Хаоса из игры Warhammer 40,000 Dawn of War"
+  speaker: chaos_marines_sorceror_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dark_eldar_archon_dow
+  name: Архон Тёмных Эльдар
+  description: "Голос юнита Архон Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  speaker: dark_eldar_archon_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dark_eldar_mandrake_dow
+  name: Мандрагор Тёмных Эльдар
+  description: "Голос юнита Мандрагор Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  speaker: dark_eldar_mandrake_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dark_eldar_warrior_dow
+  name: Воин Тёмных Эльдар
+  description: "Голос юнита Воин Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  speaker: dark_eldar_warrior_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: dark_eldar_wych_dow
+  name: Ведьма Тёмных Эльдар
+  description: "Голос юнита Ведьма Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  speaker: dark_eldar_wych_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: eldar_dow
+  name: Стражи Эльдар
+  description: "Голос юнита Стражи Эльдар из игры Warhammer 40,000 Dawn of War"
+  speaker: eldar_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: eldar_farseer_dow
+  name: Провидец Эльдар
+  description: "Голос юнита Провидец Эльдар из игры Warhammer 40,000 Dawn of War"
+  speaker: eldar_farseer_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: eldar_fire_dragon_dow
+  name: Огненный Дракон Эльдар
+  description: "Голос юнита Огненный Дракон Эльдар из игры Warhammer 40,000 Dawn of War"
+  speaker: eldar_fire_dragon_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: eldar_warlock_dow
+  name: Колдун Эльдар
+  description: "Голос юнита Колдун Эльдар из игры Warhammer 40,000 Dawn of War"
+  speaker: eldar_warlock_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: guard_assassin_dow
+  name: Ассасин Имперской Гвардии
+  description: "Голос юнита Ассасин Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_assassin_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard_captain_dow
+  name: Капитан Имперской Гвардии
+  description: "Голос юнита Капитан Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_captain_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard_commissar_dow
+  name: Комиссар Имперской Гвардии
+  description: "Голос юнита Комиссар Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_commissar_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard_enginseer_dow
+  name: Техножрец Имперской Гвардии
+  description: "Голос юнита Техножрец Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_enginseer_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard_guardsman_sergeant_dow
+  name: Сержант Имперской Гвардии
+  description: "Голос юнита Сержант Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_guardsman_sergeant_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard_heavy_weapons_platoon_dow
+  name: Команда тяжёлого оружия Имперской Гвардии
+  description: "Голос юнита Команда тяжёлого оружия Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_heavy_weapons_platoon_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard_karskin_dow
+  name: Касркин Имперской Гвардии
+  description: "Голос юнита Касркин Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_karskin_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard_ogryn_dow
+  name: Огрин Имперской Гвардии
+  description: "Голос юнита Огрин Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_ogryn_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard_priest_dow
+  name: Священник Имперской Гвардии
+  description: "Голос юнита Священник Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_priest_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: guard_psyker_dow
+  name: Псайкер Имперской Гвардии
+  description: "Голос юнита Псайкер Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  speaker: guard_psyker_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: orks_dow
+  name: Бойзы Орков
+  description: "Голос юнита Бойзы Орков из игры Warhammer 40,000 Dawn of War"
+  speaker: orks_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: orks_flashgitznobs_dow
+  name: Флэш Гитз и Нобы Орков
+  description: "Голос юнитов Флэш Гитз и Нобы Орков из игры Warhammer 40,000 Dawn of War"
+  speaker: orks_flashgitznobs_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: orks_grots_dow
+  name: Гретчины Орков
+  description: "Голос юнита Гретчины Орков из игры Warhammer 40,000 Dawn of War"
+  speaker: orks_grots_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: orks_warboss_dow
+  name: Варбосс Орков
+  description: "Голос юнита Варбосс Орков из игры Warhammer 40,000 Dawn of War"
+  speaker: orks_warboss_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: sisters_battle_sister_dow
+  name: Сестры Битвы
+  description: "Голос юнита Сестры Битвы из игры Warhammer 40,000 Dawn of War"
+  speaker: sisters_battle_sister_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: sisters_missionary_dow
+  name: Миссионер Сестёр Битвы
+  description: "Голос юнита Миссионер Сестёр Битвы из игры Warhammer 40,000 Dawn of War"
+  speaker: sisters_missionary_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: space_marines_2_dow
+  name: Космодесантники 2
+  description: "Голос юнита Космодесантники 2 из игры Warhammer 40,000 Dawn of War"
+  speaker: space_marines_2_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: space_marines_chaplain_dow
+  name: Капеллан Космодесантников
+  description: "Голос юнита Капеллан Космодесантников из игры Warhammer 40,000 Dawn of War"
+  speaker: space_marines_chaplain_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: space_marines_dow
+  name: Космодесантники
+  description: "Голос юнита Космодесантники из игры Warhammer 40,000 Dawn of War"
+  speaker: space_marines_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: space_marines_force_commander_dow
+  name: Командир Сил Космодесантников
+  description: "Голос юнита Командир Сил Космодесантников из игры Warhammer 40,000 Dawn of War"
+  speaker: space_marines_force_commander_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: space_marines_librarian_dow
+  name: Библиарий Космодесантников
+  description: "Голос юнита Библиарий Космодесантников из игры Warhammer 40,000 Dawn of War"
+  speaker: space_marines_librarian_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: tau_ethereal_dow
+  name: Эфирный Тау
+  description: "Голос юнита Эфирный Тау из игры Warhammer 40,000 Dawn of War"
+  speaker: tau_ethereal_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: tau_kroot_dow
+  name: Крууты Тау
+  description: "Голос юнита Крууты Тау из игры Warhammer 40,000 Dawn of War"
+  speaker: tau_kroot_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: tutorial_f_dow
+  name: Инструкторша DOW
+  description: "Женский голос инструктора из туториала игры Warhammer 40,000 Dawn of War"
+  speaker: tutorial_f_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: tutorial_m_dow
+  name: Инструктор DOW
+  description: "Мужской голос из туториала игры Warhammer 40,000 Dawn of War"
+  speaker: tutorial_m_dow
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: kingpin
+  name: Кингпин
+  description: "Голос Кингпина из игры Kingpin Life of Crime"
+  speaker: kingpin
+  provider: NTTS
+  categories: [ Misc ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]

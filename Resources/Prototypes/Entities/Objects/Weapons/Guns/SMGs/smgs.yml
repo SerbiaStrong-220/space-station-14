@@ -66,6 +66,14 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
+  # SS220-place-and-pickup-sounds-2 begin
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/SS220/Items/Weapons/smg_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/SS220/Items/Weapons/smg_drop.ogg
+  # SS220-place-and-pickup-sounds-2 end
 
 - type: entity
   name: Atreides
@@ -237,6 +245,12 @@
       steps: 1 # SS220-fix-for-our-sprites
       zeroVisible: true
     - type: Appearance
+# SS220-sec-gear-size-fix-start
+    - type: Item
+      size: Large
+      shape:
+      - 0,0,3,1
+# SS220-sec-gear-size-fix-end
 
 - type: entity
   name: WT550
@@ -300,6 +314,15 @@
     steps: 6
     zeroVisible: true
   - type: Appearance
+# SS220-sec-gear-size-fix-start
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,2,1
+  - type: Tag
+    tags:
+    - SecBeltEquip
+# SS220-sec-gear-size-fix-end
 
 - type: entity
   name: brown briefcase

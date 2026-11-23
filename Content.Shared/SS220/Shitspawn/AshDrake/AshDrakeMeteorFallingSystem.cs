@@ -5,10 +5,10 @@ using System.Numerics;
 
 namespace Content.Shared.SS220.Shitspawn.AshDrake;
 
-public sealed class AshDrakeMeteorFallingSystem : EntitySystem
+public sealed partial class AshDrakeMeteorFallingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Update(float frameTime)
     {
@@ -23,13 +23,13 @@ public sealed class AshDrakeMeteorFallingSystem : EntitySystem
 
             if (dir.Length() <= comp.Speed * frameTime)
             {
-                _transform.SetWorldPosition(xform, comp.Target);
+                _transform.SetWorldPosition((uid, xform), comp.Target);
                 if (_net.IsServer)
                     RemComp<AshDrakeMeteorFallingComponent>(uid);
                 continue;
             }
 
-            _transform.SetWorldPosition(xform, cur + Vector2.Normalize(dir) * comp.Speed * frameTime);
+            _transform.SetWorldPosition((uid, xform), cur + Vector2.Normalize(dir) * comp.Speed * frameTime);
         }
     }
 }

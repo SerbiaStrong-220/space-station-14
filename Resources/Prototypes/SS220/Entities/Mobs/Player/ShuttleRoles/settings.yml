@@ -1,6 +1,6 @@
 - type: randomHumanoidSettings
   id: VisitorTourist
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran]
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid ]
   parent: VisitorCivilian
   components:
     - type: GhostRole
@@ -12,11 +12,12 @@
 - type: randomHumanoidSettings
   id: RedWings
   parent: EventHumanoid
-  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf]
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf, Ipc]
   components:
     - type: GhostRole
       raffle:
         settings: short
+    - type: AntagImmune
 
 - type: randomHumanoidSettings
   id: RedWingsOfficer
@@ -35,9 +36,8 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-officer
-    - type: RoleExperienceAdd
-      definitionId: SecurityOfficerRoleExperience
-      addSublevelPoints: 5
+    - type: ExperienceAddition
+      definitionId: RedWingsOfficerRoleExperience
 
 - type: randomHumanoidSettings
   id: RedWingsMedic
@@ -57,9 +57,8 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-medic
-    - type: RoleExperienceAdd
-      definitionId: BrigmedicRoleExperience
-      addSublevelPoints: 5
+    - type: ExperienceAddition
+      definitionId: RedWingsMedicRoleExperience
 
 - type: randomHumanoidSettings
   id: RedWingsPilot
@@ -79,6 +78,5 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-pilot
-    - type: RoleExperienceAdd
-      definitionId: SecurityPilotRoleExperience
-      addSublevelPoints: 5
+    - type: ExperienceAddition
+      definitionId: RedWingsPilotRoleExperience

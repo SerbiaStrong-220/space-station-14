@@ -387,6 +387,7 @@ namespace Content.IntegrationTests.Tests
                 "Actor", // We aren't testing actor components, those need their player session set.
                 "BiomeSelection", // Whaddya know, requires config.
                 "ActivatableUI", // Requires enum key
+                "DirectCompactDefibrillator", // SS220 handles errors itself
             };
 
             var pair = Pair;

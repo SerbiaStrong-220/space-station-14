@@ -12,19 +12,15 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class JetPackUseSkillSystem : SkillEntitySystem
+public sealed partial class JetPackUseSkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedJetpackSystem _jetpack = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<JetpackComponent> _jetpackQuery;
     private EntityQuery<JetpackUserComponent> _jetpackUserQuery;
     private EntityQuery<ActiveJetpackComponent> _activeJetpackQuery;
-
-    private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "ExtravehicularActivity";
-    private readonly FixedPoint4 _learningPerFailure = 0.15f;
-    private readonly int _levelNotGainingExperience = 2;
 
     public override void Initialize()
     {
@@ -82,15 +78,11 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
         entity.Comp.LastInputTick = args.Entity.Comp.LastInputTick.Value;
 
         var predictedRandom = GetPredictedRandom(new() { GetNetEntity(entity).Id, (int)entity.Comp.LastInputTick, GetNetEntity(actionUid).Id });
-        if (!predictedRandom.Prob(entity.Comp.FailChance)) return;
+        if (!predictedRandom.Prob(entity.Comp.FailChance))
+            return;
 
         _actions.PerformAction(args.Entity.Owner, actionEntity);
         _actions.SetCooldown(actionEntity!, entity.Comp.JetPackFailureCooldown);
         _popup.PopupPredictedCursor(Loc.GetString(entity.Comp.JetPackFailurePopup), args.Entity.Owner, PopupType.LargeCaution);
-
-        Experience.TryGetSkillTreeLevel(args.Entity.Owner, _affectedSkillTree, out var targetLevel);
-
-        if (targetLevel < _levelNotGainingExperience)
-            TryChangeStudyingProgress(entity, _affectedSkillTree, _learningPerFailure);
     }
 }

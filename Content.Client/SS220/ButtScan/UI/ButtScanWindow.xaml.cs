@@ -15,7 +15,7 @@ namespace Content.Client.SS220.ButtScan.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ButtScanWindow : PaperWindow
 {
-    [Dependency] private readonly IResourceCache _resCache = default!;
+    [Dependency] private IResourceCache _resCache = default!;
 
     private readonly Vector2 _buttRectSize = new Vector2(300, 300);
     private readonly Thickness _buttRectMargin = new(25, 25);

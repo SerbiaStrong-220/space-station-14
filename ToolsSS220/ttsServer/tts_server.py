@@ -6,7 +6,7 @@ api = Flask(__name__)
 primary_speaker = 'aidar'
 
 host = "127.0.0.1"
-port = 5000
+port = 5005
 tts_module = tts_creator()
 
 #Get request, consume text, make tts, build response, return to sender.

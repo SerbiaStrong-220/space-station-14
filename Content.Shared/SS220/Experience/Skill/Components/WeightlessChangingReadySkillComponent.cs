@@ -18,10 +18,6 @@ public sealed partial class WeightlessChangingReadySkillComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public float VomitChance = 0.4f;
-
-    [DataField]
-    [AutoNetworkedField]
     public float HardsuitFallChance = 0.1f;
 
     [DataField]

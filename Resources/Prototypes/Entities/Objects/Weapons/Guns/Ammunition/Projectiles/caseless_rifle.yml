@@ -4,6 +4,10 @@
   categories: [ HideSpawnMenu ]
   name: bullet (.25 caseless)
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: MediumCaliberFragment
+  # SS220-add-projectile-wounds-begin
   - type: Projectile
     damage:
       types:

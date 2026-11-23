@@ -10,9 +10,9 @@ namespace Content.Client.SS220.Species;
 
 public sealed partial class SpeciesRequirementsManager
 {
-    [Dependency] private readonly IBaseClient _client = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IBaseClient _client = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private INetManager _net = default!;
 
     private readonly List<ProtoId<SpeciesPrototype>> _speciesBans = [];
 

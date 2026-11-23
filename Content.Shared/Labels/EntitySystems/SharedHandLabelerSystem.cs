@@ -8,6 +8,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
+using Robust.Shared.Utility; //SS220-LabelColors
 
 namespace Content.Shared.Labels.EntitySystems;
 
@@ -29,6 +30,7 @@ public abstract class SharedHandLabelerSystem : EntitySystem
         SubscribeLocalEvent<HandLabelerComponent, ExaminedEvent>(OnExamined);
         // Bound UI subscriptions
         SubscribeLocalEvent<HandLabelerComponent, HandLabelerLabelChangedMessage>(OnHandLabelerLabelChanged);
+        SubscribeLocalEvent<HandLabelerComponent, HandLabelerLabelColorChangedMessage>(OnHandLabelerLabelColorChanged); //SS220-LabelColors
         SubscribeLocalEvent<HandLabelerComponent, ComponentGetState>(OnGetState);
         SubscribeLocalEvent<HandLabelerComponent, ComponentHandleState>(OnHandleState);
     }
@@ -38,6 +40,7 @@ public abstract class SharedHandLabelerSystem : EntitySystem
         args.State = new HandLabelerComponentState(ent.Comp.AssignedLabel)
         {
             MaxLabelChars = ent.Comp.MaxLabelChars,
+            AssignedLabelColor = ent.Comp.AssignedLabelColor, //SS220-LabelColors
         };
     }
 
@@ -47,6 +50,14 @@ public abstract class SharedHandLabelerSystem : EntitySystem
             return;
 
         ent.Comp.MaxLabelChars = state.MaxLabelChars;
+
+        //SS220-LabelColors begin
+        if (ent.Comp.AssignedLabelColor != state.AssignedLabelColor)
+        {
+            ent.Comp.AssignedLabelColor = state.AssignedLabelColor;
+            UpdateUI(ent);
+        }
+        //SS220-LabelColors end
 
         if (ent.Comp.AssignedLabel == state.AssignedLabel)
             return;
@@ -68,7 +79,7 @@ public abstract class SharedHandLabelerSystem : EntitySystem
         }
 
         if (_netManager.IsServer)
-            _labelSystem.Label(target, ent.Comp.AssignedLabel);
+            _labelSystem.Label(target, ent.Comp.AssignedLabel, color: ent.Comp.AssignedLabelColor); //SS220-LabelColors
 
         _popupSystem.PopupClient(Loc.GetString("hand-labeler-successfully-applied"), user, user);
 
@@ -144,14 +155,38 @@ public abstract class SharedHandLabelerSystem : EntitySystem
             $"{ToPrettyString(args.Actor):user} set {ToPrettyString(uid):labeler} to apply label \"{handLabeler.AssignedLabel}\"");
     }
 
+    //SS220-LabelColors begin
+    private void OnHandLabelerLabelColorChanged(Entity<HandLabelerComponent> ent, ref HandLabelerLabelColorChangedMessage args)
+    {
+        if (ent.Comp.AssignedLabelColor == args.Color)
+            return;
+
+        ent.Comp.AssignedLabelColor = args.Color;
+        UpdateUI(ent);
+        Dirty(ent);
+
+        // Log label color change
+        _adminLogger.Add(LogType.Action, LogImpact.Low,
+            $"{ToPrettyString(args.Actor):user} set {ToPrettyString(ent):labeler} to apply label color {args.Color.ToHex()}");
+    }
+    //SS220-LabelColors end
+
     private void OnExamined(Entity<HandLabelerComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
             return;
 
-        var text = ent.Comp.AssignedLabel == string.Empty
-            ? Loc.GetString("hand-labeler-examine-blank")
-            : Loc.GetString("hand-labeler-examine-label-text", ("label-text", ent.Comp.AssignedLabel));
+        //SS220-LabelColors begin
+        if (ent.Comp.AssignedLabel == string.Empty)
+        {
+            args.PushMarkup(Loc.GetString("hand-labeler-examine-blank"));
+            return;
+        }
+
+        var label = FormattedMessage.EscapeText(ent.Comp.AssignedLabel);
+        var text = Loc.GetString("hand-labeler-examine-label-text",
+            ("label-text", $"[color={ent.Comp.AssignedLabelColor.ToHex()}]{label}[/color]"));
+        //SS220-LabelColors end
         args.PushMarkup(text);
     }
 }

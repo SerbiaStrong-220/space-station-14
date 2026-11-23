@@ -1,18 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Components;
+using Content.Shared.SS220.Experience.Systems.Experience;
 using Content.Shared.SS220.HiddenDescription;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 
 namespace Content.Client.SS220.HiddenDescription;
 
-public sealed class HiddenDescriptionSystem : SharedHiddenDescriptionSystem
+public sealed partial class HiddenDescriptionSystem : SharedHiddenDescriptionSystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly ExperienceSystem _experience = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private ExperienceSystem _experience = default!;
 
     public override void Initialize()
     {

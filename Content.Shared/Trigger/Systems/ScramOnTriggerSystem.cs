@@ -1,4 +1,6 @@
 using System.Numerics;
+using Content.Shared.Buckle.Components;
+using Content.Shared.Buckle;
 using Content.Shared.Maps;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
@@ -9,6 +11,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
+using Content.Shared.SS220.Grab;
 
 namespace Content.Shared.Trigger.Systems;
 
@@ -20,9 +23,16 @@ public sealed class ScramOnTriggerSystem : XOnTriggerSystem<ScramOnTriggerCompon
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly TurfSystem _turfSystem = default!;
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!; //SS220 buckled scram fix
+    [Dependency] private readonly SharedGrabSystem _grabSystem = default!; // SS220-grabs
 
     protected override void OnTrigger(Entity<ScramOnTriggerComponent> ent, EntityUid target, ref TriggerEvent args)
     {
+        // SS220-grabs-begin
+        if (TryComp<GrabbableComponent>(target, out var grabbableComponent))
+            _grabSystem.BreakGrab((target, grabbableComponent));
+        // SS220-grabs-end
+
         // We need stop the user from being pulled so they don't just get "attached" with whoever is pulling them.
         // This can for example happen when the user is cuffed and being pulled.
         if (TryComp<PullableComponent>(target, out var pull) && _pulling.IsPulled(target, pull))
@@ -31,6 +41,12 @@ public sealed class ScramOnTriggerSystem : XOnTriggerSystem<ScramOnTriggerCompon
         // Check if the user is pulling anything, and drop it if so.
         if (TryComp<PullerComponent>(target, out var puller) && TryComp<PullableComponent>(puller.Pulling, out var pullable))
             _pulling.TryStopPull(puller.Pulling.Value, pullable);
+
+        //SS220 buckled scram fix begin
+        // Unbuckle from any objects.
+        if (TryComp<BuckleComponent>(target, out var buckle) && buckle.Buckled)
+            _buckle.Unbuckle((target, buckle), target);
+        //SS220 buckled scram fix end
 
         _audio.PlayPredicted(ent.Comp.TeleportSound, ent, args.User);
 

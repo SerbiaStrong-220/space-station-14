@@ -7,10 +7,10 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Shared.SS220.CollisionPassage.Systems;
 
-public sealed class CollisionPassageSystem : EntitySystem
+public sealed partial class CollisionPassageSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {

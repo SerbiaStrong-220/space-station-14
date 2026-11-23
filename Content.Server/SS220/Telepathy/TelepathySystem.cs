@@ -7,6 +7,7 @@ using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.TTS.Components;
 using Content.Shared.SS220.UpdateChannels;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -18,12 +19,12 @@ namespace Content.Server.SS220.Telepathy;
 /// <summary>
 /// This handles events related to sending messages over the telepathy channel
 /// </summary>
-public sealed class TelepathySystem : EntitySystem
+public sealed partial class TelepathySystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     /// <summary>
     /// Key is a "fake" protoId. It wont indexed.
@@ -162,7 +163,7 @@ public sealed class TelepathySystem : EntitySystem
         else
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Announce telepathy message: {message}, were send in telepathy channel: {rightTelepathyChannel.Id}");
 
-        if (senderUid != null && HasComp<TTSComponent>(senderUid))
+        if (senderUid != null && HasComp<TtsComponent>(senderUid))
         {
             RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTtsRecievers], rightTelepathyChannel));
         }

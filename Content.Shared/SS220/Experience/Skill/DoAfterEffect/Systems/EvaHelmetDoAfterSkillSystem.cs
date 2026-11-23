@@ -7,9 +7,9 @@ using Content.Shared.Tag;
 
 namespace Content.Shared.SS220.Experience.DoAfterEffect.Systems;
 
-public sealed class EvaHelmetDoAfterSkillSystem : BaseDoAfterSkillSystem<EvaHelmetDoAfterSkillComponent, ClothingEquipDoAfterEvent>
+public sealed partial class EvaHelmetDoAfterSkillSystem : BaseDoAfterSkillSystem<EvaHelmetDoAfterSkillComponent, ClothingEquipDoAfterEvent>
 {
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     protected override bool SkillEffect(Entity<EvaHelmetDoAfterSkillComponent> entity, in DoAfterArgs args)
     {
