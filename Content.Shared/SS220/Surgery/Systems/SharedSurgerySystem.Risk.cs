@@ -83,9 +83,9 @@ public abstract partial class SharedSurgerySystem
         if (!TryComp<SurgeryDiskComponent>(args.Entity, out var disk))
             return;
 
-        foreach (var surgery in disk.Surgeries)
+        foreach (var protocol in disk.Protocols)
         {
-            entity.Comp.UnlockedSurgeries.Add(surgery);
+            entity.Comp.UnlockedProtocols.Add(protocol);
         }
 
         Dirty(entity);
@@ -99,10 +99,10 @@ public abstract partial class SharedSurgerySystem
         if (!TryComp<SurgeryDiskComponent>(args.Entity, out var disk))
             return;
 
-        foreach (var surgery in disk.Surgeries)
+        foreach (var protocol in disk.Protocols)
         {
-            if (!entity.Comp.BaseUnlockedSurgeries.Contains(surgery))
-                entity.Comp.UnlockedSurgeries.Remove(surgery);
+            if (!entity.Comp.BaseUnlockedProtocols.Contains(protocol))
+                entity.Comp.UnlockedProtocols.Remove(protocol);
         }
 
         Dirty(entity);
@@ -157,7 +157,7 @@ public abstract partial class SharedSurgerySystem
     private void OnOperatingComputerInit(Entity<OperatingComputerComponent> ent, ref ComponentInit args)
     {
         _deviceLink.EnsureSourcePorts(ent.Owner, ent.Comp.TablePort);
-        ent.Comp.BaseUnlockedSurgeries.UnionWith(ent.Comp.UnlockedSurgeries);
+        ent.Comp.BaseUnlockedProtocols.UnionWith(ent.Comp.UnlockedProtocols);
     }
 
     private void OnOperatingComputerMapInit(Entity<OperatingComputerComponent> ent, ref MapInitEvent args)
@@ -274,7 +274,7 @@ public abstract partial class SharedSurgerySystem
     /// <summary>
     /// Checks whether an operating table has a linked, powered <see cref="OperatingComputerComponent"/> within range.
     /// </summary>
-    public bool HasLinkedOperatingComputer(Entity<OperatingTableComponent> table, ProtoId<SurgeryGraphPrototype>? requiredSurgery = null)
+    public bool HasLinkedOperatingComputer(Entity<OperatingTableComponent> table, string? protocol = null)
     {
         if (table.Comp.LinkedComputer is not { } computerUid ||
             !TryComp<OperatingComputerComponent>(computerUid, out var computerComp))
@@ -285,22 +285,22 @@ public abstract partial class SharedSurgerySystem
         if (!IsOperatingLinkActive((computerUid, computerComp), table))
             return false;
 
-        if (requiredSurgery is null)
+        if (protocol is null)
             return true;
 
-        return computerComp.UnlockedSurgeries.Contains(requiredSurgery.Value);
+        return computerComp.UnlockedProtocols.Contains(protocol);
     }
 
     /// <summary>
     /// Checks whether a patient (or operating table) has a linked <see cref="OperatingComputerComponent"/> in range.
     /// </summary>
-    public bool HasLinkedOperatingComputer(EntityUid target, ProtoId<SurgeryGraphPrototype>? requiredSurgery = null)
+    public bool HasLinkedOperatingComputer(EntityUid target, string? protocol = null)
     {
         if (TryComp<OperatingTableComponent>(target, out var tableComp))
-            return HasLinkedOperatingComputer((target, tableComp), requiredSurgery);
+            return HasLinkedOperatingComputer((target, tableComp), protocol);
 
         if (IsOnOperatingTable(target, out var table))
-            return HasLinkedOperatingComputer(table, requiredSurgery);
+            return HasLinkedOperatingComputer(table, protocol);
 
         return false;
     }

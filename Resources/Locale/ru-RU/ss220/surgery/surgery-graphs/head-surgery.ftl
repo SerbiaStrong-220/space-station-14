@@ -64,12 +64,15 @@ surgery-requirement-fixer-required = [color=red]{ CAPITALIZE(ent-MindslaveFixerC
 
 surgery-requirement-slave-target = В мозгу пациента должен быть [color=red]имплант подчинения разума[/color]
 
-to-brain-exposed-heal-brain-damage = Удалить отмершие ткани мозга (снижает урон мозгу)
+to-brain-exposed-heal-brain-damage = Удалить отмершие ткани мозга
 
 surgery-requirement-total-damage-requirement-brain-damage-heal-description = Мозг пациента должен быть повреждён
 surgery-requirement-total-damage-requirement-brain-damage-no-damage = Для этого действия требуется наличие повреждённого мозга, но мозг пациента не имеет поврежденных областей
 
-remove-brain-pathology = Устранить неврологическое расстройство (немота, слепота, нарколепсия и т. п.)
+remove-brain-pathology = Устранить неврологическое расстройство
+brain-exposed-lobotomy = Провести лоботомию
+brain-exposed-pacify = Провести пацификацию
+brain-exposed-unpacify = Снять пацификацию
 
 surgery-pathology-requirement-description-remove-brain-pathology = У пациента должно быть неврологическое расстройство
 surgery-pathology-requirement-failure-remove-brain-pathology = Для этого действия требуется наличие повреждённых участков в мозгу, но Вы их не находите.
@@ -118,3 +121,8 @@ start-mouth-surgery = Подготовка операции на челюсти 
 mouth-skin-incision = Надрез в области челюсти
 mouth-skin-clamp-bleeders = Остановка кровотечения в области челюсти
 retract-mouth-skin = Расширение разреза в области челюсти
+
+surgery-pathology-requirement-description-pacify = Пациент не должен быть [color=lightblue]пацифицирован[/color]
+surgery-pathology-requirement-failure-pacify = Пациент уже пацифицирован!
+surgery-pathology-requirement-description-unpacify = Пациент должен быть [color=lightblue]пацифицирован[/color] хирургически
+surgery-pathology-requirement-failure-unpacify = Пациент не пацифицирован хирургически!

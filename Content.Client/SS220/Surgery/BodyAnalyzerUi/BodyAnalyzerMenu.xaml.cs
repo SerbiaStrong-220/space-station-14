@@ -23,6 +23,11 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
     /// </summary>
     private readonly List<ProtoId<SurgeryGraphPrototype>> _ongoing = new();
 
+    /// <summary>
+    /// Disk protocols of the computer the shown steps were made with.
+    /// </summary>
+    private readonly HashSet<string> _shownProtocols = new();
+
     public BodyAnalyzerMenu()
     {
         RobustXamlLoader.Load(this);
@@ -47,6 +52,10 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
 
     public void ChangeTarget(EntityUid? target, bool tableNotLinked = false)
     {
+        // a disk put into or taken out of the computer while the UI is open
+        if (UpdateShownProtocols())
+            OperationDescription.Refresh();
+
         if (target is not { } patient)
         {
             if (tableNotLinked)
@@ -68,8 +77,11 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
         TreatmentSuggestion.ShowSuggestion(_surgeryPatientAnalyzer.GetTreatmentRecommendation(status));
     }
 
-    public void UpdatePerformer(bool tableNotLinked = false)
+    public void UpdatePerformer(EntityUid analyzer, bool tableNotLinked = false)
     {
+        OperationDescription.Analyzer = analyzer;
+        UpdateShownProtocols();
+
         OperationList.MakeList(false);
         OperationList.SetOngoing(_ongoing, OperationDescription.CurrentOperation);
 
@@ -79,6 +91,18 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
             TreatmentSuggestion.ShowTargetlessSuggestion();
 
         PatientStatus.ShowUnknownStatus();
+    }
+
+    /// <returns>True if the disk protocols of the computer changed since the last call</returns>
+    private bool UpdateShownProtocols()
+    {
+        if (!_entityManager.TryGetComponent<OperatingComputerComponent>(OperationDescription.Analyzer, out var computer)
+            || _shownProtocols.SetEquals(computer.UnlockedProtocols))
+            return false;
+
+        _shownProtocols.Clear();
+        _shownProtocols.UnionWith(computer.UnlockedProtocols);
+        return true;
     }
 
     private void UpdateOngoing(EntityUid? patient)

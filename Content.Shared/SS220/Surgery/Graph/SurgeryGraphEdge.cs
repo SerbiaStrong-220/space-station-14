@@ -1,5 +1,6 @@
 // Original code from construction graph all edits under © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -56,6 +57,13 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     [DataField]
     [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
     public float? FailureChance { get; private set; }
+
+    /// <summary>
+    /// Dealt to the patient on a failed roll of the step on top of the damage of the tool, e.g. a failed lobotomy hurts the brain.
+    /// </summary>
+    [DataField]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public DamageSpecifier? FailureDamage { get; private set; }
 
     /// <summary>
     /// The step doesn't hurt whatever is used, e.g. taking off a prosthesis.

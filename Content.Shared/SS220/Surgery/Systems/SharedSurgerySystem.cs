@@ -279,7 +279,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
             if (_random.NextFloat() < failChance)
             {
-                OnSurgeryFailure(args, isStepRollFailure: true);
+                OnSurgeryFailure(args, failedEdge: chosenEdge);
                 ResyncPatient(entity);
                 return;
             }
@@ -458,7 +458,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         return true;
     }
 
-    private void OnSurgeryFailure(SurgeryDoAfterEvent args, bool isStepRollFailure = false)
+    /// <param name="failedEdge">The step whose roll failed, null if the step was just interrupted</param>
+    private void OnSurgeryFailure(SurgeryDoAfterEvent args, SurgeryGraphEdge? failedEdge = null)
     {
         if (_net.IsClient)
             return;
@@ -466,6 +467,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (args.Target is not { Valid: true } target)
             return;
 
+        var isStepRollFailure = failedEdge is not null;
         var damaged = false;
 
         if (args.Used is { } used && TryGetFailureDamage(used, args.User, target, isStepRollFailure, out var failureDamage))
@@ -475,6 +477,9 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             if (damaged && TryComp<MeleeWeaponComponent>(used, out var melee))
                 PlayFailureStrike(args.User, (used, melee), target, appliedDamage);
         }
+
+        if (failedEdge is not null && SurgeryGraph.FailureDamage(failedEdge) is { } edgeDamage)
+            damaged |= _damageable.TryChangeDamage(target, edgeDamage, out _, origin: args.User);
 
         if (!damaged && !isStepRollFailure)
             return;

@@ -586,6 +586,123 @@
         - LightweightDrunk
         - FrontalLisp
         - Nervousness
+    # lobotomy, a disk protocol: the failed roll is the failed lobotomy, the action decides the rest
+    - to: brain-exposed
+      id: brain-exposed-lobotomy
+      delay: 12
+      failureChance: 0.5
+      failureDamage:
+        types:
+          Cerebral: 10
+      edgeTooltip: brain-exposed-lobotomy
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: Lobotomy
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      - !type:HasOrganRequirement
+        subject: target
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:CongenitalTraitRequirement
+        subject: target
+        description: surgery-requirement-congenital-trait-description
+        failureMessage: surgery-requirement-congenital-trait-failure
+      actions:
+      - !type:LobotomyAction
+    # pacification, a disk protocol
+    - to: brain-exposed
+      id: brain-exposed-pacify
+      delay: 10
+      edgeTooltip: brain-exposed-pacify
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: Pacification
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      - !type:HasOrganRequirement
+        subject: target
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        invert: true
+        pathology: SurgicalPacification
+        description: surgery-pathology-requirement-description-pacify
+        failureMessage: surgery-pathology-requirement-failure-pacify
+      actions:
+      - !type:AddPathologyAction
+        pathology: SurgicalPacification
+    - to: brain-exposed
+      id: brain-exposed-unpacify
+      delay: 10
+      edgeTooltip: brain-exposed-unpacify
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: Pacification
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      - !type:HasOrganRequirement
+        subject: target
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: SurgicalPacification
+        description: surgery-pathology-requirement-description-unpacify
+        failureMessage: surgery-pathology-requirement-failure-unpacify
+      actions:
+      - !type:RemovePathologyAction
+        pathologies:
+        - SurgicalPacification
     # brain
     - to: brain-exposed
       id: extract-brain

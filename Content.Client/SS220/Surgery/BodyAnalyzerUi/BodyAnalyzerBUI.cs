@@ -17,7 +17,7 @@ public sealed class BodyAnalyzerBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         _menu = this.CreateWindow<BodyAnalyzerMenu>();
 
         var bodyAnalyzer = EntMan.System<BodyAnalyzerSystem>();
-        _menu.UpdatePerformer(bodyAnalyzer.IsComputerTableUnlinked(Owner));
+        _menu.UpdatePerformer(Owner, bodyAnalyzer.IsComputerTableUnlinked(Owner));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

@@ -397,9 +397,13 @@
   name: surgery data disk
   description: A data disk containing advanced surgical protocols for an operating computer.
   components:
+  # the tier disks add the border of their tier
   - type: Sprite
     sprite: Objects/Misc/module.rsi
-    state: datadisk_gene
+    layers:
+    - state: datadisk_base
+      color: "#3E8FC9"
+    - state: datadisk_label
   - type: Item
     size: Small
   - type: SurgeryDisk
@@ -409,3 +413,41 @@
   - type: GuideHelp
     guides:
     - Surgery
+
+- type: entity
+  parent: BaseSurgeryDisk
+  id: SurgeryDiskAdvanced
+  name: advanced surgery data disk
+  description: Protocols of the advanced brain surgery for an operating computer.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    layers:
+    - state: datadisk_base
+      color: "#3E8FC9"
+    - state: datadisk_label
+    - state: datadisk_t2_border
+  - type: SurgeryDisk
+    protocols:
+    - Lobotomy
+    - Pacification
+
+- type: entity
+  parent: BaseSurgeryDisk
+  id: SurgeryDiskBioware
+  name: biomodification surgery data disk
+  description: Protocols of the biomodifications, permanent surgical improvements of the body, for an operating computer.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    layers:
+    - state: datadisk_base
+      color: "#3E8FC9"
+    - state: datadisk_label
+    - state: datadisk_t3_border
+  - type: SurgeryDisk
+    protocols:
+    - VeinThreading
+    - CapillaryWeaving
+    - NerveSplicing
+    - NerveGrounding

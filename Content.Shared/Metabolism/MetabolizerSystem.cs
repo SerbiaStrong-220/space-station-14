@@ -15,6 +15,7 @@ using Content.Shared.EntityEffects.Effects.Solution;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.Metabolism;
 using Content.Shared.SS220.Narcotics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -56,6 +57,11 @@ public sealed class MetabolizerSystem : EntitySystem
     private void OnApplyMetabolicMultiplier(Entity<MetabolizerComponent> ent, ref BodyRelayedEvent<ApplyMetabolicMultiplierEvent> args)
     {
         ent.Comp.UpdateIntervalMultiplier = args.Args.Multiplier;
+        //SS220-surgery-update start
+        var rateEv = new GetMetabolizerRateEvent(ent.Comp.Stages);
+        RaiseLocalEvent(args.Body, ref rateEv);
+        ent.Comp.UpdateIntervalMultiplier /= rateEv.Multiplier;
+        //SS220-surgery-update end
         Dirty(ent);
     }
 

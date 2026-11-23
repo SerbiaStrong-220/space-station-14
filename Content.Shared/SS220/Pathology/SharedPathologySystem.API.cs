@@ -2,6 +2,7 @@
 
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Traits;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -210,6 +211,17 @@ public abstract partial class SharedPathologySystem
             return false;
 
         return entity.Comp.ActivePathologies.ContainsKey(pathologyId);
+    }
+
+    /// <summary>
+    /// Whether an active pathology gives the trait, so its components belong to the pathology.
+    /// </summary>
+    public bool IsTraitInUse(Entity<PathologyHolderComponent?> entity, ProtoId<TraitPrototype> traitId)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return false;
+
+        return IsTraitInUse(entity.Comp, traitId);
     }
 
     /// <summary>

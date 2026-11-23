@@ -787,6 +787,155 @@
         failureMessage: surgery-pathology-requirement-failure-heart-failure
         curePathologies:
         - HeartDamage
+    # biomodifications (bioware), disk protocols: one modification per group, the modification stays with the body
+    - to: open-heart-incision
+      id: open-heart-vein-threading
+      delay: 12.5
+      edgeTooltip: open-heart-vein-threading
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: VeinThreading
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-bioware-circulation-description
+        failureMessage: surgery-requirement-bioware-circulation-failure
+        whitelist:
+          components:
+          - VeinThreading
+          - CapillaryWeaving
+      actions:
+      - !type:AddComponentsAction
+        components:
+        - type: VeinThreading
+    - to: open-heart-incision
+      id: open-heart-capillary-weaving
+      delay: 12.5
+      edgeTooltip: open-heart-capillary-weaving
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: CapillaryWeaving
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-bioware-circulation-description
+        failureMessage: surgery-requirement-bioware-circulation-failure
+        whitelist:
+          components:
+          - VeinThreading
+          - CapillaryWeaving
+      actions:
+      - !type:AddComponentsAction
+        components:
+        - type: CapillaryWeaving
+    - to: open-heart-incision
+      id: open-heart-nerve-splicing
+      delay: 15.5
+      edgeTooltip: open-heart-nerve-splicing
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: NerveSplicing
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-bioware-nerves-description
+        failureMessage: surgery-requirement-bioware-nerves-failure
+        whitelist:
+          components:
+          - NerveSplicing
+          - NerveGrounding
+      actions:
+      - !type:AddComponentsAction
+        components:
+        - type: NerveSplicing
+    - to: open-heart-incision
+      id: open-heart-nerve-grounding
+      delay: 15.5
+      edgeTooltip: open-heart-nerve-grounding
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: NerveGrounding
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-bioware-nerves-description
+        failureMessage: surgery-requirement-bioware-nerves-failure
+        whitelist:
+          components:
+          - NerveSplicing
+          - NerveGrounding
+      actions:
+      - !type:AddComponentsAction
+        components:
+        - type: NerveGrounding
     # return
     # TOOD: better back
     - to: saw-rib-bone

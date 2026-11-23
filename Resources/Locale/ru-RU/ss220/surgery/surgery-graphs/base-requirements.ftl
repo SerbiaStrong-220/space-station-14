@@ -18,8 +18,10 @@ surgery-requirement-tool-required-autopsy-scanner = Инструмент для 
 surgery-requirement-tool-required-shears = Инструмент для [color=lightblue]ампутации[/color] ({ ent-AmputationShears })
 surgery-requirement-tool-required-specific = [color=gold]Особый[/color] инструмент
 
-surgery-requirement-operating-computer-description = Наличие привязанной к столу [color=lightblue]консоли сканера тела[/color] с загруженным протоколом операции
-surgery-requirement-operating-computer-failure = К операционному столу не привязана консоль сканера тела с загруженным протоколом этой операции!
+surgery-requirement-operating-computer-description = Нужна [color=lightblue]хирургическая дискета[/color] с протоколом операции
+surgery-requirement-operating-computer-failure = В консоли сканера тела нет дискеты с протоколом этой операции!
+surgery-requirement-congenital-trait-description = У пациента должно быть [color=lightblue]врождённое[/color] неврологическое расстройство
+surgery-requirement-congenital-trait-failure = У пациента нет врождённых неврологических расстройств!
 
 surgery-organ-name-torso = торс
 surgery-organ-name-head = голова

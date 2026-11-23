@@ -113,3 +113,13 @@
   definition:
   - description: pathology-frontal-lisp-description
     trait: FrontalLisp
+
+# done by the pacification protocol, the ordinary brain surgery doesn't remove it
+- type: pathology
+  id: SurgicalPacification
+  name: pathology-surgical-pacification-name
+  targetZone: Head
+  organ: Brain
+  definition:
+  - description: pathology-surgical-pacification-description
+    trait: Pacifist

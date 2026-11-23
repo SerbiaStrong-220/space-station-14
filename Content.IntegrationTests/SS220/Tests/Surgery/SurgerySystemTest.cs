@@ -1,11 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.SS220.Surgery.Actions;
 using Content.Shared.Atmos;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Buckle;
+using Content.Shared.CombatMode.Pacification;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
@@ -14,6 +17,8 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Power.EntitySystems;
+using Content.Shared.SS220.Bioware;
+using Content.Shared.SS220.Body;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Components;
 using Content.Shared.SS220.Experience.Systems.Experience;
@@ -94,6 +99,37 @@ public sealed class SurgerySystemTest
       id: edge-2
       delay: 1
   - node: seal-wound
+
+- type: surgeryGraph
+  id: TestDiskSurgeryGraph
+  name: surgery-edge-tooltip-err
+  description: surgery-edge-tooltip-err
+  targetPart: Torso
+  start: surgery-head-start
+  end: seal-wound
+  graph:
+  - node: surgery-head-start
+    edges:
+    - to: seal-wound
+      id: disk-edge
+      baseEdge: incision
+      edgeTooltip: to-torso-skin-incision
+      delay: 1
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: TestProtocol
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+  - node: seal-wound
+
+- type: entity
+  parent: BaseSurgeryDisk
+  id: TestSurgeryDisk
+  components:
+  - type: SurgeryDisk
+    protocols:
+    - TestProtocol
 ";
 
     [Test]
@@ -136,6 +172,315 @@ public sealed class SurgerySystemTest
 
             var canEnd = surgerySystem.OperationCanBeEnded(entity, surgeryGraphId);
             Assert.That(canEnd, Is.True);
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task SurgeryDiskUnlocksSurgeryTest()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var buckleSystem = entMng.System<SharedBuckleSystem>();
+        var deviceLink = entMng.System<SharedDeviceLinkSystem>();
+        var powerReceiver = entMng.System<SharedPowerReceiverSystem>();
+        var itemSlots = entMng.System<ItemSlotsSystem>();
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        const string diskGraphId = "TestDiskSurgeryGraph";
+
+        EntityUid patient = default!;
+        EntityUid surgeon = default!;
+        EntityUid table = default!;
+        EntityUid computer = default!;
+        EntityUid disk = default!;
+        await server.WaitAssertion(() =>
+        {
+            patient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            surgeon = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            table = entMng.SpawnEntity("OperatingTable", mapData.MapCoords);
+            computer = entMng.SpawnEntity("computerBodyScanner", new MapCoordinates(1f, 0f, mapData.MapId));
+            disk = entMng.SpawnEntity("TestSurgeryDisk", mapData.MapCoords);
+
+            deviceLink.LinkDefaults(null, computer, table);
+            powerReceiver.SetNeedsPower(computer, false);
+        });
+
+        await pair.RunTicksSync(5);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(buckleSystem.TryBuckle(patient, surgeon, table, popup: false), Is.True);
+            Assert.That(surgerySystem.HasLinkedOperatingComputer(table), Is.True);
+
+            var patientComp = entMng.GetComponent<SurgeryPatientComponent>(patient);
+            var entity = new Entity<SurgeryPatientComponent>(patient, patientComp);
+            Assert.That(protoManager.Index<SurgeryGraphPrototype>(diskGraphId).TryGetNode("surgery-head-start", out var startNode), Is.True);
+            var diskEdge = startNode!.Edges[0];
+
+            // the operation itself needs no disk, only its disk step does
+            Assert.That(surgerySystem.TryStartSurgery(entity, diskGraphId, surgeon, surgeon), Is.True);
+            Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, diskEdge, null, surgeon).Visible, Is.False, "No disk in the computer");
+
+            var computerComp = entMng.GetComponent<OperatingComputerComponent>(computer);
+            Assert.That(itemSlots.TryInsert(computer, computerComp.DiskSlotId, disk, null), Is.True);
+            Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, diskEdge, null, surgeon).Visible, Is.True);
+
+            Assert.That(itemSlots.TryEject(computer, computerComp.DiskSlotId, null, out _), Is.True);
+            Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, diskEdge, null, surgeon).Visible, Is.False, "The computer doesn't keep the protocol of a taken disk");
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task LobotomySurgeryTest()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var buckleSystem = entMng.System<SharedBuckleSystem>();
+        var deviceLink = entMng.System<SharedDeviceLinkSystem>();
+        var powerReceiver = entMng.System<SharedPowerReceiverSystem>();
+        var itemSlots = entMng.System<ItemSlotsSystem>();
+        var bodySystem = entMng.System<BodySystem>();
+        var graphSystem = entMng.System<SurgeryGraphSystem>();
+
+        EntityUid patient = default!;
+        EntityUid surgeon = default!;
+        EntityUid table = default!;
+        EntityUid computer = default!;
+        EntityUid disk = default!;
+        EntityUid scalpel = default!;
+        await server.WaitAssertion(() =>
+        {
+            patient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            surgeon = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            table = entMng.SpawnEntity("OperatingTable", mapData.MapCoords);
+            computer = entMng.SpawnEntity("computerBodyScanner", new MapCoordinates(1f, 0f, mapData.MapId));
+            disk = entMng.SpawnEntity("SurgeryDiskAdvanced", mapData.MapCoords);
+            scalpel = entMng.SpawnEntity("Scalpel", mapData.MapCoords);
+
+            deviceLink.LinkDefaults(null, computer, table);
+            powerReceiver.SetNeedsPower(computer, false);
+        });
+
+        await pair.RunTicksSync(5);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(buckleSystem.TryBuckle(patient, surgeon, table, popup: false), Is.True);
+            var entity = new Entity<SurgeryPatientComponent>(patient, entMng.GetComponent<SurgeryPatientComponent>(patient));
+            Assert.That(protoManager.Index<SurgeryGraphPrototype>(HeadSurgeryGraphId).TryGetNode("brain-exposed", out var brainNode), Is.True);
+            var lobotomy = brainNode!.Edges.Single(e => e.Id == "brain-exposed-lobotomy");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(graphSystem.FailureChance(lobotomy), Is.EqualTo(0.5f), "A failed roll is the failed lobotomy");
+                Assert.That(graphSystem.FailureDamage(lobotomy)!.DamageDict["Cerebral"].Float(), Is.EqualTo(10f));
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, lobotomy, scalpel, surgeon).Visible, Is.False, "Hidden without the disk");
+            });
+
+            var computerComp = entMng.GetComponent<OperatingComputerComponent>(computer);
+            Assert.That(itemSlots.TryInsert(computer, computerComp.DiskSlotId, disk, null), Is.True);
+            var info = surgerySystem.GetPerformSurgeryEdgeInfo(entity, lobotomy, scalpel, surgeon);
+            Assert.Multiple(() =>
+            {
+                Assert.That(info.Visible, Is.True, "Shown with the disk");
+                Assert.That(info.FailureReason, Is.Not.Null, "Inactive without a congenital trait");
+            });
+
+            Assert.That(bodySystem.TryGetOrganByCategory(patient, BrainCategory, out var brain), Is.True);
+            var congenital = entMng.EnsureComponent<CongenitalTraitsComponent>(brain!.Value);
+            congenital.Traits.Add("Blindness");
+            entMng.EnsureComponent<PermanentBlindnessComponent>(patient);
+            Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, lobotomy, scalpel, surgeon).FailureReason, Is.Null);
+
+            // the outcomes of a successful roll
+            var pathologies = entMng.GetComponent<PathologyHolderComponent>(patient).ActivePathologies;
+            var pathologyCount = pathologies.Count;
+            new LobotomyAction { TraumaChance = 1f }.PerformAction(patient, surgeon, scalpel, entMng);
+            Assert.Multiple(() =>
+            {
+                Assert.That(pathologies, Has.Count.EqualTo(pathologyCount + 1), "Bad luck leaves a new trauma");
+                Assert.That(congenital.Traits, Is.Not.Empty);
+            });
+
+            new LobotomyAction { TraumaChance = 0f }.PerformAction(patient, surgeon, scalpel, entMng);
+            Assert.Multiple(() =>
+            {
+                Assert.That(congenital.Traits, Is.Empty);
+                Assert.That(entMng.HasComponent<PermanentBlindnessComponent>(patient), Is.False, "The trait is cured");
+            });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task BiowareSurgeryTest()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var buckleSystem = entMng.System<SharedBuckleSystem>();
+        var deviceLink = entMng.System<SharedDeviceLinkSystem>();
+        var powerReceiver = entMng.System<SharedPowerReceiverSystem>();
+        var itemSlots = entMng.System<ItemSlotsSystem>();
+        var graphSystem = entMng.System<SurgeryGraphSystem>();
+
+        EntityUid patient = default!;
+        EntityUid surgeon = default!;
+        EntityUid table = default!;
+        EntityUid computer = default!;
+        EntityUid disk = default!;
+        EntityUid hemostat = default!;
+        EntityUid scalpel = default!;
+        await server.WaitAssertion(() =>
+        {
+            patient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            surgeon = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            table = entMng.SpawnEntity("OperatingTable", mapData.MapCoords);
+            computer = entMng.SpawnEntity("computerBodyScanner", new MapCoordinates(1f, 0f, mapData.MapId));
+            disk = entMng.SpawnEntity("SurgeryDiskBioware", mapData.MapCoords);
+            hemostat = entMng.SpawnEntity("Hemostat", mapData.MapCoords);
+            scalpel = entMng.SpawnEntity("Scalpel", mapData.MapCoords);
+
+            deviceLink.LinkDefaults(null, computer, table);
+            powerReceiver.SetNeedsPower(computer, false);
+        });
+
+        await pair.RunTicksSync(5);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(buckleSystem.TryBuckle(patient, surgeon, table, popup: false), Is.True);
+            var entity = new Entity<SurgeryPatientComponent>(patient, entMng.GetComponent<SurgeryPatientComponent>(patient));
+            Assert.That(protoManager.Index<SurgeryGraphPrototype>(TorsoSurgeryGraphId).TryGetNode("open-heart-incision", out var node), Is.True);
+            var veins = node!.Edges.Single(e => e.Id == "open-heart-vein-threading");
+            var capillaries = node.Edges.Single(e => e.Id == "open-heart-capillary-weaving");
+            var splicing = node.Edges.Single(e => e.Id == "open-heart-nerve-splicing");
+
+            Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, veins, hemostat, surgeon).Visible, Is.False, "Hidden without the disk");
+
+            var computerComp = entMng.GetComponent<OperatingComputerComponent>(computer);
+            Assert.That(itemSlots.TryInsert(computer, computerComp.DiskSlotId, disk, null), Is.True);
+            Assert.Multiple(() =>
+            {
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, veins, hemostat, surgeon).FailureReason, Is.Null);
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, capillaries, hemostat, surgeon).FailureReason, Is.Null);
+            });
+
+            foreach (var action in graphSystem.GetActions(veins))
+            {
+                action.PerformAction(patient, surgeon, hemostat, entMng);
+            }
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(entMng.HasComponent<VeinThreadingComponent>(patient), Is.True);
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, capillaries, hemostat, surgeon).FailureReason, Is.Not.Null,
+                    "One modification per group");
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, veins, hemostat, surgeon).FailureReason, Is.Not.Null);
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, splicing, scalpel, surgeon).FailureReason, Is.Null,
+                    "Another group is free");
+            });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task PacificationSurgeryTest()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var mapData = await pair.CreateTestMap();
+        var server = pair.Server;
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var surgerySystem = entMng.System<SharedSurgerySystem>();
+        var buckleSystem = entMng.System<SharedBuckleSystem>();
+        var deviceLink = entMng.System<SharedDeviceLinkSystem>();
+        var powerReceiver = entMng.System<SharedPowerReceiverSystem>();
+        var itemSlots = entMng.System<ItemSlotsSystem>();
+        var bodySystem = entMng.System<BodySystem>();
+        var graphSystem = entMng.System<SurgeryGraphSystem>();
+
+        EntityUid patient = default!;
+        EntityUid surgeon = default!;
+        EntityUid table = default!;
+        EntityUid computer = default!;
+        EntityUid disk = default!;
+        EntityUid hemostat = default!;
+        await server.WaitAssertion(() =>
+        {
+            patient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            surgeon = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
+            table = entMng.SpawnEntity("OperatingTable", mapData.MapCoords);
+            computer = entMng.SpawnEntity("computerBodyScanner", new MapCoordinates(1f, 0f, mapData.MapId));
+            disk = entMng.SpawnEntity("SurgeryDiskAdvanced", mapData.MapCoords);
+            hemostat = entMng.SpawnEntity("Hemostat", mapData.MapCoords);
+
+            deviceLink.LinkDefaults(null, computer, table);
+            powerReceiver.SetNeedsPower(computer, false);
+        });
+
+        await pair.RunTicksSync(5);
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(buckleSystem.TryBuckle(patient, surgeon, table, popup: false), Is.True);
+            var computerComp = entMng.GetComponent<OperatingComputerComponent>(computer);
+            Assert.That(itemSlots.TryInsert(computer, computerComp.DiskSlotId, disk, null), Is.True);
+
+            var entity = new Entity<SurgeryPatientComponent>(patient, entMng.GetComponent<SurgeryPatientComponent>(patient));
+            Assert.That(protoManager.Index<SurgeryGraphPrototype>(HeadSurgeryGraphId).TryGetNode("brain-exposed", out var brainNode), Is.True);
+            var pacify = brainNode!.Edges.Single(e => e.Id == "brain-exposed-pacify");
+            var unpacify = brainNode.Edges.Single(e => e.Id == "brain-exposed-unpacify");
+            var removePathology = brainNode.Edges.Single(e => e.Id == "brain-exposed-remove-brain-pathology");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, pacify, hemostat, surgeon).FailureReason, Is.Null);
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, unpacify, hemostat, surgeon) is { Visible: true, FailureReason: not null }, Is.True,
+                    "Nothing to undo yet");
+            });
+
+            foreach (var action in graphSystem.GetActions(pacify))
+            {
+                action.PerformAction(patient, surgeon, hemostat, entMng);
+            }
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(entMng.HasComponent<PacifiedComponent>(patient), Is.True);
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, pacify, hemostat, surgeon).FailureReason, Is.Not.Null, "Already pacified");
+                Assert.That(surgerySystem.GetPerformSurgeryEdgeInfo(entity, unpacify, hemostat, surgeon).FailureReason, Is.Null);
+                Assert.That(surgerySystem.CanMeetRequirements(entity, removePathology, hemostat, surgeon), Is.False,
+                    "The ordinary brain surgery doesn't undo it");
+            });
+
+            // it lives in the brain
+            Assert.That(bodySystem.TryExtractOrgan(patient, BrainCategory, out var brain), Is.True);
+            Assert.That(entMng.HasComponent<PacifiedComponent>(patient), Is.False);
+            Assert.That(bodySystem.TryInsertOrgan(patient, brain!.Value), Is.True);
+            Assert.That(entMng.HasComponent<PacifiedComponent>(patient), Is.True);
+
+            foreach (var action in graphSystem.GetActions(unpacify))
+            {
+                action.PerformAction(patient, surgeon, hemostat, entMng);
+            }
+
+            Assert.That(entMng.HasComponent<PacifiedComponent>(patient), Is.False);
         });
 
         await pair.CleanReturnAsync();

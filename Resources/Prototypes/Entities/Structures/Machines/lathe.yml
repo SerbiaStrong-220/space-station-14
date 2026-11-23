@@ -352,6 +352,7 @@
     - BorgModules
     - MechParts
     - MechEquipment
+    - ProsthesesCyber #SS220-surgery-update
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   # SS220 Add access check for material eject begin
@@ -548,6 +549,7 @@
     dynamicPacks:
     - Chemistry
     - MedServiceTech #ss220 add pinpointer crew
+    - SurgeryAdvanced #SS220-surgery-update
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: StealTarget

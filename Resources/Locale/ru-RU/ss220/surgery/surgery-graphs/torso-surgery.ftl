@@ -80,3 +80,12 @@ to-torso-open-abdomen = Вскрыть брюшную полость
 to-torso-close-abdomen = Зашить брюшную полость
 torso-abdomen-opened-examine = Брюшная полость вскрыта, видны внутренние органы.
 torso-abdomen-opened-popup = {THE($user)} вскрывает брюшную полость {THE($target)}, используя {$used}
+
+open-heart-vein-threading = Провести венозную нить
+open-heart-capillary-weaving = Выполнить капиллярное оплетение
+open-heart-nerve-splicing = Срастить нервы
+open-heart-nerve-grounding = Заземлить нервы
+surgery-requirement-bioware-circulation-description = Кровеносная система пациента ещё не [color=lightblue]модифицирована[/color]
+surgery-requirement-bioware-circulation-failure = Кровеносная система пациента уже модифицирована!
+surgery-requirement-bioware-nerves-description = Нервная система пациента ещё не [color=lightblue]модифицирована[/color]
+surgery-requirement-bioware-nerves-failure = Нервная система пациента уже модифицирована!
