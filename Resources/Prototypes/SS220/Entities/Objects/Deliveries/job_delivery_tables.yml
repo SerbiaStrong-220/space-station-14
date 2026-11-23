@@ -125,7 +125,8 @@
       tableId: PackageDeliveryTea
     - id: BookRandomStory
     - id: CassetteTape
-    - id: PlushieLizard
+    - !type:NestedSelector
+      tableId: AllPlushiesTable
       weight: 0.3
 
 - type: entityTable
@@ -243,6 +244,8 @@
     - id: ChemistryBottleRobustHarvest
     - id: ChemistryBottleLeft4Zed
       weight: 0.3
+    - id: FoodMiGomyceteCult
+      weight: 0.15
 
 - type: entityTable
   id: PackageDeliveryJanitor
@@ -334,7 +337,8 @@
     - !type:NestedSelector
       tableId: PackageDeliverySnack
     - id: d6Dice
-    - id: PlushieLizard
+    - !type:NestedSelector
+      tableId: AllPlushiesTable
       weight: 0.3
 
 - type: entityTable
