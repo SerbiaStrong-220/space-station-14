@@ -39,11 +39,10 @@
         walkSpeedModifier: 1.35
         sprintSpeedModifier: 1.35
       - !type:Jitter
-      - !type:GenericStatusEffect
-        key: Stun
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStunned
         time: 3
         type: Remove
-      - !type:GenericStatusEffect
-        key: KnockedDown
+      - !type:ModifyKnockdown
         time: 3
         type: Remove

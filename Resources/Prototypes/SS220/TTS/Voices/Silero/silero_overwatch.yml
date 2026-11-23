@@ -1,0 +1,443 @@
+- type: ttsVoice
+  id: Zenyatta
+  name: Дзенъятта
+  speaker: zenyatta
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Kiriko
+  name: Кирико
+  speaker: kiriko
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Hanzo
+  name: Хандзо
+  speaker: hanzo
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Roadhog
+  name: Турбосвин
+  speaker: roadhog
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Sigma
+  name: Сигма
+  speaker: sigma
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Soldier76
+  name: Солдат-76
+  speaker: soldier_76
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Junkrat
+  name: Крысавчик
+  speaker: junkrat
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Tracer
+  name: Трейсер
+  speaker: tracer
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Genji
+  name: Гэндзи
+  speaker: genji
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Echo
+  name: Эхо
+  speaker: echo
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Sojourn
+  name: Соджорн
+  speaker: sojourn
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Winston
+  name: Уинстон
+  speaker: winston
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Reaper
+  name: Жнец
+  speaker: reaper
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: TrainingRobot
+  name: Тренировочный робот
+  speaker: training_robot
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Moira
+  name: Мойра
+  speaker: moira
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Ashe
+  name: Эш
+  speaker: ashe
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Brigitte
+  name: Бригитта
+  speaker: brigitte
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Mercy
+  name: Ангел
+  speaker: mercy
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: LucioOv
+  name: Лусио
+  speaker: lucio_ov
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: DvaOv
+  name: Д.Ва
+  speaker: dva_ov
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Symmetra
+  name: Симметра
+  speaker: symmetra
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Zarya
+  name: Заря
+  speaker: zarya
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Cassidy
+  name: Кэссиди
+  speaker: cassidy
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Baptiste
+  name: Батист
+  speaker: baptiste
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: JunkerQueen
+  name: Королева свалки
+  speaker: junker_queen
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Doomfist
+  name: Роковой кулак
+  speaker: doomfist
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Pharah
+  name: Фарра
+  speaker: pharah
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Sombra
+  name: Сомбра
+  speaker: sombra
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Ana
+  name: Ана
+  speaker: ana
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Widowmaker
+  name: Роковая вдова
+  speaker: widowmaker
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: WreckingBall
+  name: Шар-разрушитель
+  speaker: wrecking_ball
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Tank
+  name: Танк
+  speaker: tank
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsSponsorRequirement
+    sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Torbjorn
+  name: Торбьорн
+  speaker: torbjorn
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Reinhardt
+  name: Райнхардт
+  speaker: reinhardt
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Orisa
+  name: Ориса
+  speaker: orisa
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Mei
+  name: Мэй
+  speaker: mei
+  provider: Silero
+  categories: [ Overwatch ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa

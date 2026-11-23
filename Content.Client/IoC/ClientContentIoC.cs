@@ -26,6 +26,7 @@ using Content.Shared.Administration.Logs;
 using Content.Client.Lobby;
 using Content.Client.Players.RateLimiting;
 using Content.Client.SS220.ChatBans;
+using Content.Client.SS220.TTS;
 using Content.Shared.Administration.Managers;
 using Content.Client.SS220.Discord;
 using Content.Shared.Chat;
@@ -33,7 +34,6 @@ using Content.Shared.FeedbackSystem;
 using Content.Shared.IoC;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
-using Content.Client.SS220.TTS;
 using Content.Client.SS220.Species;
 
 namespace Content.Client.IoC
@@ -63,6 +63,7 @@ namespace Content.Client.IoC
             collection.Register<ExtendedDisconnectInformationManager>();
             collection.Register<JobRequirementsManager>();
             collection.Register<SponsorsManager>(); // Corvax-Sponsors
+            collection.Register<TtsNetManager>(); // SS220 TTS
             collection.Register<JoinQueueManager>(); // Corvax-Queue
             collection.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
             collection.Register<DocumentParsingManager>();
@@ -77,7 +78,6 @@ namespace Content.Client.IoC
             collection.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
             collection.Register<TitleWindowManager>();
             collection.Register<ClientsidePlaytimeTrackingManager>();
-            collection.Register<TTSManager>(); // SS220 TTS
             collection.Register<ClientFeedbackManager>();
             collection.Register<ISharedFeedbackManager, ClientFeedbackManager>();
         }

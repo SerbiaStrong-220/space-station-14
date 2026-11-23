@@ -265,6 +265,7 @@ floor-tile-item-wood-large-light = крупный светлый деревян�
 floor-tile-item-wood-large-red = крупный красный деревянный пол
 
 ## ПАРКЕТНАЯ ПЛИТКА
+floor-tile-item-wood-parquet = паркетный деревянный пол
 floor-tile-item-wood-parquet-black = паркетный чёрный деревянный пол
 floor-tile-item-wood-parquet-dark = паркетный тёмный деревянный пол
 floor-tile-item-wood-parquet-light = паркетный светлый деревянный пол
@@ -432,3 +433,14 @@ floor-oldconcrete-pavement-vertical = бетонное старое вертик
 floor-lino-gray = { ent-FloorItemLinoGray }
 floor-lino-light-brown = { ent-FloorItemLinoLightBrown }
 floor-lino-red-brown = { ent-FloorItemLinoRedBrown } 
+
+## SS220 floors
+tiles-steel-reinforced = { ent-FloorTileItemSteelReinforced }
+tiles-white-reinforced = { ent-FloorTileItemWhiteReinforced }
+tiles-dark-reinforced = { ent-FloorTileItemDarkReinforced }
+tiles-techmaint-drain-vertical = технический пол с вертикальной решёткой
+tiles-techmaint-drain-horizontal = технический пол с горизонтальной решёткой
+tiles-techmaint-drain-middle = { ent-FloorItemTechMainDrainMiddle }
+tiles-kitchen-red = { ent-FloorTileItemKitchenRed }
+tiles-astro-sand = { ent-FloorTileItemSand }
+tiles-220-curse = проклятье 220

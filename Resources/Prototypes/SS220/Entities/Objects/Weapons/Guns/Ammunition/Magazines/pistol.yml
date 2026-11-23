@@ -1,7 +1,7 @@
 - type: entity
   id: MagazinePistolSubMachineGunAcp
   name: SMG magazine (.45 ACP)
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseMagazine, BaseSecurityContraband ]
   components:
   - type: Tag
     tags:

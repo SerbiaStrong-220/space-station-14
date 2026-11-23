@@ -15,3 +15,12 @@
     path: /Audio/SS220/Animals/bnuuy_squeak.ogg
   exclaimSound:
     path: /Audio/SS220/Animals/bnuuy_squeak.ogg
+
+- type: speechSounds
+  id: Beep
+  saySound:
+    path: /Audio/Items/beep.ogg
+  askSound:
+    path: /Audio/Items/beep.ogg
+  exclaimSound:
+    path: /Audio/Items/beep.ogg
