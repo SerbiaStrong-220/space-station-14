@@ -58,10 +58,9 @@ public sealed partial class DeliverySystem : SharedDeliverySystem
             //return;
         var recipient = AssignRecipient(ent);
         FillContents(ent, recipient?.JobPrototype, recipient?.Species);
-    }
-		// SS220-job-mail end
+    }// SS220-job-mail end
 
-	// SS220-job-mail begin
+    // SS220-job-mail begin
     private GeneralStationRecord? AssignRecipient(Entity<DeliveryComponent> ent)
     {
         var stationId = _station.GetStationInMap(Transform(ent).MapID);
@@ -70,7 +69,7 @@ public sealed partial class DeliverySystem : SharedDeliverySystem
 
         if (!_records.TryGetRandomRecord<GeneralStationRecord>(stationId.Value, out var entry))
             return null;
-        // SS220-job-mail end
+
         ent.Comp.RecipientName = entry.Name;
         ent.Comp.RecipientJobTitle = entry.JobTitle;
         ent.Comp.RecipientStation = stationId;
@@ -85,8 +84,9 @@ public sealed partial class DeliverySystem : SharedDeliverySystem
         }
 
         Dirty(ent);
-        return entry; // SS220-job-mail
+        return entry;
     }
+    // SS220-job-mail end
 
     protected override void GrantSpesoReward(Entity<DeliveryComponent?> ent)
     {
