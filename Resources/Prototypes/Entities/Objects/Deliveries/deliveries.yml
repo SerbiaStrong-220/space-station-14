@@ -58,6 +58,7 @@
   id: PackageDelivery
   name: package
   components:
+  - type: AntiRottingContainer # SS220: preserve ingredients until the package is opened.
   - type: Sprite
     sprite: SS220/Objects/Specific/Cargo/mail_large.rsi #SS220 package-resprite
     layers:
@@ -94,14 +95,15 @@
   - type: Delivery
     baseSpesoReward: 1000
     baseSpesoPenalty: 250 # So low due to dept economy splitting all the earnings, but not splitting the penalty.
+    # SS220-job-mail begin
+    contents: !type:NestedSelector
+      tableId: PackageDeliveryRewardsWithJob
+    # SS220-job-mail end
   - type: Speech
     speechVerb: Robotic
   - type: SimpleToolUsage
     doAfter: 6
-  - type: EntityTableContainerFill
-    containers:
-      delivery: !type:NestedSelector
-        tableId: PackageDeliveryRewards
+  # SS220-job-mail: contents are filled by Delivery after assigning the recipient.
   - type: Tag
     tags:
       - PackageDelivery

@@ -1,11 +1,11 @@
 using Content.Server.Speech;
+using Content.Server.SS220.TTS;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Database;
-using Content.Shared.Interaction;
 using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Implants;
@@ -13,7 +13,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Content.Shared.Speech;
-using Content.Shared.SS220.TTS;
 using Content.Shared.VoiceMask;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
@@ -33,6 +32,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
+    [Dependency] private TtsSystem _tts = default!;
 
     // CCVar.
     private int _maxNameLength;
@@ -50,14 +50,13 @@ public sealed partial class VoiceMaskSystem : EntitySystem
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeVerbMessage>(OnChangeVerb);
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskToggleMessage>(OnToggle);
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskAccentToggleMessage>(OnAccentToggle);
-        InitializeTTS(); // Corvax-TTS
         SubscribeLocalEvent<VoiceMaskComponent, ClothingGotEquippedEvent>(OnEquip);
         SubscribeLocalEvent<VoiceMaskSetNameEvent>(OpenUI);
         SubscribeLocalEvent<VoiceMaskComponent, TransformSpeechEvent>(OnTransformSpeech, before: [typeof(AccentSystem)]);
         SubscribeLocalEvent<VoiceMaskComponent, InventoryRelayedEvent<TransformSpeechEvent>>(OnTransformSpeechInventory, before: [typeof(AccentSystem)]);
         SubscribeLocalEvent<VoiceMaskComponent, ImplantRelayEvent<TransformSpeechEvent>>(OnTransformSpeechImplant, before: [typeof(AccentSystem)]);
 
-        SubscribeLocalEvent<VoiceMaskComponent, AfterInteractEvent>(OnInteract); //ss220 change voice in mask when clicking on target
+        InitializeSS220(); // SS220
 
         Subs.CVar(_cfgManager, CCVars.MaxNameLength, value => _maxNameLength = value, true);
     }
@@ -197,19 +196,8 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     private void UpdateUI(Entity<VoiceMaskComponent> entity)
     {
         if (_uiSystem.HasUi(entity, VoiceMaskUIKey.Key))
-            _uiSystem.SetUiState(entity.Owner, VoiceMaskUIKey.Key, new VoiceMaskBuiState(GetCurrentVoiceName(entity), entity.Comp.VoiceMaskSpeechVerb, entity.Comp.Active, entity.Comp.AccentHide, entity.Comp.VoiceId)); //Corvax-TTS 
+            _uiSystem.SetUiState(entity.Owner, VoiceMaskUIKey.Key, new VoiceMaskBuiState(GetCurrentVoiceName(entity), entity.Comp.VoiceMaskSpeechVerb, entity.Comp.Active, entity.Comp.AccentHide, entity.Comp.VoicePreferences) /* SS220 tts */);
     }
-
-    //ss220 change voice in mask when clicking on target start
-    private void OnInteract(Entity<VoiceMaskComponent> ent, ref AfterInteractEvent args)
-    {
-        if (!TryComp<TTSComponent>(args.Target, out var ttsComponent)
-            || ttsComponent.VoicePrototypeId == null)
-            return;
-
-        RaiseLocalEvent(ent.Owner, new VoiceMaskChangeVoiceMessage(ttsComponent.VoicePrototypeId));
-    }
-    //ss220 change voice in mask when clicking on target end
     #endregion
 
     #region Helper functions

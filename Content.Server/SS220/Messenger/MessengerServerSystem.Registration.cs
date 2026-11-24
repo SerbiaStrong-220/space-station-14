@@ -120,6 +120,7 @@ public sealed partial class MessengerServerSystem
             return;
 
         RefreshCartridge(server, program, loader);
+        UpdateContactNames(server);
         UpdateContactStatuses(server);
     }
 
@@ -177,7 +178,8 @@ public sealed partial class MessengerServerSystem
         if (!HasServerAccess(ent, idCardUid.Value))
             return;
 
-        contactId = RegisterNewClient(ent, idCardUid.Value, idCard.FullName ?? "#unkn##n", address);
+        var fullName = string.IsNullOrWhiteSpace(idCard.FullName) ? MessengerContact.UnknownName : idCard.FullName;
+        contactId = RegisterNewClient(ent, idCardUid.Value, fullName, address);
         SendToContact(ent, contactId, CreateInfoPayload(ent.Comp));
         RememberIdCard(cartridge, idCardUid.Value);
     }
@@ -256,14 +258,14 @@ public sealed partial class MessengerServerSystem
 
             SendToContact(ent, contactId, new NetworkPayload
             {
-                [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.Chat,
-                [MessengerNetworkKey.Chat.ToString()] = chat,
+                [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.Contact,
+                [MessengerNetworkKey.Contact.ToString()] = newContact,
             });
 
             SendToContact(ent, contactId, new NetworkPayload
             {
-                [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.Contact,
-                [MessengerNetworkKey.Contact.ToString()] = newContact,
+                [MessengerNetworkKey.Command.ToString()] = MessengerNetworkCommand.Chat,
+                [MessengerNetworkKey.Chat.ToString()] = chat,
             });
         }
 
