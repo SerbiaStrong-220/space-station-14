@@ -6,6 +6,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.IgnoreWield;
 
@@ -24,6 +25,14 @@ public sealed class IgnoreWieldSystem : EntitySystem
         SubscribeLocalEvent<IgnoreWieldComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<IgnoreWieldComponent, DidEquipHandEvent>(OnDidEquipHand);
         SubscribeLocalEvent<IgnoreWieldComponent, DidUnequipHandEvent>(OnDidUnequipHand);
+
+        SubscribeLocalEvent<GunWieldBonusComponent, EntGotRemovedFromContainerMessage>(OnEntGotRemovedFromContainer);
+    }
+
+    private void OnEntGotRemovedFromContainer(Entity<GunWieldBonusComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    {
+        if (HasComp<GunComponent>(ent))
+            _gun.RefreshModifiers(ent.Owner);
     }
 
     private void OnDidUnequipHand(Entity<IgnoreWieldComponent> ent, ref DidUnequipHandEvent args)
@@ -58,7 +67,7 @@ public sealed class IgnoreWieldSystem : EntitySystem
         if (!TryComp<ClothingComponent>(ent, out var clothingComp))
             return;
 
-        if (args.SlotFlags != clothingComp.Slots)
+        if ((args.SlotFlags & clothingComp.Slots) == 0)
             return;
 
         EnsureComp<IgnoreWieldComponent>(args.EquipTarget, out var comp);
