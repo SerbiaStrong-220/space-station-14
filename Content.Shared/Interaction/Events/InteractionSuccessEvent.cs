@@ -1,4 +1,4 @@
-using Robust.Shared.Audio; //SS220-NonTactile
+using Robust.Shared.Audio;
 
 namespace Content.Shared.Interaction.Events;
 
@@ -11,9 +11,9 @@ namespace Content.Shared.Interaction.Events;
 //SS220-NonTactile begin
 public record struct InteractionSuccessEvent(EntityUid User)
 {
-    public string? Message;
+    public LocId? Message;
     public SoundSpecifier? Sound;
-    public string? MessagePerceivedByOthers;
+    public LocId? MessagePerceivedByOthers;
 }
 //SS220-NonTactile end
 

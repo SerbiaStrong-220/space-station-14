@@ -89,7 +89,7 @@ public sealed class InteractionPopupSystem : EntitySystem
 
         var msg = ""; // Stores the text to be shown in the popup message
         SoundSpecifier? sfx = null; // Stores the filepath of the sound to be played
-        string? perceivedByOthers; //SS220-NonTactile
+        LocId? perceivedByOthers; //SS220-NonTactile
 
         var predict = component.SuccessChance is 0 or 1
                       && component.InteractSuccessSpawn == null
@@ -110,7 +110,7 @@ public sealed class InteractionPopupSystem : EntitySystem
             RaiseLocalEvent(target, ref ev);
 
             if (ev.Message != null)
-                msg = Loc.GetString(ev.Message, ("target", Identity.Entity(uid, EntityManager))); // Success message (localized).
+                msg = Loc.GetString(ev.Message.Value, ("target", Identity.Entity(uid, EntityManager))); // Success message (localized).
 
             sfx = ev.Sound;
             perceivedByOthers = ev.MessagePerceivedByOthers;
@@ -131,7 +131,7 @@ public sealed class InteractionPopupSystem : EntitySystem
             RaiseLocalEvent(target, ref ev);
 
             if (ev.Message != null)
-                msg = Loc.GetString(ev.Message, ("target", Identity.Entity(uid, EntityManager))); // Failure message (localized).
+                msg = Loc.GetString(ev.Message.Value, ("target", Identity.Entity(uid, EntityManager))); // Failure message (localized).
 
             sfx = ev.Sound;
             perceivedByOthers = ev.MessagePerceivedByOthers;
@@ -141,9 +141,9 @@ public sealed class InteractionPopupSystem : EntitySystem
                 Spawn(component.InteractFailureSpawn, _transform.GetMapCoordinates(uid));
         }
 
-        if (!string.IsNullOrEmpty(perceivedByOthers)) //SS220-NonTactile
+        if (perceivedByOthers is { } others) //SS220-NonTactile
         {
-            var msgOthers = Loc.GetString(perceivedByOthers, //SS220-NonTactile
+            var msgOthers = Loc.GetString(others, //SS220-NonTactile
                 ("user", Identity.Entity(user, EntityManager)), ("target", Identity.Entity(uid, EntityManager)));
             _popupSystem.PopupEntity(msgOthers, uid, Filter.PvsExcept(user, entityManager: EntityManager), true);
         }
