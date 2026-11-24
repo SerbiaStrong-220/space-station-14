@@ -36,7 +36,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.SS220.MindSlave;
-using Content.Server.SS220.AntagRemoval; // SS220-removeantag
+using Content.Server.SS220.AntagRemoval;
 using Content.Shared.SS220.Experience.Systems;
 using Content.Shared.SS220.Arena;
 
@@ -205,14 +205,8 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
             // SS220-removeantag-begin
             var players = _playerManager.NetworkedSessions.Count(x => x.AttachedEntity != null);
-            if (TryGetFreedDefinition((uid, antag), players, out var freedDef))
-            {
-                if (freedDef is not { } selectedDef)
-                    continue;
-                if (TryMakeAntag((uid, antag), session, selectedDef))
-                    break;
-                continue;
-            }
+            if (TryAssignFreedSlot((uid, antag), session, players))
+                break;
             // SS220-removeantag-end
 
             if (!antag.Definitions.Any(p => p.LateJoinAdditional))
@@ -537,7 +531,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         {
             removeAntag.CancelGrant(snapshot);
         }
-// SS220-removeantag-end
+        // SS220-removeantag-end
     }
 
     /// <summary>

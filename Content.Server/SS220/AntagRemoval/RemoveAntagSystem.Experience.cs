@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Antag.Components;
 using Content.Shared.Roles;
 using Content.Shared.SS220.Experience;
@@ -95,6 +96,7 @@ public sealed partial class RemoveAntagSystem
     private bool CanRevokeAntagExperience(EntityUid body, string roleId, out string reason)
     {
         reason = string.Empty;
+
         if (!TryComp<ExperienceComponent>(body, out var exp))
             return true;
 
@@ -111,6 +113,7 @@ public sealed partial class RemoveAntagSystem
                 var purchase = spent.RemoveAntagPurchases[i];
                 if (!remainingSkills.TryGetValue(purchase.SkillTree, out var held))
                     continue;
+
                 var available = Math.Min(purchase.Amount, held);
                 refundable += available;
                 remainingSkills[purchase.SkillTree] -= available;
@@ -156,6 +159,7 @@ public sealed partial class RemoveAntagSystem
                 purchases.SpentSublevelPoints -= refunded;
                 deficit -= refunded;
             }
+
             Dirty(body, purchases);
         }
 

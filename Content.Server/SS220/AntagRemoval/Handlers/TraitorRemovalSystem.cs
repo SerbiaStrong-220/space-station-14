@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Collections.Generic;
 using System.Linq;
 using Content.Server.GameTicking.Rules;
@@ -9,7 +10,7 @@ using Content.Shared.Store.Components;
 
 namespace Content.Server.SS220.AntagRemoval.Handlers;
 
-public sealed class TraitorRemovalSystem : EntitySystem, IAntagRemovalHandler
+public sealed partial class TraitorRemovalSystem : EntitySystem, IAntagRemovalHandler
 {
     [Dependency] private TraitorRuleSystem _traitor = default!;
     [Dependency] private SharedRoleCodewordSystem _codewords = default!;
@@ -27,9 +28,12 @@ public sealed class TraitorRemovalSystem : EntitySystem, IAntagRemovalHandler
         AntagRemovalGrantComponent provenance, AntagGrantRecord grant, out string reason)
     {
         RevokeUplinks(body, grant);
+
         if (TryComp<RoleCodewordComponent>(mindId, out var codewords))
             _codewords.SetRoleCodewords((mindId, codewords), "traitor", new List<string>(), default);
+
         _traitor.RemoveTraitorFromRoundAccounting(mindId);
+
         reason = string.Empty;
         return true;
     }

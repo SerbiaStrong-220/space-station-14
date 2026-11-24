@@ -41,6 +41,7 @@ namespace Content.Client.SS220.Administration.UI.CustomControls
             RobustXamlLoader.Load(this);
             // Fill the Option data
             AntagonistsListContainer.ItemPressed += AntagonistsListItemPressed;
+            AntagonistsListContainer.NoItemSelected += () => OnSelectionChanged?.Invoke(null);
             AntagonistsListContainer.GenerateItem += GenerateButton;
 
             BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(32, 32, 40) };

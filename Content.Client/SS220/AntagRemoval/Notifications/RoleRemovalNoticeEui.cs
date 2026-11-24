@@ -18,6 +18,7 @@ public sealed class RoleRemovalNoticeEui : BaseEui
         _window = new();
 
         _window.AcceptButton.OnPressed += _ => _window.Close();
+        _window.OnClose += () => SendMessage(new CloseEuiMessage());
     }
 
     public override void Opened()

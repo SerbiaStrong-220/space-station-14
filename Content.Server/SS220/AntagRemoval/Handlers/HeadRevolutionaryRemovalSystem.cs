@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Mind;
 using Content.Shared.Revolutionary.Components;
 
@@ -19,8 +20,10 @@ public sealed class HeadRevolutionaryRemovalSystem : EntitySystem, IAntagRemoval
         AntagRemovalGrantComponent provenance, AntagGrantRecord grant, out string reason)
     {
         RemComp<HeadRevolutionaryComponent>(body);
+
         if (!HasRevolutionaryMindRole(mindId))
             RemComp<RevolutionaryComponent>(body);
+
         reason = string.Empty;
         return true;
     }
@@ -29,9 +32,11 @@ public sealed class HeadRevolutionaryRemovalSystem : EntitySystem, IAntagRemoval
     {
         if (!TryComp<MindComponent>(mindId, out var mind))
             return false;
+
         foreach (var role in mind.MindRoleContainer.ContainedEntities)
             if (MetaData(role).EntityPrototype?.ID == RemoveAntagRoles.Revolutionary)
                 return true;
+
         return false;
     }
 }

@@ -1,8 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Linq;
 using Content.Server.Antag;
 using Content.Server.Chat.Managers;
 using Content.Server.EUI;
+using Content.Server.GameTicking.Rules;
 using Content.Server.SS220.AntagRemoval.Notifications;
 using Content.Server.SS220.AntagRemoval.Handlers;
 using Content.Server.Roles;
@@ -43,7 +45,8 @@ public sealed partial class RemoveAntagSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnded);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
+        InitializeUi();
         EntityManager.EntityAdded += OnGrantedEntityAdded;
     }
 
@@ -53,7 +56,7 @@ public sealed partial class RemoveAntagSystem : EntitySystem
         base.Shutdown();
     }
 
-    private void OnRoundEnded(RoundEndedEvent ev)
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _selection.ResetRemovedRolesForNewRound();
     }
@@ -88,9 +91,10 @@ public sealed partial class RemoveAntagSystem : EntitySystem
                 : string.Join(", ", roles)));
     }
 
-    public bool TryRemove(ICommonSession? administrator, ICommonSession session, string kind, out string result)
+    public bool TryRemove(ICommonSession? administrator, ICommonSession session, string kind, out string result,
+        NetEntity? expectedBody = null, NetEntity? expectedMind = null)
     {
-        if (!Supported.TryGetValue(kind, out var roleId))
+        if (kind is null || !Supported.TryGetValue(kind, out var roleId))
         {
             result = Loc.GetString("ss220-removeantag-error-unsupported");
             return false;
@@ -98,6 +102,13 @@ public sealed partial class RemoveAntagSystem : EntitySystem
 
         if (!TryResolvePlayer(session, out var body, out var mindId, out var mind, out result))
             return false;
+
+        if ((expectedBody is { } bodyNet && GetNetEntity(body) != bodyNet) ||
+            (expectedMind is { } mindNet && GetNetEntity(mindId) != mindNet))
+        {
+            result = Loc.GetString("ss220-removeantag-error-target-changed");
+            return false;
+        }
 
         if (!HasRolePrototype(mind, roleId))
         {
@@ -126,6 +137,7 @@ public sealed partial class RemoveAntagSystem : EntitySystem
             result = Loc.GetString("ss220-removeantag-error-unavailable");
             return false;
         }
+
         if (!handler.CanRemove(body, mindId, out result))
             return false;
 
@@ -175,6 +187,9 @@ public sealed partial class RemoveAntagSystem : EntitySystem
             assignmentStillActive ? -1 : grant.SelectionDefinitionIndex);
         provenance.Grants.Remove(roleId);
 
+        if (roleId == RemoveAntagRoles.HeadRevolutionary)
+            EntityManager.System<RevolutionaryRuleSystem>().RecheckAfterHeadRemoval(grant.GameRule);
+
         RaiseNetworkEvent(new MindRoleTypeChangedEvent(), session.Channel);
 
         var roleName = RoleName(roleId);
@@ -184,6 +199,7 @@ public sealed partial class RemoveAntagSystem : EntitySystem
 
         if (roleId != RemoveAntagRoles.Cult)
             _euiManager.OpenEui(new RoleRemovalNoticeEui(roleName), session);
+
         _log.Add(LogType.Mind, LogImpact.High,
             $"removeantag: actor={FormatAdministrator(administrator)}, target={session.Name} ({session.UserId}), character={Name(body)}, removed={roleId}, stationJob={job.ID}");
 
@@ -245,6 +261,7 @@ public sealed partial class RemoveAntagSystem : EntitySystem
         foreach (var role in mind.MindRoleContainer.ContainedEntities)
             if (MetaData(role).EntityPrototype?.ID == roleId)
                 return true;
+
         return false;
     }
 
@@ -261,6 +278,7 @@ public sealed partial class RemoveAntagSystem : EntitySystem
                     foreach (var contents in container.ContainedEntities.ToArray())
                         _containers.Remove(contents, container, force: true);
             }
+
             QueueDel(item);
         }
     }
@@ -275,6 +293,7 @@ public sealed partial class RemoveAntagSystem : EntitySystem
             if (!stillGranted && origin.FactionsBeforeFirstAntag?.Contains(faction) != true)
                 _factions.RemoveFaction(body, faction.Id);
         }
+
         foreach (var faction in removed.FactionsRemoved)
         {
             var stillRemoved = origin.Grants.Values.Any(other => other != removed &&
@@ -287,6 +306,7 @@ public sealed partial class RemoveAntagSystem : EntitySystem
         {
             if (other == removed)
                 continue;
+
             foreach (var faction in other.FactionsAdded)
                 _factions.AddFaction(body, faction.Id);
             foreach (var faction in other.FactionsRemoved)
@@ -305,6 +325,7 @@ public sealed partial class RemoveAntagSystem : EntitySystem
             RemoveAntagRoles.HeadRevolutionary => "ss220-removeantag-role-headrev",
             _ => null
         };
+
         return key is null ? roleId : Loc.GetString(key);
     }
 }

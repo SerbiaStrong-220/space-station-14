@@ -23,9 +23,8 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.StationRecords;
 using Robust.Shared.Map;
 
-using Content.Server.SS220.AntagRemoval; // SS220-removeantag
-using Content.Shared.SS220.Experience.Systems; // SS220-removeantag
-
+using Content.Server.SS220.AntagRemoval;
+using Content.Shared.SS220.Experience.Systems;
 namespace Content.Server.GameTicking.Rules;
 
 public sealed partial class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>

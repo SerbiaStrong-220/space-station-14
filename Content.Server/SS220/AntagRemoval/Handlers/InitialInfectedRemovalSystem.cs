@@ -1,10 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Actions;
 using Content.Shared.Zombies;
 
 namespace Content.Server.SS220.AntagRemoval.Handlers;
 
-public sealed class InitialInfectedRemovalSystem : EntitySystem, IAntagRemovalHandler
+public sealed partial class InitialInfectedRemovalSystem : EntitySystem, IAntagRemovalHandler
 {
     [Dependency] private SharedActionsSystem _actions = default!;
 
@@ -24,12 +25,16 @@ public sealed class InitialInfectedRemovalSystem : EntitySystem, IAntagRemovalHa
         {
             if (infection.Action is { } action)
                 _actions.RemoveAction(body, action);
+
             RemComp<IncurableZombieComponent>(body);
         }
+
         if (grant.GrantedPatientZero)
             RemComp<InitialInfectedComponent>(body);
+
         if (grant.GrantedZombifyOnDeath)
             RemComp<ZombifyOnDeathComponent>(body);
+
         if (grant.GrantedPendingZombie)
             RemComp<PendingZombieComponent>(body);
 

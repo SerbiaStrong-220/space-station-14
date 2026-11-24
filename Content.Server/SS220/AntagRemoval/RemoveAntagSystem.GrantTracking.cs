@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Linq;
 using Content.Server.Antag.Components;
 using Content.Shared.Mind;
@@ -58,6 +59,7 @@ public sealed partial class RemoveAntagSystem
                     snap.SelectionDefinitionIndex = -1;
                     break;
                 }
+
                 snap.SelectionDefinitionIndex = i;
             }
         }
@@ -73,8 +75,10 @@ public sealed partial class RemoveAntagSystem
         {
             foreach (var item in gear.Equipment.Values)
                 snap.GearPrototypes.Add(item.Id);
+
             foreach (var item in gear.Inhand)
                 snap.GearPrototypes.Add(item.Id);
+
             foreach (var storage in gear.Storage.Values)
                 foreach (var item in storage)
                     snap.GearPrototypes.Add(item.Id);
@@ -92,6 +96,7 @@ public sealed partial class RemoveAntagSystem
         // Stop tracking before recalculation and any cleanup can spawn entities.
         if (_activeGrantSnapshots.Count == 0 || !ReferenceEquals(_activeGrantSnapshots.Peek(), snapshot))
             throw new InvalidOperationException("Mismatched antagonist equipment grant scope.");
+
         _activeGrantSnapshots.Pop();
 
         var origin = EnsureComp<AntagRemovalGrantComponent>(body);
@@ -101,6 +106,7 @@ public sealed partial class RemoveAntagSystem
             snapshot.MindAfterGrant = grantedMindId;
             currentObjectives.UnionWith(mind.Objectives);
         }
+
         currentObjectives.ExceptWith(snapshot.ObjectivesBefore);
 
         var newGear = new HashSet<EntityUid>();
@@ -123,6 +129,7 @@ public sealed partial class RemoveAntagSystem
         {
             if (!origin.Grants.TryGetValue(roleId, out var grant))
                 origin.Grants[roleId] = grant = new AntagGrantRecord { RoleId = roleId, GameRule = snapshot.Rule };
+
             grant.GameRule = snapshot.Rule;
             grant.SelectionDefinitionIndex = snapshot.SelectionDefinitionIndex;
 
@@ -188,6 +195,7 @@ public sealed partial class RemoveAntagSystem
                     grant.VerifiedProvenance = true;
                 }
             }
+
             grant.FactionsAdded.UnionWith(after.Except(before));
             grant.FactionsRemoved.UnionWith(before.Except(after));
         }
@@ -209,13 +217,17 @@ public sealed partial class RemoveAntagSystem
         {
             if (uid == body)
                 return true;
+
             if (!TryComp(uid, out TransformComponent? transform))
                 break;
+
             var parent = transform.ParentUid;
             if (parent == uid)
                 break;
+
             current = parent;
         }
+
         return false;
     }
 }
