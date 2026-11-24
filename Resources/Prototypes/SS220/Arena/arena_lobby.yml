@@ -15,7 +15,7 @@
   components:
   - type: ArenaRule
     displayName: Operative 2x2 (uplink)
-    description: Аплинк 40 ТК.
+    description: Аплинк 400 ТК.
     maxPlayers: 4
     maps:
     - path: /Maps/SS220/Shitspawn/Arenas/uplink_arena_2v2.yml
@@ -103,7 +103,7 @@
   components:
   - type: ArenaRule
     displayName: Uplink 1x1
-    description: Дуэль на 40 ТК.
+    description: Дуэль на 400 ТК.
     maxPlayers: 2
     maps:
     - path: /Maps/SS220/Shitspawn/Arenas/two_player_arena.yml

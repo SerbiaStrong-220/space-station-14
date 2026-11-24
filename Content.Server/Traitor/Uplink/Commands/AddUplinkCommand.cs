@@ -73,7 +73,7 @@ public sealed class AddUplinkCommand : LocalizedEntityCommands
         }
 
         // Finally add uplink
-        var result = _uplinkSystem.AddUplink(user, 20, out var code, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted);
+        var result = _uplinkSystem.AddUplink(user, 200, out var code, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted); //SS220-uplink-200tc
 
         if (code != null && result == AddUplinkResult.Pda)
             shell.WriteLine(Loc.GetString("add-uplink-command-success-pda", ("code", string.Join("-", code).Replace("sharp", "#"))));
