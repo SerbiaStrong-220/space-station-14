@@ -10,3 +10,6 @@ alerts-grabbed-name = Захват
 alerts-grabbed-desc = Вас кто-то удерживает в захвате. Нажмите, чтобы сопротивляться захвату!
 alerts-void-blocker-name = [color=yellow]Планарный ограничитель[/color]
 alerts-void-blocker-desc = Вы разрушили [color=yellow]{ ent-VoidKey }[/color]! Нарушение пространства бездны накладывает ограничения. Некоторое время вы не сможете попасть в бездну тем же способом.
+
+alerts-demon-rofler-deadscore-name = требуемые поглощения
+alerts-demon-rofler-deadscore-desc = Показывает количество поглощений, требуемых для следующего уровня.

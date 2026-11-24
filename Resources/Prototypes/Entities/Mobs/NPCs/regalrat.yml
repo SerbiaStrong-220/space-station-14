@@ -153,6 +153,7 @@
   - type: Tts
     voicePreferences:
       NTTS: hagraven
+      Silero: Hagraven
   #SS220-AddTTSRatKing end
 
 - type: entity

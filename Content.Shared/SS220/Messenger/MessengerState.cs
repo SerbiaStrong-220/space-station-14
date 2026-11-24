@@ -49,6 +49,8 @@ public enum MessengerContactStatus : byte
 [Serializable, NetSerializable]
 public sealed class MessengerContact
 {
+    public const string UnknownName = "#unkn##n";
+
     public ContactUid Id;
     public string? Name;
     public MessengerContactStatus Status;

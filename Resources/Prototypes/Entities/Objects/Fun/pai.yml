@@ -78,6 +78,7 @@
   - type: Tts
     voicePreferences:
       NTTS: adventure_core
+      Silero: Wheatley
   # SS220 Tts end
   - type: Speech
     speechVerb: Robotic
