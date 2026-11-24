@@ -50,11 +50,26 @@ public sealed partial class DeliverySystem : SharedDeliverySystem
     {
         _container.EnsureContainer<Container>(ent, ent.Comp.Container);
 
-        if (_station.GetStationInMap(Transform(ent).MapID) is not { } stationId)
-            return;
+        // SS220-job-mail begin
+        //if (_station.GetStationInMap(Transform(ent).MapID) is not { } stationId)
+            //return;
 
-        if (!_records.TryGetRandomRecord<GeneralStationRecord>(stationId, out var entry))
-            return;
+        //if (!_records.TryGetRandomRecord<GeneralStationRecord>(stationId, out var entry))
+            //return;
+        var recipient = AssignRecipient(ent);
+        FillContents(ent, recipient?.JobPrototype, recipient?.Species);
+        // SS220-job-mail end
+    }
+
+    // SS220-job-mail begin
+    private GeneralStationRecord? AssignRecipient(Entity<DeliveryComponent> ent)
+    {
+        var stationId = _station.GetStationInMap(Transform(ent).MapID);
+        if (stationId == null)
+            return null;
+
+        if (!_records.TryGetRandomRecord<GeneralStationRecord>(stationId.Value, out var entry))
+            return null;
 
         ent.Comp.RecipientName = entry.Name;
         ent.Comp.RecipientJobTitle = entry.JobTitle;
@@ -70,7 +85,9 @@ public sealed partial class DeliverySystem : SharedDeliverySystem
         }
 
         Dirty(ent);
+        return entry;
     }
+    // SS220-job-mail end
 
     protected override void GrantSpesoReward(Entity<DeliveryComponent?> ent)
     {
