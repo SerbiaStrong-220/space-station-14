@@ -103,7 +103,7 @@ public sealed partial class MessengerServerSystem
         if (HasComp<StationAiHeldComponent>(clientUid))
             name = MetaData(clientUid).EntityName;
         else if (TryComp<IdCardComponent>(clientUid, out var card))
-            name = card.FullName;
+            name = string.IsNullOrWhiteSpace(card.FullName) ? MessengerContact.UnknownName : card.FullName;
 
         return name != null;
     }
