@@ -58,7 +58,8 @@ public sealed partial class DeliverySystem : SharedDeliverySystem
             //return;
         var recipient = AssignRecipient(ent);
         FillContents(ent, recipient?.JobPrototype, recipient?.Species);
-    }// SS220-job-mail end
+        // SS220-job-mail end
+    }
 
     // SS220-job-mail begin
     private GeneralStationRecord? AssignRecipient(Entity<DeliveryComponent> ent)

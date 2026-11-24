@@ -116,9 +116,9 @@ public sealed partial class DeliverySystem
     }
 
     private void FillContents(
-    Entity<DeliveryComponent> ent,
-    ProtoId<JobPrototype>? job,
-    ProtoId<SpeciesPrototype>? species)
+        Entity<DeliveryComponent> ent,
+        ProtoId<JobPrototype>? job,
+        ProtoId<SpeciesPrototype>? species)
     {
         if (ent.Comp.Contents == null)
             return;
