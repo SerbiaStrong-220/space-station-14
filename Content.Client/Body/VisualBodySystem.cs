@@ -65,11 +65,13 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
 
     private void OnOrganState(Entity<VisualOrganComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        //SS220-surgery-update begin
         if (Comp<OrganComponent>(ent).Body is not { } body)
         {
-            _severedOrganVisuals.OrganAppearanceChanged(ent); //SS220-surgery-update
+            _severedOrganVisuals.OrganAppearanceChanged(ent);
             return;
         }
+        //SS220-surgery-update end
 
         ApplyVisual(ent, body);
     }
@@ -102,11 +104,13 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
 
     private void OnMarkingsState(Entity<VisualOrganMarkingsComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        //SS220-surgery-update begin
         if (Comp<OrganComponent>(ent).Body is not { } body)
         {
-            _severedOrganVisuals.OrganAppearanceChanged(ent); //SS220-surgery-update
+            _severedOrganVisuals.OrganAppearanceChanged(ent);
             return;
         }
+        //SS220-surgery-update end
 
         RemoveMarkings(ent, body);
         ApplyMarkings(ent, body);
