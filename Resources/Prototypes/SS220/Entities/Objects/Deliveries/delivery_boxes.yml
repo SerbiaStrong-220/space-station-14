@@ -1,0 +1,72 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Mail variants keep the boxed presentation while controlling the pizza inside.
+- type: entity
+  parent: FoodBoxPizza
+  id: FoodBoxPizzaDeliveryFilled
+  suffix: Filled, delivery
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: PackageDeliveryPizzaContents
+
+- type: entity
+  parent: FoodBoxPizza
+  id: FoodBoxPizzaDeliveryMeatFilled
+  suffix: Filled, meat delivery
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: KnifePlastic
+        - id: FoodPizzaMeat
+
+- type: entity
+  parent: ToolboxEmergency
+  id: ToolboxEmergencyDeliveryIpcFilled
+  suffix: Filled, IPC delivery
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - !type:NestedSelector
+          tableId: PackageDeliveryEmergencyToolboxTools
+        - id: PowerCellSmall
+          prob: 0.15
+        - id: HarmonicaInstrument
+          prob: 0.15
+
+- type: entity
+  parent: ToolboxEmergency
+  id: ToolboxEmergencyDeliveryMothFilled
+  suffix: Filled, moth delivery
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - !type:NestedSelector
+          tableId: PackageDeliveryEmergencyToolboxTools
+        - id: FoodBagelCotton
+          prob: 0.15
+        - id: HarmonicaInstrument
+          prob: 0.15
+
+- type: entity
+  parent: ToolboxEmergency
+  id: ToolboxEmergencyDeliveryCarnivoreFilled
+  suffix: Filled, carnivore delivery
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - !type:NestedSelector
+          tableId: PackageDeliveryEmergencyToolboxTools
+        - id: FoodDonkpocketDink
+          prob: 0.15
+        - id: HarmonicaInstrument
+          prob: 0.15
