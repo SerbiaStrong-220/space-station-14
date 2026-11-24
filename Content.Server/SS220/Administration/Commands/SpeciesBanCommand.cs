@@ -35,7 +35,8 @@ public sealed partial class SpeciesBanCommand : LocalizedCommands
         uint minutes;
         var postBanInfo = true;
 
-        if (!Enum.TryParse(_cfg.GetCVar(CCVars220.SpeciesBanDefaultSeverity), out NoteSeverity severity))
+        if (!Enum.TryParse(_cfg.GetCVar(CCVars220.SpeciesBanDefaultSeverity), ignoreCase: true,
+                out NoteSeverity severity))
         {
             _sawmill ??= _log.GetSawmill("admin.species_ban");
             _sawmill.Warning("Species ban severity could not be parsed from config! Defaulting to medium.");

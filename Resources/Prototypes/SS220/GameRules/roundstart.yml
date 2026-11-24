@@ -21,7 +21,6 @@
         components:
         - BibleUser
         - CultYoggSacrificial
-        - ArenaParticipant
         - AntagImmune
         - Ipc
       lateJoinAdditional: false

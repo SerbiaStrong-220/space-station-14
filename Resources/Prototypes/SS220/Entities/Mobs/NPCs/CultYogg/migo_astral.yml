@@ -55,8 +55,10 @@
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelYoggSothothCult
-  - type: TTS
-    voice: forester
+  - type: Tts
+    voicePreferences:
+      NTTS: forester
+      Silero: Abathur
   - type: Language
     availableLanguages:
     - id: Galactic
