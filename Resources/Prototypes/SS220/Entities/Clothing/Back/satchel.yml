@@ -59,9 +59,9 @@
   components:
   - type: Storage
     grid:
-    - 0,0,2,4
-    - 4,0,8,4
-    - 10,0,12,4
+    - 0,0,2,3
+    - 4,0,7,3
+    - 9,0,11,3
   - type: Sprite
     sprite: SS220/Clothing/Back/Satchels/redwings.rsi
   - type: MicroFiber

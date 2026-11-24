@@ -166,7 +166,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,8,4
+    - 0,0,7,3
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/redwings.rsi
   - type: MicroFiber
