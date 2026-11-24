@@ -254,10 +254,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
-        if (!_prototype.Resolve(args.SurgeryGraph, out var surgeryPrototype))
+        // only the server decides the result: the client may compute other risk modifiers (skills, power, anesthesia)
+        // and finish the DoAfter on another tick, a predicted step would show twice or be rolled back
+        if (_net.IsClient)
             return;
 
-        if (!_gameTiming.IsFirstTimePredicted)
+        if (!_prototype.Resolve(args.SurgeryGraph, out var surgeryPrototype))
             return;
 
         if (GetEdgeTargeting(entity, surgeryPrototype, args.EdgeId) is not { } chosenEdge)
@@ -270,19 +272,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         }
 
         var failChance = GetStepFailureChance(entity.Owner, args.User, args.Used, chosenEdge);
-        var serverOnly = failChance > 0f;
-        if (serverOnly)
+        if (failChance > 0f && _random.NextFloat() < failChance)
         {
-            // client and server can finish the DoAfter on different ticks, so a predicted roll would desync
-            if (_net.IsClient)
-                return;
-
-            if (_random.NextFloat() < failChance)
-            {
-                OnSurgeryFailure(args, failedEdge: chosenEdge);
-                ResyncPatient(entity);
-                return;
-            }
+            OnSurgeryFailure(args, failedEdge: chosenEdge);
+            ResyncPatient(entity);
+            return;
         }
 
         if (!TryMeetRequirement(entity, chosenEdge, args.Used, args.User))
@@ -291,7 +285,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
-        ProceedToNextStep(entity, args.User, args.Used, args.SurgeryGraph, chosenEdge, predicted: !serverOnly);
+        ProceedToNextStep(entity, args.User, args.Used, args.SurgeryGraph, chosenEdge);
     }
 
     private void ResyncPatient(Entity<SurgeryPatientComponent> entity)
@@ -511,12 +505,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return false;
 
         // a failure with a weapon is a hit, so it obeys the same cooldown and attack restrictions (e.g. pacifism)
-        var curTime = _gameTiming.CurTime;
-        if (curTime < melee.NextAttack || !_actionBlocker.CanAttack(user, target, (used, melee)))
+        if (!_actionBlocker.CanAttack(user, target, (used, melee)) || !_meleeWeapon.TryUseAttack((used, melee), user))
             return false;
-
-        melee.NextAttack = curTime + TimeSpan.FromSeconds(1f / _meleeWeapon.GetAttackRate(used, user, melee));
-        DirtyField(used, melee, nameof(MeleeWeaponComponent.NextAttack));
 
         damage = _meleeWeapon.GetDamage(used, user, melee);
         return true;

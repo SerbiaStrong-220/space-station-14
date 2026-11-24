@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Client.Body;
 using Content.Client.DisplacementMap;
 using Content.Shared.Body;
 using Content.Shared.Humanoid.Markings;
@@ -20,6 +21,7 @@ public sealed partial class SeveredOrganVisualsSystem : EntitySystem
     [Dependency] private DisplacementMapSystem _displacement = default!;
     [Dependency] private MarkingManager _marking = default!;
     [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private VisualBodySystem _visualBody = default!;
 
     public override void Initialize()
     {
@@ -136,27 +138,25 @@ public sealed partial class SeveredOrganVisualsSystem : EntitySystem
             return;
 
         var displacements = markings.MarkingsDisplacement;
-        foreach (var layerMarkings in markings.Markings.Values)
+        // the same markings as on the body, with the nudity censorship
+        foreach (var marking in _visualBody.AllMarkings((organ, markings)))
         {
-            foreach (var marking in layerMarkings)
+            if (!_marking.TryGetMarking(marking, out var proto))
+                continue;
+
+            displacements.TryGetValue(proto.BodyPart, out var displacement);
+            for (var i = 0; i < proto.Sprites.Count; i++)
             {
-                if (!_marking.TryGetMarking(marking, out var proto))
-                    continue;
+                DebugTools.Assert(proto.Sprites[i] is SpriteSpecifier.Rsi, $"Marking {proto.ID} has a non-RSI sprite");
 
-                displacements.TryGetValue(proto.BodyPart, out var displacement);
-                for (var i = 0; i < proto.Sprites.Count; i++)
-                {
-                    DebugTools.Assert(proto.Sprites[i] is SpriteSpecifier.Rsi, $"Marking {proto.ID} has a non-RSI sprite");
+                var index = _sprite.AddLayer(sprite.AsNullable(), proto.Sprites[i]);
+                var layerId = TrackLayer(ent, sprite, index);
 
-                    var index = _sprite.AddLayer(sprite.AsNullable(), proto.Sprites[i]);
-                    var layerId = TrackLayer(ent, sprite, index);
+                var color = marking.MarkingColors is { } colors && i < colors.Count ? colors[i] : Color.White;
+                _sprite.LayerSetColor(sprite.AsNullable(), index, color);
 
-                    var color = marking.MarkingColors is { } colors && i < colors.Count ? colors[i] : Color.White;
-                    _sprite.LayerSetColor(sprite.AsNullable(), index, color);
-
-                    if (displacement != null && proto.CanBeDisplaced)
-                        _displacement.TryAddDisplacement(displacement, sprite, index, layerId, out _);
-                }
+                if (displacement != null && proto.CanBeDisplaced)
+                    _displacement.TryAddDisplacement(displacement, sprite, index, layerId, out _);
             }
         }
     }

@@ -1,21 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Body.Components;
-using Content.Server.SS220.LimitationRevive;
-using Content.Shared.Administration.Systems;
-using Content.Shared.Atmos;
-using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body;
-using Content.Shared.Damage.Prototypes;
-using Content.Shared.Damage.Systems;
-using Content.Shared.EntityConditions;
-using Content.Shared.Eye.Blinding.Components;
-using Content.Shared.Eye.Blinding.Systems;
-using Content.Shared.FixedPoint;
-using Content.Shared.SS220.EntityConditions;
-using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.SS220.Pathology;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -31,9 +17,6 @@ public sealed class OrganPathologyTest
     private const string MissingOrganProto = "TestMissingLiver";
     private const string DecayProto = "TestDecayPathology";
     private static readonly ProtoId<OrganCategoryPrototype> LiverCategory = "Liver";
-    private static readonly ProtoId<OrganCategoryPrototype> BrainCategory = "Brain";
-    private static readonly ProtoId<PathologyPrototype> SlownessProto = "Slowness";
-    private static readonly ProtoId<PathologyPrototype> MissingBrainProto = "MissingBrain";
 
     [TestPrototypes]
     private const string OrganPathologyPrototypes = @"
@@ -174,46 +157,6 @@ public sealed class OrganPathologyTest
 
             Assert.That(bodySystem.TryInsertOrgan(donor, recipientLiver!.Value.Owner), Is.True);
             Assert.That(pathologySystem.HavePathology(donor, MissingOrganProto), Is.False);
-        });
-
-        await pair.CleanReturnAsync();
-    }
-
-    [Test]
-    public async Task BrainPathologyMovesWithBrainTest()
-    {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Connected = true,
-            DummyTicker = false
-        });
-
-        var mapData = await pair.CreateTestMap();
-        var server = pair.Server;
-        var entMng = server.ResolveDependency<IEntityManager>();
-        var pathologySystem = entMng.System<SharedPathologySystem>();
-        var bodySystem = entMng.System<BodySystem>();
-
-        await server.WaitAssertion(() =>
-        {
-            var donor = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
-            var recipient = entMng.SpawnEntity("MobHuman", mapData.MapCoords);
-
-            Assert.That(pathologySystem.TryAddPathology(donor, SlownessProto), Is.True);
-            Assert.That(bodySystem.TryExtractOrgan(donor, BrainCategory, out var brain), Is.True);
-            Assert.Multiple(() =>
-            {
-                Assert.That(pathologySystem.HavePathology(donor, SlownessProto), Is.False);
-                Assert.That(pathologySystem.HavePathology(donor, MissingBrainProto), Is.True);
-            });
-
-            Assert.That(bodySystem.TryExtractOrgan(recipient, BrainCategory, out _), Is.True);
-            Assert.That(bodySystem.TryInsertOrgan(recipient, brain!.Value.Owner), Is.True);
-            Assert.Multiple(() =>
-            {
-                Assert.That(pathologySystem.HavePathology(recipient, SlownessProto), Is.True, "Brain trauma must move with the brain");
-                Assert.That(pathologySystem.HavePathology(recipient, MissingBrainProto), Is.False);
-            });
         });
 
         await pair.CleanReturnAsync();

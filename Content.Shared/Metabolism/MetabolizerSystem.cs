@@ -20,6 +20,7 @@ using Content.Shared.SS220.Narcotics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Metabolism;
 
@@ -57,9 +58,10 @@ public sealed class MetabolizerSystem : EntitySystem
     private void OnApplyMetabolicMultiplier(Entity<MetabolizerComponent> ent, ref BodyRelayedEvent<ApplyMetabolicMultiplierEvent> args)
     {
         ent.Comp.UpdateIntervalMultiplier = args.Args.Multiplier;
-        //SS220-surgery-update start
+        //SS220-surgery-update begin
         var rateEv = new GetMetabolizerRateEvent(ent.Comp.Stages);
         RaiseLocalEvent(args.Body, ref rateEv);
+        DebugTools.Assert(rateEv.Multiplier > 0f, $"Metabolizer rate multiplier of {ToPrettyString(args.Body)} must be positive");
         ent.Comp.UpdateIntervalMultiplier /= rateEv.Multiplier;
         //SS220-surgery-update end
         Dirty(ent);

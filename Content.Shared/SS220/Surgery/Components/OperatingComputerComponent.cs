@@ -23,11 +23,4 @@ public sealed partial class OperatingComputerComponent : Component
     [ViewVariables]
     [AutoNetworkedField]
     public EntityUid? LinkedTable;
-
-    [DataField]
-    [AutoNetworkedField]
-    public HashSet<string> UnlockedProtocols = new();
-
-    [ViewVariables]
-    public HashSet<string> BaseUnlockedProtocols = new();
 }

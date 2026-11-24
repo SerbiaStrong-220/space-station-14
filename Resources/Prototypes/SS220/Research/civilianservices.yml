@@ -104,7 +104,6 @@
   recipeUnlocks:
   - DecryptionKeyAdvanced
 
-
 # Surgery: the disks, tools and prostheses
 - type: technology
   id: AdvancedSurgery

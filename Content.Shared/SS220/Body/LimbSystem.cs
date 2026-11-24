@@ -51,8 +51,11 @@ public sealed partial class LimbSystem : EntitySystem
         DebugTools.Assert(ent.Comp.Container.ContainedEntities.Count <= ent.Comp.AttachedOrgans.Count,
             $"Limb {ToPrettyString(ent)} carries more organs than it has attached categories");
 
-        if (ent.Comp.Supporting && !HasSupportingLimb(args.Target))
-            EnsureComp<WormComponent>(args.Target);
+        if (ent.Comp.Supporting && !HasSupportingLimb(args.Target) && !HasComp<WormComponent>(args.Target))
+        {
+            AddComp<WormComponent>(args.Target);
+            AddComp<LimbWormComponent>(args.Target);
+        }
 
         SetDamageOverlayDisabled(ent, args.Target, true);
     }
@@ -64,7 +67,7 @@ public sealed partial class LimbSystem : EntitySystem
 
         ReturnAttachedOrgans(ent.AsNullable(), args.Target);
 
-        if (ent.Comp.Supporting)
+        if (ent.Comp.Supporting && RemComp<LimbWormComponent>(args.Target))
             RemComp<WormComponent>(args.Target);
 
         SetDamageOverlayDisabled(ent, args.Target, false);

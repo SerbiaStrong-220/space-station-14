@@ -2,10 +2,8 @@
 
 using Content.Server.SS220.Body;
 using Content.Shared.Random;
-using Content.Shared.SS220.Pathology;
 using Content.Shared.SS220.Surgery.Graph;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Surgery.Actions;
 
@@ -27,12 +25,6 @@ public sealed partial class LobotomyAction : ISurgeryGraphEdgeAction
 
     public void PerformAction(EntityUid targetUid, EntityUid userUid, EntityUid? usedUid, IEntityManager entityManager)
     {
-        if (IoCManager.Resolve<IRobustRandom>().Prob(TraumaChance))
-        {
-            entityManager.System<SharedPathologySystem>().TryAddRandom(targetUid, Traumas, 1f);
-            return;
-        }
-
-        entityManager.System<CongenitalTraitSystem>().TryCureRandomTrait(targetUid);
+        entityManager.System<CongenitalTraitSystem>().Lobotomize(targetUid, TraumaChance, Traumas);
     }
 }

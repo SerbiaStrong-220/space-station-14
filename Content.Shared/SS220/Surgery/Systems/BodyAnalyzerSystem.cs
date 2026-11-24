@@ -141,13 +141,14 @@ public sealed partial class BodyAnalyzerSystem : EntitySystem
 
     private void OnBodyAnalyzerAfterInteract(Entity<BodyAnalyzerComponent> entity, ref AfterInteractEvent args)
     {
-        // ScannedEntity and the UI state are server-side only
-        if (_net.IsClient || !args.CanReach)
+        if (args.Handled || !args.CanReach)
             return;
 
         if (args.Target == null)
         {
-            UpdateAnalyzerTarget(entity, args.Target);
+            if (_net.IsServer)
+                UpdateAnalyzerTarget(entity, null);
+
             return;
         }
 
@@ -156,6 +157,13 @@ public sealed partial class BodyAnalyzerSystem : EntitySystem
             Log.Debug($"Entity {ToPrettyString(entity)} has {nameof(BodyAnalyzerComponent)} but don't have its UI!");
             return;
         }
+
+        // handled on the client too, so it doesn't predict another interaction with the target
+        args.Handled = true;
+
+        // ScannedEntity and the UI state are server-side only
+        if (_net.IsClient)
+            return;
 
         _userInterface.OpenUi(entity.Owner, BodyAnalyzerUiKey.Key, args.User);
 

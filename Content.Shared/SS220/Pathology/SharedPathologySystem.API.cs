@@ -214,6 +214,20 @@ public abstract partial class SharedPathologySystem
     }
 
     /// <summary>
+    /// Adds the pathology with the given stack count, or adds the stacks to it when the entity already has it.
+    /// </summary>
+    public bool TryAddOrStackPathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, int stacks = 1)
+    {
+        if (HavePathology(entity, pathologyId))
+            return TryChangePathologyStack(entity, pathologyId, stacks);
+
+        if (!TryAddPathology(entity, pathologyId))
+            return false;
+
+        return stacks <= 1 || TryChangePathologyStack(entity, pathologyId, stacks - 1);
+    }
+
+    /// <summary>
     /// Whether an active pathology gives the trait, so its components belong to the pathology.
     /// </summary>
     public bool IsTraitInUse(Entity<PathologyHolderComponent?> entity, ProtoId<TraitPrototype> traitId)

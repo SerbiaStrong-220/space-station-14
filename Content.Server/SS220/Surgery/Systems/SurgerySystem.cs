@@ -68,7 +68,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         _bloodstream.TryModifyBleedAmount(entity.Owner, entity.Comp.OnSurgeryMoveBleed * distance * countForBleed);
     }
 
-    protected override void ProceedToNextStep(Entity<SurgeryPatientComponent> entity, EntityUid user, EntityUid? used, ProtoId<SurgeryGraphPrototype> surgeryGraph, SurgeryGraphEdge chosenEdge, bool predicted)
+    protected override void ProceedToNextStep(Entity<SurgeryPatientComponent> entity, EntityUid user, EntityUid? used, ProtoId<SurgeryGraphPrototype> surgeryGraph, SurgeryGraphEdge chosenEdge)
     {
         foreach (var action in SurgeryGraph.GetActions(chosenEdge))
         {
@@ -76,7 +76,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         }
 
         // base comes after actions because it changes surgery node
-        base.ProceedToNextStep(entity, user, used, surgeryGraph, chosenEdge, predicted);
+        base.ProceedToNextStep(entity, user, used, surgeryGraph, chosenEdge);
     }
 
     protected override void OnPatientPain(EntityUid patient)

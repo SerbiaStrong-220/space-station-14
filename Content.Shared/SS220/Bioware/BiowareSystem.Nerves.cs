@@ -2,7 +2,6 @@
 
 using Content.Shared.Damage.Events;
 using Content.Shared.Electrocution;
-using Content.Shared.Inventory;
 
 namespace Content.Shared.SS220.Bioware;
 
@@ -21,8 +20,7 @@ public sealed partial class BiowareSystem
 
     private void OnNerveGroundingElectrocution(Entity<NerveGroundingComponent> ent, ref ElectrocutionAttemptEvent args)
     {
-        // A shock that ignores insulation targets no slots
-        if (args.TargetSlots == SlotFlags.NONE)
+        if (args.IgnoreInsulation)
             return;
 
         args.SiemensCoefficient = 0f;

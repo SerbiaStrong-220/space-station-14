@@ -122,14 +122,14 @@
     - Scalpel
     - SurgeryScalpelNormal #SS220-surgery-update
   # SS220 Edit biomass craft end
-  #SS220-surgery-update begin
+  # SS220 Surgery begin
   - type: SurgeryTool
     toolType: Scalpel
     sound:
       path: /Audio/SS220/Surgery/scalpel.ogg
       params:
         variation: 0.125
-  #SS220-surgery-update end
+  # SS220 Surgery end
 
 # SS220 Scalpel item begin
 - type: entity

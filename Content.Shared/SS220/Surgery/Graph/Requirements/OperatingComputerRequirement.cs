@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Surgery.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Surgery.Graph.Requirements;
 
@@ -12,7 +13,7 @@ public sealed partial class OperatingComputerRequirement : SurgeryGraphRequireme
     /// Without it only a linked computer is needed.
     /// </summary>
     [DataField]
-    public string? Protocol;
+    public ProtoId<SurgeryProtocolPrototype>? Protocol;
 
     protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {

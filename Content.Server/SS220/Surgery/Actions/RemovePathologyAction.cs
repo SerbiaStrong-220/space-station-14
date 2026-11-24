@@ -12,9 +12,6 @@ public sealed partial class RemovePathologyAction : ISurgeryGraphEdgeAction
     [DataField(required: true)]
     public HashSet<ProtoId<PathologyPrototype>> Pathologies = new();
 
-    [DataField]
-    public bool RemoveAllMatching = true;
-
     public void PerformAction(EntityUid targetUid, EntityUid userUid, EntityUid? usedUid, IEntityManager entityManager)
     {
         var pathologySystem = entityManager.System<SharedPathologySystem>();
@@ -24,8 +21,6 @@ public sealed partial class RemovePathologyAction : ISurgeryGraphEdgeAction
                 continue;
 
             pathologySystem.TryRemovePathology(targetUid, pathologyId, checkStacks: false);
-            if (!RemoveAllMatching)
-                break;
         }
     }
 }

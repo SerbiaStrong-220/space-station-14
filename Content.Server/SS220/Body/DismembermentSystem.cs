@@ -2,6 +2,7 @@
 
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
+using Content.Server.SS220.PathologyProvider;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -50,18 +51,11 @@ public sealed partial class DismembermentSystem : EntitySystem
     private static readonly ProtoId<EmotePrototype> ScreamEmote = "Scream";
     private static readonly SoundSpecifier TearSound = new SoundCollectionSpecifier("gib");
 
-    // a hit: (damage - offset) * per damage, clamped
-    private const float HitChanceOffset = 9.17f;
-    private const float HitChancePerDamage = 0.06f;
-    private const float HitMinChance = 0.20f;
-    private const float HitMaxChance = 0.95f;
+    // a hit, the threshold is the part's own
+    private static readonly TraumaRoll HitRoll = new(0f, 9.17f, 0.06f, 0.20f, 0.95f);
 
     // an explosion, by its blunt damage after armor
-    private const float BlastThreshold = 20f;
-    private const float BlastChanceOffset = 10f;
-    private const float BlastChancePerDamage = 0.005f;
-    private const float BlastMinChance = 0.05f;
-    private const float BlastMaxChance = 0.40f;
+    private static readonly TraumaRoll BlastRoll = new(20f, 10f, 0.005f, 0.05f, 0.40f);
 
     private const float TearSlashDamage = 20f;
     private const float TearThrowMinDistance = 2f;
@@ -94,8 +88,11 @@ public sealed partial class DismembermentSystem : EntitySystem
             || !HasSevereTrauma(ent, category))
             return;
 
-        var chance = dismemberable.HitChance
-            ?? Math.Clamp((damage - HitChanceOffset) * HitChancePerDamage, HitMinChance, HitMaxChance);
+        var chance = 0f;
+        if (dismemberable.HitChance is { } fixedChance)
+            chance = fixedChance;
+        else if (!HitRoll.TryGetChance(damage, out chance))
+            return;
 
         if (_random.Prob(chance))
             TearOff(ent, organ.Value);
@@ -125,10 +122,10 @@ public sealed partial class DismembermentSystem : EntitySystem
 
         // the damage is already reduced by explosion armor
         var blunt = GetDamageAmount(args.Damage, DamageBlunt).Float();
-        if (blunt < BlastThreshold || !_body.TryGetOrgansWithComponent<DismemberableComponent>(ent.Owner, out var parts))
+        if (!BlastRoll.TryGetChance(blunt, out var chance)
+            || !_body.TryGetOrgansWithComponent<DismemberableComponent>(ent.Owner, out var parts))
             return;
 
-        var chance = Math.Clamp((blunt - BlastChanceOffset) * BlastChancePerDamage, BlastMinChance, BlastMaxChance);
         foreach (var part in parts)
         {
             if (!part.Comp.TornByBlast)

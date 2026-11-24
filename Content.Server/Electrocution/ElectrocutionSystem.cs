@@ -360,6 +360,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
 
         var attemptEvent = new ElectrocutionAttemptEvent(uid, sourceUid, siemensCoefficient,
             ignoreInsulation ? SlotFlags.NONE : ~SlotFlags.POCKET);
+        attemptEvent.IgnoreInsulation = ignoreInsulation; //SS220-surgery-update
         RaiseLocalEvent(uid, attemptEvent, true);
 
         // Cancel the electrocution early, so we don't recursively electrocute anything.

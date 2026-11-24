@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Bioware;
 
 public sealed partial class BiowareSystem
 {
-    [Dependency] private readonly MetabolizerSystem _metabolizer = default!;
+    [Dependency] private MetabolizerSystem _metabolizer = default!;
 
     private void InitializeCirculation()
     {

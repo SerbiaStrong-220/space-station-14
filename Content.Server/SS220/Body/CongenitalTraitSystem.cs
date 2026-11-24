@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Traits;
+using Content.Server.SS220.Traits;
 using Content.Shared.Body;
-using Content.Shared.GameTicking;
+using Content.Shared.Random;
 using Content.Shared.SS220.Body;
 using Content.Shared.SS220.Pathology;
 using Content.Shared.Traits;
@@ -22,34 +22,24 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
 
-    private static readonly ProtoId<OrganCategoryPrototype> BrainCategory = "Brain";
-
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete, after: [typeof(TraitSystem)]);
+        SubscribeLocalEvent<BodyComponent, TraitAppliedEvent>(OnTraitApplied);
         SubscribeLocalEvent<CongenitalTraitsComponent, OrganGotRemovedEvent>(OnRemoved);
         SubscribeLocalEvent<CongenitalTraitsComponent, OrganGotInsertedEvent>(OnInserted);
     }
 
-    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args)
+    private void OnTraitApplied(Entity<BodyComponent> ent, ref TraitAppliedEvent args)
     {
-        if (!_body.TryGetOrganByCategory(args.Mob, BrainCategory, out var brain))
+        if (!IsBrainTrait(args.Trait)
+            || !_body.TryGetOrganByCategory(ent.Owner, InitialBodySystem.BrainCategory, out var brain))
             return;
 
-        foreach (var traitId in args.Profile.TraitPreferences)
-        {
-            if (!IsBrainTrait(traitId)
-                || GetTraitComponents(traitId) is not { } components
-                // the trait system skips a trait the job or the species doesn't allow
-                || !HasAllComponents(args.Mob, components))
-                continue;
-
-            var congenital = EnsureComp<CongenitalTraitsComponent>(brain.Value);
-            congenital.Traits.Add(traitId);
-            Dirty(brain.Value, congenital);
-        }
+        var congenital = EnsureComp<CongenitalTraitsComponent>(brain.Value);
+        congenital.Traits.Add(args.Trait);
+        Dirty(brain.Value, congenital);
     }
 
     private void OnRemoved(Entity<CongenitalTraitsComponent> ent, ref OrganGotRemovedEvent args)
@@ -77,7 +67,7 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
     /// </summary>
     public bool TryCureRandomTrait(EntityUid body)
     {
-        if (!_body.TryGetOrganByCategory(body, BrainCategory, out var brain)
+        if (!_body.TryGetOrganByCategory(body, InitialBodySystem.BrainCategory, out var brain)
             || !TryComp<CongenitalTraitsComponent>(brain, out var congenital)
             || congenital.Traits.Count == 0)
             return false;
@@ -87,6 +77,20 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
         Dirty(brain.Value, congenital);
         RemoveTraitComponents(body, traitId);
         return true;
+    }
+
+    /// <summary>
+    /// The outcome of a successful lobotomy roll: cures a random congenital trait of the brain or, by bad luck, leaves a new brain trauma.
+    /// </summary>
+    public void Lobotomize(EntityUid body, float traumaChance, ProtoId<WeightedRandomPrototype> traumas)
+    {
+        if (_random.Prob(traumaChance))
+        {
+            _pathology.TryAddRandom(body, traumas, 1f);
+            return;
+        }
+
+        TryCureRandomTrait(body);
     }
 
     private void RemoveTraitComponents(EntityUid body, ProtoId<TraitPrototype> traitId)
@@ -102,7 +106,7 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
     {
         foreach (var pathology in _prototype.EnumeratePrototypes<PathologyPrototype>())
         {
-            if (pathology.Organ != BrainCategory)
+            if (pathology.Organ != InitialBodySystem.BrainCategory)
                 continue;
 
             foreach (var definition in pathology.Definition)
@@ -118,16 +122,5 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
     private ComponentRegistry? GetTraitComponents(ProtoId<TraitPrototype> traitId)
     {
         return _prototype.Resolve(traitId, out var trait) ? trait.Components : null;
-    }
-
-    private bool HasAllComponents(EntityUid uid, ComponentRegistry components)
-    {
-        foreach (var entry in components.Values)
-        {
-            if (!HasComp(uid, entry.Component.GetType()))
-                return false;
-        }
-
-        return true;
     }
 }

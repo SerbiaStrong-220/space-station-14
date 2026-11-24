@@ -1,0 +1,23 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Protocols of the surgery disks, the graph steps require them with OperatingComputerRequirement
+
+# brain, SurgeryDiskAdvanced
+- type: surgeryProtocol
+  id: Lobotomy
+
+- type: surgeryProtocol
+  id: Pacification
+
+# biomodifications, SurgeryDiskBioware
+- type: surgeryProtocol
+  id: VeinThreading
+
+- type: surgeryProtocol
+  id: CapillaryWeaving
+
+- type: surgeryProtocol
+  id: NerveSplicing
+
+- type: surgeryProtocol
+  id: NerveGrounding

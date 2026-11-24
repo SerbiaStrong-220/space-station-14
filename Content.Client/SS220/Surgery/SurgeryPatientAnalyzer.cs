@@ -41,7 +41,7 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
             patientStatus.BrainRotDegree = GetBrainRotDegree(limitationReviveComponent, mobStateComponent);
 
         patientStatus.IsAnesthetized = _surgery.IsPatientAnesthetized(target);
-        patientStatus.IsOnOperatingTable = _surgery.IsOnOperatingTable(target, out _);
+        patientStatus.IsOnOperatingTable = _surgery.TryGetOperatingTable(target, out _);
 
         CollectPathologyDescriptions(target, ref patientStatus);
 

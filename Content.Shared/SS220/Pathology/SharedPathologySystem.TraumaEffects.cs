@@ -45,12 +45,10 @@ public abstract partial class SharedPathologySystem
             if (!TryResolveDefinition(protoId, data.Level, out _, out var definition))
                 continue;
 
-            if (!MathHelper.CloseTo(definition.DoAfterDelayModifier, 1f))
-                totalModifier *= definition.DoAfterDelayModifier;
+            totalModifier *= definition.DoAfterDelayModifier;
         }
 
-        if (!MathHelper.CloseTo(totalModifier, 1f))
-            args.Args.DelayModifier *= totalModifier;
+        args.Args.DelayModifier *= totalModifier;
     }
 
     private void HandleTraumaSeverityChanged(Entity<PathologyHolderComponent> ent, ref PathologySeverityChanged args)
@@ -105,9 +103,6 @@ public abstract partial class SharedPathologySystem
 
         args.MinAngle += penalty;
         args.MaxAngle += penalty;
-
-        if (args.MaxAngle < args.MinAngle)
-            args.MaxAngle = args.MinAngle;
     }
 
     private Angle GetGunSpreadPenalty(PathologyHolderComponent holder, HandLocation heldLocation, bool isWielded)

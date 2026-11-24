@@ -28,10 +28,14 @@ public sealed partial class PathologySystem : SharedPathologySystem
     }
 
     private void OnHolderStartup(Entity<PathologyHolderComponent> ent, ref ComponentStartup args)
-        => OnTargetUpdated?.Invoke(ent.Owner);
+    {
+        OnTargetUpdated?.Invoke(ent.Owner);
+    }
 
     private void OnHolderShutdown(Entity<PathologyHolderComponent> ent, ref ComponentShutdown args)
-        => OnTargetUpdated?.Invoke(ent.Owner);
+    {
+        OnTargetUpdated?.Invoke(ent.Owner);
+    }
 
     private void OnHolderStateHandled(Entity<PathologyHolderComponent> ent, ref AfterAutoHandleStateEvent args)
     {
@@ -40,17 +44,27 @@ public sealed partial class PathologySystem : SharedPathologySystem
     }
 
     private void OnPatientStartup(Entity<SurgeryPatientComponent> ent, ref ComponentStartup args)
-        => OnTargetUpdated?.Invoke(ent.Owner);
+    {
+        OnTargetUpdated?.Invoke(ent.Owner);
+    }
 
     private void OnPatientShutdown(Entity<SurgeryPatientComponent> ent, ref ComponentShutdown args)
-        => OnTargetUpdated?.Invoke(ent.Owner);
+    {
+        OnTargetUpdated?.Invoke(ent.Owner);
+    }
 
     private void OnPatientStateHandled(Entity<SurgeryPatientComponent> ent, ref AfterAutoHandleStateEvent args)
-        => OnTargetUpdated?.Invoke(ent.Owner);
+    {
+        OnTargetUpdated?.Invoke(ent.Owner);
+    }
 
     private void OnLocalPlayerAttached(LocalPlayerAttachedEvent args)
-        => OnLocalPlayerChanged?.Invoke(args.Entity);
+    {
+        OnLocalPlayerChanged?.Invoke(args.Entity);
+    }
 
     private void OnLocalPlayerDetached(LocalPlayerDetachedEvent args)
-        => OnLocalPlayerChanged?.Invoke(null);
+    {
+        OnLocalPlayerChanged?.Invoke(null);
+    }
 }

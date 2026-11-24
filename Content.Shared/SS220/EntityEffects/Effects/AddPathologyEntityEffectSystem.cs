@@ -17,16 +17,6 @@ public sealed partial class AddPathologyEntityEffectSystem : EntityEffectSystem<
         if (_net.IsClient)
             return;
 
-        var pathology = args.Effect.Pathology;
-        if (!_pathology.HavePathology(entity.AsNullable(), pathology))
-        {
-            if (!_pathology.TryAddPathology(entity.AsNullable(), pathology) || args.Effect.Stacks <= 1)
-                return;
-
-            _pathology.TryChangePathologyStack(entity.AsNullable(), pathology, args.Effect.Stacks - 1);
-            return;
-        }
-
-        _pathology.TryChangePathologyStack(entity.AsNullable(), pathology, args.Effect.Stacks);
+        _pathology.TryAddOrStackPathology(entity.AsNullable(), args.Effect.Pathology, args.Effect.Stacks);
     }
 }

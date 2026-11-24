@@ -143,7 +143,7 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
         ApplyVisual(ent, body);
     }
 
-    private IEnumerable<Marking> AllMarkings(Entity<VisualOrganMarkingsComponent> ent)
+    public IEnumerable<Marking> AllMarkings(Entity<VisualOrganMarkingsComponent> ent) //SS220-surgery-update
     {
         foreach (var markings in ent.Comp.Markings.Values)
         {

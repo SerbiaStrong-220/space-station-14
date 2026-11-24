@@ -19,7 +19,7 @@ public sealed partial class InitialBodySystem
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private LimbSystem _limb = default!;
 
-    private static readonly ProtoId<OrganCategoryPrototype> BrainCategory = "Brain";
+    public static readonly ProtoId<OrganCategoryPrototype> BrainCategory = "Brain";
 
     private void InitializeSurgery()
     {

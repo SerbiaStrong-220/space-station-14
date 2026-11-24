@@ -1,7 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Bed.Sleep;
+using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceNetwork.Components;
@@ -14,7 +17,6 @@ using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Traits.Assorted;
-using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -23,7 +25,9 @@ namespace Content.Shared.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem
 {
+    [Dependency] private SharedBuckleSystem _buckle = default!;
     [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
@@ -48,8 +52,6 @@ public abstract partial class SharedSurgerySystem
         SubscribeLocalEvent<OperatingComputerComponent, MapInitEvent>(OnOperatingComputerMapInit);
         SubscribeLocalEvent<OperatingComputerComponent, NewLinkEvent>(OnOperatingComputerNewLink);
         SubscribeLocalEvent<OperatingComputerComponent, PortDisconnectedEvent>(OnOperatingComputerPortDisconnected);
-        SubscribeLocalEvent<OperatingComputerComponent, EntInsertedIntoContainerMessage>(OnComputerSlotInserted);
-        SubscribeLocalEvent<OperatingComputerComponent, EntRemovedFromContainerMessage>(OnComputerSlotRemoved);
     }
 
     private void OnToolGetDelayModifiers(Entity<SurgeryToolComponent> entity, ref GetSurgeryDelayModifiersEvent args)
@@ -75,37 +77,23 @@ public abstract partial class SharedSurgerySystem
             args.FlatModifier += entity.Comp.LinkedComputerFailureBonus;
     }
 
-    private void OnComputerSlotInserted(Entity<OperatingComputerComponent> entity, ref EntInsertedIntoContainerMessage args)
+    /// <summary>
+    /// Whether the disk in the slot of the computer has the protocol.
+    /// </summary>
+    public bool HasProtocol(Entity<OperatingComputerComponent> computer, ProtoId<SurgeryProtocolPrototype> protocol)
     {
-        if (args.Container.ID != entity.Comp.DiskSlotId)
-            return;
-
-        if (!TryComp<SurgeryDiskComponent>(args.Entity, out var disk))
-            return;
-
-        foreach (var protocol in disk.Protocols)
-        {
-            entity.Comp.UnlockedProtocols.Add(protocol);
-        }
-
-        Dirty(entity);
+        return TryGetDisk(computer, out var disk) && disk.Value.Comp.Protocols.Contains(protocol);
     }
 
-    private void OnComputerSlotRemoved(Entity<OperatingComputerComponent> entity, ref EntRemovedFromContainerMessage args)
+    public bool TryGetDisk(Entity<OperatingComputerComponent> computer, [NotNullWhen(true)] out Entity<SurgeryDiskComponent>? disk)
     {
-        if (args.Container.ID != entity.Comp.DiskSlotId)
-            return;
+        disk = null;
+        if (_itemSlots.GetItemOrNull(computer, computer.Comp.DiskSlotId) is not { } item
+            || !TryComp<SurgeryDiskComponent>(item, out var diskComp))
+            return false;
 
-        if (!TryComp<SurgeryDiskComponent>(args.Entity, out var disk))
-            return;
-
-        foreach (var protocol in disk.Protocols)
-        {
-            if (!entity.Comp.BaseUnlockedProtocols.Contains(protocol))
-                entity.Comp.UnlockedProtocols.Remove(protocol);
-        }
-
-        Dirty(entity);
+        disk = (item, diskComp);
+        return true;
     }
 
     /// <summary>
@@ -125,15 +113,10 @@ public abstract partial class SharedSurgerySystem
         return false;
     }
 
-    public bool IsBuckled(EntityUid patient)
-    {
-        return TryComp<BuckleComponent>(patient, out var buckle) && buckle.Buckled;
-    }
-
     /// <summary>
     /// Checks whether the patient is buckled onto an <see cref="OperatingTableComponent"/>.
     /// </summary>
-    public bool IsOnOperatingTable(EntityUid patient, out Entity<OperatingTableComponent> table)
+    public bool TryGetOperatingTable(EntityUid patient, out Entity<OperatingTableComponent> table)
     {
         table = default;
 
@@ -157,7 +140,6 @@ public abstract partial class SharedSurgerySystem
     private void OnOperatingComputerInit(Entity<OperatingComputerComponent> ent, ref ComponentInit args)
     {
         _deviceLink.EnsureSourcePorts(ent.Owner, ent.Comp.TablePort);
-        ent.Comp.BaseUnlockedProtocols.UnionWith(ent.Comp.UnlockedProtocols);
     }
 
     private void OnOperatingComputerMapInit(Entity<OperatingComputerComponent> ent, ref MapInitEvent args)
@@ -274,7 +256,7 @@ public abstract partial class SharedSurgerySystem
     /// <summary>
     /// Checks whether an operating table has a linked, powered <see cref="OperatingComputerComponent"/> within range.
     /// </summary>
-    public bool HasLinkedOperatingComputer(Entity<OperatingTableComponent> table, string? protocol = null)
+    public bool HasLinkedOperatingComputer(Entity<OperatingTableComponent> table, ProtoId<SurgeryProtocolPrototype>? protocol = null)
     {
         if (table.Comp.LinkedComputer is not { } computerUid ||
             !TryComp<OperatingComputerComponent>(computerUid, out var computerComp))
@@ -288,18 +270,18 @@ public abstract partial class SharedSurgerySystem
         if (protocol is null)
             return true;
 
-        return computerComp.UnlockedProtocols.Contains(protocol);
+        return HasProtocol((computerUid, computerComp), protocol.Value);
     }
 
     /// <summary>
     /// Checks whether a patient (or operating table) has a linked <see cref="OperatingComputerComponent"/> in range.
     /// </summary>
-    public bool HasLinkedOperatingComputer(EntityUid target, string? protocol = null)
+    public bool HasLinkedOperatingComputer(EntityUid target, ProtoId<SurgeryProtocolPrototype>? protocol = null)
     {
         if (TryComp<OperatingTableComponent>(target, out var tableComp))
             return HasLinkedOperatingComputer((target, tableComp), protocol);
 
-        if (IsOnOperatingTable(target, out var table))
+        if (TryGetOperatingTable(target, out var table))
             return HasLinkedOperatingComputer(table, protocol);
 
         return false;
@@ -324,10 +306,10 @@ public abstract partial class SharedSurgerySystem
         if (tool is { } toolUid)
             RaiseLocalEvent(toolUid, ref envEv);
 
-        if (IsOnOperatingTable(patient, out var table))
+        if (TryGetOperatingTable(patient, out var table))
             RaiseLocalEvent(table, ref envEv);
         else
-            envEv.Multiplier *= IsBuckled(patient) ? NoOperatingTableDelayMultiplier : FloorDelayMultiplier;
+            envEv.Multiplier *= _buckle.IsBuckled(patient) ? NoOperatingTableDelayMultiplier : FloorDelayMultiplier;
 
         if (IsImprovisedForEdge(tool, edge))
             envEv.Multiplier *= ImprovisedToolDelayMultiplier;
@@ -349,10 +331,10 @@ public abstract partial class SharedSurgerySystem
         if (tool is { } toolUid)
             RaiseLocalEvent(toolUid, ref failEv);
 
-        if (IsOnOperatingTable(patient, out var table))
+        if (TryGetOperatingTable(patient, out var table))
             RaiseLocalEvent(table, ref failEv);
         else
-            failEv.FlatModifier += IsBuckled(patient) ? NoOperatingTableFailurePenalty : FloorFailurePenalty;
+            failEv.FlatModifier += _buckle.IsBuckled(patient) ? NoOperatingTableFailurePenalty : FloorFailurePenalty;
 
         if (IsImprovisedForEdge(tool, edge))
             failEv.FlatModifier += ImprovisedToolFailurePenalty;

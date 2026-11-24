@@ -96,11 +96,9 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private SurgeryGraphEdge? GetEdgeTargeting(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraphId, string edgeId)
     {
+        // the operation may be cancelled during the step or a client message may be late, that's not an error
         if (!entity.Comp.OngoingSurgeries.TryGetValue(surgeryGraphId, out var currentNode))
-        {
-            Log.Error($"Tried to get edge with id {edgeId} in surgery {surgeryGraphId}, but entity doesn't have this surgery ongoing!");
             return null;
-        }
 
         if (!TryGetSurgeryNode(surgeryGraphId, currentNode, out var node))
             return null;

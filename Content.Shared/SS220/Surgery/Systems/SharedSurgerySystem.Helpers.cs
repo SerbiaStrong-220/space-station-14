@@ -108,15 +108,13 @@ public abstract partial class SharedSurgerySystem
         return buckleComponent.BuckledTo;
     }
 
-    protected virtual void ProceedToNextStep(Entity<SurgeryPatientComponent> entity, EntityUid user, EntityUid? used, ProtoId<SurgeryGraphPrototype> surgeryGraph, SurgeryGraphEdge chosenEdge, bool predicted)
+    /// <summary>
+    /// Server only, the step isn't predicted.
+    /// </summary>
+    protected virtual void ProceedToNextStep(Entity<SurgeryPatientComponent> entity, EntityUid user, EntityUid? used, ProtoId<SurgeryGraphPrototype> surgeryGraph, SurgeryGraphEdge chosenEdge)
     {
-        ChangeSurgeryNode(entity, surgeryGraph, chosenEdge.Target, user, used, predicted, SurgeryGraph.Popup(chosenEdge));
-
-        var sound = SurgeryGraph.GetSoundSpecifier(chosenEdge);
-        if (predicted)
-            _audio.PlayPredicted(sound, entity.Owner, user);
-        else
-            _audio.PlayPvs(sound, entity.Owner);
+        ChangeSurgeryNode(entity, surgeryGraph, chosenEdge.Target, user, used, predicted: false, SurgeryGraph.Popup(chosenEdge));
+        _audio.PlayPvs(SurgeryGraph.GetSoundSpecifier(chosenEdge), entity.Owner);
 
         if (OperationCanBeEnded(entity!, surgeryGraph))
             EndOperation(entity!, surgeryGraph, user);

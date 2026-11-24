@@ -29,9 +29,6 @@ public sealed partial class PathologyProviderSystem
             return;
 
         // only further injuries of already burnt out eyes damage the retina, e.g. welding without protection
-        if (_pathology.HavePathology(entity.AsNullable(), RetinaDamage))
-            _pathology.TryChangePathologyStack(entity.AsNullable(), RetinaDamage);
-        else
-            _pathology.TryAddPathology(entity.AsNullable(), RetinaDamage);
+        _pathology.TryAddOrStackPathology(entity.AsNullable(), RetinaDamage);
     }
 }

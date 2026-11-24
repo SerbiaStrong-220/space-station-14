@@ -14,7 +14,6 @@ surgery-requirement-tool-required-bone-gel = гель для [color=lightblue]в
 surgery-requirement-tool-required-cautery = Инструмент способного точечно [color=lightblue]прижечь[/color] рану ({ ent-Cautery })
 surgery-requirement-tool-required-bonesetter = Инструмент для [color=lightblue]вправления[/color] костей ({ ent-BoneSetter })
 surgery-requirement-tool-required-drill = Инструмент для [color=lightblue]сверления[/color] костной ткани ({ ent-Drill })
-surgery-requirement-tool-required-autopsy-scanner = Инструмент для [color=lightblue]аутопсии[/color] тканей ({ ent-AutopsyScanner })
 surgery-requirement-tool-required-shears = Инструмент для [color=lightblue]ампутации[/color] ({ ent-AmputationShears })
 surgery-requirement-tool-required-specific = [color=gold]Особый[/color] инструмент
 
@@ -23,7 +22,6 @@ surgery-requirement-operating-computer-failure = В консоли сканер�
 surgery-requirement-congenital-trait-description = У пациента должно быть [color=lightblue]врождённое[/color] неврологическое расстройство
 surgery-requirement-congenital-trait-failure = У пациента нет врождённых неврологических расстройств!
 
-surgery-organ-name-torso = торс
 surgery-organ-name-head = голова
 surgery-organ-name-arm-left = левая рука
 surgery-organ-name-arm-right = правая рука
@@ -37,7 +35,6 @@ surgery-organ-name-brain = мозг
 surgery-organ-name-eyes = глаза
 surgery-organ-name-tongue = язык
 surgery-organ-name-appendix = аппендикс
-surgery-organ-name-ears = уши
 surgery-organ-name-lungs = лёгкие
 surgery-organ-name-heart = сердце
 surgery-organ-name-stomach = желудок

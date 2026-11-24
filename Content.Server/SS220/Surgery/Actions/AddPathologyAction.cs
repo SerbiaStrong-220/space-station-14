@@ -13,19 +13,10 @@ public sealed partial class AddPathologyAction : ISurgeryGraphEdgeAction
     public ProtoId<PathologyPrototype> Pathology;
 
     [DataField]
-    public int StackCount = 1;
+    public int Stacks = 1;
 
     public void PerformAction(EntityUid targetUid, EntityUid userUid, EntityUid? usedUid, IEntityManager entityManager)
     {
-        var pathologySystem = entityManager.System<SharedPathologySystem>();
-        if (!pathologySystem.HavePathology(targetUid, Pathology))
-        {
-            pathologySystem.TryAddPathology(targetUid, Pathology);
-            if (StackCount > 1)
-                pathologySystem.TryChangePathologyStack(targetUid, Pathology, StackCount - 1);
-            return;
-        }
-
-        pathologySystem.TryChangePathologyStack(targetUid, Pathology, StackCount);
+        entityManager.System<SharedPathologySystem>().TryAddOrStackPathology(targetUid, Pathology, Stacks);
     }
 }
