@@ -1,5 +1,6 @@
 ﻿using Content.Client.Overlays;
 using Content.Shared.Access.Systems;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
@@ -28,7 +29,7 @@ public sealed class JobStatusSystem : SharedJobStatusSystem
         if (_showJobIcons.IsActive && ent.Comp.JobStatusIcon != null)
             ev.StatusIcons.Add(_prototype.Index(ent.Comp.JobStatusIcon));
 
-        if (_showCrewIcons.IsActive)
+        if (_showCrewIcons.IsActive && !HasComp<BorgChassisComponent>(ent)) // SS220 Silicon-Manifest
         {
             if (_showCrewIcons.UncertainCrewBorder)
                 ev.StatusIcons.Add(_prototype.Index(CrewUncertainBorderIcon));
