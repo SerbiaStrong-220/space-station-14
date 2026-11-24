@@ -426,15 +426,12 @@ public sealed partial class EmergencyShuttleSystem
         if (EarlyLaunchAuthorized || !EmergencyShuttleArrived ||
             _consoleAccumulator <= _authorizeTime)
             return false;
-        //SS220-emergency-shuttle-departure-control end
 
-        //SS220-emergency-shuttle-departure-control begin
         // Forced early launch may override the admin hold, but not game-owned holds.
         // Game-owned holds stay active until their source releases them.
         if (_departureHolds.Any(sourceId => sourceId != AdminDepartureHoldSource))
             return false;
 
-        _departureHolds.Remove(AdminDepartureHoldSource);
         //SS220-emergency-shuttle-departure-control end
 
         // SS220 MalfAI
@@ -442,6 +439,8 @@ public sealed partial class EmergencyShuttleSystem
         RaiseLocalEvent(ref attempt);
         if (attempt.Cancelled)
             return false;
+        
+        _departureHolds.Remove(AdminDepartureHoldSource); //SS220-emergency-shuttle-departure-control
 
         _logger.Add(LogType.EmergencyShuttle, LogImpact.High, $"Emergency shuttle launch authorized");
         _consoleAccumulator = _authorizeTime;
