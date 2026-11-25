@@ -3,7 +3,8 @@
 using System.Numerics;
 using Content.Client.SS220.Administration.Ahelp;
 using Robust.Client.UserInterface.RichText;
-using Robust.Shared.Maths;
+using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Timing;
 
 namespace Content.Client.Administration.UI.Bwoink;
 
@@ -22,24 +23,50 @@ public sealed partial class BwoinkPanel
     ];
 
     private AhelpEmojiPicker? _emojiPicker;
+    private readonly IGameTiming _emojiTiming = IoCManager.Resolve<IGameTiming>();
+    private uint? _emojiPickerClosedFrame;
 
     private void InitializeEmojis()
     {
-        EmojiButton.OnPressed += _ => OpenEmojiPicker();
-        OnVisibilityChanged += _ =>
+        EmojiButton.Mode = BaseButton.ActionMode.Press;
+        EmojiButton.OnPressed += _ =>
         {
-            if (!Visible)
-                _emojiPicker?.Close();
+            // An outside click can close the popup before reaching this button.
+            if (_emojiPickerClosedFrame == _emojiTiming.CurFrame)
+                return;
+
+            if (_emojiPicker is { Visible: true })
+                _emojiPicker.Close();
+            else
+                OpenEmojiPicker();
         };
+    }
+
+    protected override void VisibilityChanged(bool newVisible)
+    {
+        base.VisibilityChanged(newVisible);
+
+        if (!newVisible)
+            _emojiPicker?.Close();
+    }
+
+    protected override void ExitedTree()
+    {
+        DisposeEmojis();
+        base.ExitedTree();
     }
 
     private void OpenEmojiPicker()
     {
+        if (Root == null)
+            return;
+
         if (_emojiPicker == null)
         {
             _emojiPicker = new AhelpEmojiPicker();
             _emojiPicker.EmojiSelected += InsertEmoji;
-            UserInterfaceManager.ModalRoot.AddChild(_emojiPicker);
+            _emojiPicker.OnPopupHide += () => _emojiPickerClosedFrame = _emojiTiming.CurFrame;
+            Root.ModalRoot.AddChild(_emojiPicker);
         }
 
         var position = EmojiButton.GlobalPosition + new Vector2(0, EmojiButton.Height);

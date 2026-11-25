@@ -771,7 +771,7 @@ namespace Content.Server.Administration.Systems
                 var unameLength = senderSession.Name.Length;
                 //SS220-ahelp-emojis begin
                 // Expand before applying Discord's per-message budget, preserving complete emoji tokens.
-                var messageLimit = Math.Max(0, Math.Min(DescriptionMax, MessageLengthCap) - _maxAdditionalChars - unameLength);
+                var messageLimit = Math.Max(0, DescriptionMax - _maxAdditionalChars - unameLength);
                 var str = AhelpEmojiText.ForDiscord(message.Text, _ahelpEmojiPrototypes, messageLimit);
                 //SS220-ahelp-emojis end
 

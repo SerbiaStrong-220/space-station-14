@@ -11,6 +11,7 @@ namespace Content.Shared.SS220.Administration.Ahelp;
 public static class AhelpEmojiText
 {
     public const string MarkupTag = "ahelpemoji";
+    private const int MaxEmojisPerMessage = 32;
     private const string Truncated = "…";
 
     private static readonly Regex EmojiTokens = new(
@@ -19,8 +20,11 @@ public static class AhelpEmojiText
 
     public static string ForGame(string text, IPrototypeManager prototypes)
     {
-        return Replace(FormattedMessage.EscapeText(text), prototypes,
-            static emoji => $"[{MarkupTag}=\"{FormattedMessage.EscapeStringParameter(emoji.ID)}\"][/{MarkupTag}]");
+        return Replace(
+            FormattedMessage.EscapeText(text),
+            prototypes,
+            static emoji => $"[{MarkupTag}=\"{FormattedMessage.EscapeStringParameter(emoji.ID)}\"][/{MarkupTag}]",
+            MaxEmojisPerMessage);
     }
 
     /// <summary>Accounts for expanded Discord markup and never truncates a custom emoji token.</summary>
@@ -60,10 +64,18 @@ public static class AhelpEmojiText
     }
 
     private static string Replace(string text, IPrototypeManager prototypes,
-        Func<AhelpEmojiPrototype, string> replacement)
+        Func<AhelpEmojiPrototype, string> replacement, int maxReplacements = int.MaxValue)
     {
+        var replacements = 0;
         return EmojiTokens.Replace(text, match =>
-            TryResolveEmoji(match, prototypes, out var emoji) ? replacement(emoji) : match.Value);
+        {
+            if (replacements >= maxReplacements ||
+                !TryResolveEmoji(match, prototypes, out var emoji))
+                return match.Value;
+
+            replacements++;
+            return replacement(emoji);
+        });
     }
 
     private static bool TryResolveEmoji(Match match, IPrototypeManager prototypes,
