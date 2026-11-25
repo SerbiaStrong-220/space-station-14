@@ -113,7 +113,6 @@ malfai-doomsday-wave-announcement = Doomsday Device pulse. A lethal field is exp
 
 malfai-machine-override-done = Machine overridden and animated.
 malfai-machine-override-already = This machine is already active.
-malfai-machine-override-limit = Construct limit reached: {$max} animated machines already serve you on this station.
 malfai-emag-done = Device emagged.
 malfai-emag-failed = The signal has no effect.
 malfai-emag-already = Already emagged.

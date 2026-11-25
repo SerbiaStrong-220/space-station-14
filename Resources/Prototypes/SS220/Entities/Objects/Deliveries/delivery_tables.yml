@@ -1,0 +1,63 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entityTable
+  id: PackageDeliveryRewardsWithJob
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: PackageDeliveryRewards
+      weight: 0.65
+    - !type:NestedSelector
+      tableId: PackageDeliveryJobRewards
+      weight: 0.35
+
+- type: entityTable
+  id: PackageDeliveryJobRewards
+  table: !type:JobSelector
+    fallback: PackageDeliveryRewards
+    jobs:
+      StationEngineer: PackageDeliveryEngineering
+      TechnicalAssistant: PackageDeliveryEngineering
+      SeniorEngineer: PackageDeliveryEngineering
+      ChiefEngineer: PackageDeliveryEngineering
+      AtmosphericTechnician: PackageDeliveryAtmospherics
+      Scientist: PackageDeliveryScience
+      ResearchAssistant: PackageDeliveryScience
+      SeniorResearcher: PackageDeliveryScience
+      ResearchDirector: PackageDeliveryScience
+      CargoTechnician: PackageDeliveryCargo
+      Quartermaster: PackageDeliveryCargo
+      SalvageSpecialist: PackageDeliverySalvage
+      MedicalDoctor: PackageDeliveryMedical
+      MedicalIntern: PackageDeliveryMedical
+      SeniorPhysician: PackageDeliveryMedical
+      ChiefMedicalOfficer: PackageDeliveryMedical
+      Paramedic: PackageDeliveryParamedic
+      Brigmedic: PackageDeliveryParamedic
+      Chemist: PackageDeliveryChemistry
+      Psychologist: PackageDeliveryPsychology
+      SecurityOfficer: PackageDeliverySecurity
+      SecurityCadet: PackageDeliverySecurity
+      SeniorOfficer: PackageDeliverySecurity
+      Warden: PackageDeliverySecurity
+      HeadOfSecurity: PackageDeliverySecurity
+      BlueShield: PackageDeliveryParamedic
+      Detective: PackageDeliveryDetective
+      SecurityPilot: PackageDeliverySecurityPilot
+      Bartender: PackageDeliveryBartender
+      Chef: PackageDeliveryChef
+      Botanist: PackageDeliveryBotany
+      Janitor: PackageDeliveryJanitor
+      Clown: PackageDeliveryClown
+      Mime: PackageDeliveryMime
+      Chaplain: PackageDeliveryChaplain
+      Librarian: PackageDeliveryLibrarian
+      Musician: PackageDeliveryMusician
+      ServiceWorker: PackageDeliveryService
+      SeniorService: PackageDeliveryService
+      Passenger: PackageDeliveryPassenger
+      Reporter: PackageDeliveryReporter
+      Captain: PackageDeliveryCommand
+      HeadOfPersonnel: PackageDeliveryCommand
+      Lawyer: PackageDeliveryCommand
+      NanoTrasenRepresentative: PackageDeliveryCommand

@@ -1,0 +1,113 @@
+- type: ttsVoice
+  id: Alyx
+  name: Аликс
+  speaker: alyx
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Female ]
+
+- type: ttsVoice
+  id: Barney
+  name: Барни
+  speaker: barney
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: VortE2
+  name: Вортигонт (эпизод 2)
+  speaker: vort_e2
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Kleiner
+  name: Кляйнер
+  speaker: kleiner
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Father
+  name: Отец Григорий
+  speaker: father
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: GmanE2
+  name: Джи-мэн (эпизод 2)
+  speaker: gman_e2
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: BigShlopa
+
+- type: ttsVoice
+  id: Gman
+  name: Джи-мэн
+  speaker: gman
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa
+
+- type: ttsVoice
+  id: Vort
+  name: Вортигонт
+  speaker: vort
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsSexRequirement
+    sexes: [ Male ]
+
+- type: ttsVoice
+  id: Overwatch
+  name: Дозор
+  speaker: overwatch
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Female ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: HugeShlopa
+
+- type: ttsVoice
+  id: Breen
+  name: Брин
+  speaker: breen
+  provider: Silero
+  categories: [ HalfLife2 ]
+  requirement: !type:TtsAllRequirement
+    requirements:
+    - !type:TtsSexRequirement
+      sexes: [ Male ]
+    - !type:TtsSponsorRequirement
+      sponsorTier: Shlopa

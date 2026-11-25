@@ -20,6 +20,9 @@ messenger-ui-you = Вы
 messenger-ui-name-lock = Не менять имя
 messenger-ui-name-lock-tooltip = Ваше имя в мессенджере перестанет обновляться по имени на ID-карте
 
+messenger-ui-hide-unregistered = Скрыть незарегистрированных пользователей
+messenger-ui-hide-unregistered-tooltip = Скрывать контакты без имени, с которыми нет переписки
+
 messenger-ui-mute-button = Без звука
 messenger-ui-mute-tooltip = Новые сообщения этого чата не будут издавать звук
 messenger-ui-muted-note = без звука

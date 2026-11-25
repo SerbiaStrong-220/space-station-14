@@ -32,6 +32,4 @@ public sealed partial class VoiceOverrideComponent : Component
     /// </summary>
     [DataField]
     public bool Enabled = true;
-
-    [ViewVariables(VVAccess.ReadWrite)] public string? LastSetVoice; // Corvax-TTS
 }
