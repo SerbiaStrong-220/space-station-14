@@ -233,8 +233,8 @@
     fuelCost: 10
   - type: MobPrice
     price: 1000
-  - type: TTS
-    randomVoicesList: Borg
+  - type: Tts
+    randomVoicePreferences: Borg
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -458,7 +458,7 @@
 - type: entity
   name: Mousi
   id: MobMousi
-  parent: [ SimpleMobBase, BaseMobRuminant ]
+  parent: [ BaseMobRuminant, SimpleMobBase ]
   description: Peep?...
   components:
   - type: NightVision
@@ -559,8 +559,10 @@
       Male: Mouse
       Female: Mouse
       Unsexed: Mouse
-  - type: TTS
-    voice: mana
+  - type: Tts
+    voicePreferences:
+      NTTS: mana
+      Silero: Polina
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
@@ -653,8 +655,10 @@
       Male: Mouse
       Female: Mouse
       Unsexed: Mouse
-  - type: TTS
-    voice: horner
+  - type: Tts
+    voicePreferences:
+      NTTS: horner
+      Silero: Raynor
   - type: Butcherable
     spawned:
     - id: FoodMeat

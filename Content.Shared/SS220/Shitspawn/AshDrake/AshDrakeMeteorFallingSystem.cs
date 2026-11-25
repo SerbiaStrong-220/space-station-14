@@ -23,13 +23,13 @@ public sealed partial class AshDrakeMeteorFallingSystem : EntitySystem
 
             if (dir.Length() <= comp.Speed * frameTime)
             {
-                _transform.SetWorldPosition(xform, comp.Target);
+                _transform.SetWorldPosition((uid, xform), comp.Target);
                 if (_net.IsServer)
                     RemComp<AshDrakeMeteorFallingComponent>(uid);
                 continue;
             }
 
-            _transform.SetWorldPosition(xform, cur + Vector2.Normalize(dir) * comp.Speed * frameTime);
+            _transform.SetWorldPosition((uid, xform), cur + Vector2.Normalize(dir) * comp.Speed * frameTime);
         }
     }
 }

@@ -117,7 +117,7 @@ public sealed partial class EmergencyShuttleSystem
     private void OnEmagged(EntityUid uid, EmergencyShuttleConsoleComponent component, ref GotEmaggedEvent args)
     {
         _logger.Add(LogType.EmergencyShuttle, LogImpact.Extreme, $"{ToPrettyString(args.UserUid):player} emagged shuttle console for early launch");
-        EarlyLaunch();
+        args.Handled = EarlyLaunch();
     }
     //SS220 Return hijack objective end
 
@@ -393,6 +393,12 @@ public sealed partial class EmergencyShuttleSystem
     public bool EarlyLaunch()
     {
         if (EarlyLaunchAuthorized || !EmergencyShuttleArrived || _consoleAccumulator <= _authorizeTime) return false;
+
+        // SS220 MalfAI
+        var attempt = new EmergencyShuttleEarlyLaunchAttemptEvent(false);
+        RaiseLocalEvent(ref attempt);
+        if (attempt.Cancelled)
+            return false;
 
         _logger.Add(LogType.EmergencyShuttle, LogImpact.High, $"Emergency shuttle launch authorized");
         _consoleAccumulator = _authorizeTime;

@@ -7,6 +7,7 @@
 ```toml
 [discord_auth]
 api_url = "http://localhost:5080"
+link_url = "http://localhost:5080"
 ```
 
 ## Изменение уровня подписи
