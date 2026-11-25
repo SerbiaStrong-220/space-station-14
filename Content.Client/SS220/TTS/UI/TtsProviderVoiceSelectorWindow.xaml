@@ -1,14 +1,27 @@
 <DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
                MinSize="700 500">
     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 0 0 5">
             <LineEdit Name="SearchLineEdit" PlaceHolder="{Loc ui-tts-provider-voice-selector-window-search-placeholder}" HorizontalExpand="True"/>
             <OptionButton Name="CategoryOptionButton" MinWidth="220" Margin="5 0 0 0"/>
         </BoxContainer>
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 0 0 10">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 0 0 5">
             <CheckBox Name="OnlyAvailableCheckBox" Text="{Loc ui-tts-provider-voice-selector-window-only-available}" Pressed="False"/>
             <Control HorizontalExpand="True"/>
             <Label Name="CountLabel" Modulate="#FFFFFF80"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 0 0 10">
+            <BoxContainer Orientation="Horizontal">
+                <CheckBox Name="OnlyMySexCheckBox" Text="{Loc ui-tts-provider-voice-selector-window-only-my-sex}" Pressed="False"/>
+            </BoxContainer>
+            <cc:VSeparator Margin="10 0"/>
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <CheckBox Name="ShlopaTierCheckBox" Text="{Loc ui-tts-provider-voice-selector-window-tier-shlopa}" Pressed="False" Margin="0 0 5 0"/>
+                <CheckBox Name="BigShlopaTierCheckBox" Text="{Loc ui-tts-provider-voice-selector-window-tier-big-shlopa}" Pressed="False" Margin="5 0 5 0"/>
+                <CheckBox Name="HugeShlopaTierCheckBox" Text="{Loc ui-tts-provider-voice-selector-window-tier-huge-shlopa}" Pressed="False" Margin="5 0 5 0"/>
+                <CheckBox Name="CriticalMassShlopaTierCheckBox" Text="{Loc ui-tts-provider-voice-selector-window-tier-critical-mass-shlopa}" Pressed="False"  Margin="5 0 0 0"/>
+            </BoxContainer>
         </BoxContainer>
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
             <BoxContainer Name="CategoryEntriesContainer" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 5 0">

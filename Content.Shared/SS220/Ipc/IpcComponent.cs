@@ -23,6 +23,30 @@ public sealed partial class IpcComponent : Component
     public SoundSpecifier CritStateSound = new SoundPathSpecifier("/Audio/Machines/buzz-two.ogg");
 
     /// <summary>
+    /// Minimum time in seconds between playing the critical state sound.
+    /// </summary>
+    [DataField]
+    public TimeSpan CritSoundMinInterval = TimeSpan.FromSeconds(15);
+
+    /// <summary>
+    /// Maximum time in seconds between playing the critical state sound.
+    /// </summary>
+    [DataField]
+    public TimeSpan CritSoundMaxInterval = TimeSpan.FromSeconds(30);
+
+    /// <summary>
+    /// Popup shown when IPC has no battery.
+    /// </summary>
+    [DataField]
+    public LocId NoBatteryPopup = "ipc-no-battery";
+
+    /// <summary>
+    /// Popup shown when IPC battery is low.
+    /// </summary>
+    [DataField]
+    public LocId NoPowerPopup = "ipc-no-power";
+
+    /// <summary>
     /// The battery charge alert.
     /// </summary>
     [DataField]

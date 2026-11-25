@@ -1,4 +1,5 @@
 using Content.Shared.Cargo.Prototypes;
+using Content.Shared.EntityTable.EntitySelectors;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -86,4 +87,12 @@ public sealed partial class DeliveryComponent : Component
     /// </summary>
     [DataField]
     public string Container = "delivery";
+
+    // SS220-job-mail begin
+    /// <summary>
+    /// Contents generated on the server after assigning the recipient, with their job and species in the table context.
+    /// </summary>
+    [DataField]
+    public EntityTableSelector? Contents;
+    // SS220-job-mail end
 }
