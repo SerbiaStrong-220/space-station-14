@@ -1,0 +1,37 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Poison of burns by stage: each burned zone is one stack, at most two of the same stage poison the body.
+
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectBurnPoison
+  name: burn poison
+  components:
+  - type: PathologyStatusEffectStackable
+  - type: PathologyDamageStatusEffect
+    maxStacks: 2
+    damage:
+      types:
+        Poison: 0.02
+
+- type: entity
+  parent: StatusEffectBurnPoison
+  id: StatusEffectNecrosisPoison
+  name: necrosis poison
+  components:
+  - type: PathologyDamageStatusEffect
+    maxStacks: 2
+    damage:
+      types:
+        Poison: 0.05
+
+- type: entity
+  parent: StatusEffectBurnPoison
+  id: StatusEffectMortificationPoison
+  name: mortification poison
+  components:
+  - type: PathologyDamageStatusEffect
+    maxStacks: 2
+    damage:
+      types:
+        Poison: 0.1

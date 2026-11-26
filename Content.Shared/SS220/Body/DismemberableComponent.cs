@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.Pathology;
+
 namespace Content.Shared.SS220.Body;
 
 /// <summary>
@@ -10,16 +12,10 @@ namespace Content.Shared.SS220.Body;
 public sealed partial class DismemberableComponent : Component
 {
     /// <summary>
-    /// Cuts and blows of one hit needed to roll the tearing.
+    /// Chance of a hit to tear this part off, used instead of <see cref="DismembermentComponent.HitRoll"/> of the body, e.g. for the head.
     /// </summary>
     [DataField]
-    public float HitThreshold = 15f;
-
-    /// <summary>
-    /// Chance of a hit to tear the part off, used instead of the one growing with the damage, e.g. for the head.
-    /// </summary>
-    [DataField]
-    public float? HitChance;
+    public TraumaRoll? HitRoll;
 
     /// <summary>
     /// An explosion may tear the part off even without a trauma.

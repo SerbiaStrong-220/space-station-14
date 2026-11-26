@@ -15,8 +15,8 @@ public sealed partial class SurgeryPathologyRequirement : SurgeryGraphRequiremen
     public int StackChange = -1;
 
     /// <summary>
-    /// If set, the pathology is lowered by one level with <see cref="RegressStackCount"/> stacks instead of being cured,
-    /// e.g. a repaired organ goes from failure back to damaged and heals by itself.
+    /// If set, the pathology is lowered to its first level with <see cref="RegressStackCount"/> stacks instead of being cured,
+    /// e.g. a repaired organ goes from any failure stage back to damaged and heals by itself.
     /// </summary>
     [DataField]
     public bool RegressLevel;
@@ -50,7 +50,7 @@ public sealed partial class SurgeryPathologyRequirement : SurgeryGraphRequiremen
 
             if (RegressLevel)
             {
-                entityManager.System<SharedPathologySystem>().TryRegressPathology(uid.Value, key, RegressStackCount);
+                entityManager.System<SharedPathologySystem>().TryRegressPathology(uid.Value, key, RegressStackCount, toLevel: 0);
                 break;
             }
 

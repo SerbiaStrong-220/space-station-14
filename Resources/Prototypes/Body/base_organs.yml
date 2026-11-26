@@ -73,8 +73,12 @@
   #SS220-surgery-update begin
   - type: SeveredOrganVisuals
   - type: Dismemberable
-    hitThreshold: 25
-    hitChance: 0.35
+    hitRoll: # a fixed chance from 25
+      threshold: 25
+      chanceOffset: 0
+      chancePerDamage: 0
+      minChance: 0.35
+      maxChance: 0.35
   - type: TaintableOrgan
     poisonsWhenRotten: true
   #SS220-surgery-update end

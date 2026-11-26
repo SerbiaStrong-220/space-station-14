@@ -16,9 +16,21 @@
     Bloodstream:
       effects:
       #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
       - !type:AddPathology
         pathology: LiverDamage
-        probability: 0.05
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: Toxin
+          min: 3
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: Toxin
+          min: 10
       #SS220-surgery-update end
       - !type:HealthChange
         damage:
@@ -44,9 +56,21 @@
     Bloodstream:
       effects:
       #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
       - !type:AddPathology
         pathology: LiverDamage
-        probability: 0.05
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: CarpoToxin
+          min: 3
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: CarpoToxin
+          min: 10
       #SS220-surgery-update end
       - !type:HealthChange
         damage:
@@ -103,9 +127,21 @@
     Bloodstream:
       effects:
         #SS220-surgery-update begin
+        # a few units are harmless, the organ fails before the poison itself crits the body
         - !type:AddPathology
           pathology: StomachDamage
-          probability: 0.05
+          probability: 0.1
+          conditions:
+          - !type:ReagentCondition
+            reagent: GastroToxin
+            min: 3
+        - !type:AddPathology
+          pathology: StomachDamage
+          probability: 0.1
+          conditions:
+          - !type:ReagentCondition
+            reagent: GastroToxin
+            min: 10
         #SS220-surgery-update end
         - !type:HealthChange
           damage:
@@ -131,9 +167,14 @@
     Bloodstream:
       effects:
       #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
       - !type:AddPathology
         pathology: LiverDamage
-        probability: 0.03
+        probability: 0.08
+        conditions:
+        - !type:ReagentCondition
+          reagent: Mold
+          min: 3
       #SS220-surgery-update end
       - !type:HealthChange
         damage:
@@ -175,9 +216,15 @@
       metabolismRate : 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
       #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
       - !type:AddPathology
         pathology: StomachDamage
-        probability: 0.05
+        stacks: 2
+        probability: 0.3
+        conditions:
+        - !type:ReagentCondition
+          reagent: PolytrinicAcid
+          min: 3
       #SS220-surgery-update end
       - !type:HealthChange
         damage:
@@ -240,9 +287,15 @@
       metabolismRate: 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
       #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
       - !type:AddPathology
         pathology: StomachDamage
-        probability: 0.05
+        stacks: 2
+        probability: 0.3
+        conditions:
+        - !type:ReagentCondition
+          reagent: FluorosulfuricAcid
+          min: 3
       #SS220-surgery-update end
       - !type:HealthChange
         damage:
@@ -294,9 +347,15 @@
       metabolismRate: 3.00 # Okay damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
       #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
       - !type:AddPathology
         pathology: StomachDamage
-        probability: 0.05
+        stacks: 2
+        probability: 0.3
+        conditions:
+        - !type:ReagentCondition
+          reagent: SulfuricAcid
+          min: 3
       #SS220-surgery-update end
       - !type:HealthChange
         damage:
@@ -359,9 +418,14 @@
     Bloodstream:
       effects:
       #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
       - !type:AddPathology
         pathology: HeartDamage
-        probability: 0.1
+        probability: 0.25
+        conditions:
+        - !type:ReagentCondition
+          reagent: HeartbreakerToxin
+          min: 3
       #SS220-surgery-update end
       - !type:HealthChange
         damage:
@@ -487,9 +551,21 @@
       metabolismRate: 0.2
       effects:
       #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
       - !type:AddPathology
         pathology: LiverDamage
-        probability: 0.05
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: Amatoxin
+          min: 3
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: Amatoxin
+          min: 10
       #SS220-surgery-update end
       - !type:HealthChange
         damage:
@@ -508,9 +584,21 @@
     Bloodstream:
       effects:
         #SS220-surgery-update begin
+        # a few units are harmless, the organ fails before the poison itself crits the body
         - !type:AddPathology
           pathology: StomachDamage
-          probability: 0.05
+          probability: 0.1
+          conditions:
+          - !type:ReagentCondition
+            reagent: VentCrud
+            min: 3
+        - !type:AddPathology
+          pathology: StomachDamage
+          probability: 0.1
+          conditions:
+          - !type:ReagentCondition
+            reagent: VentCrud
+            min: 10
         #SS220-surgery-update end
         - !type:HealthChange
           damage:

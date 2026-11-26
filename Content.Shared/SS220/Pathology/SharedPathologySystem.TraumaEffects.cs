@@ -96,25 +96,25 @@ public abstract partial class SharedPathologySystem
             return;
 
         var isWielded = TryComp<WieldableComponent>(ent.Owner, out var wield) && wield.Wielded;
-        var penalty = GetGunSpreadPenalty(holder, heldHand.Value.Location, isWielded);
+        var modifier = GetGunSpreadModifier(holder, heldHand.Value.Location, isWielded);
 
-        if (penalty <= Angle.Zero)
+        if (modifier <= 1f)
             return;
 
-        args.MinAngle += penalty;
-        args.MaxAngle += penalty;
+        args.MinAngle = new Angle(args.MinAngle.Theta * modifier);
+        args.MaxAngle = new Angle(args.MaxAngle.Theta * modifier);
     }
 
-    private Angle GetGunSpreadPenalty(PathologyHolderComponent holder, HandLocation heldLocation, bool isWielded)
+    private float GetGunSpreadModifier(PathologyHolderComponent holder, HandLocation heldLocation, bool isWielded)
     {
-        var maxPenalty = Angle.Zero;
+        var maxModifier = 1f;
 
         foreach (var (protoId, data) in holder.ActivePathologies)
         {
             if (!TryResolveDefinition(protoId, data.Level, out var proto, out var definition))
                 continue;
 
-            if (definition.GunSpreadPenalty <= Angle.Zero ||
+            if (definition.GunSpreadModifier <= 1f ||
                 proto.TargetZone is not { } zone ||
                 !TryResolveHandLocation(zone, out var traumaHand))
             {
@@ -124,11 +124,11 @@ public abstract partial class SharedPathologySystem
             if (!isWielded && traumaHand != heldLocation)
                 continue;
 
-            if (definition.GunSpreadPenalty > maxPenalty)
-                maxPenalty = definition.GunSpreadPenalty;
+            if (definition.GunSpreadModifier > maxModifier)
+                maxModifier = definition.GunSpreadModifier;
         }
 
-        return maxPenalty;
+        return maxModifier;
     }
 
     protected void RefreshHeldGuns(EntityUid holderUid)

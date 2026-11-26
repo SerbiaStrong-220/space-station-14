@@ -6,7 +6,6 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -14,6 +13,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Pathology;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Ui;
@@ -36,7 +36,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private ISharedAdminLogManager _adminLogManager = default!;
     [Dependency] private SharedMeleeWeaponSystem _meleeWeapon = default!;
     [Dependency] private MeleeSoundSystem _meleeSound = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedPathologySystem _pathology = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private INetManager _net = default!;
@@ -265,7 +265,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (GetEdgeTargeting(entity, surgeryPrototype, args.EdgeId) is not { } chosenEdge)
             return;
 
-        if (!CanMeetRequirements(entity, chosenEdge, args.Used, args.User))
+        if (!CanMeetRequirements(entity, chosenEdge, args.Used, args.User, predicted: false))
         {
             ResyncPatient(entity);
             return;
@@ -466,14 +466,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         if (args.Used is { } used && TryGetFailureDamage(used, args.User, target, isStepRollFailure, out var failureDamage))
         {
-            damaged = _damageable.TryChangeDamage(target, failureDamage, out var appliedDamage, origin: args.User);
+            damaged = _pathology.TryChangeDamageWithoutTraumas(target, failureDamage, out var appliedDamage, origin: args.User);
 
             if (damaged && TryComp<MeleeWeaponComponent>(used, out var melee))
                 PlayFailureStrike(args.User, (used, melee), target, appliedDamage);
         }
 
         if (failedEdge is not null && SurgeryGraph.FailureDamage(failedEdge) is { } edgeDamage)
-            damaged |= _damageable.TryChangeDamage(target, edgeDamage, out _, origin: args.User);
+            damaged |= _pathology.TryChangeDamageWithoutTraumas(target, edgeDamage, out _, origin: args.User);
 
         if (!damaged && !isStepRollFailure)
             return;

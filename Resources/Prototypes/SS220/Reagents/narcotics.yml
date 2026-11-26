@@ -61,7 +61,7 @@
       effects:
       - !type:AddPathology
         pathology: HeartDamage
-        probability: 0.03
+        probability: 0.12
         conditions:
         - !type:ReagentCondition
           reagent: Aglomorphine
@@ -125,7 +125,7 @@
       effects:
       - !type:AddPathology
         pathology: HeartDamage
-        probability: 0.03
+        probability: 0.12
         conditions:
         - !type:ReagentCondition
           reagent: Frontier

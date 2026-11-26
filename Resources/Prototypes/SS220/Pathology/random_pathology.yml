@@ -85,3 +85,11 @@
     RightLegBurnNecrosis: 4
     HeadBurnNecrosis: 2
     EyeCornealTrauma: 1
+
+# a terminal liver failure poisons the other organs
+- type: weightedRandom
+  id: LiverFailureOrganDamage
+  weights:
+    HeartDamage: 1
+    LungDamage: 1
+    StomachDamage: 1

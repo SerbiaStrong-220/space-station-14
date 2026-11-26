@@ -16,7 +16,7 @@
       #SS220-surgery-update begin
       - !type:AddPathology
         pathology: HeartDamage
-        probability: 0.03
+        probability: 0.12
         conditions:
         - !type:ReagentCondition
           reagent: Desoxyephedrine
@@ -96,7 +96,7 @@
       #SS220-surgery-update begin
       - !type:AddPathology
         pathology: HeartDamage
-        probability: 0.03
+        probability: 0.12
         conditions:
         - !type:ReagentCondition
           reagent: Ephedrine
@@ -167,7 +167,7 @@
       #SS220-surgery-update begin
       - !type:AddPathology
         pathology: HeartDamage
-        probability: 0.03
+        probability: 0.12
         conditions:
         - !type:ReagentCondition
           reagent: Stimulants

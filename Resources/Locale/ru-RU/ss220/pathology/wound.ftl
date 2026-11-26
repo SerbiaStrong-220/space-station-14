@@ -117,19 +117,19 @@ pathology-foot-fracture-operation = Хирургия стопы: восстан�
 # Arterial punctures
 
 pathology-head-arterial-name = Разрыв артерии головы
-pathology-head-arterial-description = Повреждена крупная артерия головы — интенсивная внутренняя кровопотеря!
+pathology-head-arterial-description = Повреждена крупная артерия головы - интенсивная внутренняя кровопотеря!
 pathology-torso-arterial-name = Разрыв артерии торса
-pathology-torso-arterial-description = Повреждена крупная артерия груди — опасная для жизни кровопотеря!
+pathology-torso-arterial-description = Повреждена крупная артерия груди - опасная для жизни кровопотеря!
 pathology-lowertorso-arterial-name = Разрыв бедренной артерии
-pathology-lowertorso-arterial-description = Повреждена артерия в области паха — сильное внутреннее кровотечение!
+pathology-lowertorso-arterial-description = Повреждена артерия в области паха - сильное внутреннее кровотечение!
 pathology-leftarm-arterial-name = Разрыв артерии левой руки
-pathology-leftarm-arterial-description = Повреждена плечевая артерия левой руки — обильное кровотечение!
+pathology-leftarm-arterial-description = Повреждена плечевая артерия левой руки - обильное кровотечение!
 pathology-rightarm-arterial-name = Разрыв артерии правой руки
-pathology-rightarm-arterial-description = Повреждена плечевая артерия правой руки — обильное кровотечение!
+pathology-rightarm-arterial-description = Повреждена плечевая артерия правой руки - обильное кровотечение!
 pathology-leftleg-arterial-name = Разрыв артерии левой ноги
-pathology-leftleg-arterial-description = Повреждена артерия левой ноги — обильное кровотечение!
+pathology-leftleg-arterial-description = Повреждена артерия левой ноги - обильное кровотечение!
 pathology-rightleg-arterial-name = Разрыв артерии правой ноги
-pathology-rightleg-arterial-description = Повреждена артерия правой ноги — обильное кровотечение!
+pathology-rightleg-arterial-description = Повреждена артерия правой ноги - обильное кровотечение!
 
 pathology-arterial-operation = Хирургия поражённой зоны: вскройте ткани, пережмите сосуд гемостатом и запаяйте прижигателем.
 
@@ -151,6 +151,27 @@ pathology-rightleg-necrosis-name = Ожоговый некроз правой н
 pathology-rightleg-necrosis-description = Омертвевшие ткани правой ноги выделяют токсины.
 
 pathology-necrosis-operation = Хирургия поражённой зоны: вскройте ткани, иссеките некроз скальпелем и удалите ткани гемостатом.
+
+pathology-head-burn-name = Ожог головы
+pathology-torso-burn-name = Ожог торса
+pathology-lowertorso-burn-name = Ожог таза
+pathology-leftarm-burn-name = Ожог левой руки
+pathology-rightarm-burn-name = Ожог правой руки
+pathology-leftleg-burn-name = Ожог левой ноги
+pathology-rightleg-burn-name = Ожог правой ноги
+pathology-burn-description = Обожжённые ткани слабо отравляют организм. Без лечения ожог перейдёт в некроз.
+pathology-burn-operation = Обработайте ожог мазью, или проведите хирургию поражённой зоны: вскройте ткани, иссеките поражение скальпелем и удалите ткани гемостатом.
+pathology-necrosis-progress-popup = Ожог темнеет, кожа вокруг него немеет.
+
+pathology-head-mortification-name = Омертвение тканей головы
+pathology-torso-mortification-name = Омертвение тканей торса
+pathology-lowertorso-mortification-name = Омертвение тканей таза
+pathology-leftarm-mortification-name = Омертвение тканей левой руки
+pathology-rightarm-mortification-name = Омертвение тканей правой руки
+pathology-leftleg-mortification-name = Омертвение тканей левой ноги
+pathology-rightleg-mortification-name = Омертвение тканей правой ноги
+pathology-mortification-description = Обожжённые ткани омертвели и сильно отравляют организм.
+pathology-mortification-progress-popup = Обожжённые ткани чернеют и перестают чувствоваться.
 
 # Eyes & Mouth
 

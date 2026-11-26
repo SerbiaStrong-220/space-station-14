@@ -100,11 +100,19 @@
     Respiration:
       effects:
       #SS220-surgery-update begin
+      # rolls once per breath, the scale is the inhaled amount: 0.25 is about 1% of the air, 1.5 is the high toxins alert
+      - !type:AddPathology
+        pathology: LungDamage
+        probability: 0.15
+        minScale: 0.25
       - !type:AddPathology
         pathology: LungDamage
         probability: 0.35
-        # same concentration as the high toxins alert
         minScale: 1.5
+      - !type:AddPathology
+        pathology: LungDamage
+        probability: 0.35
+        minScale: 4
       #SS220-surgery-update end
       - !type:HealthChange
         ignoreResistances: true
@@ -152,11 +160,19 @@
     Respiration:
       effects:
       #SS220-surgery-update begin
+      # rolls once per breath, the scale is the inhaled amount: 0.25 is about 1% of the air, 1.5 is the high toxins alert
+      - !type:AddPathology
+        pathology: LungDamage
+        probability: 0.15
+        minScale: 0.25
       - !type:AddPathology
         pathology: LungDamage
         probability: 0.35
-        # same concentration as the high toxins alert
         minScale: 1.5
+      - !type:AddPathology
+        pathology: LungDamage
+        probability: 0.35
+        minScale: 4
       #SS220-surgery-update end
       - !type:HealthChange
         ignoreResistances: true
@@ -385,10 +401,19 @@
     Respiration:
       effects:
       #SS220-surgery-update begin
+      # rolls once per breath, the scale is the inhaled amount: 0.25 is about 1% of the air, 1.5 is the high toxins alert
+      - !type:AddPathology
+        pathology: LungDamage
+        probability: 0.15
+        minScale: 0.25
       - !type:AddPathology
         pathology: LungDamage
         probability: 0.35
         minScale: 1.5
+      - !type:AddPathology
+        pathology: LungDamage
+        probability: 0.35
+        minScale: 4
       #SS220-surgery-update end
       - !type:HealthChange
         minScale: 0.5

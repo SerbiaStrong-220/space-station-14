@@ -109,6 +109,7 @@
           Poison: 0.2
 
 # Organ damage. The "damaged" stage accumulates stacks from damage sources and heals by itself (about 2 minutes per stack).
+# Its downsides grow with the stacks, so it is worth treating before the organ fails.
 # At max stacks it turns into "failure", which is fixed only by a repair surgery (back to damaged) or a transplant.
 
 - type: pathology
@@ -125,6 +126,8 @@
     progressConditions:
     - !type:PathologyStackProgressCondition
       stackCount: 5
+    statusEffects:
+    - StatusEffectLungDamageSlowdown
     effects:
     - !type:PathologyEntityEffect
       effects:
@@ -152,6 +155,8 @@
     progressConditions:
     - !type:PathologyStackProgressCondition
       stackCount: 4
+    statusEffects:
+    - StatusEffectHeartDamageSlowdown
     effects:
     - !type:PathologyEntityEffect
       effects:
@@ -164,6 +169,8 @@
     name: pathology-heart-failure-name
     operationRecommendation: pathology-heart-damage-operation
     progressPopup: pathology-heart-failure-popup
+    statusEffects:
+    - StatusEffectHeartFailureSlowdown
     effects:
     - !type:PathologyDamageEffect
       damage:
@@ -199,15 +206,56 @@
         visualType: SmallCaution
         messages: [ "pathology-liver-damage-popup" ]
         probability: 0.02
+    # per stack
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.02
+  # failure gets worse every minute, the last stage damages other organs
   - description: pathology-liver-failure-description
     name: pathology-liver-failure-name
     operationRecommendation: pathology-liver-damage-operation
     progressPopup: pathology-liver-failure-popup
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 1m
     effects:
     - !type:PathologyDamageEffect
       damage:
         types:
-          Poison: 0.3
+          Poison: 0.2
+  - description: pathology-liver-failure-severe-description
+    name: pathology-liver-failure-name
+    operationRecommendation: pathology-liver-damage-operation
+    progressPopup: pathology-liver-failure-severe-popup
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 1m
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.4
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:Vomit
+        probability: 0.02
+  - description: pathology-liver-failure-terminal-description
+    name: pathology-liver-failure-name
+    operationRecommendation: pathology-liver-damage-operation
+    progressPopup: pathology-liver-failure-terminal-popup
+    effects:
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.8
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:Vomit
+        probability: 0.03
+    - !type:RandomPathologyAddEffect
+      chance: 0.02
+      weightedId: LiverFailureOrganDamage
 
 - type: pathology
   id: StomachDamage
@@ -231,6 +279,11 @@
         visualType: SmallCaution
         messages: [ "pathology-stomach-damage-popup" ]
         probability: 0.02
+    # vomiting grows with the stacks
+    - !type:PathologyEntityEffect
+      chancePerStack: 0.002
+      effects:
+      - !type:Vomit
   - description: pathology-stomach-failure-description
     name: pathology-stomach-failure-name
     operationRecommendation: pathology-stomach-damage-operation
@@ -239,7 +292,11 @@
     - !type:PathologyEntityEffect
       effects:
       - !type:Vomit
-        probability: 0.02
+        probability: 0.04
+    - !type:PathologyDamageEffect
+      damage:
+        types:
+          Poison: 0.1
 
 # eye damage from welding and flashes on already burnt out eyes
 - type: pathology

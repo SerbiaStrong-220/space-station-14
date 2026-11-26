@@ -13,8 +13,17 @@ public sealed partial class PathologyEntityEffect : IPathologyEffect
     [DataField(required: true)]
     public EntityEffect[] Effects = Array.Empty<EntityEffect>();
 
+    /// <summary>
+    /// If set, the effects are applied with this chance for each stack, so they happen more often the more stacks there are.
+    /// </summary>
+    [DataField]
+    public float? ChancePerStack;
+
     public void ApplyEffect(EntityUid uid, PathologyInstanceData data, IEntityManager entityManager)
     {
+        if (ChancePerStack is { } chance && !entityManager.System<SharedPathologySystem>().RollChancePerStack(data, chance))
+            return;
+
         entityManager.System<SharedEntityEffectsSystem>().ApplyEffects(uid, Effects);
     }
 }

@@ -135,17 +135,21 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         return true;
     }
 
-    public bool CanMeetRequirements(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
+    /// <param name="predicted">False if only the server checks it, then the server sends the failure popup itself</param>
+    public bool CanMeetRequirements(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user, bool predicted = true)
     {
-        return CheckRequirements(entity, edge, used, user, applyEffects: false);
+        return CheckRequirements(entity, edge, used, user, applyEffects: false, predicted);
     }
 
+    /// <summary>
+    /// Server only, the step result isn't predicted.
+    /// </summary>
     public bool TryMeetRequirement(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
     {
-        return CheckRequirements(entity, edge, used, user, applyEffects: true);
+        return CheckRequirements(entity, edge, used, user, applyEffects: true, predicted: false);
     }
 
-    private bool CheckRequirements(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user, bool applyEffects)
+    private bool CheckRequirements(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user, bool applyEffects, bool predicted)
     {
         foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
         {
@@ -171,7 +175,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
-            _popup.PopupClient(reason, user);
+            if (predicted)
+                _popup.PopupClient(reason, user);
+            else
+                _popup.PopupCursor(reason, user);
 
             return false;
         }

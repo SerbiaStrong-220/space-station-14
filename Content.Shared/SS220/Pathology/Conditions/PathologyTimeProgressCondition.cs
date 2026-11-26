@@ -9,6 +9,6 @@ public sealed partial class PathologyTimeProgressCondition : PathologyProgressCo
 
     protected override bool Condition(EntityUid uid, PathologyInstanceData instanceData, TimeSpan curTime, IEntityManager entityManager)
     {
-        return curTime > instanceData.StartTime + Delay;
+        return curTime > instanceData.LevelStartTime + Delay;
     }
 }

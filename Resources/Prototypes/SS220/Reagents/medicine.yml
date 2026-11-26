@@ -248,3 +248,27 @@
         reagent: Nicergoline
         addTime: 60
         decay: 0.8
+
+# treats a damaged heart, an overdose drops the blood pressure too much
+- type: reagent
+  id: Nitroglycerin
+  name: reagent-name-nitroglycerin
+  group: Medicine
+  desc: reagent-desc-nitroglycerin
+  physicalDesc: reagent-physical-desc-oily
+  flavor: medicine
+  color: "#e8e3c1"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:ReducePathologyStacks
+        pathology: HeartDamage
+        probability: 0.15
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Nitroglycerin
+          min: 15
+        damage:
+          types:
+            Asphyxiation: 1

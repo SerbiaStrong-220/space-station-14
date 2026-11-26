@@ -38,6 +38,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
         InitializeExamineEvents();
         InitializeTraumaEffectsEvents();
         InitializeOrganEvents();
+        InitializeTopicalCureEvents();
     }
 
     public override void Update(float frameTime)
@@ -145,22 +146,31 @@ public abstract partial class SharedPathologySystem : EntitySystem
         if (instanceData.Level + 1 >= pathologyPrototype.Definition.Length)
             return false;
 
+        AdvanceLevel(entity, pathologyPrototype, instanceData, context, showPopup: true);
+        return true;
+    }
+
+    /// <summary>
+    /// Raises the pathology by one level, the caller checks that the next level exists.
+    /// </summary>
+    private void AdvanceLevel(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, PathologyInstanceData instanceData, IPathologyContext? context, bool showPopup)
+    {
         var preservedContext = context ?? GetFirstContext(instanceData);
 
         instanceData.Level++;
+        instanceData.LevelStartTime = _gameTiming.CurTime;
         // we drop all previous
         instanceData.StackCount = OneStack;
         instanceData.PathologyContexts.Clear();
 
         instanceData.PathologyContexts.Add(preservedContext);
-        AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[instanceData.Level]);
+        AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[instanceData.Level], showPopup);
         DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
 
         var ev = new PathologySeverityChanged(pathologyPrototype.ID, instanceData.Level - 1, instanceData.Level);
         RaiseLocalEvent(entity, ref ev);
 
         Dirty(entity);
-        return true;
     }
 
     private static IPathologyContext? GetFirstContext(PathologyInstanceData instanceData)
@@ -193,12 +203,12 @@ public abstract partial class SharedPathologySystem : EntitySystem
         Dirty(entity);
     }
 
-    private void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyDefinition definition)
+    private void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyDefinition definition, bool showPopup = true)
     {
         AddTrait(entity, definition.Trait);
 
         // we don't want to popup dead ones
-        if (_mobState.IsIncapacitated(entity))
+        if (!showPopup || _mobState.IsIncapacitated(entity))
             return;
 
         if (definition.ProgressPopup is { } progressPopup)

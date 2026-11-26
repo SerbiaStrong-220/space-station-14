@@ -32,6 +32,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LiverDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -112,6 +118,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LiverDamage
+        probability: 0.05
+      #SS220-surgery-update end
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrunk
         time: 18.0 #SS220 ethylredoxrazine buff
@@ -266,6 +278,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LungDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -292,6 +310,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LungDamage
+        probability: 0.2
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -963,6 +987,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: RetinaDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:EyeDamage
       - !type:ChemRemoveHallucinationsEffect #SS220
 

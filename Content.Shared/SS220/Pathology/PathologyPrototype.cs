@@ -99,6 +99,18 @@ public sealed partial class PathologyDefinition
     public int MaxStackCount = SharedPathologySystem.OneStack;
 
     /// <summary>
+    /// The same pathology added again (e.g. a new burn of the zone) raises this level to the next one.
+    /// </summary>
+    [DataField]
+    public bool WorsensOnRepeat;
+
+    /// <summary>
+    /// This level is cured by topical medicine (e.g. ointment), see <see cref="TopicalPathologyCureComponent"/>.
+    /// </summary>
+    [DataField]
+    public bool CuredByTopicals;
+
+    /// <summary>
     /// False for stacks that only lead to the next level (e.g. organ damage before failure), they don't make the pathology severe.
     /// </summary>
     [DataField]
@@ -117,10 +129,10 @@ public sealed partial class PathologyDefinition
     public float DoAfterDelayModifier = 1f;
 
     /// <summary>
-    /// Additional gun spread angle applied when firing with the injured hand (or any wielded gun).
+    /// Multiplier of the gun spread when firing with the injured hand (or any wielded gun), e.g. 1.2 is +20% of the gun's own spread.
     /// </summary>
     [DataField]
-    public Angle GunSpreadPenalty = Angle.Zero;
+    public float GunSpreadModifier = 1f;
 
     [DataField]
     public PathologyProgressCondition[] ProgressConditions = Array.Empty<PathologyProgressCondition>();

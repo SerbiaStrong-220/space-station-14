@@ -2,7 +2,6 @@
 
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
-using Content.Server.SS220.PathologyProvider;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -51,16 +50,6 @@ public sealed partial class DismembermentSystem : EntitySystem
     private static readonly ProtoId<EmotePrototype> ScreamEmote = "Scream";
     private static readonly SoundSpecifier TearSound = new SoundCollectionSpecifier("gib");
 
-    // a hit, the threshold is the part's own
-    private static readonly TraumaRoll HitRoll = new(0f, 9.17f, 0.06f, 0.20f, 0.95f);
-
-    // an explosion, by its blunt damage after armor
-    private static readonly TraumaRoll BlastRoll = new(20f, 10f, 0.005f, 0.05f, 0.40f);
-
-    private const float TearSlashDamage = 20f;
-    private const float TearThrowMinDistance = 2f;
-    private const float TearThrowMaxDistance = 3f;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -77,6 +66,9 @@ public sealed partial class DismembermentSystem : EntitySystem
         if (!args.DamageIncreased || args.DamageDelta is not { } delta || ent.Comp.TearTick == _timing.CurTick || HasComp<GodmodeComponent>(ent))
             return;
 
+        if (TryComp<PathologyHolderComponent>(ent, out var holder) && holder.DamageWithoutTraumas)
+            return;
+
         var damage = (GetDamageAmount(delta, DamageBlunt) + GetDamageAmount(delta, DamageSlash)).Float();
         if (!_prototype.Resolve(ent.Comp.HitZones, out var zones))
             return;
@@ -84,14 +76,9 @@ public sealed partial class DismembermentSystem : EntitySystem
         ProtoId<OrganCategoryPrototype> category = zones.Pick(_random);
         if (!_body.TryGetOrganByCategory(ent.Owner, category, out var organ)
             || !TryComp<DismemberableComponent>(organ, out var dismemberable)
-            || damage < dismemberable.HitThreshold
+            || (dismemberable.HitRoll ?? ent.Comp.HitRoll) is not { } hitRoll
+            || !hitRoll.TryGetChance(damage, out var chance)
             || !HasSevereTrauma(ent, category))
-            return;
-
-        var chance = 0f;
-        if (dismemberable.HitChance is { } fixedChance)
-            chance = fixedChance;
-        else if (!HitRoll.TryGetChance(damage, out chance))
             return;
 
         if (_random.Prob(chance))
@@ -103,9 +90,9 @@ public sealed partial class DismembermentSystem : EntitySystem
         if (!TryComp<PathologyHolderComponent>(body, out var holder))
             return false;
 
-        foreach (var pathologyId in holder.ActivePathologies.Keys)
+        foreach (var (pathologyId, data) in holder.ActivePathologies)
         {
-            if (_prototype.Resolve(pathologyId, out var pathology) && pathology.IsSevere && pathology.Organ == category)
+            if (_prototype.Resolve(pathologyId, out var pathology) && pathology.Organ == category && SharedPathologySystem.IsSevere(pathology, data))
                 return true;
         }
 
@@ -122,7 +109,8 @@ public sealed partial class DismembermentSystem : EntitySystem
 
         // the damage is already reduced by explosion armor
         var blunt = GetDamageAmount(args.Damage, DamageBlunt).Float();
-        if (!BlastRoll.TryGetChance(blunt, out var chance)
+        if (ent.Comp.BlastRoll is not { } blastRoll
+            || !blastRoll.TryGetChance(blunt, out var chance)
             || !_body.TryGetOrgansWithComponent<DismemberableComponent>(ent.Owner, out var parts))
             return;
 
@@ -144,7 +132,7 @@ public sealed partial class DismembermentSystem : EntitySystem
             || !_body.TryExtractOrgan(ent.Owner, category, out _))
             return;
 
-        var direction = _random.NextAngle().ToVec() * _random.NextFloat(TearThrowMinDistance, TearThrowMaxDistance);
+        var direction = _random.NextAngle().ToVec() * _random.NextFloat(ent.Comp.TearThrowMinDistance, ent.Comp.TearThrowMaxDistance);
         _throwing.TryThrow(part, direction, playSound: false);
 
         _popup.PopupEntity(Loc.GetString("limb-dismembered-popup", ("target", Identity.Entity(ent, EntityManager)), ("part", part)),
@@ -158,9 +146,12 @@ public sealed partial class DismembermentSystem : EntitySystem
         if (TryComp<BloodstreamComponent>(ent, out var bloodstream))
             _bloodstream.TryModifyBleedAmount((ent, bloodstream), bloodstream.MaxBleedAmount);
 
+        if (ent.Comp.TearDamage is not { } tearDamage)
+            return;
+
         // the wound damage must not roll another tear in the same tick
         ent.Comp.TearTick = _timing.CurTick;
-        _damageable.TryChangeDamage(ent.Owner, new DamageSpecifier(_prototype.Index(DamageSlash), TearSlashDamage), ignoreResistances: true);
+        _damageable.TryChangeDamage(ent.Owner, tearDamage, ignoreResistances: true);
     }
 
     private static FixedPoint2 GetDamageAmount(DamageSpecifier damage, ProtoId<DamageTypePrototype> type)

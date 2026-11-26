@@ -6,6 +6,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Systems.Experience;
+using Content.Shared.SS220.Pathology;
 using Content.Shared.SS220.Surgery.Graph;
 using Robust.Shared.Prototypes;
 
@@ -44,7 +45,8 @@ public sealed partial class ApplyDamageAction : ISurgeryGraphEdgeAction
 
         var damagableSystem = entityManager.System<DamageableSystem>();
 
-        damagableSystem.TryChangeDamage(uid, Damage * modifier, IgnoreResistance, origin: userUid);
+        // a surgery step is not a hit, its damage doesn't roll traumas
+        entityManager.System<SharedPathologySystem>().TryChangeDamageWithoutTraumas(uid, Damage * modifier, out _, IgnoreResistance, userUid);
 
         foreach (var (group, amount) in DamageGrouped)
         {

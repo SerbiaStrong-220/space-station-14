@@ -135,7 +135,7 @@
   definition:
   - description: pathology-lefthand-dislocation-description
     doAfterDelayModifier: 1.2
-    gunSpreadPenalty: 5
+    gunSpreadModifier: 1.2
 
 - type: pathology
   id: RightHandDislocation
@@ -149,7 +149,7 @@
   definition:
   - description: pathology-righthand-dislocation-description
     doAfterDelayModifier: 1.2
-    gunSpreadPenalty: 5
+    gunSpreadModifier: 1.2
 
 - type: pathology
   id: LeftLegDislocation
@@ -163,7 +163,7 @@
   definition:
   - description: pathology-leftleg-dislocation-description
     statusEffects:
-    - StatusEffectLegTraumaSlowdown
+    - StatusEffectDislocationSlowdown
 
 - type: pathology
   id: RightLegDislocation
@@ -177,7 +177,7 @@
   definition:
   - description: pathology-rightleg-dislocation-description
     statusEffects:
-    - StatusEffectLegTraumaSlowdown
+    - StatusEffectDislocationSlowdown
 
 - type: pathology
   id: LeftFootDislocation
@@ -191,7 +191,7 @@
   definition:
   - description: pathology-leftfoot-dislocation-description
     statusEffects:
-    - StatusEffectLegTraumaSlowdown
+    - StatusEffectDislocationSlowdown
 
 - type: pathology
   id: RightFootDislocation
@@ -205,7 +205,7 @@
   definition:
   - description: pathology-rightfoot-dislocation-description
     statusEffects:
-    - StatusEffectLegTraumaSlowdown
+    - StatusEffectDislocationSlowdown
 
 # Hairline Fractures
 
@@ -272,7 +272,7 @@
   definition:
   - description: pathology-lefthand-hairline-description
     doAfterDelayModifier: 1.35
-    gunSpreadPenalty: 5
+    gunSpreadModifier: 1.2
 
 - type: pathology
   id: RightHandHairlineFracture
@@ -286,7 +286,7 @@
   definition:
   - description: pathology-righthand-hairline-description
     doAfterDelayModifier: 1.35
-    gunSpreadPenalty: 5
+    gunSpreadModifier: 1.2
 
 - type: pathology
   id: LeftLegHairlineFracture
@@ -437,7 +437,7 @@
   definition:
   - description: pathology-lefthand-compound-description
     doAfterDelayModifier: 1.6
-    gunSpreadPenalty: 5
+    gunSpreadModifier: 1.2
 
 - type: pathology
   id: RightHandCompoundFracture
@@ -452,7 +452,7 @@
   definition:
   - description: pathology-righthand-compound-description
     doAfterDelayModifier: 1.6
-    gunSpreadPenalty: 5
+    gunSpreadModifier: 1.2
 
 - type: pathology
   id: LeftLegCompoundFracture
@@ -618,118 +618,230 @@
   id: HeadBurnNecrosis
   name: pathology-head-necrosis-name
   examineDescription: pathology-head-necrosis-examine
-  isSevere: true
   armorSlotFlags: HEAD
   targetZone: Head
   organ: Head
   operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
   definition:
+  - name: pathology-head-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
   - description: pathology-head-necrosis-description
-    effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.01
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-head-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
 
 - type: pathology
   id: TorsoBurnNecrosis
   name: pathology-torso-necrosis-name
   examineDescription: pathology-torso-necrosis-examine
-  isSevere: true
   armorSlotFlags: TORSO
   targetZone: Torso
   operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
   definition:
+  - name: pathology-torso-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
   - description: pathology-torso-necrosis-description
-    effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.01
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-torso-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
 
 - type: pathology
   id: LowerTorsoBurnNecrosis
   name: pathology-lowertorso-necrosis-name
   examineDescription: pathology-lowertorso-necrosis-examine
-  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LowerTorso
   operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
   definition:
+  - name: pathology-lowertorso-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
   - description: pathology-lowertorso-necrosis-description
-    effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.01
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-lowertorso-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
 
 - type: pathology
   id: LeftArmBurnNecrosis
   name: pathology-leftarm-necrosis-name
   examineDescription: pathology-leftarm-necrosis-examine
-  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftArm
   organ: ArmLeft
   operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
   definition:
+  - name: pathology-leftarm-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
   - description: pathology-leftarm-necrosis-description
-    effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.01
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-leftarm-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
 
 - type: pathology
   id: RightArmBurnNecrosis
   name: pathology-rightarm-necrosis-name
   examineDescription: pathology-rightarm-necrosis-examine
-  isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightArm
   organ: ArmRight
   operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
   definition:
+  - name: pathology-rightarm-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
   - description: pathology-rightarm-necrosis-description
-    effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.01
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-rightarm-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
 
 - type: pathology
   id: LeftLegBurnNecrosis
   name: pathology-leftleg-necrosis-name
   examineDescription: pathology-leftleg-necrosis-examine
-  isSevere: true
   armorSlotFlags: TORSO
   targetZone: LeftLeg
   organ: LegLeft
   operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
   definition:
+  - name: pathology-leftleg-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
   - description: pathology-leftleg-necrosis-description
-    effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.01
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-leftleg-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
 
 - type: pathology
   id: RightLegBurnNecrosis
   name: pathology-rightleg-necrosis-name
   examineDescription: pathology-rightleg-necrosis-examine
-  isSevere: true
   armorSlotFlags: TORSO
   targetZone: RightLeg
   organ: LegRight
   operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
   definition:
+  - name: pathology-rightleg-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
   - description: pathology-rightleg-necrosis-description
-    effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.01
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-rightleg-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
 
 # Eyes & Mouth Traumas
 
@@ -751,6 +863,7 @@
   examineDescription: pathology-mouth-jaw-dislocation-examine
   armorSlotFlags: MASK
   targetZone: Mouth
+  organ: Head
   affectsBones: true
   operationRecommendation: pathology-mouth-jaw-dislocation-operation
   definition:

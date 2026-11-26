@@ -14,6 +14,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Pathology;
 using Content.Shared.Stacks;
 using Robust.Shared.Audio.Systems;
 
@@ -79,6 +80,11 @@ public sealed class HealingSystem : EntitySystem
 
         if (!_damageable.TryChangeDamage(target.Owner, healing.Damage * _damageable.UniversalTopicalsHealModifier, out var healed, true, origin: args.Args.User) && healing.BloodlossModifier != 0)
             return;
+
+        //SS220-surgery-update begin
+        var treatedEv = new HealingTreatedEvent(target.Owner, args.User);
+        RaiseLocalEvent(args.Used.Value, ref treatedEv);
+        //SS220-surgery-update end
 
         var total = healed.GetTotal();
 
@@ -152,6 +158,14 @@ public sealed class HealingSystem : EntitySystem
                 return true;
             }
         }
+
+        //SS220-surgery-update begin
+        // e.g. ointment treats burns that are not damage
+        var canTreatEv = new HealingCanTreatEvent(target.Owner);
+        RaiseLocalEvent(healing, ref canTreatEv);
+        if (canTreatEv.CanTreat)
+            return true;
+        //SS220-surgery-update end
 
         return false;
     }

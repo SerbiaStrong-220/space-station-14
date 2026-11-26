@@ -52,6 +52,15 @@ public abstract partial class SharedPathologySystem : EntitySystem
             UpdateStackableStatusEffect(entity, effectId);
         }
 
+        // status effects belong to the current level only, the previous level no longer counts for its ones
+        if (args.PreviousSeverity >= 0 && args.PreviousSeverity < pathologyPrototype.Definition.Length)
+        {
+            foreach (var effectId in pathologyPrototype.Definition[args.PreviousSeverity].StatusEffects)
+            {
+                UpdateStackableStatusEffect(entity, effectId);
+            }
+        }
+
         RefreshOverriddenStatusEffects(entity, pathologyPrototype);
         HandleTraumaSeverityChanged(entity, ref args);
     }
@@ -127,5 +136,9 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
         stackableComponent.StackCount = totalStacks;
         Dirty(effect.Value, stackableComponent);
+
+        // the slowdown of this effect depends on the stacks
+        if (HasComp<PathologyMovementModStatusEffectComponent>(effect))
+            _movementSpeedModifier.RefreshMovementSpeedModifiers(entity.Owner);
     }
 }

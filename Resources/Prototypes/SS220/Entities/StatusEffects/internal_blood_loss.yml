@@ -25,6 +25,15 @@
 
 - type: entity
   parent: StatusEffectSlowdown
+  id: StatusEffectDislocationSlowdown
+  name: dislocation slowdown
+  components:
+  - type: MovementModStatusEffect
+    walkSpeedModifier: 0.88
+    sprintSpeedModifier: 0.85
+
+- type: entity
+  parent: StatusEffectSlowdown
   id: StatusEffectCompoundLegSlowdown
   name: compound fracture slowdown
   components:

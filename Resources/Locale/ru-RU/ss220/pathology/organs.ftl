@@ -54,6 +54,10 @@ pathology-liver-damage-popup = Вас подташнивает, в правом 
 pathology-liver-failure-name = Отказ печени
 pathology-liver-failure-description = Печёночная недостаточность: токсины отравляют организм.
 pathology-liver-failure-popup = Правый бок пронзает тупая боль!
+pathology-liver-failure-severe-description = Тяжёлая печёночная недостаточность: токсины сильно отравляют организм, пациента рвёт.
+pathology-liver-failure-severe-popup = Боль в боку усиливается, к горлу подступает тошнота!
+pathology-liver-failure-terminal-description = Терминальная печёночная недостаточность: токсины разрушают организм и поражают другие органы.
+pathology-liver-failure-terminal-popup = Внутренности будто горят, вас выворачивает от боли!
 pathology-liver-damage-operation = Хирургия торса: вскройте брюшную полость и проведите гепатэктомию скальпелем, либо пересадите печень.
 
 pathology-stomach-damage-name = Повреждение желудка

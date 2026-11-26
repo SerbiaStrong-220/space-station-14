@@ -40,12 +40,6 @@ public sealed partial class PathologyProviderSystem : EntitySystem
     private static readonly ProtoId<WeightedRandomPrototype> ArterialPunctureTable = "ArterialPuncturePathology";
     private static readonly ProtoId<WeightedRandomPrototype> BurnNecrosisTable = "BurnNecrosisPathology";
 
-    private static readonly TraumaRoll CompoundFractureRoll = new(35f, 20f, 0.035f, 0.50f, 0.90f);
-    private static readonly TraumaRoll HairlineFractureRoll = new(22f, 15f, 0.03f, 0.20f, 0.55f);
-    private static readonly TraumaRoll DislocationRoll = new(12f, 10f, 0.025f, 0.05f, 0.35f);
-    private static readonly TraumaRoll ArterialPunctureRoll = new(18f, 14f, 0.025f, 0.10f, 0.65f);
-    private static readonly TraumaRoll BurnNecrosisRoll = new(20f, 15f, 0.025f, 0.12f, 0.65f);
-
     public override void Initialize()
     {
         base.Initialize();
@@ -87,7 +81,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
         if (!args.DamageIncreased || args.DamageDelta is not { } delta)
             return;
 
-        if (HasComp<GodmodeComponent>(entity.Owner))
+        if (entity.Comp.DamageWithoutTraumas || HasComp<GodmodeComponent>(entity.Owner))
             return;
 
         if (entity.Comp.ProjectileTraumaTick == _timing.CurTick)
@@ -98,12 +92,12 @@ public sealed partial class PathologyProviderSystem : EntitySystem
             return;
         }
 
-        var blunt = GetDamageAmount(delta, DamageBlunt);
-        if (CompoundFractureRoll.TryGetChance(blunt.Float(), out var compoundChance))
+        var blunt = GetDamageAmount(delta, DamageBlunt).Float();
+        if (entity.Comp.CompoundFractureRoll is { } compoundRoll && compoundRoll.TryGetChance(blunt, out var compoundChance))
             AddArmoredRandom(entity.Owner, CompoundFractureTable, DamageBlunt, compoundChance);
-        else if (HairlineFractureRoll.TryGetChance(blunt.Float(), out var hairlineChance))
+        else if (entity.Comp.HairlineFractureRoll is { } hairlineRoll && hairlineRoll.TryGetChance(blunt, out var hairlineChance))
             AddArmoredRandom(entity.Owner, HairlineFractureTable, DamageBlunt, hairlineChance);
-        else if (DislocationRoll.TryGetChance(blunt.Float(), out var dislocationChance))
+        else if (entity.Comp.DislocationRoll is { } dislocationRoll && dislocationRoll.TryGetChance(blunt, out var dislocationChance))
             AddArmoredRandom(entity.Owner, DislocationTable, DamageBlunt, dislocationChance);
 
         RollArterialPuncture(entity, delta);
@@ -111,10 +105,11 @@ public sealed partial class PathologyProviderSystem : EntitySystem
         var heat = GetDamageAmount(delta, DamageHeat);
         var caustic = GetDamageAmount(delta, DamageCaustic);
         var shock = GetDamageAmount(delta, DamageShock);
-        if (BurnNecrosisRoll.TryGetChance((heat + caustic + shock).Float(), out var burnChance))
+        var burn = (heat + caustic + shock).Float();
+        if (entity.Comp.BurnNecrosisRoll is { } burnRoll && burnRoll.TryGetChance(burn, out var burnChance))
         {
             var burnType = GetMaxDamageType(heat, DamageHeat, caustic, DamageCaustic, shock, DamageShock);
-            AddArmoredRandom(entity.Owner, BurnNecrosisTable, burnType, burnChance);
+            AddArmoredRandom(entity.Owner, BurnNecrosisTable, burnType, burnChance, level: burnRoll.GetLevel(burn));
         }
     }
 
@@ -122,7 +117,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
     {
         var slash = GetDamageAmount(delta, DamageSlash);
         var piercing = GetDamageAmount(delta, DamagePiercing);
-        if (!ArterialPunctureRoll.TryGetChance((slash + piercing).Float(), out var arterialChance))
+        if (entity.Comp.ArterialPunctureRoll is not { } arterialRoll || !arterialRoll.TryGetChance((slash + piercing).Float(), out var arterialChance))
             return;
 
         var sharpType = piercing >= slash ? DamagePiercing : DamageSlash;
@@ -134,7 +129,8 @@ public sealed partial class PathologyProviderSystem : EntitySystem
         ProtoId<WeightedRandomPrototype> tableId,
         ProtoId<DamageTypePrototype> damageType,
         float baseChance,
-        IPathologyContext? context = null)
+        IPathologyContext? context = null,
+        int level = 0)
     {
         if (!_prototype.Resolve(tableId, out var weightedRandomPrototype))
             return;
@@ -143,7 +139,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
         if (armorAffectedWeights.Count == 0 || chanceMultiplier <= 0f)
             return;
 
-        _pathology.TryAddRandom(target, armorAffectedWeights, baseChance * chanceMultiplier, context);
+        _pathology.TryAddRandom(target, armorAffectedWeights, baseChance * chanceMultiplier, context, level);
     }
 
     private (Dictionary<string, float> Weights, float ChanceMultiplier) GetAffectedByArmoredChance(
