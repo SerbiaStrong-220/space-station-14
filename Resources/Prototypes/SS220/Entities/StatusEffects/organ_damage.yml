@@ -39,6 +39,16 @@
     sprintSpeedModifier: 0.95
     maxStacks: 3
 
+# failed lungs keep the slowdown the damaged ones reached
+- type: entity
+  parent: StatusEffectSlowdown
+  id: StatusEffectLungFailureSlowdown
+  name: lung failure slowdown
+  components:
+  - type: MovementModStatusEffect
+    walkSpeedModifier: 1
+    sprintSpeedModifier: 0.95
+
 - type: entity
   parent: StatusEffectSlowdown
   id: StatusEffectHeartFailureSlowdown

@@ -140,6 +140,16 @@
     operationRecommendation: pathology-lung-damage-operation
     progressPopup: pathology-lung-failure-popup
     stopsBreathing: true
+    statusEffects:
+    - StatusEffectLungFailureSlowdown
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-lung-failure-popup" ]
+        probability: 0.05
 
 - type: pathology
   id: HeartDamage
@@ -182,7 +192,7 @@
         type: Local
         visualType: LargeCaution
         messages: [ "pathology-heart-failure-attack-popup" ]
-        probability: 0.03
+        probability: 0.05
 
 - type: pathology
   id: LiverDamage
@@ -224,6 +234,13 @@
       damage:
         types:
           Poison: 0.2
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-liver-failure-popup" ]
+        probability: 0.05
   - description: pathology-liver-failure-severe-description
     name: pathology-liver-failure-name
     operationRecommendation: pathology-liver-damage-operation
@@ -240,6 +257,11 @@
       effects:
       - !type:Vomit
         probability: 0.02
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-liver-failure-severe-popup" ]
+        probability: 0.05
   - description: pathology-liver-failure-terminal-description
     name: pathology-liver-failure-name
     operationRecommendation: pathology-liver-damage-operation
@@ -253,6 +275,11 @@
       effects:
       - !type:Vomit
         probability: 0.03
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-liver-failure-terminal-popup" ]
+        probability: 0.05
     - !type:RandomPathologyAddEffect
       chance: 0.02
       weightedId: LiverFailureOrganDamage
@@ -293,6 +320,11 @@
       effects:
       - !type:Vomit
         probability: 0.04
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-stomach-failure-popup" ]
+        probability: 0.05
     - !type:PathologyDamageEffect
       damage:
         types:
