@@ -562,6 +562,7 @@
   - type: Tts
     voicePreferences:
       NTTS: mana
+      Silero: Polina
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
@@ -657,6 +658,7 @@
   - type: Tts
     voicePreferences:
       NTTS: horner
+      Silero: Raynor
   - type: Butcherable
     spawned:
     - id: FoodMeat
