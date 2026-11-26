@@ -1,14 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Shuttles.Components;
-using Content.Server.Shuttles.Systems;
+using Content.Server.Shuttles.Systems; //SS220 GyroPowerUpdate
 using Content.Shared.SS220.CruiseControl;
 
 namespace Content.Server.SS220.CruiseControl;
 
 public sealed class CruiseControlSystem : EntitySystem
 {
-    [Dependency] private readonly ShuttleConsoleSystem _shuttleConsole = default!;
+    [Dependency] private readonly ShuttleConsoleSystem _shuttleConsole = default!; //SS220 GyroPowerUpdate
     public override void Initialize()
     {
         base.Initialize();

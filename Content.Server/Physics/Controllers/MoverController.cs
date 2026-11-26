@@ -745,6 +745,8 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
             {
                 PhysicsSystem.SetSleepingAllowed(shuttleUid, body, false);
 
+                //var torque = shuttle.AngularThrust * -angularInput; SS220 GyroPowerUpdate
+
                 /*SS220 GyroPowerUpdate Start*/
                 var gyroPower = 1f;
                 if (TryComp<ShuttleGyroPowerComponent>(shuttleUid, out var gyroComp))
