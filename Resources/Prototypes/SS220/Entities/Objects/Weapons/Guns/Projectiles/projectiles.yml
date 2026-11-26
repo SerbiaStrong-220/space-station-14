@@ -558,7 +558,7 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
     layers:
-    - state: redlaser
+    - state: red_plasma
       shader: unshaded
   - type: Projectile
     impactEffect: BulletImpactEffectBlaster
