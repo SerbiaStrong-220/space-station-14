@@ -103,8 +103,11 @@ public sealed partial class InitialBodySystem
             EntityUid? replaced = null;
             if (_body.TryGetOrganByCategory((ent, body), category, out var organ))
             {
-                // a transplanted brain carries someone's mind, deleting it would kill that player
-                if (category == BrainCategory || IsSpeciesOrgan(ent, organ.Value.AsNullable()))
+                // a transplanted brain carries someone's mind, deleting it would kill that player,
+                // a prosthesis is not an injury to heal
+                if (category == BrainCategory
+                    || HasComp<ProsthesisComponent>(organ.Value)
+                    || IsSpeciesOrgan(ent, organ.Value.AsNullable()))
                     continue;
 
                 if (!_body.TryExtractOrgan((ent, body), category, out _))
@@ -114,19 +117,22 @@ public sealed partial class InitialBodySystem
             }
 
             var spawned = Spawn(organProto, coords);
-            var inserted = _body.TryInsertOrgan((ent, body), spawned);
+            if (!_body.TryInsertOrgan((ent, body), spawned))
+            {
+                Del(spawned);
+
+                // the body must not be left without the organ it had
+                if (replaced is { } notReplaced)
+                    _body.TryInsertOrgan((ent, body), notReplaced);
+
+                continue;
+            }
 
             // a foreign head took the brain along, the organs go back before the head is deleted
             if (replaced is { } replacedOrgan)
             {
                 _limb.ReturnAttachedOrgans(replacedOrgan, ent);
                 Del(replacedOrgan);
-            }
-
-            if (!inserted)
-            {
-                Del(spawned);
-                continue;
             }
 
             if (profile is { } organProfile)

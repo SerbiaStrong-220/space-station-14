@@ -7,12 +7,10 @@ using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Explosion;
-using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -35,7 +33,7 @@ public sealed partial class DismembermentSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedPathologySystem _pathology = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -69,7 +67,7 @@ public sealed partial class DismembermentSystem : EntitySystem
         if (TryComp<PathologyHolderComponent>(ent, out var holder) && holder.DamageWithoutTraumas)
             return;
 
-        var damage = (GetDamageAmount(delta, DamageBlunt) + GetDamageAmount(delta, DamageSlash)).Float();
+        var damage = (SharedPathologySystem.GetDealtDamage(delta, DamageBlunt) + SharedPathologySystem.GetDealtDamage(delta, DamageSlash)).Float();
         if (!_prototype.Resolve(ent.Comp.HitZones, out var zones))
             return;
 
@@ -108,7 +106,7 @@ public sealed partial class DismembermentSystem : EntitySystem
         ent.Comp.TearTick = _timing.CurTick;
 
         // the damage is already reduced by explosion armor
-        var blunt = GetDamageAmount(args.Damage, DamageBlunt).Float();
+        var blunt = SharedPathologySystem.GetDealtDamage(args.Damage, DamageBlunt).Float();
         if (ent.Comp.BlastRoll is not { } blastRoll
             || !blastRoll.TryGetChance(blunt, out var chance)
             || !_body.TryGetOrgansWithComponent<DismemberableComponent>(ent.Owner, out var parts))
@@ -149,13 +147,7 @@ public sealed partial class DismembermentSystem : EntitySystem
         if (ent.Comp.TearDamage is not { } tearDamage)
             return;
 
-        // the wound damage must not roll another tear in the same tick
-        ent.Comp.TearTick = _timing.CurTick;
-        _damageable.TryChangeDamage(ent.Owner, tearDamage, ignoreResistances: true);
-    }
-
-    private static FixedPoint2 GetDamageAmount(DamageSpecifier damage, ProtoId<DamageTypePrototype> type)
-    {
-        return damage.DamageDict.TryGetValue(type, out var amount) && amount > FixedPoint2.Zero ? amount : FixedPoint2.Zero;
+        // the wound of the tear is not a hit, it must not roll traumas or another tear
+        _pathology.TryChangeDamageWithoutTraumas(ent.Owner, tearDamage, out _, ignoreResistances: true);
     }
 }

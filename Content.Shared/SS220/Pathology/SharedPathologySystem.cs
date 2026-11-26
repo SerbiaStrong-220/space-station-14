@@ -158,6 +158,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
         var preservedContext = context ?? GetFirstContext(instanceData);
 
         instanceData.Level++;
+        DebugTools.Assert(instanceData.Level < pathologyPrototype.Definition.Length, $"Pathology {pathologyPrototype.ID} advanced past its last level");
         instanceData.LevelStartTime = _gameTiming.CurTime;
         // we drop all previous
         instanceData.StackCount = OneStack;

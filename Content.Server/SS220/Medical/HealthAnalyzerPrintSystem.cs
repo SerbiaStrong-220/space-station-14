@@ -244,9 +244,7 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
             if (!_prototypeManager.Resolve(pathologyId, out var pathologyProto))
                 continue;
 
-            var label = Loc.GetString(SharedPathologySystem.GetName(pathologyProto, instanceData));
-            if (instanceData.StackCount > SharedPathologySystem.OneStack)
-                label = Loc.GetString("pathology-hud-entry-with-stack", ("name", label), ("count", instanceData.StackCount));
+            var label = SharedPathologySystem.GetLabel(pathologyProto, instanceData);
 
             if (pathologyProto.TargetZone is not { } zone)
             {

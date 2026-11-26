@@ -13,10 +13,16 @@
   - description: pathology-missing-brain-description
     effects:
     # about 5 minutes to death: ~3.3 min to crit, then breathing stops and suffocation joins
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Cellular: 0.5
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Cellular: 0.5
 
 - type: pathology
   id: MissingEyes
@@ -52,10 +58,16 @@
   definition:
   - description: pathology-missing-heart-description
     effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Asphyxiation: 1.5
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Asphyxiation: 1.5
 
 # body already suffocates without lungs, the pathology only shows the reason
 - type: pathology
@@ -78,10 +90,16 @@
   definition:
   - description: pathology-missing-liver-description
     effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.5
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.5
 
 - type: pathology
   id: MissingStomach
@@ -103,10 +121,16 @@
   definition:
   - description: pathology-missing-kidneys-description
     effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.2
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.2
 
 # Organ damage. The "damaged" stage accumulates stacks from damage sources and heals by itself (about 2 minutes per stack).
 # Its downsides grow with the stacks, so it is worth treating before the organ fails.
@@ -182,10 +206,16 @@
     statusEffects:
     - StatusEffectHeartFailureSlowdown
     effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Asphyxiation: 1
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Asphyxiation: 1
     - !type:PathologyEntityEffect
       effects:
       - !type:PopupMessage
@@ -217,10 +247,17 @@
         messages: [ "pathology-liver-damage-popup" ]
         probability: 0.02
     # per stack
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.02
+    - !type:PathologyEntityEffect
+      scaleByStacks: true
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.02
   # failure gets worse every minute, the last stage damages other organs
   - description: pathology-liver-failure-description
     name: pathology-liver-failure-name
@@ -230,10 +267,16 @@
     - !type:PathologyTimeProgressCondition
       delay: 1m
     effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.2
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.2
     - !type:PathologyEntityEffect
       effects:
       - !type:PopupMessage
@@ -249,10 +292,16 @@
     - !type:PathologyTimeProgressCondition
       delay: 1m
     effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.4
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.4
     - !type:PathologyEntityEffect
       effects:
       - !type:Vomit
@@ -267,10 +316,16 @@
     operationRecommendation: pathology-liver-damage-operation
     progressPopup: pathology-liver-failure-terminal-popup
     effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.8
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.8
     - !type:PathologyEntityEffect
       effects:
       - !type:Vomit
@@ -325,10 +380,16 @@
         visualType: LargeCaution
         messages: [ "pathology-stomach-failure-popup" ]
         probability: 0.05
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 0.1
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.1
 
 # eye damage from welding and flashes on already burnt out eyes
 - type: pathology

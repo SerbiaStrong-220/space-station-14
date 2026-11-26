@@ -271,7 +271,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
-        var failChance = GetStepFailureChance(entity.Owner, args.User, args.Used, chosenEdge);
+        var failChance = GetStepFailureChance(entity.AsNullable(), args.User, args.Used, chosenEdge);
         if (failChance > 0f && _random.NextFloat() < failChance)
         {
             OnSurgeryFailure(args, failedEdge: chosenEdge);
@@ -420,7 +420,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (SurgeryGraph.Delay(chosenEdge) is null)
             Log.Fatal($"Found edge {chosenEdge.Id} with zero delay, graph id {surgeryGraph}");
 
-        var secondsDelay = GetStepDelay(entity.Owner, user, used, chosenEdge);
+        var secondsDelay = GetStepDelay(entity.AsNullable(), user, used, chosenEdge);
 
         var performerDoAfterEventArgs =
             new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(secondsDelay),
@@ -464,7 +464,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         var isStepRollFailure = failedEdge is not null;
         var damaged = false;
 
-        if (args.Used is { } used && TryGetFailureDamage(used, args.User, target, isStepRollFailure, out var failureDamage))
+        if (args.Used is { } used && TryUseFailureDamage(used, args.User, target, isStepRollFailure, out var failureDamage))
         {
             damaged = _pathology.TryChangeDamageWithoutTraumas(target, failureDamage, out var appliedDamage, origin: args.User);
 
@@ -486,7 +486,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             $"{ToPrettyString(args.User):user} failed performing edge of surgery{(damaged ? " and damaged" : " on")} {ToPrettyString(target):target}!");
     }
 
-    private bool TryGetFailureDamage(EntityUid used, EntityUid user, EntityUid target, bool isStepRollFailure, [NotNullWhen(true)] out DamageSpecifier? damage)
+    private bool TryUseFailureDamage(EntityUid used, EntityUid user, EntityUid target, bool isStepRollFailure, [NotNullWhen(true)] out DamageSpecifier? damage)
     {
         damage = null;
 

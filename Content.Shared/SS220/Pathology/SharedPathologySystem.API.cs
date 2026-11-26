@@ -1,7 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Traits;
@@ -55,6 +57,26 @@ public abstract partial class SharedPathologySystem
     public static LocId GetName(PathologyPrototype prototype, PathologyInstanceData data)
     {
         return prototype.Definition[data.Level].Name ?? prototype.Name;
+    }
+
+    /// <summary>
+    /// Localized name of the current level with the stack count, as shown on body dolls and in reports.
+    /// </summary>
+    public static string GetLabel(PathologyPrototype prototype, PathologyInstanceData data)
+    {
+        // the static Loc, the system's own one is an instance member
+        var name = Robust.Shared.Localization.Loc.GetString(GetName(prototype, data));
+        return data.StackCount > OneStack
+            ? Robust.Shared.Localization.Loc.GetString("pathology-hud-entry-with-stack", ("name", name), ("count", data.StackCount))
+            : name;
+    }
+
+    /// <summary>
+    /// Dealt damage of the type, healing counts as none.
+    /// </summary>
+    public static FixedPoint2 GetDealtDamage(DamageSpecifier damage, ProtoId<DamageTypePrototype> type)
+    {
+        return damage.DamageDict.TryGetValue(type, out var amount) && amount > FixedPoint2.Zero ? amount : FixedPoint2.Zero;
     }
 
     public static LocId? GetOperationRecommendation(PathologyPrototype prototype, PathologyInstanceData data)

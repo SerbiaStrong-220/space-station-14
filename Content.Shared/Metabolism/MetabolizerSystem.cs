@@ -47,6 +47,7 @@ public sealed class MetabolizerSystem : EntitySystem
 
         SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MetabolizerComponent, BodyRelayedEvent<ApplyMetabolicMultiplierEvent>>(OnApplyMetabolicMultiplier);
+        SubscribeLocalEvent<MetabolizerComponent, OrganGotInsertedEvent>(OnOrganGotInserted); //SS220-surgery-update
     }
 
     private void OnMapInit(Entity<MetabolizerComponent> ent, ref MapInitEvent args)
@@ -66,6 +67,14 @@ public sealed class MetabolizerSystem : EntitySystem
         //SS220-surgery-update end
         Dirty(ent);
     }
+
+    //SS220-surgery-update begin
+    private void OnOrganGotInserted(Entity<MetabolizerComponent> ent, ref OrganGotInsertedEvent args)
+    {
+        // an organ keeps the rate of its previous body, e.g. a heart from a body on a stasis bed or with bioware would stay slow or fast
+        UpdateMetabolicMultiplier(args.Target);
+    }
+    //SS220-surgery-update end
 
     public override void Update(float frameTime)
     {

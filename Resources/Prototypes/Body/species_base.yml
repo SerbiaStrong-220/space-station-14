@@ -330,7 +330,7 @@
       chancePerDamage: 0.025
       minChance: 0.1
       maxChance: 0.65
-    burnNecrosisRoll: # heat + caustic + shock from 10: 12-65%, a burn up to 25, necrosis from 26
+    burnNecrosisRoll: # heat + caustic + shock from 10: 12-65%, a burn below 24, necrosis from 24
       threshold: 10
       chanceOffset: 15
       chancePerDamage: 0.025

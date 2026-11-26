@@ -3,6 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Forensics;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Body;
 
@@ -72,6 +73,7 @@ public sealed partial class BodySystem
         if (!_container.Remove(organ.Value.Owner, ent.Comp.Organs))
             return false;
 
+        DebugTools.Assert(!ent.Comp.Organs.Contains(organ.Value.Owner), $"Extracted organ {ToPrettyString(organ.Value)} is still in the body");
         extractedOrgan = organ;
         return true;
     }

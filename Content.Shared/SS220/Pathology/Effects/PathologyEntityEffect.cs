@@ -5,7 +5,7 @@ using Content.Shared.EntityEffects;
 namespace Content.Shared.SS220.Pathology.Effects;
 
 /// <summary>
-/// Applies regular entity effects (popups, emotes, vomit, stuns) to the pathology holder every update interval.
+/// Applies regular entity effects (damage, popups, emotes, vomit, stuns) to the pathology holder every update interval.
 /// Use effect probability to make them occasional.
 /// </summary>
 public sealed partial class PathologyEntityEffect : IPathologyEffect
@@ -19,11 +19,17 @@ public sealed partial class PathologyEntityEffect : IPathologyEffect
     [DataField]
     public float? ChancePerStack;
 
+    /// <summary>
+    /// Whether the effects are scaled by the stack count, e.g. damage per stack.
+    /// </summary>
+    [DataField]
+    public bool ScaleByStacks;
+
     public void ApplyEffect(EntityUid uid, PathologyInstanceData data, IEntityManager entityManager)
     {
         if (ChancePerStack is { } chance && !entityManager.System<SharedPathologySystem>().RollChancePerStack(data, chance))
             return;
 
-        entityManager.System<SharedEntityEffectsSystem>().ApplyEffects(uid, Effects);
+        entityManager.System<SharedEntityEffectsSystem>().ApplyEffects(uid, Effects, ScaleByStacks ? data.StackCount : 1f);
     }
 }

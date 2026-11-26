@@ -33,12 +33,6 @@ public abstract partial class SharedSurgerySystem
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    private const float UnanesthetizedFailurePenalty = 0.25f;
-    private const float NoOperatingTableFailurePenalty = 0.20f;
-    private const float NoOperatingTableDelayMultiplier = 1.35f;
-    private const float FloorFailurePenalty = 0.35f;
-    private const float FloorDelayMultiplier = 1.5f;
-
     private void InitializeRisk()
     {
         SubscribeLocalEvent<SurgeryToolComponent, GetSurgeryDelayModifiersEvent>(OnToolGetDelayModifiers);
@@ -290,9 +284,12 @@ public abstract partial class SharedSurgerySystem
     /// <summary>
     /// Calculates the modified delay of a surgery edge taking into account surgeon skills, tool, and table.
     /// </summary>
-    public float GetStepDelay(EntityUid patient, EntityUid surgeon, EntityUid? tool, SurgeryGraphEdge edge)
+    public float GetStepDelay(Entity<SurgeryPatientComponent?> patient, EntityUid surgeon, EntityUid? tool, SurgeryGraphEdge edge)
     {
         var baseDelay = SurgeryGraph.Delay(edge) ?? ErrorGettingDelayDelay;
+        if (!Resolve(patient, ref patient.Comp))
+            return baseDelay;
+
         var skillEv = new GetSurgeryDelayModifiersEvent(0f, 1f);
 
         RaiseLocalEvent(surgeon, ref skillEv);
@@ -309,21 +306,24 @@ public abstract partial class SharedSurgerySystem
         if (TryGetOperatingTable(patient, out var table))
             RaiseLocalEvent(table, ref envEv);
         else
-            envEv.Multiplier *= _buckle.IsBuckled(patient) ? NoOperatingTableDelayMultiplier : FloorDelayMultiplier;
+            envEv.Multiplier *= _buckle.IsBuckled(patient) ? patient.Comp.NoOperatingTableDelayMultiplier : patient.Comp.FloorDelayMultiplier;
 
         if (IsImprovisedForEdge(tool, edge))
-            envEv.Multiplier *= ImprovisedToolDelayMultiplier;
+            envEv.Multiplier *= patient.Comp.ImprovisedToolDelayMultiplier;
 
         var totalDelay = baseDelay * skillMultiplier * envEv.Multiplier + skillEv.FlatModifier + envEv.FlatModifier;
-        return MathF.Max(0.5f, totalDelay);
+        return MathF.Max(patient.Comp.MinStepDelay, totalDelay);
     }
 
     /// <summary>
-    /// Calculates the final probability [0..0.95] of failing a surgery step.
+    /// Calculates the final probability [0..<see cref="SurgeryPatientComponent.MaxStepFailureChance"/>] of failing a surgery step.
     /// </summary>
-    public float GetStepFailureChance(EntityUid patient, EntityUid surgeon, EntityUid? tool, SurgeryGraphEdge edge)
+    public float GetStepFailureChance(Entity<SurgeryPatientComponent?> patient, EntityUid surgeon, EntityUid? tool, SurgeryGraphEdge edge)
     {
         var baseChance = SurgeryGraph.FailureChance(edge) ?? 0f;
+        if (!Resolve(patient, ref patient.Comp))
+            return baseChance;
+
         var failEv = new GetSurgeryFailureChanceEvent(baseChance, 1f);
 
         RaiseLocalEvent(surgeon, ref failEv);
@@ -334,16 +334,16 @@ public abstract partial class SharedSurgerySystem
         if (TryGetOperatingTable(patient, out var table))
             RaiseLocalEvent(table, ref failEv);
         else
-            failEv.FlatModifier += _buckle.IsBuckled(patient) ? NoOperatingTableFailurePenalty : FloorFailurePenalty;
+            failEv.FlatModifier += _buckle.IsBuckled(patient) ? patient.Comp.NoOperatingTableFailurePenalty : patient.Comp.FloorFailurePenalty;
 
         if (IsImprovisedForEdge(tool, edge))
-            failEv.FlatModifier += ImprovisedToolFailurePenalty;
+            failEv.FlatModifier += patient.Comp.ImprovisedToolFailurePenalty;
 
         if (!IsPatientAnesthetized(patient) && !IsPainlessTool(tool) && !SurgeryGraph.IsPainless(edge))
-            failEv.FlatModifier += UnanesthetizedFailurePenalty;
+            failEv.FlatModifier += patient.Comp.UnanesthetizedFailurePenalty;
 
         var total = failEv.FlatModifier * failEv.Multiplier;
-        return Math.Clamp(total, 0f, 0.95f);
+        return Math.Clamp(total, 0f, patient.Comp.MaxStepFailureChance);
     }
 
     /// <summary>

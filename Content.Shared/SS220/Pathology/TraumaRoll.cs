@@ -32,15 +32,6 @@ public partial record struct TraumaRoll()
     [DataField]
     public float[] LevelThresholds { get; set; } = [];
 
-    public TraumaRoll(float threshold, float chanceOffset, float chancePerDamage, float minChance, float maxChance) : this()
-    {
-        Threshold = threshold;
-        ChanceOffset = chanceOffset;
-        ChancePerDamage = chancePerDamage;
-        MinChance = minChance;
-        MaxChance = maxChance;
-    }
-
     public readonly bool TryGetChance(float damage, out float chance)
     {
         chance = 0f;

@@ -92,7 +92,7 @@ public sealed partial class PathologyProviderSystem : EntitySystem
             return;
         }
 
-        var blunt = GetDamageAmount(delta, DamageBlunt).Float();
+        var blunt = SharedPathologySystem.GetDealtDamage(delta, DamageBlunt).Float();
         if (entity.Comp.CompoundFractureRoll is { } compoundRoll && compoundRoll.TryGetChance(blunt, out var compoundChance))
             AddArmoredRandom(entity.Owner, CompoundFractureTable, DamageBlunt, compoundChance);
         else if (entity.Comp.HairlineFractureRoll is { } hairlineRoll && hairlineRoll.TryGetChance(blunt, out var hairlineChance))
@@ -102,9 +102,9 @@ public sealed partial class PathologyProviderSystem : EntitySystem
 
         RollArterialPuncture(entity, delta);
 
-        var heat = GetDamageAmount(delta, DamageHeat);
-        var caustic = GetDamageAmount(delta, DamageCaustic);
-        var shock = GetDamageAmount(delta, DamageShock);
+        var heat = SharedPathologySystem.GetDealtDamage(delta, DamageHeat);
+        var caustic = SharedPathologySystem.GetDealtDamage(delta, DamageCaustic);
+        var shock = SharedPathologySystem.GetDealtDamage(delta, DamageShock);
         var burn = (heat + caustic + shock).Float();
         if (entity.Comp.BurnNecrosisRoll is { } burnRoll && burnRoll.TryGetChance(burn, out var burnChance))
         {
@@ -115,8 +115,8 @@ public sealed partial class PathologyProviderSystem : EntitySystem
 
     private void RollArterialPuncture(Entity<PathologyHolderComponent> entity, DamageSpecifier delta)
     {
-        var slash = GetDamageAmount(delta, DamageSlash);
-        var piercing = GetDamageAmount(delta, DamagePiercing);
+        var slash = SharedPathologySystem.GetDealtDamage(delta, DamageSlash);
+        var piercing = SharedPathologySystem.GetDealtDamage(delta, DamagePiercing);
         if (entity.Comp.ArterialPunctureRoll is not { } arterialRoll || !arterialRoll.TryGetChance((slash + piercing).Float(), out var arterialChance))
             return;
 
@@ -194,13 +194,6 @@ public sealed partial class PathologyProviderSystem : EntitySystem
 
         cache.Add((slotFlags, multiplier));
         return multiplier;
-    }
-
-    private static FixedPoint2 GetDamageAmount(DamageSpecifier delta, ProtoId<DamageTypePrototype> type)
-    {
-        return delta.DamageDict.TryGetValue(type, out var amount) && amount > FixedPoint2.Zero
-            ? amount
-            : FixedPoint2.Zero;
     }
 
     private static ProtoId<DamageTypePrototype> GetMaxDamageType(

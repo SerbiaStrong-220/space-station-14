@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -11,7 +10,6 @@ namespace Content.Server.SS220.Pathology;
 
 public sealed partial class PathologyHealerSystem : EntitySystem
 {
-    [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPathologySystem _pathology = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;
@@ -84,7 +82,8 @@ public sealed partial class PathologyHealerSystem : EntitySystem
         if (damageModifier == 0f)
             return;
 
-        _damageable.TryChangeDamage(target.Owner, healing.DamagePerCure * damageModifier, origin: args.User, ignoreResistances: true);
+        // the damage of the treatment is not a hit
+        _pathology.TryChangeDamageWithoutTraumas(target.Owner, healing.DamagePerCure * damageModifier, out _, ignoreResistances: true, origin: args.User);
     }
 
     private bool HasAnyCurablePathology(PathologyHealerComponent healing, Entity<PathologyHolderComponent> target)

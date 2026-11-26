@@ -125,7 +125,8 @@
   physicalDesc: reagent-physical-desc-putrid
   metabolisms:
     #SS220-surgery-update begin
-    # damages the stomach while it is there, the reagent still goes to the blood as fast and as much as without a digestion stage
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
     Digestion:
       metabolismRate: 0.25
       metabolites:
@@ -218,7 +219,8 @@
         probability: 0.3
   metabolisms:
     #SS220-surgery-update begin
-    # damages the stomach while it is there, the reagent still goes to the blood as fast and as much as without a digestion stage
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
     Digestion:
       metabolismRate: 0.25
       metabolites:
@@ -293,7 +295,8 @@
         probability: 0.2
   metabolisms:
     #SS220-surgery-update begin
-    # damages the stomach while it is there, the reagent still goes to the blood as fast and as much as without a digestion stage
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
     Digestion:
       metabolismRate: 0.25
       metabolites:
@@ -357,7 +360,8 @@
         probability: 0.1
   metabolisms:
     #SS220-surgery-update begin
-    # damages the stomach while it is there, the reagent still goes to the blood as fast and as much as without a digestion stage
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
     Digestion:
       metabolismRate: 0.25
       metabolites:
@@ -599,7 +603,8 @@
   color: "#000000"
   metabolisms:
     #SS220-surgery-update begin
-    # damages the stomach while it is there, the reagent still goes to the blood as fast and as much as without a digestion stage
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
     Digestion:
       metabolismRate: 0.25
       metabolites:

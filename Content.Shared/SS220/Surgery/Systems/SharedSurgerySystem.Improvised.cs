@@ -16,9 +16,6 @@ public abstract partial class SharedSurgerySystem
     [Dependency] private ItemToggleSystem _itemToggle = default!;
     [Dependency] private SharedToolSystem _tool = default!;
 
-    private const float ImprovisedToolFailurePenalty = 0.25f;
-    private const float ImprovisedToolDelayMultiplier = 1.6f;
-
     private static readonly ProtoId<ToolQualityPrototype> PryingQuality = "Prying";
     private static readonly ProtoId<ToolQualityPrototype> CuttingQuality = "Cutting";
     private static readonly ProtoId<ToolQualityPrototype> ScrewingQuality = "Screwing";

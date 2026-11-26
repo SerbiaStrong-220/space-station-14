@@ -123,10 +123,16 @@
   - description: pathology-missing-head-description
     effects:
     # the body dies in under a minute, the person lives on in the brain inside the head
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Asphyxiation: 5
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Asphyxiation: 5
 
 # An organ of a zombie or an infected body, or a rotten body part, put into another body. One for all such organs, removed with the last of them.
 - type: pathology
@@ -137,7 +143,13 @@
   definition:
   - description: pathology-tainted-flesh-description
     effects:
-    - !type:PathologyDamageEffect
-      damage:
-        types:
-          Poison: 1
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 1

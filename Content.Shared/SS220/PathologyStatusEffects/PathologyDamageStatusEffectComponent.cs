@@ -8,7 +8,7 @@ namespace Content.Shared.SS220.PathologyStatusEffects;
 /// Damages the entity every second by <see cref="Damage"/> for each pathology using this status effect, but not more than <see cref="MaxStacks"/> of them,
 /// e.g. several necroses poison the body as two at most.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class PathologyDamageStatusEffectComponent : Component
 {
     /// <summary>
@@ -20,6 +20,6 @@ public sealed partial class PathologyDamageStatusEffectComponent : Component
     [DataField(required: true)]
     public int MaxStacks;
 
-    [ViewVariables]
+    [ViewVariables, AutoPausedField]
     public TimeSpan NextUpdate;
 }

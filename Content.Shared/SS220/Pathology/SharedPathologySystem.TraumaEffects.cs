@@ -27,8 +27,9 @@ public abstract partial class SharedPathologySystem
         SubscribeLocalEvent<PathologyHolderComponent, BeforeDoAfterStartEvent>(OnBeforeDoAfterStart);
         SubscribeLocalEvent<PathologyHolderComponent, PathologyRemovedEvent>(OnPathologyRemoved);
 
-        SubscribeLocalEvent<GunComponent, GotEquippedHandEvent>(OnGunEquippedHand);
-        SubscribeLocalEvent<GunComponent, GotUnequippedHandEvent>(OnGunUnequippedHand);
+        // equipping is handled on the holder, the gun component and hand events pair belongs to upstream
+        SubscribeLocalEvent<PathologyHolderComponent, DidEquipHandEvent>(OnHolderEquippedHand);
+        SubscribeLocalEvent<PathologyHolderComponent, DidUnequipHandEvent>(OnHolderUnequippedHand);
         SubscribeLocalEvent<GunComponent, ItemWieldedEvent>(OnGunWielded);
         SubscribeLocalEvent<GunComponent, ItemUnwieldedEvent>(OnGunUnwielded);
         SubscribeLocalEvent<GunComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers, after: [typeof(BatteryWeaponFireModesSystem)]);
@@ -61,14 +62,16 @@ public abstract partial class SharedPathologySystem
         RefreshHeldGuns(ent.Owner);
     }
 
-    private void OnGunEquippedHand(Entity<GunComponent> ent, ref GotEquippedHandEvent args)
+    private void OnHolderEquippedHand(Entity<PathologyHolderComponent> ent, ref DidEquipHandEvent args)
     {
-        _gun.RefreshModifiers((ent.Owner, ent.Comp));
+        if (TryComp<GunComponent>(args.Equipped, out var gun))
+            _gun.RefreshModifiers((args.Equipped, gun));
     }
 
-    private void OnGunUnequippedHand(Entity<GunComponent> ent, ref GotUnequippedHandEvent args)
+    private void OnHolderUnequippedHand(Entity<PathologyHolderComponent> ent, ref DidUnequipHandEvent args)
     {
-        _gun.RefreshModifiers((ent.Owner, ent.Comp));
+        if (TryComp<GunComponent>(args.Unequipped, out var gun))
+            _gun.RefreshModifiers((args.Unequipped, gun));
     }
 
     private void OnGunWielded(Entity<GunComponent> ent, ref ItemWieldedEvent args)

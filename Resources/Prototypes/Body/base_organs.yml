@@ -58,10 +58,6 @@
   components:
   - type: Organ
     category: Head
-  #SS220-surgery-update begin
-  - type: Limb
-    attachedOrgans: [ Brain, Eyes, Tongue, Ears ]
-  #SS220-surgery-update end
   - type: Sprite
     state: head
     #SS220-surgery-update begin
@@ -71,6 +67,8 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ Brain, Eyes, Tongue, Ears ]
   - type: SeveredOrganVisuals
   - type: Dismemberable
     hitRoll: # a fixed chance from 25
@@ -107,10 +105,6 @@
   components:
   - type: Organ
     category: ArmLeft
-  #SS220-surgery-update begin
-  - type: Limb
-    attachedOrgans: [ HandLeft ]
-  #SS220-surgery-update end
   - type: Sprite
     state: l_arm
     #SS220-surgery-update begin
@@ -119,6 +113,8 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ HandLeft ]
   - type: SeveredOrganVisuals
   - type: Dismemberable
     tornByBlast: true
@@ -142,10 +138,6 @@
   components:
   - type: Organ
     category: ArmRight
-  #SS220-surgery-update begin
-  - type: Limb
-    attachedOrgans: [ HandRight ]
-  #SS220-surgery-update end
   - type: Sprite
     state: r_arm
     #SS220-surgery-update begin
@@ -154,6 +146,8 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ HandRight ]
   - type: SeveredOrganVisuals
   - type: Dismemberable
     tornByBlast: true
@@ -245,11 +239,6 @@
   components:
   - type: Organ
     category: LegLeft
-  #SS220-surgery-update begin
-  - type: Limb
-    attachedOrgans: [ FootLeft ]
-    supporting: true
-  #SS220-surgery-update end
   - type: Sprite
     state: l_leg
     #SS220-surgery-update begin
@@ -258,6 +247,9 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ FootLeft ]
+    supporting: true
   - type: SeveredOrganVisuals
   - type: Dismemberable
     tornByBlast: true
@@ -281,11 +273,6 @@
   components:
   - type: Organ
     category: LegRight
-  #SS220-surgery-update begin
-  - type: Limb
-    attachedOrgans: [ FootRight ]
-    supporting: true
-  #SS220-surgery-update end
   - type: Sprite
     state: r_leg
     #SS220-surgery-update begin
@@ -294,6 +281,9 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: Limb
+    attachedOrgans: [ FootRight ]
+    supporting: true
   - type: SeveredOrganVisuals
   - type: Dismemberable
     tornByBlast: true

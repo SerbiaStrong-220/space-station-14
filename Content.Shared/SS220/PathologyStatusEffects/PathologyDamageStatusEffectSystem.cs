@@ -17,6 +17,18 @@ public sealed partial class PathologyDamageStatusEffectSystem : EntitySystem
 
     private static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<PathologyDamageStatusEffectComponent, MapInitEvent>(OnMapInit);
+    }
+
+    private void OnMapInit(Entity<PathologyDamageStatusEffectComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.NextUpdate = _timing.CurTime + UpdateInterval;
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -30,7 +42,7 @@ public sealed partial class PathologyDamageStatusEffectSystem : EntitySystem
             if (_timing.CurTime < damageEffect.NextUpdate)
                 continue;
 
-            damageEffect.NextUpdate = _timing.CurTime + UpdateInterval;
+            damageEffect.NextUpdate += UpdateInterval;
 
             if (statusEffect.AppliedTo is not { } target || _mobState.IsDead(target))
                 continue;

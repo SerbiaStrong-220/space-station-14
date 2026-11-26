@@ -16,7 +16,6 @@ public sealed partial class BiowareSystem
         SubscribeLocalEvent<VeinThreadingComponent, BleedModifierEvent>(OnVeinThreadingBleed);
 
         SubscribeLocalEvent<CapillaryWeavingComponent, MapInitEvent>(OnCapillaryWeavingMapInit);
-        SubscribeLocalEvent<MetabolizerComponent, OrganGotInsertedEvent>(OnMetabolizerInserted);
         SubscribeLocalEvent<CapillaryWeavingComponent, GetMetabolizerRateEvent>(OnCapillaryWeavingRate);
     }
 
@@ -28,12 +27,6 @@ public sealed partial class BiowareSystem
     private void OnCapillaryWeavingMapInit(Entity<CapillaryWeavingComponent> ent, ref MapInitEvent args)
     {
         _metabolizer.UpdateMetabolicMultiplier(ent);
-    }
-
-    private void OnMetabolizerInserted(Entity<MetabolizerComponent> ent, ref OrganGotInsertedEvent args)
-    {
-        // An organ keeps the rate of its previous body, so a heart from a body with the bioware would stay fast
-        _metabolizer.UpdateMetabolicMultiplier(args.Target);
     }
 
     private void OnCapillaryWeavingRate(Entity<CapillaryWeavingComponent> ent, ref GetMetabolizerRateEvent args)
