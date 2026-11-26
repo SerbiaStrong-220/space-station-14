@@ -25,8 +25,6 @@ public sealed class IgnoreWieldSystem : EntitySystem
 
         SubscribeLocalEvent<IgnoreWieldComponent, ComponentRemove>(OnCompRemove);
         SubscribeLocalEvent<IgnoreWieldComponent, ComponentInit>(OnCompInit);
-        SubscribeLocalEvent<IgnoreWieldComponent, DidEquipHandEvent>(OnDidEquipHand);
-        SubscribeLocalEvent<IgnoreWieldComponent, DidUnequipHandEvent>(OnDidUnequipHand);
 
         SubscribeLocalEvent<GunWieldBonusComponent, EntGotInsertedIntoContainerMessage>(OnEntGotInsertedIntoContainer);
         SubscribeLocalEvent<GunWieldBonusComponent, EntGotRemovedFromContainerMessage>(OnEntGotRemovedFromContainer);
@@ -42,18 +40,6 @@ public sealed class IgnoreWieldSystem : EntitySystem
     {
         if (HasComp<GunComponent>(ent))
             _gun.RefreshModifiers(ent.Owner);
-    }
-
-    private void OnDidUnequipHand(Entity<IgnoreWieldComponent> ent, ref DidUnequipHandEvent args)
-    {
-        if (HasComp<GunWieldBonusComponent>(args.Unequipped))
-            _gun.RefreshModifiers(args.Unequipped);
-    }
-
-    private void OnDidEquipHand(Entity<IgnoreWieldComponent> ent, ref DidEquipHandEvent args)
-    {
-        if (HasComp<GunWieldBonusComponent>(args.Equipped))
-            _gun.RefreshModifiers(args.Equipped);
     }
 
     private void OnCompInit(Entity<IgnoreWieldComponent> ent, ref ComponentInit args)
@@ -80,16 +66,19 @@ public sealed class IgnoreWieldSystem : EntitySystem
             if (!TryComp<ClothingComponent>(worn, out var otherClothingComp))
                 continue;
 
-            if ((args.SlotFlags & otherClothingComp.Slots) == 0)
+            if (!_inventory.TryGetContainingSlot(worn, out var slot))
                 continue;
 
-            break;
+            if ((otherClothingComp.Slots & slot.SlotFlags) == 0x0)
+                continue;
+
+            return;
         }
 
         if (!TryComp<ClothingComponent>(ent, out var clothingComp))
             return;
 
-        if ((args.SlotFlags & clothingComp.Slots) != 0)
+        if ((args.SlotFlags & clothingComp.Slots) != 0x0)
             RemComp<IgnoreWieldComponent>(args.EquipTarget);
     }
 
@@ -102,7 +91,9 @@ public sealed class IgnoreWieldSystem : EntitySystem
             return;
 
         EnsureComp<IgnoreWieldComponent>(args.EquipTarget, out var comp);
-        comp.IgnoreWeaponStats = ent.Comp.IgnoreWeaponStats;
+        comp.IgnoreWeaponStats |= ent.Comp.IgnoreWeaponStats;
+
+        RefreshWieldModifiers(args.EquipTarget);
     }
 
     private void RefreshWieldModifiers(EntityUid entity)
