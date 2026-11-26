@@ -21,7 +21,7 @@ public sealed partial class DismembermentComponent : Component
     public ProtoId<WeightedRandomPrototype> HitZones = "DismembermentZone";
 
     /// <summary>
-    /// Chance of a hit (its cuts and blows) to tear off a part with a severe trauma, if the part has no own <see cref="DismemberableComponent.HitRoll"/>.
+    /// Chance of a hit (its cuts and blows) to tear off a part with a severe bone trauma, if the part has no own <see cref="DismemberableComponent.HitRoll"/>.
     /// Null - hits tear nothing off.
     /// </summary>
     [DataField]
@@ -39,6 +39,13 @@ public sealed partial class DismembermentComponent : Component
     /// </summary>
     [DataField]
     public DamageSpecifier? TearDamage;
+
+    /// <summary>
+    /// A melee execution cuts the head off if the weapon deals more slash damage than this, without the execution bonus.
+    /// Null - executions cut nothing off.
+    /// </summary>
+    [DataField]
+    public float? ExecutionDecapitationSlash = 12f;
 
     /// <summary>
     /// A torn off part flies away by a random distance between these.

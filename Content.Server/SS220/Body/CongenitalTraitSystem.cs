@@ -49,7 +49,7 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
 
         foreach (var traitId in ent.Comp.Traits)
         {
-            RemoveTraitComponents(args.Target, traitId);
+            RemoveTraitEffects(args.Target, traitId);
         }
     }
 
@@ -57,8 +57,8 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
     {
         foreach (var traitId in ent.Comp.Traits)
         {
-            if (GetTraitComponents(traitId) is { } components)
-                EntityManager.AddComponents(args.Target, components, removeExisting: false);
+            if (_prototype.Resolve(traitId, out var trait))
+                _pathology.ApplyTraitEffects(args.Target, trait);
         }
     }
 
@@ -75,7 +75,7 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
         var traitId = _random.Pick(congenital.Traits);
         congenital.Traits.Remove(traitId);
         Dirty(brain.Value, congenital);
-        RemoveTraitComponents(body, traitId);
+        RemoveTraitEffects(body, traitId);
         return true;
     }
 
@@ -93,13 +93,13 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
         TryCureRandomTrait(body);
     }
 
-    private void RemoveTraitComponents(EntityUid body, ProtoId<TraitPrototype> traitId)
+    private void RemoveTraitEffects(EntityUid body, ProtoId<TraitPrototype> traitId)
     {
         // an acquired pathology with the same trait keeps it
-        if (_pathology.IsTraitInUse(body, traitId) || GetTraitComponents(traitId) is not { } components)
+        if (_pathology.IsTraitInUse(body, traitId) || !_prototype.Resolve(traitId, out var trait))
             return;
 
-        EntityManager.RemoveComponents(body, components);
+        _pathology.RemoveTraitEffects(body, trait);
     }
 
     private bool IsBrainTrait(ProtoId<TraitPrototype> traitId)
@@ -117,10 +117,5 @@ public sealed partial class CongenitalTraitSystem : EntitySystem
         }
 
         return false;
-    }
-
-    private ComponentRegistry? GetTraitComponents(ProtoId<TraitPrototype> traitId)
-    {
-        return _prototype.Resolve(traitId, out var trait) ? trait.Components : null;
     }
 }

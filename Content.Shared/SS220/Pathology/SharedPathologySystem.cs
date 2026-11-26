@@ -307,40 +307,83 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
     protected virtual void ApplyPathologyContext(Entity<PathologyHolderComponent> entity, IPathologyContext? context) { }
 
-    // Kill it with TraitPrototype pls
-    private void AddTrait(Entity<PathologyHolderComponent> entity, ProtoId<TraitPrototype>? traitId)
+    /// <summary>
+    /// Status effects the trait gives besides its components, e.g. pain numbness. They come from the trait specials, which only the server knows.
+    /// </summary>
+    protected virtual IEnumerable<EntProtoId> GetTraitStatusEffects(TraitPrototype trait)
     {
-        if (traitId is not { } id || !_prototype.Resolve(id, out var traitPrototype))
-            return;
+        return Array.Empty<EntProtoId>();
+    }
 
-        if (traitPrototype.Components is null)
-            return;
-
-        if (entity.Comp.AppliedTraits.Contains(id))
-            return;
-
-        foreach (var entry in traitPrototype.Components.Values)
+    /// <summary>
+    /// Whether the entity already has any of the components or status effects the trait gives.
+    /// </summary>
+    public bool HasTraitEffects(EntityUid uid, TraitPrototype trait)
+    {
+        if (trait.Components is { } components)
         {
-            if (HasComp(entity.Owner, entry.Component.GetType()))
-                return;
+            foreach (var entry in components.Values)
+            {
+                if (HasComp(uid, entry.Component.GetType()))
+                    return true;
+            }
         }
 
-        EntityManager.AddComponents(entity.Owner, traitPrototype.Components, false);
+        foreach (var effect in GetTraitStatusEffects(trait))
+        {
+            if (_statusEffects.HasStatusEffect(uid, effect))
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Gives the components and status effects of the trait.
+    /// </summary>
+    public void ApplyTraitEffects(EntityUid uid, TraitPrototype trait)
+    {
+        if (trait.Components is { } components)
+            EntityManager.AddComponents(uid, components, removeExisting: false);
+
+        foreach (var effect in GetTraitStatusEffects(trait))
+        {
+            _statusEffects.TrySetStatusEffectDuration(uid, effect);
+        }
+    }
+
+    /// <summary>
+    /// Takes away the components and status effects of the trait.
+    /// </summary>
+    public void RemoveTraitEffects(EntityUid uid, TraitPrototype trait)
+    {
+        if (trait.Components is { } components)
+            EntityManager.RemoveComponents(uid, components);
+
+        foreach (var effect in GetTraitStatusEffects(trait))
+        {
+            _statusEffects.TryRemoveStatusEffect(uid, effect);
+        }
+    }
+
+    private void AddTrait(Entity<PathologyHolderComponent> entity, ProtoId<TraitPrototype>? traitId)
+    {
+        if (traitId is not { } id || entity.Comp.AppliedTraits.Contains(id) || !_prototype.Resolve(id, out var traitPrototype))
+            return;
+
+        // the entity has it from another source, curing the pathology must not take that away
+        if (HasTraitEffects(entity, traitPrototype))
+            return;
+
+        ApplyTraitEffects(entity, traitPrototype);
         entity.Comp.AppliedTraits.Add(id);
     }
 
-    // and it
     private void RemoveTrait(Entity<PathologyHolderComponent> entity, ProtoId<TraitPrototype>? traitId)
     {
-        if (traitId is not { } id || !_prototype.Resolve(id, out var traitPrototype))
+        if (traitId is not { } id || !_prototype.Resolve(id, out var traitPrototype) || !entity.Comp.AppliedTraits.Remove(id))
             return;
 
-        if (traitPrototype.Components is null)
-            return;
-
-        if (!entity.Comp.AppliedTraits.Remove(id))
-            return;
-
-        EntityManager.RemoveComponents(entity.Owner, traitPrototype.Components);
+        RemoveTraitEffects(entity, traitPrototype);
     }
 }

@@ -107,12 +107,29 @@ public abstract partial class SharedPathologySystem
 
         if (pathologyPrototype.AffectsBones && HasComp<BonelessComponent>(entity))
             args.Cancelled = true;
-        // a prosthesis gets no wounds of the organ it replaces
+        // a prosthesis gets no wounds of the organ it replaces,
+        // and the acquired form of a trait the organ was born with changes nothing, e.g. analgesia of a congenitally numb brain
         else if (pathologyPrototype.Organ is { } organ
-                 && (!_body.TryGetOrganByCategory((entity, body), organ, out var installed) || HasComp<ProsthesisComponent>(installed)))
+                 && (!_body.TryGetOrganByCategory((entity, body), organ, out var installed)
+                     || HasComp<ProsthesisComponent>(installed)
+                     || IsCongenital(installed.Value, pathologyPrototype)))
             args.Cancelled = true;
         else if (pathologyPrototype.MissingOrgan is { } missingOrgan && _body.HasOrganCategory((entity, body), missingOrgan))
             args.Cancelled = true;
+    }
+
+    private bool IsCongenital(EntityUid organ, PathologyPrototype pathologyPrototype)
+    {
+        if (!TryComp<CongenitalTraitsComponent>(organ, out var congenital))
+            return false;
+
+        foreach (var definition in pathologyPrototype.Definition)
+        {
+            if (definition.Trait is { } traitId && congenital.Traits.Contains(traitId))
+                return true;
+        }
+
+        return false;
     }
 
     private void OnOrganPathologyRemoveAttempt(Entity<PathologyHolderComponent> entity, ref PathologyRemoveAttempt args)

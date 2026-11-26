@@ -5,7 +5,7 @@ using Content.Shared.SS220.Pathology;
 namespace Content.Shared.SS220.Body;
 
 /// <summary>
-/// A body part that a strong cut or blow may tear off once it has a severe trauma.
+/// A body part that a strong cut or blow may tear off once it has a severe bone trauma.
 /// Parts without it, e.g. the torso, are never torn off.
 /// </summary>
 [RegisterComponent]

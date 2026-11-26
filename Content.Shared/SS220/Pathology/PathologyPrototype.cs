@@ -111,7 +111,7 @@ public sealed partial class PathologyDefinition
     public bool CuredByTopicals;
 
     /// <summary>
-    /// False for stacks that only lead to the next level (e.g. organ damage before failure), they don't make the pathology severe.
+    /// False for stacks that don't make the pathology severe, e.g. organ damage before failure or many projectile fragments.
     /// </summary>
     [DataField]
     public bool StacksAreSevere = true;

@@ -10,6 +10,7 @@ using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Execution;
 using Content.Shared.Explosion;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
@@ -18,6 +19,8 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Body;
 using Content.Shared.SS220.Pathology;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
@@ -27,7 +30,8 @@ using Robust.Shared.Timing;
 namespace Content.Server.SS220.Body;
 
 /// <summary>
-/// Tears off body parts: a strong cut or blow may sever a part that has a severe trauma, explosions tear off parts marked for it.
+/// Tears off body parts: a strong cut or blow may sever a part that has a severe bone trauma, explosions tear off parts marked for it,
+/// an execution with a sharp enough weapon cuts the head off.
 /// </summary>
 public sealed partial class DismembermentSystem : EntitySystem
 {
@@ -38,6 +42,7 @@ public sealed partial class DismembermentSystem : EntitySystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
@@ -45,6 +50,7 @@ public sealed partial class DismembermentSystem : EntitySystem
 
     private static readonly ProtoId<DamageTypePrototype> DamageBlunt = "Blunt";
     private static readonly ProtoId<DamageTypePrototype> DamageSlash = "Slash";
+    private static readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
     private static readonly ProtoId<EmotePrototype> ScreamEmote = "Scream";
     private static readonly SoundSpecifier TearSound = new SoundCollectionSpecifier("gib");
 
@@ -54,10 +60,11 @@ public sealed partial class DismembermentSystem : EntitySystem
 
         SubscribeLocalEvent<DismembermentComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<DismembermentComponent, BeforeExplodeEvent>(OnExploded);
+        SubscribeLocalEvent<ExecutionComponent, MeleeHitEvent>(OnExecutionHit);
     }
 
     /// <summary>
-    /// Only cuts and blows tear parts off, the hit lands on a random zone and needs a severe trauma there.
+    /// Only cuts and blows tear parts off, the hit lands on a random zone and needs a severe bone trauma there.
     /// </summary>
     private void OnDamageChanged(Entity<DismembermentComponent> ent, ref DamageChangedEvent args)
     {
@@ -76,21 +83,24 @@ public sealed partial class DismembermentSystem : EntitySystem
             || !TryComp<DismemberableComponent>(organ, out var dismemberable)
             || (dismemberable.HitRoll ?? ent.Comp.HitRoll) is not { } hitRoll
             || !hitRoll.TryGetChance(damage, out var chance)
-            || !HasSevereTrauma(ent, category))
+            || !HasSevereBoneTrauma(ent, category))
             return;
 
         if (_random.Prob(chance))
             TearOff(ent, organ.Value);
     }
 
-    private bool HasSevereTrauma(EntityUid body, ProtoId<OrganCategoryPrototype> category)
+    private bool HasSevereBoneTrauma(EntityUid body, ProtoId<OrganCategoryPrototype> category)
     {
         if (!TryComp<PathologyHolderComponent>(body, out var holder))
             return false;
 
         foreach (var (pathologyId, data) in holder.ActivePathologies)
         {
-            if (_prototype.Resolve(pathologyId, out var pathology) && pathology.Organ == category && SharedPathologySystem.IsSevere(pathology, data))
+            if (_prototype.Resolve(pathologyId, out var pathology)
+                && pathology.Organ == category
+                && pathology.AffectsBones
+                && SharedPathologySystem.IsSevere(pathology, data))
                 return true;
         }
 
@@ -123,6 +133,31 @@ public sealed partial class DismembermentSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// The hit of an execution comes before its damage and only for a target it really hits, a missed or blocked execution cuts nothing off.
+    /// </summary>
+    private void OnExecutionHit(Entity<ExecutionComponent> ent, ref MeleeHitEvent args)
+    {
+        if (!ent.Comp.Executing || args.Handled || !TryComp<MeleeWeaponComponent>(ent, out var melee))
+            return;
+
+        // the weapon's own damage, e.g. with wielding: the execution adds its bonus as damage * (multiplier - 1)
+        var bonus = SharedPathologySystem.GetDealtDamage(melee.Damage, DamageSlash) * (ent.Comp.DamageMultiplier - 1f);
+        var slash = (SharedPathologySystem.GetDealtDamage(_melee.GetDamage(ent, args.User, melee), DamageSlash) - bonus).Float();
+
+        foreach (var target in args.HitEntities)
+        {
+            if (!TryComp<DismembermentComponent>(target, out var dismemberment)
+                || dismemberment.ExecutionDecapitationSlash is not { } minSlash
+                || slash <= minSlash
+                || HasComp<GodmodeComponent>(target)
+                || !_body.TryGetOrganByCategory(target, HeadCategory, out var head))
+                continue;
+
+            TearOff((target, dismemberment), head.Value);
+        }
+    }
+
     private void TearOff(Entity<DismembermentComponent> ent, EntityUid part)
     {
         if (!TryComp<OrganComponent>(part, out var organ)
@@ -131,7 +166,8 @@ public sealed partial class DismembermentSystem : EntitySystem
             return;
 
         var direction = _random.NextAngle().ToVec() * _random.NextFloat(ent.Comp.TearThrowMinDistance, ent.Comp.TearThrowMaxDistance);
-        _throwing.TryThrow(part, direction, playSound: false);
+        // without the compensation the part lands at the distance and keeps sliding
+        _throwing.TryThrow(part, direction, compensateFriction: true, playSound: false);
 
         _popup.PopupEntity(Loc.GetString("limb-dismembered-popup", ("target", Identity.Entity(ent, EntityManager)), ("part", part)),
             ent, PopupType.LargeCaution);

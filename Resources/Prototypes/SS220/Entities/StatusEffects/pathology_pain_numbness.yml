@@ -1,7 +1,0 @@
-# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
-# own effect instead of the trait one, so curing the pathology doesn't remove the pain numbness trait chosen in the character editor
-- type: entity
-  parent: PainNumbnessStatusEffectBase
-  id: StatusEffectPathologyPainNumbness
-  name: pain numbness

@@ -101,8 +101,7 @@
   operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-pain-numbness-description
-    statusEffects:
-    - StatusEffectPathologyPainNumbness
+    trait: PainNumbness
 
 - type: pathology
   id: FrontalLisp
