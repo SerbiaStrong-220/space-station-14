@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tg station, repo https://github.com/tgstation/tgstation, baystation12, repo https://github.com/Baystation12/Baystation12, and BandaStation, repo https://github.com/ss220club/BandaStation",
+  "copyright": "Taken from tg station, repo https://github.com/tgstation/tgstation and baystation12, repo https://github.com/Baystation12/Baystation12",
   "size": {
     "x": 32,
     "y": 32

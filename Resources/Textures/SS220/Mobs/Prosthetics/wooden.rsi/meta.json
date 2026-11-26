@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from BandaStation https://github.com/ss220club/BandaStation/blob/master/icons/mob/human/species/ghetto.dmi, legs split into leg and foot and limbs aligned to the SS14 body by Zenius07 (Discord) for SS220",
+    "copyright": "Taken from tgstation https://github.com/tgstation/tgstation/blob/master/icons/mob/human/species/ghetto.dmi, legs split into leg and foot and limbs aligned to the SS14 body by Zenius07 (Discord) for SS220",
     "size": {
         "x": 32,
         "y": 32

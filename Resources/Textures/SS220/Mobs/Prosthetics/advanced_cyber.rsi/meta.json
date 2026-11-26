@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from BandaStation https://github.com/ss220club/BandaStation/blob/master/icons/mob/augmentation/advanced_augments.dmi, legs split into leg and foot by Zenius07 (Discord) for SS220",
+    "copyright": "Taken from tgstation https://github.com/tgstation/tgstation/blob/master/icons/mob/augmentation/advanced_augments.dmi, legs split into leg and foot by Zenius07 (Discord) for SS220",
     "size": {
         "x": 32,
         "y": 32
