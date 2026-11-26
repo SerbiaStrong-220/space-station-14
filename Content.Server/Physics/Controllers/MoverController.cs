@@ -752,8 +752,10 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
                     gyroPower = Math.Clamp(gyroComp.Power, ShuttleGyroPowerComponent.MinPower, ShuttleGyroPowerComponent.MaxPower);
                 }
 
-                //var torque = shuttle.AngularThrust * -angularInput;
-                var torque = shuttle.AngularThrust * -angularInput * gyroPower * gyroPower;
+                var maxGyroAngularVelocity = MathHelper.DegreesToRadians(10f) * gyroPower;
+                var maxGyroAngularAcceleration = MathHelper.DegreesToRadians(10f) * gyroPower;
+                var torque = shuttle.AngularThrust * -angularInput * gyroPower;
+                torque = Math.Clamp(torque, -maxGyroAngularAcceleration / body.InvI, maxGyroAngularAcceleration / body.InvI);
                 /*SS220 GyroPowerUpdate End*/
 
                 // Need to cap the velocity if 1 tick of input brings us over cap so we don't continuously
@@ -761,8 +763,10 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
                 var torqueMul = body.InvI * frameTime;
 
                 torque = Math.Clamp(torque,
-                    (-ShuttleComponent.MaxAngularVelocity - body.AngularVelocity) / torqueMul,
-                    (ShuttleComponent.MaxAngularVelocity - body.AngularVelocity) / torqueMul);
+                    //(-ShuttleComponent.MaxAngularVelocity - body.AngularVelocity) / torqueMul,
+                    //(ShuttleComponent.MaxAngularVelocity - body.AngularVelocity) / torqueMul);
+                    (-maxGyroAngularVelocity - body.AngularVelocity) / torqueMul,
+                    (maxGyroAngularVelocity - body.AngularVelocity) / torqueMul);
 
                 if (!torque.Equals(0f))
                 {

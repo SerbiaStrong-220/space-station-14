@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.CruiseControl;
 public sealed partial class ShuttleGyroPowerComponent : Component
 {
     public const float MinPower = 0.1f;
-    public const float MaxPower = 2f;
+    public const float MaxPower = 20f;
 
     [DataField, AutoNetworkedField, ViewVariables]
     public float Power = 1f;
