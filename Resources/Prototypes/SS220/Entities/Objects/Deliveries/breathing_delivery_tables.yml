@@ -1,0 +1,53 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entityTable
+  id: PackageDeliveryTank
+  table: !type:SpeciesSelector
+    species:
+      Vox:
+        id: NitrogenTankFilled
+      SlimePerson:
+        id: NitrogenTankFilled
+      Ipc: !type:NoneSelector {}
+    fallback:
+      id: OxygenTankFilled
+
+- type: entityTable
+  id: PackageDeliveryBreathingEquipment
+  table: !type:SpeciesSelector
+    species:
+      Vox: !type:NestedSelector
+        tableId: PackageDeliveryNitrogenEquipment
+      SlimePerson: !type:NestedSelector
+        tableId: PackageDeliveryNitrogenEquipment
+      Ipc: !type:GroupSelector
+        children:
+        - id: PowerCellMedium
+          weight: 2
+        - id: PowerCellSmall
+          weight: 3
+    fallback: !type:GroupSelector
+      children:
+      - !type:NestedSelector
+        tableId: PackageDeliveryTank
+        weight: 2
+      - id: DoubleEmergencyOxygenTankFilled
+        weight: 2
+      - id: EmergencyFunnyOxygenTankFilled
+    withoutSpecies: !type:GroupSelector
+      children:
+      - id: OxygenTankFilled
+      - id: DoubleEmergencyOxygenTankFilled
+      - id: NitrogenTankFilled
+      - id: DoubleEmergencyNitrogenTankFilled
+      - id: EmergencyFunnyOxygenTankFilled
+
+- type: entityTable
+  id: PackageDeliveryNitrogenEquipment
+  table: !type:GroupSelector
+    children:
+    - id: NitrogenTankFilled
+      weight: 2
+    - id: DoubleEmergencyNitrogenTankFilled
+      weight: 2
+    - id: EmergencyNitrogenTankFilled

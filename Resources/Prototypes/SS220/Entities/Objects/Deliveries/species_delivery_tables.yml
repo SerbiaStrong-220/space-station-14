@@ -1,0 +1,331 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Personal gifts use the recipient's species; professional supplies keep their original tables.
+
+- type: entityTable
+  id: PackageDeliveryEmergencyToolbox
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: ToolboxEmergencyDeliveryIpcFilled
+      Moth:
+        id: ToolboxEmergencyDeliveryMothFilled
+      Reptilian:
+        id: ToolboxEmergencyDeliveryCarnivoreFilled
+      Tajaran:
+        id: ToolboxEmergencyDeliveryCarnivoreFilled
+    fallback:
+      id: ToolboxEmergencyFilled
+
+- type: entityTable
+  id: PackageDeliveryEmergencyToolboxTools
+  table: !type:AllSelector
+    children:
+    - id: CrowbarRed
+    - id: HandheldRadio
+    - id: WelderMini
+    - id: FireExtinguisherMini
+    - !type:GroupSelector
+      children:
+      - id: FlashlightLantern
+      - id: Flare
+      - id: GlowstickGreen
+
+- type: entityTable
+  id: PackageDeliveryMopwata
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+    fallback:
+      id: DrinkMopwataBottleRandom
+
+- type: entityTable
+  id: PackageDeliveryVodkaKazaki
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+    fallback:
+      id: DrinkVodkaKazakiBottleFull
+
+- type: entityTable
+  id: PackageDeliveryBankate
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+    fallback:
+      id: DrinkBankateJarFull
+
+- type: entityTable
+  id: PackageDeliveryCake
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellMedium
+      Moth:
+        id: FoodCakeCotton
+      Reptilian: !type:NestedSelector
+        tableId: PackageDeliveryFruitCake
+      Tajaran: !type:NestedSelector
+        tableId: PackageDeliveryFruitCake
+    fallback: !type:NestedSelector
+      tableId: FoodRandomCakeTable
+
+- type: entityTable
+  id: PackageDeliveryPizza
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellMedium
+      Moth:
+        id: FoodBoxPizzaCotton
+      Reptilian:
+        id: FoodBoxPizzaDeliveryMeatFilled
+      Tajaran:
+        id: FoodBoxPizzaDeliveryMeatFilled
+    fallback:
+      id: FoodBoxPizzaDeliveryFilled
+
+- type: entityTable
+  id: PackageDeliveryAlcohol
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+    fallback: !type:NestedSelector
+      tableId: RandomAllAlcoholTable
+
+- type: entityTable
+  id: PackageDeliveryAdvancedMedkit
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: ToolboxMechanicalFilledAllTools
+    fallback:
+      id: MedkitAdvancedFilled
+
+- type: entityTable
+  id: PackageDeliveryTea
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+      Moth:
+        id: DrinkGreenTea
+      Reptilian:
+        id: DrinkGreenTea
+      Tajaran:
+        id: DrinkGreenTea
+    fallback:
+      id: DrinkTeacup
+
+- type: entityTable
+  id: PackageDeliveryCoffee
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+      Moth:
+        id: DrinkGreenTea
+      Reptilian:
+        id: DrinkGreenTea
+      Tajaran:
+        id: DrinkGreenTea
+    fallback:
+      id: DrinkCoffee
+
+- type: entityTable
+  id: PackageDeliverySnack
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+      Moth:
+        id: FoodBagelCotton
+      Reptilian:
+        id: FoodDonkpocketDink
+      Tajaran:
+        id: FoodDonkpocketDink
+    fallback:
+      id: FoodSnackEnergy
+
+- type: entityTable
+  id: PackageDeliveryDonut
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+      Moth:
+        id: FoodBagelCotton
+      Reptilian:
+        id: FoodDonutMeat
+      Tajaran:
+        id: FoodDonutMeat
+    fallback:
+      id: FoodDonutPlain
+
+- type: entityTable
+  id: PackageDeliveryClownSnack
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: BikeHorn
+      Moth:
+        id: FoodDonkpocketMoth
+    fallback:
+      id: FoodDonkpocketHonk
+
+- type: entityTable
+  id: PackageDeliveryClownSnackBox
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PlushieLizardJobClown
+      Moth:
+        id: FoodBoxDonkpocketMoth
+    fallback:
+      id: FoodBoxDonkpocketHonk
+
+- type: entityTable
+  id: PackageDeliveryMimeBread
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+      Moth:
+        id: FoodBreadBaguetteCotton
+      Reptilian:
+        id: FoodDonkpocketDink
+      Tajaran:
+        id: FoodDonkpocketDink
+    fallback:
+      id: FoodBreadBaguette
+
+- type: entityTable
+  id: PackageDeliveryMimeDrink
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellSmall
+    fallback:
+      id: DrinkBottleOfNothingFull
+
+- type: entityTable
+  id: PackageDeliveryMimeSnackBox
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PlushieLizardJobMime
+      Moth:
+        id: FoodBoxDonkpocketMoth
+    fallback:
+      id: FoodBoxDonkpocketDink
+
+- type: entityTable
+  id: PackageDeliveryCommandDrink
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: PowerCellMedium
+    fallback:
+      id: DrinkChampagneBottleFull
+
+- type: entityTable
+  id: PackageDeliverySecurityMedipen
+  table: !type:SpeciesSelector
+    species:
+      Ipc:
+        id: WelderMini
+    fallback:
+      id: EmergencyMedipen
+
+- type: entityTable
+  id: PackageDeliveryFirstAid
+  table: !type:SpeciesSelector
+    species:
+      Ipc: !type:GroupSelector
+        children:
+        - id: Wrench
+        - id: Wirecutter
+        - id: Screwdriver
+    fallback: !type:GroupSelector
+      children:
+      - id: Brutepack1
+      - id: Ointment1
+      - id: Gauze1
+
+- type: entityTable
+  id: PackageDeliverySecuritySupplies
+  table: !type:SpeciesSelector
+    species:
+      Ipc: !type:AllSelector
+        children:
+        - id: WelderMini
+        - id: PowerCellSmall
+    fallback: !type:AllSelector
+      children:
+      - id: Gauze1
+        amount: !type:ConstantNumberSelector
+          value: 3
+      - !type:NestedSelector
+        tableId: PackageDeliveryDonut
+
+- type: entityTable
+  id: PackageDeliveryPilotSupplies
+  table: !type:SpeciesSelector
+    species:
+      Ipc: !type:AllSelector
+        children:
+        - id: WelderMini
+        - id: Screwdriver
+        - id: Wrench
+    fallback: !type:AllSelector
+      children:
+      - id: Gauze1
+        amount: !type:ConstantNumberSelector
+          value: 2
+      - id: Brutepack1
+        amount: !type:ConstantNumberSelector
+          value: 2
+
+- type: entityTable
+  id: PackageDeliveryFruitCake
+  table: !type:GroupSelector
+    children:
+    - id: FoodCakeApple
+    - id: FoodCakeBlueberry
+    - id: FoodCakeLemon
+    - id: FoodCakeLime
+    - id: FoodCakeOrange
+    - id: FoodCakePumpkin
+    - id: FoodCakeLemoon
+
+- type: entityTable
+  id: PackageDeliveryPizzaContents
+  table: !type:AllSelector
+    children:
+    - id: KnifePlastic
+    - !type:GroupSelector
+      children:
+      - id: FoodPizzaArnold
+        weight: 1.5
+      - id: FoodPizzaSassysage
+        weight: 1.5
+      - id: FoodPizzaMargherita
+        weight: 1.5
+      - id: FoodPizzaMeat
+        weight: 1.5
+      - id: FoodPizzaMushroom
+        weight: 1.5
+      - id: FoodPizzaPineapple
+        weight: 1.5
+      - id: FoodPizzaVegetable
+        weight: 1.5
+      - id: FoodPizzaDank
+      - id: FoodPizzaDonkpocket
+      - id: FoodPizzaWorldpeas
+        weight: 0.5
+      - id: SpicyPizzaFood
+        weight: 0.5

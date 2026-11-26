@@ -93,6 +93,7 @@
   - type: Tts
     voicePreferences:
       NTTS: adventure_core
+      Silero: Wheatley
    # SS220 Tts end
   - type: WiresPanel
   - type: AmbientSound

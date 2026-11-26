@@ -58,6 +58,7 @@
   - type: Tts
     voicePreferences:
       NTTS: forester
+      Silero: Abathur
   - type: Language
     availableLanguages:
     - id: Galactic
