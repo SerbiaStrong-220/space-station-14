@@ -76,6 +76,7 @@
   - type: Tts
     voicePreferences:
       NTTS: fact_core
+      Silero: Dictor
    # SS220 Tts end
   - type: Speech
     speechVerb: Robotic
