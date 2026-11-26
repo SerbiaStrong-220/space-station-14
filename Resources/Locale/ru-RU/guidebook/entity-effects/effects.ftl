@@ -23,7 +23,9 @@ entity-effect-guidebook-plant-remove-kudzu = { $chance ->
     *[other] удаляет
     } кудзу с растения
 
+# SS220-localization-fix begin
 entity-effect-guidebook-plant-mutate-chemicals = { $chance ->
-    [1] Мутирует\n
+    [1] Мутирует
     *[other] мутирует
     } растение, чтобы производить {$name}
+# SS220-localization-fix end

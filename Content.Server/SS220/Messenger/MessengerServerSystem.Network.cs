@@ -262,7 +262,8 @@ public sealed partial class MessengerServerSystem
         if (TryGetContactId(ent, idCardUid.Value, out contactId))
             return true;
 
-        contactId = RegisterNewClient(ent, idCardUid.Value, idCard.FullName ?? "", netAddress);
+        var fullName = string.IsNullOrWhiteSpace(idCard.FullName) ? MessengerContact.UnknownName : idCard.FullName;
+        contactId = RegisterNewClient(ent, idCardUid.Value, fullName, netAddress);
 
         return true;
     }
