@@ -36,19 +36,14 @@ public sealed class LogWindowTest : InteractionTest
         // Find the log search field and refresh buttons
         var search = logWindow.Logs.LogSearch;
         var refresh = logWindow.Logs.RefreshButton;
-        // SS220 check fix begin
-        // Wait for the initial round state and automatic query before refreshing.
-        await WaitForLog(logWindow, guid);
-        // SS220 check fix end
+        await WaitForLog(logWindow, guid);// SS220 check fix. Wait for the initial round state and automatic query before refreshing.
 
         // Search for the log we added earlier.
         await Client.WaitPost(() => search.Text = guid.ToString());
         await ClickControl(refresh);
-        // SS220 check fix begin
         var searchResult = await WaitForLog(logWindow, guid);
         Assert.That(searchResult.Length, Is.EqualTo(1));
-        Assert.That(searchResult[0].Message, Contains.Substring($" test log 1: {guid}"));
-        // SS220 check fix end
+        Assert.That(searchResult[0].Message, Contains.Substring($" test log 1: {guid}")); // SS220 check fix begin
 
         // Add a new log
         guid = Guid.NewGuid();
@@ -57,11 +52,9 @@ public sealed class LogWindowTest : InteractionTest
         // Update the search and refresh
         await Client.WaitPost(() => search.Text = guid.ToString());
         await ClickControl(refresh);
-        // SS220 check fix begin
-        searchResult = await WaitForLog(logWindow, guid);
+        searchResult = await WaitForLog(logWindow, guid); // SS220 check fix
         Assert.That(searchResult.Length, Is.EqualTo(1));
-        Assert.That(searchResult[0].Message, Contains.Substring($" test log 2: {guid}"));
-        // SS220 check fix end
+        Assert.That(searchResult[0].Message, Contains.Substring($" test log 2: {guid}")); // SS220 check fix
     }
 
     // SS220 check fix begin

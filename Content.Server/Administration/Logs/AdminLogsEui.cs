@@ -117,12 +117,10 @@ public sealed class AdminLogsEui : BaseEui
             {
                 _sawmill.Info($"Admin log request from admin with id {Player.UserId.UserId} and name {Player.Name}");
 
-                // SS220 check fix begin
                 _logSendCancellation.Cancel();
-                _logSendCancellation.Dispose();
+                _logSendCancellation.Dispose(); // SS220 check fix
                 _logSendCancellation = new CancellationTokenSource();
-                var filter = _filter = new LogFilter
-                // SS220 check fix end
+                var filter = _filter = new LogFilter // SS220 check fix 
                 {
                     CancellationToken = _logSendCancellation.Token,
                     Round = request.RoundId,
@@ -229,11 +227,12 @@ public sealed class AdminLogsEui : BaseEui
         _logSendCancellation.Dispose();
     }
 
-    // SS220 check fix begin
-    private async Task LoadFromDb(int roundId, LogFilter filter)
+    private async Task LoadFromDb(int roundId, LogFilter filter) // SS220 check fix
     {
+        // SS220 check fix begin 
         if (!IsCurrentFilter(filter))
             return;
+        // SS220 check fix end
 
         _isLoading = true;
         StateDirty();
@@ -242,9 +241,10 @@ public sealed class AdminLogsEui : BaseEui
         var count = _adminLogs.CountLogs(roundId);
         await Task.WhenAll(round, count);
 
-        // Neither old round metadata nor a closed window may update the active state.
+        // SS220 check fix. Neither old round metadata nor a closed window may update the active state.
         if (!IsCurrentFilter(filter))
             return;
+        // SS220 check fix end
 
         var players = (await round).Players
             .ToDictionary(player => player.UserId, player => player.LastSeenUserName);
@@ -261,6 +261,5 @@ public sealed class AdminLogsEui : BaseEui
         _isLoading = false;
         StateDirty();
     }
-    // SS220 check fix end
 }
 
