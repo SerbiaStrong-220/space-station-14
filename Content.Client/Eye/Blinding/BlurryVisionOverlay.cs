@@ -5,6 +5,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Content.Shared.Eye.Blinding.Components;
 using Robust.Shared.Configuration;
+using Content.Client.Flash;
 
 namespace Content.Client.Eye.Blinding
 {
@@ -33,6 +34,8 @@ namespace Content.Client.Eye.Blinding
         private const float NoMotion_Max = 8.0f; // Max value for the nomotion variant's gradient
         private const float NoMotion_Mult = 0.75f; // Multiplier for the nomotion variant
 
+        public static readonly int ContentZIndex = FlashOverlay.ContentZIndex + 1; // SS220 Fix flash & blind overlays overlapping
+
         public BlurryVisionOverlay()
         {
             IoCManager.InjectDependencies(this);
@@ -43,6 +46,8 @@ namespace Content.Client.Eye.Blinding
             _circleMaskShader.SetParameter("CirclePow", NoMotion_Pow);
             _circleMaskShader.SetParameter("CircleMax", NoMotion_Max);
             _circleMaskShader.SetParameter("CircleMult", NoMotion_Mult);
+
+            ZIndex = ContentZIndex; // SS220 Fix flash & blind overlays overlapping
         }
 
         protected override bool BeforeDraw(in OverlayDrawArgs args)

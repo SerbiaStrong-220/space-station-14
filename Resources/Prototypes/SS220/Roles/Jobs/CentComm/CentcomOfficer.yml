@@ -12,7 +12,7 @@
 
 - type: randomHumanoidSettings
   id: CentCommOfficer
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran, Ipc ]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran, Ipc, Resomi ]
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false

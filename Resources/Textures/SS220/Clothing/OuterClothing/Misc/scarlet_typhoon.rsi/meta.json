@@ -8,15 +8,19 @@
     },
     "states": [
         {
-            "name": "icon"
+            "name": "equipped-OUTERCLOTHING",
+            "directions": 4
         },
         {
-            "name": "equipped-OUTERCLOTHING",
+            "name": "equipped-OUTERCLOTHING-resomi",
             "directions": 4
         },
         {
             "name": "equipped-OUTERCLOTHING-vox",
             "directions": 4
+        },
+        {
+            "name": "icon"
         },
         {
             "name": "inhand-left",

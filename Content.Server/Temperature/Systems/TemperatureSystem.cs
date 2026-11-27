@@ -124,7 +124,7 @@ public sealed partial class TemperatureSystem : SharedTemperatureSystem
 
     private void OnRejuvenate(EntityUid uid, TemperatureComponent comp, RejuvenateEvent args)
     {
-        ForceChangeTemperature(uid, Atmospherics.T20C, comp);
+        ForceChangeTemperature(uid, comp.DefaultTemperature, comp); // SS220 fix rejuvenate temperature
     }
 
     private void OnTemperatureChangeAttempt(EntityUid uid, TemperatureProtectionComponent component, ModifyChangedTemperatureEvent args)

@@ -14,9 +14,10 @@ public sealed partial class ChatSystem
         string verb,
         SpeechVerbPrototype speech,
         EntityUid source,
-        ChatTransmitRange range)
+        ChatTransmitRange range,
+        InGameICChatType chatType = InGameICChatType.Speak)
     {
-        foreach (var (session, data) in GetRecipients(source, VoiceRange))
+        foreach (var (session, data) in GetRecipients(source, VoiceRange, chatType))
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)

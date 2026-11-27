@@ -8,7 +8,7 @@
 - type: randomHumanoidSettings
   id: VisitorHead
   parent: EventHumanoidMindShielded
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
@@ -116,7 +116,7 @@
 - type: randomHumanoidSettings
   id: VisitorSecurity
   parent: EventHumanoidMindShielded
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
@@ -180,7 +180,7 @@
 - type: randomHumanoidSettings
   id: VisitorCargonian
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
@@ -220,7 +220,7 @@
 - type: randomHumanoidSettings
   id: VisitorEngineering
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
@@ -272,7 +272,7 @@
 - type: randomHumanoidSettings
   id: VisitorMedical
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
@@ -382,7 +382,7 @@
 - type: randomHumanoidSettings
   id: VisitorScience
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience
@@ -422,7 +422,7 @@
 - type: randomHumanoidSettings
   id: VisitorCivilian
   parent: EventHumanoid
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran] #SS220 LostSouls race ban
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi] #SS220 LostSouls race ban
   components:
     - type: ExperienceAddition #SS220-visitor-experience
       definitionId: VisitorRoleExperience #SS220-visitor-experience

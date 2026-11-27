@@ -24,3 +24,21 @@
     path: /Audio/Items/beep.ogg
   exclaimSound:
     path: /Audio/Items/beep.ogg
+
+- type: speechSounds
+  id: MaleResomi
+  saySound:
+    path: /Audio/SS220/Voice/Resomi/resomi_1.ogg
+  askSound:
+    path: /Audio/SS220/Voice/Resomi/resomi_1_ask.ogg
+  exclaimSound:
+    path: /Audio/SS220/Voice/Resomi/resomi_1_exclaim.ogg
+
+- type: speechSounds
+  id: FemaleResomi
+  saySound:
+    path: /Audio/SS220/Voice/Resomi/resomi_2.ogg
+  askSound:
+    path: /Audio/SS220/Voice/Resomi/resomi_2_ask.ogg
+  exclaimSound:
+    path: /Audio/SS220/Voice/Resomi/resomi_2_exclaim.ogg

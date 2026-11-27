@@ -23,6 +23,7 @@
     - type: VoxAccent
   #SS220-Vox accent End
     - type: DwarfAccent # SS220 Fix Dwarf Accentless
+    - type: ResomiAccent # SS220 Resomi
 
 # 1 Cost
 

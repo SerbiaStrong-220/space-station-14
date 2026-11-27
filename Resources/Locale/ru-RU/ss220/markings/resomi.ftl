@@ -1,0 +1,37 @@
+marking-ResomiHairBackstrafe = Резоми, зачёс назад
+marking-ResomiHairBigears = Резоми, большие ушные перья
+marking-ResomiHairBurst = Резоми, пышное оперенье
+marking-ResomiHairBurstShort = Резоми, короткое пышное оперенье
+marking-ResomiHairDefault = Резоми, стандартное оперенье
+marking-ResomiHairDroopy = Резоми, свисающее оперенье
+marking-ResomiHairDroppy = Резоми, растрёпанное оперенье
+marking-ResomiHairEars = Резоми, ушные перья
+marking-ResomiHairFluffymoahawk = Резоми, пушистый мохавк
+marking-ResomiHairFluffymohawk = Резоми, мягкий мохавк
+marking-ResomiHairHedge = Резоми, ёжик
+marking-ResomiHairLong = Резоми, длинное оперенье
+marking-ResomiHairLongway = Резоми, длинный зачёс
+marking-ResomiHairMane = Резоми, грива
+marking-ResomiHairManeBeardless = Резоми, грива без бороды
+marking-ResomiHairMohawk = Резоми, мохавк
+marking-ResomiHairMushroom = Резоми, грибовидное оперенье
+marking-ResomiHairNotree = Резоми, гладкое оперенье
+marking-ResomiHairPointy = Резоми, острое оперенье
+marking-ResomiHairSpiky = Резоми, колючее оперенье
+marking-ResomiHairTwies = Резоми, двойные пряди
+marking-ResomiHairUpright = Резоми, стоячее оперенье
+
+marking-ResomiTail = Резоми, хвост
+marking-ResomiTail-tail = хвост
+marking-ResomiTail-tail_feathers = оперенье
+marking-ResomiTailSmooth = Резоми, хвост
+marking-ResomiTailSmooth-tail_smooth = хвост
+marking-ResomiTailSmooth-tail_feathers = оперенье
+
+marking-ResomiChestFluff = Резоми, оперенье
+marking-ResomiSnoutFluff = Резоми, оперенье
+marking-ResomiHeadFluff = Резоми, оперенье
+marking-ResomiLFootFeathers = Резоми, оперенье
+marking-ResomiRFootFeathers = Резоми, оперенье
+marking-ResomiLHandFeathers = Резоми, оперенье
+marking-ResomiRHandFeathers = Резоми, оперенье

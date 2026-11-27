@@ -1,0 +1,16 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: species
+  id: Resomi
+  name: species-name-resomi
+  roundStart: true
+  prototype: MobResomi
+  defaultSkinTone: "#ffffff"
+  dollPrototype: AppearanceResomi
+  skinColoration: Hues
+  maleFirstNames: NamesResomi
+  femaleFirstNames: NamesResomi
+  naming: First
+  sexes:
+  - Unsexed
+  buttScanTexture: /Textures/SS220/Interface/Butts/vox.png

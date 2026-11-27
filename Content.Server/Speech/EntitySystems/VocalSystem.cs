@@ -10,6 +10,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing; // SS220-scream-cooldown
 using Content.Shared.SS220.Speech; // SS220 Chat-Special-Emote
+using Content.Server.SS220.QuadHearing;
+using Content.Shared.SS220.QuadHearing;
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -21,6 +23,9 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly IGameTiming _timing = default!; // SS220-scream-cooldown
+    [Dependency] private readonly QuadHearingSystem _quadHearing = default!; // SS220 Quad hearing
+
+    private static readonly ProtoId<QuadHearingTargetPrototype> ScreamQuadHearingTargetProtoId = "Scream"; // SS220 Quad hearing
 
     public override void Initialize()
     {
@@ -175,7 +180,13 @@ public sealed class VocalSystem : EntitySystem
         if (component.EmoteSounds is not { } sounds)
             return false;
 
-        return _chat.TryPlayEmoteSound(uid, _proto.Index(sounds), component.ScreamId);
+        // SS220 Quad hearing begin
+        if (!_chat.TryPlayEmoteSound(uid, _proto.Index(sounds), component.ScreamId))
+            return false;
+
+        _quadHearing.RegisterTarget(ScreamQuadHearingTargetProtoId, uid);
+        return true;
+        // SS220 Quad hearing end
     }
 
     private void LoadSounds(EntityUid uid, VocalComponent component, Sex? sex = null)

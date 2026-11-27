@@ -1,6 +1,7 @@
 using Content.Server.Body.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.ActionBlocker;
+using Content.Shared.SS220.Body.Events;
 using Content.Shared.Temperature.Components;
 using Robust.Shared.Timing;
 
@@ -50,6 +51,14 @@ public sealed class ThermalRegulatorSystem : EntitySystem
     {
         if (!Resolve(ent, ref ent.Comp2, logMissing: false))
             return;
+
+        // SS220 fix thermal regulation on dead mob begin
+        var attemptEv = new ProcessThermalRegulationAttemptEvent();
+        RaiseLocalEvent(ent, attemptEv);
+
+        if (attemptEv.Cancelled)
+            return;
+        // SS220 fix thermal regulation on dead mob end
 
         // TODO: Why do we have two datafields for this if they are only ever used once here?
         var totalMetabolismTempChange = ent.Comp1.MetabolismHeat - ent.Comp1.RadiatedHeat;

@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by abubben (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ResomiBackstrafe",
+      "directions": 4
+    },
+    {
+      "name": "ResomiBigears",
+      "directions": 4
+    },
+    {
+      "name": "ResomiBurst",
+      "directions": 4
+    },
+    {
+      "name": "ResomiBurstShort",
+      "directions": 4
+    },
+    {
+      "name": "ResomiDefault",
+      "directions": 4
+    },
+    {
+      "name": "ResomiDroopy",
+      "directions": 4
+    },
+    {
+      "name": "ResomiDroppy",
+      "directions": 4
+    },
+    {
+      "name": "ResomiEars",
+      "directions": 4
+    },
+    {
+      "name": "ResomiFluffymoahawk",
+      "directions": 4
+    },
+    {
+      "name": "ResomiFluffymohawk",
+      "directions": 4
+    },
+    {
+      "name": "ResomiHedge",
+      "directions": 4
+    },
+    {
+      "name": "ResomiLong",
+      "directions": 4
+    },
+    {
+      "name": "ResomiLongway",
+      "directions": 4
+    },
+    {
+      "name": "ResomiMane",
+      "directions": 4
+    },
+    {
+      "name": "ResomiManeBeardless",
+      "directions": 4
+    },
+    {
+      "name": "ResomiMohawk",
+      "directions": 4
+    },
+    {
+      "name": "ResomiMushroom",
+      "directions": 4
+    },
+    {
+      "name": "ResomiNotree",
+      "directions": 4
+    },
+    {
+      "name": "ResomiPointy",
+      "directions": 4
+    },
+    {
+      "name": "ResomiSpiky",
+      "directions": 4
+    },
+    {
+      "name": "ResomiTwies",
+      "directions": 4
+    },
+    {
+      "name": "ResomiUpright",
+      "directions": 4
+    }
+  ]
+}
