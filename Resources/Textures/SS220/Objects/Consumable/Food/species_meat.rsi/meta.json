@@ -1,0 +1,99 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Sprited by Prazat911, taken from https://github.com/space-syndicate/Goob-Station/pull/696",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "arachnid"
+        },
+        {
+            "name": "arachnid-cooked"
+        },
+        {
+            "name": "moth"
+        },
+        {
+            "name": "moth-cooked"
+        },
+        {
+            "name": "resomi"
+        },
+        {
+            "name": "resomi-cooked"
+        },
+        {
+            "name": "tajaran"
+        },
+        {
+            "name": "tajaran-cooked"
+        },
+        {
+            "name": "vox"
+        },
+        {
+            "name": "vox-cooked"
+        },
+        {
+            "name": "vulp"
+        },
+        {
+            "name": "vulp-cooked"
+        },
+        {
+            "name": "plain-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "plain-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "plain-cooked-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "plain-cooked-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "arachnid_cutlet-cooked"
+        },
+        {
+            "name": "arachnid_cutlet"
+        },
+        {
+            "name": "moth_cutlet-cooked"
+        },
+        {
+            "name": "moth_cutlet"
+        },
+        {
+            "name": "resomi_cutlet-cooked"
+        },
+        {
+            "name": "resomi_cutlet"
+        },
+        {
+            "name": "tajaran_cutlet-cooked"
+        },
+        {
+            "name": "tajaran_cutlet"
+        },
+        {
+            "name": "vox_cutlet-cooked"
+        },
+        {
+            "name": "vox_cutlet"
+        },
+        {
+            "name": "vulp_cutlet-cooked"
+        },
+        {
+            "name": "vulp_cutlet"
+        }
+    ]
+}

@@ -1,0 +1,421 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Base
+
+- type: entity
+  abstract: true
+  parent: FoodMeatRawBase
+  id: FoodMeatSpeciesBase
+  description: A slab of raw humanoid meat. Better not to ask whose.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 9
+  - type: Item
+    storedOffset: -2,1
+    inhandVisuals:
+      left:
+      - state: plain-inhand-left
+      right:
+      - state: plain-inhand-right
+
+- type: entity
+  abstract: true
+  parent: FoodMeatBase
+  id: FoodMeatSpeciesCookedBase
+  description: A cooked slab of humanoid meat. Smells disturbingly appetizing.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 5
+  - type: Item
+    storedOffset: -2,1
+    inhandVisuals:
+      left:
+      - state: plain-cooked-inhand-left
+      right:
+      - state: plain-cooked-inhand-right
+
+- type: entity
+  abstract: true
+  parent: FoodCutletBase
+  id: FoodMeatSpeciesCutletBase
+  description: A raw cutlet of humanoid meat.
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Cutlet
+    - Meat
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+        - ReagentId: Fat
+          Quantity: 2
+  - type: Item
+    size: Tiny
+    shape:
+    - 0,0,0,0
+    inhandVisuals:
+      left:
+      - sprite: Objects/Consumable/Food/meat.rsi
+        state: generic-pink-inhand-left
+      right:
+      - sprite: Objects/Consumable/Food/meat.rsi
+        state: generic-pink-inhand-right
+
+- type: entity
+  abstract: true
+  parent: FoodMeatBase
+  id: FoodMeatSpeciesCutletCookedBase
+  description: A cooked cutlet of humanoid meat.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Cutlet
+    - Meat
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/species_meat.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Protein
+          Quantity: 2
+  - type: Item
+    size: Tiny
+    shape:
+    - 0,0,0,0
+    storedOffset: -1,1
+    inhandVisuals:
+      left:
+      - sprite: Objects/Consumable/Food/meat.rsi
+        state: generic-pink-inhand-left
+      right:
+      - sprite: Objects/Consumable/Food/meat.rsi
+        state: generic-pink-inhand-right
+
+# Vulpkanin
+
+- type: entity
+  parent: FoodMeatSpeciesBase
+  id: FoodMeatVulpkanin
+  name: raw vulpkanin meat
+  components:
+  - type: Sprite
+    state: vulp
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatVulpkaninCutlet
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatVulpkaninCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCookedBase
+  id: FoodMeatVulpkaninCooked
+  name: vulpkanin steak
+  components:
+  - type: Sprite
+    state: vulp-cooked
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatVulpkaninCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletBase
+  id: FoodMeatVulpkaninCutlet
+  name: raw vulpkanin cutlet
+  components:
+  - type: Sprite
+    state: vulp_cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatVulpkaninCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletCookedBase
+  id: FoodMeatVulpkaninCutletCooked
+  name: vulpkanin cutlet
+  components:
+  - type: Sprite
+    state: vulp_cutlet-cooked
+  - type: FoodSequenceElement
+    entries:
+      Burger: VulpkaninCutletBurger
+      Taco: VulpkaninCutlet
+
+# Arachnid
+
+- type: entity
+  parent: FoodMeatSpeciesBase
+  id: FoodMeatArachnid
+  name: raw arachnid meat
+  components:
+  - type: Sprite
+    state: arachnid
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatArachnidCutlet
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatArachnidCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCookedBase
+  id: FoodMeatArachnidCooked
+  name: arachnid steak
+  components:
+  - type: Sprite
+    state: arachnid-cooked
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatArachnidCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletBase
+  id: FoodMeatArachnidCutlet
+  name: raw arachnid cutlet
+  components:
+  - type: Sprite
+    state: arachnid_cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatArachnidCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletCookedBase
+  id: FoodMeatArachnidCutletCooked
+  name: arachnid cutlet
+  components:
+  - type: Sprite
+    state: arachnid_cutlet-cooked
+  - type: FoodSequenceElement
+    entries:
+      Burger: ArachnidCutletBurger
+      Taco: ArachnidCutlet
+
+# Tajaran
+
+- type: entity
+  parent: FoodMeatSpeciesBase
+  id: FoodMeatTajaran
+  name: raw tajaran meat
+  components:
+  - type: Sprite
+    state: tajaran
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatTajaranCutlet
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatTajaranCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCookedBase
+  id: FoodMeatTajaranCooked
+  name: tajaran steak
+  components:
+  - type: Sprite
+    state: tajaran-cooked
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatTajaranCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletBase
+  id: FoodMeatTajaranCutlet
+  name: raw tajaran cutlet
+  components:
+  - type: Sprite
+    state: tajaran_cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatTajaranCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletCookedBase
+  id: FoodMeatTajaranCutletCooked
+  name: tajaran cutlet
+  components:
+  - type: Sprite
+    state: tajaran_cutlet-cooked
+  - type: FoodSequenceElement
+    entries:
+      Burger: TajaranCutletBurger
+      Taco: TajaranCutlet
+
+# Vox
+
+- type: entity
+  parent: FoodMeatSpeciesBase
+  id: FoodMeatVox
+  name: raw vox meat
+  components:
+  - type: Sprite
+    state: vox
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatVoxCutlet
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatVoxCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCookedBase
+  id: FoodMeatVoxCooked
+  name: vox steak
+  components:
+  - type: Sprite
+    state: vox-cooked
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatVoxCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletBase
+  id: FoodMeatVoxCutlet
+  name: raw vox cutlet
+  components:
+  - type: Sprite
+    state: vox_cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatVoxCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletCookedBase
+  id: FoodMeatVoxCutletCooked
+  name: vox cutlet
+  components:
+  - type: Sprite
+    state: vox_cutlet-cooked
+  - type: FoodSequenceElement
+    entries:
+      Burger: VoxCutletBurger
+      Taco: VoxCutlet
+
+# Moth
+
+- type: entity
+  parent: FoodMeatSpeciesBase
+  id: FoodMeatMoth
+  name: raw moth meat
+  components:
+  - type: Sprite
+    state: moth
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatMothCutlet
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatMothCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCookedBase
+  id: FoodMeatMothCooked
+  name: moth steak
+  components:
+  - type: Sprite
+    state: moth-cooked
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatMothCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletBase
+  id: FoodMeatMothCutlet
+  name: raw moth cutlet
+  components:
+  - type: Sprite
+    state: moth_cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatMothCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletCookedBase
+  id: FoodMeatMothCutletCooked
+  name: moth cutlet
+  components:
+  - type: Sprite
+    state: moth_cutlet-cooked
+  - type: FoodSequenceElement
+    entries:
+      Burger: MothCutletBurger
+      Taco: MothCutlet
+
+# Resomi
+
+- type: entity
+  parent: FoodMeatSpeciesBase
+  id: FoodMeatResomi
+  name: raw resomi meat
+  components:
+  - type: Sprite
+    state: resomi
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatResomiCutlet
+  - type: Grillable
+    timeToCook: 30
+    cookingResult: FoodMeatResomiCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCookedBase
+  id: FoodMeatResomiCooked
+  name: resomi steak
+  components:
+  - type: Sprite
+    state: resomi-cooked
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatResomiCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletBase
+  id: FoodMeatResomiCutlet
+  name: raw resomi cutlet
+  components:
+  - type: Sprite
+    state: resomi_cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatResomiCutletCooked
+
+- type: entity
+  parent: FoodMeatSpeciesCutletCookedBase
+  id: FoodMeatResomiCutletCooked
+  name: resomi cutlet
+  components:
+  - type: Sprite
+    state: resomi_cutlet-cooked
+  - type: FoodSequenceElement
+    entries:
+      Burger: ResomiCutletBurger
+      Taco: ResomiCutlet

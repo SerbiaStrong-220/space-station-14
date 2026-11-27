@@ -113,8 +113,10 @@
     - ZombifyableByMelee # SS220-add-animal-not-zombiefying
   - type: Butcherable
     spawned:
-    - id: FoodMeatSpider
+    #SS220-species-meat begin
+    - id: FoodMeatArachnid
       amount: 5
+    #SS220-species-meat end
   - type: Reactive
     reactions:
     - reagents: [Water]
@@ -191,7 +193,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Arachnid/organs.rsi
+    sprite: SS220/Mobs/Species/Arachnid/organs.rsi #SS220-species-organs-resprite
 
 - type: entity
   id: OrganArachnidVisual
@@ -253,7 +255,7 @@
   id: OrganArachnidFootRight
 
 - type: entity
-  parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganArachnidInternal ]
+  parent: [ OrganBaseBrain, OrganArachnidInternal ] #SS220-species-organs-resprite
   id: OrganArachnidBrain
 
 - type: entity
@@ -285,9 +287,9 @@
   id: OrganArachnidStomach
 
 - type: entity
-  parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganArachnidInternal, OrganAnimalMetabolizer ]
+  parent: [ OrganBaseLiver, OrganArachnidInternal, OrganAnimalMetabolizer ] #SS220-species-organs-resprite
   id: OrganArachnidLiver
 
 - type: entity
-  parent: [ OrganBaseKidneys, OrganSpriteHumanInternal, OrganArachnidInternal, OrganAnimalMetabolizer ]
+  parent: [ OrganBaseKidneys, OrganArachnidInternal, OrganAnimalMetabolizer ] #SS220-species-organs-resprite
   id: OrganArachnidKidneys
