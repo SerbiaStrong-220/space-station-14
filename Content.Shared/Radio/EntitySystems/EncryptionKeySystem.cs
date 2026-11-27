@@ -122,6 +122,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             return;
 
         component.Channels.Clear();
+        component.ListenOnlyChannels.Clear(); // SS220-listen-only-radio
         component.DefaultChannel = null;
 
         foreach (var ent in component.KeyContainer.ContainedEntities)
@@ -129,9 +130,18 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             if (TryComp<EncryptionKeyComponent>(ent, out var key))
             {
                 component.Channels.UnionWith(key.Channels);
+                component.ListenOnlyChannels.UnionWith(key.ListenOnlyChannels); // SS220-listen-only-radio
                 component.DefaultChannel ??= key.DefaultChannel;
             }
         }
+
+        // SS220-listen-only-radio begin
+        // A channel must live in exactly one of the two sets. If some key grants speaking
+        // access to a channel another key only allows listening to, speaking wins and the
+        // listen-only duplicate is dropped — this is the single place that enforces it,
+        // so nothing downstream has to re-check for double entries.
+        component.ListenOnlyChannels.ExceptWith(component.Channels);
+        // SS220-listen-only-radio end
 
         RaiseLocalEvent(uid, new EncryptionChannelsChangedEvent(component));
     }
@@ -258,6 +268,21 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             }
         }
 
+        // SS220-listen-only-radio begin
+        if (component.ListenOnlyChannels.Count > 0)
+        {
+            using (args.PushGroup(nameof(EncryptionKeyComponent)))
+            {
+                args.PushMarkup(Loc.GetString("examine-listen-only-channels-prefix"));
+                AddChannelsExamine(component.ListenOnlyChannels,
+                    null,
+                    args,
+                    _protoManager,
+                    "examine-encryption-channel");
+            }
+        }
+        // SS220-listen-only-radio end
+
         var languageNames = new HashSet<string>(); //SS220-decryption-key
         foreach (var keyEntity in component.KeyContainer.ContainedEntities)
         {
@@ -294,7 +319,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        if(component.Channels.Count > 0)
+        if (component.Channels.Count > 0)
         {
             args.PushMarkup(Loc.GetString("examine-encryption-channels-prefix"));
             AddChannelsExamine(component.Channels, component.DefaultChannel, args, _protoManager, "examine-encryption-channel");
