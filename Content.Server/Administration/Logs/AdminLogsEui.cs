@@ -52,6 +52,13 @@ public sealed class AdminLogsEui : BaseEui
         };
     }
 
+    // SS220 check fix begin
+    private bool IsCurrentFilter(LogFilter filter)
+    {
+        return ReferenceEquals(_filter, filter) && !filter.CancellationToken.IsCancellationRequested;
+    }
+    // SS220 check fix end
+
     private int CurrentRoundId => _e.System<GameTicker>().RoundId;
 
     public override async void Opened()
@@ -60,8 +67,11 @@ public sealed class AdminLogsEui : BaseEui
 
         _adminManager.OnPermsChanged += OnPermsChanged;
 
-        var roundId = _filter.Round ?? CurrentRoundId;
-        await LoadFromDb(roundId);
+        // SS220 check fix begin
+        var filter = _filter;
+        var roundId = filter.Round ?? CurrentRoundId;
+        await LoadFromDb(roundId, filter);
+        // SS220 check fix end
     }
 
     private void ClientBatchSizeChanged(int value)
@@ -108,8 +118,9 @@ public sealed class AdminLogsEui : BaseEui
                 _sawmill.Info($"Admin log request from admin with id {Player.UserId.UserId} and name {Player.Name}");
 
                 _logSendCancellation.Cancel();
+                _logSendCancellation.Dispose(); // SS220 check fix
                 _logSendCancellation = new CancellationTokenSource();
-                _filter = new LogFilter
+                var filter = _filter = new LogFilter // SS220 check fix 
                 {
                     CancellationToken = _logSendCancellation.Token,
                     Round = request.RoundId,
@@ -126,17 +137,19 @@ public sealed class AdminLogsEui : BaseEui
                     Limit = _clientBatchSize
                 };
 
-                var roundId = _filter.Round ??= CurrentRoundId;
-                await LoadFromDb(roundId);
+                // SS220 check fix begin
+                var roundId = filter.Round ??= CurrentRoundId;
+                await LoadFromDb(roundId, filter);
 
-                SendLogs(true);
+                await SendLogs(filter, true);
+                // SS220 check fix end
                 break;
             }
             case NextLogsRequest:
             {
                 _sawmill.Info($"Admin log next batch request from admin with id {Player.UserId.UserId} and name {Player.Name}");
 
-                SendLogs(false);
+                await SendLogs(_filter, false); // SS220 check fix
                 break;
             }
         }
@@ -152,37 +165,57 @@ public sealed class AdminLogsEui : BaseEui
         SendMessage(message);
     }
 
-    private async void SendLogs(bool replace)
+    // SS220 check fix begin
+    private async Task SendLogs(LogFilter filter, bool replace)
     {
+        if (!IsCurrentFilter(filter))
+            return;
+
         var stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        var logs = await Task.Run(async () => await _adminLogs.All(_filter, _adminLogListPool.Get),
-            _filter.CancellationToken);
-
-        if (logs.Count > 0)
+        List<SharedAdminLog>? logs = null;
+        try
         {
-            _filter.LogsSent += logs.Count;
+            // Capture this request, not the filter that a later refresh installs.
+            logs = await Task.Run(() => _adminLogs.All(filter, _adminLogListPool.Get),
+                filter.CancellationToken);
 
-            var largestId = _filter.DateOrder switch
+            // A cache search can finish successfully even after its request was cancelled.
+            if (!IsCurrentFilter(filter))
+                return;
+
+            if (logs.Count > 0)
             {
-                DateOrder.Ascending => 0,
-                DateOrder.Descending => ^1,
-                _ => throw new ArgumentOutOfRangeException(nameof(_filter.DateOrder), _filter.DateOrder, null)
-            };
+                filter.LogsSent += logs.Count;
 
-            _filter.LastLogId = logs[largestId].Id;
+                var largestId = filter.DateOrder switch
+                {
+                    DateOrder.Ascending => 0,
+                    DateOrder.Descending => ^1,
+                    _ => throw new ArgumentOutOfRangeException(nameof(filter.DateOrder), filter.DateOrder, null)
+                };
+
+                filter.LastLogId = logs[largestId].Id;
+            }
+
+            var message = new NewLogs(logs, replace, logs.Count >= filter.Limit);
+            SendMessage(message);
+
+            _sawmill.Info($"Sent {logs.Count} logs to {Player.Name} in {stopwatch.Elapsed.TotalMilliseconds} ms");
         }
-
-        var message = new NewLogs(logs, replace, logs.Count >= _filter.Limit);
-
-        SendMessage(message);
-
-        _sawmill.Info($"Sent {logs.Count} logs to {Player.Name} in {stopwatch.Elapsed.TotalMilliseconds} ms");
-
-        _adminLogListPool.Return(logs);
+        catch (OperationCanceledException) when (filter.CancellationToken.IsCancellationRequested)
+        {
+            // Refreshing or closing the window cancels the previous request normally.
+        }
+        finally
+        {
+            if (logs != null)
+                _adminLogListPool.Return(logs);
+        }
+        
     }
-
+    // SS220 check fix end
     public override void Closed()
     {
         base.Closed();
@@ -194,14 +227,24 @@ public sealed class AdminLogsEui : BaseEui
         _logSendCancellation.Dispose();
     }
 
-    private async Task LoadFromDb(int roundId)
+    private async Task LoadFromDb(int roundId, LogFilter filter) // SS220 check fix
     {
+        // SS220 check fix begin 
+        if (!IsCurrentFilter(filter))
+            return;
+        // SS220 check fix end
+
         _isLoading = true;
         StateDirty();
 
         var round = _adminLogs.Round(roundId);
         var count = _adminLogs.CountLogs(roundId);
         await Task.WhenAll(round, count);
+
+        // SS220 check fix. Neither old round metadata nor a closed window may update the active state.
+        if (!IsCurrentFilter(filter))
+            return;
+        // SS220 check fix end
 
         var players = (await round).Players
             .ToDictionary(player => player.UserId, player => player.LastSeenUserName);
@@ -219,3 +262,4 @@ public sealed class AdminLogsEui : BaseEui
         StateDirty();
     }
 }
+

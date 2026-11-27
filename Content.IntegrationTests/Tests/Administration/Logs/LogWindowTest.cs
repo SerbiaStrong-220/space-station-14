@@ -7,6 +7,7 @@ using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Server.Administration.Commands;
 using Content.Server.Administration.Logs;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 
 namespace Content.IntegrationTests.Tests.Administration.Logs;
@@ -35,15 +36,14 @@ public sealed class LogWindowTest : InteractionTest
         // Find the log search field and refresh buttons
         var search = logWindow.Logs.LogSearch;
         var refresh = logWindow.Logs.RefreshButton;
-        var cont = logWindow.Logs.LogsContainer;
+        await WaitForLog(logWindow, guid);// SS220 check fix. Wait for the initial round state and automatic query before refreshing.
 
         // Search for the log we added earlier.
         await Client.WaitPost(() => search.Text = guid.ToString());
         await ClickControl(refresh);
-        await RunTicks(5);
-        var searchResult = cont.Children.Where(x => x.Visible && x is AdminLogLabel).Cast<AdminLogLabel>().ToArray();
+        var searchResult = await WaitForLog(logWindow, guid);
         Assert.That(searchResult.Length, Is.EqualTo(1));
-        Assert.That(searchResult[0].Log.Message, Contains.Substring($" test log 1: {guid}"));
+        Assert.That(searchResult[0].Message, Contains.Substring($" test log 1: {guid}")); // SS220 check fix begin
 
         // Add a new log
         guid = Guid.NewGuid();
@@ -52,9 +52,41 @@ public sealed class LogWindowTest : InteractionTest
         // Update the search and refresh
         await Client.WaitPost(() => search.Text = guid.ToString());
         await ClickControl(refresh);
-        await RunTicks(5);
-        searchResult = cont.Children.Where(x => x.Visible && x is AdminLogLabel).Cast<AdminLogLabel>().ToArray();
+        searchResult = await WaitForLog(logWindow, guid); // SS220 check fix
         Assert.That(searchResult.Length, Is.EqualTo(1));
-        Assert.That(searchResult[0].Log.Message, Contains.Substring($" test log 2: {guid}"));
+        Assert.That(searchResult[0].Message, Contains.Substring($" test log 2: {guid}")); // SS220 check fix
     }
+
+    // SS220 check fix begin
+    private async Task<SharedAdminLog[]> WaitForLog(AdminLogsWindow window, Guid guid)
+    {
+        const int maxTicks = 600;
+        var expected = guid.ToString();
+        SharedAdminLog[] visible = [];
+        SharedAdminLog[] all = [];
+        var roundId = 0;
+
+        for (var tick = 0; tick <= maxTicks; tick++)
+        {
+            await Client.WaitPost(() =>
+            {
+                var labels = window.Logs.LogsContainer.Children.OfType<AdminLogLabel>().ToArray();
+                all = labels.Select(label => label.Log).ToArray();
+                visible = labels.Where(label => label.Visible).Select(label => label.Log).ToArray();
+                roundId = window.Logs.SelectedRoundId;
+            });
+
+            if (visible.Any(log => log.Message.Contains(expected)))
+                return visible;
+
+            if (tick < maxTicks)
+                await RunTicks(1);
+        }
+
+        Assert.Fail($"Log {expected} did not appear after {maxTicks} ticks. " +
+                    $"Round: {roundId}; total labels: {all.Length}; visible: {visible.Length}; " +
+                    $"present before visibility filtering: {all.Any(log => log.Message.Contains(expected))}.");
+        return visible;
+    }
+    // SS220 check fix end
 }
