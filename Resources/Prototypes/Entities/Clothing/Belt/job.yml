@@ -442,7 +442,7 @@
   - type: Clothing
     sprite: Clothing/Belt/security.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.9
+    damageCoefficient: 0.1 #SS220-balance-update
   - type: Storage
     whitelist:
       tags:

@@ -262,7 +262,7 @@
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Battery/makeshift.rsi #SS220 resprite
   - type: BatteryAmmoProvider
-    proto: RedLaser
+    proto: RedMediumLaser #SS220-makeshift-laser-tweak
     fireCost: 62.5
   - type: Battery
     maxCharge: 500
@@ -768,9 +768,7 @@
   - type: Item
     size: Normal
     shape:
-# SS220-sec-gear-size-fix-start
-    - 0,0,2,1
-# SS220-sec-gear-size-fix-end
+    - 0,0,1,1
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
     layers:
@@ -798,9 +796,7 @@
     price: 63
   - type: Tag
     tags:
-# SS220-sec-gear-size-fix-start
-    - SecBeltEquip
-# SS220-sec-gear-size-fix-end
+    - Sidearm
     - LaserWeapon
 
 - type: entity

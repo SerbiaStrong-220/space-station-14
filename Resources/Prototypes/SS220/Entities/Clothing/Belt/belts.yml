@@ -10,6 +10,8 @@
     sprite: SS220/Clothing/Belt/blueshield.rsi
   - type: Clothing
     sprite: SS220/Clothing/Belt/blueshield.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
   - type: Storage
     maxItemSize: Normal
     defaultStorageOrientation: Vertical

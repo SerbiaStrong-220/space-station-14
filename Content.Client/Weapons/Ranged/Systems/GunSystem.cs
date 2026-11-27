@@ -41,7 +41,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IStateManager _state = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    // [Dependency] private readonly IConfigurationManager _cfg = default!; //SS220-disable-hold-to-attack-ranged
     [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
@@ -245,7 +245,7 @@ public sealed partial class GunSystem : SharedGunSystem
             Target = target,
             Coordinates = GetNetCoordinates(coordinates),
             Gun = GetNetEntity(gun),
-            Continuous = _cfg.GetCVar(CCVars.ControlHoldToAttackRanged),
+            // Continuous = _cfg.GetCVar(CCVars.ControlHoldToAttackRanged), //SS220-disable-hold-to-attack-ranged
         });
     }
 

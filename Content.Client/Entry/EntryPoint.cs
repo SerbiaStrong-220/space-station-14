@@ -30,6 +30,7 @@ using Content.Client.UserInterface;
 using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Shared.Ame.Components;
+using Content.Shared.CCVar;
 using Content.Shared.FeedbackSystem;
 using Content.Shared.Gravity;
 using Content.Shared.Localizations;
@@ -172,6 +173,14 @@ namespace Content.Client.Entry
         public override void PostInit()
         {
             base.PostInit();
+
+            //SS220-disable-hold-to-attack-ranged begin
+            if (_configManager.GetCVar(CCVars.ControlHoldToAttackRanged))
+            {
+                _configManager.SetCVar(CCVars.ControlHoldToAttackRanged, false);
+                _configManager.SaveToFile();
+            }
+            //SS220-disable-hold-to-attack-ranged end
 
             _stylesheetManager.Initialize();
 
