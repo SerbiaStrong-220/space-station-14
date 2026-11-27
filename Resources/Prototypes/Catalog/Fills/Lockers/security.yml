@@ -184,6 +184,8 @@
     - id: ClothingEyesHudSecurity # Dec is sec
     - id: BodySecurityCamera #SS220-Bodycam
     - id: HandHeldImplantMedicalScanner # SS220-surgery-scanner
+    - id: PhotoCamera # SS220-Photography
+    - id: PhotoCameraFilm # SS220-Photography
     # SS220-our-stuff-end
     - id: ClothingEyesGlassesNoir
     - id: ClothingHeadHatDetGadget
