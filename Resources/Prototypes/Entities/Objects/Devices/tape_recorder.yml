@@ -50,7 +50,7 @@
     interfaces:
       enum.TapeRecorderUIKey.Key:
         type: TapeRecorderBoundUserInterface
-  - type: TTS # SS220 Tape recorder TTS
+  - type: Tts # SS220 Tape recorder TTS
   # SS220 languages begin
   - type: Language
     knowAllLanguages: true # Used as transponder
@@ -98,7 +98,7 @@
   id: CassetteTapeInterview
   components:
   - type: Label
-    currentLabel: Interview with Garry Smosh
+    currentLabel: label-cassette-interview-garry-smosh # SS220-localization-fix
   - type: TapeCassette
     recordedData:
       - timestamp: 2

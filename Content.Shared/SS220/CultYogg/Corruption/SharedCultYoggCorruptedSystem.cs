@@ -391,7 +391,7 @@ public sealed partial class SharedCultYoggCorruptedSystem : EntitySystem
             TryComp(entityTo, out StackComponent? stackTo) &&
             recipe.FromEntity.StackType == (originalEntity == entityFrom ? stackFrom : stackTo).StackTypeId)
         {
-            _stackSystem.SetCount(entityTo, stackFrom.Count, stackTo);
+            _stackSystem.SetCount((entityTo, stackTo), stackFrom.Count);
             return true;
         }
         return false;

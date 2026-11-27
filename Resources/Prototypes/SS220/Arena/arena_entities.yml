@@ -52,13 +52,12 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: RoleExperienceAdd
+  - type: ExperienceAddition
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
     team: a
     icon: ArenaTeamAIcon
   - type: AntagImmune
-  - type: ParadoxCloneBlacklist
 
 - type: randomHumanoidSettings
   id: ArenaFighterPlayerTwo
@@ -66,13 +65,12 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: RoleExperienceAdd
+  - type: ExperienceAddition
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
     team: b
     icon: ArenaTeamBIcon
   - type: AntagImmune
-  - type: ParadoxCloneBlacklist
 
 - type: entity
   id: ArenaGhostSpawnerPlayerOne

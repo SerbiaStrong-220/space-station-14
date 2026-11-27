@@ -173,13 +173,13 @@ public sealed partial class CartSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    public bool TryAttachCart(EntityUid target, CartComponent cartComp, EntityUid user)
+    public bool TryAttachCart(EntityUid target, Entity<CartComponent> cart, EntityUid user)
     {
-        if (!IsAttachable(target, cartComp.Owner))
+        if (!IsAttachable(target, cart))
             return false;
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, user, cartComp.AttachToggleTime, new CartAttachDoAfterEvent(target),
-            cartComp.Owner, target: cartComp.Owner)
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, user, cart.Comp.AttachToggleTime, new CartAttachDoAfterEvent(target),
+            cart, target: cart)
         {
             BreakOnMove = true,
             BreakOnDamage = true,

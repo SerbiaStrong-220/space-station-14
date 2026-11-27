@@ -115,13 +115,16 @@
   table: !type:GroupSelector
     children:
     - !type:NestedSelector
-      tableId: MaintToolsTable
+      tableId: PackageDeliveryMaintTools # SS220-species-mail
       rolls: !type:RangeNumberSelector
         range: 1, 2
     - !type:NestedSelector
-      tableId: FoodRandomCakeTable
+      tableId: PackageDeliveryCake # SS220-species-mail
       weight: 2
-    - id: FoodBoxPizzaFilled
+    # SS220-species-mail begin
+    - !type:NestedSelector
+      tableId: PackageDeliveryPizza
+    # SS220-species-mail end
 
 - type: entityTable
   id: PackageUncommonEntityTable
@@ -136,7 +139,7 @@
       tableId: AllPlushiesTable
       weight: 0.4
     - !type:NestedSelector
-      tableId: RandomAllAlcoholTable
+      tableId: PackageDeliveryAlcohol # SS220-species-mail
       weight: 0.2
       rolls: !type:RangeNumberSelector
         range: 2, 3
@@ -148,7 +151,10 @@
   id: PackageRareEntityTable
   table: !type:GroupSelector
     children:
-    - id: MedkitAdvancedFilled # TODO: Replace with PackageRareGeneralBundlesTable for when something doesn't fit with a department. (Like a bundle of bed sheets, dunno)
+    # SS220-species-mail begin
+    - !type:NestedSelector
+      tableId: PackageDeliveryAdvancedMedkit
+    # SS220-species-mail end
     - id: PipeBomb # TODO: PackageRarePunishmentTable, including things like pipebombs and other potentially harmful things (the pipebomb should also get primed when unpacked)
     - !type:NestedSelector
       tableId: SmallCritterEntityTable
@@ -157,7 +163,7 @@
     - !type:NestedSelector
       tableId: AnimalMaskTable
     - !type:NestedSelector
-      tableId: MaintWeaponTable
+      tableId: PackageDeliveryMaintWeapons # SS220-species-mail
       weight: 0.5
     - !type:NestedSelector
       tableId: SyndieMaintLoot

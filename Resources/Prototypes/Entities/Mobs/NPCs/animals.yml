@@ -2460,8 +2460,12 @@
       reagents:
       - ReagentId: Blood
         Quantity: 50
-  - type: TTS # Corvax-TTS
-    voice: ziggs
+  # SS220 Tts begin
+  - type: Tts
+    voicePreferences:
+      NTTS: ziggs
+      Silero: Ziggs
+  # SS220 Tts end
 
 - type: entity
   parent: MobParrotBase

@@ -7,3 +7,10 @@ stack-fake-credit = спесо
 stack-cable-live = живые корни (ЛВ)
 stack-cable-mv-live = живые корни (СВ)
 stack-cable-hv-live = живые корни (ВВ)
+
+stack-cone =
+    { $amount ->
+        [1] конус
+        [few] конуса
+       *[other] конусов
+    }

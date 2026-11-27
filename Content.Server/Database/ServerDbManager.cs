@@ -26,7 +26,7 @@ using MSLogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace Content.Server.Database
 {
-    public interface IServerDbManager
+    public partial interface IServerDbManager // # SS220 connections by ckeys
     {
         void Init();
 
@@ -357,7 +357,7 @@ namespace Content.Server.Database
         public string? Payload { get; set; }
     }
 
-    public sealed class ServerDbManager : IServerDbManager
+    public sealed partial class ServerDbManager : IServerDbManager // # SS220 connections by ckeys
     {
         public static readonly Counter DbReadOpsMetric = Metrics.CreateCounter(
             "db_read_ops",
@@ -387,7 +387,6 @@ namespace Content.Server.Database
         private SqliteConnection? _sqliteInMemoryConnection;
 
         private readonly List<Action<DatabaseNotification>> _notificationHandlers = [];
-
         public void Init()
         {
             _msLogProvider = new LoggingProvider(_logMgr);

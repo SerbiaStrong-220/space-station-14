@@ -8,7 +8,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
-using Content.Server.Administration.Managers;
 using Content.Server.SS220.Signature;
 using Content.Server.SS220.Traits;
 using Content.Shared.Administration.Logs;
@@ -17,8 +16,6 @@ using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.SS220.Signature;
-using Content.Shared.Traits;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -27,7 +24,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Database
 {
-    public abstract class ServerDbBase
+    public abstract partial class ServerDbBase // # SS220 connections by ckeys
     {
         private readonly ISawmill _opsLog;
         public event Action<DatabaseNotification>? OnNotificationReceived;
@@ -52,6 +49,7 @@ namespace Content.Server.Database
                 .Include(p => p.Profiles).ThenInclude(h => h.Jobs)
                 .Include(p => p.Profiles).ThenInclude(h => h.Antags)
                 .Include(p => p.Profiles).ThenInclude(h => h.Traits)
+                .Include(p => p.Profiles).ThenInclude(h => h.TtsVoicePreferences) // SS220 Tts
                 .Include(p => p.Profiles)
                     .ThenInclude(h => h.Loadouts)
                     .ThenInclude(l => l.Groups)
@@ -113,6 +111,7 @@ namespace Content.Server.Database
                 .Include(p => p.Loadouts)
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
+                .Include(p => p.TtsVoicePreferences) // SS220 Tts
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
 
@@ -217,7 +216,6 @@ namespace Content.Server.Database
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
             profile.Species = humanoid.Species;
-            profile.Voice = humanoid.Voice; // Corvax-TTS
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();
@@ -254,6 +252,15 @@ namespace Content.Server.Database
             // ss220 add signature end
 
             profile.TraitOptions = TraitOptionsSerializer.Serialize(humanoid.TraitOptions); // ss220 trait options
+
+            // SS220 tts begin
+            profile.TtsVoicePreferences.Clear();
+            for (var i = 0; i < humanoid.VoicePreferences.Count; i++)
+            {
+                var pair = humanoid.VoicePreferences[i];
+                profile.TtsVoicePreferences.Add(new TtsVoicePreference { PositionIndex = i, ProviderName = pair.Key.ToString(), VoiceId = pair.Value });
+            }
+            // SS220 tts end
 
             profile.Jobs.Clear();
             profile.Jobs.AddRange(
