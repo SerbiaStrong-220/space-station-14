@@ -64,4 +64,27 @@ public enum PinpointerMode//ToDo_SS220 fix cursed pinpointer https://github.com/
     Crew,
     Item,
     Component,
+    Dna,
+}
+
+[Serializable]
+[NetSerializable]
+public sealed partial class PinpointerAddDnaMessage(string dna) : BoundUserInterfaceMessage
+{
+    public string Dna = dna;
+}
+
+[Serializable]
+[NetSerializable]
+public sealed partial class PinpointerSelectDnaMessage(string dna) : BoundUserInterfaceMessage
+{
+    public string Dna = dna;
+}
+
+[Serializable]
+[NetSerializable]
+public sealed partial class PinpointerDnaListState(List<string> savedDnas, string? activeDna) : BoundUserInterfaceState
+{
+    public List<string> SavedDnas = savedDnas;
+    public string? ActiveDna = activeDna;
 }

@@ -22,6 +22,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Content.Server.Body.Systems;
 using Content.Shared.SS220.LimitationRevive;
+using Content.Shared.Forensics.Components; // SS220 Redwings DnaScan
 
 namespace Content.Server.Medical;
 
@@ -258,6 +259,14 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             counterDeath = reviveComp.DeathCounter;
         //SS220 LimitationRevive - end
 
+        //SS220 Redwings DnaScan - start
+        string? dna = null;
+        if (TryComp<DnaComponent>(entity, out var dnaComp))
+        {
+            dna = dnaComp.DNA;
+        }
+        //SS220 Redwings DnaScan - end
+
         // ss220 add health analyzer start
         var scannedName = HasComp<MetaDataComponent>(target)
             ? Identity.Name(target.Value, EntityManager)
@@ -274,7 +283,8 @@ public sealed class HealthAnalyzerSystem : EntitySystem
                 bloodAmount,
                 bleeding,
                 unrevivable,
-                counterDeath);
+                counterDeath,
+                dna);
         }
         // ss220 add health analyzer end
 
@@ -286,7 +296,8 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             bleeding,
             unrevivable,
             counterDeath, //SS220 LimitationRevive
-            healthAnalyzerComp?.CanPrint ?? false // SS220-health-analyzer-report
+            healthAnalyzerComp?.CanPrint ?? false, // SS220-health-analyzer-report
+            dna // SS220 Redwings DnaScan
         );
     }
 }

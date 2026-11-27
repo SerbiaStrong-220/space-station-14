@@ -12,6 +12,7 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
 {
     private PinpointerMenu? _crewMenu;
     private PinpointerUplinkMenu? _itemMenu;
+    private DnaPinpointerMenu? _dnaMenu;
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
@@ -41,6 +42,11 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
 
                 _crewMenu.CrewListCoords = targetState.Targets;
                 _crewMenu.PopulateList();
+                break;
+
+            case PinpointerDnaListState dnaState:
+                if (_dnaMenu == null) return;
+                _dnaMenu.UpdateState(dnaState);
                 break;
         }
     }
@@ -78,6 +84,14 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
                     _crewMenu.PopulateList();
                     break;
                 }
+
+            case PinpointerMode.Dna:
+                {
+                    _dnaMenu = this.CreateWindow<DnaPinpointerMenu>();
+                    _dnaMenu.OnAddDna = OnAddDna;
+                    _dnaMenu.OnSelectDna = OnSelectDna;
+                    break;
+                }
         }
     }
 
@@ -101,5 +115,15 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
     private void OnDnaPicked(string? dna)
     {
         SendMessage(new PinpointerDnaPick(dna));
+    }
+
+    private void OnAddDna(string dna)
+    {
+        SendMessage(new PinpointerAddDnaMessage(dna));
+    }
+
+    private void OnSelectDna(string dna)
+    {
+        SendMessage(new PinpointerSelectDnaMessage(dna));
     }
 }

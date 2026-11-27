@@ -89,7 +89,8 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
         float bloodAmount,
         bool? bleeding,
         bool? unrevivable,
-        int? counterDeath)
+        int? counterDeath,
+        string? dna)
     {
         string status;
         var builder = new StringBuilder();
@@ -107,6 +108,13 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
             ? Loc.GetString(_prototypeManager.Index(humanoidAppearance.Species).Name)
             : Loc.GetString("health-analyzer-window-entity-unknown-species-text");
         builder.AppendLine(Loc.GetString("health-analyzer-report-species", ("species", species)));
+
+        // Redwings DnaScan - start
+        var dnaText = !string.IsNullOrWhiteSpace(dna) 
+            ? dna 
+            : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
+        builder.AppendLine(Loc.GetString("health-analyzer-report-dna", ("dna", dnaText)));
+        // Redwings DnaScan - end
 
         if (mobState != null)
         {

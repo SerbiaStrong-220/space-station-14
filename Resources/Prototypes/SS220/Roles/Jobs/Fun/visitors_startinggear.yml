@@ -28,8 +28,8 @@
   experienceDefinition: RedWingsOfficerRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
-    back: ClothingBackpackSecurity
-    shoes: ClothingShoesBootsCombatFilled
+    back: ClothingBackpackRedWings
+    shoes: ClothingShoesBootsMagRW
     eyes: ClothingEyesGlassesBallistic
     mask: ClothingMaskNeckGaiter
     gloves: ClothingHandsGlovesCombat
@@ -53,15 +53,14 @@
     back:
     - BoxSurvivalBrigmedic
     - MedkitCombatFilled
-    - PinpointerUplink
 
 - type: startingGear
   id: RedWingsMedicGear
   experienceDefinition: RedWingsMedicRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
-    back: ClothingBackpackSatchelBrigmedic
-    shoes: ClothingShoesBootsCombatFilled
+    back: ClothingBackpackRedWingsSatchel
+    shoes: ClothingShoesBootsMagRW
     eyes: ClothingEyesHudSyndChem
     mask: ClothingMaskNeckGaiterRed
     gloves: ClothingHandsGlovesCombat
@@ -88,19 +87,18 @@
     back:
     - BoxSurvivalBrigmedic
     - MedkitCombatFilled
-    - PinpointerUplink
     - LaserSMGPowerCell
     - LaserSMGPowerCell
-    - DefibrillatorSyndicate
     - EmergencyRollerBedSpawnFolded
+    - DefibrillatorSyndicate
 
 - type: startingGear
   id: RedWingsPilotGear
   experienceDefinition: RedWingsPilotRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
-    back: ClothingBackpackSecurity
-    shoes: ClothingShoesBootsCombatFilled
+    back: ClothingBackpackRedWings
+    shoes: ClothingShoesBootsMagRW
     eyes: ClothingEyesGlassesBallistic
     mask: ClothingMaskNeckGaiter
     gloves: ClothingHandsGlovesCombat
@@ -126,4 +124,3 @@
     - BoxSurvivalBrigmedic
     - MedkitCombatFilled
     - HandHeldMassScanner
-    - PinpointerUplink

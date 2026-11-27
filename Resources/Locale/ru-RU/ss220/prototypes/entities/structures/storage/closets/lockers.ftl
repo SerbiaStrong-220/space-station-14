@@ -15,6 +15,9 @@ ent-LockerInterdyneFilled = шкаф Интердайн
     .suffix = Заполненный
 ent-LockerInterdyneArmory = шкаф отряда "Красные Крылья"
     .desc = { ent-LockerSyndicatePersonal.desc }
+ent-LockerInterdyneArmoryFilled = шкаф отряда "Красные Крылья"
+    .desc = { ent-LockerSyndicatePersonal.desc }
+    .suffix = Заполненный
 ent-LockerInterdyneArmoryArmored = укрепленный шкаф отряда "Красные Крылья"
     .desc = { ent-LockerSyndicatePersonal.desc }
 

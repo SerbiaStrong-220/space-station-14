@@ -82,7 +82,11 @@ book-text-redwings-client-start =
 
 book-text-redwings-client-middle =  ФИО: { $name }
     ДНК: { $dna }
-    Уровень страховки: ◼ Серебряный ☐ Золотой ☐ Платиновый
+    Уровень страховки: { $insurance }
+
+book-text-redwings-insurance-silver = ◼ Серебряный ☐ Золотой ☐ Платиновый
+book-text-redwings-insurance-gold = ☐ Серебряный ◼ Золотой ☐ Платиновый
+book-text-redwings-insurance-platinum = ☐ Серебряный ☐ Золотой ◼ Платиновый
 
 book-text-redwings-client-end =
     {"["}bold{"]"}Предписания для отряда «RedWings»:{"["}/bold{"]"}

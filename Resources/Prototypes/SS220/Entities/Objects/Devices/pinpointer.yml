@@ -76,3 +76,31 @@
     interfaces:
       enum.PinpointerUIKey.Key:
         type: PinpointerBoundUserInterface
+
+- type: entity
+  parent: PinpointerBase
+  id: PinpointerDNA
+  name: dna pinpointer
+  description: Advanced technology for tracking an entity via its DNA.
+  suffix: Dna, Pinpointer
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Devices/pinpointer.rsi
+    layers:
+    - state: pinpointer-redwings
+      map: ["enum.PinpointerLayers.Base"]
+    - state: pinonnull
+      map: ["enum.PinpointerLayers.Screen"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: SS220/Objects/Devices/pinpointer.rsi
+    state: pinpointer-redwings
+  - type: Pinpointer
+    mode: Dna
+  - type: ActivatableUI
+    key: enum.PinpointerUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PinpointerUIKey.Key:
+        type: PinpointerBoundUserInterface

@@ -160,3 +160,20 @@
         - id: LaserCarabinePowerCell
           amount: 3
         - id: StimpackERT
+
+# Redwings
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackRedWings
+  name: RedWing's operator backpack
+  description: A backpack made of reinforced fiber, featuring additional pockets. It smells of alcohol.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,7,3
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/redwings.rsi
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-red

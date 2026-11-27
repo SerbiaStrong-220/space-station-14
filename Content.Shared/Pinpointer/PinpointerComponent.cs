@@ -111,6 +111,13 @@ public sealed partial class PinpointerComponent : Component
     [Access(Other = AccessPermissions.ReadWriteExecute)]
     public string? TargetsComponent;//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
     //ss220 add pinpointer ui end
+
+    //ss220 add dna pinpointer - start
+    [DataField]
+    [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public List<string> SavedDnas = new();
+    //ss220 add dna pinpointer - end
 }
 
 [Serializable, NetSerializable]

@@ -30,10 +30,11 @@ public struct HealthAnalyzerUiState
     public bool? Bleeding;
     public bool? Unrevivable;
     public int? CounterDeath; //SS220 LimitationRevive
+    public string? Dna; //SS220 Redwings DnaScan
 
     public HealthAnalyzerUiState() {}
 
-    public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, int? counterDeath /* SS220 LimitationRevive */, bool canPrint /*  SS220-health-analyzer-report */)
+    public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, int? counterDeath /* SS220 LimitationRevive */, bool canPrint /*  SS220-health-analyzer-report */, string? dna /* SS220 RedWingsDnaScan */)
     {
         TargetEntity = targetEntity;
         Temperature = temperature;
@@ -43,5 +44,6 @@ public struct HealthAnalyzerUiState
         Bleeding = bleeding;
         Unrevivable = unrevivable;
         CounterDeath = counterDeath; // SS220 LimitationRevive
+        Dna = dna; //SS220 Redwings DnaScan
     }
 }
