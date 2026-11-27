@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseUplinkRadio40TC
   id: ArenaUplinkRadio40TC
-  suffix: Arena, 40 TC
+  suffix: Arena, 400 TC
   components:
   - type: Store
     categories:
@@ -14,7 +14,7 @@
     - UplinkWearables
     - UplinkPointless
     balance:
-      Telecrystal: 40
+      Telecrystal: 400
     useDiscounts: true
 
 - type: experienceDefinition

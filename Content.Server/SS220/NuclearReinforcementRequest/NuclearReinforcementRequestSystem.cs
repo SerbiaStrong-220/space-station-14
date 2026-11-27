@@ -54,7 +54,7 @@ public sealed partial class NuclearReinforcementRequestSystem : EntitySystem
 
         var ruleQuery = EntityQueryEnumerator<NukeopsRuleComponent>();
 
-        int warTcAmountPerNukie = 40;
+        int warTcAmountPerNukie = 400;
 
         bool leftOutpost = false;
 

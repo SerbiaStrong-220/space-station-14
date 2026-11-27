@@ -12,17 +12,17 @@
 #    Telecrystal: 2
 #ss220-uplink-discounts end
   cost:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 24
 #ss220 dynamic-price end
 
 # Inbuilt suppressor so it's sneaky + more expensive.
@@ -33,19 +33,19 @@
   productEntity: WeaponPistolCobra
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 8 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 24 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 24
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 28
 #ss220 dynamic-price end
 
 # Poor accuracy, slow to fire, cheap option
@@ -55,17 +55,17 @@
   description: uplink-rifle-mosin-desc
   productEntity: WeaponSniperMosin
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -75,20 +75,20 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 35 #SS220-uplink-200tc
   productEntity: EnergySword
   cost:
-    Telecrystal: 5 #ss220-uplink-discounts
+    Telecrystal: 44 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 7
+      Telecrystal: 56
     MediumDynamic:
-      Telecrystal: 5
+      Telecrystal: 44
     HardDynamic:
-      Telecrystal: 4
+      Telecrystal: 36
 #ss220 dynamic-price end
 
 - type: listing
@@ -99,17 +99,17 @@
   productEntity: EnergyDaggerBox
   discountCategory: rareDiscounts
   cost:
-    Telecrystal: 1 #SS220 shield rework
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 # ss220 - post upstream - uplink tweaks - bgn
@@ -138,19 +138,19 @@
   productEntity: ThrowingKnivesKit
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 8 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 16 #SS220-uplink-200tc
   categories:
     - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 20
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 16
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 14
 #ss220 dynamic-price end
 
 - type: listing
@@ -160,19 +160,19 @@
   productEntity: ClothingHandsGlovesNorthStar
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 8 #ss220-uplink-discounts
+    Telecrystal: 44 #SS220-uplink-200tc
   cost:
-    Telecrystal: 10 #ss220-uplink-discounts
+    Telecrystal: 56 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 5
+      Telecrystal: 70
     MediumDynamic:
-      Telecrystal: 8
+      Telecrystal: 56
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 44
 #ss220 dynamic-price end
 
 # SS220-double-e-sword-begin
@@ -183,10 +183,10 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword_double.rsi, state: icon }
   productEntity: EnergySwordDouble
   cost:
-    Telecrystal: 18 #ss220-uplink-discounts
+    Telecrystal: 110
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 11 #ss220-uplink-discounts
+    Telecrystal: 67
   categories:
   - UplinkWeaponry
   conditions:
@@ -205,11 +205,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 22
+      Telecrystal: 136
     MediumDynamic:
-      Telecrystal: 16
+      Telecrystal: 110
     HardDynamic:
-      Telecrystal: 14
+      Telecrystal: 90
 #ss220 dynamic-price end
 # SS220-double-e-sword-end
 
@@ -221,19 +221,19 @@
   productEntity: ClothingHandsKnuckleDustersSyndicate
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 1 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 8 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 16 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 16
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 16
 #ss220 dynamic-price end
 
 - type: listing
@@ -244,19 +244,19 @@
   productEntity: EnergyShieldSyndi # SS220 Syndi energy shield
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6 #SS220 shield rework
+    Telecrystal: 45 #SS220-uplink-200tc
   cost:
-    Telecrystal: 8 #SS220 shield rework
+    Telecrystal: 60 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 10
+      Telecrystal: 76
     MediumDynamic:
-      Telecrystal: 8
+      Telecrystal: 60
     HardDynamic:
-      Telecrystal: 7
+      Telecrystal: 48
   #ss220 dynamic-price end
 
 - type: listing
@@ -267,19 +267,19 @@
   productEntity: ClothingHandsGlovesBoxingRiggedBlue # TODO Replace this with the random spawner when it's not bugged
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 3 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 17 #SS220-uplink-200tc
   cost:
-    Telecrystal: 6 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 34 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 26
     MediumDynamic:
-      Telecrystal: 6
+      Telecrystal: 34
     HardDynamic:
-      Telecrystal: 7
+      Telecrystal: 40
   #ss220 dynamic-price end
 
 - type: listing
@@ -290,19 +290,19 @@
   productEntity: BriefcaseSyndieSniperBundleFilled
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 6
+    Telecrystal: 42 #SS220-uplink-200tc
   cost:
-    Telecrystal: 14 #ss220TTKUpdate
+    Telecrystal: 100 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 16
+      Telecrystal: 120
     MediumDynamic:
-      Telecrystal: 12
+      Telecrystal: 100
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 80
   #ss220 dynamic-price end
 
 - type: listing
@@ -313,20 +313,20 @@
   productEntity: BriefcaseWeaponHushpupFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 10
+    Telecrystal: 46 #SS220-uplink-200tc
   cost:
-    Telecrystal: 15
+    Telecrystal: 70 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
-  # ss220 - post upstream - uplink tweaks - bgn
+#SS220-uplink-200tc begin
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 17
+      Telecrystal: 56
     MediumDynamic:
-      Telecrystal: 13
+      Telecrystal: 70
     HardDynamic:
-      Telecrystal: 13
-  # ss220 - post upstream - uplink tweaks - end
+      Telecrystal: 88
+#SS220-uplink-200tc end
 
 - type: listing
   id: UplinkC20R
@@ -336,9 +336,9 @@
   productEntity: BriefcaseWeaponC20Filled
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 10
+    Telecrystal: 85 #SS220-uplink-200tc
   cost:
-    Telecrystal: 14
+    Telecrystal: 120 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
   conditions:
@@ -349,11 +349,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 19
+      Telecrystal: 142
     MediumDynamic:
-      Telecrystal: 15
+      Telecrystal: 120
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 90
   #ss220 dynamic-price end
 
 - type: listing
@@ -364,16 +364,20 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledSMG
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 10
+    Telecrystal: 76 #SS220-uplink-200tc
   cost:
-    Telecrystal: 17
+    Telecrystal: 170 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 160
+    MediumDynamic:
+      Telecrystal: 130
+    HardDynamic:
+      Telecrystal: 100
+#SS220-uplink-200tc end
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
 
 - type: listing
   id: UplinkBulldog
@@ -383,9 +387,9 @@
   productEntity: BriefcaseWeaponBulldogFilled
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 12 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 72 #SS220-uplink-200tc
   cost:
-    Telecrystal: 20 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 120 #SS220-uplink-200tc
   categories:
   - UplinkWeaponry
   conditions:
@@ -396,11 +400,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 22
+      Telecrystal: 150
     MediumDynamic:
-      Telecrystal: 16
+      Telecrystal: 135
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 100
   #ss220 dynamic-price end
 
 - type: listing
@@ -411,16 +415,20 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledShotgun
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 10 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 103 #SS220-uplink-200tc
   cost:
-    Telecrystal: 14 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 140 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 200
+    MediumDynamic:
+      Telecrystal: 145
+    HardDynamic:
+      Telecrystal: 100
+#SS220-uplink-200tc end
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
 
 - type: listing
   id: UplinkEstocBundle
@@ -430,16 +438,20 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledRifle
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 11
+    Telecrystal: 91 #SS220-uplink-200tc
   cost:
-    Telecrystal: 18
+    Telecrystal: 180 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 180
+    MediumDynamic:
+      Telecrystal: 150
+    HardDynamic:
+      Telecrystal: 125
+#SS220-uplink-200tc end
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
 
 # ss220 - post upstream - uplink tweaks - bgn
 # - type: listing
@@ -467,16 +479,20 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 20
+    Telecrystal: 200 #SS220-uplink-200tc
   cost:
-    Telecrystal: 25
+    Telecrystal: 250 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 300
+    MediumDynamic:
+      Telecrystal: 250
+    HardDynamic:
+      Telecrystal: 180
+#SS220-uplink-200tc end
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
 
 - type: listing
   id: UplinkL6SawBundle
@@ -486,18 +502,20 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledLMG
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 30 #ss220TTKUpdate
+    Telecrystal: 300 #SS220-uplink-200tc
   cost:
-    Telecrystal: 40 #ss220TTKUpdate
+    Telecrystal: 400 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 500
+    MediumDynamic:
+      Telecrystal: 400
+    HardDynamic:
+      Telecrystal: 300
+#SS220-uplink-200tc end
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-      - DebugUplink #SS220-debug-uplink-fix
 
 # Explosives
 
@@ -508,9 +526,9 @@
   productEntity: ExGrenade
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 15 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkExplosives
   conditions:
@@ -518,15 +536,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-  #ss220 dynamic-price bgn
-  dynamicsPrices:
-    LightDynamic:
-      Telecrystal: 7
-    MediumDynamic:
-      Telecrystal: 5
-    HardDynamic:
-      Telecrystal: 2
-  #ss220 dynamic-price end
 
 - type: listing
   id: UplinkSmokeGrenade
@@ -534,17 +543,17 @@
   description: uplink-smoke-grenade-desc
   productEntity: SmokeGrenade
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkExplosives
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -554,19 +563,19 @@
   productEntity: SyndieMiniBomb
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 45 #SS220-uplink-200tc
   cost:
-    Telecrystal: 8 #ss220-uplink-discounts
+    Telecrystal: 90 #SS220-uplink-200tc
   categories:
     - UplinkExplosives
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 8
+      Telecrystal: 100
     MediumDynamic:
-      Telecrystal: 8
+      Telecrystal: 90
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 80
 #ss220 dynamic-price end
 
 - type: listing
@@ -576,19 +585,19 @@
   productEntity: SingularityGrenade
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 12 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 24 #SS220-uplink-200tc
   categories:
     - UplinkDisruption
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 28
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 24
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
 #ss220 dynamic-price end
 
 - type: listing
@@ -598,9 +607,9 @@
   productEntity: MobGrenadePenguin
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
     - UplinkExplosives
   conditions:
@@ -618,11 +627,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 5
+      Telecrystal: 34
     MediumDynamic:
-      Telecrystal: 5
+      Telecrystal: 40
     HardDynamic:
-      Telecrystal: 7
+      Telecrystal: 46
 #ss220 dynamic-price end
 
 - type: listing
@@ -632,19 +641,19 @@
   productEntity: C4
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkExplosives
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 16
 #ss220 dynamic-price end
 
 - type: listing
@@ -654,9 +663,9 @@
   productEntity: ClothingBeltMilitaryWebbingGrenadeFilled
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6
+    Telecrystal: 60 #SS220-uplink-200tc
   cost:
-    Telecrystal: 12
+    Telecrystal: 120 #SS220-uplink-200tc
   categories:
   - UplinkExplosives
   conditions:
@@ -674,19 +683,19 @@
   productEntity: ClothingBackpackDuffelSyndicateC4tBundle
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6 #ss220-uplink-discounts
+    Telecrystal: 54 #SS220-uplink-200tc
   cost:
-    Telecrystal: 10 #ss220-uplink-discounts
+    Telecrystal: 90 #SS220-uplink-200tc
   categories:
   - UplinkExplosives
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 10
+      Telecrystal: 100
     MediumDynamic:
-      Telecrystal: 10
+      Telecrystal: 90
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 76
 #ss220 dynamic-price end
 
 - type: listing
@@ -700,17 +709,17 @@
 #    Telecrystal: 1
 #ss220-uplink-discounts end
   cost:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkExplosives
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -721,19 +730,19 @@
   productEntity: PenExplodingBox
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkExplosives
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 24
 #ss220 dynamic-price end
 
 - type: listing
@@ -742,19 +751,20 @@
   description: uplink-exploding-syndicate-bomb-desc
   productEntity: SyndicateBomb
   cost:
-    Telecrystal: 9
+    Telecrystal: 90 #SS220-uplink-200tc
   categories:
     - UplinkExplosives
+#SS220-uplink-200tc begin
+  restockTime: 1800
   conditions:
   - !type:StoreWhitelistCondition
-    whitelist:
+    blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
-      - DebugUplink #SS220-debug-uplink-fix
-    blacklist:
+      - DebugUplink
       components:
       - SurplusBundle
+#SS220-uplink-200tc end
 
 - type: listing
   id: UplinkGrenadeShrapnel
@@ -763,19 +773,19 @@
   productEntity: GrenadeShrapnel
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 15 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkExplosives
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 40
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
 #ss220 dynamic-price end
 
 - type: listing
@@ -785,19 +795,19 @@
   productEntity: GrenadeIncendiary
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 15 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkExplosives
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 40
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
   #ss220 dynamic-price end
 
 # Ammo
@@ -809,7 +819,16 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base-icon }
   productEntity: MagazinePistolHighCapacity
   cost:
-    Telecrystal: 1
+    Telecrystal: 8 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 10
+    MediumDynamic:
+      Telecrystal: 8
+    HardDynamic:
+      Telecrystal: 6
+#SS220-uplink-200tc end
   categories:
   - UplinkAmmo
 
@@ -821,7 +840,16 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistolSubMachineGun
   cost:
-    Telecrystal: 2
+    Telecrystal: 10 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 14
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 8
+#SS220-uplink-200tc end
   categories:
   - UplinkAmmo
 
@@ -833,7 +861,16 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
   productEntity: MagazineShotgun
   cost:
-    Telecrystal: 2
+    Telecrystal: 10 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 14
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 8
+#SS220-uplink-200tc end
   categories:
   - UplinkAmmo
 
@@ -844,7 +881,16 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
   productEntity: MagazineShotgunSlug
   cost:
-    Telecrystal: 2
+    Telecrystal: 10 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 14
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 8
+#SS220-uplink-200tc end
   categories:
   - UplinkAmmo
 
@@ -856,7 +902,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: red-icon }
   productEntity: MagazinePistolCaselessRifle
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkAmmo
 
@@ -867,7 +913,7 @@
   description: uplink-mosin-ammo-desc
   productEntity: MagazineBoxLightRifle
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkAmmo
 
@@ -878,7 +924,16 @@
   description: uplink-estoc-ammo-desc
   productEntity: MagazineRifle
   cost:
-    Telecrystal: 2
+    Telecrystal: 10 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 14
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 8
+#SS220-uplink-200tc end
   categories:
   - UplinkAmmo
 
@@ -889,7 +944,16 @@
   description: uplink-sniper-ammo-desc
   productEntity: MagazineBoxAntiMateriel
   cost:
-    Telecrystal: 4 #ss220TTKUpdate
+    Telecrystal: 20 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 24
+    MediumDynamic:
+      Telecrystal: 20
+    HardDynamic:
+      Telecrystal: 16
+#SS220-uplink-200tc end
   categories:
   - UplinkAmmo
 
@@ -899,7 +963,7 @@
   description: uplink-ammo-bundle-desc
   productEntity: ClothingBackpackDuffelSyndicateAmmoFilled
   cost:
-    Telecrystal: 15
+    Telecrystal: 150 #SS220-uplink-200tc
   categories:
   - UplinkAmmo
   conditions:
@@ -924,19 +988,19 @@
   productEntity: HypopenBox
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 4
+    Telecrystal: 26 #SS220-uplink-200tc
   cost:
-    Telecrystal: 6
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 32
     MediumDynamic:
-      Telecrystal: 6
+      Telecrystal: 40
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 48
 #ss220 dynamic-price end
 
 - type: listing
@@ -951,17 +1015,17 @@
 #    Telecrystal: 1
 #ss220-uplink-discounts end
   cost:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -972,19 +1036,19 @@
   productEntity: ChemicalSynthesisKit
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3
+    Telecrystal: 32 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 3
+      Telecrystal: 28
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 32
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 36
 #ss220 dynamic-price end
 
 - type: listing
@@ -994,7 +1058,7 @@
   icon: { sprite: /Textures/Structures/Wallmounts/signs.rsi, state: bio }
   productEntity: ClothingBackpackDuffelZombieBundle
   cost:
-    Telecrystal: 40
+    Telecrystal: 400 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
   conditions:
@@ -1015,19 +1079,19 @@
   productEntity: ChemistryBottleNocturine
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 15 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 24
     MediumDynamic:
-      Telecrystal: 6
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 12
+      Telecrystal: 40
 #ss220 dynamic-price end
 
 - type: listing
@@ -1037,19 +1101,19 @@
   productEntity: MedkitCombatFilled
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 42
     MediumDynamic:
-      Telecrystal: 5
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 24
 #ss220 dynamic-price end
 
 - type: listing
@@ -1059,19 +1123,19 @@
   productEntity: CombatMedipen
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 60
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 40
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
 #ss220 dynamic-price end
 
 - type: listing
@@ -1081,19 +1145,19 @@
   productEntity: Stimpack
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 24
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 16
 #ss220 dynamic-price end
 
 - type: listing
@@ -1103,19 +1167,19 @@
   productEntity: StimkitFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 33 #SS220-uplink-200tc
   cost:
-    Telecrystal: 5
+    Telecrystal: 56 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 14
+      Telecrystal: 68
     MediumDynamic:
-      Telecrystal: 10
+      Telecrystal: 56
     HardDynamic:
-      Telecrystal: 5
+      Telecrystal: 44
 #ss220 dynamic-price end
 
 - type: listing
@@ -1124,17 +1188,17 @@
   description: uplink-cigarettes-desc
   productEntity: CigPackSyndicate
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -1144,9 +1208,9 @@
   productEntity: ClothingBackpackDuffelSyndicateMedicalBundleFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 16
+    Telecrystal: 160 #SS220-uplink-200tc
   cost:
-    Telecrystal: 24
+    Telecrystal: 240 #SS220-uplink-200tc
   categories:
   - UplinkChemicals
   conditions:
@@ -1167,7 +1231,7 @@
   description: uplink-syndicate-id-card-desc
   productEntity: SyndicateIDCard
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkDeception
 
@@ -1178,19 +1242,19 @@
   productEntity: AgentIDCard
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 12 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 24 #SS220-uplink-200tc
   categories:
   - UplinkDeception
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 24
     HardDynamic:
-      Telecrystal: 5
+      Telecrystal: 30
 #ss220 dynamic-price end
 
 - type: listing
@@ -1200,19 +1264,19 @@
   productEntity: StealthBox
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 40 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 80 #SS220-uplink-200tc
   categories:
   - UplinkDeception
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 10
+      Telecrystal: 50
     MediumDynamic:
-      Telecrystal: 15
+      Telecrystal: 120
     HardDynamic:
-      Telecrystal: 20
+      Telecrystal: 120
 #ss220 dynamic-price end
 
 - type: listing
@@ -1222,19 +1286,19 @@
   productEntity: ChameleonProjector
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkDeception
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 24
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 5
+      Telecrystal: 36
 #ss220 dynamic-price end
 
 - type: listing
@@ -1245,19 +1309,19 @@
   productEntity: BoxEncryptionKeySyndie # Two for the price of one
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkDeception
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
 #ss220 dynamic-price end
 
 - type: listing
@@ -1267,17 +1331,17 @@
   icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: ai_label }
   productEntity: EncryptionKeyBinarySyndicate
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkDeception
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 8
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -1286,17 +1350,17 @@
   description: uplink-cyberpen-desc
   productEntity: CyberPen
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkDeception
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -1305,17 +1369,17 @@
   description: uplink-decoy-disk-desc
   productEntity: NukeDiskFake
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkDeception
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
 #ss220 dynamic-price end
 
 - type: listing
@@ -1325,19 +1389,19 @@
   productEntity: BriefcaseSyndieLobbyingBundleFilled
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
     - UplinkDeception
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 24
 #ss220 dynamic-price end
 
 # - type: listing
@@ -1357,21 +1421,21 @@
   productEntity: SyndicateBombFake
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 5 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkDeception
   restockTime: 1800
-  # ss220 - post upstream - uplink tweaks - bgn
+#SS220-uplink-200tc begin
   dynamicsPrices:
       LightDynamic:
-        Telecrystal: 2
+        Telecrystal: 16
       MediumDynamic:
-        Telecrystal: 2
+        Telecrystal: 20
       HardDynamic:
-        Telecrystal: 4
-  # ss220 - post upstream - uplink tweaks - end
+        Telecrystal: 24
+#SS220-uplink-200tc end
   conditions:
   - !type:StoreWhitelistCondition
     blacklist:
@@ -1385,9 +1449,9 @@
   productEntity: SyndicateBombFake
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
   - UplinkDeception
   conditions:
@@ -1405,18 +1469,18 @@
   description: uplink-syndicate-pen-signaller-desc
   productEntity: PenSignaller
   cost:
-    Telecrystal: 1
+    Telecrystal: 10
   categories:
     - UplinkDisruption
 #ss220 ADD pen-signaller end
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -1426,19 +1490,19 @@
   productEntity: AccessBreaker
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 15 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 24
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 7
+      Telecrystal: 40
 #ss220 dynamic-price end
 
 - type: listing
@@ -1448,19 +1512,19 @@
   productEntity: Emag
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 24 #SS220-uplink-200tc
   cost:
-    Telecrystal: 5
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 3
+      Telecrystal: 34
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 40
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 40
 #ss220 dynamic-price end
 
 - type: listing
@@ -1470,19 +1534,19 @@
   productEntity: RadioJammer
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 18 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 36 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 28
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 36
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 44
 #ss220 dynamic-price end
 
 - type: listing
@@ -1492,19 +1556,19 @@
   productEntity: BorgModuleSyndicateWeapon
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
   #ss220 dynamic-price end
 
 - type: listing
@@ -1514,9 +1578,9 @@
   productEntity: ToolboxElectricalTurretFilled
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 15 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
   conditions:
@@ -1527,11 +1591,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 40
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 24
   #ss220 dynamic-price end
 
 - type: listing
@@ -1542,19 +1606,19 @@
   icon: { sprite: /Textures/Objects/Specific/Robotics/borgmodule.rsi, state: syndicateborgbomb }
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
     - UplinkDisruption
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
 #ss220 dynamic-price end
 
 - type: listing
@@ -1565,20 +1629,20 @@
   productEntity: SoapSyndie
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 8
 #ss220-uplink-discounts end
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 16 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 16
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 12
 #ss220 dynamic-price end
 
 - type: listing
@@ -1588,17 +1652,17 @@
   productEntity: SlipocalypseClusterSoap
   discountCategory: rareDiscounts
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -1608,19 +1672,19 @@
   productEntity: ToolboxSyndicateFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
 #ss220 dynamic-price end
 
 - type: listing
@@ -1630,19 +1694,19 @@
   productEntity: SyndicateJawsOfLife
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
 #ss220 dynamic-price end
 
 - type: listing
@@ -1651,18 +1715,18 @@
   description: uplink-travel-camera-desc
   productEntity: TravelCamera
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkDeception
-  # ss220 - post upstream - uplink tweaks - bgn
+#SS220-uplink-200tc begin
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 2
-  # ss220 - post upstream - uplink tweaks - end
+      Telecrystal: 10
+#SS220-uplink-200tc end
 
 # Note: Removed for the time being until surgery/newmed is added. Considered bloat until then.
 # - type: listing
@@ -1685,9 +1749,18 @@
   productEntity: PowerSink
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 4
+    Telecrystal: 40 #SS220-uplink-200tc
   cost:
-    Telecrystal: 8
+    Telecrystal: 80 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 80
+    MediumDynamic:
+      Telecrystal: 80
+    HardDynamic:
+      Telecrystal: 80
+#SS220-uplink-200tc end
   categories:
   - UplinkExplosives
 
@@ -1699,9 +1772,9 @@
   productEntity: SyndimovCircuitKit
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 6
+    Telecrystal: 60 #SS220-uplink-200tc
   cost:
-    Telecrystal: 8
+    Telecrystal: 80 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
   conditions:
@@ -1712,11 +1785,11 @@
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 8
+      Telecrystal: 72
     MediumDynamic:
-      Telecrystal: 8
+      Telecrystal: 80
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 88
   #ss220 dynamic-price end
 
 - type: listing
@@ -1726,9 +1799,9 @@
   productEntity: AntimovCircuitBoard
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 20
+    Telecrystal: 200 #SS220-uplink-200tc
   cost:
-    Telecrystal: 24
+    Telecrystal: 240 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
   conditions:
@@ -1744,7 +1817,7 @@
   description: uplink-surplus-bundle-desc
   productEntity: CrateSyndicateSurplusBundle
   cost:
-    Telecrystal: 20
+    Telecrystal: 200 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
   conditions:
@@ -1764,7 +1837,7 @@
   description: uplink-starter-kit-desc
   productEntity: ClothingBackpackDuffelSyndicateFilledStarterKit
   cost:
-    Telecrystal: 40
+    Telecrystal: 400 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
   conditions:
@@ -1783,7 +1856,7 @@
   description: uplink-singularity-beacon-desc
   productEntity: SingularityBeacon
   cost:
-    Telecrystal: 6
+    Telecrystal: 60 #SS220-uplink-200tc
   categories:
     - UplinkDisruption
   conditions:
@@ -1807,17 +1880,17 @@
   #    Telecrystal: 1
   #ss220 fix store test falling end
   cost:
-    Telecrystal: 1 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkDisruption
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 # Allies
@@ -1830,9 +1903,9 @@
   productEntity: BoxHoloparasite
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 11 #ss220-uplink-discounts
+    Telecrystal: 67 #SS220-uplink-200tc
   cost:
-    Telecrystal: 18 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 110 #SS220-uplink-200tc
   categories:
   - UplinkAllies
   conditions:
@@ -1844,11 +1917,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 18
+      Telecrystal: 130
     MediumDynamic:
-      Telecrystal: 14
+      Telecrystal: 110
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 90
 #ss220 dynamic-price end
 
 - type: listing
@@ -1859,9 +1932,18 @@
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-urist }
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 7
+    Telecrystal: 70 #SS220-uplink-200tc
   cost:
-    Telecrystal: 11
+    Telecrystal: 110 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 120
+    MediumDynamic:
+      Telecrystal: 110
+    HardDynamic:
+      Telecrystal: 90
+#SS220-uplink-200tc end
   categories:
   - UplinkAllies
   conditions:
@@ -1878,7 +1960,7 @@
   productEntity: ReinforcementRadioSyndicateNukeops
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-nukeop }
   cost:
-    Telecrystal: 30
+    Telecrystal: 300 #SS220-uplink-200tc
   categories:
   - UplinkAllies
   conditions:
@@ -1898,7 +1980,7 @@
   productEntity: ReinforcementRadioSyndicateCyborgAssault
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-borg-assault }
   cost:
-    Telecrystal: 65
+    Telecrystal: 650 #SS220-uplink-200tc
   categories:
     - UplinkAllies
   conditions:
@@ -1916,9 +1998,9 @@
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 4
+    Telecrystal: 40 #SS220-uplink-200tc
   cost:
-    Telecrystal: 6
+    Telecrystal: 60 #SS220-uplink-200tc
   categories:
   - UplinkAllies
   conditions:
@@ -1936,9 +2018,9 @@
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 4
+    Telecrystal: 40 #SS220-uplink-200tc
   cost:
-    Telecrystal: 6
+    Telecrystal: 60 #SS220-uplink-200tc
   categories:
   - UplinkAllies
   conditions:
@@ -1954,7 +2036,7 @@
   description: uplink-carp-dehydrated-desc
   productEntity: DehydratedSpaceCarp
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkAllies
   conditions:
@@ -1971,19 +2053,19 @@
   productEntity: ReinforcementRadioSyndicateSyndiCat
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   cost:
-    Telecrystal: 6
+    Telecrystal: 60 #SS220-uplink-200tc
   categories:
     - UplinkAllies
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 10
+      Telecrystal: 72
     MediumDynamic:
-      Telecrystal: 6
+      Telecrystal: 60
     HardDynamic:
-      Telecrystal: 5
+      Telecrystal: 50
 #ss220 dynamic-price end
 
 - type: listing
@@ -1993,7 +2075,7 @@
   icon: { sprite: /Textures/Objects/Fun/pai.rsi, state: syndicate-icon-pai-off }
   productEntity: SyndicatePersonalAI
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
     - UplinkAllies
   conditions:
@@ -2010,9 +2092,9 @@
   productEntity: StorageImplanter
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 28 #SS220-uplink-200tc
   cost:
-    Telecrystal: 6 #ss220-uplink-discounts
+    Telecrystal: 56 #SS220-uplink-200tc
   categories:
     - UplinkImplants
   conditions:
@@ -2024,11 +2106,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 44
     MediumDynamic:
-      Telecrystal: 7
+      Telecrystal: 56
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 70
 #ss220 dynamic-price end
 
 - type: listing
@@ -2039,19 +2121,19 @@
   productEntity: FreedomImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
     - UplinkImplants
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
 #ss220 dynamic-price end
 
 - type: listing
@@ -2062,19 +2144,19 @@
   productEntity: ScramImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 4 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 26 #SS220-uplink-200tc
   cost:
-    Telecrystal: 6 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
     - UplinkImplants
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
     MediumDynamic:
-      Telecrystal: 6
+      Telecrystal: 40
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 50
 #ss220 dynamic-price end
 
 - type: listing
@@ -2085,19 +2167,19 @@
   productEntity: DnaScramblerImplanter
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
     - UplinkImplants
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 44
 #ss220 dynamic-price end
 
 - type: listing
@@ -2112,17 +2194,17 @@
     #Telecrystal: 1
   #ss220 1 tc uplink sales fix end
   cost:
-    Telecrystal: 4 #ss220 change uplink price after usptream 72
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
     - UplinkImplants
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 5
+      Telecrystal: 36
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
 #ss220 dynamic-price end
 
 - type: listing
@@ -2133,19 +2215,19 @@
   productEntity: RadioImplanter
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 5 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkImplants
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -2155,7 +2237,7 @@
   icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: explosive }
   productEntity: MicroBombImplanter
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkImplants
   conditions:
@@ -2176,7 +2258,7 @@
   icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: explosive }
   productEntity: MacroBombImplanter
   cost:
-    Telecrystal: 13
+    Telecrystal: 130 #SS220-uplink-200tc
   categories:
     - UplinkImplants
   conditions:
@@ -2197,7 +2279,7 @@
   icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: gib }
   productEntity: DeathAcidifierImplanter
   cost:
-    Telecrystal: 4
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
     - UplinkImplants
   conditions:
@@ -2214,7 +2296,7 @@
   icon: { sprite: /Textures/Objects/Devices/communication.rsi, state: old-radio }
   productEntity: UplinkImplanter
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkImplants
   conditions:
@@ -2230,7 +2312,7 @@
   description: uplink-deathrattle-implant-desc
   productEntity: BoxDeathRattleImplants
   cost:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkImplants
   conditions:
@@ -2251,19 +2333,19 @@
   icon: { sprite: Interface/Actions/actions_fakemindshield.rsi, state: icon-on }
   productEntity: FakeMindShieldImplanter
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkImplants
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 4
+      Telecrystal: 30
 #ss220 dynamic-price end
 
 - type: listing
@@ -2274,19 +2356,19 @@
   productEntity: VoiceMaskImplanter
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkImplants
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 14
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 28
   #ss220 dynamic-price end
 
 # Wearables
@@ -2297,17 +2379,17 @@
   description: uplink-black-jetpack-desc
   productEntity: JetpackBlackFilled
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -2316,17 +2398,17 @@
   description: uplink-chest-rig-desc
   productEntity: ClothingBeltMilitaryWebbing
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -2337,19 +2419,19 @@
   icon: { sprite: /Textures/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
     - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 20
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 44
 #ss220 dynamic-price end
 
 - type: listing
@@ -2359,19 +2441,19 @@
   productEntity: ClothingShoesChameleonNoSlips
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 15 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 36
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 24
 #ss220 dynamic-price end
 
 - type: listing
@@ -2385,17 +2467,17 @@
   #   Telecrystal: 3 #SS220 syndie armor tweaks
   # SS220 StoreDiscountAndRefund_fix end
   cost:
-    Telecrystal: 3 #SS220 syndie armor tweaks
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 36
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 24
 #ss220 dynamic-price end
 
 - type: listing
@@ -2409,17 +2491,17 @@
   #   Telecrystal: 6 # ss220 - post upstream - uplink tweaks
   # SS220 StoreDiscountAndRefund_fix end
   cost:
-    Telecrystal: 6 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 60 #SS220-uplink-200tc
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 9
+      Telecrystal: 72
     MediumDynamic:
-      Telecrystal: 7
+      Telecrystal: 60
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 48
 #ss220 dynamic-price end
 
 - type: listing
@@ -2429,19 +2511,19 @@
   productEntity: ClothingShoesBootsMagSyndie
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 18 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 34
     MediumDynamic:
-      Telecrystal: 5
+      Telecrystal: 26
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 18
 #ss220 dynamic-price end
 
 - type: listing
@@ -2451,17 +2533,17 @@
   icon: { sprite: /Textures/Clothing/OuterClothing/Suits/eva_syndicate.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEVABundle
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 - type: listing
@@ -2472,19 +2554,19 @@
   productEntity: ClothingOuterHardsuitCarp
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 36
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 24
 #ss220 dynamic-price end
 
 - type: listing
@@ -2495,9 +2577,9 @@
   productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6 #ss220-uplink-discounts
+    Telecrystal: 50 #SS220-uplink-200tc
   cost:
-    Telecrystal: 12 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 100 #SS220-uplink-200tc
   categories:
   - UplinkWearables
   conditions:
@@ -2515,11 +2597,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 18
+      Telecrystal: 120
     MediumDynamic:
-      Telecrystal: 14
+      Telecrystal: 100
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 80
 #ss220 dynamic-price end
 
 - type: listing
@@ -2532,17 +2614,21 @@
 #ss220-uplink-discounts bgn
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6
+    Telecrystal: 61
 #ss220-uplink-discounts end
   cost:
-    Telecrystal: 8
+    Telecrystal: 70 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 100
+    MediumDynamic:
+      Telecrystal: 70
+    HardDynamic:
+      Telecrystal: 58
+#SS220-uplink-200tc end
   categories:
   - UplinkWearables
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
 
 - type: listing
   id: UplinkHardsuitSyndieElite
@@ -2551,18 +2637,18 @@
   icon: { sprite: /Textures/SS220/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon } # SS220-hardsuir-resprite
   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
   cost:
-    Telecrystal: 12
+    Telecrystal: 130 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 150
+    MediumDynamic:
+      Telecrystal: 130
+    HardDynamic:
+      Telecrystal: 110
+#SS220-uplink-200tc end
   categories:
   - UplinkWearables
-#ss220-fix-uplink-begin
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
-        - DebugUplink #SS220-debug-uplink-fix
-#ss220-fix-uplink-end
 
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
@@ -2571,7 +2657,16 @@
   icon: { sprite: /Textures/Structures/Storage/Crates/syndicate.rsi, state: icon }
   productEntity: CrateCybersunJuggernautBundle
   cost:
-    Telecrystal: 12
+    Telecrystal: 120 #SS220-uplink-200tc
+#SS220-uplink-200tc begin
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 150
+    MediumDynamic:
+      Telecrystal: 120
+    HardDynamic:
+      Telecrystal: 100
+#SS220-uplink-200tc end
   categories:
   - UplinkWearables
 # ss220-fix-uplink-begin
@@ -2580,12 +2675,6 @@
     blacklist:
       components:
       - SurplusBundle
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-      - DebugUplink #SS220-debug-uplink-fix
 # ss220-fix-uplink-end
 
 #SS220 Syndie visor buff begin
@@ -2611,18 +2700,18 @@
   description: uplink-clothing-eyes-hud-syndicate-agent-desc
   productEntity: ClothingEyesHudSyndicateAgent
   cost:
-    Telecrystal: 2
+    Telecrystal: 14
   categories:
     - UplinkWearables
 #SS220 Syndie visor buff end
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 14
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 14
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 14
 #ss220 dynamic-price end
 
 - type: listing
@@ -2631,17 +2720,17 @@
   description: uplink-backpack-syndicate-desc
   productEntity: ClothingBackpackSyndicate
   cost:
-    Telecrystal: 2
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
     - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 10
 #ss220 dynamic-price end
 
 
@@ -2653,7 +2742,7 @@
   description: uplink-barber-scissors-desc
   productEntity: BarberScissors
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkPointless
 
@@ -2663,7 +2752,7 @@
   description: uplink-snack-box-desc
   productEntity: HappyHonkNukieSnacks
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkPointless
 
@@ -2673,7 +2762,7 @@
   description: uplink-clothing-conducting-gloves-desc
   productEntity: ClothingHandsGlovesConducting
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkPointless
 
@@ -2683,7 +2772,7 @@
   description: uplink-revolver-cap-gun-desc
   productEntity: RevolverCapGun
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkPointless
 
@@ -2704,7 +2793,7 @@
   description: uplink-cat-ears-desc
   productEntity: ClothingHeadHatCatEars
   cost:
-    Telecrystal: 26
+    Telecrystal: 260 #SS220-uplink-200tc
   categories:
   - UplinkPointless
   conditions:
@@ -2730,7 +2819,7 @@
   description: uplink-outlaw-glasses-desc
   productEntity: ClothingEyesGlassesOutlawGlasses
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkPointless
 
@@ -2740,7 +2829,7 @@
   description: uplink-costume-pyjama-desc
   productEntity: ClothingBackpackDuffelSyndicatePyjamaBundle
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkPointless
 
@@ -2750,7 +2839,7 @@
   description: uplink-costume-clown-desc
   productEntity: ClothingBackpackDuffelSyndicateCostumeClown
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkPointless
 
@@ -2760,7 +2849,7 @@
   description: uplink-carp-suit-bundle-desc
   productEntity: ClothingBackpackDuffelSyndicateCarpSuit
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkPointless
 
@@ -2792,7 +2881,7 @@
   description: uplink-balloon-desc
   productEntity: BalloonSyn
   cost:
-    Telecrystal: 20
+    Telecrystal: 200 #SS220-uplink-200tc
   categories:
   - UplinkPointless
   conditions:
@@ -2849,17 +2938,17 @@
     stock: 1
   # ss220 - post upstream - uplink tweaks - end
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkPointless
   #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     MediumDynamic:
-      Telecrystal: 1
+      Telecrystal: 10
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 10
   #ss220 dynamic-price end
 
 # Job Specific
@@ -2871,9 +2960,9 @@
   productEntity: GatfruitSeeds
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 6
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -2885,11 +2974,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 50
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 40
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
 #ss220 dynamic-price end
 
 - type: listing
@@ -2899,9 +2988,9 @@
   productEntity: HolyHandGrenade
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 14
+    Telecrystal: 140 #SS220-uplink-200tc
   cost:
-    Telecrystal: 20
+    Telecrystal: 200 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -2916,11 +3005,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 30
+      Telecrystal: 250
     MediumDynamic:
-      Telecrystal: 25
+      Telecrystal: 200
     HardDynamic:
-      Telecrystal: 20
+      Telecrystal: 170
 #ss220 dynamic-price end
 
 - type: listing
@@ -2930,9 +3019,9 @@
   productEntity: RevolverCapGunFake
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -2944,11 +3033,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 40
     MediumDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
 #ss220 dynamic-price end
 
 - type: listing
@@ -2958,9 +3047,9 @@
   productEntity: ClusterBananaPeel
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   cost:
-    Telecrystal: 5
+    Telecrystal: 50 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -2970,11 +3059,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 8
+      Telecrystal: 60
     MediumDynamic:
-      Telecrystal: 5
+      Telecrystal: 50
     HardDynamic:
-      Telecrystal: 4
+      Telecrystal: 40
 #ss220 dynamic-price end
 
 - type: listing
@@ -2985,9 +3074,9 @@
   productEntity: BoxHoloclown
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 8 #ss220-uplink-discounts
+    Telecrystal: 62 #SS220-uplink-200tc
   cost:
-    Telecrystal: 14 #ss220-uplink-discounts
+    Telecrystal: 110 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -2998,11 +3087,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 18
+      Telecrystal: 130
     MediumDynamic:
-      Telecrystal: 14
+      Telecrystal: 110
     HardDynamic:
-      Telecrystal: 10
+      Telecrystal: 90
 #ss220 dynamic-price end
 
 
@@ -3012,10 +3101,10 @@
   description: uplink-hot-potato-desc
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 18 #SS220-uplink-200tc
   productEntity: HotPotato
   cost:
-    Telecrystal: 4
+    Telecrystal: 36 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -3030,11 +3119,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
+      Telecrystal: 40
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 36
     HardDynamic:
-      Telecrystal: 3
+      Telecrystal: 30
 #ss220 dynamic-price end
 
 - type: listing
@@ -3044,9 +3133,9 @@
   productEntity: WeaponPistolCHIMPUpgradeKit
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -3061,9 +3150,9 @@
   productEntity: WetFloorSignMineExplosive
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 5 # was 4, with my buff made it 5 to be closer to minibomb -panzer
+    Telecrystal: 50 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -3084,10 +3173,10 @@
   icon: { sprite:  Objects/Misc/monkeycube.rsi, state: box}
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   productEntity: SyndicateSpongeBox
   cost:
-    Telecrystal: 4
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -3106,9 +3195,9 @@
   productEntity: CaneSheathFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -3124,9 +3213,9 @@
   productEntity: CombatBakeryKit
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -3143,7 +3232,7 @@
   icon: { sprite: /Textures/SS220/Objects/Tools/Lighters/syndielighter.rsi, state: icon } #SS220 zippo resprie
   productEntity: UplinkLighterBox
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkPointless
 
@@ -3153,7 +3242,7 @@
   description: uplink-smuggler-satchel-desc
   productEntity: ClothingBackpackSatchelSmugglerUnanchored
   cost:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   categories:
   - UplinkDeception
 
@@ -3165,9 +3254,9 @@
   productEntity: ClothingBackpackDuffelAcolyteBundle
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 30 #SS220-uplink-200tc
   cost:
-    Telecrystal: 4
+    Telecrystal: 40 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -3183,9 +3272,9 @@
   productEntity: SawAdvanced
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 10 #SS220-uplink-200tc
   cost:
-    Telecrystal: 2
+    Telecrystal: 20 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
@@ -3200,24 +3289,24 @@
   productEntity: WeaponSubMachineGunBriefcase
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 10
+    Telecrystal: 57 #SS220-uplink-200tc
   cost:
-    Telecrystal: 14
+    Telecrystal: 80 #SS220-uplink-200tc
   categories:
   - UplinkJob
   conditions:
   - !type:BuyerJobCondition
     whitelist:
     - Lawyer
-  # ss220 - post upstream - uplink tweaks - bgn
+#SS220-uplink-200tc begin
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 15
+      Telecrystal: 100
     MediumDynamic:
-      Telecrystal: 11
+      Telecrystal: 80
     HardDynamic:
-      Telecrystal: 6
-  # ss220 - post upstream - uplink tweaks - end
+      Telecrystal: 64
+#SS220-uplink-200tc end
 
 #Objective items
 

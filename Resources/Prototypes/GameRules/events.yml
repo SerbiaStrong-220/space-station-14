@@ -680,7 +680,7 @@
     gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
   - type: NukeopsRule
     roundEndBehavior: Nothing
-    warTcAmountPerNukie: 100 # SS220 Lone-Ops-War
+    warTcAmountPerNukie: 1000 #SS220-uplink-200tc
     warNukieArriveDelay: 600 # SS220 Lone-Ops-War
   - type: AntagSelection
     definitions:
