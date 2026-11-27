@@ -1,0 +1,12 @@
+<Control xmlns="https://spacestation14.io"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+        </PanelContainer.PanelOverride>
+
+        <ScrollContainer>
+            <BoxContainer Name="Container" Orientation="Vertical" />
+        </ScrollContainer>
+    </PanelContainer>
+</Control>

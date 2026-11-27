@@ -1,0 +1,10 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<Control xmlns="https://spacestation14.io">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="8">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <TextureRect Name="RecipeIcon" MinSize="40 40" Stretch="KeepAspectCentered" Margin="0 0 8 0" />
+            <Button Name="RecipeButton" HorizontalExpand="True" ClipText="True" />
+        </BoxContainer>
+        <RichTextLabel Name="CostLabel" StyleClasses="LabelSubText" Margin="0 4 0 0" />
+    </BoxContainer>
+</Control>

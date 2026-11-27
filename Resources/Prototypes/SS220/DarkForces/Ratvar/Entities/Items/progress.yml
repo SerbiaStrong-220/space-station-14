@@ -1,0 +1,5 @@
+﻿- type: entity
+  id: RatvarProgress
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RatvarProgress

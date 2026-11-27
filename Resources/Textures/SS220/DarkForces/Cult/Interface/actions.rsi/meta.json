@@ -1,0 +1,116 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from ParadiseSS13 at https://github.com/ParadiseSS13/Paradise/pull/14516. Edited by SabreML.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "blindness"
+        },
+        {
+            "name": "emp"
+        },
+        {
+            "name": "shadow"
+        },
+        {
+            "name": "teleport"
+        },
+        {
+            "name": "stun"
+        },
+        {
+            "name": "fire"
+        },
+        {
+            "name": "stealth"
+        },
+        {
+            "name": "silence"
+        },
+        {
+            "name": "cuff"
+        },
+        {
+            "name": "allteleport"
+        },
+        {
+            "name": "ghostaxe"
+        },
+        {
+            "name": "blood_barrage"
+        },
+        {
+            "name": "abyssal_gaze"
+        },
+        {
+            "name": "areaconvert"
+        },
+        {
+            "name": "artificer"
+        },
+        {
+            "name": "blood_dagger"
+        },
+        {
+            "name": "blood_rites"
+        },
+        {
+            "name": "bloodspear"
+        },
+        {
+            "name": "carve"
+        },
+        {
+            "name": "cult_comms"
+        },
+        {
+            "name": "cult_mark"
+        },
+        {
+            "name": "cultfist"
+        },
+        {
+            "name": "cultforcewall"
+        },
+        {
+            "name": "death_dagger"
+        },
+        {
+            "name": "dominate"
+        },
+        {
+            "name": "equip"
+        },
+        {
+            "name": "hell_dagger"
+        },
+        {
+            "name": "horror"
+        },
+        {
+            "name": "lesserconstruct"
+        },
+        {
+            "name": "manip"
+        },
+        {
+            "name": "phaseshift"
+        },
+        {
+            "name": "revealing"
+        },
+        {
+            "name": "shackles"
+        },
+        {
+            "name": "transmute"
+        },
+        {
+            "name": "veiling"
+        }
+    ]
+}

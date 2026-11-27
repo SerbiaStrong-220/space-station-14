@@ -85,6 +85,9 @@
     voltage: Medium
   - type: PowerProvider
     voltage: Apc
+  # SS220 Cult Ratvar and Narsie port begin
+  - type: RatvarGearTarget
+  # SS220 Cult Ratvar and Narsie port end
   - type: Apc
     voltage: Apc
   - type: ExtensionCableProvider

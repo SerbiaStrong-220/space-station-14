@@ -1,0 +1,18 @@
+{
+    "version": 1,
+    "license": "Custom",
+    "copyright": "by @spent1k; Original license: Собственная лицензия. Полный запрет на копирование и использование вне проекта Dark Station без одобрения текущего владельца проекта",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "skeleton",
+            "directions": 4
+        },
+        {
+            "name": "skeleton_dead"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "license": "Custom",
+    "copyright": "kotcop; Original license: Собственная лицензия. Полный запрет на копирование и использование вне проекта Dark Station без одобрения текущего владельца проекта",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "handcuff"
+        },
+        {
+            "name": "body-overlay-2",
+            "directions": 4
+        },
+        {
+            "name": "body-overlay-4",
+            "directions": 4
+        }
+    ]
+}

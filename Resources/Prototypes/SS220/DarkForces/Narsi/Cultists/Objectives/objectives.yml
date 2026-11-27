@@ -1,0 +1,111 @@
+﻿- type: entity
+  id: BaseNarsiObjective
+  components:
+  - type: Objective
+    difficulty: 0.0
+    issuer: issuer-narsie
+    unique: false
+    icon:
+      sprite: SS220/DarkForces/Cult/Icons/task.rsi
+      state: narsi_icon
+
+- type: entity
+  id: NarsiKillObjective
+  parent: BaseNarsiObjective
+  name: "Нар'Си требует жертву"
+  description: "Положите труп жертвы на руну предложения и активируйте ее"
+  components:
+  - type: NarsiCultOfferObjective
+  - type: NarsiObjective
+    bloodScore: 20
+
+- type: entity
+  id: NarsiRitualObjective
+  parent: BaseNarsiObjective
+  description: "Используйте алтарь Нар'Си для проведения ритуала"
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/DarkForces/Cult/Structures/altar.rsi
+      state: narsi
+  - type: NarsiCultRitualObjective
+    rituals:
+    - NarsiGhostRitual
+    - NarsiRunicPlasteelRitual
+    - NarsiIconsRitual
+  - type: NarsiObjective
+    bloodScore: 20
+
+- type: entity
+  id: NarsiCreatureEggObjective
+  parent: BaseNarsiObjective
+  description: "Постройте яйцо сущности и вырастите существо"
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/DarkForces/Cult/Structures/creature_egg.rsi
+      state: stage-4
+  - type: NarsiCultCreatureEggObjective
+    availableCreatures:
+    - MobNarsiSkeleton
+    - MobNarsiFlesh
+    - MobNarsiCharger
+  - type: NarsiObjective
+    bloodScore: 15
+
+- type: entity
+  id: NarsiBuildingAltarObjective
+  parent: BaseNarsiObjective
+  name: "Постройте Оккультный Алтарь Нар'Си"
+  description: "Нам необходима эта постройка, для развития культа"
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/DarkForces/Cult/Structures/altar.rsi
+      state: narsi
+  - type: NarsiCultBuildingObjective
+    buildingType: Altar
+  - type: NarsiObjective
+    bloodScore: 15
+
+- type: entity
+  id: NarsiBuildingForgeObjective
+  parent: BaseNarsiObjective
+  name: "Постройте Тёмную кузню"
+  description: "Нам необходима эта постройка, для создания брони и оружия"
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/DarkForces/Cult/Structures/forge.rsi
+      state: forge
+  - type: NarsiCultBuildingObjective
+    buildingType: Forge
+  - type: NarsiObjective
+    bloodScore: 15
+
+- type: entity
+  id: NarsiBuildingPilonObjective
+  parent: BaseNarsiObjective
+  name: "Постройте пилон"
+  description: "Чтобы не откиснуть от ран"
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/DarkForces/Cult/Structures/pilon.rsi
+      state: pilon
+  - type: NarsiCultBuildingObjective
+    buildingType: Pilon
+  - type: NarsiObjective
+    bloodScore: 10
+
+- type: entity
+  id: NarsiSummonObjective
+  parent: BaseNarsiObjective
+  name: "Призовите Нар'Си!"
+  description: "Пришло время призвать Нар'Си!"
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/DarkForces/Cult/Icons/task.rsi
+      state: narsi_icon
+  - type: NarsiCultSummonObjective

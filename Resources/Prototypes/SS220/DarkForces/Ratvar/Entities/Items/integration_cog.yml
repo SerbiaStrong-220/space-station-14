@@ -1,0 +1,17 @@
+﻿- type: entity
+  id: RatvarIntegrationCog
+  parent: BaseItem
+  name: "Шестерня интеграции"
+  description: "Инструмент праведников Ратвара."
+  suffix: Ratvar
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Items/integration_cog.rsi
+    state: gear
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RatvarDroneUsable
+  - type: RatvarGear
+  - type: RatvarItem

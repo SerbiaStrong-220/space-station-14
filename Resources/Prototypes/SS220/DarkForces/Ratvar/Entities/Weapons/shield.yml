@@ -1,0 +1,25 @@
+﻿- type: entity
+  id: RatvarShield
+  parent: BaseShield
+  name: "Латунный щит"
+  suffix: Ratvar
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Ratvar/Weapons/brass_buckler.rsi
+    state: brass-buckler
+  - type: Item
+    sprite: SS220/DarkForces/Ratvar/Weapons/brass_buckler.rsi
+    heldPrefix: brass
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.8
+        Piercing: 0.8
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.7
+        Piercing: 0.7
+      flatReductions:
+        Blunt: 1.5
+        Piercing: 1.5
+  - type: RatvarItem

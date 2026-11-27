@@ -1,0 +1,23 @@
+﻿#Ratvar Laws
+- type: siliconLaw
+  id: Ratvar1
+  order: 1
+  lawString: law-ratvar-1
+
+- type: siliconLaw
+  id: Ratvar2
+  order: 2
+  lawString: law-ratvar-2
+
+- type: siliconLaw
+  id: Ratvar3
+  order: 3
+  lawString: law-ratvar-3
+
+- type: siliconLawset
+  id: Ratvar
+  laws:
+  - Ratvar1
+  - Ratvar2
+  - Ratvar3
+  obeysTo: laws-owner-ratvar

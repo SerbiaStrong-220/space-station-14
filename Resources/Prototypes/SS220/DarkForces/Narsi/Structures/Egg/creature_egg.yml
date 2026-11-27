@@ -1,0 +1,88 @@
+﻿- type: entity
+  id: NarsiCreatureEgg
+  parent: [ BaseStructure, BaseNarsiStructure ]
+  name: "Странное яйцо"
+  description: "Уродливоё яйцо, от него тянется запах гнили."
+  suffix: Narsi
+  components:
+  - type: Sprite
+    sprite: SS220/DarkForces/Cult/Structures/creature_egg.rsi
+    layers:
+    - state: stage-1
+      map: [ "enum.CreatureVisuals.Egg" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.CreatureVisuals.Egg:
+        CreatureState:
+          StageOne: { state: stage-1 }
+          StageTwo: { state: stage-2 }
+          StageThree: { state: stage-3 }
+          StageFour: { state: stage-4 }
+  - type: Appearance
+  - type: Icon
+    sprite: SS220/DarkForces/Cult/Structures/creature_egg.rsi
+    state: stage-1
+  - type: ItemSlots
+    slots:
+      arm_l_slot:
+        name: narsi-creature-egg-left-arm-slot
+        startingItem: null
+        whitelist:
+          tags:
+          - LArm
+      arm_r_slot:
+        name: narsi-creature-egg-right-arm-slot
+        startingItem: null
+        whitelist:
+          tags:
+          - RArm
+      leg_l_slot:
+        name: narsi-creature-egg-left-leg-slot
+        startingItem: null
+        whitelist:
+          tags:
+          - LLeg
+      leg_r_slot:
+        name: narsi-creature-egg-right-leg-slot
+        startingItem: null
+        whitelist:
+          tags:
+          - RLeg
+      head_slot:
+        name: narsi-creature-egg-head-slot
+        startingItem: null
+        whitelist:
+          tags:
+          - Head
+      heart_slot:
+        name: narsi-creature-egg-heart-slot
+        startingItem: null
+        whitelist:
+          tags:
+          - Heart
+  - type: ContainerContainer
+    containers:
+      arm_l_slot: !type:ContainerSlot
+      arm_r_slot: !type:ContainerSlot
+      leg_l_slot: !type:ContainerSlot
+      leg_r_slot: !type:ContainerSlot
+      heart_slot: !type:ContainerSlot
+      head_slot: !type:ContainerSlot
+  - type: NarsiCreatureEgg
+    creatureSteps:
+    - delay: 15
+      stage: StageOne
+    - entityProtoId: MobNarsiSkeleton
+      stage: StageTwo
+      delay: 45
+    - entityProtoId: MobNarsiFlesh
+      stage: StageThree
+      delay: 60
+    - entityProtoId: MobNarsiCharger
+      stage: StageFour
+      delay: 120
+  - type: NarsiCultStructure
+    building: CreatureEgg
+  - type: Construction
+    graph: NarsiCreatureEggGraph
+    node: egg

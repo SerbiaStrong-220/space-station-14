@@ -38,6 +38,9 @@ public sealed partial class CCVars220
     public static readonly CVarDef<float> AdminAhelpMessageDelay =
         CVarDef.Create("admin.ahelp_message_delay", 5f, CVar.SERVERONLY);
 
+    public static readonly CVarDef<int> RatvarMaxRighteousCount =
+        CVarDef.Create("antag.ratvar_max_righteous_count", 40, CVar.SERVERONLY);
+
     /// <summary>
     /// (SS220) AHelp sound volume.
     /// </summary>

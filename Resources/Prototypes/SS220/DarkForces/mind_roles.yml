@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleNarsiCultist
+  name: Narsi Cultist Role
+  components:
+  - type: MindRole
+    antagPrototype: NarsiCultist
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+  - type: NarsiCultRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleRatvar
+  name: Ratvar Role
+  components:
+  - type: MindRole
+    antagPrototype: RatvarRighteous
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+  - type: RatvarRole

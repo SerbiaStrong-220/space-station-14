@@ -16,4 +16,8 @@
   - [textlink="Космические ниндзя" link="SpaceNinja"], мастера шпионажа и саботажа с особым снаряжением.
   - [textlink="Зомби" link="Zombies"], которые жаждут плоти каждого члена экипажа и существа на борту.
   - [textlink="Различные негуманоидные существа" link="MinorAntagonists"], которые обычно атакуют всё, что движется.
+  <!-- # SS220 Cult Ratvar and Narsie port begin -->
+  - [textlink="Культисты Нар'Си" link="NarsiCultGuide"], которые проводят кровавые ритуалы и готовят призыв своего божества.
+  - [textlink="Праведники Ратвара" link="RatvarCultGuide"], которые строят латунные сооружения, накапливают мощь и освобождают Ратвара.
+  <!-- # SS220 Cult Ratvar and Narsie port end -->
 </Document>

@@ -1,0 +1,32 @@
+{
+    "version": 1,
+    "license": "Custom",
+    "copyright": "DarkStation; Original license: Собственная лицензия. Полный запрет на копирование и использование вне проекта Dark Station или одобрения текущего владельца проекта",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "equipped-EYES",
+            "directions": 4
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "image2"
+        },
+        {
+            "name": "judicial_visor_1"
+        }
+    ]
+}
