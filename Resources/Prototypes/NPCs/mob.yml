@@ -28,10 +28,15 @@
     - tasks:
         - !type:HTNCompoundTask
           task: FoodCompound
+    #SS220 Mouse Gnaw Cables begin
+    - tasks:
+        - !type:HTNCompoundTask
+          task: MouseGnawCablesCompound
+    #SS220 Mouse Gnaw Cables end
     - tasks:
         - !type:HTNCompoundTask
           task: IdleCompound
-          
+
 - type: htnCompound
   id: MoproachCompound
   branches:
