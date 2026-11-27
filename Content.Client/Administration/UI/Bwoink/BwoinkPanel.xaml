@@ -5,6 +5,14 @@
     HorizontalExpand="True">
     <OutputPanel Name="TextOutput" VerticalExpand="true" />
     <RichTextLabel Name="TypingIndicator" Access="Public" />
-    <HistoryLineEdit Name="SenderLineEdit" />
+    <!-- SS220-ahelp-emojis begin -->
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+        <HistoryLineEdit Name="SenderLineEdit" HorizontalExpand="True" />
+        <Button Name="EmojiButton" ToolTip="{Loc ahelp-emoji-picker-open}" Margin="4 0 0 0">
+            <TextureRect TexturePath="/Textures/Interface/emotes.svg.192dpi.png"
+                         SetSize="20 20" Stretch="KeepAspectCentered" />
+        </Button>
+    </BoxContainer>
+    <!-- SS220-ahelp-emojis end -->
     <RichTextLabel Name="RelayedToDiscordLabel" Access="Public" Visible="False" />
 </BoxContainer>

@@ -1,0 +1,301 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: ahelpEmoji
+  id: jokerge
+  name: jokerge
+  discordId: "1098305467811377222"
+  texture: /Textures/SS220/Interface/AhelpEmojis/jokerge_1098305467811377222.png
+
+- type: ahelpEmoji
+  id: facepalm
+  name: facepalm
+  discordId: "1098305470017589309"
+  texture: /Textures/SS220/Interface/AhelpEmojis/facepalm_1098305470017589309.png
+
+- type: ahelpEmoji
+  id: when
+  name: when
+  discordId: "1098305472836141197"
+  texture: /Textures/SS220/Interface/AhelpEmojis/when_1098305472836141197.png
+
+- type: ahelpEmoji
+  id: justice
+  name: justice
+  discordId: "1098305474102841374"
+  texture: /Textures/SS220/Interface/AhelpEmojis/justice_1098305474102841374.png
+
+- type: ahelpEmoji
+  id: mooniXorow
+  name: mooniXorow
+  discordId: "1098305735798030437"
+  texture: /Textures/SS220/Interface/AhelpEmojis/mooniXorow_1098305735798030437.png
+
+- type: ahelpEmoji
+  id: KEKWait
+  name: KEKWait
+  discordId: "1098305738302050314"
+  texture: /Textures/SS220/Interface/AhelpEmojis/KEKWait_1098305738302050314.png
+
+- type: ahelpEmoji
+  id: KEKW
+  name: KEKW
+  discordId: "1098305739656798401"
+  texture: /Textures/SS220/Interface/AhelpEmojis/KEKW_1098305739656798401.png
+
+- type: ahelpEmoji
+  id: WeirdChamp
+  name: WeirdChamp
+  discordId: "1098305741938499665"
+  texture: /Textures/SS220/Interface/AhelpEmojis/WeirdChamp_1098305741938499665.png
+
+- type: ahelpEmoji
+  id: kbIk
+  name: kbIk
+  discordId: "1098305747722457098"
+  texture: /Textures/SS220/Interface/AhelpEmojis/kbIk_1098305747722457098.png
+
+- type: ahelpEmoji
+  id: mericCat
+  name: mericCat
+  discordId: "1098305749211422850"
+  texture: /Textures/SS220/Interface/AhelpEmojis/mericCat_1098305749211422850.png
+
+- type: ahelpEmoji
+  id: cat7
+  name: cat7
+  discordId: "1098305759617491124"
+  texture: /Textures/SS220/Interface/AhelpEmojis/cat7_1098305759617491124.png
+
+- type: ahelpEmoji
+  id: xdd
+  name: xdd
+  discordId: "1098397219670994944"
+  texture: /Textures/SS220/Interface/AhelpEmojis/xdd_1098397219670994944.png
+
+- type: ahelpEmoji
+  id: wyccStare
+  name: wyccStare
+  discordId: "1098647386697510912"
+  texture: /Textures/SS220/Interface/AhelpEmojis/wyccStare_1098647386697510912.png
+
+- type: ahelpEmoji
+  id: dogeSmile
+  name: dogeSmile
+  discordId: "1098647396738670695"
+  texture: /Textures/SS220/Interface/AhelpEmojis/dogeSmile_1098647396738670695.png
+
+- type: ahelpEmoji
+  id: omegalul
+  name: omegalul
+  discordId: "1098648304012759131"
+  texture: /Textures/SS220/Interface/AhelpEmojis/omegalul_1098648304012759131.png
+
+- type: ahelpEmoji
+  id: ratge
+  name: ratge
+  discordId: "1098651031409266768"
+  texture: /Textures/SS220/Interface/AhelpEmojis/ratge_1098651031409266768.png
+
+- type: ahelpEmoji
+  id: ratgesus
+  name: ratgesus
+  discordId: "1098651034139754496"
+  texture: /Textures/SS220/Interface/AhelpEmojis/ratgesus_1098651034139754496.png
+
+- type: ahelpEmoji
+  id: xmm
+  name: xmm
+  discordId: "1098941909268963358"
+  texture: /Textures/SS220/Interface/AhelpEmojis/xmm_1098941909268963358.png
+
+- type: ahelpEmoji
+  id: shlepaEz
+  name: shlepaEz
+  discordId: "1098986635212902400"
+  texture: /Textures/SS220/Interface/AhelpEmojis/shlepaEz_1098986635212902400.png
+
+- type: ahelpEmoji
+  id: FatCat
+  name: FatCat
+  discordId: "1099001077749252168"
+  texture: /Textures/SS220/Interface/AhelpEmojis/FatCat_1099001077749252168.png
+
+- type: ahelpEmoji
+  id: moan
+  name: moan
+  discordId: "1099032152533893240"
+  texture: /Textures/SS220/Interface/AhelpEmojis/moan_1099032152533893240.png
+
+- type: ahelpEmoji
+  id: ache
+  name: ache
+  discordId: "1099062299962134730"
+  texture: /Textures/SS220/Interface/AhelpEmojis/ache_1099062299962134730.png
+
+- type: ahelpEmoji
+  id: comfortcat
+  name: comfortcat
+  discordId: "1099063270016565248"
+  texture: /Textures/SS220/Interface/AhelpEmojis/comfortcat_1099063270016565248.png
+
+- type: ahelpEmoji
+  id: BigFloppa
+  name: BigFloppa
+  discordId: "1099063743901618276"
+  texture: /Textures/SS220/Interface/AhelpEmojis/BigFloppa_1099063743901618276.png
+
+- type: ahelpEmoji
+  id: confusecat
+  name: confusecat
+  discordId: "1099067461598449765"
+  texture: /Textures/SS220/Interface/AhelpEmojis/confusecat_1099067461598449765.png
+
+- type: ahelpEmoji
+  id: goodcat
+  name: goodcat
+  discordId: "1099252674689503292"
+  texture: /Textures/SS220/Interface/AhelpEmojis/goodcat_1099252674689503292.png
+
+- type: ahelpEmoji
+  id: smilecat
+  name: smilecat
+  discordId: "1099253809286479905"
+  texture: /Textures/SS220/Interface/AhelpEmojis/smilecat_1099253809286479905.png
+
+- type: ahelpEmoji
+  id: sadcat
+  name: sadcat
+  discordId: "1099254184072712223"
+  texture: /Textures/SS220/Interface/AhelpEmojis/sadcat_1099254184072712223.png
+
+- type: ahelpEmoji
+  id: confusecat_1099257417751076905
+  name: confusecat
+  discordId: "1099257417751076905"
+  texture: /Textures/SS220/Interface/AhelpEmojis/confusecat_1099257417751076905.png
+
+- type: ahelpEmoji
+  id: angrycat
+  name: angrycat
+  discordId: "1099257499871350804"
+  texture: /Textures/SS220/Interface/AhelpEmojis/angrycat_1099257499871350804.png
+
+- type: ahelpEmoji
+  id: MentorCat
+  name: MentorCat
+  discordId: "1100008967767334912"
+  texture: /Textures/SS220/Interface/AhelpEmojis/MentorCat_1100008967767334912.png
+
+- type: ahelpEmoji
+  id: aRolf
+  name: aRolf
+  discordId: "1100099699387682948"
+  texture: /Textures/SS220/Interface/AhelpEmojis/aRolf_1100099699387682948.png
+
+- type: ahelpEmoji
+  id: Clueless
+  name: Clueless
+  discordId: "1100099700742430810"
+  texture: /Textures/SS220/Interface/AhelpEmojis/Clueless_1100099700742430810.png
+
+- type: ahelpEmoji
+  id: GIGACHAD
+  name: GIGACHAD
+  discordId: "1100100904029536341"
+  texture: /Textures/SS220/Interface/AhelpEmojis/GIGACHAD_1100100904029536341.png
+
+- type: ahelpEmoji
+  id: CemkaM1
+  name: CemkaM1
+  discordId: "1100103202327777473"
+  texture: /Textures/SS220/Interface/AhelpEmojis/CemkaM1_1100103202327777473.png
+
+- type: ahelpEmoji
+  id: CemkaShiza
+  name: CemkaShiza
+  discordId: "1100103204974370836"
+  texture: /Textures/SS220/Interface/AhelpEmojis/CemkaShiza_1100103204974370836.png
+
+- type: ahelpEmoji
+  id: GachiOmega
+  name: GachiOmega
+  discordId: "1100103206413008996"
+  texture: /Textures/SS220/Interface/AhelpEmojis/GachiOmega_1100103206413008996.png
+
+- type: ahelpEmoji
+  id: cemkaWO
+  name: cemkaWO
+  discordId: "1100109652013891694"
+  texture: /Textures/SS220/Interface/AhelpEmojis/cemkaWO_1100109652013891694.png
+
+- type: ahelpEmoji
+  id: KEK
+  name: KEK
+  discordId: "1100109653565767690"
+  texture: /Textures/SS220/Interface/AhelpEmojis/KEK_1100109653565767690.png
+
+- type: ahelpEmoji
+  id: odobryaem
+  name: odobryaem
+  discordId: "1100109661266522132"
+  texture: /Textures/SS220/Interface/AhelpEmojis/odobryaem_1100109661266522132.png
+
+- type: ahelpEmoji
+  id: welder
+  name: welder
+  discordId: "1100109663732781169"
+  texture: /Textures/SS220/Interface/AhelpEmojis/welder_1100109663732781169.png
+
+- type: ahelpEmoji
+  id: wyccRozvidka
+  name: wyccRozvidka
+  discordId: "1100109665364361337"
+  texture: /Textures/SS220/Interface/AhelpEmojis/wyccRozvidka_1100109665364361337.png
+
+- type: ahelpEmoji
+  id: wyccTopor
+  name: wyccTopor
+  discordId: "1100109670493982772"
+  texture: /Textures/SS220/Interface/AhelpEmojis/wyccTopor_1100109670493982772.png
+
+- type: ahelpEmoji
+  id: Stunbaton
+  name: Stunbaton
+  discordId: "1100109673430007820"
+  texture: /Textures/SS220/Interface/AhelpEmojis/Stunbaton_1100109673430007820.png
+
+- type: ahelpEmoji
+  id: Kekvarich
+  name: Kekvarich
+  discordId: "1100109675170635796"
+  texture: /Textures/SS220/Interface/AhelpEmojis/Kekvarich_1100109675170635796.png
+
+- type: ahelpEmoji
+  id: NeOdobryaem
+  name: NeOdobryaem
+  discordId: "1100109695869538414"
+  texture: /Textures/SS220/Interface/AhelpEmojis/NeOdobryaem_1100109695869538414.png
+
+- type: ahelpEmoji
+  id: Pog
+  name: Pog
+  discordId: "1100109697744371852"
+  texture: /Textures/SS220/Interface/AhelpEmojis/Pog_1100109697744371852.png
+
+- type: ahelpEmoji
+  id: Kekomrade
+  name: Kekomrade
+  discordId: "1100109701280174153"
+  texture: /Textures/SS220/Interface/AhelpEmojis/Kekomrade_1100109701280174153.png
+
+- type: ahelpEmoji
+  id: D_
+  name: D_
+  discordId: "1100110315401773188"
+  texture: /Textures/SS220/Interface/AhelpEmojis/D__1100110315401773188.png
+
+- type: ahelpEmoji
+  id: byond
+  name: byond
+  discordId: "1109845921904205874"
+  texture: /Textures/SS220/Interface/AhelpEmojis/byond_1109845921904205874.png
