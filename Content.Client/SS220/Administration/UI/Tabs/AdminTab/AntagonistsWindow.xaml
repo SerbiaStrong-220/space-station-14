@@ -5,14 +5,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:SS220cc="clr-namespace:Content.Client.SS220.Administration.UI.CustomControls"
+    xmlns:removal="clr-namespace:Content.Client.SS220.AntagRemoval.UI"
     xmlns:SS220at="clr-namespace:Content.Client.SS220.Administration.UI.Tabs.AdminTab"
-    Title="{Loc admin-player-actions-window-antagonists}" MinSize="425 272">
+    Title="{Loc admin-player-actions-window-antagonists}"
+    MinSize="560 272">
+
     <BoxContainer Orientation="Vertical">
-        <CheckBox Name="CustomObjectivesFilter" Text="{Loc admin-antagonists-custom-objectives-filter}" />
-        <SS220cc:AntagonistsListControl Name="AntagonistsList" VerticalExpand="True" />
+        <CheckBox Name="CustomObjectivesFilter"
+                  Text="{Loc admin-antagonists-custom-objectives-filter}" />
+
+        <SS220cc:AntagonistsListControl Name="AntagonistsList"
+                                       VerticalExpand="True"
+                                       MinSize="0 120" />
+
         <BoxContainer Orientation="Horizontal">
-            <Button Name="ListOfTargetsButton" Text="{Loc admin-antagonists-list-of-targets}" Disabled="True"/>
-            <cc:UICommandButton Name="AddTargetButton" Text="{Loc admin-antagonists-add-target}" Disabled="True" WindowType="{x:Type SS220at:AddObjectiveWindow}"/>
+            <Button Name="ListOfTargetsButton"
+                    Text="{Loc admin-antagonists-list-of-targets}"
+                    HorizontalExpand="True"
+                    Disabled="True" />
+
+            <cc:UICommandButton Name="AddTargetButton"
+                                Text="{Loc admin-antagonists-add-target}"
+                                HorizontalExpand="True"
+                                Disabled="True"
+                                WindowType="{x:Type SS220at:AddObjectiveWindow}" />
+
+            <removal:AntagRemovalControl Name="AntagRemoval"
+                                        HorizontalExpand="True" />
         </BoxContainer>
     </BoxContainer>
 </DefaultWindow>

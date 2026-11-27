@@ -36,6 +36,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.SS220.MindSlave;
+using Content.Server.SS220.AntagRemoval;
 using Content.Shared.SS220.Experience.Systems;
 using Content.Shared.SS220.Arena;
 
@@ -202,13 +203,16 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             if (!RobustRandom.Prob(LateJoinRandomChance))
                 continue;
 
+            // SS220-removeantag-begin
+            var players = _playerManager.NetworkedSessions.Count(x => x.AttachedEntity != null);
+            if (TryAssignFreedSlot((uid, antag), session, players))
+                break;
+            // SS220-removeantag-end
+
             if (!antag.Definitions.Any(p => p.LateJoinAdditional))
                 continue;
 
             DebugTools.AssertNotEqual(antag.SelectionTime, AntagSelectionTime.PrePlayerSpawn);
-
-            // do not count players in the lobby for the antag ratio
-            var players = _playerManager.NetworkedSessions.Count(x => x.AttachedEntity != null);
 
             if (!TryGetNextAvailableDefinition((uid, antag), out var def, players))
                 continue;
@@ -472,49 +476,62 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             return;
         }
 
-        // The following is where we apply components, equipment, and other changes to our antagonist entity.
-        // TODO: fix this remove disaster
-        EntityManager.AddComponents(player, def.Components);
-
-        // Equip the entity's RoleLoadout and LoadoutGroup
-        List<ProtoId<StartingGearPrototype>> gear = new();
-        if (def.StartingGear is not null)
-            gear.Add(def.StartingGear.Value);
-
-        // SS220-experience-update-begin
-        if (def.StartingGear is not null && _prototype.Resolve(def.StartingGear, out var gearPrototype))
+        // SS220-removeantag-begin
+        var removeAntag = EntityManager.System<RemoveAntagSystem>();
+        var snapshot = removeAntag.BeginGrant(ent.Owner, player, def);
+        try
         {
-            var changeDefEv = new TryChangeExperienceDefinitionEvent(gearPrototype.ExperienceDefinition, false);
-            RaiseLocalEvent(antagEnt.Value, ref changeDefEv);
-        }
-        _experienceAddition.EnqueueRecalculation(antagEnt.Value);
-        // SS220-experience-update-end
+            // The following is where we apply components, equipment, and other changes to our antagonist entity.
+            // TODO: fix this remove disaster
+            EntityManager.AddComponents(player, def.Components);
 
-        _loadout.Equip(player, gear, def.RoleLoadout);
+            // Equip the entity's RoleLoadout and LoadoutGroup
+            List<ProtoId<StartingGearPrototype>> gear = new();
+            if (def.StartingGear is not null)
+                gear.Add(def.StartingGear.Value);
 
-        if (session != null)
-        {
-            var curMind = session.GetMind();
-
-            if (curMind == null ||
-                !TryComp<MindComponent>(curMind.Value, out var mindComp) ||
-                mindComp.OwnedEntity != antagEnt)
+            // SS220-experience-update-begin
+            if (def.StartingGear is not null && _prototype.Resolve(def.StartingGear, out var gearPrototype))
             {
-                curMind = _mind.CreateMind(session.UserId, Name(antagEnt.Value));
-                _mind.SetUserId(curMind.Value, session.UserId);
+                var changeDefEv = new TryChangeExperienceDefinitionEvent(gearPrototype.ExperienceDefinition, false);
+                RaiseLocalEvent(antagEnt.Value, ref changeDefEv);
+            }
+            _experienceAddition.EnqueueRecalculation(antagEnt.Value);
+            // SS220-experience-update-end
+
+            _loadout.Equip(player, gear, def.RoleLoadout);
+
+            if (session != null)
+            {
+                var curMind = session.GetMind();
+
+                if (curMind == null ||
+                    !TryComp<MindComponent>(curMind.Value, out var mindComp) ||
+                    mindComp.OwnedEntity != antagEnt)
+                {
+                    curMind = _mind.CreateMind(session.UserId, Name(antagEnt.Value));
+                    _mind.SetUserId(curMind.Value, session.UserId);
+                }
+
+                _mind.TransferTo(curMind.Value, antagEnt, ghostCheckOverride: true);
+                _role.MindAddRoles(curMind.Value, def.MindRoles, null, true);
+                ent.Comp.AssignedMinds.Add((curMind.Value, Name(player)));
+                SendBriefing(session, def.Briefing);
+
+                Log.Debug($"Assigned {ToPrettyString(curMind)} as antagonist: {ToPrettyString(ent)}");
+                _adminLogger.Add(LogType.AntagSelection, $"Assigned {ToPrettyString(curMind)} as antagonist: {ToPrettyString(ent)}");
             }
 
-            _mind.TransferTo(curMind.Value, antagEnt, ghostCheckOverride: true);
-            _role.MindAddRoles(curMind.Value, def.MindRoles, null, true);
-            ent.Comp.AssignedMinds.Add((curMind.Value, Name(player)));
-            SendBriefing(session, def.Briefing);
-
-            Log.Debug($"Assigned {ToPrettyString(curMind)} as antagonist: {ToPrettyString(ent)}");
-            _adminLogger.Add(LogType.AntagSelection, $"Assigned {ToPrettyString(curMind)} as antagonist: {ToPrettyString(ent)}");
+            var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
+            RaiseLocalEvent(ent, ref afterEv, true);
+            removeAntag.RegisterGrantExperience(antagEnt.Value, def);
+            removeAntag.EndGrant(player, snapshot);
         }
-
-        var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
-        RaiseLocalEvent(ent, ref afterEv, true);
+        finally
+        {
+            removeAntag.CancelGrant(snapshot);
+        }
+        // SS220-removeantag-end
     }
 
     /// <summary>
@@ -562,6 +579,11 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         if (ent.Comp.AssignedSessions.Contains(session))
             return false;
+
+        // SS220-removeantag-begin
+        if (IsRoleRevokedForRound(session, def))
+            return false;
+        // SS220-removeantag-end
 
         // SS220 Antag ban fix begin
         if (_ban.GetAntagBans(session.UserId) is { } antagBans)

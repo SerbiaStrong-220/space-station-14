@@ -26,14 +26,9 @@
       multiAntagSetting: NotExclusive
       startingGear: ThiefGear
       components:
-      # SS220-experience-update-begin
-      - type: TryAddExperienceAddition
-        sources:
-          Antag:
-            freeSublevelPoints: 10
-            knowledges:
-            - ThiefKnowledge
-      # SS220-experience-update-end
+      # SS220-removeantag-begin
+      # Thief bonuses are granted by ThiefRuleSystem on role assignment.
+      # SS220-removeantag-end
       - type: Pacified
       - type: Thieving
         stripTimeReduction: 2

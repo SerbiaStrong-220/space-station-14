@@ -36,7 +36,7 @@ namespace Content.Server.GameTicking.Rules;
 /// <summary>
 /// Where all the main stuff for Revolutionaries happens (Assigning Head Revs, Command on station, and checking for the game to end.)
 /// </summary>
-public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleComponent>
+public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleComponent> //SS220-removeantag
 {
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;

@@ -42,6 +42,7 @@ namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab
         private void OnListOnOnSelectionChanged(PlayerInfo? obj)
         {
             _selectedAntagonist = obj;
+            AntagRemoval.SetPlayer(obj);
             var disableButtons = _selectedAntagonist == null;
             ListOfTargetsButton.Disabled = disableButtons;
             AddTargetButton.Disabled = disableButtons;
