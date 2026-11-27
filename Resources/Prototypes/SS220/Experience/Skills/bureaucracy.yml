@@ -26,7 +26,7 @@
 - type: skill
   id: BureaucracyProfessional
   levelInfo:
-    maximumSublevel: 1
+    maximumSublevel: 0
     levelUpPopup: bureaucracy-professional-level-up-popup
     sublevelUpPopup: bureaucracy-professional-sublevel-up-popup
   levelDescription:

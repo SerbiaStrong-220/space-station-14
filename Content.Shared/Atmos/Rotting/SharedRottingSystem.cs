@@ -116,11 +116,13 @@ public abstract class SharedRottingSystem : EntitySystem
         if (TryComp<MobStateComponent>(uid, out var mobState) && !_mobState.IsDead(uid, mobState))
             return false;
 
-        if (_container.TryGetOuterContainer(uid, Transform(uid), out var container) &&
-            HasComp<AntiRottingContainerComponent>(container.Owner))
+        // SS220-mail-ingredients begin
+        foreach (var container in _container.GetContainingContainers((uid, Transform(uid))))
         {
-            return false;
+            if (HasComp<AntiRottingContainerComponent>(container.Owner))
+                return false;
         }
+        // SS220-mail-ingredients end
 
         var ev = new IsRottingEvent();
         RaiseLocalEvent(uid, ref ev);
