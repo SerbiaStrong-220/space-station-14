@@ -3,6 +3,19 @@
   abstract: true
   id: CoreSubstation
   components:
+  # SS220 randomlawset fix begin
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ApcVisuals.Hacked:
+        controller:
+          True: { color: "#87CEEB" }
+          False: { color: "#FFFFFF" }
+  - type: PowerMalfunction
+    repairDelay: 20
+    requiredCables: [Cable, CableMV, CableHV]
+  - type: WiresPanel
+  # SS220 randomlawset fix end
   # Core power behavior
   - type: Battery
     # Very important:
@@ -85,6 +98,7 @@
     layers:
     - state: substation
     - state: screen
+      map: [controller] # SS220 randomlawset fix
       shader: unshaded
     - state: full
       shader: unshaded
@@ -189,6 +203,7 @@
     layers:
     - state: substation_wall
     - state: screen_wall
+      map: [controller] # SS220 randomlawset fix
       shader: unshaded
   - type: Battery
     maxCharge: 2000000

@@ -4,6 +4,7 @@ using Content.Shared.Overlays;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Stunnable;
+using Content.Shared.SS220.MalfAI;
 using Content.Shared.Wires;
 using Robust.Shared.Audio;
 
@@ -42,6 +43,7 @@ public abstract partial class SharedSiliconLawSystem : EntitySystem
         }
 
         if (component.RequireOpenPanel &&
+            !HasComp<MalfAiActorComponent>(args.UserUid) && // SS220 randomlawset fix
             TryComp<WiresPanelComponent>(uid, out var panel) &&
             !panel.Open)
         {
