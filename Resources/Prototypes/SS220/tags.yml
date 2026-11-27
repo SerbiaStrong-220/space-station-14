@@ -413,3 +413,21 @@
 #Cult equipment: items with this tag forcibly removed from cultist on deconversion
 - type: Tag
   id: YoggEquipment
+
+- type: Tag
+  id: GoldenBikeHorn
+
+- type: Tag
+  id: AirGrenade
+
+- type: Tag
+  id: BoxMouthSwab
+
+- type: Tag
+  id: Cane
+
+- type: Tag
+  id: PlasticToy
+
+- type: Tag
+  id: SnuffBox

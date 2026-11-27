@@ -7,6 +7,14 @@
   - type: Sprite
     sprite: Objects/Weapons/Melee/offset_canes/standard.rsi
     state: icon
+  #SS220 Recycler expansion begin
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+  - type: Tag
+    tags:
+    - Cane
+  #SS220 Recycler expansion end
   - type: Item
     size: Normal
     sprite: Objects/Weapons/Melee/offset_canes/standard.rsi
@@ -82,5 +90,10 @@
   - type: Sprite
     sprite: Objects/Weapons/Melee/offset_canes/wood.rsi
     state: icon
+  #SS220 Recycler expansion begin
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 100
+  #SS220 Recycler expansion end
   - type: Item
     sprite: Objects/Weapons/Melee/offset_canes/wood.rsi

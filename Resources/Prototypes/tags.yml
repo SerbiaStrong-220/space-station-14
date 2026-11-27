@@ -1454,6 +1454,7 @@
   id: Trash # Tagged entities are generic garbage. They fit inside TrashBag and are destroyed by Recycler.
             # CargoBounty: BountyTrash. SpecialDigestible: OrganVoxStomach
 
+
 - type: Tag
   id: TrashBag # Storage whitelist: BoxTrashbag, ClothingBeltJanitor, JanitorialTrolley. ItemMapper: JanitorialTrolley
 

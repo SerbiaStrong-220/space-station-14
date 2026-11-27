@@ -224,6 +224,11 @@
   id: OrganSlimePerson
   abstract: true
   suffix: slime person
+  #SS220 Recycler expansion start
+  components:
+  - type: Organ
+    bloodReagent: Slime
+  #SS220 Recycler expansion end
 
 - type: entity
   id: OrganSlimePersonMetabolizer
