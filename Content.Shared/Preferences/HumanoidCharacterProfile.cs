@@ -62,6 +62,11 @@ namespace Content.Shared.Preferences
         [DataField]
         private HashSet<ProtoId<TraitPrototype>> _traitPreferences = new();
 
+        //SS220-TraitOptions begin
+        [DataField]
+        private Dictionary<ProtoId<TraitPrototype>, string> _traitOptions = [];
+        //SS220-TraitOptions end
+
         /// <summary>
         /// <see cref="_loadouts"/>
         /// </summary>
@@ -137,6 +142,10 @@ namespace Content.Shared.Preferences
         /// </summary>
         public IReadOnlySet<ProtoId<TraitPrototype>> TraitPreferences => _traitPreferences;
 
+        //SS220-TraitOptions begin
+        public IReadOnlyDictionary<ProtoId<TraitPrototype>, string> TraitOptions => _traitOptions;
+        //SS220-TraitOptions end
+
         /// <summary>
         /// If we're unable to get one of our preferred jobs do we spawn as a fallback job or do we stay in lobby.
         /// </summary>
@@ -160,7 +169,8 @@ namespace Content.Shared.Preferences
             Dictionary<string, RoleLoadout> loadouts,
             TtsVoicePreferences? voicePreferences = null, // SS220 TTS
             SignatureData? signatureData = null, // ss220 add signature
-            bool lateTeleportAfkToCryoStorage = true) //SS220 Cryo-Teleport
+            bool lateTeleportAfkToCryoStorage = true, //SS220 Cryo-Teleport
+            Dictionary<ProtoId<TraitPrototype>, string>? traitOptions = null) //SS220-TraitOptions
         {
             Name = name;
             FlavorText = flavortext;
@@ -177,6 +187,8 @@ namespace Content.Shared.Preferences
             TeleportAfkToCryoStorage = lateTeleportAfkToCryoStorage; // SS220 Cryo-Teleport
             SignatureData = signatureData; // ss220 add signature
             _loadouts = loadouts;
+
+            _traitOptions = traitOptions ?? []; //SS220-TraitOptions
 
             // SS220 tts begin
             if (voicePreferences != null)
@@ -217,6 +229,7 @@ namespace Content.Shared.Preferences
                 other.SignatureData?.Clone(), // ss220 add signature
                 other.TeleportAfkToCryoStorage)
         {
+            _traitOptions = new Dictionary<ProtoId<TraitPrototype>, string>(other._traitOptions); //SS220-TraitOptions
         }
 
         /// <summary>
@@ -515,6 +528,21 @@ namespace Content.Shared.Preferences
             };
         }
 
+        //SS220-TraitOptions begin
+        public HumanoidCharacterProfile WithTraitOption(ProtoId<TraitPrototype> traitId, string option)
+        {
+            var list = new Dictionary<ProtoId<TraitPrototype>, string>(_traitOptions)
+            {
+                [traitId] = option,
+            };
+
+            return new(this)
+            {
+                _traitOptions = list,
+            };
+        }
+        //SS220-TraitOptions end
+
         public HumanoidCharacterProfile WithoutTraitPreference(ProtoId<TraitPrototype> traitId, IPrototypeManager protoManager)
         {
             var list = new HashSet<ProtoId<TraitPrototype>>(_traitPreferences);
@@ -565,6 +593,7 @@ namespace Content.Shared.Preferences
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
+            if (!_traitOptions.SequenceEqual(other._traitOptions)) return false; //SS220-TraitOptions
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
             if (FlavorText != other.FlavorText) return false;
             return Appearance.Equals(other.Appearance);
@@ -716,6 +745,34 @@ namespace Content.Shared.Preferences
 
             _traitPreferences.Clear();
             _traitPreferences.UnionWith(GetValidTraits(traits, prototypeManager));
+
+            //SS220-TraitOptions begin
+            var validOptions = new Dictionary<ProtoId<TraitPrototype>, string>();
+
+            foreach (var (traitId, option) in _traitOptions)
+            {
+                if (prototypeManager.TryIndex(traitId, out var traitProto) &&
+                    traitProto.Options is { Count: > 0 } options &&
+                    options.ContainsKey(option))
+                {
+                    validOptions[traitId] = option;
+                }
+            }
+
+            foreach (var trait in _traitPreferences)
+            {
+                if (!prototypeManager.TryIndex(trait, out var traitProto) ||
+                    traitProto.Options is not { Count: > 0 } options ||
+                    validOptions.ContainsKey(trait))
+                {
+                    continue;
+                }
+
+                validOptions[trait] = options.First().Key;
+            }
+
+            _traitOptions = validOptions;
+            //SS220-TraitOptions end
 
             // Checks prototypes exist for all loadouts and dump / set to default if not.
             var toRemove = new ValueList<string>();

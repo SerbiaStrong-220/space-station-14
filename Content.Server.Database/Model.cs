@@ -361,6 +361,7 @@ namespace Content.Server.Database
         public List<Trait> Traits { get; } = new();
         public List<TtsVoicePreference> TtsVoicePreferences { get; } = []; // SS220 tts 
         public string? SignatureData { get; set; } // ss220 add signature
+        public string? TraitOptions { get; set; } // ss220 trait options
         public bool TeleportAfkToCryoStorage { get; set; } = true; // SS220-teleport-to-cryo-storage
 
         public List<ProfileRoleLoadout> Loadouts { get; } = new();

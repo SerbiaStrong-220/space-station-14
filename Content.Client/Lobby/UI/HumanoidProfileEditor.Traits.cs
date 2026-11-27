@@ -77,7 +77,8 @@ public sealed partial class HumanoidProfileEditor
             foreach (var traitProto in categoryTraits)
             {
                 var trait = _prototypeManager.Index<TraitPrototype>(traitProto);
-                var selector = new TraitPreferenceSelector(trait);
+
+                var selector = new TraitPreferenceSelector(trait, Profile?.TraitOptions.GetValueOrDefault(trait.ID)); //SS220-TraitOptions
 
                 selector.Preference = Profile?.TraitPreferences.Contains(trait.ID) == true;
                 if (selector.Preference)
@@ -97,6 +98,15 @@ public sealed partial class HumanoidProfileEditor
                     SetDirty();
                     RefreshTraits(); // If too many traits are selected, they will be reset to the real value.
                 };
+
+                //SS220-TraitOptions begin
+                selector.OptionChanged += optionId =>
+                {
+                    Profile = Profile?.WithTraitOption(trait.ID, optionId);
+                    SetDirty();
+                };
+                //SS220-TraitOptions end
+
                 selectors.Add(selector);
             }
 
