@@ -415,6 +415,13 @@
   minLimit: 0
   loadouts:
   - GlovesSecTactical
+
+- type: loadoutGroup
+  id: SecurityBadge
+  name: loadout-group-security-badge
+  hidden: true
+  loadouts:
+  - SecurityBadge
   # Офицер СБ (Конец)
 
   # Инструктор СБ (Начало)
