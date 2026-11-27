@@ -180,7 +180,7 @@
   name: space carp
   id: MobCarpDragon
   suffix: DragonBrood
-  parent: MobCarp
+  parent: [ BaseMobDragonBrood, MobCarp ] #SS220-dragon-orders
   components:
     - type: GhostRole
       allowMovement: true

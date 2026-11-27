@@ -3,7 +3,7 @@ using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.Popups;
 using Content.Shared.Actions;
-using Content.Shared.Damage;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Dragon;
 using Content.Shared.Gibbing;
@@ -18,9 +18,8 @@ using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Timing;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
+using Robust.Shared.Prototypes;
+using Content.Shared.Devour.Components;
 using System.Linq;
 
 namespace Content.Server.Dragon;
@@ -38,9 +37,9 @@ public sealed partial class DragonSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly IGameTiming _timing = default!; // SS220 Dragon rifts charged buff
-    [Dependency] private readonly DamageableSystem _damageable = default!; // SS220 Dragon rifts charged buff
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!; // SS220 Dragon rifts charged buff
     [Dependency] private readonly SharedPointLightSystem _lights = default!; // SS220 Dragon rifts charged buff
+    [Dependency] private readonly MovementModStatusSystem _movementMod = default!; // SS220 Dragon rifts charged buff
     [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SmokeSystem _smoke = default!;
 
@@ -59,9 +58,11 @@ public sealed partial class DragonSystem : EntitySystem
     private const int RiftsAllowed = 3;
 
     // SS220 Dragon rifts charged buff BGN
+    private static readonly EntProtoId RiftSpeedStatusEffect = "DragonRiftSpeedStatusEffect";
     private static readonly TimeSpan RiftSpeedBoostDuration = TimeSpan.FromSeconds(30);
-    private const float RiftSpeedBoostMultiplier = 1.3f;
-    private const int RiftSpeedBoostToPermanent = 3;
+    private const float RiftSpeedBoostMultiplier = 1.2f;
+    private const int ChargedRiftsForPermanentBoost = 3;
+    private const int DevourHealsPerChargedRift = 2;
     // SS220 Dragon rifts charged buff END
 
     public override void Initialize()
@@ -97,16 +98,6 @@ public sealed partial class DragonSystem : EntitySystem
                 }
             }
 
-            // SS220 Dragon rifts charged buff BGN
-            if (!comp.RiftSpeedBoostPermanent
-                && comp.RiftSpeedBoostEndTime != TimeSpan.Zero
-                && _timing.CurTime >= comp.RiftSpeedBoostEndTime)
-            {
-                comp.RiftSpeedBoostEndTime = TimeSpan.Zero;
-                _movement.RefreshMovementSpeedModifiers(uid);
-            }
-            // SS220 Dragon rifts charged buff END
-
             // At max rifts
             if (comp.Rifts.Count >= RiftsAllowed)
                 continue;
@@ -129,9 +120,6 @@ public sealed partial class DragonSystem : EntitySystem
             // Gib it, naughty dragon!
             if (comp.RiftAccumulator >= comp.RiftMaxAccumulator)
             {
-                Roar(uid, comp);
-                // QueueDel(uid);
-                _gibbing.Gib(uid); // SS220 Dragon Bodies Fix
                 Roar(uid, comp, Transform(uid).Coordinates);
                 var smoke = Spawn(comp.SmokePrototype, Transform(uid).Coordinates);
                 if (TryComp<SmokeComponent>(smoke, out var smokeComp))
@@ -211,14 +199,6 @@ public sealed partial class DragonSystem : EntitySystem
     // TODO: just make this a move speed modifier component???
     private void OnDragonMove(EntityUid uid, DragonComponent component, RefreshMovementSpeedModifiersEvent args)
     {
-        // SS220 Dragon rifts charged buff BGN
-        if (component.RiftSpeedBoostPermanent
-            || (component.RiftSpeedBoostEndTime != TimeSpan.Zero && _timing.CurTime < component.RiftSpeedBoostEndTime))
-        {
-            args.ModifySpeed(RiftSpeedBoostMultiplier, RiftSpeedBoostMultiplier);
-        }
-        // SS220 Dragon rifts charged buff END
-
         if (component.Weakened)
         {
             args.ModifySpeed(0.5f, 0.5f);
@@ -235,7 +215,7 @@ public sealed partial class DragonSystem : EntitySystem
             _audio.PlayPvs(component.SoundDeath, uid);
 
         // SS220 Dragon rifts charged buff BGN
-        if (component.RiftSpeedBoostPermanent)
+        if (IsRiftSpeedBoostPermanent(component))
             _lights.RemoveLightDeferred(uid);
         // SS220 Dragon rifts charged buff END
 
@@ -301,20 +281,20 @@ public sealed partial class DragonSystem : EntitySystem
             return;
 
         // SS220 Dragon rifts charged buff BGN
-        // Full heal dragon when charging each rift
-        if (TryComp<DamageableComponent>(uid, out var damageable))
-            _damageable.SetAllDamage((uid, damageable), 0);
+        if (TryComp<DevourerComponent>(uid, out var devourer))
+            _bloodstream.TryAddToBloodstream(uid, new Solution(devourer.Chemical, devourer.HealRate * DevourHealsPerChargedRift));
 
         // Temporary buff until the third charged rift
-        if (!comp.RiftSpeedBoostPermanent)
+        if (!IsRiftSpeedBoostPermanent(comp))
         {
-            comp.RiftsCharged = Math.Min(RiftSpeedBoostToPermanent, comp.RiftsCharged + 1);
+            comp.RiftsCharged++;
 
-            if (comp.RiftsCharged >= RiftSpeedBoostToPermanent)
+            var permanent = IsRiftSpeedBoostPermanent(comp);
+            TimeSpan? duration = permanent ? null : RiftSpeedBoostDuration;
+            _movementMod.TryUpdateMovementSpeedModDuration(uid, RiftSpeedStatusEffect, duration, RiftSpeedBoostMultiplier, RiftSpeedBoostMultiplier);
+
+            if (permanent)
             {
-                comp.RiftSpeedBoostPermanent = true;
-                comp.RiftSpeedBoostEndTime = TimeSpan.Zero;
-
                 var light = _lights.EnsureLight(uid);
                 _lights.SetColor(uid, Color.Red, light);
                 _lights.SetRadius(uid, 2.5f, light);
@@ -325,11 +305,8 @@ public sealed partial class DragonSystem : EntitySystem
             }
             else
             {
-                comp.RiftSpeedBoostEndTime = _timing.CurTime + RiftSpeedBoostDuration;
                 _popup.PopupEntity(Loc.GetString("carp-rift-speed-buff"), uid, uid);
             }
-
-            _movement.RefreshMovementSpeedModifiers(uid);
         }
         // SS220 Dragon rifts charged buff END
 
@@ -345,6 +322,13 @@ public sealed partial class DragonSystem : EntitySystem
             }
         }
     }
+
+    // SS220 Dragon rifts charged buff BGN
+    private static bool IsRiftSpeedBoostPermanent(DragonComponent comp)
+    {
+        return comp.RiftsCharged >= ChargedRiftsForPermanentBoost;
+    }
+    // SS220 Dragon rifts charged buff END
 
     /// <summary>
     /// Do everything that needs to happen when a rift gets destroyed by the crew.

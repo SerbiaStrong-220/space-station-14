@@ -160,6 +160,7 @@
     riftPrototype: EldrichCarpRift
     spawnRiftAction: ActionSpawnEldrichRift
     weakenedDuration: 30
+  - type: DragonOrders
   - type: ActionGun
     action: ActionDragonsBreath
     gunProto: EldrichDragonsBreathGun
@@ -311,7 +312,7 @@
   name: SharkDragon
   id: MobSharkEldrichDragon
   suffix: Shitspawn, Lanc
-  parent: [ BaseMobBloodsucker, SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ]
+  parent: [ BaseMobDragonBrood, BaseMobBloodsucker, SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ]
   components:
     - type: InputMover
     - type: MobMover
@@ -325,9 +326,6 @@
       mindRoles:
       - MindRoleGhostRoleTeamAntagonistFlock
     - type: GhostTakeoverAvailable
-    - type: HTN
-      rootTask:
-        task: DragonCarpCompound
     - type: NpcFactionMember
       factions:
       - Dragon

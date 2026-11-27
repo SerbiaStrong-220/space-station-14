@@ -206,6 +206,7 @@
   components:
   - type: Dragon
     spawnRiftAction: ActionSpawnRift
+  - type: DragonOrders #SS220-dragon-orders
   - type: GhostRole
     mindRoles:
     - MindRoleDragon

@@ -84,6 +84,14 @@
 - type: htnCompound
   id: DragonCarpCompound
   branches:
+    #SS220-dragon-orders begin
+    - preconditions:
+        - !type:KeyExistsPrecondition
+          key: BroodDragon
+      tasks:
+        - !type:HTNCompoundTask
+          task: DragonBroodCompound
+    #SS220-dragon-orders end
     - tasks:
         - !type:HTNCompoundTask
           task: MeleeAgressiveCombatCompound #SS220 Agressive Combat

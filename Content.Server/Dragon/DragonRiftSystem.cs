@@ -2,6 +2,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.NPC;
 using Content.Server.NPC.Systems;
 using Content.Server.Pinpointer;
+using Content.Server.SS220.DragonOrders;
 using Content.Shared.Dragon;
 using Content.Shared.Examine;
 using Content.Shared.Sprite;
@@ -27,6 +28,7 @@ public sealed class DragonRiftSystem : EntitySystem
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly DragonOrdersSystem _dragonOrders = default!; //SS220-dragon-orders
 
     public override void Initialize()
     {
@@ -69,6 +71,7 @@ public sealed class DragonRiftSystem : EntitySystem
                 {
                     _dragon.RiftCharged(comp.Dragon.Value);
                     _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, new EntityCoordinates(comp.Dragon.Value, Vector2.Zero));
+                    _dragonOrders.AddToBrood(comp.Dragon.Value, ent); //SS220-dragon-orders
                 }
                 // ss220 add shark for dragon rift end
 
@@ -108,6 +111,11 @@ public sealed class DragonRiftSystem : EntitySystem
 
                 if (comp.Dragon != null)
                     _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, new EntityCoordinates(comp.Dragon.Value, Vector2.Zero));
+
+                //SS220-dragon-orders begin
+                if (comp.Dragon != null)
+                    _dragonOrders.AddToBrood(comp.Dragon.Value, ent);
+                //SS220-dragon-orders end
             }
         }
     }
