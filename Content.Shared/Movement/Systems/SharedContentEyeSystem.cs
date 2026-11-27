@@ -5,6 +5,7 @@ using Content.Shared.Camera;
 using Content.Shared.Ghost;
 using Content.Shared.Input;
 using Content.Shared.Movement.Components;
+using Content.Shared.SS220.CentComm; // SS220 centcomm-eye
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
 using Robust.Shared.Serialization;
@@ -105,7 +106,8 @@ public abstract class SharedContentEyeSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not { } player)
             return;
 
-        if (!HasComp<GhostComponent>(player) && !_admin.IsAdmin(player))
+        if (!HasComp<GhostComponent>(player) && !_admin.IsAdmin(player)
+            && !HasComp<CentCommEyeComponent>(player)) // SS220 centcomm-eye
             return;
 
         if (TryComp<EyeComponent>(player, out var eyeComp))
