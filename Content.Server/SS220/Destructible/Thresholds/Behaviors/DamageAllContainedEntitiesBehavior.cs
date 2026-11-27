@@ -1,4 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using System.Linq;
 using Content.Server.Destructible;
 using Content.Server.Destructible.Thresholds.Behaviors;
 using Content.Shared.Damage;
@@ -24,12 +26,11 @@ public sealed partial class DamageAllContainedEntitiesBehavior : IThresholdBehav
 
         var damageableSystem = system.EntityManager.System<DamageableSystem>();
 
-        foreach (var container in containerManager.Containers.Values)
+        var targets = containerManager.Containers.Values.SelectMany(container => container.ContainedEntities).ToArray();
+
+        foreach (var entity in targets)
         {
-            foreach (var entity in container.ContainedEntities)
-            {
-                damageableSystem.TryChangeDamage(entity, Damage, true, origin: owner);
-            }
+            damageableSystem.TryChangeDamage(entity, Damage, true, origin: owner);
         }
     }
 }
