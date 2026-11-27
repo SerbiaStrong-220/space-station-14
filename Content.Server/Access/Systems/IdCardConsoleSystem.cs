@@ -172,13 +172,22 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         }
 
         UpdateStationRecord(uid, targetId, newFullName, newJobTitle, job);
-        if ((!TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
-            || keyStorage.Key is not { } key
-            || !_record.TryGetRecord<GeneralStationRecord>(key, out _))
-            && newJobProto != string.Empty)
+        //SS220-new-feature begin
+        // Original vanilla code (upstream #34921), replaced:
+        // if ((!TryComp<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
+        //     || keyStorage.Key is not { } key
+        //     || !_record.TryGetRecord<GeneralStationRecord>(key, out _))
+        //     && newJobProto != string.Empty)
+        // {
+        //     Comp<IdCardComponent>(targetId).JobPrototype = newJobProto;
+        // }
+        // Only write JobPrototype if the client actually sent a value —
+        // do NOT overwrite an existing one with null when only the name changed.
+        if (newJobProto.HasValue && TryComp<IdCardComponent>(targetId, out var idComp))
         {
-            Comp<IdCardComponent>(targetId).JobPrototype = newJobProto;
+            idComp.JobPrototype = newJobProto.Value;
         }
+        //SS220-new-feature end
 
         if (!newAccessList.TrueForAll(x => component.AccessLevels.Contains(x)))
         {
