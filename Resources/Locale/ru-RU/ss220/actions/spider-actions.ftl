@@ -21,11 +21,7 @@ ent-ActionSpawnSpiderLittleBloodPoints  = Выпустить паучат
 
 
 ent-ActionSpawnSpiderCrystal = Создать осколок кристалла
-    .desc = Осколок, который служит подсветкой для пауков.
-
-ent-ActionSpawnSpiderCrystalBloodPoints = { ent-ActionSpawnSpiderCrystal }
     .desc = Осколок, который служит подсветкой для пауков. Генерирует небольшое количество кислорода вокруг себя.
-            Стоимость [color=#800000]5 крови[/color].
 
 
 ent-ActionSpawnSpiderWallWeb = Создать стену
@@ -34,25 +30,13 @@ ent-ActionSpawnSpiderWallWeb = Создать стену
 ent-ActionSpawnSpiderWallWebDurable = Создать прочную стену
     .desc = Создаёт прочную стену из... Паутины?!?!?
 
-ent-ActionSpawnSpiderWallWebDurableBloodPoints = { ent-ActionSpawnSpiderWallWebDurable }
-    .desc = Создаёт прочную стену из... Паутины?!?!?
-            Стоимость [color=#800000]10 крови[/color].
-
 
 ent-ActionSpawnSpiderWebPassage = Создать проход
     .desc = Наматывает проход из паутины.
 
-ent-ActionSpawnSpiderWebPassageBloodPoints = { ent-ActionSpawnSpiderWebPassage }
-    .desc = Создаёт проход из... Паутины?!?!?
-            Стоимость [color=#800000]6 крови[/color].
-
 
 ent-ActionSpawnWebTile = Создать паутинный пол
-    .desc = Создаёт пол из паутины блокирующий утечку воздуха.
-
-ent-ActionSpawnWebTileBloodPoints = { ent-ActionSpawnWebTile }
-    .desc = Создаёт пол из паутины, блокирующий утечку воздуха
-            Стоимость [color=#800000]10 крови[/color].
+    .desc = Создаёт пол из паутины, блокирующий утечку воздуха.
 
 
 ent-ActionSpawnSingleSpiderWebShortDelay = Пустить паутину
@@ -63,10 +47,6 @@ ent-ActionSpawnSingleSpiderWebLongDelay = { ent-ActionSpawnSingleSpiderWebShortD
 
 ent-ActionSpawnSingleSpiderWebDurable = Пустить прочную паутину
     .desc = { ent-ActionSpawnSingleSpiderWebShortDelay.desc }
-
-ent-ActionSpawnSingleSpiderWebDurableBloodPoints = { ent-ActionSpawnSingleSpiderWebDurable }
-    .desc = Создаёт паутину, которая замедляет вашу добычу.
-            Стоимость [color=#800000]2 крови[/color].
 
 ent-ActionSpawnSingleSpiderWebClown = Пустить клоунскую паутину
     .desc = { ent-ActionSpawnSingleSpiderWebShortDelay.desc }

@@ -180,11 +180,11 @@
     - ActionSpawnSpiderEggGhostBloodPoints
     - ActionSpawnSpiderEggShooterBloodPoints
     - ActionSpawnSpiderLittleBloodPoints
-    - ActionSpawnSpiderCrystalBloodPoints
-    - ActionSpawnSingleSpiderWebDurableBloodPoints
-    - ActionSpawnWebTileBloodPoints
-    - ActionSpawnSpiderWallWebDurableBloodPoints
-    - ActionSpawnSpiderWebPassageBloodPoints
+    - ActionSpawnSpiderCrystal
+    - ActionSpawnSingleSpiderWebDurable
+    - ActionSpawnWebTile
+    - ActionSpawnSpiderWallWebDurable
+    - ActionSpawnSpiderWebPassage
     - ActionSpiderCoconning
   - type: Hunger
     thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
