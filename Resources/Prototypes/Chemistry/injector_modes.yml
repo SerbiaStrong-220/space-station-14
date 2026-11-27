@@ -27,6 +27,9 @@
 - type: injectorMode
   abstract: true
   id: BaseSyringeMode
+  # SS220 injector-quick-transfer bgn
+  quickTransferAmounts: [1, 5, 15]
+  # SS220 injector-quick-transfer end
   transferAmounts:
   - 1 # SS220-add-1-transfer
   - 5
