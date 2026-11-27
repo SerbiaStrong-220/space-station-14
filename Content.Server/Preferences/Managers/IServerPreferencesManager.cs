@@ -16,6 +16,7 @@ namespace Content.Server.Preferences.Managers
         Task LoadData(ICommonSession session, CancellationToken cancel);
         void FinishLoad(ICommonSession session);
         void OnClientDisconnected(ICommonSession session);
+        void RevalidatePreferences(ICommonSession session); // SS220 sponsor
 
         bool TryGetCachedPreferences(NetUserId userId, [NotNullWhen(true)] out PlayerPreferences? playerPreferences);
         PlayerPreferences GetPreferences(NetUserId userId);
