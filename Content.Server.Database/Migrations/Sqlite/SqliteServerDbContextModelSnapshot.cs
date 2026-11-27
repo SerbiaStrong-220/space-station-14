@@ -15,7 +15,7 @@ namespace Content.Server.Database.Migrations.Sqlite
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.6");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
 
             modelBuilder.Entity("Content.Server.Database.Admin", b =>
                 {
@@ -784,7 +784,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("ban_id");
 
-                    b.Property<string>("discriminator")
+                    b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("TEXT")
@@ -798,7 +798,7 @@ namespace Content.Server.Database.Migrations.Sqlite
 
                     b.ToTable("iban_role", (string)null);
 
-                    b.HasDiscriminator<string>("discriminator").HasValue("IBanRole");
+                    b.HasDiscriminator().HasValue("IBanRole");
 
                     b.UseTphMappingStrategy();
                 });
@@ -1074,10 +1074,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Property<bool>("TeleportAfkToCryoStorage")
                         .HasColumnType("INTEGER")
                         .HasColumnName("teleport_afk_to_cryo_storage");
-
-                    b.Property<string>("TraitOptions")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("trait_options");
 
                     b.Property<string>("Voice")
                         .IsRequired()
