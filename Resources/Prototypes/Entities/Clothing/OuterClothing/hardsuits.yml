@@ -30,10 +30,7 @@
         Piercing: 0.9
         Heat: 0.8
         Radiation: 0.5
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.5
-  # SS220 add stamina resistance end
+        Shock: 0.5 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.7
@@ -67,13 +64,9 @@
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-        Shock: 0.8
         Caustic: 0.5
         Radiation: 0.2
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.5
-  # SS220 add stamina resistance end
+        Shock: 0.5 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.7
@@ -123,10 +116,7 @@
         Piercing: 0.9
         Radiation: 0.8 #salv is supposed to have radiation hazards in the future # ss220 rad fix 0.3 -> 0.8 (20%)
         Caustic: 0.8
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.8
-  # SS220 add stamina resistance end
+        Shock: 0.8 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -171,10 +161,7 @@
         Heat: 0.7
         Radiation: 0.3
         Caustic: 0.7
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.8
-  # SS220 add stamina resistance end
+        Shock: 0.8 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.75
@@ -211,10 +198,7 @@
         Heat: 0.7 #Goliath hide gets grilled instead of you
         Radiation: 0.3
         Caustic: 0.8
-  # SS220 add stamina resistance for goliath hardsuit begin
-  - type: StaminaResistance
-    damageCoefficient: 0.55
-  # SS220 add stamina resistance for goliath hardsuit end
+        Shock: 0.55 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -276,6 +260,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
+  - type: FireProtection #SS220 weapon overhaul
+    reduction: 0.4 #SS220 weapon overhaul
   - type: ExplosionResistance
     damageCoefficient: 0.4
   - type: Armor
@@ -286,10 +272,7 @@
         Piercing: 0.6
         Heat: 0.8
         Caustic: 0.7
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.4
-  # SS220 add stamina resistance end
+        Shock: 0.4 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.85 #SS220 sec hardsuit buff
     sprintModifier: 0.85 #SS220 sec hardsuit buff
@@ -325,14 +308,11 @@
         Piercing: 0.80
         Radiation: 0.7
         Caustic: 0.8  #SS220-MinorTweaks end
+        Shock: 0.8 #SS220 weapon overhaul
   #ss220 brigmedic hardsuit virus resistance begin
   - type: ZombificationResistance
     zombificationResistanceCoefficient: 0.5
   #ss220 brigmedic hardsuit virus resistance end
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.8
-  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.90 #SS220-MinorTweaks
     sprintModifier: 0.90 #SS220-MinorTweaks
@@ -356,6 +336,8 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.3 #SS220-WardenJuggernaut
+  - type: FireProtection #SS220 weapon overhaul
+    reduction: 0.3 #SS220 weapon overhaul
   - type: Armor
     modifiers:
       coefficients:
@@ -365,13 +347,10 @@
         Heat: 0.6
         Caustic: 0.4
         Radiation: 0.4 #SS220-WardenJuggernaut-End
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.4
-  # SS220 add stamina resistance end
+        Shock: 0.4 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
-    walkModifier: 0.65 #SS220-WardenJuggernaut-Begin
-    sprintModifier: 0.65 #SS220-WardenJuggernaut-End
+    walkModifier: 0.7 #SS220-WardenJuggernaut-Begin
+    sprintModifier: 0.7 #SS220-WardenJuggernaut-End
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitWarden
@@ -422,10 +401,7 @@
         Heat: 0.55
         Radiation: 0.5
         Caustic: 0.6
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.35
-  # SS220 add stamina resistance end
+        Shock: 0.35 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.9 #SS220 crew hardsuit buff
     sprintModifier: 0.9 #SS220 crew hardsuit buff
@@ -464,10 +440,7 @@
         Heat: 0.4
         Radiation: 0.0
         Caustic: 0.7
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.5
-  # SS220 add stamina resistance end
+        Shock: 0.5 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -506,10 +479,7 @@
     modifiers:
       coefficients:
         Caustic: 0.1
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.8
-  # SS220 add stamina resistance end
+        Shock: 0.8 #SS220 weapon overhaul
   - type: ZombificationResistance
     zombificationResistanceCoefficient: 0.4
   - type: ClothingSpeedModifier
@@ -546,10 +516,7 @@
         Heat: 0.3
         Radiation: 0.15 #ss-220 armReb
         Caustic: 0.2
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.8
-  # SS220 add stamina resistance end
+        Shock: 0.8 #SS220 weapon overhaul
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: ClothingSpeedModifier
@@ -589,6 +556,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
+  - type: FireProtection #SS220 weapon overhaul
+    reduction: 0.4 #SS220 weapon overhaul
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Armor
@@ -600,10 +569,7 @@
         Heat: 0.6 #SS220 sec hardsuit buff
         Radiation: 0.5
         Caustic: 0.6
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.35
-  # SS220 add stamina resistance end
+        Shock: 0.35 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.9 #SS220 sec hardsuit buff
     sprintModifier: 0.9 #SS220 sec hardsuit buff
@@ -645,11 +611,8 @@
         Heat: 0.8
         Radiation: 0.5
         Caustic: 0.8
+        Shock: 0.8 #SS220 weapon overhaul
     #SS220 Quartermaster_Hardsuit_add end
-    # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.8
-  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -687,6 +650,7 @@
         Heat: 0.6 #ss-220 armReb
         Radiation: 0.5
         Caustic: 0.5
+        Shock: 0.3 #SS220 weapon overhaul
   # SS220-MIT-add-field-shields-begin
   - type: FieldShieldProvider
     rechargeShieldData:
@@ -696,6 +660,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: red
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#D82000"
       radius: 1
@@ -704,10 +681,6 @@
     action: ActionTogglePersonalShield
     disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.3
-  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -756,10 +729,7 @@
         Heat: 0.5 #ss-220 armReb
         Radiation: 0.2
         Caustic: 0.5  #ss-220 armReb
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.1
-  # SS220 add stamina resistance end
+        Shock: 0.1 #SS220 weapon overhaul
   # SS220-MIT-add-field-shields-begin
   - type: FieldShieldProvider
     rechargeShieldData:
@@ -769,6 +739,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: red
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#D82000"
       radius: 1
@@ -819,10 +802,7 @@
         Heat: 0.5 #ss-220 armReb
         Radiation: 0.2  #ss-220 armReb
         Caustic: 0.5
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.1
-  # SS220 add stamina resistance end
+        Shock: 0.1 #SS220 weapon overhaul
   # SS220-MIT-add-field-shields-begin
   - type: FieldShieldProvider
     rechargeShieldData:
@@ -832,6 +812,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: red
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 2
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 2
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#D82000"
       radius: 1
@@ -890,10 +883,7 @@
         Heat: 0.4 #ss-220 armReb
         Radiation: 0.1  #ss-220 armReb
         Caustic: 0.4
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.1
-  # SS220 add stamina resistance end
+        Shock: 0.1 #SS220 weapon overhaul
   # SS220-MIT-add-field-shields-begin
   - type: FieldShieldProvider
     rechargeShieldData:
@@ -903,6 +893,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: red
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#D82000"
       radius: 1
@@ -948,6 +951,7 @@
   - type: TemperatureProtection #ss-220 armReb
     heatingCoefficient: 0.001 #ss-220 armReb
     coolingCoefficient: 0.001 #ss220 armReb
+  - type: GrabImmuneProvider #SS220 add juggernaut grab immunity
   - type: ExplosionResistance
     damageCoefficient: 0.2  #ss-220 armReb
   #- type: StaminaResistance # Should not have stamina resistance, this is purely so people know it was not forgotten.
@@ -960,10 +964,7 @@
         Heat: 0.2
         Radiation: 0.2
         Caustic: 0.2
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.1
-  # SS220 add stamina resistance end
+        Shock: 0.1 #SS220 weapon overhaul
   # SS220-MIT-add-field-shields-begin
   - type: FieldShieldProvider
     rechargeShieldData:
@@ -973,6 +974,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: red
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 6
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 6
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#D82000"
       radius: 1.5
@@ -982,8 +996,8 @@
     disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
-    walkModifier: 0.65
-    sprintModifier: 0.65
+    walkModifier: 0.7 #SS220 weapon overhaul
+    sprintModifier: 0.7 #SS220 weapon overhaul
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCybersun
@@ -1026,10 +1040,7 @@
         Heat: 0.25
         Radiation: 0.25
         Caustic: 0.75
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.5
-  # SS220 add stamina resistance end
+        Shock: 0.5 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -1064,10 +1075,7 @@
         Slash: 0.95
         Piercing: 1
         Heat: 0.5
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.8
-  # SS220 add stamina resistance end
+        Shock: 0.8 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -1100,10 +1108,7 @@
         Piercing: 0.9
         Heat: 0.4
         Caustic: 0.75
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.5
-  # SS220 add stamina resistance end
+        Shock: 0.5 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.6
     sprintModifier: 0.6
@@ -1139,10 +1144,7 @@
         Piercing: 0.85
         Heat: 0.4
         Caustic: 0.75
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.35
-  # SS220 add stamina resistance end
+        Shock: 0.35 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -1175,6 +1177,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: blue
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#0061d8"
       radius: 1
@@ -1236,6 +1251,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: blue
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#0061d8"
       radius: 1
@@ -1271,6 +1299,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: blue
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#0061d8"
       radius: 1
@@ -1315,8 +1356,6 @@
     damageCoefficient: 0.2
   - type: FireProtection
     reduction: 0.8
-  - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
-    damageCoefficient: 0.15 # Needs 21 hits with a disabler to stun :godo:
   - type: Armor
     modifiers:
       coefficients:
@@ -1327,6 +1366,7 @@
         Heat: 0.3
         Radiation: 0.1
         Caustic: 0.1
+        Shock: 0.05 #SS220 weapon overhaul
   #SS220-Deathsquad-Update-End
   - type: ClothingSpeedModifier
     walkModifier: 1.0
@@ -1384,10 +1424,6 @@
         Radiation: 0.2
         Caustic: 0.2
 # SS220 CBURN_stats_tweak end
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.5
-  # SS220 add stamina resistance end
   - type: ZombificationResistance
     zombificationResistanceCoefficient: 0.25
   - type: ClothingSpeedModifier
@@ -1405,6 +1441,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: blue
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#0061d8"
       radius: 1
@@ -1438,10 +1487,7 @@
         Slash: 0.9
         Piercing: 0.9
         Caustic: 0.8
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.8
-  # SS220 add stamina resistance end
+        Shock: 0.8 #SS220 weapon overhaul
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
