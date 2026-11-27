@@ -19,6 +19,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
+using Content.Shared.SS220.DarkReaper;
 using Content.Shared.Storage.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;
@@ -94,13 +95,28 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
 
         SubscribeLocalEvent<DisposalUnitComponent, GetDumpableVerbEvent>(OnGetDumpableVerb);
         SubscribeLocalEvent<DisposalUnitComponent, DumpEvent>(OnDump);
+
+        // SS220 fix #4554
+        SubscribeLocalEvent<DisposalUnitComponent, ContainerIsInsertingAttemptEvent>(OnContainerInsertAttempt);
     }
+
+    // SS220 fix #4554 begin
+    private void OnContainerInsertAttempt(Entity<DisposalUnitComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (args.Container.ID == DisposalUnitComponent.ContainerId && HasComp<DarkReaperComponent>(args.EntityUid))
+            args.Cancel();
+    }
+    // SS220 fix #4554 end
 
     private void AddDisposalAltVerbs(Entity<DisposalUnitComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        // SS220 fix #4554 begin
+        if (TryComp<DarkReaperComponent>(args.User, out var reaper) && !reaper.PhysicalForm)
+            return;
+        // SS220 fix #4554 begin end 
         var uid = ent.Owner;
         var component = ent.Comp;
 
