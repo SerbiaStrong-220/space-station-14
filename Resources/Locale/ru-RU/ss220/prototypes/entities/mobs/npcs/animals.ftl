@@ -13,3 +13,7 @@ ent-MobCrocodileAngry = крокодил
     .desc = Он кусается, наверное.
 ent-MobAlbinoCrocodile = альбино
     .desc = Добрейшей души крокодил.
+
+ent-MobSpiderGhostWizard = паучий призрак-волшебник
+    .desc = Этот паучий призрак выглядит немного волшебным.
+    .suffix = Волшебник
