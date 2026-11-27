@@ -31,11 +31,9 @@
           tags:
           - CaptainSabre
   - type: Appearance
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-reinforced-textile
-    microFiberColor: micro-fibers-red
-#SS220 Micro_fibers end
+  # SS220 microfibers begin
+  - type: StorageMicroFiber
+  # SS220 microfibers end
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -99,11 +97,6 @@
       - CartridgeLightRifle
       - CartridgeAntiMateriel
     #ss220 Bandolier rework end
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-reinforced-textile
-    microFiberColor: micro-fibers-black
-#SS220 Micro_fibers end
 
 - type: entity
   parent: [ ClothingBeltStorageBase, BaseMagicalContraband ]
@@ -122,11 +115,6 @@
       tags:
       - WizardWand
       - WhitelistChameleon
-  #SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-textile
-    microFiberColor: micro-fibers-dark-purple
-  #SS220 Micro_fibers end
 
 
 ## Holsters
@@ -178,11 +166,6 @@
         - Gun
         - BallisticAmmoProvider
         - CartridgeAmmo
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-leather
-    microFiberColor: micro-fibers-red
-#SS220 Micro_fibers end
   - type: StaticPrice
     price: 500
 
@@ -200,11 +183,6 @@
     sprite: Clothing/Belt/securitywebbing.rsi
   - type: Clothing
     sprite: Clothing/Belt/securitywebbing.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-reinforced-textile
-    microFiberColor: micro-fibers-black
-#SS220 Micro_fibers end
 
 - type: entity
   parent: [ ClothingBeltStorageBase]
@@ -216,11 +194,6 @@
     sprite: Clothing/Belt/mercwebbing.rsi
   - type: Clothing
     sprite: Clothing/Belt/mercwebbing.rsi
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-reinforced-textile
-    microFiberColor: micro-fibers-moss
-#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -245,11 +218,6 @@
     sprite: Clothing/Belt/militarywebbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.1
-#SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-reinforced-textile
-    microFiberColor: micro-fibers-grey
-#SS220 Micro_fibers end
   - type: StaticPrice
     price: 500
 
@@ -263,11 +231,6 @@
     sprite: Clothing/Belt/militarywebbingmed.rsi
   - type: Clothing
     sprite: Clothing/Belt/militarywebbingmed.rsi
-  #SS220 Micro_fibers start
-  - type: MicroFiber
-    microFiberMaterial: micro-fibers-reinforced-textile
-    microFiberColor: micro-fibers-grey
-  #SS220 Micro_fibers end
 
 - type: entity
   parent: [ BaseCentcommContraband, ClothingBeltMilitaryWebbing ]

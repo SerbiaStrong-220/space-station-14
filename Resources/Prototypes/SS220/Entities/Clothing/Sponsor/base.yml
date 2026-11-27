@@ -108,6 +108,7 @@
   parent: ClothingSponsor
   id: UnsensoredClothingSponsorUniformBase
   components:
+  - type: StorageMicroFiber
   - type: Sprite
     state: icon
   - type: Clothing
@@ -146,6 +147,7 @@
   parent: ClothingSponsorOuterBase
   id: ClothingSponsorOuterStorageBase
   components:
+  - type: StorageMicroFiber
   - type: Storage
     grid:
     - 0,0,2,1

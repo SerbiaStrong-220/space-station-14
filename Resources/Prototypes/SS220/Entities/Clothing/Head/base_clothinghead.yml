@@ -1,0 +1,18 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  abstract: true
+  parent: ClothingHeadBase
+  id: ClothingHeadHatStorageBase
+  components:
+  - type: StorageMicroFiber
+  - type: Storage
+    grid:
+    - 0,0,0,0
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container

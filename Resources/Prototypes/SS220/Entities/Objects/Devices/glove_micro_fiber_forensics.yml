@@ -1,0 +1,119 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: [BaseItem, BaseSecurityContraband]
+  id: GloveMicroFiberScanner
+  name: microfiber scanner
+  description: A portable scanner that collects surface microfibers or an item's own sample and dispenses a swab. Use it in hand to open its mode menu.
+  components:
+  # ToDo_SS220 find sprites: Scanner world, in-hand and belt sprites currently reuse the appraisal tool.
+  - type: Sprite
+    sprite: Objects/Tools/appraisal-tool.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Tools/appraisal-tool.rsi
+    size: Small
+  - type: Clothing
+    sprite: Objects/Tools/appraisal-tool.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: GloveMicroFiberScanner
+  - type: ActivatableUI
+    inHandsOnly: true
+    key: enum.GloveMicroFiberScannerUiKey.Key
+    verbText: glove-micro-fiber-scanner-mode-verb
+  - type: UserInterface
+    interfaces:
+      enum.GloveMicroFiberScannerUiKey.Key:
+        type: GloveMicroFiberScannerBoundUserInterface
+  - type: UnPlaceable
+  - type: GuideHelp
+    guides:
+    - Forensics
+
+- type: entity
+  parent: BaseItem
+  id: GloveMicroFiberSwab
+  name: microfiber sample swab
+  description: A physical carrier for a microfiber sample. Insert a collected sample into a microfiber analyzer.
+  components:
+  # ToDo_SS220 find sprites: Dedicated microfiber sample swab sprite; currently uses a medical swab.
+  - type: Sprite
+    sprite: Objects/Specific/Medical/mouth_swab.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+  - type: GloveMicroFiberSwab
+  - type: UnPlaceable
+  - type: Tag
+    tags:
+    - GloveMicroFiberSwab
+  - type: GuideHelp
+    guides:
+    - Forensics
+
+- type: entity
+  parent: [BaseMachine, ConstructibleMachine, BaseSecurityContraband]
+  id: MicroFiberAnalyzer
+  name: microfiber analyzer
+  description: A machine that identifies the glove types and pair codes in a collected swab sample.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  # ToDo_SS220 find sprites: Dedicated microfiber analyzer sprite; currently uses a medical diagnoser.
+  - type: Sprite
+    sprite: Structures/Machines/diagnoser.rsi
+    layers:
+    - state: icon
+    - state: unlit
+      shader: unshaded
+  - type: MicroFiberAnalyzer
+  - type: Machine
+    board: MicroFiberAnalyzerMachineCircuitboard
+  - type: DeviceLinkSource
+    ports:
+    - MicroFiberReport
+  - type: ItemSlots
+    slots:
+      sampleSlot:
+        name: micro-fiber-analyzer-slot-name
+        whitelist:
+          tags:
+          - GloveMicroFiberSwab
+  - type: ContainerContainer
+    containers:
+      sampleSlot: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: ActivatableUI
+    key: enum.MicroFiberAnalyzerUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.MicroFiberAnalyzerUiKey.Key:
+        type: MicroFiberAnalyzerBoundUserInterface
+  - type: GuideHelp
+    guides:
+    - Forensics
+
+- type: entity
+  parent: PaperNtFormSec
+  id: MicroFiberReportPaper
+  name: microfiber analysis report
+  description: An official security department report identifying glove types and individual pair codes in an analyzed sample.
+  components:
+  - type: GuideHelp
+    guides:
+    - Forensics
+
+- type: entity
+  parent: PaperNtFormSec
+  id: MicroFiberComparisonReportPaper
+  name: microfiber comparison report
+  description: An official security department document comparing individual codes in two analyzed microfiber samples.
+  components:
+  - type: GuideHelp
+    guides:
+    - Forensics

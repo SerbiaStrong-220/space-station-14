@@ -333,7 +333,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatStorageBase # SS220
   id: ClothingHeadHatChef
   name: chef's hat
   description: A hat used by chefs to keep their hair out of your food. Judging by the food in the mess, they don't work.
@@ -342,16 +342,6 @@
     sprite: Clothing/Head/Hats/chefhat.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/chefhat.rsi
-  - type: Storage
-    grid:
-    - 0,0,0,0
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
   - type: PilotedClothing
     pilotWhitelist:
       tags:
@@ -1193,7 +1183,7 @@
     sprite: Clothing/Head/Hats/hetman_hat.rsi
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatStorageBase # SS220
   id: ClothingHeadHatMagician
   name: magician's tophat
   description: A magician's top hat.
@@ -1214,16 +1204,6 @@
     size: Small
     sprite: Clothing/Head/Hats/magician.rsi
     storedRotation: 0
-  - type: Storage
-    grid:
-    - 0,0,0,0
-  - type: UserInterface
-    interfaces:
-        enum.StorageUiKey.Key:
-          type: StorageBoundUserInterface
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
   - type: Tag
     tags:
     - PetWearable
