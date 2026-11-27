@@ -1,17 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Shuttles.Components;
+using Content.Server.Shuttles.Systems; //SS220 GyroPowerUpdate
 using Content.Shared.SS220.CruiseControl;
 
 namespace Content.Server.SS220.CruiseControl;
 
 public sealed class CruiseControlSystem : EntitySystem
 {
+    [Dependency] private readonly ShuttleConsoleSystem _shuttleConsole = default!; //SS220 GyroPowerUpdate
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ShuttleConsoleComponent, CruiseControlMessage>(OnCruiseControlMessage);
+        SubscribeLocalEvent<ShuttleConsoleComponent, ShuttleGyroPowerMessage>(OnGyroPowerMessage); //SS220 GyroPowerUpdate
     }
 
     public void DisableCruiseControlFromConsole(Entity<ShuttleConsoleComponent> console)
@@ -22,6 +25,26 @@ public sealed class CruiseControlSystem : EntitySystem
         RemComp<ShuttleCruiseControlComponent>(console.Comp.CruiseControlTarget.Value);
         console.Comp.CruiseControlTarget = null;
     }
+
+    /*SS220 GyroPowerUpdate Start*/
+    private void OnGyroPowerMessage(Entity<ShuttleConsoleComponent> console, ref ShuttleGyroPowerMessage args)
+    {
+        if (float.IsNaN(args.Power))
+            return;
+
+        var shuttleConsole = _shuttleConsole.GetDroneConsole(console.Owner);
+        if (shuttleConsole == null ||
+            !TryComp<ShuttleConsoleComponent>(shuttleConsole.Value, out var targetConsole) ||
+            !targetConsole.CanControlShuttle ||
+            Transform(shuttleConsole.Value).GridUid is not { } shuttleUid)
+            return;
+
+        var power = Math.Clamp(args.Power, ShuttleGyroPowerComponent.MinPower, ShuttleGyroPowerComponent.MaxPower);
+        var gyro = EnsureComp<ShuttleGyroPowerComponent>(shuttleUid);
+        gyro.Power = power;
+        Dirty(shuttleUid, gyro);
+    }
+    /*SS220 GyroPowerUpdate End*/
 
     private void OnCruiseControlMessage(Entity<ShuttleConsoleComponent> console, ref CruiseControlMessage args)
     {

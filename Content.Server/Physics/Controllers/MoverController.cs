@@ -744,15 +744,31 @@ public sealed partial class MoverController : SharedMoverController // SS220-add
             else if (!cruiseQuery.HasComp(shuttleUid)) // SS220 Cruise-Control
             {
                 PhysicsSystem.SetSleepingAllowed(shuttleUid, body, false);
-                var torque = shuttle.AngularThrust * -angularInput;
+
+                //var torque = shuttle.AngularThrust * -angularInput; SS220 GyroPowerUpdate
+
+                /*SS220 GyroPowerUpdate Start*/
+                var gyroPower = 1f;
+                if (TryComp<ShuttleGyroPowerComponent>(shuttleUid, out var gyroComp))
+                {
+                    gyroPower = Math.Clamp(gyroComp.Power, ShuttleGyroPowerComponent.MinPower, ShuttleGyroPowerComponent.MaxPower);
+                }
+
+                var maxGyroAngularVelocity = MathHelper.DegreesToRadians(10f) * gyroPower;
+                var maxGyroAngularAcceleration = MathHelper.DegreesToRadians(10f) * gyroPower;
+                var torque = shuttle.AngularThrust * -angularInput * gyroPower;
+                torque = Math.Clamp(torque, -maxGyroAngularAcceleration / body.InvI, maxGyroAngularAcceleration / body.InvI);
+                /*SS220 GyroPowerUpdate End*/
 
                 // Need to cap the velocity if 1 tick of input brings us over cap so we don't continuously
                 // edge onto the cap over and over.
                 var torqueMul = body.InvI * frameTime;
 
                 torque = Math.Clamp(torque,
-                    (-ShuttleComponent.MaxAngularVelocity - body.AngularVelocity) / torqueMul,
-                    (ShuttleComponent.MaxAngularVelocity - body.AngularVelocity) / torqueMul);
+                    //(-ShuttleComponent.MaxAngularVelocity - body.AngularVelocity) / torqueMul,
+                    //(ShuttleComponent.MaxAngularVelocity - body.AngularVelocity) / torqueMul);
+                    (-maxGyroAngularVelocity - body.AngularVelocity) / torqueMul,
+                    (maxGyroAngularVelocity - body.AngularVelocity) / torqueMul);
 
                 if (!torque.Equals(0f))
                 {

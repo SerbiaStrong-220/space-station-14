@@ -29,6 +29,7 @@ public sealed class ShuttleConsoleBoundUserInterface : BoundUserInterface
         _window.UndockRequest += OnUndockRequest;
 
         _window.SetCruiseControl += OnCruiseControlChanged; // SS220 Cruise-Control
+        _window.SetGyroPower += power => SendMessage(new ShuttleGyroPowerMessage(power)); //SS220 GyroPowerUpdate Start
     }
 
     // SS220 Cruise-Control begin
