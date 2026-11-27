@@ -1,3 +1,5 @@
+using Robust.Shared.Audio;
+
 namespace Content.Shared.Interaction.Events;
 
 /// <summary>
@@ -6,4 +8,12 @@ namespace Content.Shared.Interaction.Events;
 // TODO INTERACTION
 // Rename this, or move it to another namespace to make it clearer that this is specific to "petting/hugging" (InteractionPopupSystem)
 [ByRefEvent]
-public readonly record struct InteractionFailureEvent(EntityUid User);
+//SS220-NonTactile begin
+public record struct InteractionFailureEvent(EntityUid User)
+{
+    public LocId? Message;
+    public SoundSpecifier? Sound;
+    public LocId? MessagePerceivedByOthers;
+}
+//SS220-NonTactile end
+
