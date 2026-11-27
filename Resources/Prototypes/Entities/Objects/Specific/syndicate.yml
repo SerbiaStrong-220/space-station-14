@@ -3,7 +3,7 @@
   name: telecrystal
   parent: [BaseItem]
   id: Telecrystal
-  suffix: 20 TC
+  suffix: 200 TC #SS220-uplink-200tc
   description: It seems to be pulsing with suspiciously enticing energies.
   components:
   - type: Sprite
@@ -13,12 +13,12 @@
     sprite: Objects/Specific/Syndicate/telecrystal.rsi
     size: Tiny
   - type: Stack
-    count: 20
+    count: 200 #SS220-uplink-200tc
     stackType: Telecrystal
   - type: StaticPrice
     price: 0
   - type: StackPrice
-    price: 200
+    price: 20 #SS220-uplink-200tc
   - type: Currency
     price:
       Telecrystal: 1
@@ -38,26 +38,26 @@
 - type: entity
   parent: Telecrystal
   id: Telecrystal1
-  suffix: 1 TC
+  suffix: 10 TC #SS220-uplink-200tc
   components:
   - type: Stack
-    count: 1
+    count: 10 #SS220-uplink-200tc
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal5
-  suffix: 5 TC
+  suffix: 50 TC #SS220-uplink-200tc
   components:
   - type: Stack
-    count: 5
+    count: 50 #SS220-uplink-200tc
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal10
-  suffix: 10 TC
+  suffix: 100 TC #SS220-uplink-200tc
   components:
   - type: Stack
-    count: 10
+    count: 100 #SS220-uplink-200tc
 
 # Uplinks
 - type: entity
@@ -87,26 +87,26 @@
 - type: entity
   parent: BaseUplinkRadio
   id: BaseUplinkRadio20TC
-  suffix: 20 TC
+  suffix: 200 TC #SS220-uplink-200tc
   components:
   - type: Store
     balance:
-      Telecrystal: 20
+      Telecrystal: 200 #SS220-uplink-200tc
 
 - type: entity
   parent: BaseUplinkRadio
   id: BaseUplinkRadio25TC
-  suffix: 25 TC
+  suffix: 250 TC #SS220-uplink-200tc
   components:
   - type: Store
     balance:
-      Telecrystal: 25
+      Telecrystal: 250 #SS220-uplink-200tc
 
 #this uplink MUST be used for nukeops, as it has the tag for filtering the listing.
 - type: entity
   parent: BaseUplinkRadio
   id: BaseUplinkRadio40TC
-  suffix: 40 TC, NukeOps
+  suffix: 400 TC, NukeOps #SS220-uplink-200tc
   components:
   - type: Store
     categories:
@@ -124,7 +124,7 @@
     - UplinkPointless
 #SS220 NukeOpsUplink end
     balance:
-      Telecrystal: 40
+      Telecrystal: 400 #SS220-uplink-200tc
     useDiscounts: true # SS220 Lone-Ops-Uplink
   - type: Tag
     tags:
@@ -133,7 +133,7 @@
 - type: entity
   parent: BaseUplinkRadio
   id: LoneOpsUplinkRadio40TC # SS220 Lone-Ops-Uplink
-  suffix: 40 TC, LoneOps # SS220 Lone-Ops-Uplink
+  suffix: 400 TC, LoneOps #SS220-uplink-200tc
   components:
   - type: Store
     categories:
@@ -151,8 +151,8 @@
     - UplinkPointless
 #SS220 NukeOpsUplink end
     balance:
-      Telecrystal: 40 # SS220 Lone-Ops-Uplink start
-    useDiscounts: true # SS220 Lone-Ops-Uplink end
+      Telecrystal: 400 #SS220-uplink-200tc
+    useDiscounts: true # SS220 Lone-Ops-Uplink
   - type: Tag
     tags:
     - LoneOpsUplink # SS220 Lone-Ops-Uplink
