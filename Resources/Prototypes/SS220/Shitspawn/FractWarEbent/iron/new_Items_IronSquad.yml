@@ -67,7 +67,7 @@
     damageCoefficient: 0.0
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingCloakIronSquadCMO
   name: плащ Главного Врача Железного отряда
   description: Этот плащ не только нарушает любые санитарные нормы, но и наделяет владельца таким авторитетом, что его никто не посмеет обсуждать за спиной.
@@ -77,7 +77,7 @@
       sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_cmo.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingCloakIronSquadCmd
   name: плащ Командира Железного отряда
   description: Надев его, чувствуешь настоящую силу, власть и коварство.
@@ -87,7 +87,7 @@
       sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_command.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingCloakIronSquadEng
   name: плащ Инженера Железного отряда
   description: Снаружи жёсткая ткань с отчётливо видными следами тления, а внутри слышится стойкий аромат машинного масла.
@@ -97,7 +97,7 @@
       sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_eng.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingCloakIronSquadMed
   name: плащ Полевого медика Железного отряда
   description: Говорят, если на светлом плаще будут видны пятна крови - то врачу понадобится врач.

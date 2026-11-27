@@ -413,3 +413,8 @@
 #Cult equipment: items with this tag forcibly removed from cultist on deconversion
 - type: Tag
   id: YoggEquipment
+
+# SS220-cloak-hide-equipment start
+- type: Tag
+  id: Satchel
+# SS220-cloak-hide-equipment end

@@ -4,7 +4,7 @@
 
   # Парадизовский
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckParadise
   name: communion cloak
   description: Awarded to the chosen ones, granted a unique place in this world.
@@ -19,7 +19,7 @@
 
   # Для разработчиков (Кодеры)
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckCoder
   name: cloak of creation
   description: A special cloak whose wearers are permitted to intervene and change the rules of the world.
@@ -32,7 +32,7 @@
 
   # Для разработчиков (Мапперы)
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckMapper
   name: cloak of genesis
   description: A special cloak whose wearers have been honored to participate in the creation of the world.
@@ -45,7 +45,7 @@
 
   # Для разработчиков (Спрайтеры)
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckSpriter
   name: cloak of inscription
   description: A special cloak whose wearers brought color and filled the world with grace.
@@ -58,7 +58,7 @@
 
   # Для разработчиков (Трекероведы)
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckTrackerExpert
   name: cloak of equilibrium
   description: A special cloak for those who have dedicated themselves to protecting the outside world.
@@ -71,7 +71,7 @@
 
   # Награда ведущих разработчиков
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckHeadDevelopment
   name: cloak of knowing creation
   description: A special cloak belonging to an entity attributed with power over the universe itself.
@@ -84,7 +84,7 @@
 
 # Administrator
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckAdministrator
   name: cloak of order
   description: An elegant mantle bestowed upon the eternal guardians who watch over the order of the world.
@@ -96,7 +96,7 @@
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
 
 - type: entity
-  parent: ClothingSponsorNeckOtherShoulderBase
+  parent: [ClothingSponsorNeckOtherShoulderBase, BaseClothingCloak]
   id: ClothingSponsorNeckMentor
   name: cloak of guidance
   description: A special cloak awarded to teachers who tirelessly guide the chosen ones on their arduous journey.
@@ -109,7 +109,7 @@
 
 # Moderator
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckModerator
   name: cloak of the ministry of love
   description: A cloak from the ministry where there is no darkness. Such cloaks are often worn by the thought police. The eyes on the pattern are definitely watching you.
@@ -122,7 +122,7 @@
 
  # Для викиредов
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckWikiEditors
   name: cloak of cognition
   description: A special cloak granted to the first who imagined and composed the rules of our world.
@@ -143,7 +143,7 @@
 
 # Разное
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak]
   id: ClothingNeckCloakFloppa
   name: floppa's hide
   description: It's not what you think.
@@ -162,7 +162,7 @@
 
 # Для лороведов
 - type: entity
-  parent: ClothingSponsorNeckBase
+  parent: [ClothingSponsorNeckBase, BaseClothingCloak]
   id: ClothingSponsorNeckLoroveds
   name: the cloak of storytelling
   description: A special cloak given to the guardians, whose purpose is to preserve the memory of the world.

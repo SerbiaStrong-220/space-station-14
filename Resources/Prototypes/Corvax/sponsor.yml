@@ -30,7 +30,7 @@
           Heat: 0.80
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak] #SS220-cloak-hide-equipment
   id: ClothingCloakAtmosian
   name: atmosian's cloak
   description: The cloak of a legendary Atmosian.
@@ -56,7 +56,7 @@
     - type: BreathMask
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseClothingCloak] #SS220-cloak-hide-equipment
   id: ClothingCloakGamer
   name: legendary gamer's cloak
   description: Worn by the most skilled professional gamers.
