@@ -30,6 +30,8 @@ public sealed class InteractHandEvent : HandledEntityEventArgs, ITargetedInterac
     /// </summary>
     public EntityUid Target { get; }
 
+    public bool PreventContact; //SS220-NonTactile
+
     public InteractHandEvent(EntityUid user, EntityUid target)
     {
         User = user;

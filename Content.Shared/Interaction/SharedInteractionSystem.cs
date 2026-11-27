@@ -1506,6 +1506,11 @@ namespace Content.Shared.Interaction
             if (uidB == null || args?.Handled == false)
                 return;
 
+            //SS220-NonTactile begin
+            if (args is InteractHandEvent { PreventContact: true })
+                return;
+            //SS220-NonTactile end
+
             if (uidA == uidB.Value)
                 return;
 
