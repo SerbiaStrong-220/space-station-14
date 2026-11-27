@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Grid
-  engineVersion: 275.2.0
+  category: Map
+  engineVersion: 277.2.5
   forkId: ""
   forkVersion: ""
-  time: 05/11/2026 22:21:52
-  entityCount: 790
-maps: []
+  time: 11/15/2026 07:16:45
+  entityCount: 791
+maps:
+- 515
 grids:
 - 1
-orphans:
-- 1
+orphans: []
 nullspace: []
 tilemap:
   0: Space
@@ -36,7 +36,7 @@ entities:
       name: Si-SSWA - "Whiskey"
     - type: Transform
       pos: -0.4633603,-3.7108612
-      parent: invalid
+      parent: 515
     - type: Tag
       tags:
       - Syndicate
@@ -697,6 +697,17 @@ entities:
     - type: TileHistory
       chunkHistory: {}
     - type: ExplosionAirtightGrid
+  - uid: 515
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: GridTree
+    - type: Broadphase
+    - type: OccluderTree
+    - type: SkipAutoVariantize
 - proto: AirAlarm
   entities:
   - uid: 10
@@ -4003,12 +4014,11 @@ entities:
     - type: Transform
       pos: 4.629271,3.6529398
       parent: 1
-- proto: NuclearBomb
+- proto: NuclearBombUnanchored
   entities:
-  - uid: 515
+  - uid: 791
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -2.5,3.5
       parent: 1
 - proto: OperatingTable
