@@ -21,8 +21,13 @@ public sealed partial class CuffableComponent : Component
     /// <summary>
     /// How many of this entity's hands are currently cuffed.
     /// </summary>
+    //SS220-ArahnidHandReturn begin
+    [DataField]
+    public int HandsPerCuff = 2;
+
     [ViewVariables]
-    public int CuffedHandCount => Container.ContainedEntities.Count * 2;
+    public int CuffedHandCount => Container.ContainedEntities.Count * HandsPerCuff;
+    //SS220-ArahnidHandReturn end
 
     /// <summary>
     ///     Container of various handcuffs currently applied to the entity.
