@@ -28,6 +28,12 @@ public sealed class RoboticsConsoleBoundUserInterface : BoundUserInterface
         {
             SendMessage(new RoboticsConsoleDestroyMessage(address));
         };
+        // SS220 Silicon-Manifest begin
+        _window.OnManifestPressed += address =>
+        {
+            SendMessage(new RoboticsConsoleToggleManifestMessage(address));
+        };
+        // SS220 Silicon-Manifest end
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

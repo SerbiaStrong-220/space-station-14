@@ -50,7 +50,12 @@ public sealed partial class BorgSystem
                 hpPercent,
                 chassis.ModuleCount,
                 hasBrain,
-                canDisable);
+                canDisable)
+            // SS220 Silicon-Manifest begin
+            {
+                Entity = GetNetEntity(uid),
+            };
+            // SS220 Silicon-Manifest end
 
             var payload = new NetworkPayload()
             {

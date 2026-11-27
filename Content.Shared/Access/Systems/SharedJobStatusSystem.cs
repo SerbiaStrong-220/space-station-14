@@ -2,6 +2,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Hands;
 using Content.Shared.Inventory.Events;
 using Content.Shared.PDA;
+using Content.Shared.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
@@ -63,7 +64,17 @@ public abstract class SharedJobStatusSystem : EntitySystem
 
         // SS220 Add borg icon for hud begin
         if (HasComp<BorgChassisComponent>(ent) && iconId == JobIconForNoId)
+        {
             iconId = JobIconForBorg;
+
+            if (TryComp<BorgSwitchableTypeComponent>(ent, out var switchable) &&
+                switchable.SelectedBorgType is { } borgType &&
+                _prototype.TryIndex(borgType, out BorgTypePrototype? borgTypeProto) &&
+                borgTypeProto.Icon is { } borgIcon)
+            {
+                iconId = borgIcon;
+            }
+        }
         // SS220 Add borg icon for hud end
 
         ent.Comp.JobStatusIcon = iconId;

@@ -24,10 +24,18 @@ public sealed class RoboticsConsoleState : BoundUserInterfaceState
     /// </summary>
     public bool AllowBorgControl;
 
-    public RoboticsConsoleState(Dictionary<string, CyborgControlData> cyborgs, bool allowBorgControl)
+    // SS220 Silicon-Manifest begin
+    /// <summary>
+    /// If the UI will have the button to toggle manifest membership.
+    /// </summary>
+    public bool AllowManifest;
+    // SS220 Silicon-Manifest end
+
+    public RoboticsConsoleState(Dictionary<string, CyborgControlData> cyborgs, bool allowBorgControl, bool allowManifest) // SS220 Silicon-Manifest
     {
         Cyborgs = cyborgs;
         AllowBorgControl = allowBorgControl;
+        AllowManifest = allowManifest; // SS220 Silicon-Manifest
     }
 }
 
@@ -58,6 +66,17 @@ public sealed class RoboticsConsoleDestroyMessage : BoundUserInterfaceMessage
         Address = address;
     }
 }
+
+// SS220 Silicon-Manifest begin
+/// <summary>
+/// Message to toggle whether the selected cyborg is listed in the crew manifest.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class RoboticsConsoleToggleManifestMessage(string address) : BoundUserInterfaceMessage
+{
+    public readonly string Address = address;
+}
+// SS220 Silicon-Manifest end
 
 /// <summary>
 /// All data a client needs to render the console UI for a single cyborg.
@@ -115,6 +134,20 @@ public partial record struct CyborgControlData
     /// </summary>
     [DataField]
     public bool CanDisable;
+
+    // SS220 Silicon-Manifest begin
+    /// <summary>
+    /// The borg entity, used to toggle manifest membership.
+    /// </summary>
+    [DataField]
+    public NetEntity Entity;
+
+    /// <summary>
+    /// Whether the borg is currently listed in the station's crew manifest.
+    /// </summary>
+    [DataField]
+    public bool InManifest;
+    // SS220 Silicon-Manifest end
 
     /// <summary>
     /// When this cyborg's data will be deleted.

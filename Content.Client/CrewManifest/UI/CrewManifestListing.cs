@@ -1,4 +1,5 @@
 ﻿using Content.Shared.CrewManifest;
+using Content.Client.SS220.CrewManifest.UI;
 using Content.Shared.Roles;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
@@ -59,6 +60,11 @@ public sealed class CrewManifestListing : BoxContainer
         {
             AddChild(new CrewManifestSection(_prototypeManager, _spriteSystem, item.section, item.entries));
         }
+
+        // SS220 Silicon-Manifest begin
+        if (entries.Synthetics is { Length: > 0 })
+            AddChild(new CrewManifestSiliconSection(_prototypeManager, _spriteSystem, entries.Synthetics));
+        // SS220 Silicon-Manifest end
 
         // SS220 Cryo-Manifest
         if (cryoList.Count > 0)

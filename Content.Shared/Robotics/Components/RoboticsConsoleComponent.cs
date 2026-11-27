@@ -56,4 +56,12 @@ public sealed partial class RoboticsConsoleComponent : Component
     /// </summary>
     [DataField]
     public bool AllowBorgControl = true;
+
+    // SS220 Silicon-Manifest begin
+    /// <summary>
+    /// Controls if the console can add or remove borgs from the crew manifest.
+    /// </summary>
+    [DataField]
+    public bool AllowManifest;
+    // SS220 Silicon-Manifest end
 }
