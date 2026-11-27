@@ -8,22 +8,22 @@ namespace Content.Shared.SS220.Weapons.Ranged;
 /// <summary>
 ///     Raised when attemting to cycle the entity in your hands.
 /// </summary>
-[ByRefEvent]
-public record struct GunCycleRequestEvent
+[NetSerializable, Serializable]
+public sealed class GunCycleRequestEvent : EntityEventArgs
 {
     /// <summary>
     ///     The gun
     /// </summary>
-    public EntityUid Gun;
+    public NetEntity Gun;
 
     /// <summary>
     ///     Entity holding the gun in their hand.
     /// </summary>
-    public EntityUid User;
+    public NetEntity User;
 
     public bool Handled = false;
 
-    public GunCycleRequestEvent(EntityUid user, EntityUid gun)
+    public GunCycleRequestEvent(NetEntity user, NetEntity gun)
     {
         User = user;
         Gun = gun;

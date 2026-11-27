@@ -1,13 +1,15 @@
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.SS220.CCVars;
+using Content.Shared.SS220.Weapons.Ranged;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -29,6 +31,8 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<InteractionVerb>>(OnChamberInteractionVerb);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnMagazineVerb);
 
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, ActivateInWorldEvent>(OnChamberActivate);
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, UseInHandEvent>(OnChamberUse);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, InteractUsingEvent>(OnInteractUsing); //SS220 weapon overhaul
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, AmmoFillDoAfterEvent>(OnChamberMagAmmoFillDoAfter); //SS220 weapon overhaul
 
@@ -46,34 +50,44 @@ public abstract partial class SharedGunSystem
         }
     }
 
-    //SS220 do not use this begin
-    ///// <summary>
-    ///// Called when user "Activated In World" (E) with the gun as the target
-    ///// </summary>
-    //private void OnChamberActivate(EntityUid uid, ChamberMagazineAmmoProviderComponent component, ActivateInWorldEvent args)
-    //{
-    //    if (args.Handled || !args.Complex)
-    //        return;
+    /// <summary>
+    /// Called when user "Activated In World" (E) with the gun as the target
+    /// </summary>
+    private void OnChamberActivate(EntityUid uid, ChamberMagazineAmmoProviderComponent component, ActivateInWorldEvent args)
+    {
+        if (args.Handled || !args.Complex)
+            return;
 
-    //    args.Handled = true;
-    //    ToggleBolt(uid, component, args.User);
-    //}
+        args.Handled = true;
+        ToggleBolt(uid, component, args.User);
+    }
 
-    ///// <summary>
-    ///// Called when gun was "Activated In Hand" (Z)
-    ///// </summary>
-    //private void OnChamberUse(EntityUid uid, ChamberMagazineAmmoProviderComponent component, UseInHandEvent args)
-    //{
-    //    if (args.Handled)
-    //        return;
+    //SS220 weapon overhaul begin
+    /// <summary>
+    /// Called when gun was "Activated In Hand" (Z)
+    /// </summary>
+    private void OnChamberUse(EntityUid uid, ChamberMagazineAmmoProviderComponent component, UseInHandEvent args)
+    {
+        if (args.Handled ||
+            !Timing.IsFirstTimePredicted ||
+            _netManager.IsServer)
+            return;
 
-    //    args.Handled = true;
-    //    if (component.CanRack)
-    //        UseChambered(uid, component, args.User);
-    //    else
-    //        ToggleBolt(uid, component, args.User);
-    //}
-    //SS220 do not use this end
+        if (!_cfg.GetCVar(CCVars220.ControlIgnoreGunInteraction))
+            return;
+
+        args.Handled = true;
+
+        if (!TryGetNetEntity(args.User, out var netUser) ||
+            !TryGetNetEntity(uid, out var netGun) ||
+            netUser is not { Valid: true } netUserValid ||
+            netGun is not { Valid: true } netGunValid)
+            return;
+
+        var ev = new GunCycleRequestEvent(netUserValid, netGunValid);
+        RaisePredictiveEvent(ev);
+    }
+    //SS220 weapon overhaul end
 
     /// <summary>
     /// Creates "Rack" verb on the gun
