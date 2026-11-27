@@ -240,6 +240,7 @@
     selectedMode: FullAuto
     availableModes:
     - FullAuto
+    angleDecay: 14
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: MagazineVisuals
@@ -247,8 +248,8 @@
     steps: 5
     zeroVisible: true
   - type: GunWieldBonus
-    minAngle: -2
-    maxAngle: -13
+    minAngle: -10
+    maxAngle: -15
   - type: BatteryAmmoProvider
     proto: BulletLaserSMG
     fireCost: 48
