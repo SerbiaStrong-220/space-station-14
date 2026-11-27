@@ -31,7 +31,19 @@
     - id: CriminalRecords
       enabled: false
     - id: JobIcons
-      enabled: false
+      enabled: true
+    - id: Zombies
+      enabled: true
+    - id: Cult
+      enabled: true
+    - id: EventRoles
+      enabled: true
+    - id: Revolutionaries
+      enabled: true
+    - id: Syndicate
+      enabled: true
+    - id: MindSlaves
+      enabled: true
   # SS220 ghost-hud-settings end
   - type: Hands
     hands:

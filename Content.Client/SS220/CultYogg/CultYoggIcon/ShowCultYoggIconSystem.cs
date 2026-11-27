@@ -1,7 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Ghost;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.StatusIcon.Components;
+using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.CultYogg.CultYoggIcon;
@@ -9,6 +11,7 @@ namespace Content.Client.SS220.CultYogg.CultYoggIcon;
 public sealed partial class ShowCultYoggIconsSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {
@@ -19,6 +22,10 @@ public sealed partial class ShowCultYoggIconsSystem : EntitySystem
 
     private void OnGetCultistsIconsEvent(Entity<ShowCultYoggIconsComponent> uid, ref GetStatusIconsEvent ev)
     {
+        var viewer = _playerManager.LocalSession?.AttachedEntity;
+        if (HasComp<GhostComponent>(viewer) && !HasComp<ShowCultYoggIconsComponent>(viewer))
+            return;
+
         if (!TryComp<ShowCultYoggIconsComponent>(uid, out var cultComp))
             return;
 

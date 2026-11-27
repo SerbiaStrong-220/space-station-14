@@ -114,7 +114,7 @@
   id: MindSlaveIcon
   priority: 11
   locationPreference: Right
-  visibleToGhosts: false
+  visibleToGhosts: true
   icon:
     sprite: /Textures/SS220/Interface/Misc/job_icons.rsi
     state: slave
@@ -123,7 +123,7 @@
   id: MindSlaveMasterIcon
   priority: 11
   locationPreference: Right
-  visibleToGhosts: false
+  visibleToGhosts: true
   icon:
     sprite: /Textures/SS220/Interface/Misc/job_icons.rsi
     state: master
