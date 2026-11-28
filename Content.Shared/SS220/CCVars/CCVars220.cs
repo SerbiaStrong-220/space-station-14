@@ -30,7 +30,7 @@ public sealed partial class CCVars220
         CVarDef.Create("infolinks.boosty", "", CVar.SERVER | CVar.REPLICATED);
 
     public static readonly CVarDef<int> TraitorDeathMatchStartingBalance =
-        CVarDef.Create("game.traitor_deathmatch_starting_balance", 20, CVar.SERVER);
+        CVarDef.Create("game.traitor_deathmatch_starting_balance", 200, CVar.SERVER);
 
     /// <summary>
     /// Delay of ahelp messages for non-admins.
