@@ -68,7 +68,20 @@ public sealed partial class DismembermentSystem : EntitySystem
     /// </summary>
     private void OnDamageChanged(Entity<DismembermentComponent> ent, ref DamageChangedEvent args)
     {
-        if (!args.DamageIncreased || args.DamageDelta is not { } delta || ent.Comp.TearTick == _timing.CurTick || HasComp<GodmodeComponent>(ent))
+        if (!args.DamageIncreased || args.DamageDelta is not { } delta)
+            return;
+
+        if (ent.Comp.ExecutionCutTick == _timing.CurTick && args.Origin == ent.Comp.ExecutionCutBy)
+        {
+            ent.Comp.ExecutionCutTick = GameTick.Zero;
+            ent.Comp.ExecutionCutBy = null;
+            if (_body.TryGetOrganByCategory(ent.Owner, HeadCategory, out var head))
+                TearOff(ent, head.Value);
+
+            return;
+        }
+
+        if (ent.Comp.TearTick == _timing.CurTick || HasComp<GodmodeComponent>(ent))
             return;
 
         if (TryComp<PathologyHolderComponent>(ent, out var holder) && holder.DamageWithoutTraumas)
@@ -134,7 +147,8 @@ public sealed partial class DismembermentSystem : EntitySystem
     }
 
     /// <summary>
-    /// The hit of an execution comes before its damage and only for a target it really hits, a missed or blocked execution cuts nothing off.
+    /// The hit of an execution comes only for a target it really hits, a missed or blocked execution cuts nothing off.
+    /// It comes before the damage and other handlers may still cancel it, so the head is cut by the damage of the hit.
     /// </summary>
     private void OnExecutionHit(Entity<ExecutionComponent> ent, ref MeleeHitEvent args)
     {
@@ -150,11 +164,11 @@ public sealed partial class DismembermentSystem : EntitySystem
             if (!TryComp<DismembermentComponent>(target, out var dismemberment)
                 || dismemberment.ExecutionDecapitationSlash is not { } minSlash
                 || slash <= minSlash
-                || HasComp<GodmodeComponent>(target)
-                || !_body.TryGetOrganByCategory(target, HeadCategory, out var head))
+                || HasComp<GodmodeComponent>(target))
                 continue;
 
-            TearOff((target, dismemberment), head.Value);
+            dismemberment.ExecutionCutTick = _timing.CurTick;
+            dismemberment.ExecutionCutBy = args.User;
         }
     }
 
@@ -164,6 +178,9 @@ public sealed partial class DismembermentSystem : EntitySystem
             || organ.Category is not { } category
             || !_body.TryExtractOrgan(ent.Owner, category, out _))
             return;
+
+        // the rest of the damage in this tick (e.g. of the same hit) must not tear another part
+        ent.Comp.TearTick = _timing.CurTick;
 
         var direction = _random.NextAngle().ToVec() * _random.NextFloat(ent.Comp.TearThrowMinDistance, ent.Comp.TearThrowMaxDistance);
         // without the compensation the part lands at the distance and keeps sliding

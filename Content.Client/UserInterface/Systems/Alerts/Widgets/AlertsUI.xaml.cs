@@ -36,7 +36,6 @@ public sealed partial class AlertsUI : UIWidget
         // also there may be some new alerts we need to show.
         // further, we need to ensure they are ordered w.r.t their configured order
         SyncUpdateControls(alertsSystem, alertOrderPrototype, alertStates);
-        UpdatePathologyPuppetPosition(); //SS220-surgery-update
     }
 
     public void ClearAllControls()
@@ -48,7 +47,6 @@ public sealed partial class AlertsUI : UIWidget
         }
 
         _alertControls.Clear();
-        ClearPathologyPuppet(); //SS220-surgery-update
     }
 
     public event EventHandler<ProtoId<AlertPrototype>>? AlertPressed;
@@ -115,13 +113,8 @@ public sealed partial class AlertsUI : UIWidget
                     var added = false;
                     foreach (var alertControl in AlertContainer.Children)
                     {
-                        //SS220-surgery-update begin
-                        if (alertControl is not AlertControl control)
+                        if (alertOrderPrototype.Compare(newAlert, ((AlertControl) alertControl).Alert) >= 0)
                             continue;
-
-                        if (alertOrderPrototype.Compare(newAlert, control.Alert) >= 0)
-                            continue;
-                        //SS220-surgery-update end
 
                         var idx = alertControl.GetPositionInParent();
                         AlertContainer.Children.Add(newAlertControl);

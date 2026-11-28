@@ -67,6 +67,9 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
   - type: Limb
     attachedOrgans: [ Brain, Eyes, Tongue, Ears ]
   - type: SeveredOrganVisuals
@@ -113,6 +116,9 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
   - type: Limb
     attachedOrgans: [ HandLeft ]
   - type: SeveredOrganVisuals
@@ -146,6 +152,9 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
   - type: Limb
     attachedOrgans: [ HandRight ]
   - type: SeveredOrganVisuals
@@ -247,6 +256,9 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
   - type: Limb
     attachedOrgans: [ FootLeft ]
     supporting: true
@@ -281,6 +293,9 @@
     overrideDir: South
     #SS220-surgery-update end
   #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
   - type: Limb
     attachedOrgans: [ FootRight ]
     supporting: true

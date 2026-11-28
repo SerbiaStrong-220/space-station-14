@@ -13,3 +13,6 @@ alerts-void-blocker-desc = Вы разрушили [color=yellow]{ ent-VoidKey }
 
 alerts-demon-rofler-deadscore-name = требуемые поглощения
 alerts-demon-rofler-deadscore-desc = Показывает количество поглощений, требуемых для следующего уровня.
+
+alerts-pathology-doll-name = Состояние тела
+alerts-pathology-doll-desc = Травмы вашего тела

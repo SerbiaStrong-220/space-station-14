@@ -62,4 +62,14 @@ public sealed partial class DismembermentComponent : Component
     /// </summary>
     [ViewVariables]
     public GameTick TearTick = GameTick.Zero;
+
+    /// <summary>
+    /// Tick and attacker of an execution hit that cuts the head off. The head goes only with the damage of that hit,
+    /// so a hit cancelled after it was rolled cuts nothing off.
+    /// </summary>
+    [ViewVariables]
+    public GameTick ExecutionCutTick = GameTick.Zero;
+
+    [ViewVariables]
+    public EntityUid? ExecutionCutBy;
 }

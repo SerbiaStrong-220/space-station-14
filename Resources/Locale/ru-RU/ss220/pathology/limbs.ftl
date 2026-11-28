@@ -32,5 +32,5 @@ pathology-missing-head-description = Голова отделена от тела
 pathology-missing-head-operation = Хирургия головы: раскройте шею и пришейте голову, затем реанимируйте тело.
 
 pathology-tainted-flesh-name = Мёртвая плоть
-pathology-tainted-flesh-description = Пересаженный орган или часть тела взяты у зомби, заражённого или сгнившего тела и отравляют организм.
-pathology-tainted-flesh-operation = Извлеките пересаженный орган или ампутируйте часть тела, взятые у зомби, заражённого или сгнившего тела.
+pathology-tainted-flesh-description = Пересаженный орган или часть тела взяты у сгнившего тела и отравляют организм.
+pathology-tainted-flesh-operation = Извлеките пересаженный орган или ампутируйте часть тела, взятые у сгнившего тела.

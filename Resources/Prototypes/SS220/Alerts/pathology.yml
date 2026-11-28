@@ -1,0 +1,61 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# The body doll of the player, each part is tinted by its traumas.
+- type: alert
+  id: PathologyDoll
+  icons: [ /Textures/SS220/Interface/Surgery/puppet/torso.png ]
+  alertViewEntity: AlertPathologyDollSpriteView
+  name: alerts-pathology-doll-name
+  description: alerts-pathology-doll-desc
+
+- type: entity
+  id: AlertPathologyDollSpriteView
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    # the doll is drawn 1px above the middle of its texture and fills almost the whole alert slot,
+    # 1.5px down leaves equal gaps to the health alert above and to the next alert below.
+    # The alert view drops the offset of the whole sprite, so each layer has it
+    layers:
+    # the icon of the alert goes to the base layer
+    - map: [ "enum.AlertVisualLayers.Base", "enum.SurgeryPuppetPart.Torso" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/butt.png
+      map: [ "enum.SurgeryPuppetPart.LowerTorso" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/head.png
+      map: [ "enum.SurgeryPuppetPart.Head" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/left_arm.png
+      map: [ "enum.SurgeryPuppetPart.LeftArm" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/right_arm.png
+      map: [ "enum.SurgeryPuppetPart.RightArm" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/left_hand.png
+      map: [ "enum.SurgeryPuppetPart.LeftHand" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/right_hand.png
+      map: [ "enum.SurgeryPuppetPart.RightHand" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/left_leg.png
+      map: [ "enum.SurgeryPuppetPart.LeftLeg" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/right_leg.png
+      map: [ "enum.SurgeryPuppetPart.RightLeg" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/left_foot.png
+      map: [ "enum.SurgeryPuppetPart.LeftFoot" ]
+      offset: 0, -0.046875
+    - texture: /Textures/SS220/Interface/Surgery/puppet/right_foot.png
+      map: [ "enum.SurgeryPuppetPart.RightFoot" ]
+      offset: 0, -0.046875
+    # shown over the head only while the eyes or the mouth have a state
+    - texture: /Textures/SS220/Interface/Surgery/puppet/eyes_selected.png
+      map: [ "enum.SurgeryPuppetPart.Eyes" ]
+      offset: 0, -0.046875
+      visible: false
+    - texture: /Textures/SS220/Interface/Surgery/puppet/mouth_selected.png
+      map: [ "enum.SurgeryPuppetPart.Mouth" ]
+      offset: 0, -0.046875
+      visible: false

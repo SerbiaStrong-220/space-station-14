@@ -15,6 +15,7 @@ public sealed partial class PathologySystem : SharedPathologySystem
         base.Initialize();
 
         InitializeBreathing();
+        InitializeDollAlert();
     }
 
     protected override void ApplyPathologyContext(Entity<PathologyHolderComponent> entity, IPathologyContext? context)
