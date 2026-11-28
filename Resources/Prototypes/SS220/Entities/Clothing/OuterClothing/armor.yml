@@ -128,7 +128,7 @@
     clothingPrototype: ClothingHeadHelmetAssault
   - type: ClothingSpeedModifier
     walkModifier: 1
-    sprintModifier: 0.75
+    sprintModifier: 0.85
   - type: NeedleProtection
   - type: ContainerContainer
     containers:
