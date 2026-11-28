@@ -1,6 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Body.Systems;
+using Content.Server.Chat.Systems;
+using Content.Shared.Chat;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared.Interaction;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Systems;
@@ -12,7 +16,11 @@ namespace Content.Server.SS220.Surgery.Systems;
 public sealed partial class SurgerySystem : SharedSurgerySystem
 {
     [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
+
+    private static readonly ProtoId<EmotePrototype> ScreamEmote = "Scream";
 
     public override void Initialize()
     {
@@ -24,6 +32,16 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
 
     private void OnStartSurgeryMessage(Entity<SurgeryStarterComponent> entity, ref StartSurgeryMessage args)
     {
+        var user = GetEntity(args.User);
+        var used = GetEntity(args.Used);
+        var target = GetEntity(args.Target);
+
+        if (user != args.Actor || used != entity.Owner || !Exists(target))
+            return;
+
+        if (!_interaction.InRangeUnobstructed(args.Actor, target))
+            return;
+
         var ev = new StartSurgeryEvent(args.SurgeryGraphId, args.Target, args.User, args.Used);
         RaiseLocalEvent(entity, ev);
     }
@@ -59,7 +77,10 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
 
         // base comes after actions because it changes surgery node
         base.ProceedToNextStep(entity, user, used, surgeryGraph, chosenEdge);
+    }
 
-        Dirty(entity);
+    protected override void OnPatientPain(EntityUid patient)
+    {
+        _chat.TryEmoteWithChat(patient, ScreamEmote, ChatTransmitRange.Normal, ignoreActionBlocker: true);
     }
 }

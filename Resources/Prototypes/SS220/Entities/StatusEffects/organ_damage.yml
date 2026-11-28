@@ -1,0 +1,59 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Slowdowns of damaged organs. Each stack of organ damage slows the sprint a bit more,
+# the modifier is reached at the last stack before the organ fails.
+
+# same filter as StatusEffectSlowdown, but without its MovementModStatusEffect, which slows by half by default
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectOrganDamageSlowdown
+  abstract: true
+  name: organ damage slowdown
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - MobState
+      - MovementSpeedModifier
+      requireAll: true
+    blacklist:
+      tags:
+      - SlowImmune
+  - type: PathologyStatusEffectStackable
+
+- type: entity
+  parent: StatusEffectOrganDamageSlowdown
+  id: StatusEffectLungDamageSlowdown
+  name: shortness of breath
+  components:
+  - type: PathologyMovementModStatusEffect
+    sprintSpeedModifier: 0.95
+    maxStacks: 4
+
+- type: entity
+  parent: StatusEffectOrganDamageSlowdown
+  id: StatusEffectHeartDamageSlowdown
+  name: heart damage slowdown
+  components:
+  - type: PathologyMovementModStatusEffect
+    sprintSpeedModifier: 0.95
+    maxStacks: 3
+
+# failed lungs keep the slowdown the damaged ones reached
+- type: entity
+  parent: StatusEffectSlowdown
+  id: StatusEffectLungFailureSlowdown
+  name: lung failure slowdown
+  components:
+  - type: MovementModStatusEffect
+    walkSpeedModifier: 1
+    sprintSpeedModifier: 0.95
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: StatusEffectHeartFailureSlowdown
+  name: heart failure slowdown
+  components:
+  - type: MovementModStatusEffect
+    walkSpeedModifier: 0.8
+    sprintSpeedModifier: 0.7

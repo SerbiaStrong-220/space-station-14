@@ -1,0 +1,16 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Where a cut or blow lands when it may tear a body part off, weighted like the traumas.
+- type: weightedRandom
+  id: DismembermentZone
+  weights:
+    Torso: 7
+    ArmLeft: 4
+    ArmRight: 4
+    HandLeft: 1
+    HandRight: 1
+    LegLeft: 4
+    LegRight: 4
+    FootLeft: 1
+    FootRight: 1
+    Head: 2

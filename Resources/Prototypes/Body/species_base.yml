@@ -115,6 +115,55 @@
   - type: SSDIndicator
   - type: StandingState
   - type: Crawler
+  #SS220-surgery-update begin
+  - type: OrganWornSlots
+    slots:
+      HandLeft: GLOVES
+      HandRight: GLOVES
+      FootLeft: FEET
+      FootRight: FEET
+      Head: [ HEAD, MASK, EYES, EARS ]
+    masks:
+      HandLeft:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: gloves-left
+      HandRight:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: gloves-right
+      FootLeft:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: shoes-left
+      FootRight:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/limb_masks.rsi
+            state: shoes-right
+  - type: Dismemberment
+    # the chance is (damage - chanceOffset) * chancePerDamage, clamped to min/max
+    hitRoll: # cuts + blows of a hit on a part with a severe trauma, from 15: 35-95%
+      threshold: 15
+      chanceOffset: 9.17
+      chancePerDamage: 0.06
+      minChance: 0.2
+      maxChance: 0.95
+    blastRoll: # blunt of an explosion after armor, from 20: 5-40% per part
+      threshold: 20
+      chanceOffset: 10
+      chancePerDamage: 0.005
+      minChance: 0.05
+      maxChance: 0.4
+    tearDamage:
+      types:
+        Slash: 20
+    tearThrowMinDistance: 2
+    tearThrowMaxDistance: 3
+  #SS220-surgery-update end
   - type: Dna
   - type: MindContainer
   - type: MindExaminable
@@ -255,6 +304,40 @@
     alternateState: Standing
   - type: SurgeryPatient #SS220 Surgery
   - type: PathologyHolder #SS220 Pathology
+    #SS220-surgery-update begin
+    # traumas from one hit: from the threshold the chance is (damage - chanceOffset) * chancePerDamage, clamped to min/max
+    dislocationRoll: # blunt 10-15: 5-30%
+      threshold: 10
+      chanceOffset: 9
+      chancePerDamage: 0.05
+      minChance: 0.05
+      maxChance: 0.35
+    hairlineFractureRoll: # blunt 15-20: 20-55%
+      threshold: 15
+      chanceOffset: 12.15
+      chancePerDamage: 0.07
+      minChance: 0.2
+      maxChance: 0.55
+    compoundFractureRoll: # blunt from 20: 50-90%
+      threshold: 20
+      chanceOffset: 5.71
+      chancePerDamage: 0.035
+      minChance: 0.5
+      maxChance: 0.9
+    arterialPunctureRoll: # slash + piercing from 18: 10-65%
+      threshold: 18
+      chanceOffset: 14
+      chancePerDamage: 0.025
+      minChance: 0.1
+      maxChance: 0.65
+    burnNecrosisRoll: # heat + caustic + shock from 10: 12-65%, a burn below 24, necrosis from 24
+      threshold: 10
+      chanceOffset: 15
+      chancePerDamage: 0.025
+      minChance: 0.12
+      maxChance: 0.65
+      levelThresholds: [ 24 ]
+    #SS220-surgery-update end
   - type: Experience # SS220 Experience update
   - type: StunVisuals
   - type: LimitationRevive #SS220 LimitationRevive

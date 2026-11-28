@@ -10,10 +10,10 @@
     HorizontalExpand="True">
     <PanelContainer VerticalExpand="True" HorizontalExpand="True">
         <PanelContainer.PanelOverride>
-            <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
+            <gfx:StyleBoxFlat BackgroundColor="#202026" BorderColor="#3A3A45" BorderThickness="1"/>
         </PanelContainer.PanelOverride>
     </PanelContainer>
-    <BoxContainer Name="ContentContainer" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+    <BoxContainer Name="ContentContainer" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="6">
         <RichTextLabel Name="HeaderText" Text="{Loc 'operation-list-header'}"/>
         <ScrollContainer Name="OperationScroll" HScrollEnabled="False"
             HorizontalExpand="True" VerticalExpand="True" MouseFilter="Pass">

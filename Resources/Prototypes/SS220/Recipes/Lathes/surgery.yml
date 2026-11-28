@@ -1,0 +1,193 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Unlocked by the surgery technologies, see Research/civilianservices.yml
+
+## Medical techfab
+
+- type: latheRecipe
+  id: SurgeryDiskAdvanced
+  result: SurgeryDiskAdvanced
+  categories: [ Tools ]
+  completetime: 3
+  materials:
+    Steel: 100
+    Gold: 100
+    Plasma: 150
+
+- type: latheRecipe
+  id: SurgeryDiskBioware
+  result: SurgeryDiskBioware
+  categories: [ Tools ]
+  completetime: 3
+  materials:
+    Steel: 100
+    Gold: 100
+    Plasma: 150
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: AmputationShears
+  result: AmputationShears
+  completetime: 4
+  materials:
+    Steel: 600
+    Plastic: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ScalpelAdvanced
+  result: ScalpelAdvanced
+  materials:
+    Steel: 200
+    Plastic: 50
+    Silver: 50
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ScalpelLaser
+  result: ScalpelLaser
+  completetime: 3
+  materials:
+    Steel: 200
+    Glass: 100
+    Gold: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CauteryAdvanced
+  result: CauteryAdvanced
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 100
+    Gold: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: RetractorAdvanced
+  result: RetractorAdvanced
+  completetime: 3
+  materials:
+    Steel: 400
+    Plastic: 100
+    Silver: 100
+
+## Exosuit fabricator, an arm or a leg comes with its hand or foot
+
+- type: latheRecipe
+  abstract: true
+  parent: BaseRoboticsRecipe
+  id: BaseProsthesisCyberLimbRecipe
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 100
+
+- type: latheRecipe
+  abstract: true
+  parent: BaseRoboticsRecipe
+  id: BaseProsthesisCyberPartRecipe
+  completetime: 2
+  materials:
+    Steel: 150
+    Glass: 50
+
+- type: latheRecipe
+  abstract: true
+  parent: BaseRoboticsRecipe
+  id: BaseProsthesisAdvancedCyberLimbRecipe
+  completetime: 4
+  materials:
+    Steel: 400
+    Glass: 150
+    Silver: 100
+
+- type: latheRecipe
+  abstract: true
+  parent: BaseRoboticsRecipe
+  id: BaseProsthesisAdvancedCyberPartRecipe
+  completetime: 3
+  materials:
+    Steel: 200
+    Glass: 75
+    Silver: 50
+
+- type: latheRecipe
+  parent: BaseProsthesisCyberLimbRecipe
+  id: ProsthesisCyberArmLeft
+  result: ProsthesisCyberArmLeft
+
+- type: latheRecipe
+  parent: BaseProsthesisCyberLimbRecipe
+  id: ProsthesisCyberArmRight
+  result: ProsthesisCyberArmRight
+
+- type: latheRecipe
+  parent: BaseProsthesisCyberPartRecipe
+  id: ProsthesisCyberHandLeft
+  result: ProsthesisCyberHandLeft
+
+- type: latheRecipe
+  parent: BaseProsthesisCyberPartRecipe
+  id: ProsthesisCyberHandRight
+  result: ProsthesisCyberHandRight
+
+- type: latheRecipe
+  parent: BaseProsthesisCyberLimbRecipe
+  id: ProsthesisCyberLegLeft
+  result: ProsthesisCyberLegLeft
+
+- type: latheRecipe
+  parent: BaseProsthesisCyberLimbRecipe
+  id: ProsthesisCyberLegRight
+  result: ProsthesisCyberLegRight
+
+- type: latheRecipe
+  parent: BaseProsthesisCyberPartRecipe
+  id: ProsthesisCyberFootLeft
+  result: ProsthesisCyberFootLeft
+
+- type: latheRecipe
+  parent: BaseProsthesisCyberPartRecipe
+  id: ProsthesisCyberFootRight
+  result: ProsthesisCyberFootRight
+
+- type: latheRecipe
+  parent: BaseProsthesisAdvancedCyberLimbRecipe
+  id: ProsthesisAdvancedCyberArmLeft
+  result: ProsthesisAdvancedCyberArmLeft
+
+- type: latheRecipe
+  parent: BaseProsthesisAdvancedCyberLimbRecipe
+  id: ProsthesisAdvancedCyberArmRight
+  result: ProsthesisAdvancedCyberArmRight
+
+- type: latheRecipe
+  parent: BaseProsthesisAdvancedCyberPartRecipe
+  id: ProsthesisAdvancedCyberHandLeft
+  result: ProsthesisAdvancedCyberHandLeft
+
+- type: latheRecipe
+  parent: BaseProsthesisAdvancedCyberPartRecipe
+  id: ProsthesisAdvancedCyberHandRight
+  result: ProsthesisAdvancedCyberHandRight
+
+- type: latheRecipe
+  parent: BaseProsthesisAdvancedCyberLimbRecipe
+  id: ProsthesisAdvancedCyberLegLeft
+  result: ProsthesisAdvancedCyberLegLeft
+
+- type: latheRecipe
+  parent: BaseProsthesisAdvancedCyberLimbRecipe
+  id: ProsthesisAdvancedCyberLegRight
+  result: ProsthesisAdvancedCyberLegRight
+
+- type: latheRecipe
+  parent: BaseProsthesisAdvancedCyberPartRecipe
+  id: ProsthesisAdvancedCyberFootLeft
+  result: ProsthesisAdvancedCyberFootLeft
+
+- type: latheRecipe
+  parent: BaseProsthesisAdvancedCyberPartRecipe
+  id: ProsthesisAdvancedCyberFootRight
+  result: ProsthesisAdvancedCyberFootRight

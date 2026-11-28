@@ -417,7 +417,13 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
             damageVisComp.DisabledLayers[layer] = disabled;
             if (damageVisComp.TrackAllDamage)
             {
-                SpriteSystem.LayerSetVisible((uid, spriteComponent), $"{layer}trackDamage", !disabled);
+                //SS220-surgery-update begin
+                // A disabled layer skips damage updates, so a re-enabled one is redrawn from the current threshold instead of showing its stale state
+                if (disabled)
+                    SpriteSystem.LayerSetVisible((uid, spriteComponent), $"{layer}trackDamage", false);
+                else
+                    UpdateTargetLayer((uid, spriteComponent), damageVisComp, layer, damageVisComp.LastDamageThreshold);
+                //SS220-surgery-update end
                 continue;
             }
 
@@ -426,7 +432,12 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
 
             foreach (var damageGroup in damageVisComp.DamageOverlayGroups.Keys)
             {
-                SpriteSystem.LayerSetVisible((uid, spriteComponent), $"{layer}{damageGroup}", !disabled);
+                //SS220-surgery-update begin
+                if (disabled)
+                    SpriteSystem.LayerSetVisible((uid, spriteComponent), $"{layer}{damageGroup}", false);
+                else
+                    UpdateTargetLayer((uid, spriteComponent, damageVisComp), layer, damageGroup, damageVisComp.LastThresholdPerGroup[damageGroup]);
+                //SS220-surgery-update end
             }
         }
     }

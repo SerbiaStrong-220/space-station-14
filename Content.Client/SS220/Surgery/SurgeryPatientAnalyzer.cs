@@ -9,7 +9,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.SS220.Pathology;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Surgery;
 
@@ -18,6 +17,7 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private RottingSystem _rotting = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SurgerySystem _surgery = default!;
 
     private const int MaxBrainRotPercentage = 100;
 
@@ -39,6 +39,9 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
         if (TryComp<LimitationReviveComponent>(target, out var limitationReviveComponent)
                 && mobStateComponent?.CurrentState == MobState.Dead) // kinda bad fix
             patientStatus.BrainRotDegree = GetBrainRotDegree(limitationReviveComponent, mobStateComponent);
+
+        patientStatus.IsAnesthetized = _surgery.IsPatientAnesthetized(target);
+        patientStatus.IsOnOperatingTable = _surgery.TryGetOperatingTable(target, out _);
 
         CollectPathologyDescriptions(target, ref patientStatus);
 
@@ -100,6 +103,24 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
             recommendation.Problems.Add(Loc.GetString(descLocId));
         }
 
+        foreach (var opLocId in status.PathologiesOperations)
+        {
+            recommendation.Operations.Add(Loc.GetString(opLocId));
+        }
+
+        if (recommendation.Problems.Count == 0 && recommendation.Operations.Count == 0)
+            return recommendation;
+
+        if (!status.IsAnesthetized && status.PatientState == MobState.Alive)
+        {
+            recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-need-anesthesia"));
+        }
+
+        if (!status.IsOnOperatingTable)
+        {
+            recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-need-operating-table"));
+        }
+
         return recommendation;
     }
 
@@ -131,7 +152,13 @@ public sealed partial class SurgeryPatientAnalyzer : EntitySystem
             if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
                 continue;
 
+            if (instanceData.Level < 0 || instanceData.Level >= pathologyPrototype.Definition.Length)
+                continue;
+
             statusData.PathologiesDescription.Add(pathologyPrototype.Definition[instanceData.Level].Description);
+
+            if (SharedPathologySystem.GetOperationRecommendation(pathologyPrototype, instanceData) is { } operationLocId)
+                statusData.PathologiesOperations.Add(operationLocId);
         }
     }
 }

@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -44,9 +45,29 @@ public sealed partial class SurgeryGraphSystem : EntitySystem
         return Get(node, (x) => x.NodeText.Popup);
     }
 
+    public LocId? Popup(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.Popup);
+    }
+
+    public bool IsPainless(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.Painless) ?? false;
+    }
+
     public float? Delay(SurgeryGraphEdge edge)
     {
         return Get(edge, (x) => x.Delay);
+    }
+
+    public float? FailureChance(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.FailureChance);
+    }
+
+    public DamageSpecifier? FailureDamage(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.FailureDamage);
     }
 
     public SpriteSpecifier? EdgeIcon(SurgeryGraphEdge edge)

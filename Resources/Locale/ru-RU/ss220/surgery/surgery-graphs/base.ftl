@@ -10,7 +10,8 @@ surgery-cant-be-cancelled-on-start = Вы не можете завершить �
 cant-start-undefined-surgery = неизвестная операция!
 cant-start-surgery-while-on-surgery = Эта операция уже проводится!
 
-surgery-tool-damage-on-failure = Неосторожнее движение { $used } повреждает ткани { CAPITALIZE(THE($target)) }
+surgery-tool-damage-on-failure = Неосторожное движение { $used } повреждает ткани { CAPITALIZE(THE($target)) }
+surgery-step-failed = Неосторожное движение { $used } срывает этап операции { CAPITALIZE(THE($target)) }
 surgery-need-to-be-started-before-operating = Чтобы оперировать необходимо начать операцию с помощью предмета { ent-SurgeryDrapes }!
 
 surgery-start-ui-target = Начать операцию над {CAPITALIZE($target)}
@@ -23,6 +24,7 @@ seal-wound = Зашивание надреза
 surgery-footer-right = Uup
 surgery-footer-idle = Ожидание выбора операции.
 surgery-footer-confirm = Нажмите ещё раз на операцию, чтобы подтвердить.
+surgery-drape-cancel-button = Отменить: { $surgery }
 
 incision-examine-description = На теле заметен хирургический разрез.
 incision-popup = {THE($user)} делает надрез на теле {THE($target)}, используя {$used}
@@ -52,3 +54,36 @@ bone-gel-edge-name = Восстановить кости
 set-bones-edge-name = Выправить кости
 clamp-bleeders-edge-name = Зажать кровоточащие сосуды
 seal-wound-edge-name = Прижечь рану
+
+compound-fracture-reset-examine-description = В разрезе видна вправленная, но ещё не зафиксированная кость.
+compound-fracture-reset-popup = {THE($user)} вправляет смещённую кость {THE($target)}, используя {$used}
+
+arterial-puncture-clamped-examine-description = В разрезе видна пережатая гемостатом разорванная артерия.
+arterial-puncture-clamped-popup = {THE($user)} зажимает разорванную артерию {THE($target)}, используя {$used}
+
+burn-necrosis-excised-examine-description = Омертвевшие ткани иссечены и готовы к удалению.
+burn-necrosis-excised-popup = {THE($user)} иссекает некротизированные ткани {THE($target)}, используя {$used}
+
+cranial-fissure-prepped-examine-description = Края трещины черепа зачищены и готовы к фиксации.
+cranial-fissure-prepped-popup = {THE($user)} зачищает края трещины черепа {THE($target)}, используя {$used}
+
+to-repair-dislocation = Вправить вывих
+to-repair-hairline-fracture = Восстановить трещину кости
+to-reset-compound-fracture = Вправить открытый перелом
+to-repair-compound-fracture = Зафиксировать кость
+to-clamp-arterial-puncture = Пережать разорванную артерию
+to-seal-arterial-puncture = Закрыть разрыв артерии
+to-excise-burn-necrosis = Иссечь некротические ткани
+to-remove-burn-necrosis = Удалить некротические ткани
+to-drill-cranial-fissure = Зачистить трещину черепа
+
+surgery-pathology-requirement-description-dislocation = Наличие вывиха в этой зоне
+surgery-pathology-requirement-failure-dislocation = Вывиха в этой зоне не обнаружено!
+surgery-pathology-requirement-description-hairline = Наличие трещины кости в этой зоне
+surgery-pathology-requirement-failure-hairline = Трещин кости в этой зоне не обнаружено!
+surgery-pathology-requirement-description-compound = Наличие открытого перелома в этой зоне
+surgery-pathology-requirement-failure-compound = Открытого перелома в этой зоне не обнаружено!
+surgery-pathology-requirement-description-arterial = Наличие разрыва артерии в этой зоне
+surgery-pathology-requirement-failure-arterial = Разрыва артерии в этой зоне не обнаружено!
+surgery-pathology-requirement-description-necrosis = Наличие ожогового некроза в этой зоне
+surgery-pathology-requirement-failure-necrosis = Ожогового некроза в этой зоне не обнаружено!

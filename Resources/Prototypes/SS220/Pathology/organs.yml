@@ -1,0 +1,413 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Missing organs. Added when an organ is extracted and removed when one is inserted back.
+
+- type: pathology
+  id: MissingBrain
+  name: pathology-missing-brain-name
+  isSevere: true
+  targetZone: Head
+  missingOrgan: Brain
+  operationRecommendation: pathology-missing-brain-operation
+  definition:
+  - description: pathology-missing-brain-description
+    effects:
+    # about 5 minutes to death: ~3.3 min to crit, then breathing stops and suffocation joins
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Cellular: 0.5
+
+- type: pathology
+  id: MissingEyes
+  name: pathology-missing-eyes-name
+  examineDescription: pathology-missing-eyes-examine
+  isSevere: true
+  targetZone: Eyes
+  missingOrgan: Eyes
+  operationRecommendation: pathology-missing-eyes-operation
+  definition:
+  - description: pathology-missing-eyes-description
+    trait: Blindness
+
+- type: pathology
+  id: MissingTongue
+  name: pathology-missing-tongue-name
+  examineDescription: pathology-missing-tongue-examine
+  isSevere: true
+  targetZone: Mouth
+  missingOrgan: Tongue
+  operationRecommendation: pathology-missing-tongue-operation
+  definition:
+  - description: pathology-missing-tongue-description
+    trait: Muted
+
+- type: pathology
+  id: MissingHeart
+  name: pathology-missing-heart-name
+  isSevere: true
+  targetZone: Torso
+  missingOrgan: Heart
+  operationRecommendation: pathology-missing-heart-operation
+  definition:
+  - description: pathology-missing-heart-description
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Asphyxiation: 1.5
+
+# body already suffocates without lungs, the pathology only shows the reason
+- type: pathology
+  id: MissingLungs
+  name: pathology-missing-lungs-name
+  isSevere: true
+  targetZone: Torso
+  missingOrgan: Lungs
+  operationRecommendation: pathology-missing-lungs-operation
+  definition:
+  - description: pathology-missing-lungs-description
+
+- type: pathology
+  id: MissingLiver
+  name: pathology-missing-liver-name
+  isSevere: true
+  targetZone: Torso
+  missingOrgan: Liver
+  operationRecommendation: pathology-missing-liver-operation
+  definition:
+  - description: pathology-missing-liver-description
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.5
+
+- type: pathology
+  id: MissingStomach
+  name: pathology-missing-stomach-name
+  isSevere: true
+  targetZone: Torso
+  missingOrgan: Stomach
+  operationRecommendation: pathology-missing-stomach-operation
+  definition:
+  - description: pathology-missing-stomach-description
+
+- type: pathology
+  id: MissingKidneys
+  name: pathology-missing-kidneys-name
+  isSevere: true
+  targetZone: Torso
+  missingOrgan: Kidneys
+  operationRecommendation: pathology-missing-kidneys-operation
+  definition:
+  - description: pathology-missing-kidneys-description
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.2
+
+# Organ damage. The "damaged" stage accumulates stacks from damage sources and heals by itself (about 2 minutes per stack).
+# Its downsides grow with the stacks, so it is worth treating before the organ fails.
+# At max stacks it turns into "failure", which is fixed only by a repair surgery (back to damaged) or a transplant.
+
+- type: pathology
+  id: LungDamage
+  name: pathology-lung-damage-name
+  targetZone: Torso
+  organ: Lungs
+  failsOnRot: true
+  definition:
+  - description: pathology-lung-damage-description
+    maxStackCount: 5
+    stackDecayChance: 0.008
+    stacksAreSevere: false
+    progressConditions:
+    - !type:PathologyStackProgressCondition
+      stackCount: 5
+    statusEffects:
+    - StatusEffectLungDamageSlowdown
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:Emote
+        emote: Cough
+        showInChat: true
+        probability: 0.02
+  - description: pathology-lung-failure-description
+    name: pathology-lung-failure-name
+    operationRecommendation: pathology-lung-damage-operation
+    progressPopup: pathology-lung-failure-popup
+    stopsBreathing: true
+    statusEffects:
+    - StatusEffectLungFailureSlowdown
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-lung-failure-popup" ]
+        probability: 0.05
+
+- type: pathology
+  id: HeartDamage
+  name: pathology-heart-damage-name
+  targetZone: Torso
+  organ: Heart
+  failsOnRot: true
+  definition:
+  - description: pathology-heart-damage-description
+    maxStackCount: 4
+    stackDecayChance: 0.008
+    stacksAreSevere: false
+    progressConditions:
+    - !type:PathologyStackProgressCondition
+      stackCount: 4
+    statusEffects:
+    - StatusEffectHeartDamageSlowdown
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: SmallCaution
+        messages: [ "pathology-heart-damage-popup" ]
+        probability: 0.02
+  - description: pathology-heart-failure-description
+    name: pathology-heart-failure-name
+    operationRecommendation: pathology-heart-damage-operation
+    progressPopup: pathology-heart-failure-popup
+    statusEffects:
+    - StatusEffectHeartFailureSlowdown
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Asphyxiation: 1
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-heart-failure-attack-popup" ]
+        probability: 0.05
+
+- type: pathology
+  id: LiverDamage
+  name: pathology-liver-damage-name
+  targetZone: Torso
+  organ: Liver
+  failsOnRot: true
+  definition:
+  - description: pathology-liver-damage-description
+    maxStackCount: 5
+    stackDecayChance: 0.008
+    stacksAreSevere: false
+    progressConditions:
+    - !type:PathologyStackProgressCondition
+      stackCount: 5
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: SmallCaution
+        messages: [ "pathology-liver-damage-popup" ]
+        probability: 0.02
+    # per stack
+    - !type:PathologyEntityEffect
+      scaleByStacks: true
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.02
+  # failure gets worse every minute, the last stage damages other organs
+  - description: pathology-liver-failure-description
+    name: pathology-liver-failure-name
+    operationRecommendation: pathology-liver-damage-operation
+    progressPopup: pathology-liver-failure-popup
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 1m
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.2
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-liver-failure-popup" ]
+        probability: 0.05
+  - description: pathology-liver-failure-severe-description
+    name: pathology-liver-failure-name
+    operationRecommendation: pathology-liver-damage-operation
+    progressPopup: pathology-liver-failure-severe-popup
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 1m
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.4
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:Vomit
+        probability: 0.02
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-liver-failure-severe-popup" ]
+        probability: 0.05
+  - description: pathology-liver-failure-terminal-description
+    name: pathology-liver-failure-name
+    operationRecommendation: pathology-liver-damage-operation
+    progressPopup: pathology-liver-failure-terminal-popup
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.8
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:Vomit
+        probability: 0.03
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-liver-failure-terminal-popup" ]
+        probability: 0.05
+    - !type:RandomPathologyAddEffect
+      chance: 0.02
+      weightedId: LiverFailureOrganDamage
+
+- type: pathology
+  id: StomachDamage
+  name: pathology-stomach-damage-name
+  targetZone: Torso
+  organ: Stomach
+  failsOnRot: true
+  definition:
+  - description: pathology-stomach-damage-description
+    maxStackCount: 5
+    stackDecayChance: 0.008
+    stacksAreSevere: false
+    progressConditions:
+    - !type:PathologyStackProgressCondition
+      stackCount: 5
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: SmallCaution
+        messages: [ "pathology-stomach-damage-popup" ]
+        probability: 0.02
+    # vomiting grows with the stacks
+    - !type:PathologyEntityEffect
+      chancePerStack: 0.002
+      effects:
+      - !type:Vomit
+  - description: pathology-stomach-failure-description
+    name: pathology-stomach-failure-name
+    operationRecommendation: pathology-stomach-damage-operation
+    progressPopup: pathology-stomach-failure-popup
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:Vomit
+        probability: 0.04
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "pathology-stomach-failure-popup" ]
+        probability: 0.05
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 0.1
+
+# eye damage from welding and flashes on already burnt out eyes
+- type: pathology
+  id: RetinaDamage
+  name: pathology-retina-damage-name
+  targetZone: Eyes
+  organ: Eyes
+  failsOnRot: true
+  definition:
+  - description: pathology-retina-damage-description
+    maxStackCount: 4
+    stackDecayChance: 0.008
+    stacksAreSevere: false
+    progressConditions:
+    - !type:PathologyStackProgressCondition
+      stackCount: 4
+  - description: pathology-retina-failure-description
+    name: pathology-retina-failure-name
+    operationRecommendation: pathology-retina-damage-operation
+    progressPopup: pathology-retina-failure-popup
+    trait: Blindness

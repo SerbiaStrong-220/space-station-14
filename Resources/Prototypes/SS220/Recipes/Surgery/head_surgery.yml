@@ -10,11 +10,11 @@
     failureMessage: surgery-head-complex-inventory-requirement-failure
     slotNames:
     - head
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -31,6 +31,27 @@
       id: head-skin-incision
       baseEdge: incision
       edgeTooltip: to-head-skin-incision
+    - to: head-amputated
+      id: head-amputate-shears
+      baseEdge: amputate-limb-shears
+      edgeTooltip: to-amputate-head-shears
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Head
+      - !type:ApplyBleedingAction
+        # the stump bleeds as hard as a body can
+        bleedAmount: 10
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 100
 
   - node: head-skin-incision
     baseNode: incision
@@ -56,6 +77,16 @@
       id: retract-head-skin-implant-check
       delay: 15
       edgeTooltip: to-head-check-implant
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      edgeIcon:
+        sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+        state: implant-scanner
       actions:
       - !type:CheckImplantAction
       requirements:
@@ -72,18 +103,290 @@
       baseEdge: retract-skin
       delay: 15
       edgeTooltip: to-head-change-tts
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
       actions:
       - !type:ChangeTtsAction
+        surgery: HeadSurgery
+        node: retract-head-skin
+    # cranial fissure repair
+    - to: head-cranial-fissure-prepped
+      id: head-cranial-fissure-prep
+      baseEdge: to-drill-cranial-fissure
+      edgeTooltip: to-prep-cranial-fissure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Drill
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-drill
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: HeadCranialFissure
+        description: surgery-pathology-requirement-description-cranial-fissure
+        failureMessage: surgery-pathology-requirement-failure-cranial-fissure
+    # arterial puncture repair
+    - to: head-arterial-clamped
+      id: head-arterial-clamp
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-clamp-arterial-puncture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: HeadArterialPuncture
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+    # burn necrosis debridement
+    - to: head-necrosis-excised
+      id: head-necrosis-excise
+      baseEdge: to-excise-burn-necrosis
+      edgeTooltip: to-excise-burn-necrosis
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: HeadBurnNecrosis
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
     # deeper
     - to: saw-skull-bone
       id: saw-skull-bone
       baseEdge: saw-bone
       edgeTooltip: to-saw-skull-bone
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-has-bones-description
+        failureMessage: surgery-requirement-has-bones-failure
+        whitelist:
+          components:
+          - Boneless
+    - to: saw-skull-bone
+      id: part-head-soft-tissue
+      baseEdge: retract-skin
+      edgeTooltip: to-part-head-soft-tissue
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      - !type:WhitelistRequirement
+        subject: target
+        description: surgery-requirement-boneless-description
+        failureMessage: surgery-requirement-boneless-failure
+        whitelist:
+          components:
+          - Boneless
+    - to: head-amputated
+      id: head-amputate
+      baseEdge: amputate-limb
+      edgeTooltip: to-amputate-head
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Head
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Slash: 50
+    - to: head-attached
+      id: head-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-head
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: head_m
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Head
+        rejectionDamage:
+          types:
+            Poison: 30
     # return
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-head-incision
+
+  - node: head-amputated
+    baseNode: limb-amputated
+    nodeText:
+      examineDescription: head-amputated-examine-description
+      popup: head-amputated-popup
+    edges:
+    - to: head-attached
+      id: head-amputated-attach
+      baseEdge: attach-limb
+      edgeTooltip: to-attach-head
+      edgeIcon:
+        sprite: Mobs/Species/Human/parts.rsi
+        state: head_m
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Head
+        organName: surgery-organ-name-head
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Head
+        rejectionDamage:
+          types:
+            Poison: 30
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-head-incision
+      actions:
+      # closing the stump stops its bleeding, however strong
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+
+  - node: head-attached
+    baseNode: limb-attached
+    nodeText:
+      examineDescription: head-attached-examine-description
+      popup: head-attached-popup
+    edges:
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-head-incision
+
+  - node: head-cranial-fissure-prepped
+    baseNode: cranial-fissure-prepped
+    edges:
+    - to: retract-head-skin
+      id: head-cranial-fissure-repair
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-cranial-fissure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-cranial-fissure
+        failureMessage: surgery-pathology-requirement-failure-cranial-fissure
+        curePathologies:
+        - HeadCranialFissure
+
+  - node: head-arterial-clamped
+    baseNode: arterial-puncture-clamped
+    edges:
+    - to: retract-head-skin
+      id: head-arterial-seal
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-seal-arterial-puncture
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+        curePathologies:
+        - HeadArterialPuncture
+
+  - node: head-necrosis-excised
+    baseNode: burn-necrosis-excised
+    edges:
+    - to: retract-head-skin
+      id: head-necrosis-remove
+      baseEdge: to-remove-burn-necrosis
+      edgeTooltip: to-remove-burn-necrosis
+      actions:
+      - !type:ApplyDamageAction
+        damageGrouped:
+          Burn: -20
+          Toxin: -15
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+        curePathologies:
+        - HeadBurnNecrosis
 
   - node: saw-skull-bone-gelled-fixed
     baseNode: saw-bone-gelled-fixed
@@ -103,6 +406,9 @@
 
   - node: saw-skull-bone
     baseNode: saw-bone
+    nodeText:
+      examineDescription: saw-skull-bone-examine
+      popup: saw-skull-bone-popup
     edges:
     # remove bullet fragments
     - to: saw-skull-bone
@@ -111,7 +417,7 @@
       edgeTooltip: remove-head-bullet-fragments
       edgeIcon:
         sprite: Objects/Specific/Medical/Surgery/scissors.rsi
-        state: hemostat
+        state: retractor
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
         params:
@@ -119,8 +425,9 @@
       requirements:
       - !type:SurgeryToolRequirement
         subject: used
-        surgeryTool: hemostat
-        description: surgery-requirement-tool-required-hemostat
+        surgeryTool: retractor
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-retractor
         failureMessage: surgery-requirement-tool-miss
       - !type:SurgeryPathologyRequirement
         subject: target
@@ -138,6 +445,27 @@
       id: saw-skull-bone-gelled
       baseEdge: bone-gel
       edgeTooltip: to-saw-skull-bone-gelled
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-has-bones-description
+        failureMessage: surgery-requirement-has-bones-failure
+        whitelist:
+          components:
+          - Boneless
+    - to: retract-head-skin
+      id: close-head-soft-tissue
+      baseEdge: retract-skin
+      edgeTooltip: to-close-head-soft-tissue
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        description: surgery-requirement-boneless-description
+        failureMessage: surgery-requirement-boneless-failure
+        whitelist:
+          components:
+          - Boneless
 
   - node: brain-exposed
     baseNode: retract-skin
@@ -160,6 +488,12 @@
         description: surgery-syndicate-agent-knowledge-requirement-description
         failureMessage: surgery-syndicate-agent-knowledge-requirement-failure
         knowledge: SyndicateAgentKnowledge
+      - !type:HasOrganRequirement
+        subject: target
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
       requirements:
       # to give player popup about incorrect tool <- do I need it?
       - !type:SurgeryToolRequirement
@@ -188,6 +522,13 @@
       id: brain-exposed-heal-brain-damage
       baseEdge: retract-skin
       edgeTooltip: to-brain-exposed-heal-brain-damage
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
       actions:
       - !type:ApplyDamageAction
         damage:
@@ -245,11 +586,522 @@
         - LightweightDrunk
         - FrontalLisp
         - Nervousness
+    # lobotomy, a disk protocol: the failed roll is the failed lobotomy, the action decides the rest
+    - to: brain-exposed
+      id: brain-exposed-lobotomy
+      delay: 12
+      failureChance: 0.5
+      failureDamage:
+        types:
+          Cerebral: 10
+      edgeTooltip: brain-exposed-lobotomy
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: Lobotomy
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      - !type:HasOrganRequirement
+        subject: target
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:CongenitalTraitRequirement
+        subject: target
+        description: surgery-requirement-congenital-trait-description
+        failureMessage: surgery-requirement-congenital-trait-failure
+      actions:
+      - !type:LobotomyAction
+    # pacification, a disk protocol
+    - to: brain-exposed
+      id: brain-exposed-pacify
+      delay: 10
+      edgeTooltip: brain-exposed-pacify
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: Pacification
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      - !type:HasOrganRequirement
+        subject: target
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        invert: true
+        pathology: SurgicalPacification
+        description: surgery-pathology-requirement-description-pacify
+        failureMessage: surgery-pathology-requirement-failure-pacify
+      actions:
+      - !type:AddPathologyAction
+        pathology: SurgicalPacification
+    - to: brain-exposed
+      id: brain-exposed-unpacify
+      delay: 10
+      edgeTooltip: brain-exposed-unpacify
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: Pacification
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      - !type:HasOrganRequirement
+        subject: target
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: SurgicalPacification
+        description: surgery-pathology-requirement-description-unpacify
+        failureMessage: surgery-pathology-requirement-failure-unpacify
+      actions:
+      - !type:RemovePathologyAction
+        pathologies:
+        - SurgicalPacification
+    # brain
+    - to: brain-exposed
+      id: extract-brain
+      baseEdge: extract-organ
+      delay: 10
+      edgeTooltip: to-extract-brain
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: brain
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Brain
+    - to: brain-exposed
+      id: insert-brain
+      baseEdge: insert-organ
+      delay: 10
+      edgeTooltip: to-insert-brain
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: brain
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Brain
+        organName: surgery-organ-name-brain
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Brain
     # return
     - to: saw-skull-bone
       id: saw-skull-bone
       baseEdge: seal-wound
       edgeTooltip: to-close-brain-exposure
+
+  - node: seal-wound
+    baseNode: seal-wound
+
+# Eyes & Mouth surgeries
+- type: surgeryGraph
+  id: EyesSurgery
+  name: surgery-eyes-complex-name
+  description: surgery-eyes-complex-description
+  targetPart: Eyes
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-eyes-complex-inventory-requirement-description
+    failureMessage: surgery-eyes-complex-inventory-requirement-failure
+    slotNames:
+    - eyes
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-head-complex-inventory-requirement-description
+    failureMessage: surgery-head-complex-inventory-requirement-failure
+    slotNames:
+    - head
+  - !type:LyingPatientRequirement
+    subject: target
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    strapWhitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  - !type:HasOrganRequirement
+    subject: target
+    category: Head
+    organName: surgery-organ-name-head
+    description: surgery-requirement-has-organ-description
+    failureMessage: surgery-requirement-has-organ-failure
+  start: start-eyes-surgery
+  end: seal-wound
+  graph:
+  - node: start-eyes-surgery
+    nodeText:
+      examineDescription: surgery-eyes-examine-start
+    edges:
+    - to: eyes-retract-lids
+      id: eyes-retract-lids
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-eyelids
+
+  - node: eyes-retract-lids
+    baseNode: retract-skin
+    edges:
+    - to: eyes-cornea-prepped
+      id: eyes-cornea-prep
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-prep-eye-cornea
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: EyeCornealTrauma
+        description: surgery-pathology-requirement-description-eye-corneal
+        failureMessage: surgery-pathology-requirement-failure-eye-corneal
+    # eyes
+    - to: eyes-retract-lids
+      id: extract-eyes
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-eyes
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: eyeball-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Eyes
+        organName: surgery-organ-name-eyes
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Eyes
+    - to: eyes-retract-lids
+      id: insert-eyes
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-eyes
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: eyeball-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Eyes
+        organName: surgery-organ-name-eyes
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Eyes
+        organName: surgery-organ-name-eyes
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Eyes
+        rejectionDamage:
+          types:
+            Poison: 15
+    # repair eyes
+    - to: eyes-retract-lids
+      id: repair-eyes
+      delay: 6.5
+      failureChance: 0.1
+      edgeTooltip: to-repair-eyes
+      sound: /Audio/SS220/Surgery/organ.ogg
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      visibilityRequirements:
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: RetinaDamage
+        minLevel: 1
+        description: surgery-pathology-requirement-description-eyes-failure
+        failureMessage: surgery-pathology-requirement-failure-eyes-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        regressLevel: true
+        regressStackCount: 2
+        description: surgery-pathology-requirement-description-eyes-failure
+        failureMessage: surgery-pathology-requirement-failure-eyes-failure
+        curePathologies:
+        - RetinaDamage
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-eyes-surgery
+
+  - node: eyes-cornea-prepped
+    nodeText:
+      examineDescription: eyes-cornea-prepped-examine-description
+      popup: eyes-cornea-prepped-popup
+    edges:
+    - to: eyes-retract-lids
+      id: eyes-cornea-repair
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-repair-eye-cornea
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-eye-corneal
+        failureMessage: surgery-pathology-requirement-failure-eye-corneal
+        curePathologies:
+        - EyeCornealTrauma
+
+  - node: seal-wound
+    baseNode: seal-wound
+
+- type: surgeryGraph
+  id: MouthSurgery
+  name: surgery-mouth-complex-name
+  description: surgery-mouth-complex-description
+  targetPart: Mouth
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-mouth-complex-inventory-requirement-description
+    failureMessage: surgery-mouth-complex-inventory-requirement-failure
+    slotNames:
+    - mask
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-head-complex-inventory-requirement-description
+    failureMessage: surgery-head-complex-inventory-requirement-failure
+    slotNames:
+    - head
+  - !type:LyingPatientRequirement
+    subject: target
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    strapWhitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  - !type:HasOrganRequirement
+    subject: target
+    category: Head
+    organName: surgery-organ-name-head
+    description: surgery-requirement-has-organ-description
+    failureMessage: surgery-requirement-has-organ-failure
+  start: start-mouth-surgery
+  end: seal-wound
+  graph:
+  - node: start-mouth-surgery
+    nodeText:
+      examineDescription: surgery-mouth-examine-start
+    edges:
+    - to: start-mouth-surgery
+      id: start-mouth-repair-jaw
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-jaw-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-jaw-dislocation
+        failureMessage: surgery-pathology-requirement-failure-jaw-dislocation
+        curePathologies:
+        - MouthJawDislocation
+    - to: mouth-skin-incision
+      id: mouth-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-mouth-skin-incision
+
+  - node: mouth-skin-incision
+    baseNode: incision
+    edges:
+    - to: mouth-skin-clamp-bleeders
+      id: mouth-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-mouth-skin-clamp-bleeders
+
+  - node: mouth-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-mouth-skin
+      id: retract-mouth-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-mouth-skin
+
+  - node: retract-mouth-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-mouth-skin
+      id: retract-mouth-repair-jaw
+      baseEdge: to-repair-dislocation
+      edgeTooltip: to-repair-jaw-dislocation
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-jaw-dislocation
+        failureMessage: surgery-pathology-requirement-failure-jaw-dislocation
+        curePathologies:
+        - MouthJawDislocation
+    - to: retract-mouth-skin
+      id: retract-mouth-skin-change-tts
+      baseEdge: retract-skin
+      delay: 15
+      edgeTooltip: to-head-change-tts
+      actions:
+      - !type:ChangeTtsAction
+        surgery: MouthSurgery
+        node: retract-mouth-skin
+    # tongue
+    - to: retract-mouth-skin
+      id: extract-tongue
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-tongue
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: tongue
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Tongue
+        organName: surgery-organ-name-tongue
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Tongue
+    - to: retract-mouth-skin
+      id: insert-tongue
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-tongue
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: tongue
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Tongue
+        organName: surgery-organ-name-tongue
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Tongue
+        organName: surgery-organ-name-tongue
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Tongue
+        rejectionDamage:
+          types:
+            Poison: 15
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-mouth-incision
 
   - node: seal-wound
     baseNode: seal-wound

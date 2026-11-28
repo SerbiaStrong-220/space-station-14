@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -11,7 +10,6 @@ namespace Content.Server.SS220.Pathology;
 
 public sealed partial class PathologyHealerSystem : EntitySystem
 {
-    [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPathologySystem _pathology = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;
@@ -46,15 +44,19 @@ public sealed partial class PathologyHealerSystem : EntitySystem
 
     private void OnDoAfter(Entity<PathologyHolderComponent> target, ref HealingPathologyDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled)
+        if (args.Handled || args.Cancelled || args.Used is not { } used)
             return;
 
-        if (!TryComp<PathologyHealerComponent>(args.Used, out var healing))
+        if (!TryComp<PathologyHealerComponent>(used, out var healing))
             return;
 
-        if (!_powerCell.TryUseActivatableCharge(args.Used.Value, user: args.User))
+        if (!HasAnyCurablePathology(healing, target))
             return;
 
+        if (!_powerCell.HasActivatableCharge(used, user: args.User))
+            return;
+
+        var curedAny = false;
         var damageModifier = 0f;
         foreach (var selector in healing.CurePathologyStacksSelectors)
         {
@@ -63,23 +65,50 @@ public sealed partial class PathologyHealerSystem : EntitySystem
                 if (!_pathology.TryChangePathologyStack(target!, id, deltaStack))
                     continue;
 
+                curedAny = true;
                 var modifierEv = new GetPathologyHealerDamageModifier(id, target.Owner, args.User);
-                RaiseLocalEvent(target, ref modifierEv);
+                RaiseLocalEvent(args.User, ref modifierEv);
 
-                damageModifier += (modifierEv.Modifier * Math.Abs(deltaStack));
+                damageModifier += modifierEv.Modifier * Math.Abs(deltaStack);
                 break;
             }
         }
 
+        if (!curedAny)
+            return;
+
+        _powerCell.TryUseActivatableCharge(used, user: args.User);
+
         if (damageModifier == 0f)
             return;
 
-        _damageable.TryChangeDamage(target.Owner, healing.DamagePerCure * damageModifier, origin: args.User, ignoreResistances: true);
+        // the damage of the treatment is not a hit
+        _pathology.TryChangeDamageWithoutTraumas(target.Owner, healing.DamagePerCure * damageModifier, out _, ignoreResistances: true, origin: args.User);
+    }
+
+    private bool HasAnyCurablePathology(PathologyHealerComponent healing, Entity<PathologyHolderComponent> target)
+    {
+        foreach (var selector in healing.CurePathologyStacksSelectors)
+        {
+            foreach (var (id, _) in selector)
+            {
+                if (_pathology.HavePathology(target!, id))
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     private bool TryHeal(Entity<PathologyHealerComponent> healing, Entity<PathologyHolderComponent?> target, EntityUid user)
     {
         if (!Resolve(target.Owner, ref target.Comp, logMissing: false))
+            return false;
+
+        if (!HasAnyCurablePathology(healing.Comp, (target.Owner, target.Comp)))
+            return false;
+
+        if (!_powerCell.HasActivatableCharge(healing.Owner, user: user))
             return false;
 
         var doAfterEventArgs =

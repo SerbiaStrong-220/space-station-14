@@ -14,7 +14,17 @@ public sealed partial class SurgeryPathologyRequirement : SurgeryGraphRequiremen
     [DataField]
     public int StackChange = -1;
 
-    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    /// <summary>
+    /// If set, the pathology is lowered to its first level with <see cref="RegressStackCount"/> stacks instead of being cured,
+    /// e.g. a repaired organ goes from any failure stage back to damaged and heals by itself.
+    /// </summary>
+    [DataField]
+    public bool RegressLevel;
+
+    [DataField]
+    public int RegressStackCount = 1;
+
+    protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
         if (!entityManager.TryGetComponent<PathologyHolderComponent>(uid, out var pathologyHolder))
             return false;
@@ -37,6 +47,12 @@ public sealed partial class SurgeryPathologyRequirement : SurgeryGraphRequiremen
         {
             if (!CurePathologies.Contains(key))
                 continue;
+
+            if (RegressLevel)
+            {
+                entityManager.System<SharedPathologySystem>().TryRegressPathology(uid.Value, key, RegressStackCount, toLevel: 0);
+                break;
+            }
 
             if (!entityManager.System<SharedPathologySystem>().TryRemovePathology(uid.Value, key))
                 entityManager.System<SharedPathologySystem>().TryChangePathologyStack(uid.Value, key, StackChange);

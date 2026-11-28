@@ -24,6 +24,7 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         base.Open();
         _menu = this.CreateWindow<SimpleRadialMenu>();
         _menu.Track(Owner);
+        _menu.OpenOverMouseScreenPosition();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -36,8 +37,6 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
 
                 var buttons = ConvertInfosToButtons(msg.Infos);
                 _menu?.SetButtons(buttons);
-
-                _menu?.OpenOverMouseScreenPosition();
 
                 break;
         }
@@ -71,7 +70,7 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
             Used = _used
         };
 
-        SendMessage(msg);
+        SendPredictedMessage(msg);
     }
 
     public sealed class RadialMenuDoubleArgumentActionOption<T1, T2>(Action<T1, T2> onPressed, T1 data1, T2 data2) : RadialMenuActionOptionBase(onPressed: () => onPressed(data1, data2));

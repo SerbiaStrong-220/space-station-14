@@ -42,6 +42,10 @@
               Cerebral: 0.25
       - !type:SatiateHunger
         factor: -0.2
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
 
 - type: reagent
   id: Aglomorphine
@@ -55,6 +59,13 @@
     Bloodstream:
       metabolismRate: 0.1
       effects:
+      - !type:AddPathology
+        pathology: HeartDamage
+        probability: 0.12
+        conditions:
+        - !type:ReagentCondition
+          reagent: Aglomorphine
+          min: 10
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -88,6 +99,10 @@
         statusEffectId: MobThresholdsModifierAglomorphine
         duration: 5
         refresh: false
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
       - !type:HealthChange
           damage:
             types:
@@ -108,6 +123,13 @@
     Bloodstream:
       metabolismRate: 0.5
       effects:
+      - !type:AddPathology
+        pathology: HeartDamage
+        probability: 0.12
+        conditions:
+        - !type:ReagentCondition
+          reagent: Frontier
+          min: 20.5
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -154,6 +176,10 @@
         dependsOnAdaptation: true
         duration: 5
         refresh: false
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
       - !type:Hallucination
         setting:
           randomEntities: HallucinationReagentFrontier

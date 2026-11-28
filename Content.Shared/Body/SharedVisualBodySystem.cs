@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid;
+using Content.Shared.SS220.Body;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -122,6 +123,12 @@ public abstract partial class SharedVisualBodySystem : EntitySystem
             return;
 
         ent.Comp.Profile = data;
+
+        //SS220-surgery-update begin
+        // a prosthesis has its own colors, the body's skin doesn't apply to it
+        if (HasComp<ProsthesisComponent>(ent))
+            return;
+        //SS220-surgery-update end
 
         if (ent.Comp.Layer.Equals(HumanoidVisualLayers.Eyes))
             SetOrganColor(ent, ent.Comp.Profile.EyeColor);

@@ -28,4 +28,4 @@ public readonly record struct PathologyRemovedEvent(ProtoId<PathologyPrototype> 
 // related to pathology, but not the main logic
 
 [ByRefEvent]
-public record struct GetPathologyHealerDamageModifier(ProtoId<PathologyPrototype> PathologyId, EntityUid Owner, EntityUid Target, float Modifier = 1f);
+public record struct GetPathologyHealerDamageModifier(ProtoId<PathologyPrototype> PathologyId, EntityUid Patient, EntityUid Healer, float Modifier = 1f);

@@ -4,7 +4,7 @@ using Content.Server.Medical;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Systems;
 
-namespace Content.Server.SS220.Surgery.Action;
+namespace Content.Server.SS220.Surgery.Actions;
 
 [DataDefinition]
 public sealed partial class TryCompactDefibZapAction : ISurgeryGraphEdgeAction

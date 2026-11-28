@@ -17,6 +17,10 @@ to-torso-skin-clamp-bleeders = Зажать сосуды в разрезе на 
 to-retract-torso-skin = Расширить надрез на туловище
 to-torso-internal-healing = Грубая обработка ран
 to-saw-rib-bone = Распилить ребра
+to-part-torso-soft-tissue = Раздвинуть мягкие ткани грудной клетки
+to-close-torso-soft-tissue = Сомкнуть мягкие ткани грудной клетки
+saw-rib-bone-examine = Грудная клетка вскрыта, видны сердце и лёгкие.
+saw-rib-bone-popup = {THE($user)} вскрывает грудную клетку {THE($target)}, используя {$used}
 to-retract-torso-skin-after-gel = Завершить сращивание рёбер
 to-saw-rib-bone-gelled-fixed = Срастить рёбра
 to-saw-rib-bone-gelled = Обработать рёбра костным гелем
@@ -28,13 +32,15 @@ to-close-heart-incision = Зашить сердце
 
 surgery-torso-complex-inventory-requirement-description = У пациента должен быть открыт торс
 surgery-torso-complex-inventory-requirement-failure = Вы не можете добраться до торса { CAPITALIZE($target) }!
+surgery-lowertorso-complex-inventory-requirement-description = У пациента должна быть открыта паховая область
+surgery-lowertorso-complex-inventory-requirement-failure = Вы не можете добраться до паховой области { CAPITALIZE($target) }!
 
 surgery-torso-examine-start = Пациент готов к операции на торсе.
 surgery-torso-popup-start = Начинает операцию на торсе.
 surgery-torso-node-start = Начало операции.
 
 surgery-requirement-total-damage-requirement-body-heal-description = Тело пациента должно иметь обширные повреждения
-surgery-requirement-total-damage-requirement-body-heal-not-enough-damage = Для дальнейшего лечения нужно менее грубый метод
+surgery-requirement-total-damage-requirement-body-heal-not-enough-damage = Для дальнейшего лечения нужен менее грубый метод
 
 direct-compact-defibrillator-cant-zap = Это оборудование должно быть использовано непосредственно на сердце пациента
 
@@ -44,3 +50,42 @@ surgery-requirement-direct-compact-defib-failure = Вы не знаете что
 remove-torso-bullet-fragments = Убрать инородные тела в торсе пациента
 surgery-pathology-requirement-description-torso-fragments = Инородные тела в торсе пациента
 surgery-pathology-requirement-failure-torso-fragments = Для этого действия требуется наличие инородных тел в теле пациента, но Вы их не находите.
+
+surgery-lowertorso-complex-name = Хирургия паховой области и таза
+surgery-lowertorso-complex-description = Комплексная операция в нижней части торса.
+    Позволяет лечить переломы таза, разрыв бедренной артерии и извлекать осколки.
+surgery-lowertorso-examine-start = Пациент готов к операции в области паха.
+to-lowertorso-skin-incision = Сделать надрез в области паха
+to-lowertorso-skin-clamp-bleeders = Зажать сосуды в разрезе
+to-retract-lowertorso-skin = Расширить разрез
+to-seal-lowertorso-incision = Зашить разрез в области паха
+remove-lowertorso-bullet-fragments = Извлечь инородное тело из таза
+surgery-pathology-requirement-description-lowertorso-fragments = Инородное тело в области паха
+surgery-pathology-requirement-failure-lowertorso-fragments = Инородных тел в области паха не обнаружено!
+
+torso-compound-reset = Вправление отломков рёбер
+torso-arterial-clamped = Пережатие артерии торса
+torso-necrosis-excised = Иссечение некроза на торсе
+
+start-lowertorso-surgery = Подготовка операции в области паха
+lowertorso-skin-incision = Надрез в области паха
+lowertorso-skin-clamp-bleeders = Остановка кровотечения в области паха
+retract-lowertorso-skin = Расширение разреза в области паха
+lowertorso-compound-reset = Вправление отломков таза
+lowertorso-arterial-clamped = Пережатие бедренной артерии
+lowertorso-necrosis-excised = Иссечение некроза в области паха
+
+torso-abdomen-opened = Брюшная полость вскрыта
+to-torso-open-abdomen = Вскрыть брюшную полость
+to-torso-close-abdomen = Зашить брюшную полость
+torso-abdomen-opened-examine = Брюшная полость вскрыта, видны внутренние органы.
+torso-abdomen-opened-popup = {THE($user)} вскрывает брюшную полость {THE($target)}, используя {$used}
+
+open-heart-vein-threading = Провести венозную нить
+open-heart-capillary-weaving = Выполнить капиллярное оплетение
+open-heart-nerve-splicing = Срастить нервы
+open-heart-nerve-grounding = Заземлить нервы
+surgery-requirement-bioware-circulation-description = Кровеносная система пациента ещё не [color=lightblue]модифицирована[/color]
+surgery-requirement-bioware-circulation-failure = Кровеносная система пациента уже модифицирована!
+surgery-requirement-bioware-nerves-description = Нервная система пациента ещё не [color=lightblue]модифицирована[/color]
+surgery-requirement-bioware-nerves-failure = Нервная система пациента уже модифицирована!

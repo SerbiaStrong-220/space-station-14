@@ -20,6 +20,8 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.SS220.MedicalScanner;
 using Content.Shared.SS220.Paper;
+using Content.Shared.SS220.Pathology;
+using Content.Shared.SS220.Surgery;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -194,6 +196,9 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
             builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
 
         builder.AppendLine();
+        AppendPathologies(builder, target);
+
+        builder.AppendLine();
         builder.AppendLine(Loc.GetString("health-analyzer-report-section-reagents"));
 
         var hasReagents = false;
@@ -217,6 +222,68 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
             builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
 
         return builder.ToString();
+    }
+
+    /// <summary>
+    /// Lists the pathologies the same way the analyzer doll does, grouped by body zone.
+    /// </summary>
+    private void AppendPathologies(StringBuilder builder, EntityUid target)
+    {
+        builder.AppendLine(Loc.GetString("health-analyzer-report-section-pathologies"));
+
+        if (!TryComp<PathologyHolderComponent>(target, out var holder) || holder.ActivePathologies.Count == 0)
+        {
+            builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
+            return;
+        }
+
+        var zoneEntries = new Dictionary<SurgeryPuppetPart, List<string>>();
+        var noZoneEntries = new List<string>();
+        foreach (var (pathologyId, instanceData) in holder.ActivePathologies)
+        {
+            if (!_prototypeManager.Resolve(pathologyId, out var pathologyProto))
+                continue;
+
+            var label = SharedPathologySystem.GetLabel(pathologyProto, instanceData);
+
+            if (pathologyProto.TargetZone is not { } zone)
+            {
+                noZoneEntries.Add(label);
+                continue;
+            }
+
+            if (!zoneEntries.TryGetValue(zone, out var entries))
+            {
+                entries = new List<string>();
+                zoneEntries[zone] = entries;
+            }
+
+            entries.Add(label);
+        }
+
+        foreach (var zone in Enum.GetValues<SurgeryPuppetPart>())
+        {
+            if (!zoneEntries.TryGetValue(zone, out var entries))
+                continue;
+
+            builder.AppendLine($"{Loc.GetString($"surgery-puppet-part-{zone.ToString().ToLowerInvariant()}")}:");
+            foreach (var entry in entries)
+            {
+                builder.AppendLine($" · {entry}");
+            }
+        }
+
+        if (noZoneEntries.Count > 0)
+        {
+            builder.AppendLine($"{Loc.GetString("health-analyzer-report-pathologies-whole-body")}:");
+            foreach (var entry in noZoneEntries)
+            {
+                builder.AppendLine($" · {entry}");
+            }
+        }
+
+        if (zoneEntries.Count == 0 && noZoneEntries.Count == 0)
+            builder.AppendLine(Loc.GetString("health-analyzer-report-none"));
     }
 
     private string GetStatus(MobState mobState)

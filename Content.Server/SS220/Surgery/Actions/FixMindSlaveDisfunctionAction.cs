@@ -4,7 +4,7 @@ using Content.Server.SS220.MindSlave.Systems;
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.SS220.Surgery.Graph;
 
-namespace Content.Server.SS220.Surgery.Action;
+namespace Content.Server.SS220.Surgery.Actions;
 
 [DataDefinition]
 public sealed partial class FixMindSlaveDisfunctionAction : ISurgeryGraphEdgeAction

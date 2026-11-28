@@ -315,7 +315,11 @@ public sealed class HandsUIController : UIController, IOnStateEntered<GameplaySt
         {
             SetRepresentative(button, representative);
         }
-        UpdateHandStatus(button, null, hand);
+        //SS220-surgery-update begin
+        // [wizden-code]
+        // UpdateHandStatus(button, null, hand);
+        // [wizden-code]
+        //SS220-surgery-update end
 
         // If we don't have a status for this hand type yet, set it.
         // This means we have status filled by default in most scenarios,
@@ -324,6 +328,11 @@ public sealed class HandsUIController : UIController, IOnStateEntered<GameplaySt
             _statusHandLeft ??= button;
         else
             _statusHandRight ??= button;
+
+        //SS220-surgery-update begin
+        // a removed hand leaves its item in the status panel, a hand that takes the panel over must clear it
+        UpdateHandStatus(button, null, hand);
+        //SS220-surgery-update end
 
         UpdateVisibleStatusPanels();
 

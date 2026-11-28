@@ -10,11 +10,16 @@
   components:
   - type: SurgeryDoAfterSkill
     durationScale: 1.5
-    failureChance: 0
+    failureChance: 0.15
   - type: PathologyHealerRemoveDamageSkill
     removeDamageModifier:
       TorsoProjectileFragment: 1.2
       HeadProjectileFragment: 1.4
+      LowerTorsoProjectileFragment: 1.2
+      LeftArmProjectileFragment: 1.2
+      RightArmProjectileFragment: 1.2
+      LeftLegProjectileFragment: 1.2
+      RightLegProjectileFragment: 1.2
   - type: HiddenImplantInstallation
     installChances:
       Easy: 0.7
@@ -33,11 +38,16 @@
   components:
   - type: SurgeryDoAfterSkill
     durationScale: 1
-    failureChance: 0
+    failureChance: 0.05
   - type: PathologyHealerRemoveDamageSkill
     removeDamageModifier:
       TorsoProjectileFragment: 1
       HeadProjectileFragment: 1.2
+      LowerTorsoProjectileFragment: 1
+      LeftArmProjectileFragment: 1
+      RightArmProjectileFragment: 1
+      LeftLegProjectileFragment: 1
+      RightLegProjectileFragment: 1
   - type: HiddenImplantInstallation
     installChances:
       Easy: 0.1
@@ -62,6 +72,11 @@
     removeDamageModifier:
       TorsoProjectileFragment: 0.9
       HeadProjectileFragment: 1
+      LowerTorsoProjectileFragment: 0.9
+      LeftArmProjectileFragment: 0.9
+      RightArmProjectileFragment: 0.9
+      LeftLegProjectileFragment: 0.9
+      RightLegProjectileFragment: 0.9
   - type: HiddenImplantInstallation
     installChances:
       Medium: 0.6
@@ -80,11 +95,16 @@
   components:
   - type: SurgeryDoAfterSkill
     durationScale: 0.7
-    failureChance: 0
+    failureChance: -0.05
   - type: PathologyHealerRemoveDamageSkill
     removeDamageModifier:
       TorsoProjectileFragment: 0.8
       HeadProjectileFragment: 0.8
+      LowerTorsoProjectileFragment: 0.8
+      LeftArmProjectileFragment: 0.8
+      RightArmProjectileFragment: 0.8
+      LeftLegProjectileFragment: 0.8
+      RightLegProjectileFragment: 0.8
   - type: HiddenImplantInstallation
     installChances:
       Medium: 0.2

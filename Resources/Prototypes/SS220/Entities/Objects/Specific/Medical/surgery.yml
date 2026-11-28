@@ -14,6 +14,7 @@
   - type: Tag
     tags:
     - SurgeryTool
+    - SurgeryDrapes
   - type: SurgeryStarter
   - type: ActivatableUI
     key: enum.SurgeryDrapeUiKey.Key
@@ -42,6 +43,7 @@
   - type: Tag
     tags:
     - SurgeryTool
+    - SurgeryBoneGel
 
 - type: entity
   parent: BaseToolSurgery
@@ -160,3 +162,292 @@
   - type: GuideHelp
     guides:
     - Surgery
+
+- type: entity
+  name: bone setter
+  id: BoneSetter
+  parent: Retractor
+  description: A surgical tool used for setting bones.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: bonesetter
+  - type: Item
+    heldPrefix: setter
+    storedRotation: 90
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryBoneSetter
+  - type: SurgeryTool
+    failureDamage:
+      types:
+        Blunt: 8
+    toolType: Bonesetter
+    sound:
+      path: /Audio/SS220/Surgery/retractor.ogg
+      params:
+        variation: 0.125
+
+- type: entity
+  parent: Retractor
+  id: RetractorAdvanced
+  name: mechanical pinches
+  description: An agglomerate of gears and levers that combines a retractor, hemostat, and bonesetter.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: adv_retractor
+  - type: Item
+    storedRotation: 90
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryRetractorAdvanced
+  - type: SurgeryTool
+    toolType: Retractor
+    additionalToolTypes:
+    - Hemostat
+    - Bonesetter
+    speedModifier: 0.7
+    failureModifier: -0.05
+    failureDamage:
+      types:
+        Slash: 4
+    sound:
+      path: /Audio/SS220/Surgery/retractor.ogg
+      params:
+        variation: 0.125
+
+- type: entity
+  parent: Cautery
+  id: CauteryAdvanced
+  name: searing tool
+  description: A high-powered laser unit used for instant cauterization and precision bone drilling.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: e_cautery
+  - type: Item
+    storedRotation: 90
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryCauteryAdvanced
+  - type: SurgeryTool
+    toolType: Cautery
+    additionalToolTypes:
+    - Drill
+    speedModifier: 0.7
+    failureModifier: -0.05
+    failureDamage:
+      types:
+        Heat: 4
+    sound:
+      path: /Audio/SS220/Surgery/cautery.ogg
+      params:
+        variation: 0.125
+
+- type: entity
+  parent: SawElectric
+  id: AmputationShears
+  name: amputation shears
+  description: Heavy-duty surgical shears designed for rapid bone cutting and limb amputation.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: shears
+  # own sprite instead of the saw's, it has no in-hand states yet
+  - type: Item
+    size: Normal
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    heldPrefix: null
+  - type: SurgeryTool
+    toolType: Shears
+    additionalToolTypes:
+    - Saw
+    speedModifier: 0.6
+    failureModifier: -0.05
+    failureDamage:
+      types:
+        Slash: 15
+    sound:
+      path: /Audio/SS220/Surgery/saw.ogg
+      params:
+        variation: 0.125
+
+- type: entity
+  parent: BaseToolSurgery
+  id: AutopsyScanner
+  name: autopsy scanner
+  description: A forensic medical scanner used to inspect internal tissue trauma and cause of death.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/handheld_mass_scanner.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: SurgeryTool
+    toolType: AutopsyScanner
+    failureModifier: 0
+    isPainless: true
+    sound:
+      path: /Audio/Items/hypospray.ogg
+
+- type: entity
+  parent: BaseStorageItem
+  id: SurgeryTray
+  name: surgical tray
+  description: A sterile stainless steel tray for organizing surgical instruments.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/medicart.rsi
+    state: tray
+    scale: 0.8, 0.8
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,4
+    whitelist:
+      components:
+      - SurgeryTool
+      - SurgeryStarter
+      - BodyAnalyzer
+      - Injector
+      - Healing
+  - type: ItemMapper
+    sprite: SS220/Objects/Specific/Medical/medicart.rsi
+    mapLayers:
+      drapes:
+        whitelist:
+          tags:
+          - SurgeryDrapes
+      scalpel_normal:
+        whitelist:
+          tags:
+          - SurgeryScalpelNormal
+      scalpel_advanced:
+        whitelist:
+          tags:
+          - SurgeryScalpelAdvanced
+      retractor_normal:
+        whitelist:
+          tags:
+          - SurgeryRetractor
+      retractor_advanced:
+        whitelist:
+          tags:
+          - SurgeryRetractorAdvanced
+      hemostat_normal:
+        whitelist:
+          tags:
+          - SurgeryHemostat
+      cautery_normal:
+        whitelist:
+          tags:
+          - SurgeryCautery
+      cautery_advanced:
+        whitelist:
+          tags:
+          - SurgeryCauteryAdvanced
+      saw_normal:
+        whitelist:
+          tags:
+          - SurgerySaw
+      drill_normal:
+        whitelist:
+          tags:
+          - SurgeryDrill
+      bonesetter:
+        whitelist:
+          tags:
+          - SurgeryBoneSetter
+      gel:
+        whitelist:
+          tags:
+          - SurgeryBoneGel
+  - type: Appearance
+  - type: GuideHelp
+    guides:
+    - Surgery
+
+- type: entity
+  parent: SurgeryTray
+  id: SurgeryTrayFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: SurgeryDrapes
+    - id: Scalpel
+    - id: Retractor
+    - id: Hemostat
+    - id: Cautery
+    - id: SawElectric
+    - id: BoneGel
+    - id: BoneSetter
+    - id: Drill
+    - id: BodyAnalyzer
+
+- type: entity
+  parent: BaseItem
+  id: BaseSurgeryDisk
+  name: surgery data disk
+  description: A data disk containing advanced surgical protocols for an operating computer.
+  components:
+  # the tier disks add the border of their tier
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    layers:
+    - state: datadisk_base
+      color: "#3E8FC9"
+    - state: datadisk_label
+  - type: Item
+    size: Small
+  - type: SurgeryDisk
+  - type: Tag
+    tags:
+    - SurgeryDisk
+  - type: GuideHelp
+    guides:
+    - Surgery
+
+- type: entity
+  parent: BaseSurgeryDisk
+  id: SurgeryDiskAdvanced
+  name: advanced surgery data disk
+  description: Protocols of the advanced brain surgery for an operating computer.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    layers:
+    - state: datadisk_base
+      color: "#3E8FC9"
+    - state: datadisk_label
+    - state: datadisk_t2_border
+  - type: SurgeryDisk
+    protocols:
+    - Lobotomy
+    - Pacification
+
+- type: entity
+  parent: BaseSurgeryDisk
+  id: SurgeryDiskBioware
+  name: biomodification surgery data disk
+  description: Protocols of the biomodifications, permanent surgical improvements of the body, for an operating computer.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    layers:
+    - state: datadisk_base
+      color: "#3E8FC9"
+    - state: datadisk_label
+    - state: datadisk_t3_border
+  - type: SurgeryDisk
+    protocols:
+    - VeinThreading
+    - CapillaryWeaving
+    - NerveSplicing
+    - NerveGrounding

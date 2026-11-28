@@ -4,4 +4,19 @@ using Content.Shared.SS220.Pathology;
 
 namespace Content.Client.SS220.Pathology;
 
-public sealed class PathologySystem : SharedPathologySystem;
+public sealed partial class PathologySystem : SharedPathologySystem
+{
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<PathologyHolderComponent, AfterAutoHandleStateEvent>(OnHolderStateHandled);
+
+        InitializeDollAlert();
+    }
+
+    private void OnHolderStateHandled(Entity<PathologyHolderComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshHeldGuns(ent.Owner);
+    }
+}

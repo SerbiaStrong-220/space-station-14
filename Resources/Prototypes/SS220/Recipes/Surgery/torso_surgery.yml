@@ -11,11 +11,11 @@
     slotNames:
     - jumpsuit
     - outerClothing
-  - !type:WhitelistRequirement
-    subject: strap
+  - !type:LyingPatientRequirement
+    subject: target
     description: surgery-strap-bed-requirement-description
     failureMessage: surgery-strap-bed-requirement-failure
-    whitelist:
+    strapWhitelist:
       tags:
       - Bed
       components:
@@ -110,6 +110,7 @@
       - !type:SurgeryToolRequirement
         subject: used
         surgeryTool: retractor
+        requirementPriority: -1
         description: surgery-requirement-tool-required-retractor
         failureMessage: surgery-requirement-tool-miss
       - !type:SurgeryPathologyRequirement
@@ -118,16 +119,425 @@
         failureMessage: surgery-pathology-requirement-failure-torso-fragments
         curePathologies:
         - TorsoProjectileFragment
+    # hairline fracture
+    - to: retract-torso-skin
+      id: retract-torso-skin-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - TorsoHairlineFracture
+    # compound fracture
+    - to: torso-compound-reset
+      id: torso-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: TorsoCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    # arterial puncture
+    - to: torso-arterial-clamped
+      id: torso-arterial-clamp
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-clamp-arterial-puncture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: TorsoArterialPuncture
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+    # burn necrosis
+    - to: torso-necrosis-excised
+      id: torso-necrosis-excise
+      baseEdge: to-excise-burn-necrosis
+      edgeTooltip: to-excise-burn-necrosis
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: TorsoBurnNecrosis
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+    # abdominal organs
+    - to: torso-abdomen-opened
+      id: torso-open-abdomen
+      baseEdge: incision
+      edgeTooltip: to-torso-open-abdomen
     # deeper
     - to: saw-rib-bone
       id: saw-rib-bone
       baseEdge: saw-bone
       edgeTooltip: to-saw-rib-bone
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-has-bones-description
+        failureMessage: surgery-requirement-has-bones-failure
+        whitelist:
+          components:
+          - Boneless
+    - to: saw-rib-bone
+      id: part-torso-soft-tissue
+      baseEdge: retract-skin
+      edgeTooltip: to-part-torso-soft-tissue
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        description: surgery-requirement-boneless-description
+        failureMessage: surgery-requirement-boneless-failure
+        whitelist:
+          components:
+          - Boneless
     # end surgery
     - to: seal-wound
       id: seal-wound
       baseEdge: seal-wound
       edgeTooltip: to-seal-torso-incision
+
+  - node: torso-abdomen-opened
+    nodeText:
+      examineDescription: torso-abdomen-opened-examine
+      popup: torso-abdomen-opened-popup
+    edges:
+    # liver
+    - to: torso-abdomen-opened
+      id: extract-liver
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-liver
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: liver
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Liver
+        organName: surgery-organ-name-liver
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Liver
+    - to: torso-abdomen-opened
+      id: insert-liver
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-liver
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: liver
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Liver
+        organName: surgery-organ-name-liver
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Liver
+        organName: surgery-organ-name-liver
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Liver
+        rejectionDamage:
+          types:
+            Poison: 15
+    # stomach
+    - to: torso-abdomen-opened
+      id: extract-stomach
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-stomach
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: stomach
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Stomach
+        organName: surgery-organ-name-stomach
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Stomach
+    - to: torso-abdomen-opened
+      id: insert-stomach
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-stomach
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: stomach
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Stomach
+        organName: surgery-organ-name-stomach
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Stomach
+        organName: surgery-organ-name-stomach
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Stomach
+        rejectionDamage:
+          types:
+            Poison: 15
+    # kidneys
+    - to: torso-abdomen-opened
+      id: extract-kidneys
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-kidneys
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: kidney-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Kidneys
+        organName: surgery-organ-name-kidneys
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Kidneys
+    - to: torso-abdomen-opened
+      id: insert-kidneys
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-kidneys
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: kidney-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Kidneys
+        organName: surgery-organ-name-kidneys
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Kidneys
+        organName: surgery-organ-name-kidneys
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Kidneys
+        rejectionDamage:
+          types:
+            Poison: 15
+    # appendix, extraction only
+    - to: torso-abdomen-opened
+      id: extract-appendix
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-appendix
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: appendix
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Appendix
+        organName: surgery-organ-name-appendix
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Appendix
+    # repair liver
+    - to: torso-abdomen-opened
+      id: repair-liver
+      delay: 6
+      failureChance: 0.1
+      edgeTooltip: to-repair-liver
+      sound: /Audio/SS220/Surgery/organ.ogg
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      visibilityRequirements:
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LiverDamage
+        minLevel: 1
+        description: surgery-pathology-requirement-description-liver-failure
+        failureMessage: surgery-pathology-requirement-failure-liver-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        regressLevel: true
+        regressStackCount: 2
+        description: surgery-pathology-requirement-description-liver-failure
+        failureMessage: surgery-pathology-requirement-failure-liver-failure
+        curePathologies:
+        - LiverDamage
+    # repair stomach
+    - to: torso-abdomen-opened
+      id: repair-stomach
+      delay: 6
+      failureChance: 0.1
+      edgeTooltip: to-repair-stomach
+      sound: /Audio/SS220/Surgery/organ.ogg
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      visibilityRequirements:
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: StomachDamage
+        minLevel: 1
+        description: surgery-pathology-requirement-description-stomach-failure
+        failureMessage: surgery-pathology-requirement-failure-stomach-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        regressLevel: true
+        regressStackCount: 2
+        description: surgery-pathology-requirement-description-stomach-failure
+        failureMessage: surgery-pathology-requirement-failure-stomach-failure
+        curePathologies:
+        - StomachDamage
+    # return
+    - to: retract-torso-skin
+      id: torso-close-abdomen
+      baseEdge: seal-wound
+      edgeTooltip: to-torso-close-abdomen
+
+  - node: torso-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-torso-skin
+      id: torso-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - TorsoCompoundFracture
+
+  - node: torso-arterial-clamped
+    baseNode: arterial-puncture-clamped
+    edges:
+    - to: retract-torso-skin
+      id: torso-arterial-seal
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-seal-arterial-puncture
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+        curePathologies:
+        - TorsoArterialPuncture
+
+  - node: torso-necrosis-excised
+    baseNode: burn-necrosis-excised
+    edges:
+    - to: retract-torso-skin
+      id: torso-necrosis-remove
+      baseEdge: to-remove-burn-necrosis
+      edgeTooltip: to-remove-burn-necrosis
+      actions:
+      - !type:ApplyDamageAction
+        damageGrouped:
+          Burn: -20
+          Toxin: -15
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+        curePathologies:
+        - TorsoBurnNecrosis
 
   - node: saw-rib-bone-gelled-fixed
     baseNode: saw-bone-gelled-fixed
@@ -147,17 +557,180 @@
 
   - node: saw-rib-bone
     baseNode: saw-bone
+    nodeText:
+      examineDescription: saw-rib-bone-examine
+      popup: saw-rib-bone-popup
     edges:
     # deeper
     - to: open-heart-incision
       id: open-heart-incision
       baseEdge: incision
       edgeTooltip: to-open-heart-incision
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Heart
+        organName: surgery-organ-name-heart
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+    # heart
+    - to: saw-rib-bone
+      id: extract-heart
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-heart
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: heart-on
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Heart
+        organName: surgery-organ-name-heart
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Heart
+    - to: saw-rib-bone
+      id: insert-heart
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-heart
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: heart-on
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Heart
+        organName: surgery-organ-name-heart
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Heart
+        organName: surgery-organ-name-heart
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Heart
+        rejectionDamage:
+          types:
+            Poison: 15
+    # lungs
+    - to: saw-rib-bone
+      id: extract-lungs
+      baseEdge: extract-organ
+      edgeTooltip: to-extract-lungs
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: lung-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: target
+        category: Lungs
+        organName: surgery-organ-name-lungs
+        description: surgery-requirement-has-organ-description
+        failureMessage: surgery-requirement-has-organ-failure
+      actions:
+      - !type:ExtractOrganAction
+        category: Lungs
+    - to: saw-rib-bone
+      id: insert-lungs
+      baseEdge: insert-organ
+      edgeTooltip: to-insert-lungs
+      edgeIcon:
+        sprite: Mobs/Species/Human/organs.rsi
+        state: lung-l
+      visibilityRequirements:
+      - !type:HasOrganRequirement
+        subject: used
+        category: Lungs
+        organName: surgery-organ-name-lungs
+        description: surgery-requirement-hold-organ-description
+        failureMessage: surgery-requirement-hold-organ-failure
+      requirements:
+      - !type:HasOrganRequirement
+        subject: target
+        invert: true
+        category: Lungs
+        organName: surgery-organ-name-lungs
+        description: surgery-requirement-no-organ-description
+        failureMessage: surgery-requirement-no-organ-failure
+      - !type:CompatibleOrganRequirement
+        subject: target
+        description: surgery-requirement-compatible-organ-description
+        failureMessage: surgery-requirement-compatible-organ-failure
+      actions:
+      - !type:InsertOrganAction
+        category: Lungs
+        rejectionDamage:
+          types:
+            Poison: 15
+    # repair lungs
+    - to: saw-rib-bone
+      id: repair-lungs
+      delay: 5
+      failureChance: 0.1
+      edgeTooltip: to-repair-lungs
+      sound: /Audio/SS220/Surgery/organ.ogg
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      visibilityRequirements:
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LungDamage
+        minLevel: 1
+        description: surgery-pathology-requirement-description-lungs-failure
+        failureMessage: surgery-pathology-requirement-failure-lungs-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        regressLevel: true
+        regressStackCount: 2
+        description: surgery-pathology-requirement-description-lungs-failure
+        failureMessage: surgery-pathology-requirement-failure-lungs-failure
+        curePathologies:
+        - LungDamage
     # return
     - to: saw-rib-bone-gelled
       id: saw-rib-bone-gelled
       baseEdge: bone-gel
       edgeTooltip: to-saw-rib-bone-gelled
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-has-bones-description
+        failureMessage: surgery-requirement-has-bones-failure
+        whitelist:
+          components:
+          - Boneless
+    - to: retract-torso-skin
+      id: close-torso-soft-tissue
+      baseEdge: retract-skin
+      edgeTooltip: to-close-torso-soft-tissue
+      visibilityRequirements:
+      - !type:WhitelistRequirement
+        subject: target
+        description: surgery-requirement-boneless-description
+        failureMessage: surgery-requirement-boneless-failure
+        whitelist:
+          components:
+          - Boneless
 
   - node: open-heart-incision
     baseNode: incision
@@ -167,6 +740,9 @@
       id: open-heart-incision
       delay: 2
       edgeTooltip: to-direct-heart-defib
+      edgeIcon:
+        sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+        state: direct-defibrillator
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
       actions:
@@ -179,6 +755,187 @@
         whitelist:
           components:
           - DirectCompactDefibrillator
+    # repair heart
+    - to: open-heart-incision
+      id: repair-heart
+      delay: 9
+      failureChance: 0.12
+      edgeTooltip: to-repair-heart
+      sound: /Audio/SS220/Surgery/organ.ogg
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      visibilityRequirements:
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: HeartDamage
+        minLevel: 1
+        description: surgery-pathology-requirement-description-heart-failure
+        failureMessage: surgery-pathology-requirement-failure-heart-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        regressLevel: true
+        regressStackCount: 2
+        description: surgery-pathology-requirement-description-heart-failure
+        failureMessage: surgery-pathology-requirement-failure-heart-failure
+        curePathologies:
+        - HeartDamage
+    # biomodifications (bioware), disk protocols: one modification per group, the modification stays with the body
+    - to: open-heart-incision
+      id: open-heart-vein-threading
+      delay: 12.5
+      edgeTooltip: open-heart-vein-threading
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: VeinThreading
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-bioware-circulation-description
+        failureMessage: surgery-requirement-bioware-circulation-failure
+        whitelist:
+          components:
+          - VeinThreading
+          - CapillaryWeaving
+      actions:
+      - !type:AddComponentsAction
+        components:
+        - type: VeinThreading
+    - to: open-heart-incision
+      id: open-heart-capillary-weaving
+      delay: 12.5
+      edgeTooltip: open-heart-capillary-weaving
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: CapillaryWeaving
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-bioware-circulation-description
+        failureMessage: surgery-requirement-bioware-circulation-failure
+        whitelist:
+          components:
+          - VeinThreading
+          - CapillaryWeaving
+      actions:
+      - !type:AddComponentsAction
+        components:
+        - type: CapillaryWeaving
+    - to: open-heart-incision
+      id: open-heart-nerve-splicing
+      delay: 15.5
+      edgeTooltip: open-heart-nerve-splicing
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: NerveSplicing
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-bioware-nerves-description
+        failureMessage: surgery-requirement-bioware-nerves-failure
+        whitelist:
+          components:
+          - NerveSplicing
+          - NerveGrounding
+      actions:
+      - !type:AddComponentsAction
+        components:
+        - type: NerveSplicing
+    - to: open-heart-incision
+      id: open-heart-nerve-grounding
+      delay: 15.5
+      edgeTooltip: open-heart-nerve-grounding
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+        state: scalpel
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      - !type:OperatingComputerRequirement
+        subject: target
+        protocol: NerveGrounding
+        description: surgery-requirement-operating-computer-description
+        failureMessage: surgery-requirement-operating-computer-failure
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: target
+        invert: true
+        description: surgery-requirement-bioware-nerves-description
+        failureMessage: surgery-requirement-bioware-nerves-failure
+        whitelist:
+          components:
+          - NerveSplicing
+          - NerveGrounding
+      actions:
+      - !type:AddComponentsAction
+        components:
+        - type: NerveGrounding
     # return
     # TOOD: better back
     - to: saw-rib-bone
@@ -187,5 +944,228 @@
       edgeTooltip: to-close-heart-incision
 
   # end
+  - node: seal-wound
+    baseNode: seal-wound
+
+# LowerTorso surgery
+- type: surgeryGraph
+  id: LowerTorsoSurgery
+  name: surgery-lowertorso-complex-name
+  description: surgery-lowertorso-complex-description
+  targetPart: LowerTorso
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-lowertorso-complex-inventory-requirement-description
+    failureMessage: surgery-lowertorso-complex-inventory-requirement-failure
+    slotNames:
+    - jumpsuit
+    - outerClothing
+  - !type:LyingPatientRequirement
+    subject: target
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    strapWhitelist:
+      tags:
+      - Bed
+      components:
+      - StasisBed
+      requireAll: false
+  start: start-lowertorso-surgery
+  end: seal-wound
+  graph:
+  - node: start-lowertorso-surgery
+    nodeText:
+      examineDescription: surgery-lowertorso-examine-start
+    edges:
+    - to: lowertorso-skin-incision
+      id: lowertorso-skin-incision
+      baseEdge: incision
+      edgeTooltip: to-lowertorso-skin-incision
+
+  - node: lowertorso-skin-incision
+    baseNode: incision
+    edges:
+    - to: lowertorso-skin-clamp-bleeders
+      id: lowertorso-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+      edgeTooltip: to-lowertorso-skin-clamp-bleeders
+
+  - node: lowertorso-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-lowertorso-skin
+      id: retract-lowertorso-skin
+      baseEdge: retract-skin
+      edgeTooltip: to-retract-lowertorso-skin
+
+  - node: retract-lowertorso-skin
+    baseNode: retract-skin
+    edges:
+    - to: retract-lowertorso-skin
+      id: retract-lowertorso-remove-fragments
+      delay: 4
+      edgeTooltip: remove-lowertorso-bullet-fragments
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: retractor
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: retractor
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-retractor
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-lowertorso-fragments
+        failureMessage: surgery-pathology-requirement-failure-lowertorso-fragments
+        curePathologies:
+        - LowerTorsoProjectileFragment
+    - to: retract-lowertorso-skin
+      id: retract-lowertorso-repair-hairline
+      baseEdge: to-repair-hairline-fracture
+      edgeTooltip: to-repair-hairline-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-hairline
+        failureMessage: surgery-pathology-requirement-failure-hairline
+        curePathologies:
+        - LowerTorsoHairlineFracture
+    - to: lowertorso-compound-reset
+      id: lowertorso-compound-reset
+      baseEdge: to-reset-compound-fracture
+      edgeTooltip: to-reset-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: Bonesetter
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bonesetter
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LowerTorsoCompoundFracture
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+    - to: lowertorso-arterial-clamped
+      id: lowertorso-arterial-clamp
+      baseEdge: to-clamp-arterial-puncture
+      edgeTooltip: to-clamp-arterial-puncture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LowerTorsoArterialPuncture
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+    - to: lowertorso-necrosis-excised
+      id: lowertorso-necrosis-excise
+      baseEdge: to-excise-burn-necrosis
+      edgeTooltip: to-excise-burn-necrosis
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: scalpel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-scalpel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HavePathologyRequirement
+        subject: target
+        pathology: LowerTorsoBurnNecrosis
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+    - to: seal-wound
+      id: seal-wound
+      baseEdge: seal-wound
+      edgeTooltip: to-seal-lowertorso-incision
+
+  - node: lowertorso-compound-reset
+    baseNode: compound-fracture-reset
+    edges:
+    - to: retract-lowertorso-skin
+      id: lowertorso-compound-repair
+      baseEdge: to-repair-compound-fracture
+      edgeTooltip: to-repair-compound-fracture
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: BoneGel
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-bone-gel
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-compound
+        failureMessage: surgery-pathology-requirement-failure-compound
+        curePathologies:
+        - LowerTorsoCompoundFracture
+
+  - node: lowertorso-arterial-clamped
+    baseNode: arterial-puncture-clamped
+    edges:
+    - to: retract-lowertorso-skin
+      id: lowertorso-arterial-seal
+      baseEdge: to-seal-arterial-puncture
+      edgeTooltip: to-seal-arterial-puncture
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: cautery
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-cautery
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-arterial
+        failureMessage: surgery-pathology-requirement-failure-arterial
+        curePathologies:
+        - LowerTorsoArterialPuncture
+
+  - node: lowertorso-necrosis-excised
+    baseNode: burn-necrosis-excised
+    edges:
+    - to: retract-lowertorso-skin
+      id: lowertorso-necrosis-remove
+      baseEdge: to-remove-burn-necrosis
+      edgeTooltip: to-remove-burn-necrosis
+      actions:
+      - !type:ApplyDamageAction
+        damageGrouped:
+          Burn: -20
+          Toxin: -15
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-necrosis
+        failureMessage: surgery-pathology-requirement-failure-necrosis
+        curePathologies:
+        - LowerTorsoBurnNecrosis
+
   - node: seal-wound
     baseNode: seal-wound

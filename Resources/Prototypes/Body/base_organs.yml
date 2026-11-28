@@ -21,6 +21,9 @@
   parent: BaseItem
   components:
   - type: Organ
+  #SS220-surgery-update begin
+  - type: TaintableOrgan
+  #SS220-surgery-update end
 
 - type: entity
   parent: OrganBase
@@ -57,6 +60,29 @@
     category: Head
   - type: Sprite
     state: head
+    #SS220-surgery-update begin
+    # every body part is drawn off-center in its full-body frame, the fixed frame keeps the offset right while the item spins
+    offset: 0, -0.3
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
+  - type: Limb
+    attachedOrgans: [ Brain, Eyes, Tongue, Ears ]
+  - type: SeveredOrganVisuals
+  - type: Dismemberable
+    hitRoll: # a fixed chance from 25
+      threshold: 25
+      chanceOffset: 0
+      chancePerDamage: 0
+      minChance: 0.35
+      maxChance: 0.35
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.Head
     data:
@@ -84,6 +110,23 @@
     category: ArmLeft
   - type: Sprite
     state: l_arm
+    #SS220-surgery-update begin
+    offset: -0.19, 0.02
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
+  - type: Limb
+    attachedOrgans: [ HandLeft ]
+  - type: SeveredOrganVisuals
+  - type: Dismemberable
+    tornByBlast: true
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LArm
     data:
@@ -103,6 +146,23 @@
     category: ArmRight
   - type: Sprite
     state: r_arm
+    #SS220-surgery-update begin
+    offset: 0.22, 0.02
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
+  - type: Limb
+    attachedOrgans: [ HandRight ]
+  - type: SeveredOrganVisuals
+  - type: Dismemberable
+    tornByBlast: true
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RArm
     data:
@@ -126,6 +186,17 @@
       location: Left
   - type: Sprite
     state: l_hand
+    #SS220-surgery-update begin
+    offset: -0.19, 0.12
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  - type: Dismemberable
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LHand
     data:
@@ -149,6 +220,17 @@
       location: Right
   - type: Sprite
     state: r_hand
+    #SS220-surgery-update begin
+    offset: 0.22, 0.12
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  - type: Dismemberable
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RHand
     data:
@@ -168,6 +250,24 @@
     category: LegLeft
   - type: Sprite
     state: l_leg
+    #SS220-surgery-update begin
+    offset: -0.09, 0.36
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
+  - type: Limb
+    attachedOrgans: [ FootLeft ]
+    supporting: true
+  - type: SeveredOrganVisuals
+  - type: Dismemberable
+    tornByBlast: true
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LLeg
     data:
@@ -187,6 +287,24 @@
     category: LegRight
   - type: Sprite
     state: r_leg
+    #SS220-surgery-update begin
+    offset: 0.12, 0.36
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: ContainerContainer
+    containers:
+      limb_attached_organs: !type:Container
+  - type: Limb
+    attachedOrgans: [ FootRight ]
+    supporting: true
+  - type: SeveredOrganVisuals
+  - type: Dismemberable
+    tornByBlast: true
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RLeg
     data:
@@ -206,6 +324,17 @@
     category: FootLeft
   - type: Sprite
     state: l_foot
+    #SS220-surgery-update begin
+    offset: -0.09, 0.45
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  - type: Dismemberable
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.LFoot
     data:
@@ -225,6 +354,17 @@
     category: FootRight
   - type: Sprite
     state: r_foot
+    #SS220-surgery-update begin
+    offset: 0.12, 0.45
+    enableOverrideDir: true
+    overrideDir: South
+    #SS220-surgery-update end
+  #SS220-surgery-update begin
+  - type: SeveredOrganVisuals
+  - type: Dismemberable
+  - type: TaintableOrgan
+    poisonsWhenRotten: true
+  #SS220-surgery-update end
   - type: VisualOrgan
     layer: enum.HumanoidVisualLayers.RFoot
     data:

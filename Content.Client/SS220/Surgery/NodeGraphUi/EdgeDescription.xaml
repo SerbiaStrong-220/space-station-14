@@ -8,9 +8,17 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:NodeGraphUi="clr-namespace:Content.Client.SS220.Surgery.NodeGraphUi"
     Orientation="Horizontal"
+    HorizontalExpand="True"
+    Margin="0 0 0 3"
     MouseFilter="Stop">
-    <RichTextLabel Name="EdgeNameLabel"/>
-    <BoxContainer Margin="10 0 0 0">
-        <RichTextLabel Name="EdgeActionDescriptionsLabel"/>
-    </BoxContainer>
+    <!-- a plate like a button, but not a button: the background shows whether the step can be done now.
+         It ignores the mouse so the hover reaches the root holding the conditions tooltip -->
+    <PanelContainer Name="Plate" HorizontalExpand="True" MouseFilter="Ignore">
+        <BoxContainer Name="PlateContent" Orientation="Horizontal" Margin="8 3">
+            <RichTextLabel Name="EdgeNameLabel"/>
+            <BoxContainer Margin="10 0 0 0">
+                <RichTextLabel Name="EdgeActionDescriptionsLabel"/>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
 </NodeGraphUi:EdgeDescription>

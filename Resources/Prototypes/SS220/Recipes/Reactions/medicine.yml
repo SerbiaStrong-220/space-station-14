@@ -91,3 +91,15 @@
   effects:
   - !type:SpawnEntity
     entity: MaterialBiomass10
+
+- type: reaction
+  id: Nitroglycerin
+  reactants:
+    Oil:
+      amount: 1
+    SulfuricAcid:
+      amount: 1
+    Nitrogen:
+      amount: 1
+  products:
+    Nitroglycerin: 2

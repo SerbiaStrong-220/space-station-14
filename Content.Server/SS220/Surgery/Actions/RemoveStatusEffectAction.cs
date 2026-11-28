@@ -4,7 +4,7 @@ using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.Surgery.Action;
+namespace Content.Server.SS220.Surgery.Actions;
 
 [DataDefinition]
 public sealed partial class RemoveStatusEffectAction : ISurgeryGraphEdgeAction

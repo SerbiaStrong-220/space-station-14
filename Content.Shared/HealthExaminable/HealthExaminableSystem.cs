@@ -91,13 +91,15 @@ public sealed class HealthExaminableSystem : EntitySystem
             msg.AddMarkupOrThrow(chosenLocStr);
         }
 
+        //SS220-surgery-update begin
+        // Anything else want to add on to this?
+        RaiseLocalEvent(uid, new HealthBeingExaminedEvent(msg), true);
+
         if (msg.IsEmpty)
         {
             msg.AddMarkupOrThrow(Loc.GetString($"health-examinable-{component.LocPrefix}-none"));
         }
-
-        // Anything else want to add on to this?
-        RaiseLocalEvent(uid, new HealthBeingExaminedEvent(msg), true);
+        //SS220-surgery-update end
 
         return msg;
     }

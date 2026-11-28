@@ -104,3 +104,51 @@
   recipeUnlocks:
   - DecryptionKeyAdvanced
 
+# Surgery: the disks, tools and prostheses
+- type: technology
+  id: AdvancedSurgery
+  name: research-technology-advanced-surgery
+  icon:
+    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    state: advanced
+  discipline: CivilianServices
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - SurgeryDiskAdvanced
+  - AmputationShears
+  - ScalpelAdvanced
+  - ProsthesisCyberArmLeft
+  - ProsthesisCyberArmRight
+  - ProsthesisCyberHandLeft
+  - ProsthesisCyberHandRight
+  - ProsthesisCyberLegLeft
+  - ProsthesisCyberLegRight
+  - ProsthesisCyberFootLeft
+  - ProsthesisCyberFootRight
+
+- type: technology
+  id: AdvancedSurgicalTools
+  name: research-technology-advanced-surgical-tools
+  icon:
+    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    state: laser
+  discipline: CivilianServices
+  tier: 3
+  cost: 15000
+  technologyPrerequisites:
+  - AdvancedSurgery
+  recipeUnlocks:
+  - SurgeryDiskBioware
+  - ScalpelLaser
+  - CauteryAdvanced
+  - RetractorAdvanced
+  - SawAdvanced
+  - ProsthesisAdvancedCyberArmLeft
+  - ProsthesisAdvancedCyberArmRight
+  - ProsthesisAdvancedCyberHandLeft
+  - ProsthesisAdvancedCyberHandRight
+  - ProsthesisAdvancedCyberLegLeft
+  - ProsthesisAdvancedCyberLegRight
+  - ProsthesisAdvancedCyberFootLeft
+  - ProsthesisAdvancedCyberFootRight

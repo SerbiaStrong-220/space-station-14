@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Ui;
@@ -24,8 +24,15 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             if (!CanPerformAnyEdgeInSurgery(entity, surgeryId, used, user))
                 continue;
 
-            foreach (var edge in GetEdges(surgeryId, node))
+            if (!TryGetSurgeryNode(surgeryId, node, out var currentNode))
+                continue;
+
+            foreach (var edge in currentNode.Edges)
             {
+                // hidden edges (e.g. syndicate-only steps) must not be offered at all
+                if (!IsEdgeVisible(entity, edge, used, user))
+                    continue;
+
                 var requirementPriority = RequirementPriorityFailureMessageEdgeSelectorDrop;
                 string? failureReason = null;
                 var meetRequirement = true;
@@ -33,7 +40,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 {
                     var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-                    if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+                    if (requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
                         continue;
 
                     meetRequirement = false;
@@ -54,21 +61,19 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         return new SurgeryEdgeSelectorEdgesState { Infos = edgesInfoList, Used = GetNetEntity(used) };
     }
 
-    private IEnumerable<SurgeryGraphEdge> GetEdges(ProtoId<SurgeryGraphPrototype> surgeryGraphId, string node)
+    private bool TryGetSurgeryNode(ProtoId<SurgeryGraphPrototype> surgeryGraphId, string node, [NotNullWhen(true)] out SurgeryGraphNode? foundNode)
     {
+        foundNode = null;
         if (!_prototype.Resolve(surgeryGraphId, out var graphProto))
-            yield break;
+            return false;
 
-        if (!graphProto.TryGetNode(node, out var currentNode))
+        if (!graphProto.TryGetNode(node, out foundNode))
         {
             Log.Fatal($"Current node has incorrect value {node} for graph proto {surgeryGraphId}");
-            yield break;
+            return false;
         }
 
-        foreach (var edge in currentNode.Edges)
-        {
-            yield return edge;
-        }
+        return true;
     }
 
     private void PopupSurgeryGraphFailures(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraphId, EntityUid? used, EntityUid user)
@@ -80,7 +85,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
@@ -91,13 +96,20 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private SurgeryGraphEdge? GetEdgeTargeting(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraphId, string edgeId)
     {
+        // the operation may be cancelled during the step or a client message may be late, that's not an error
         if (!entity.Comp.OngoingSurgeries.TryGetValue(surgeryGraphId, out var currentNode))
-        {
-            Log.Error($"Tried to get edge with id {edgeId} in surgery {surgeryGraphId}, but entity doesn't have this surgery ongoing!");
             return null;
+
+        if (!TryGetSurgeryNode(surgeryGraphId, currentNode, out var node))
+            return null;
+
+        foreach (var edge in node.Edges)
+        {
+            if (edge.Id == edgeId)
+                return edge;
         }
 
-        return GetEdges(surgeryGraphId, currentNode).FirstOrDefault<SurgeryGraphEdge?>(x => x?.Id == edgeId);
+        return null;
     }
 
     public bool CanPerformAnyEdgeInSurgery(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> graphProtoId, EntityUid? used, EntityUid user)
@@ -114,7 +126,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
                 continue;
 
             return false;
@@ -123,13 +135,30 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         return true;
     }
 
+    /// <param name="predicted">False if only the server checks it, then the server sends the failure popup itself</param>
+    public bool CanMeetRequirements(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user, bool predicted = true)
+    {
+        return CheckRequirements(entity, edge, used, user, applyEffects: false, predicted);
+    }
+
+    /// <summary>
+    /// Server only, the step result isn't predicted.
+    /// </summary>
     public bool TryMeetRequirement(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
+    {
+        return CheckRequirements(entity, edge, used, user, applyEffects: true, predicted: false);
+    }
+
+    private bool CheckRequirements(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user, bool applyEffects, bool predicted)
     {
         foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+            var satisfied = applyEffects
+                ? requirement.MeetRequirement(requirementTarget, user, used, EntityManager)
+                : requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager);
 
-            if (requirement.MeetRequirement(requirementTarget, user, EntityManager))
+            if (satisfied)
                 continue;
 
             return false;
@@ -138,12 +167,18 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         foreach (var requirement in SurgeryGraph.GetRequirements(edge))
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+            var satisfied = applyEffects
+                ? requirement.MeetRequirement(requirementTarget, user, used, EntityManager)
+                : requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager);
 
-            if (requirement.MeetRequirement(requirementTarget, user, EntityManager))
+            if (satisfied)
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
-            _popup.PopupClient(reason, user);
+            if (predicted)
+                _popup.PopupClient(reason, user);
+            else
+                _popup.PopupCursor(reason, user);
 
             return false;
         }
@@ -153,21 +188,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     public PerformSurgeryEdgeInfo GetPerformSurgeryEdgeInfo(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
     {
-        foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
-        {
-            var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
-
-            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
-                continue;
-
+        if (!IsEdgeVisible(entity, edge, used, user))
             return new PerformSurgeryEdgeInfo(edge.Target, false, null);
-        }
 
         foreach (var requirement in SurgeryGraph.GetRequirements(edge))
         {
             var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
 
-            if (requirement.SatisfiesRequirements(requirementTarget, user, EntityManager))
+            if (requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
                 continue;
 
             var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
@@ -176,6 +204,19 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         }
 
         return new PerformSurgeryEdgeInfo(edge.Target, true, null);
+    }
+
+    private bool IsEdgeVisible(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
+    {
+        foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
+        {
+            var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+
+            if (!requirement.SatisfiesRequirements(requirementTarget, user, used, EntityManager))
+                return false;
+        }
+
+        return true;
     }
 }
 

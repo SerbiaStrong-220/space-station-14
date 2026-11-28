@@ -8,7 +8,8 @@
     xmlns:surgeryUiParts="clr-namespace:Content.Client.SS220.Surgery.UiParts"
     Title="{Loc 'surgery-observer-title'}"
     Resizable="True"
-    MinSize="920 470"
+    SetSize="980 480"
+    MinSize="980 480"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -17,16 +18,18 @@
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <BoxContainer Name="ContentBoxContainer" Orientation="Horizontal" Margin="10" HorizontalExpand="False" VerticalExpand="True">
-            <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 0 10 0" HorizontalExpand="True" MinSize="420 420">
+            <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 0 10 0" HorizontalExpand="False" MinSize="420 420">
                 <BoxContainer Name="PatientInfo" Orientation="Vertical">
-                    <surgeryUiParts:PatientStatus Name="PatientStatus" HorizontalExpand="True" VerticalExpand="True"/>
+                    <surgeryUiParts:PatientStatus Name="PatientStatus" HorizontalExpand="True"/>
+                    <PanelContainer StyleClasses="LowDivider" Margin="0 6 0 6"/>
                     <surgeryUiParts:TreatmentSuggestion Name="TreatmentSuggestion" HorizontalExpand="True"  VerticalExpand="True"/>
                 </BoxContainer>
             </ScrollContainer>
             <BoxContainer Name="HandBook" Orientation="Vertical" MinSize="520 420" Margin="0 0 10 0"
                     HorizontalExpand="True" VerticalExpand="True">
-                <surgeryUiParts:OperationList Name="OperationList" HorizontalExpand="True" VerticalExpand="True"/>
-                <surgeryUiParts:OperationDescription Name="OperationDescription" MinHeight="270" Visible ="False" HorizontalExpand="True" VerticalExpand="True"/>
+                <!-- the operations take less height than their steps -->
+                <surgeryUiParts:OperationList Name="OperationList" HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="2"/>
+                <surgeryUiParts:OperationDescription Name="OperationDescription" Margin="0 8 0 0" HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="3"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

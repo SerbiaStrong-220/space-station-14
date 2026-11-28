@@ -15,6 +15,23 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: Toxin
+          min: 3
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: Toxin
+          min: 10
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -38,6 +55,23 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: CarpoToxin
+          min: 3
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: CarpoToxin
+          min: 10
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -90,6 +124,29 @@
   color: "#acc91a"
   physicalDesc: reagent-physical-desc-putrid
   metabolisms:
+    #SS220-surgery-update begin
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
+    Digestion:
+      metabolismRate: 0.25
+      metabolites:
+        GastroToxin: 0.5
+      effects:
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.05
+        conditions:
+        - !type:ReagentCondition
+          reagent: GastroToxin
+          min: 3
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.05
+        conditions:
+        - !type:ReagentCondition
+          reagent: GastroToxin
+          min: 10
+    #SS220-surgery-update end
     Bloodstream:
       effects:
         - !type:HealthChange
@@ -115,6 +172,16 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.08
+        conditions:
+        - !type:ReagentCondition
+          reagent: Mold
+          min: 3
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -151,6 +218,22 @@
         emote: Scream
         probability: 0.3
   metabolisms:
+    #SS220-surgery-update begin
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
+    Digestion:
+      metabolismRate: 0.25
+      metabolites:
+        PolytrinicAcid: 0.5
+      effects:
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: PolytrinicAcid
+          min: 3
+    #SS220-surgery-update end
     Bloodstream:
       metabolismRate : 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
@@ -211,6 +294,22 @@
         emote: Scream
         probability: 0.2
   metabolisms:
+    #SS220-surgery-update begin
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
+    Digestion:
+      metabolismRate: 0.25
+      metabolites:
+        FluorosulfuricAcid: 0.5
+      effects:
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: FluorosulfuricAcid
+          min: 3
+    #SS220-surgery-update end
     Bloodstream:
       metabolismRate: 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
@@ -260,6 +359,22 @@
         emote: Scream
         probability: 0.1
   metabolisms:
+    #SS220-surgery-update begin
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
+    Digestion:
+      metabolismRate: 0.25
+      metabolites:
+        SulfuricAcid: 0.5
+      effects:
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.1
+        conditions:
+        - !type:ReagentCondition
+          reagent: SulfuricAcid
+          min: 3
+    #SS220-surgery-update end
     Bloodstream:
       metabolismRate: 3.00 # Okay damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
@@ -323,6 +438,16 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
+      - !type:AddPathology
+        pathology: HeartDamage
+        probability: 0.25
+        conditions:
+        - !type:ReagentCondition
+          reagent: HeartbreakerToxin
+          min: 3
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -446,6 +571,23 @@
     Bloodstream:
       metabolismRate: 0.2
       effects:
+      #SS220-surgery-update begin
+      # a few units are harmless, the organ fails before the poison itself crits the body
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: Amatoxin
+          min: 3
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:ReagentCondition
+          reagent: Amatoxin
+          min: 10
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -460,6 +602,29 @@
   flavor: bitter
   color: "#000000"
   metabolisms:
+    #SS220-surgery-update begin
+    # damages the stomach while it is there and goes to the blood as fast and as much as without a digestion stage,
+    # but unlike a plain transfer it takes one of the stomach slots and stays in the stomach of a dead body
+    Digestion:
+      metabolismRate: 0.25
+      metabolites:
+        VentCrud: 0.5
+      effects:
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.05
+        conditions:
+        - !type:ReagentCondition
+          reagent: VentCrud
+          min: 3
+      - !type:AddPathology
+        pathology: StomachDamage
+        probability: 0.05
+        conditions:
+        - !type:ReagentCondition
+          reagent: VentCrud
+          min: 10
+    #SS220-surgery-update end
     Bloodstream:
       effects:
         - !type:HealthChange

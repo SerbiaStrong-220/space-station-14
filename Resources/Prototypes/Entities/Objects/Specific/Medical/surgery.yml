@@ -32,14 +32,18 @@
         Heat: 5
     soundHit:
       path: /Audio/Effects/lightburn.ogg
-  # SS220 Surgery begin
+  #SS220-surgery-update begin
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryCautery
   - type: SurgeryTool
     toolType: Cautery
     sound:
       path: /Audio/SS220/Surgery/cautery.ogg
       params:
         variation: 0.125
-  # SS220 Surgery end
+  #SS220-surgery-update end
 
 # Drill
 
@@ -65,6 +69,18 @@
       path: /Audio/Items/drill_hit.ogg
   - type: StaticPrice
     price: 40
+  #SS220-surgery-update begin
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryDrill
+  - type: SurgeryTool
+    toolType: Drill
+    sound:
+      path: /Audio/Items/drill_use.ogg
+      params:
+        variation: 0.125
+  #SS220-surgery-update end
 
 # Scalpel
 # SS220 BaseScalpel added to separately define the scalpel and the laser scalpel
@@ -102,7 +118,9 @@
   # SS220 Edit biomass craft begin
   - type: Tag
     tags:
+    - SurgeryTool #SS220-surgery-update
     - Scalpel
+    - SurgeryScalpelNormal #SS220-surgery-update
   # SS220 Edit biomass craft end
   # SS220 Surgery begin
   - type: SurgeryTool
@@ -153,6 +171,16 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  #SS220-surgery-update begin
+  - type: SurgeryTool
+    toolType: Scalpel
+    speedModifier: 1.25
+    failureModifier: 0.10
+    sound:
+      path: /Audio/SS220/Surgery/scalpel.ogg
+      params:
+        variation: 0.125
+  #SS220-surgery-update end
 
 
 - type: entity
@@ -175,6 +203,21 @@
       types:
         Slash: 8
 # SS220 Throwable Changes end
+  #SS220-surgery-update begin
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - Scalpel
+    - SurgeryScalpelAdvanced
+  - type: SurgeryTool
+    toolType: Scalpel
+    speedModifier: 0.8
+    failureModifier: -0.05
+    sound:
+      path: /Audio/SS220/Surgery/scalpel.ogg
+      params:
+        variation: 0.125
+  #SS220-surgery-update end
 
 - type: entity
   name: laser scalpel
@@ -203,6 +246,23 @@
         Slash: 2
         Heat: 6
 # SS220 Throwable Changes end
+  #SS220-surgery-update begin
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - Scalpel
+    - SurgeryScalpelAdvanced
+  - type: SurgeryTool
+    toolType: Scalpel
+    additionalToolTypes:
+    - Cautery
+    speedModifier: 0.7
+    failureModifier: -0.05
+    sound:
+      path: /Audio/SS220/Surgery/cautery.ogg
+      params:
+        variation: 0.125
+  #SS220-surgery-update end
 
 # Scissors
 
@@ -218,7 +278,11 @@
   - type: Item
     sprite: Objects/Specific/Medical/Surgery/scissors.rsi
     storedRotation: 90
-  # SS220 Surgery begin
+  #SS220-surgery-update begin
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryRetractor
   - type: SurgeryTool
     failureDamage:
       types:
@@ -228,7 +292,7 @@
       path: /Audio/SS220/Surgery/retractor.ogg
       params:
         variation: 0.125
-  # SS220 Surgery end
+  #SS220-surgery-update end
 
 - type: entity
   name: hemostat
@@ -241,7 +305,11 @@
   - type: Item
     heldPrefix: hemostat
     storedRotation: 90
-  # SS220 Surgery begin
+  #SS220-surgery-update begin
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgeryHemostat
   - type: SurgeryTool
     failureDamage:
       types:
@@ -251,7 +319,7 @@
       path: /Audio/SS220/Surgery/hemostat.ogg
       params:
         variation: 0.125
-  # SS220 Surgery end
+  #SS220-surgery-update end
 
   # - type: entity
   #   name: bone setter
@@ -281,6 +349,23 @@
   - type: Tool
     qualities:
       - Sawing
+  #SS220-surgery-update begin
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - SurgerySaw
+  - type: SurgeryTool
+    failureDamage:
+      types:
+        Slash: 12
+    toolType: Saw
+    speedModifier: 1.2
+    failureModifier: 0.10
+    sound:
+      path: /Audio/SS220/Surgery/saw.ogg
+      params:
+        variation: 0.125
+  #SS220-surgery-update end
 # No melee for regular saw because have you ever seen someone use a band saw as a weapon? It's dumb.
 
 - type: entity
@@ -302,6 +387,16 @@
       path: /Audio/Weapons/bladeslice.ogg
   - type: Tool
     speedModifier: 0.5
+  #SS220-surgery-update begin
+  - type: SurgeryTool
+    toolType: Saw
+    speedModifier: 1.35
+    failureModifier: 0.15
+    sound:
+      path: /Audio/SS220/Surgery/saw.ogg
+      params:
+        variation: 0.125
+  #SS220-surgery-update end
 
 - type: entity
   name: circular saw
@@ -321,14 +416,16 @@
       path: /Audio/Items/drill_hit.ogg
   - type: Tool
     speedModifier: 1.5
-  # SS220 Surgery begin
+  #SS220-surgery-update begin
   - type: SurgeryTool
     toolType: Saw
+    speedModifier: 1
+    failureModifier: 0
     sound:
       path: /Audio/SS220/Surgery/saw.ogg
       params:
         variation: 0.125
-  # SS220 Surgery end
+  #SS220-surgery-update end
 
 - type: entity
   name: advanced circular saw
@@ -344,3 +441,13 @@
     attackRate: 1.5
   - type: Tool
     speedModifier: 2.0
+  #SS220-surgery-update begin
+  - type: SurgeryTool
+    toolType: Saw
+    speedModifier: 0.7
+    failureModifier: -0.05
+    sound:
+      path: /Audio/SS220/Surgery/saw.ogg
+      params:
+        variation: 0.125
+  #SS220-surgery-update end

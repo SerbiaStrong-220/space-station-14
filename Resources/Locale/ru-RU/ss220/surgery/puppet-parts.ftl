@@ -1,3 +1,4 @@
+surgery-puppet-part-none = Не выбрано
 surgery-puppet-part-head = Голова
 surgery-puppet-part-eyes = Глаза
 surgery-puppet-part-mouth = Рот

@@ -17,3 +17,5 @@ research-technology-advanced-kitchen-machinery = Продвинутая кухо
 
 research-decryption-keys = Ксенолингвистический адаптер
 research-decryption-key-advanced = Дешифровка жаргонов и диалектов
+research-technology-advanced-surgery = Продвинутая хирургия
+research-technology-advanced-surgical-tools = Продвинутые хирургические инструменты

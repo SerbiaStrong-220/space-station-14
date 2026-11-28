@@ -14,12 +14,15 @@
         </PanelContainer>
         <BoxContainer Orientation="Vertical" VerticalExpand="True">
             <RichTextLabel Name="HeaderText" Text="{Loc 'patient-status-header'}"/>
+            <PanelContainer StyleClasses="LowDivider" Margin="0 2 0 2"/>
             <BoxContainer Name="TextDataContainer"  Orientation="Vertical" VerticalAlignment="Top"
                 VerticalExpand="True" HorizontalAlignment="Left" Margin="10 5 0 5">
                 <RichTextLabel Name="MobStatus" Text="mob-status" HorizontalExpand="True" />
                 <RichTextLabel Name="OverallDamage" Text="overall-damage" HorizontalExpand="True"/>
                 <RichTextLabel Name="DecayDegree" Text="decay-degree" HorizontalExpand="True"/>
                 <RichTextLabel Name="BrainRotStatus" Text="brain-rot-status" HorizontalExpand="True"/>
+                <RichTextLabel Name="AnesthesiaStatus" Text="anesthesia-status" HorizontalExpand="True"/>
+                <RichTextLabel Name="OperatingTableStatus" Text="operating-table-status" HorizontalExpand="True"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

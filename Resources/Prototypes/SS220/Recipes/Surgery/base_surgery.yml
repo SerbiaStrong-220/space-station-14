@@ -58,6 +58,54 @@
       examineDescription: seal-wound-examine-description
       popup: seal-wound-popup
 
+- type: abstractSurgeryNode
+  id: compound-fracture-reset
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: compound-fracture-reset-examine-description
+      popup: compound-fracture-reset-popup
+
+- type: abstractSurgeryNode
+  id: arterial-puncture-clamped
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: arterial-puncture-clamped-examine-description
+      popup: arterial-puncture-clamped-popup
+
+- type: abstractSurgeryNode
+  id: burn-necrosis-excised
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: burn-necrosis-excised-examine-description
+      popup: burn-necrosis-excised-popup
+
+- type: abstractSurgeryNode
+  id: cranial-fissure-prepped
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: cranial-fissure-prepped-examine-description
+      popup: cranial-fissure-prepped-popup
+
+- type: abstractSurgeryNode
+  id: limb-amputated
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: limb-amputated-examine-description
+      popup: limb-amputated-popup
+
+- type: abstractSurgeryNode
+  id: limb-attached
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: limb-attached-examine-description
+      popup: limb-attached-popup
+
 #Edges
 
 - type: abstractSurgeryEdge
@@ -154,14 +202,14 @@
     edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/organ.ogg
     edgeIcon:
-      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
-      state: retractor
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: bonesetter
     requirements:
     - !type:SurgeryToolRequirement
       subject: used
-      surgeryTool: retractor
+      surgeryTool: Bonesetter
       requirementPriority: -1
-      description: surgery-requirement-tool-required-retractor
+      description: surgery-requirement-tool-required-bonesetter
       failureMessage: surgery-requirement-tool-miss
 
 - type: abstractSurgeryEdge
@@ -207,3 +255,231 @@
     actions:
     - !type:ApplyBleedingAction
       bleedAmount: -2
+
+- type: abstractSurgeryEdge
+  id: to-repair-dislocation
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.1
+    edgeTooltip: to-repair-dislocation
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: bonesetter
+
+- type: abstractSurgeryEdge
+  id: to-repair-hairline-fracture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 4
+    failureChance: 0.08
+    edgeTooltip: to-repair-hairline-fracture
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: bone-gel
+
+- type: abstractSurgeryEdge
+  id: to-reset-compound-fracture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 5.5
+    failureChance: 0.12
+    edgeTooltip: to-reset-compound-fracture
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: bonesetter
+
+- type: abstractSurgeryEdge
+  id: to-repair-compound-fracture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 4
+    failureChance: 0.08
+    edgeTooltip: to-repair-compound-fracture
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: bone-gel
+
+- type: abstractSurgeryEdge
+  id: to-clamp-arterial-puncture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.12
+    edgeTooltip: to-clamp-arterial-puncture
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: hemostat
+
+- type: abstractSurgeryEdge
+  id: to-seal-arterial-puncture
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.1
+    edgeTooltip: to-seal-arterial-puncture
+    sound: /Audio/SS220/Surgery/seal_wound.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: cautery
+
+- type: abstractSurgeryEdge
+  id: to-excise-burn-necrosis
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.1
+    edgeTooltip: to-excise-burn-necrosis
+    sound: /Audio/SS220/Surgery/incision.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+      state: scalpel
+
+- type: abstractSurgeryEdge
+  id: to-remove-burn-necrosis
+  edge:
+    to: abstract
+    id: abstract
+    delay: 3.5
+    failureChance: 0.08
+    edgeTooltip: to-remove-burn-necrosis
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: hemostat
+
+- type: abstractSurgeryEdge
+  id: to-drill-cranial-fissure
+  edge:
+    to: abstract
+    id: abstract
+    delay: 4
+    failureChance: 0.12
+    edgeTooltip: to-drill-cranial-fissure
+    sound: /Audio/Items/drill_use.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/drill.rsi
+      state: drill
+
+- type: abstractSurgeryEdge
+  id: extract-organ
+  edge:
+    to: abstract
+    id: abstract
+    delay: 6
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: hemostat
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: hemostat
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-hemostat
+      failureMessage: surgery-requirement-tool-miss
+
+- type: abstractSurgeryEdge
+  id: insert-organ
+  edge:
+    to: abstract
+    id: abstract
+    delay: 6
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/organ.ogg
+
+- type: abstractSurgeryEdge
+  id: amputate-limb
+  edge:
+    to: abstract
+    id: abstract
+    delay: 8
+    failureChance: 0.1
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/saw.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/saw.rsi
+      state: saw
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: saw
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-saw
+      failureMessage: surgery-requirement-tool-miss
+
+# fast amputation without opening the limb, the stump is left bleeding
+- type: abstractSurgeryEdge
+  id: amputate-limb-shears
+  edge:
+    to: abstract
+    id: abstract
+    delay: 15
+    failureChance: 0.1
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/saw.ogg
+    edgeIcon:
+      sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+      state: shears
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: shears
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-shears
+      failureMessage: surgery-requirement-tool-miss
+
+# a prosthesis is put on its mount and ends the operation, there is nothing to seal
+- type: abstractSurgeryEdge
+  id: install-prosthesis
+  edge:
+    to: abstract
+    id: abstract
+    delay: 6
+    edgeTooltip: abstract
+    popup: install-prosthesis-popup
+    sound: /Audio/SS220/Surgery/organ.ogg
+
+# a prosthesis is pried off its mount, the stump isn't opened and doesn't hurt
+- type: abstractSurgeryEdge
+  id: remove-prosthesis
+  edge:
+    to: abstract
+    id: abstract
+    delay: 5
+    edgeTooltip: abstract
+    popup: remove-prosthesis-popup
+    painless: true
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: retractor
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: retractor
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-retractor
+      failureMessage: surgery-requirement-tool-miss
+
+- type: abstractSurgeryEdge
+  id: attach-limb
+  edge:
+    to: abstract
+    id: abstract
+    delay: 6
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/organ.ogg

@@ -1,6 +1,9 @@
 - type: pathology
   id: Blindness
   name: pathology-blindness-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-start-blindness-description
     progressPopup: pathology-start-blindness-popup
@@ -13,6 +16,9 @@
 - type: pathology
   id: Muted
   name: pathology-muted-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-start-muted-description
     progressPopup: pathology-start-muted-popup
@@ -25,6 +31,9 @@
 - type: pathology
   id: Narcolepsy
   name: pathology-narcolepsy-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-start-narcolepsy-description
     progressPopup: pathology-start-narcolepsy-popup
@@ -37,6 +46,9 @@
 - type: pathology
   id: Slowness
   name: pathology-slowness-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-slowness-description
     trait: Slowness
@@ -44,6 +56,9 @@
 - type: pathology
   id: Nervousness
   name: pathology-nervousness-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-nervousness-description
     trait: Nervousness
@@ -51,6 +66,9 @@
 - type: pathology
   id: PoorVision
   name: pathology-poor-vision-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-poor-vision-description
     trait: PoorVision
@@ -58,6 +76,9 @@
 - type: pathology
   id: LightweightDrunk
   name: pathology-lightweight-drunk-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-lightweight-drunk-description
     trait: LightweightDrunk
@@ -65,6 +86,9 @@
 - type: pathology
   id: Paracusia
   name: pathology-paracusia-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-paracusia-description
     trait: Paracusia
@@ -72,6 +96,9 @@
 - type: pathology
   id: PainNumbness
   name: pathology-pain-numbness-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-pain-numbness-description
     trait: PainNumbness
@@ -79,6 +106,19 @@
 - type: pathology
   id: FrontalLisp
   name: pathology-frontal-lisp-name
+  targetZone: Head
+  organ: Brain
+  operationRecommendation: pathology-brain-trauma-operation
   definition:
   - description: pathology-frontal-lisp-description
     trait: FrontalLisp
+
+# done by the pacification protocol, the ordinary brain surgery doesn't remove it
+- type: pathology
+  id: SurgicalPacification
+  name: pathology-surgical-pacification-name
+  targetZone: Head
+  organ: Brain
+  definition:
+  - description: pathology-surgical-pacification-description
+    trait: Pacifist

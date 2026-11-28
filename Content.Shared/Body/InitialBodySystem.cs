@@ -4,7 +4,7 @@ using Robust.Shared.Map;
 
 namespace Content.Shared.Body;
 
-public sealed class InitialBodySystem : EntitySystem
+public sealed partial class InitialBodySystem : EntitySystem //SS220-surgery-update
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
@@ -13,6 +13,7 @@ public sealed class InitialBodySystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<InitialBodyComponent, MapInitEvent>(OnMapInit);
+        InitializeSurgery(); //SS220-surgery-update
     }
 
     private void OnMapInit(Entity<InitialBodyComponent> ent, ref MapInitEvent args)

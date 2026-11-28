@@ -68,7 +68,9 @@ public sealed partial class SurgeryDrapeBUI : BoundUserInterface
         List<SurgeryStartInfo> result = new();
         foreach (var surgeryGraph in _prototypeManager.EnumeratePrototypes<SurgeryGraphPrototype>())
         {
-            result.Add(new SurgeryStartInfo(surgeryGraph, _surgery.CanStartSurgery(user, surgeryGraph, target, Owner, out var reason), reason));
+            var canStart = _surgery.CanStartSurgery(user, surgeryGraph, target, Owner, out var reason);
+            var canCancel = _surgery.OperationCanBeEnded(target, surgeryGraph.ID);
+            result.Add(new SurgeryStartInfo(surgeryGraph, canStart, canCancel, reason));
         }
 
         return result;

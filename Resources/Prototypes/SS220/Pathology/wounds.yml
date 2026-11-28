@@ -1,23 +1,878 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Projectile Fragments
+
 - type: pathology
   id: TorsoProjectileFragment
   name: pathology-torso-projectile-name
   armorSlotFlags: TORSO
+  targetZone: Torso
+  operationRecommendation: pathology-torso-projectile-operation
   definition:
   - description: pathology-torso-projectile-description
     maxStackCount: 20
+    stacksAreSevere: false
     statusEffects:
     - StatusEffectInternalBloodLoss
 
 - type: pathology
   id: HeadProjectileFragment
   name: pathology-head-projectile-name
-  armorSlotFlags: FULLHEAD
+  armorSlotFlags: HEAD
+  targetZone: Head
+  organ: Head
+  operationRecommendation: pathology-head-projectile-operation
   definition:
   - description: pathology-head-projectile-description
     maxStackCount: 20
+    stacksAreSevere: false
     statusEffects:
     - StatusEffectInternalBloodLoss
     addStackEffects:
     - !type:RandomPathologyAddEffect
       weightedId: BrainTraumaPathology
       chance: 0.8
+
+- type: pathology
+  id: LowerTorsoProjectileFragment
+  name: pathology-lowertorso-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  operationRecommendation: pathology-lowertorso-projectile-operation
+  definition:
+  - description: pathology-lowertorso-projectile-description
+    maxStackCount: 20
+    stacksAreSevere: false
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LeftArmProjectileFragment
+  name: pathology-leftarm-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  organ: ArmLeft
+  operationRecommendation: pathology-leftarm-projectile-operation
+  definition:
+  - description: pathology-leftarm-projectile-description
+    maxStackCount: 10
+    stacksAreSevere: false
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: RightArmProjectileFragment
+  name: pathology-rightarm-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  organ: ArmRight
+  operationRecommendation: pathology-rightarm-projectile-operation
+  definition:
+  - description: pathology-rightarm-projectile-description
+    maxStackCount: 10
+    stacksAreSevere: false
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LeftLegProjectileFragment
+  name: pathology-leftleg-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  organ: LegLeft
+  operationRecommendation: pathology-leftleg-projectile-operation
+  definition:
+  - description: pathology-leftleg-projectile-description
+    maxStackCount: 10
+    stacksAreSevere: false
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: RightLegProjectileFragment
+  name: pathology-rightleg-projectile-name
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  organ: LegRight
+  operationRecommendation: pathology-rightleg-projectile-operation
+  definition:
+  - description: pathology-rightleg-projectile-description
+    maxStackCount: 10
+    stacksAreSevere: false
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+
+# Dislocations
+
+- type: pathology
+  id: LeftArmDislocation
+  name: pathology-leftarm-dislocation-name
+  examineDescription: pathology-leftarm-dislocation-examine
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  organ: ArmLeft
+  affectsBones: true
+  operationRecommendation: pathology-arm-dislocation-operation
+  definition:
+  - description: pathology-leftarm-dislocation-description
+    doAfterDelayModifier: 1.2
+
+- type: pathology
+  id: RightArmDislocation
+  name: pathology-rightarm-dislocation-name
+  examineDescription: pathology-rightarm-dislocation-examine
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  organ: ArmRight
+  affectsBones: true
+  operationRecommendation: pathology-arm-dislocation-operation
+  definition:
+  - description: pathology-rightarm-dislocation-description
+    doAfterDelayModifier: 1.2
+
+- type: pathology
+  id: LeftHandDislocation
+  name: pathology-lefthand-dislocation-name
+  examineDescription: pathology-lefthand-dislocation-examine
+  armorSlotFlags: GLOVES
+  targetZone: LeftHand
+  organ: HandLeft
+  affectsBones: true
+  operationRecommendation: pathology-hand-dislocation-operation
+  definition:
+  - description: pathology-lefthand-dislocation-description
+    doAfterDelayModifier: 1.2
+    gunSpreadModifier: 1.2
+
+- type: pathology
+  id: RightHandDislocation
+  name: pathology-righthand-dislocation-name
+  examineDescription: pathology-righthand-dislocation-examine
+  armorSlotFlags: GLOVES
+  targetZone: RightHand
+  organ: HandRight
+  affectsBones: true
+  operationRecommendation: pathology-hand-dislocation-operation
+  definition:
+  - description: pathology-righthand-dislocation-description
+    doAfterDelayModifier: 1.2
+    gunSpreadModifier: 1.2
+
+- type: pathology
+  id: LeftLegDislocation
+  name: pathology-leftleg-dislocation-name
+  examineDescription: pathology-leftleg-dislocation-examine
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  organ: LegLeft
+  affectsBones: true
+  operationRecommendation: pathology-leg-dislocation-operation
+  definition:
+  - description: pathology-leftleg-dislocation-description
+    statusEffects:
+    - StatusEffectDislocationSlowdown
+
+- type: pathology
+  id: RightLegDislocation
+  name: pathology-rightleg-dislocation-name
+  examineDescription: pathology-rightleg-dislocation-examine
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  organ: LegRight
+  affectsBones: true
+  operationRecommendation: pathology-leg-dislocation-operation
+  definition:
+  - description: pathology-rightleg-dislocation-description
+    statusEffects:
+    - StatusEffectDislocationSlowdown
+
+- type: pathology
+  id: LeftFootDislocation
+  name: pathology-leftfoot-dislocation-name
+  examineDescription: pathology-leftfoot-dislocation-examine
+  armorSlotFlags: FEET
+  targetZone: LeftFoot
+  organ: FootLeft
+  affectsBones: true
+  operationRecommendation: pathology-foot-dislocation-operation
+  definition:
+  - description: pathology-leftfoot-dislocation-description
+    statusEffects:
+    - StatusEffectDislocationSlowdown
+
+- type: pathology
+  id: RightFootDislocation
+  name: pathology-rightfoot-dislocation-name
+  examineDescription: pathology-rightfoot-dislocation-examine
+  armorSlotFlags: FEET
+  targetZone: RightFoot
+  organ: FootRight
+  affectsBones: true
+  operationRecommendation: pathology-foot-dislocation-operation
+  definition:
+  - description: pathology-rightfoot-dislocation-description
+    statusEffects:
+    - StatusEffectDislocationSlowdown
+
+# Hairline Fractures
+
+- type: pathology
+  id: TorsoHairlineFracture
+  name: pathology-torso-hairline-name
+  examineDescription: pathology-torso-hairline-examine
+  armorSlotFlags: TORSO
+  targetZone: Torso
+  affectsBones: true
+  operationRecommendation: pathology-torso-fracture-operation
+  definition:
+  - description: pathology-torso-hairline-description
+    trait: ChronicCough
+
+- type: pathology
+  id: LowerTorsoHairlineFracture
+  name: pathology-lowertorso-hairline-name
+  examineDescription: pathology-lowertorso-hairline-examine
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  affectsBones: true
+  operationRecommendation: pathology-lowertorso-fracture-operation
+  definition:
+  - description: pathology-lowertorso-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+
+- type: pathology
+  id: LeftArmHairlineFracture
+  name: pathology-leftarm-hairline-name
+  examineDescription: pathology-leftarm-hairline-examine
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  organ: ArmLeft
+  affectsBones: true
+  operationRecommendation: pathology-arm-fracture-operation
+  definition:
+  - description: pathology-leftarm-hairline-description
+    doAfterDelayModifier: 1.35
+
+- type: pathology
+  id: RightArmHairlineFracture
+  name: pathology-rightarm-hairline-name
+  examineDescription: pathology-rightarm-hairline-examine
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  organ: ArmRight
+  affectsBones: true
+  operationRecommendation: pathology-arm-fracture-operation
+  definition:
+  - description: pathology-rightarm-hairline-description
+    doAfterDelayModifier: 1.35
+
+- type: pathology
+  id: LeftHandHairlineFracture
+  name: pathology-lefthand-hairline-name
+  examineDescription: pathology-lefthand-hairline-examine
+  armorSlotFlags: GLOVES
+  targetZone: LeftHand
+  organ: HandLeft
+  affectsBones: true
+  operationRecommendation: pathology-hand-fracture-operation
+  definition:
+  - description: pathology-lefthand-hairline-description
+    doAfterDelayModifier: 1.35
+    gunSpreadModifier: 1.2
+
+- type: pathology
+  id: RightHandHairlineFracture
+  name: pathology-righthand-hairline-name
+  examineDescription: pathology-righthand-hairline-examine
+  armorSlotFlags: GLOVES
+  targetZone: RightHand
+  organ: HandRight
+  affectsBones: true
+  operationRecommendation: pathology-hand-fracture-operation
+  definition:
+  - description: pathology-righthand-hairline-description
+    doAfterDelayModifier: 1.35
+    gunSpreadModifier: 1.2
+
+- type: pathology
+  id: LeftLegHairlineFracture
+  name: pathology-leftleg-hairline-name
+  examineDescription: pathology-leftleg-hairline-examine
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  organ: LegLeft
+  affectsBones: true
+  operationRecommendation: pathology-leg-fracture-operation
+  definition:
+  - description: pathology-leftleg-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+
+- type: pathology
+  id: RightLegHairlineFracture
+  name: pathology-rightleg-hairline-name
+  examineDescription: pathology-rightleg-hairline-examine
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  organ: LegRight
+  affectsBones: true
+  operationRecommendation: pathology-leg-fracture-operation
+  definition:
+  - description: pathology-rightleg-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+
+- type: pathology
+  id: LeftFootHairlineFracture
+  name: pathology-leftfoot-hairline-name
+  examineDescription: pathology-leftfoot-hairline-examine
+  armorSlotFlags: FEET
+  targetZone: LeftFoot
+  organ: FootLeft
+  affectsBones: true
+  operationRecommendation: pathology-foot-fracture-operation
+  definition:
+  - description: pathology-leftfoot-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+
+- type: pathology
+  id: RightFootHairlineFracture
+  name: pathology-rightfoot-hairline-name
+  examineDescription: pathology-rightfoot-hairline-examine
+  armorSlotFlags: FEET
+  targetZone: RightFoot
+  organ: FootRight
+  affectsBones: true
+  operationRecommendation: pathology-foot-fracture-operation
+  definition:
+  - description: pathology-rightfoot-hairline-description
+    statusEffects:
+    - StatusEffectLegTraumaSlowdown
+
+# Compound Fractures & Cranial Fissure
+
+- type: pathology
+  id: HeadCranialFissure
+  name: pathology-head-cranial-fissure-name
+  examineDescription: pathology-head-cranial-fissure-examine
+  isSevere: true
+  armorSlotFlags: HEAD
+  targetZone: Head
+  organ: Head
+  affectsBones: true
+  operationRecommendation: pathology-head-cranial-fissure-operation
+  definition:
+  - description: pathology-head-cranial-fissure-description
+    trait: PoorVision
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: TorsoCompoundFracture
+  name: pathology-torso-compound-name
+  examineDescription: pathology-torso-compound-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: Torso
+  affectsBones: true
+  operationRecommendation: pathology-torso-fracture-operation
+  definition:
+  - description: pathology-torso-compound-description
+    trait: ChronicCough
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LowerTorsoCompoundFracture
+  name: pathology-lowertorso-compound-name
+  examineDescription: pathology-lowertorso-compound-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  affectsBones: true
+  operationRecommendation: pathology-lowertorso-fracture-operation
+  definition:
+  - description: pathology-lowertorso-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+    - StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LeftArmCompoundFracture
+  name: pathology-leftarm-compound-name
+  examineDescription: pathology-leftarm-compound-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  organ: ArmLeft
+  affectsBones: true
+  operationRecommendation: pathology-arm-fracture-operation
+  definition:
+  - description: pathology-leftarm-compound-description
+    doAfterDelayModifier: 1.6
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: RightArmCompoundFracture
+  name: pathology-rightarm-compound-name
+  examineDescription: pathology-rightarm-compound-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  organ: ArmRight
+  affectsBones: true
+  operationRecommendation: pathology-arm-fracture-operation
+  definition:
+  - description: pathology-rightarm-compound-description
+    doAfterDelayModifier: 1.6
+    statusEffects:
+    - StatusEffectInternalBloodLoss
+
+- type: pathology
+  id: LeftHandCompoundFracture
+  name: pathology-lefthand-compound-name
+  examineDescription: pathology-lefthand-compound-examine
+  isSevere: true
+  armorSlotFlags: GLOVES
+  targetZone: LeftHand
+  organ: HandLeft
+  affectsBones: true
+  operationRecommendation: pathology-hand-fracture-operation
+  definition:
+  - description: pathology-lefthand-compound-description
+    doAfterDelayModifier: 1.6
+    gunSpreadModifier: 1.2
+
+- type: pathology
+  id: RightHandCompoundFracture
+  name: pathology-righthand-compound-name
+  examineDescription: pathology-righthand-compound-examine
+  isSevere: true
+  armorSlotFlags: GLOVES
+  targetZone: RightHand
+  organ: HandRight
+  affectsBones: true
+  operationRecommendation: pathology-hand-fracture-operation
+  definition:
+  - description: pathology-righthand-compound-description
+    doAfterDelayModifier: 1.6
+    gunSpreadModifier: 1.2
+
+- type: pathology
+  id: LeftLegCompoundFracture
+  name: pathology-leftleg-compound-name
+  examineDescription: pathology-leftleg-compound-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  organ: LegLeft
+  affectsBones: true
+  operationRecommendation: pathology-leg-fracture-operation
+  definition:
+  - description: pathology-leftleg-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+
+- type: pathology
+  id: RightLegCompoundFracture
+  name: pathology-rightleg-compound-name
+  examineDescription: pathology-rightleg-compound-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  organ: LegRight
+  affectsBones: true
+  operationRecommendation: pathology-leg-fracture-operation
+  definition:
+  - description: pathology-rightleg-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+
+- type: pathology
+  id: LeftFootCompoundFracture
+  name: pathology-leftfoot-compound-name
+  examineDescription: pathology-leftfoot-compound-examine
+  isSevere: true
+  armorSlotFlags: FEET
+  targetZone: LeftFoot
+  organ: FootLeft
+  affectsBones: true
+  operationRecommendation: pathology-foot-fracture-operation
+  definition:
+  - description: pathology-leftfoot-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+
+- type: pathology
+  id: RightFootCompoundFracture
+  name: pathology-rightfoot-compound-name
+  examineDescription: pathology-rightfoot-compound-examine
+  isSevere: true
+  armorSlotFlags: FEET
+  targetZone: RightFoot
+  organ: FootRight
+  affectsBones: true
+  operationRecommendation: pathology-foot-fracture-operation
+  definition:
+  - description: pathology-rightfoot-compound-description
+    statusEffects:
+    - StatusEffectCompoundLegSlowdown
+
+# Arterial Punctures
+
+- type: pathology
+  id: HeadArterialPuncture
+  name: pathology-head-arterial-name
+  examineDescription: pathology-head-arterial-examine
+  isSevere: true
+  armorSlotFlags: HEAD
+  targetZone: Head
+  organ: Head
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-head-arterial-description
+    statusEffects:
+    - StatusEffectArterialBleeding
+
+- type: pathology
+  id: TorsoArterialPuncture
+  name: pathology-torso-arterial-name
+  examineDescription: pathology-torso-arterial-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: Torso
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-torso-arterial-description
+    statusEffects:
+    - StatusEffectArterialBleeding
+
+- type: pathology
+  id: LowerTorsoArterialPuncture
+  name: pathology-lowertorso-arterial-name
+  examineDescription: pathology-lowertorso-arterial-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-lowertorso-arterial-description
+    statusEffects:
+    - StatusEffectArterialBleeding
+
+- type: pathology
+  id: LeftArmArterialPuncture
+  name: pathology-leftarm-arterial-name
+  examineDescription: pathology-leftarm-arterial-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  organ: ArmLeft
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-leftarm-arterial-description
+    statusEffects:
+    - StatusEffectArterialBleeding
+
+- type: pathology
+  id: RightArmArterialPuncture
+  name: pathology-rightarm-arterial-name
+  examineDescription: pathology-rightarm-arterial-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  organ: ArmRight
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-rightarm-arterial-description
+    statusEffects:
+    - StatusEffectArterialBleeding
+
+- type: pathology
+  id: LeftLegArterialPuncture
+  name: pathology-leftleg-arterial-name
+  examineDescription: pathology-leftleg-arterial-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  organ: LegLeft
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-leftleg-arterial-description
+    statusEffects:
+    - StatusEffectArterialBleeding
+
+- type: pathology
+  id: RightLegArterialPuncture
+  name: pathology-rightleg-arterial-name
+  examineDescription: pathology-rightleg-arterial-examine
+  isSevere: true
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  organ: LegRight
+  operationRecommendation: pathology-arterial-operation
+  definition:
+  - description: pathology-rightleg-arterial-description
+    statusEffects:
+    - StatusEffectArterialBleeding
+
+# Burn Necrosis
+
+- type: pathology
+  id: HeadBurnNecrosis
+  name: pathology-head-necrosis-name
+  examineDescription: pathology-head-necrosis-examine
+  armorSlotFlags: HEAD
+  targetZone: Head
+  organ: Head
+  operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
+  definition:
+  - name: pathology-head-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
+  - description: pathology-head-necrosis-description
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-head-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
+
+- type: pathology
+  id: TorsoBurnNecrosis
+  name: pathology-torso-necrosis-name
+  examineDescription: pathology-torso-necrosis-examine
+  armorSlotFlags: TORSO
+  targetZone: Torso
+  operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
+  definition:
+  - name: pathology-torso-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
+  - description: pathology-torso-necrosis-description
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-torso-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
+
+- type: pathology
+  id: LowerTorsoBurnNecrosis
+  name: pathology-lowertorso-necrosis-name
+  examineDescription: pathology-lowertorso-necrosis-examine
+  armorSlotFlags: TORSO
+  targetZone: LowerTorso
+  operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
+  definition:
+  - name: pathology-lowertorso-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
+  - description: pathology-lowertorso-necrosis-description
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-lowertorso-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
+
+- type: pathology
+  id: LeftArmBurnNecrosis
+  name: pathology-leftarm-necrosis-name
+  examineDescription: pathology-leftarm-necrosis-examine
+  armorSlotFlags: TORSO
+  targetZone: LeftArm
+  organ: ArmLeft
+  operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
+  definition:
+  - name: pathology-leftarm-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
+  - description: pathology-leftarm-necrosis-description
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-leftarm-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
+
+- type: pathology
+  id: RightArmBurnNecrosis
+  name: pathology-rightarm-necrosis-name
+  examineDescription: pathology-rightarm-necrosis-examine
+  armorSlotFlags: TORSO
+  targetZone: RightArm
+  organ: ArmRight
+  operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
+  definition:
+  - name: pathology-rightarm-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
+  - description: pathology-rightarm-necrosis-description
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-rightarm-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
+
+- type: pathology
+  id: LeftLegBurnNecrosis
+  name: pathology-leftleg-necrosis-name
+  examineDescription: pathology-leftleg-necrosis-examine
+  armorSlotFlags: TORSO
+  targetZone: LeftLeg
+  organ: LegLeft
+  operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
+  definition:
+  - name: pathology-leftleg-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
+  - description: pathology-leftleg-necrosis-description
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-leftleg-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
+
+- type: pathology
+  id: RightLegBurnNecrosis
+  name: pathology-rightleg-necrosis-name
+  examineDescription: pathology-rightleg-necrosis-examine
+  armorSlotFlags: TORSO
+  targetZone: RightLeg
+  organ: LegRight
+  operationRecommendation: pathology-necrosis-operation
+  # burn -> necrosis -> mortification: by time, a strong burn starts from necrosis, a new burn worsens necrosis
+  definition:
+  - name: pathology-rightleg-burn-name
+    description: pathology-burn-description
+    operationRecommendation: pathology-burn-operation
+    curedByTopicals: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectBurnPoison
+  - description: pathology-rightleg-necrosis-description
+    progressPopup: pathology-necrosis-progress-popup
+    worsensOnRepeat: true
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 4m
+    statusEffects:
+    - StatusEffectNecrosisPoison
+  - name: pathology-rightleg-mortification-name
+    description: pathology-mortification-description
+    progressPopup: pathology-mortification-progress-popup
+    statusEffects:
+    - StatusEffectMortificationPoison
+
+# Eyes & Mouth Traumas
+
+- type: pathology
+  id: EyeCornealTrauma
+  name: pathology-eye-corneal-name
+  examineDescription: pathology-eye-corneal-examine
+  armorSlotFlags: EYES
+  targetZone: Eyes
+  organ: Eyes
+  operationRecommendation: pathology-eye-corneal-operation
+  definition:
+  - description: pathology-eye-corneal-description
+    trait: PoorVision
+
+- type: pathology
+  id: MouthJawDislocation
+  name: pathology-mouth-jaw-dislocation-name
+  examineDescription: pathology-mouth-jaw-dislocation-examine
+  armorSlotFlags: MASK
+  targetZone: Mouth
+  organ: Head
+  affectsBones: true
+  operationRecommendation: pathology-mouth-jaw-dislocation-operation
+  definition:
+  - description: pathology-mouth-jaw-dislocation-description
+    trait: FrontalLisp

@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.Surgery.Systems;
 using Content.Shared.SS220.Surgery.Ui;
 using Robust.Client.UserInterface;
 
@@ -15,7 +16,8 @@ public sealed class BodyAnalyzerBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         base.Open();
         _menu = this.CreateWindow<BodyAnalyzerMenu>();
 
-        _menu.UpdatePerformer();
+        var bodyAnalyzer = EntMan.System<BodyAnalyzerSystem>();
+        _menu.UpdatePerformer(Owner, bodyAnalyzer.IsComputerTableUnlinked(Owner));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -24,7 +26,7 @@ public sealed class BodyAnalyzerBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         {
             case BodyAnalyzerTargetUpdate msg:
                 var target = EntMan.GetEntity(msg.Target);
-                _menu?.ChangeTarget(target);
+                _menu?.ChangeTarget(target, msg.TableNotLinked);
                 break;
         }
     }

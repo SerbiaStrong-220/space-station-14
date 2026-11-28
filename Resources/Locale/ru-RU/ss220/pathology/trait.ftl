@@ -33,3 +33,8 @@ pathology-pain-numbness-description = У пациента наблюдается
 
 pathology-frontal-lisp-name = Шепелявость
 pathology-frontal-lisp-description = Нарушение артикуляции пациента, затрудняющее произношение части звуков.
+
+pathology-brain-trauma-operation = Хирургия головы: вскройте череп и иссеките повреждённые нервные ткани мозга.
+
+pathology-surgical-pacification-name = Хирургическая пацификация
+pathology-surgical-pacification-description = Участок мозга, отвечающий за агрессию, хирургически подавлен.

@@ -218,6 +218,7 @@
     reviveLimit: 100 #has no death limit
   # SS220 LimitationRevive - end
   - type: Geras #SS220 upstream fix
+  - type: Boneless #SS220-surgery-update
 
 - type: entity
   parent: OrganBase

@@ -6,6 +6,7 @@
   order:
     - alertType: BloodPoints #SS220 Spider queen antag
     - category: Health
+    - alertType: PathologyDoll #SS220-surgery-update
     - category: Stamina
     - alertType: SuitPower
     - category: Internals

@@ -413,3 +413,42 @@
 #Cult equipment: items with this tag forcibly removed from cultist on deconversion
 - type: Tag
   id: YoggEquipment
+
+- type: Tag
+  id: SurgeryDrapes
+
+- type: Tag
+  id: SurgeryScalpelNormal
+
+- type: Tag
+  id: SurgeryScalpelAdvanced
+
+- type: Tag
+  id: SurgeryRetractor
+
+- type: Tag
+  id: SurgeryRetractorAdvanced
+
+- type: Tag
+  id: SurgeryHemostat
+
+- type: Tag
+  id: SurgeryCautery
+
+- type: Tag
+  id: SurgeryCauteryAdvanced
+
+- type: Tag
+  id: SurgerySaw
+
+- type: Tag
+  id: SurgeryDrill
+
+- type: Tag
+  id: SurgeryBoneSetter
+
+- type: Tag
+  id: SurgeryBoneGel
+
+- type: Tag
+  id: SurgeryDisk

@@ -38,6 +38,21 @@
     },
     {
       "name": "direct-defibrillator"
+    },
+    {
+      "name": "bonesetter"
+    },
+    {
+      "name": "surgical_tape"
+    },
+    {
+      "name": "adv_retractor"
+    },
+    {
+      "name": "e_cautery"
+    },
+    {
+      "name": "shears"
     }
   ]
 }

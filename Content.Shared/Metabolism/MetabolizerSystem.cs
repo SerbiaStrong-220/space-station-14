@@ -15,10 +15,12 @@ using Content.Shared.EntityEffects.Effects.Solution;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.Metabolism;
 using Content.Shared.SS220.Narcotics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Metabolism;
 
@@ -45,6 +47,7 @@ public sealed class MetabolizerSystem : EntitySystem
 
         SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MetabolizerComponent, BodyRelayedEvent<ApplyMetabolicMultiplierEvent>>(OnApplyMetabolicMultiplier);
+        SubscribeLocalEvent<MetabolizerComponent, OrganGotInsertedEvent>(OnOrganGotInserted); //SS220-surgery-update
     }
 
     private void OnMapInit(Entity<MetabolizerComponent> ent, ref MapInitEvent args)
@@ -56,8 +59,22 @@ public sealed class MetabolizerSystem : EntitySystem
     private void OnApplyMetabolicMultiplier(Entity<MetabolizerComponent> ent, ref BodyRelayedEvent<ApplyMetabolicMultiplierEvent> args)
     {
         ent.Comp.UpdateIntervalMultiplier = args.Args.Multiplier;
+        //SS220-surgery-update begin
+        var rateEv = new GetMetabolizerRateEvent(ent.Comp.Stages);
+        RaiseLocalEvent(args.Body, ref rateEv);
+        DebugTools.Assert(rateEv.Multiplier > 0f, $"Metabolizer rate multiplier of {ToPrettyString(args.Body)} must be positive");
+        ent.Comp.UpdateIntervalMultiplier /= rateEv.Multiplier;
+        //SS220-surgery-update end
         Dirty(ent);
     }
+
+    //SS220-surgery-update begin
+    private void OnOrganGotInserted(Entity<MetabolizerComponent> ent, ref OrganGotInsertedEvent args)
+    {
+        // an organ keeps the rate of its previous body, e.g. a heart from a body on a stasis bed or with bioware would stay slow or fast
+        UpdateMetabolicMultiplier(args.Target);
+    }
+    //SS220-surgery-update end
 
     public override void Update(float frameTime)
     {

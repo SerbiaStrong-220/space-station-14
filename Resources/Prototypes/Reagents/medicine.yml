@@ -32,6 +32,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LiverDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -86,6 +92,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LiverDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:AdjustReagent
         reagent: Histamine
         amount: -3.0
@@ -112,6 +124,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LiverDamage
+        probability: 0.05
+      #SS220-surgery-update end
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrunk
         time: 18.0 #SS220 ethylredoxrazine buff
@@ -191,6 +209,33 @@
   metabolisms:
     Bloodstream:
       effects:
+        #SS220-surgery-update begin
+        # treats every damaged organ in cryo, a failed one needs surgery
+        - !type:ReducePathologyStacks
+          pathology: HeartDamage
+          probability: 0.05
+          conditions:
+          - !type:TemperatureCondition
+            max: 213.0
+        - !type:ReducePathologyStacks
+          pathology: LungDamage
+          probability: 0.05
+          conditions:
+          - !type:TemperatureCondition
+            max: 213.0
+        - !type:ReducePathologyStacks
+          pathology: LiverDamage
+          probability: 0.05
+          conditions:
+          - !type:TemperatureCondition
+            max: 213.0
+        - !type:ReducePathologyStacks
+          pathology: StomachDamage
+          probability: 0.05
+          conditions:
+          - !type:TemperatureCondition
+            max: 213.0
+        #SS220-surgery-update end
         - !type:EvenHealthChange
           conditions:
           - !type:TemperatureCondition
@@ -266,6 +311,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LungDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -292,6 +343,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LungDamage
+        probability: 0.2
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -326,6 +383,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        type: Add
+        time: 5
+      #SS220-surgery-update end
       - !type:AdjustReagent
         conditions:
         - !type:ReagentCondition
@@ -458,6 +521,12 @@
     Bloodstream:
       metabolismRate: 0.1 # Smaller doses stabilize critical people for longer. Gives it a specific usecase as to not be entirely outclassed by dex+
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged heart slowly but for long, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: HeartDamage
+        probability: 0.03
+      #SS220-surgery-update end
       - !type:HealthChange
         conditions:
           # they gotta be in crit first
@@ -638,6 +707,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LungDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:EvenHealthChange
         damage:
           Brute: -1.75
@@ -744,6 +819,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a stomach burnt by acid, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: StomachDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -763,6 +844,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LiverDamage
+        probability: 0.15
+      #SS220-surgery-update end
       - !type:HealthChange
         damage:
           types:
@@ -881,6 +968,21 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats every damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: HeartDamage
+        probability: 0.05
+      - !type:ReducePathologyStacks
+        pathology: LungDamage
+        probability: 0.05
+      - !type:ReducePathologyStacks
+        pathology: LiverDamage
+        probability: 0.05
+      - !type:ReducePathologyStacks
+        pathology: StomachDamage
+        probability: 0.05
+      #SS220-surgery-update end
       - !type:EvenHealthChange
         damage:
           Burn: -2
@@ -899,6 +1001,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LiverDamage
+        probability: 0.15
+      #SS220-surgery-update end
       - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
@@ -957,6 +1065,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged organ, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: RetinaDamage
+        probability: 0.1
+      #SS220-surgery-update end
       - !type:EyeDamage
       - !type:ChemRemoveHallucinationsEffect #SS220
 
@@ -1344,6 +1458,15 @@
   metabolisms:
     Bloodstream:
       effects:
+      #SS220-surgery-update begin
+      # treats a damaged liver in cryo, a failed one needs surgery
+      - !type:ReducePathologyStacks
+        pathology: LiverDamage
+        probability: 0.15
+        conditions:
+        - !type:TemperatureCondition
+          max: 213.0
+      #SS220-surgery-update end
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition

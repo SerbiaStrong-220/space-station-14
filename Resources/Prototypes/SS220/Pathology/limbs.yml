@@ -1,0 +1,155 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Missing limbs. Added when a limb is severed and removed when one is attached back.
+
+- type: pathology
+  id: MissingArmLeft
+  name: pathology-missing-arm-left-name
+  examineDescription: pathology-missing-arm-left-examine
+  isSevere: true
+  targetZone: LeftArm
+  missingOrgan: ArmLeft
+  missingPart: true
+  operationRecommendation: pathology-missing-arm-operation
+  definition:
+  - description: pathology-missing-arm-description
+
+- type: pathology
+  id: MissingArmRight
+  name: pathology-missing-arm-right-name
+  examineDescription: pathology-missing-arm-right-examine
+  isSevere: true
+  targetZone: RightArm
+  missingOrgan: ArmRight
+  missingPart: true
+  operationRecommendation: pathology-missing-arm-operation
+  definition:
+  - description: pathology-missing-arm-description
+
+- type: pathology
+  id: MissingHandLeft
+  name: pathology-missing-hand-left-name
+  examineDescription: pathology-missing-hand-left-examine
+  isSevere: true
+  targetZone: LeftHand
+  missingOrgan: HandLeft
+  missingPart: true
+  operationRecommendation: pathology-missing-hand-operation
+  definition:
+  - description: pathology-missing-hand-description
+
+- type: pathology
+  id: MissingHandRight
+  name: pathology-missing-hand-right-name
+  examineDescription: pathology-missing-hand-right-examine
+  isSevere: true
+  targetZone: RightHand
+  missingOrgan: HandRight
+  missingPart: true
+  operationRecommendation: pathology-missing-hand-operation
+  definition:
+  - description: pathology-missing-hand-description
+
+- type: pathology
+  id: MissingLegLeft
+  name: pathology-missing-leg-left-name
+  examineDescription: pathology-missing-leg-left-examine
+  isSevere: true
+  targetZone: LeftLeg
+  missingOrgan: LegLeft
+  missingPart: true
+  # the foot leaves with the leg, its slowdown is replaced, not multiplied
+  overridesStatusEffects: [ MissingFootLeft ]
+  operationRecommendation: pathology-missing-leg-operation
+  definition:
+  - description: pathology-missing-leg-description
+    statusEffects:
+    - StatusEffectMissingLegSlowdown
+
+- type: pathology
+  id: MissingLegRight
+  name: pathology-missing-leg-right-name
+  examineDescription: pathology-missing-leg-right-examine
+  isSevere: true
+  targetZone: RightLeg
+  missingOrgan: LegRight
+  missingPart: true
+  # the foot leaves with the leg, its slowdown is replaced, not multiplied
+  overridesStatusEffects: [ MissingFootRight ]
+  operationRecommendation: pathology-missing-leg-operation
+  definition:
+  - description: pathology-missing-leg-description
+    statusEffects:
+    - StatusEffectMissingLegSlowdown
+
+- type: pathology
+  id: MissingFootLeft
+  name: pathology-missing-foot-left-name
+  examineDescription: pathology-missing-foot-left-examine
+  isSevere: true
+  targetZone: LeftFoot
+  missingOrgan: FootLeft
+  missingPart: true
+  operationRecommendation: pathology-missing-foot-operation
+  definition:
+  - description: pathology-missing-foot-description
+    statusEffects:
+    - StatusEffectMissingFootSlowdown
+
+- type: pathology
+  id: MissingFootRight
+  name: pathology-missing-foot-right-name
+  examineDescription: pathology-missing-foot-right-examine
+  isSevere: true
+  targetZone: RightFoot
+  missingOrgan: FootRight
+  missingPart: true
+  operationRecommendation: pathology-missing-foot-operation
+  definition:
+  - description: pathology-missing-foot-description
+    statusEffects:
+    - StatusEffectMissingFootSlowdown
+
+- type: pathology
+  id: MissingHead
+  name: pathology-missing-head-name
+  examineDescription: pathology-missing-head-examine
+  isSevere: true
+  targetZone: Head
+  missingOrgan: Head
+  missingPart: true
+  operationRecommendation: pathology-missing-head-operation
+  definition:
+  - description: pathology-missing-head-description
+    effects:
+    # the body dies in under a minute, the person lives on in the brain inside the head
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Asphyxiation: 5
+
+# An organ of a zombie or an infected body, or a rotten body part, put into another body. One for all such organs, removed with the last of them.
+- type: pathology
+  id: TaintedFlesh
+  name: pathology-tainted-flesh-name
+  isSevere: true
+  operationRecommendation: pathology-tainted-flesh-operation
+  definition:
+  - description: pathology-tainted-flesh-description
+    effects:
+    - !type:PathologyEntityEffect
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+          inverted: true
+        damage:
+          types:
+            Poison: 1

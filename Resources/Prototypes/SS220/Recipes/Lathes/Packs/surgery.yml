@@ -1,0 +1,33 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: latheRecipePack
+  id: SurgeryAdvanced
+  recipes:
+  - SurgeryDiskAdvanced
+  - SurgeryDiskBioware
+  - AmputationShears
+  - ScalpelAdvanced
+  - ScalpelLaser
+  - CauteryAdvanced
+  - RetractorAdvanced
+  - SawAdvanced
+
+- type: latheRecipePack
+  id: ProsthesesCyber
+  recipes:
+  - ProsthesisCyberArmLeft
+  - ProsthesisCyberArmRight
+  - ProsthesisCyberHandLeft
+  - ProsthesisCyberHandRight
+  - ProsthesisCyberLegLeft
+  - ProsthesisCyberLegRight
+  - ProsthesisCyberFootLeft
+  - ProsthesisCyberFootRight
+  - ProsthesisAdvancedCyberArmLeft
+  - ProsthesisAdvancedCyberArmRight
+  - ProsthesisAdvancedCyberHandLeft
+  - ProsthesisAdvancedCyberHandRight
+  - ProsthesisAdvancedCyberLegLeft
+  - ProsthesisAdvancedCyberLegRight
+  - ProsthesisAdvancedCyberFootLeft
+  - ProsthesisAdvancedCyberFootRight

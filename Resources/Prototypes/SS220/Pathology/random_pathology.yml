@@ -1,7 +1,14 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: weightedRandom
   id: BulletHitPathology
   weights:
     TorsoProjectileFragment: 10
+    LowerTorsoProjectileFragment: 4
+    LeftArmProjectileFragment: 3
+    RightArmProjectileFragment: 3
+    LeftLegProjectileFragment: 3
+    RightLegProjectileFragment: 3
     HeadProjectileFragment: 2
 
 - type: weightedRandom
@@ -13,3 +20,76 @@
     Muted: 5
     Narcolepsy: 1
     Blindness: 1
+
+- type: weightedRandom
+  id: DislocationPathology
+  weights:
+    LeftArmDislocation: 4
+    RightArmDislocation: 4
+    LeftHandDislocation: 2
+    RightHandDislocation: 2
+    LeftLegDislocation: 4
+    RightLegDislocation: 4
+    LeftFootDislocation: 2
+    RightFootDislocation: 2
+    MouthJawDislocation: 1
+
+- type: weightedRandom
+  id: HairlineFracturePathology
+  weights:
+    TorsoHairlineFracture: 5
+    LowerTorsoHairlineFracture: 3
+    LeftArmHairlineFracture: 4
+    RightArmHairlineFracture: 4
+    LeftHandHairlineFracture: 2
+    RightHandHairlineFracture: 2
+    LeftLegHairlineFracture: 4
+    RightLegHairlineFracture: 4
+    LeftFootHairlineFracture: 2
+    RightFootHairlineFracture: 2
+
+- type: weightedRandom
+  id: CompoundFracturePathology
+  weights:
+    TorsoCompoundFracture: 4
+    LowerTorsoCompoundFracture: 3
+    LeftArmCompoundFracture: 4
+    RightArmCompoundFracture: 4
+    LeftHandCompoundFracture: 1
+    RightHandCompoundFracture: 1
+    LeftLegCompoundFracture: 4
+    RightLegCompoundFracture: 4
+    LeftFootCompoundFracture: 1
+    RightFootCompoundFracture: 1
+    HeadCranialFissure: 2
+
+- type: weightedRandom
+  id: ArterialPuncturePathology
+  weights:
+    TorsoArterialPuncture: 5
+    LowerTorsoArterialPuncture: 3
+    LeftArmArterialPuncture: 4
+    RightArmArterialPuncture: 4
+    LeftLegArterialPuncture: 4
+    RightLegArterialPuncture: 4
+    HeadArterialPuncture: 2
+
+- type: weightedRandom
+  id: BurnNecrosisPathology
+  weights:
+    TorsoBurnNecrosis: 5
+    LowerTorsoBurnNecrosis: 3
+    LeftArmBurnNecrosis: 4
+    RightArmBurnNecrosis: 4
+    LeftLegBurnNecrosis: 4
+    RightLegBurnNecrosis: 4
+    HeadBurnNecrosis: 2
+    EyeCornealTrauma: 1
+
+# a terminal liver failure poisons the other organs
+- type: weightedRandom
+  id: LiverFailureOrganDamage
+  weights:
+    HeartDamage: 1
+    LungDamage: 1
+    StomachDamage: 1

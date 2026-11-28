@@ -8,6 +8,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Pathology;
+using Robust.Shared.Collections;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
@@ -88,9 +90,16 @@ public abstract partial class SharedCultYoggHealSystem : EntitySystem
 
         _stamina.TryTakeStamina(ent, ent.Comp.ModifyStamina);
 
-        if (TryComp<PathologyHolderComponent>(ent, out var pathologyHolder))
+        if (TryComp<PathologyHolderComponent>(ent, out var pathologyHolder)
+            && pathologyHolder.ActivePathologies.Count > 0)
         {
-            foreach (var (key, _) in pathologyHolder.ActivePathologies)
+            var pathologies = new ValueList<ProtoId<PathologyPrototype>>(pathologyHolder.ActivePathologies.Count);
+            foreach (var key in pathologyHolder.ActivePathologies.Keys)
+            {
+                pathologies.Add(key);
+            }
+
+            foreach (var key in pathologies)
             {
                 if (!_pathology.TryRemovePathology(ent.Owner, key))
                     _pathology.TryChangePathologyStack(ent.Owner, key, ent.Comp.PathologiesChangeAmount);

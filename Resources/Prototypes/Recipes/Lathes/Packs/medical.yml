@@ -39,6 +39,11 @@
   - SurgeryDrapes # SS220-surgery-update
   - BoneGel # SS220-surgery-update
   - SawElectric # SS220-surgery-update
+  #SS220-surgery-update begin
+  - BoneSetter
+  - AutopsyScanner
+  - SurgeryTray
+  #SS220-surgery-update end
 
 - type: latheRecipePack
   id: MedicalStatic

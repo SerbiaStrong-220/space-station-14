@@ -6,6 +6,7 @@ using Content.Shared.Traits;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.Language;
+using Content.Server.SS220.Traits;
 using Content.Shared.SS220.Language.Components;
 
 namespace Content.Server.Traits;
@@ -50,6 +51,11 @@ public sealed class TraitSystem : EntitySystem
             // Add all components required by the prototype
             if (traitPrototype.Components?.Count > 0) // SS220 Add trait components nullable
                 EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
+
+            //SS220-surgery-update begin
+            var appliedEv = new TraitAppliedEvent(traitId);
+            RaiseLocalEvent(args.Mob, ref appliedEv);
+            //SS220-surgery-update end
 
             // SS220-Add-Languages begin
             if (traitPrototype.LearnedLanguages.Count > 0)

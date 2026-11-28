@@ -1,6 +1,7 @@
 treatment-suggestion-header = [head=4] АссистентВрача [/head]
 
 treatment-recommendation-target-less = Нету цели для анализа!
+treatment-recommendation-table-not-linked = [color=red]Операционный стол не привязан к консоли сканера тела![/color]
 treatment-recommendation-empty = У пациента известных проблем не обнаружено!
 
 treatment-recommendation-problem-section-name = [bold] Обнаруженные проблемы: [/bold]
@@ -23,9 +24,12 @@ treatment-recommendation-body-near-decay-help = Остановить гниен�
 treatment-recommendation-body-decay = Тело пациента сгнило!
 treatment-recommendation-body-decay-help = Восстановить потерянные ткани может химическое средство { reagent-name-opporozidone }.
 
-treatment-recommendation-near-brain-rot = Внимание! Мозг пациент близок к гниению!
-treatment-recommendation-near-brain-rot-help = Чтобы замедлить гниение мозга введите { reagent-name-formalin } пациенту.
+treatment-recommendation-near-brain-rot = Внимание! Мозг пациента близок к гниению!
+treatment-recommendation-near-brain-rot-help = Чтобы замедлить гниение мозга введите { reagent-name-nicergoline } пациенту.
 
 treatment-recommendation-brain-rot = Мозг пациента повреждён!
 treatment-recommendation-brain-rot-help = Лечение с помощью { reagent-name-cerebrin }
     в { ent-CryoPod } восстановит мозговые повреждения.
+
+treatment-recommendation-need-anesthesia = Обеспечьте пациенту анестезию (усыпите или введите обезболивающий/наркотический препарат) перед операцией, чтобы избежать болевого шока и врачебных ошибок.
+treatment-recommendation-need-operating-table = Уложите пациента на { ent-OperatingTable } для ускорения операции и снижения риска ошибок.

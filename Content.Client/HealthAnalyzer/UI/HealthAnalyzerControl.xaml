@@ -1,5 +1,7 @@
+<!-- SS220-surgery-update: xmlns:surgery -->
 <BoxContainer
     xmlns="https://spacestation14.io"
+    xmlns:surgery="clr-namespace:Content.Client.SS220.Surgery.SurgeryStartUi"
     VerticalExpand="True"
     Orientation="Vertical">
     <Label
@@ -13,6 +15,16 @@
         <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
             <SpriteView OverrideDirection="South" Scale="2 2" Name="SpriteView" Access="Public" SetSize="64 64" />
             <TextureRect Name="NoDataTex" Access="Public" SetSize="64 64" Visible="false" Stretch="KeepAspectCentered" TexturePath="/Textures/Interface/Misc/health_analyzer_out_of_range.png"/>
+            <!-- SS220-surgery-update begin -->
+            <Control Name="PathologyPuppetContainer" MinSize="64 64" Visible="False">
+                <surgery:SurgeryPuppetBox Name="PathologyPuppet"
+                                          Interactive="False"
+                                          ShowBackground="False"
+                                          Scale="3 3"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+            </Control>
+            <!-- SS220-surgery-update end -->
             <BoxContainer Margin="5 0 0 0" Orientation="Vertical" VerticalAlignment="Top">
                 <RichTextLabel Name="NameLabel" SetWidth="150" />
                 <Label Name="SpeciesLabel" VerticalAlignment="Top" StyleClasses="LabelSubText" />

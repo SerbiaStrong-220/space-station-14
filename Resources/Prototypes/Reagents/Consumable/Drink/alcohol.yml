@@ -145,6 +145,30 @@
     Metabolites:
       metabolismRate: 0.05
       effects:
+      #SS220-surgery-update begin
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.02
+        conditions:
+        # heavy drunkenness, not just a pint of beer
+        - !type:StatusEffectTimeCondition
+          effect: StatusEffectDrunk
+          min: 120
+        - !type:MetabolizerTypeCondition
+          type: [ Dwarf ]
+          inverted: true
+      # a lot of ethanol at once, e.g. injected
+      - !type:AddPathology
+        pathology: LiverDamage
+        probability: 0.02
+        conditions:
+        - !type:ReagentCondition
+          reagent: Ethanol
+          min: 15
+        - !type:MetabolizerTypeCondition
+          type: [ Dwarf ]
+          inverted: true
+      #SS220-surgery-update end
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition

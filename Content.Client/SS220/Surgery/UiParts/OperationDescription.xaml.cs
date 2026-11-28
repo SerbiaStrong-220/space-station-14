@@ -10,7 +10,6 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.Surgery.UiParts;
 
@@ -32,6 +31,12 @@ public sealed partial class OperationDescription : Control
     }
 
     private ProtoId<SurgeryGraphPrototype>? _currentOperation = null;
+    public ProtoId<SurgeryGraphPrototype>? CurrentOperation => _currentOperation;
+
+    /// <summary>
+    /// The entity of the UI, its disk opens the disk steps.
+    /// </summary>
+    public EntityUid Analyzer;
 
     public OperationDescription()
     {
@@ -39,21 +44,22 @@ public sealed partial class OperationDescription : Control
         IoCManager.InjectDependencies(this);
     }
 
-    public void UpdateNodeShowTarget(EntityUid patient)
+    /// <summary>
+    /// Marks the node the patient's shown operation is at, if it goes on.
+    /// </summary>
+    public void UpdateNodeShowTarget(EntityUid patient, EntityUid performer)
     {
-        if (!_entityManager.TryGetComponent<SurgeryPatientComponent>(patient, out var surgeryPatient))
-            return;
-
-        var pair = surgeryPatient.OngoingSurgeries.FirstOrNull();
-        if (pair is not null)
-            ShowDescription(pair.Value.Key, true);
+        string? currentNode = null;
+        if (_currentOperation is { } operation
+            && _entityManager.TryGetComponent<SurgeryPatientComponent>(patient, out var surgeryPatient))
+            surgeryPatient.OngoingSurgeries.TryGetValue(operation, out currentNode);
 
         foreach (var child in OperationContainer.Children)
         {
             if (child is not OperationNodeLabel label)
                 continue;
 
-            label.SetActive(pair?.Value == label.NodeId);
+            label.SetActive(currentNode == label.NodeId, patient, performer);
         }
     }
 
@@ -78,6 +84,18 @@ public sealed partial class OperationDescription : Control
         AddOperationSteps(surgeryProto);
     }
 
+    /// <summary>
+    /// Rebuilds the shown steps, e.g. after the disk of the computer changed.
+    /// </summary>
+    public void Refresh()
+    {
+        if (!_prototypeManager.Resolve(_currentOperation, out var surgeryProto))
+            return;
+
+        OperationContainer.RemoveAllChildren();
+        AddOperationSteps(surgeryProto);
+    }
+
     private void AddOperationSteps(SurgeryGraphPrototype graph)
     {
         var nodes = graph.Nodes;
@@ -85,7 +103,7 @@ public sealed partial class OperationDescription : Control
         foreach (var node in nodes)
         {
             var nodeLabel = new OperationNodeLabel();
-            nodeLabel.SetNodeInfo(node);
+            nodeLabel.SetNodeInfo(node, Analyzer);
 
             OperationContainer.AddChild(nodeLabel);
         }

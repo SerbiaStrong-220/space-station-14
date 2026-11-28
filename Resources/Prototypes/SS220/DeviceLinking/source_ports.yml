@@ -7,3 +7,10 @@
   id: DoorClosed
   name: signal-port-name-doorstatus-closed
   description: signal-port-description-doorstatus-closed
+
+- type: sourcePort
+  id: OperatingTableSender
+  name: signal-port-name-operating-table-sender
+  description: signal-port-description-operating-table-sender
+  defaultLinks:
+  - OperatingTableReceiver

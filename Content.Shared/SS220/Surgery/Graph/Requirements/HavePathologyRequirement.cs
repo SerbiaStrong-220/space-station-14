@@ -11,11 +11,21 @@ public sealed partial class HavePathologyRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public ProtoId<PathologyPrototype> Pathology;
 
-    protected override bool Requirement(EntityUid? uid, EntityUid user, IEntityManager entityManager)
+    /// <summary>
+    /// Pathology level must be at least this, e.g. only organ failure is repairable by surgery.
+    /// </summary>
+    [DataField]
+    public int MinLevel;
+
+    protected override bool Requirement(EntityUid? uid, EntityUid user, EntityUid? used, IEntityManager entityManager)
     {
         if (uid is null)
             return true;
 
-        return entityManager.System<SharedPathologySystem>().HavePathology(uid.Value, Pathology);
+        if (!entityManager.TryGetComponent<PathologyHolderComponent>(uid, out var holder)
+            || !holder.ActivePathologies.TryGetValue(Pathology, out var data))
+            return false;
+
+        return data.Level >= MinLevel;
     }
 }

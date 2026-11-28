@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Client.SS220.Surgery.SurgeryStartUi;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Systems;
@@ -86,6 +87,22 @@ public sealed partial class OperationList : Control
         InvalidateMeasure();
     }
 
+    /// <summary>
+    /// While operations go on, only their buttons can be pressed, the shown one stays pressed.
+    /// </summary>
+    public void SetOngoing(IReadOnlyList<ProtoId<SurgeryGraphPrototype>> ongoing, ProtoId<SurgeryGraphPrototype>? shown)
+    {
+        foreach (var child in OperationContainer.Children)
+        {
+            if (child is not SurgeryPerformButton surgeryButton)
+                continue;
+
+            surgeryButton.Disabled = ongoing.Count > 0 && !ongoing.Contains(surgeryButton.GraphId);
+            if (ongoing.Count > 0)
+                surgeryButton.Pressed = surgeryButton.GraphId == shown;
+        }
+    }
+
     public void SetAllSurgeryButtonsPress(bool pressed)
     {
         foreach (var child in OperationContainer.Children)
@@ -97,5 +114,3 @@ public sealed partial class OperationList : Control
         }
     }
 }
-
-
